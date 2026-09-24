@@ -101,7 +101,7 @@ class LabSafetyTests(unittest.TestCase):
     def test_input_allowlist_excludes_generated_trees(self):
         source = Path(self.temp.name) / "source"
         source.mkdir()
-        for rel in (".venv/lib/fake.py", ".lab/runs/report.json", "hardware/models/large.step", "logs/old.log", "build/cache.py"):
+        for rel in (".local/legacy/.venv/lib/fake.py", ".lab/runs/report.json", "hw/models/large.step", "hw/logs/old.log", "hw/build/cache.py"):
             path = source / rel
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text("not an input")

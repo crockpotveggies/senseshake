@@ -56,8 +56,12 @@ thermal performance, physical mating, or fabrication readiness.
 
 ```text
 senseshake/
+  hw/                circuits, routed CAD, models and hardware checks
+  sw/                Pi software, USB firmware and FPGA integration scopes
+  docs/              shared design and interface documentation
   environment/       small runner, Dockerfile, dependency lock and safety tests
   lab.ps1 / lab.sh   entrypoints
+  .local/            ignored local tools and preserved legacy caches
   .lab/
     .senseshake-lab   ownership marker
     .lock            prevents simultaneous run/cleanup
@@ -117,7 +121,8 @@ cleanup: other projects, including Coldfoot, share this Docker installation.
 
 ## Moving or updating it
 
-Copy the authored project and this environment directory to another machine,
+Clone the Git repository, or copy the authored project and environment directory
+(excluding `.lab/` and `.local/`) to another machine,
 then run `build`. No absolute `C:` or `P:` paths are encoded in the runner. The
 image pins the KiCad base and uv installer by digest; atopile 0.15.9 and its
 transitive Python dependencies are pinned with package hashes. Python is 3.14.7.
@@ -138,6 +143,13 @@ from online registries. Container runtime/kernel versions still vary by host.
 The checked-in `requirements.lock` is consumed directly; the old project venvs
 are never copied. `installed-constraints.txt` records the versions used when
 creating that lock. Update pins deliberately and rerun the complete suite.
+
+An [inactive GitHub Actions template](../environment/ci/README.md) can run the
+structure checks, cleanup tests, and full hardware profile on pushes and pull
+requests, with report retention of seven days. It has not been installed because
+the current GitHub login lacks workflow-management scope. The local suite is
+fully usable. Neither the local suite nor this template validates the planned
+software under `sw/`.
 
 ## Recorded validation
 

@@ -1,8 +1,8 @@
 # ShakeSense T1 — Pi-outline Trenz carrier
 
 T1 is an **85 × 56 mm, six-layer** alternative to the A2 Coldfoot ASIC HAT.
-Electrical source: [`elec/hat_trenz.ato`](../elec/hat_trenz.ato).
-CAD: [`shakesense-trenz-hat.kicad_pcb`](../hardware/shakesense-trenz-hat/shakesense-trenz-hat.kicad_pcb).
+Electrical source: [`hw/elec/hat_trenz.ato`](../hw/elec/hat_trenz.ato).
+CAD: [`shakesense-trenz-hat.kicad_pcb`](../hw/boards/shakesense-trenz-hat/shakesense-trenz-hat.kicad_pcb).
 The original ASIC HAT and remote USB sensor head remain separate builds.
 
 ## Stack and sensor placement
@@ -87,17 +87,17 @@ back pours and parallel vias. This does not establish ampacity, transient supply
 performance, RF impedance, thermal behavior or EMC. No FPGA silicon simulation,
 bitstream implementation or physical board test was performed for T1.
 **Engineering prototype; not fabrication released.** Machine-readable results
-are in [`validation.json`](../hardware/shakesense-trenz-hat/validation.json) and
-[`simulation/trenz/results.json`](../simulation/trenz/results.json).
+are in [`validation.json`](../hw/boards/shakesense-trenz-hat/validation.json) and
+[`hw/simulation/trenz/results.json`](../hw/simulation/trenz/results.json).
 
 ## 3D artifacts
 
-- [`3d.png`](../hardware/shakesense-trenz-hat/3d.png): actual carrier PCB.
-- [`trenz-mounted.png`](../hardware/shakesense-trenz-hat/trenz-mounted.png): carrier
+- [`3d.png`](../hw/boards/shakesense-trenz-hat/3d.png): actual carrier PCB.
+- [`trenz-mounted.png`](../hw/boards/shakesense-trenz-hat/trenz-mounted.png): carrier
   with the manufacturer's revision-03 Trenz STEP model.
-- [`pi-trenz-stack-concept.png`](../hardware/shakesense-trenz-hat/pi-trenz-stack-concept.png):
+- [`pi-trenz-stack-concept.png`](../hw/boards/shakesense-trenz-hat/pi-trenz-stack-concept.png):
   all three boards; the Pi and spacer bodies are explicitly simplified envelopes.
-- [`stack-exploded.png`](../hardware/shakesense-trenz-hat/stack-exploded.png):
+- [`stack-exploded.png`](../hw/boards/shakesense-trenz-hat/stack-exploded.png):
   conceptual separated view for inspecting all three levels.
 
 The adjacent assembly `.kicad_pcb` files contain visualization-only models and
@@ -106,36 +106,38 @@ electrical/layout artifact. Generic vendor geometry is not tolerance signoff.
 
 ## Rebuild
 
-From this project in WSL:
+From the repository root in WSL, with the optional local dependencies described
+in the [build guide](build.md). Use the portable lab for routine validation.
 
 ```sh
-CI=1 .venv-atopile/bin/python -m atopile build -b trenz_hat .
-CI=1 .venv-atopile/bin/python tools/solve_constraints.py --target trenz_hat
-python3 tools/assemble_pcb.py --trenz
-python3 tools/import_routes.py shakesense-trenz-hat
-python3 tools/trenz_power.py
-python3 tools/widen_power.py shakesense-trenz-hat
-python3 tools/trim_dangling.py shakesense-trenz-hat
-python3 tools/review_schematic.py shakesense-trenz-hat
-python3 tools/check_trenz.py
-python3 tools/simulate_trenz.py
-python3 tools/trenz_models.py
-python3 tools/render_trenz.py
+CI=1 .local/atopile/bin/python -m atopile build -b trenz_hat hw
+CI=1 .local/atopile/bin/python hw/tools/solve_constraints.py --target trenz_hat
+python3 hw/tools/assemble_pcb.py --trenz
+python3 hw/tools/import_routes.py shakesense-trenz-hat
+python3 hw/tools/trenz_power.py
+python3 hw/tools/widen_power.py shakesense-trenz-hat
+python3 hw/tools/trim_dangling.py shakesense-trenz-hat
+python3 hw/tools/review_schematic.py shakesense-trenz-hat
+python3 hw/tools/check_trenz.py
+python3 hw/tools/simulate_trenz.py
+python3 hw/tools/trenz_models.py
+python3 hw/tools/render_trenz.py
 ```
 
-The supplied SES matches `layout-trenz.json`. After changing placement or circuit,
+The supplied SES matches `hw/layout-trenz.json`. After changing placement or circuit,
 reroute its exported DSN before importing:
 
 ```sh
-xvfb-run -a java -jar tools/freerouting-1.9.0.jar \
-  -de hardware/shakesense-trenz-hat/shakesense-trenz-hat.dsn \
-  -do hardware/shakesense-trenz-hat/shakesense-trenz-hat.ses \
+xvfb-run -a java -jar hw/tools/freerouting-1.9.0.jar \
+  -de hw/boards/shakesense-trenz-hat/shakesense-trenz-hat.dsn \
+  -do hw/boards/shakesense-trenz-hat/shakesense-trenz-hat.ses \
   -mp 10 -mt 1 -oit 20 -da
 ```
 
 `bootstrap_trenz.py` and `pack_trenz.py` record initial authoring/placement and
 are **not routine rebuild steps**; they overwrite the maintained circuit/layout.
-The migrated venv entrypoint is invoked through Python to avoid old C: shebangs.
+The local venv is recreated under `.local/atopile`; migrated legacy environments
+are not part of the reproducible flow.
 
 ## Manufacturer references
 
@@ -147,5 +149,5 @@ The migrated venv entrypoint is invoked through Python to avoid old C: shebangs.
 - [Samtec Pi socket](https://www.samtec.com/products/esq-120-23-g-d).
 - [Raspberry Pi 4 mechanical resources](https://pip.raspberrypi.com/categories/559-mechanical).
 
-Vendor files in `docs/vendor/trenz` and `hardware/models/trenz` retain their
+Vendor files in `docs/vendor/trenz` and `hw/models/trenz` retain their
 manufacturer ownership; they document integration of a purchased module.

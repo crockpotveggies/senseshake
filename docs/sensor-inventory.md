@@ -67,7 +67,7 @@ Repository snapshots inspected:
 | GeoShake/geoshake | main | `9afdcf932202241b8bef12eeca40c1e8e9b594c7` |
 
 - **A1:** [Explorer overview and output specifications](https://github.com/anyshake/explorer/blob/0404bea927f25ca75e0c832fd0a33bcd1ed13b22/README.md).
-- **A2:** [Explorer BOM](https://github.com/anyshake/explorer/blob/0404bea927f25ca75e0c832fd0a33bcd1ed13b22/hardware/Explorer.csv).
+- **A2:** [Explorer BOM](https://github.com/anyshake/explorer/blob/0404bea927f25ca75e0c832fd0a33bcd1ed13b22/hw/boards/Explorer.csv).
 - **A3:** [Explorer sensor selection and initialization](https://github.com/anyshake/explorer/blob/0404bea927f25ca75e0c832fd0a33bcd1ed13b22/firmware/User/Src/peripheral.c).
 - **A4:** [Explorer default build configuration](https://github.com/anyshake/explorer/blob/0404bea927f25ca75e0c832fd0a33bcd1ed13b22/firmware/platformio.ini).
 - **A5:** [Explorer acceleration, temperature and ADC acquisition](https://github.com/anyshake/explorer/blob/0404bea927f25ca75e0c832fd0a33bcd1ed13b22/firmware/User/Src/reader.c).
@@ -76,7 +76,7 @@ Repository snapshots inspected:
 - **A8:** [GNSS model declarations](https://github.com/anyshake/explorer/blob/0404bea927f25ca75e0c832fd0a33bcd1ed13b22/firmware/User/Inc/gnss/model.h), [implemented setup branches](https://github.com/anyshake/explorer/blob/0404bea927f25ca75e0c832fd0a33bcd1ed13b22/firmware/User/Src/gnss/model.c), [GNSS/PPS acquisition](https://github.com/anyshake/explorer/blob/0404bea927f25ca75e0c832fd0a33bcd1ed13b22/firmware/User/Src/main.c).
 - **A9:** [AnyShake assembly guide: vertical/horizontal geophone mounting](https://anyshake.org/docs/anyshake-explorer/E-C111G/assembly-guide/) (live documentation).
 - **B1:** [ICM-42688 breakout overview](https://github.com/anyshake/icm-42688-breakout/blob/b4f35e0759763c8e6bcaafed687799e2f0148c36/README.md).
-- **B2:** [ICM-42688-P breakout BOM](https://github.com/anyshake/icm-42688-breakout/blob/b4f35e0759763c8e6bcaafed687799e2f0148c36/hardware/BOM.csv).
+- **B2:** [ICM-42688-P breakout BOM](https://github.com/anyshake/icm-42688-breakout/blob/b4f35e0759763c8e6bcaafed687799e2f0148c36/hw/boards/BOM.csv).
 - **C1:** [SCL3300 EVB overview](https://github.com/anyshake/scl3300-d01-evb/blob/fa6fea1654e929ead7e15559e8f339501428d662/README.md) and [BOM](https://github.com/anyshake/scl3300-d01-evb/blob/fa6fea1654e929ead7e15559e8f339501428d662/haradware/scl3300-evb.csv).
 - **C2:** [SCL3300 EVB acquisition](https://github.com/anyshake/scl3300-d01-evb/blob/fa6fea1654e929ead7e15559e8f339501428d662/firmware/User/Src/main.c) and [SPI driver](https://github.com/anyshake/scl3300-d01-evb/blob/fa6fea1654e929ead7e15559e8f339501428d662/firmware/User/Src/scl3300/utils.c).
 - **C3:** [Murata description of SCL3300-D01 inclination and SPI capability](https://www.murata.com/news/sensor/inclinometer/2018/1114).

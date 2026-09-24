@@ -1,10 +1,11 @@
 __pycache__/
 .lab/
+.local/
 senseshake-lab-image.tar
 *.pyc
 *.log
-tools/bootstrap/
-tools/*.jar
+hw/tools/bootstrap/
+hw/tools/*.jar
 freerouting.json
 *.lck
 *.kicad_prl
@@ -12,8 +13,6 @@ logs/
 .venv*/
 .ato/
 build/
-tests/standalone_*/
-tools/bootstrap/uv-wheel/
-tools/bootstrap/*.whl
-layout/*/*-backups/
+hw/tests/standalone_*/
+hw/layout/*/*-backups/
 *.kicad_pcb-bak

@@ -1,0 +1,29 @@
+name: Validate hardware and project layout
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+concurrency:
+  group: validation-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  hardware:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Check project links and CAD references
+        run: python3 environment/check_project.py
+      - name: Build pinned toolchain
+        run: sh ./lab.sh build
+      - name: Check cleanup safeguards
+        run: sh ./lab.sh unit
+      - name: Rebuild circuits and validate all boards
+        run: sh ./lab.sh test
+      - name: Save bounded validation reports
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: hardware-validation
+          path: .lab/runs/
+          if-no-files-found: ignore
+          retention-days: 7

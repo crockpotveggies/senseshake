@@ -1,7 +1,28 @@
-# A2 validation and release gates
-
-The separate FPGA T1 variant has its own [validation report](trenz-hat.md#verification-and-release-limits).
-The A2 results below do not certify T1.
+"""Publish the checked artifact state, with hashes and explicit model limits."""
+from pathlib import Path
+import json,hashlib,datetime
+ROOT=Path(__file__).resolve().parents[2]
+rows=[]
+for name in ['shakesense-hat','shakesense-field-head']:
+    r=json.loads((ROOT/'hw/boards'/name/'validation.json').read_text())
+    assert not r['connectivity_errors'] and not r['drc_errors'] and not r['erc_findings'] and not r['unconnected_items'],r
+    warnings=sum(r['drc_findings_by_type'].values())
+    rows.append(f"| {name} | {r['atopile_pin_checks']} | {r['erc_findings']} | {r['drc_errors']} | {warnings} | {r['unconnected_items']} | {r['tracks_and_vias']} |")
+sim=json.loads((ROOT/'hw/simulation/results.json').read_text());assert len(sim['cases'])==27 and all(not x['failures'] for x in sim['cases'])
+cir=json.loads((ROOT/'hw/simulation/circuit-checks.json').read_text());assert all(x['circuit_invariants']=='PASS' for x in cir['boards'])
+pos=(ROOT/'hw/logs/constraint-solve.log').read_text();neg=(ROOT/'hw/logs/negative-voltage.log').read_text()
+assert 'PASS: explicit upstream constraint solve hat' in pos and 'PASS: explicit upstream constraint solve field_head' in pos
+assert 'PASS: upstream solver rejected 5V' in neg
+files=list((ROOT/'hw/elec').glob('*.ato'))+[ROOT/'hw/ato.yaml',ROOT/'hw/layout.json',ROOT/'hw/layout-fixed-routes.json']
+files.extend((ROOT/'hw/tools').glob('*.py'))
+files.extend((ROOT/'hw/simulation').glob('*.cir'))
+for name in ['shakesense-hat','shakesense-field-head']:
+    folder=ROOT/'hw/boards'/name
+    files.extend([folder/(name+'.kicad_pcb'),folder/(name+'.kicad_pro'),folder/(name+'.ses'),*folder.glob('*.kicad_sch'),folder/'drc.json',folder/'erc.json',folder/'validation.json',folder/'bom.csv'])
+files.extend([ROOT/'hw/simulation/results.json',ROOT/'hw/simulation/circuit-checks.json'])
+manifest={'created_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'sha256':{str(f.relative_to(ROOT)):hashlib.sha256(f.read_bytes()).hexdigest() for f in files}}
+(ROOT/'docs/artifact-manifest.json').write_text(json.dumps(manifest,indent=2))
+text='''# A2 validation and release gates
 
 **Engineering prototype — not released for fabrication or assembly.** The
 circuit is authored in atopile; the native KiCad layout and review schematic
@@ -23,8 +44,7 @@ These rules are not a selected manufacturer's stackup or acceptance criteria.
 
 | Board | Atopile pins compared | ERC findings | DRC errors | DRC warnings | Unconnected | Tracks/vias |
 |---|---:|---:|---:|---:|---:|---:|
-| shakesense-hat | 538 | 0 | 0 | 0 | 0 | 2197 |
-| shakesense-field-head | 131 | 0 | 0 | 0 | 0 | 348 |
+'''+ '\n'.join(rows)+'''
 
 Evidence: each board's `validation.json`, `drc.json`, `erc.json` and exported
 `schematic-netlist.xml` under `hw/boards/`. `hw/tools/check_design.py` checks source,
@@ -86,3 +106,6 @@ The remote magnetometer needs its own orientation calibration; the HAT's
 inclinometer does not automatically compensate a separately mounted head.
 Aurora-related magnetic measurements are not optical aurora detection.
 Add acquisition/replay fault-injection tests when firmware is introduced.
+'''
+(ROOT/'docs/validation.md').write_text(text)
+print('Published validation and artifact hashes')

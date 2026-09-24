@@ -121,21 +121,21 @@ def clean(root, keep=5, apply=False):
 
 
 def source_files(source):
-    files = [source / name for name in ("ato.yaml", "layout.json", "layout-trenz.json")]
+    files = [source / "hw" / name for name in ("ato.yaml", "layout.json", "layout-trenz.json")]
     for folder, patterns in {
-        "elec": ("*.ato", "*.kicad_mod", "*.kicad_sym"),
-        "tools": ("*.py",), "docs": ("*.csv",),
-        "hardware/libraries": ("*.kicad_mod", "*.kicad_sym"),
+        "hw/elec": ("*.ato", "*.kicad_mod", "*.kicad_sym"),
+        "hw/tools": ("*.py",), "docs": ("*.csv",),
+        "hw/libraries": ("*.kicad_mod", "*.kicad_sym"),
     }.items():
         for pattern in patterns:
             files.extend((source / folder).rglob(pattern))
-    files.append(source / "tests/overvoltage.ato")
+    files.append(source / "hw/tests/overvoltage.ato")
     for target in TARGETS:
-        folder = source / "layout" / target
+        folder = source / "hw/layout" / target
         files.append(folder / f"{target}.kicad_pcb")
         files.extend(folder.glob("*-lib-table"))
     for board in BOARDS:
-        folder = source / "hardware" / board
+        folder = source / "hw/boards" / board
         files.extend(folder.glob("*.kicad_sch"))
         files.extend(folder.glob("*.kicad_sym"))
         files.extend(folder.glob("*-lib-table"))
@@ -160,7 +160,7 @@ def stage(source, workspace, report):
         if path.is_file():
             manifest[str(path.relative_to(source))] = hashlib.sha256(path.read_bytes()).hexdigest()
     for name in ("simulation", "logs"):
-        (workspace / name).mkdir(exist_ok=True)
+        (workspace / "hw" / name).mkdir(exist_ok=True)
     write_json(report / "inputs.sha256.json", manifest)
     return manifest
 
@@ -182,25 +182,25 @@ def commands(profile):
     steps = []
     if profile == "full":
         for target in TARGETS:
-            steps += [(f"build-{target}", ["/opt/atopile/bin/python", "-m", "atopile", "build", "-b", target, "."]),
-                      (f"constraints-{target}", ["/opt/atopile/bin/python", "tools/solve_constraints.py", "--target", target])]
-        steps.append(("reject-overvoltage", ["/opt/atopile/bin/python", "tools/solve_constraints.py", "--negative"]))
+            steps += [(f"build-{target}", ["/opt/atopile/bin/python", "-m", "atopile", "build", "-b", target, "hw"]),
+                      (f"constraints-{target}", ["/opt/atopile/bin/python", "hw/tools/solve_constraints.py", "--target", target])]
+        steps.append(("reject-overvoltage", ["/opt/atopile/bin/python", "hw/tools/solve_constraints.py", "--negative"]))
     if profile in ("full", "quick"):
-        steps += [(name, ["python3", f"tools/{name}.py"]) for name in ("check_circuit", "check_design", "check_trenz")]
-    steps += [(name, ["python3", f"tools/{name}.py"]) for name in ("simulate", "simulate_trenz")]
+        steps += [(name, ["python3", f"hw/tools/{name}.py"]) for name in ("check_circuit", "check_design", "check_trenz")]
+    steps += [(name, ["python3", f"hw/tools/{name}.py"]) for name in ("simulate", "simulate_trenz")]
     return steps
 
 
 def collect(workspace, report, profile):
     files = []
     for pattern in ("*.json", "*.cir", "*.log"):
-        files.extend((workspace / "simulation").rglob(pattern))
+        files.extend((workspace / "hw/simulation").rglob(pattern))
     for board in BOARDS:
-        folder = workspace / "hardware" / board
+        folder = workspace / "hw/boards" / board
         files.extend(folder / name for name in ("drc.json", "erc.json", "validation.json", "schematic-netlist.xml"))
     if profile == "full":
         for target in TARGETS:
-            files.append(workspace / "layout" / target / f"{target}.kicad_pcb")
+            files.append(workspace / "hw/layout" / target / f"{target}.kicad_pcb")
     for path in files:
         if path.is_file():
             no_links(path)

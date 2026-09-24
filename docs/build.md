@@ -7,17 +7,26 @@ The separate Pi-outline T1 build and rendering commands are in
 [Trenz carrier documentation](trenz-hat.md#rebuild).
 
 Used environment: WSL Ubuntu 24.04, atopile 0.15.9 with Python 3.14.7,
-KiCad/pcbnew 9.0.9, ngspice 42 and Freerouting 1.9.0. The local atopile virtual
-environment is `.venv-atopile`; it is a tool dependency, not part of the design.
-Run these commands in Linux/WSL from the shakesense directory.
+KiCad/pcbnew 9.0.9, ngspice 42 and Freerouting 1.9.0. These lower-level commands
+require KiCad's system Python bindings, sexpdata, and ngspice in Linux/WSL.
+Recreate an optional local atopile environment with an installed `uv`:
 
 ```sh
-mkdir -p logs
-CI=1 .venv-atopile/bin/ato build -v . > logs/atopile-build.log 2>&1
-.venv-atopile/bin/python tools/solve_constraints.py > logs/constraint-solve.log 2>&1
-.venv-atopile/bin/python tools/solve_constraints.py --negative > logs/negative-voltage.log 2>&1
-python3 tools/simulate.py
-python3 tools/assemble_pcb.py
+uv venv --python 3.14.7 .local/atopile
+uv pip sync --python .local/atopile/bin/python --require-hashes environment/requirements.lock
+```
+
+Run the following from the repository root. They write authoring outputs; use
+the portable lab for disposable validation instead. Freerouting's jar is a local
+dependency at `hw/tools/freerouting-1.9.0.jar`, excluded from Git.
+
+```sh
+mkdir -p hw/logs
+CI=1 .local/atopile/bin/python -m atopile build -v hw > hw/logs/atopile-build.log 2>&1
+.local/atopile/bin/python hw/tools/solve_constraints.py > hw/logs/constraint-solve.log 2>&1
+.local/atopile/bin/python hw/tools/solve_constraints.py --negative > hw/logs/negative-voltage.log 2>&1
+python3 hw/tools/simulate.py
+python3 hw/tools/assemble_pcb.py
 ```
 
 `solve_constraints.py` explicitly invokes atopile's full numeric solver for
@@ -30,21 +39,21 @@ is patched and no electrical check is disabled. Component ratings use `assert
 `assemble_pcb.py` resets routing, applies mechanical placement, adds the outline
 and plane rules, and exports Specctra. It reads the compiled native KiCad board;
 it does not create connections from a Python netlist. Save manual layout changes
-before rerunning it. Electrical source is `elec/*.ato`; `layout.json` has no pin
+before rerunning it. Electrical source is `hw/elec/*.ato`; `hw/layout.json` has no pin
 net assignments. Review BOM presentation metadata when changing a selected MPN.
 
 The checked route sessions are supplied with both boards. Reconstruct the
 delivered layout after `assemble_pcb.py` with:
 
 ```sh
-python3 tools/import_routes.py
-python3 tools/trim_dangling.py
-python3 tools/widen_power.py
-python3 tools/review_schematic.py
-python3 tools/models.py
-python3 tools/check_circuit.py
-python3 tools/check_design.py
-python3 tools/report_validation.py
+python3 hw/tools/import_routes.py
+python3 hw/tools/trim_dangling.py
+python3 hw/tools/widen_power.py
+python3 hw/tools/review_schematic.py
+python3 hw/tools/models.py
+python3 hw/tools/check_circuit.py
+python3 hw/tools/check_design.py
+python3 hw/tools/report_validation.py
 ```
 
 The HAT assembly step includes reviewed connector escapes and the short RF
@@ -56,16 +65,16 @@ legal widening. Remaining 0.15 mm sections and per-net lengths are recorded in
 For a changed placement/circuit, reroute each board and repeat the checks:
 
 ```sh
-xvfb-run -a java -jar tools/freerouting-1.9.0.jar \
-  -de hardware/shakesense-hat/shakesense-hat.dsn \
-  -do hardware/shakesense-hat/shakesense-hat.ses -mp 25 -mt 1 -da
+xvfb-run -a java -jar hw/tools/freerouting-1.9.0.jar \
+  -de hw/boards/shakesense-hat/shakesense-hat.dsn \
+  -do hw/boards/shakesense-hat/shakesense-hat.ses -mp 25 -mt 1 -da
 # Repeat for shakesense-field-head.
-python3 tools/import_routes.py
-python3 tools/trim_dangling.py
-python3 tools/widen_power.py
-python3 tools/review_schematic.py
-python3 tools/models.py
-python3 tools/check_design.py
+python3 hw/tools/import_routes.py
+python3 hw/tools/trim_dangling.py
+python3 hw/tools/widen_power.py
+python3 hw/tools/review_schematic.py
+python3 hw/tools/models.py
+python3 hw/tools/check_design.py
 ```
 
 The restricted SES importer verifies placements and rejects unsupported route
@@ -84,16 +93,16 @@ Render the actual PCB with KiCad (repeat for the field head):
 ```sh
 xvfb-run -a kicad-cli pcb render --width 1800 --height 1000 \
   --quality high --background opaque --rotate 325,0,25 --zoom 0.9 \
-  -o hardware/shakesense-hat/3d.png \
-  hardware/shakesense-hat/shakesense-hat.kicad_pcb
+  -o hw/boards/shakesense-hat/3d.png \
+  hw/boards/shakesense-hat/shakesense-hat.kicad_pcb
 ```
 
 The KiCad project opens directly in PCB Editor; use Alt+3 for its interactive 3D
 viewer. Stock models require KiCad's 3D packages. Custom envelopes are portable
-under `hardware/models/`. Prototype render geometry is not mechanical signoff.
+under `hw/models/`. Prototype render geometry is not mechanical signoff.
 
 Do not use the empty BOM emitted by atopile's automatic picker: this design uses
 manual manufacturer parts. The explicit per-board `bom.csv` files are the review
 BOMs. No purchase, assembly order or board fabrication was submitted.
 
-Render the optional pressure sensor population with `python3 tools/render_option.py`. This changes only a temporary render board; U3 stays DNP in the delivered assembly.
+Render the optional pressure sensor population with `python3 hw/tools/render_option.py`. This changes only a temporary render board; U3 stays DNP in the delivered assembly.

@@ -1,1 +1,0 @@
-(fp_lib_table (version 7) (lib (name "ShakeSense") (type "KiCad") (uri "${KIPRJMOD}/../libraries/ShakeSense.pretty") (options "") (descr "Atopile atomic parts")))
