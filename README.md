@@ -21,6 +21,15 @@ checks. Rebuild the image once to add the pinned Buf tool.
 
 See the [project map](docs/project-layout.md) for ownership and generated-file rules.
 
+**Non-FPGA boards** — KiCad renders of the A2 sensor HAT and remote USB-C sensor head.
+
+![A2 sensor HAT with run-1 Coldfoot module interface](hw/boards/shakesense-hat/3d.png)
+
+![USB-C magnetometer and optional infrasound sensor head](hw/boards/shakesense-field-head/3d.png)
+
+The infrasound sensor is optional and is not fitted in the default render.
+[View the infrasound option fitted](hw/boards/shakesense-field-head/3d-infrasound-option.png).
+
 **T1 FPGA variant:** [Pi-size 85 × 56 mm Trenz 200T carrier](docs/trenz-hat.md),
 with [carrier 3D](hw/boards/shakesense-trenz-hat/3d.png) and
 [three-board stack concept](hw/boards/shakesense-trenz-hat/pi-trenz-stack-concept.png).

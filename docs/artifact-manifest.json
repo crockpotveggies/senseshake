@@ -216,7 +216,7 @@
     "docs/sensor-contract.md": "21e402f4e051065f1f961a464e3220a30b89ce1f5ff4a834dbc35f057a1722e0",
     "docs/usb-sensor-head.md": "42631138b30f1047a3b4f5d3c12f68bc364ae00175854262ee854a367e0f6fa8",
     "sw/interfaces/buf.yaml": "bda68586bbdf808b33c348d4c11029efaedf23a94b5e078208337606e24cd1ce",
-    "README.md": "dad638cd5a88b9922420032914d87d373d3d2c615c1f22047d081d7514479ffa",
+    "README.md": "9a774c7cec0bb5bc74e425248c87efe81602cb793ba2e715eed75eede3c8744f",
     "environment/check_project.py": "f05e6821340d6dbf7bd4b402a1431d572708bd9c8772a516c88058277654fe39",
     "environment/test_lab.py": "49b8f16bd713db9b151b53b53386586001a5078a52ff62f44c8638caf5287e45",
     "sw/interfaces/proto/senseshake/sensor/v1/sensor.proto": "f037ff5f74890f35ee28d72759d2a9597047eb5c192898dff260b6b778f5de44",
