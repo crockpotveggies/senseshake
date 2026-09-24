@@ -1,0 +1,37 @@
+:root { color-scheme: dark; }
+body { font-family: system-ui, -apple-system, sans-serif; background:#0d131c; color:#e2ebf4; }
+.nicegui-content { padding:20px 26px; gap:16px; max-width:1920px; margin:auto; }
+.topbar { width:100%; align-items:center; min-height:56px; gap:16px; padding:0 2px 12px; }
+.brand { font-size:23px; font-weight:700; letter-spacing:-.6px; }
+.eyebrow { color:#8ea4b8; font-size:10px; letter-spacing:1.6px; font-weight:650; }
+.workspace { display:grid; grid-template-columns:220px minmax(480px,1fr) 300px; gap:16px; width:100%; align-items:stretch; }
+.panel { border:1px solid #2a3745; border-radius:12px; background:#151f2b; padding:18px; gap:10px; }
+.sensor-panel { min-width:0; }
+.sensor-panel,.controls-panel { max-height:850px; overflow-y:auto; }
+.section-title { font-size:17px; font-weight:600; }
+.muted { color:#98aabd; }
+.small { font-size:12px; line-height:1.5; }
+.fine-print { color:#7f95aa; font-size:10px; line-height:1.5; }
+.group-label { margin-top:16px; color:#8ca3b9; font-size:9px; letter-spacing:1px; }
+.sensor-button { width:100%; min-height:56px; max-height:64px; padding:8px 12px; border:1px solid transparent; border-radius:8px; color:#c5d4e3!important; }
+.sensor-button.selected { background:#143b3c; border-color:#2b8078; color:#65e5cd!important; }
+.sensor-name { font-size:13px; font-weight:600; }
+.sensor-status { font-size:10px; font-weight:400; margin-top:3px; white-space:normal; text-align:left; }
+.center-column { min-width:0; width:100%; gap:16px; }
+.board-panel,.chart-panel { width:100%; }
+.chart-panel { flex:1; }
+.chart-grid { width:100%; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+.chart { height:205px; width:100%; min-width:0; }
+.controls-panel { min-width:0; }
+.controls-panel .q-expansion-item { border-bottom:1px solid #2a3745; }
+.controls-panel .q-item { padding:12px 0; font-size:13px; }
+.controls-panel .q-expansion-item__content { display:flex; flex-direction:column; gap:12px; padding:6px 0 12px; }
+.seed { width:110px; }
+.timeline-panel { width:100%; padding:12px 18px; gap:3px; }
+.time-label { font-variant-numeric:tabular-nums; font-size:20px; font-weight:600; color:#66e4cc; }
+.q-uploader { background:#1d2a39; font-size:11px; box-shadow:none; }
+.q-uploader__header { background:#28534f; }
+.q-btn { letter-spacing:0; }
+.topbar .bg-primary { color:#103632!important; }
+@media (max-width:1150px) { .workspace { grid-template-columns:190px minmax(350px,1fr); } .controls-panel { grid-column:1/-1; max-height:none; } .chart-grid { grid-template-columns:1fr; } }
+@media (max-width:700px) { .nicegui-content { padding:12px; } .workspace { display:flex; flex-direction:column; } .sensor-panel { width:100%; } .chart-grid { grid-template-columns:1fr; } .topbar { gap:8px; } }

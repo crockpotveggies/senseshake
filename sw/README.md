@@ -13,6 +13,8 @@ The sensor contracts and Pi acquisition application are executable:
 - [fpga/](fpga/README.md): Trenz pin/connectivity qualification and minimal test
   bitstreams; accelerator implementation is deferred.
 - [tests/](tests/README.md): portable replay, fault injection and host integration.
+- [ui/](ui/README.md): Python/NiceGUI local sensor workbench, board explorer,
+  stimulus controls and recording/replay.
 
 Run `./lab.ps1 test -Profile software` after rebuilding the portable image.
 This checks schemas, compatibility, acquisition/replay, modeled bus drivers,

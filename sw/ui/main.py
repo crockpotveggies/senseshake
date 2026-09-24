@@ -1,0 +1,368 @@
+"""Python-authored local workbench. Launch with ./ui.ps1 or ./ui.sh.
+
+NiceGUI supplies the browser's Three.js/ECharts components; there is no custom
+JavaScript application. Acquisition and all sample semantics live in sw/pi.
+"""
+import argparse
+import hashlib
+import json
+import math
+import os
+from pathlib import Path
+import sys
+
+ROOT = Path(__file__).resolve().parents[2]
+sys.path[:0] = [str(ROOT / "sw/pi"), str(ROOT / "sw/interfaces/python")]
+
+
+def build_descriptor():
+    from grpc_tools import protoc
+    target = ROOT / "sw/build/ui-schema.binpb"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    source = ROOT / "sw/interfaces/proto"
+    result = protoc.main(["protoc", f"-I{source}", "--include_imports",
+                          f"--descriptor_set_out={target}", str(source / "senseshake/sensor/v1/sensor.proto")])
+    if result:
+        raise RuntimeError("Could not build sensor descriptor")
+    os.environ["SENSESHAKE_DESCRIPTOR"] = str(target)
+
+
+build_descriptor()
+from nicegui import app, run, ui  # noqa: E402
+from senseshake.workbench import MAX_BYTES, NAMES, Workbench  # noqa: E402
+
+ASSETS = Path(__file__).parent / "assets"
+for relative, expected in json.loads((ASSETS / "provenance.json").read_text())["sha256"].items():
+    if hashlib.sha256((ROOT / relative).read_bytes()).hexdigest() != expected:
+        raise RuntimeError(f"Board visualization is stale: {relative}. See sw/ui/assets/README.md.")
+app.add_static_files("/board-assets", ASSETS)
+TEAL, MUTED = "#44d9c2", "#98aabd"
+COLORS = [TEAL, "#a7a3ff", "#f3bd64"]
+LABELS = {**{i: ("Acceleration · raw counts", "Angular rate · raw counts") for i in range(1, 5)},
+          5: ("Acceleration · raw counts", "Inclination · raw counts"),
+          6: ("N / E / D velocity · mm/s", "GNSS position is shown above"),
+          7: ("Magnetic field · raw counts", "XYZ samples • no calibration applied"),
+          8: ("Differential pressure · raw counts", "Temperature · raw counts")}
+MODELS = {**{i: "LSM6DSO" for i in range(1, 5)}, 5: "SCL3300", 6: "MAX-M10S", 7: "RM3100", 8: "DLVR · optional"}
+
+
+def chart_options(title):
+    return dict(backgroundColor="transparent", animation=False, color=COLORS,
+        title=dict(text=title, textStyle=dict(color="#dce6ef", fontSize=12), left=8, top=8),
+        tooltip=dict(trigger="axis"), legend=dict(bottom=0, right=10, textStyle=dict(color=MUTED)),
+        grid=dict(left=65, right=20, top=40, bottom=50),
+        xAxis=dict(type="value", name="s", axisLabel=dict(color=MUTED), splitLine=dict(show=False)),
+        yAxis=dict(type="value", scale=True, axisLabel=dict(color=MUTED), splitLine=dict(lineStyle=dict(color="#283441"))),
+        series=[dict(name=a, type="line", showSymbol=False, connectNulls=False,
+                     lineStyle=dict(width=1.7), data=[]) for a in "XYZ"])
+
+
+def board_scene(scene, select):
+    """Real KiCad T1 geometry plus pick targets/custom envelopes at authored XY."""
+    layout = json.loads((ROOT / "hw/layout-trenz.json").read_text())["shakesense-trenz-hat"]
+    remote = json.loads((ROOT / "hw/layout.json").read_text())["shakesense-field-head"]
+    targets, rings = {}, {}
+    with scene:
+        with scene.group() as hat:
+            scene.gltf("/board-assets/t1.glb").scale(100).rotate(math.pi / 2, 0, 0).move(-9.25, 7.8, 0)
+            # The tall Pi socket sits below the carrier; the four FFC connectors
+            # are also underside parts and do not cover top-side IMUs.
+            scene.box(5.08, .51, 1.61).move(-.999, 2.45, -.967).material("#252b34")
+            for x, y, width in ((17,22,2.35),(17,39,2.35),(57,20,3.35),(57,37,3.35)):
+                scene.box(width, .8, .21).move((x-42.5)/10, (28-y)/10, -.11).material("#a79a81")
+            # KiCad's GLB exporter omits these local VRML bodies. These are
+            # intentionally simple visualization envelopes, not STEP substitutes.
+            custom = {"U20": (1.21, .76, .3), "U21": (.97, 1.01, .25),
+                      "J80": (3.9, .65, .4), "J81": (3.9, .65, .4), "J82": (.65, 2.6, .4)}
+            for part in layout["parts"]:
+                ref, (x, y) = part["ref"], part["xy"]
+                x, y = (x - 42.5) / 10, (28 - y) / 10
+                if ref in custom:
+                    w, h, z = custom[ref]
+                    scene.box(w, h, z).move(x, y, .16 + z / 2).material("#b6b7bb" if ref == "U21" else "#252b34")
+                sid = {"U11": 1, "U12": 2, "U13": 3, "U14": 4, "U20": 5, "U21": 6}.get(ref)
+                if sid:
+                    radius = .29 if sid <= 4 else .72
+                    target = scene.cylinder(radius, radius, .07).rotate(math.pi / 2, 0, 0).move(x, y, .63).material(TEAL, .28).with_name(f"sensor-{sid}")
+                    targets[target.id] = sid
+                    rings[sid] = scene.ring(radius, radius + .06, 48).move(x, y, .68).material(TEAL).with_name(f"sensor-{sid}")
+                    targets[rings[sid].id] = sid
+                    scene.text(NAMES[sid], "color:#e8f5ff;font-size:11px;background:#172534dc;padding:2px 5px;border-radius:4px;pointer-events:none").move(x, y, 1.12)
+            scene.text("T1 SENSOR HAT  /  85 × 56 mm", "color:#a6bfcc;font-size:11px;pointer-events:none").move(0, -3.2, .1)
+        with scene.group() as head:
+            scene.box(7, 4.5, .16).material("#165b51")
+            for part in remote["parts"]:
+                ref = part["ref"]
+                if ref not in ("U1", "U2", "U3", "J1"):
+                    continue
+                x, y = (part["xy"][0] - 35) / 10, (22.5 - part["xy"][1]) / 10
+                sid = {"U2": 7, "U3": 8}.get(ref)
+                box = scene.box(1.6 if sid else .6, 1.5 if sid else .6, .5 if sid else .3).move(x, y, .35).material("#293544")
+                if sid:
+                    targets[box.id] = sid
+                    rings[sid] = scene.ring(1, 1.08, 48).move(x, y, .64).material(TEAL)
+                    targets[rings[sid].id] = sid
+                    scene.text(NAMES[sid] + (" · optional" if sid == 8 else ""), "color:white;font-size:12px;pointer-events:none").move(x, y, 1)
+            scene.text("REMOTE USB HEAD  /  70 × 45 mm", "color:#a6bfcc;font-size:11px;pointer-events:none").move(0, -2.8, .1)
+        head.visible(False)
+    def clicked(event):
+        for hit in event.hits:
+            if hit.object_id in targets:
+                select(targets[hit.object_id])
+                break
+    scene.on_click(clicked)
+    return hat, head, rings
+
+
+@ui.page("/")
+def page():
+    engine = Workbench()
+    selected = 1
+    busy = False
+    ui.dark_mode().enable()
+    ui.colors(primary=TEAL, secondary="#a7a3ff", dark="#131c26", dark_page="#0d131c")
+    ui.add_css((Path(__file__).parent / "style.css").read_text())
+
+    def attempt(action):
+        try:
+            action()
+        except (ValueError, OSError, TypeError) as error:
+            ui.notify(str(error), type="negative")
+
+    def choose(sid):
+        nonlocal selected
+        selected = sid
+        heading.set_text(f"{NAMES[sid]}  /  {MODELS[sid]}")
+        board_label.set_text("T1 sensor HAT" if sid <= 6 else "Remote USB sensor head")
+        hat.visible(sid <= 6)
+        head.visible(sid >= 7)
+        for sensor, ring in rings.items():
+            ring.material(TEAL if sensor == sid else "#60788a", 1 if sensor == sid else .25)
+        for sensor, button in sensor_buttons.items():
+            button.classes(replace="sensor-button selected" if sensor == sid else "sensor-button")
+        update_charts()
+
+    def camera(top=False):
+        scene.move_camera(x=0 if top else 4, y=-.01 if top else -5, z=9 if top else 7,
+                          look_at_x=0, look_at_y=0, look_at_z=0, up_x=0, up_y=0, up_z=1)
+
+    def fresh(document=None):
+        engine.reset(document, int(seed.value))
+        ui.notify("New run ready. Press Start; save the recording before starting another run.")
+
+    def save_recording():
+        if engine.mode != "Simulate":
+            raise ValueError("This is an imported recording")
+        ui.download.content(engine.finish(), "senseshake-run.ssrec", "application/octet-stream")
+
+    def save_scenario():
+        ui.download.content(json.dumps(engine.scenario_json(), indent=2) + "\n", "senseshake-scenario.json", "application/json")
+
+    async def upload_recording(event):
+        nonlocal busy
+        if event.file.size() > MAX_BYTES:
+            ui.notify("Maximum recording size is 8 MiB", type="negative")
+            return
+        busy = True
+        engine.pause()
+        try:
+            await run.io_bound(engine.load_recording, await event.file.read())
+            ui.notify("Recording validated. Use Play or the replay timeline.")
+        except (ValueError, OSError, TypeError, KeyError, RecursionError) as error:
+            ui.notify(str(error), type="negative")
+        finally:
+            busy = False
+            replay_upload.reset()
+
+    async def upload_scenario(event):
+        if event.file.size() > 65536:
+            ui.notify("Scenario file is too large", type="negative")
+            return
+        try:
+            fresh(json.loads(await event.file.text()))
+        except (ValueError, OSError, TypeError, KeyError, RecursionError) as error:
+            ui.notify(str(error), type="negative")
+        scenario_upload.reset()
+
+    with ui.row().classes("topbar"):
+        ui.icon("graphic_eq", size="30px").style(f"color:{TEAL}")
+        with ui.column().classes("gap-0"):
+            ui.label("ShakeSense").classes("brand")
+            ui.label("SENSOR WORKBENCH").classes("eyebrow")
+        ui.space()
+        mode = ui.badge("SIMULATION", color="primary").props("outline")
+        state_label = ui.label("Ready").classes("muted")
+        play = ui.button("Start", icon="play_arrow", on_click=lambda: attempt(engine.toggle)).props("unelevated no-caps")
+        save = ui.button("Finish & save", icon="download", on_click=lambda: attempt(save_recording)).props("outline no-caps")
+
+    with ui.element("div").classes("workspace"):
+        with ui.column().classes("panel sensor-panel"):
+            ui.label("DEVICES").classes("eyebrow")
+            ui.label("Select a sensor").classes("section-title")
+            sensor_buttons, statuses = {}, {}
+            for sid, name in NAMES.items():
+                if sid in (1, 7):
+                    ui.label("T1 HAT · PI / FPGA STACK" if sid == 1 else "REMOTE · USB-C HEAD").classes("group-label")
+                with ui.button(on_click=lambda sid=sid: choose(sid)).props("flat no-caps align=left").classes("sensor-button") as b:
+                    with ui.column().classes("gap-0 items-start"):
+                        ui.label(name).classes("sensor-name")
+                        statuses[sid] = ui.label(f"{MODELS[sid]} · waiting").classes("sensor-status")
+                sensor_buttons[sid] = b
+            ui.separator().classes("my-2")
+            ui.label("MODELED DEVICES").classes("eyebrow")
+            ui.label("No hardware connected. The FPGA is not required for sensor experiments.").classes("small muted")
+            metrics = ui.label("0 samples · 0 missing").classes("small")
+            ui.space()
+            with ui.expansion("Recordings & scenarios", icon="folder_open").classes("w-full small"):
+                replay_upload = ui.upload(label="Open .ssrec replay", auto_upload=True, max_file_size=MAX_BYTES,
+                    max_files=1, on_upload=upload_recording, on_rejected=lambda: ui.notify("Recording exceeds 8 MiB", type="negative")).props('accept=".ssrec"').classes("w-full")
+                scenario_upload = ui.upload(label="Load scenario JSON", auto_upload=True, max_file_size=65536,
+                    max_files=1, on_upload=upload_scenario).props('accept=".json"').classes("w-full")
+                ui.button("Export scenario", on_click=lambda: attempt(save_scenario)).props("flat no-caps")
+
+        with ui.column().classes("center-column"):
+            with ui.column().classes("panel board-panel"):
+                with ui.row().classes("w-full items-center"):
+                    with ui.column().classes("gap-0"):
+                        ui.label("BOARD EXPLORER").classes("eyebrow")
+                        board_label = ui.label("T1 sensor HAT").classes("section-title")
+                    ui.space()
+                    ui.button("Orbit", on_click=lambda: camera()).props("flat dense no-caps")
+                    ui.button("Top", on_click=lambda: camera(True)).props("flat dense no-caps")
+                scene = ui.scene(height=310, grid=False, camera=ui.scene.perspective_camera(fov=40), background_color="#111c28").classes("w-full rounded-lg")
+                hat, head, rings = board_scene(scene, choose)
+                camera()
+                ui.label("Click a sensor to inspect · drag to orbit · scroll to zoom").classes("small muted")
+                ui.label("T1: KiCad geometry + simplified custom bodies. Remote head: placement-based envelopes. Camera motion does not stimulate sensors.").classes("fine-print")
+            with ui.column().classes("panel chart-panel"):
+                heading = ui.label("IMU 1 / LSM6DSO").classes("section-title")
+                detail = ui.label("Waiting for samples").classes("small muted")
+                with ui.element("div").classes("chart-grid"):
+                    primary = ui.echart(chart_options(LABELS[1][0])).classes("chart")
+                    secondary = ui.echart(chart_options(LABELS[1][1])).classes("chart")
+                ui.label("Raw counts preserved · gaps mean missing data · time axis is recording arrival time, not synchronized device clocks").classes("fine-print")
+
+        with ui.column().classes("panel controls-panel"):
+            ui.label("STIMULUS LAB").classes("eyebrow")
+            ui.label("Shape the experiment").classes("section-title")
+            ui.label("Controls apply when you press their Apply button. Changes are captured in the recording.").classes("small muted")
+            with ui.row().classes("w-full items-center"):
+                seed = ui.number("Seed", value=1, min=0, max=2**32-1, precision=0).props("dense outlined").classes("seed")
+                ui.button("New run", icon="add", on_click=lambda: attempt(fresh)).props("flat no-caps").tooltip("Replaces the current run; save it first")
+            ui.button("Load rocking + field demo", icon="waves", on_click=lambda: attempt(lambda: fresh(json.loads((ROOT / "sw/pi/profiles/stimulus-demo.json").read_text())))).props("outline no-caps").classes("w-full")
+            with ui.column().classes("w-full gap-2") as stimuli:
+                with ui.expansion("Pose & vibration", icon="screen_rotation", value=True).classes("w-full"):
+                    pose_target = ui.select({"orientation_deg": "HAT pose", "head_orientation_deg": "Remote head pose"}, value="orientation_deg").props("dense outlined").classes("w-full")
+                    pose = []
+                    for axis in ("Roll", "Pitch", "Yaw"):
+                        with ui.row().classes("w-full items-center gap-2"):
+                            ui.label(axis).classes("small w-10")
+                            slider = ui.slider(min=-180, max=180, step=1, value=0).props(f'label label-always aria-label="{axis} in degrees"').classes("flex-1")
+                            pose.append(slider)
+                    ui.button("Apply pose", on_click=lambda: attempt(lambda: engine.controls({pose_target.value: [s.value for s in pose]}))).props("flat no-caps")
+                    amp = ui.number("Vertical amplitude (m/s²)", value=.3, min=0, max=20, step=.1).props("dense outlined").classes("w-full")
+                    frequency = ui.number("Frequency (Hz)", value=2, min=0, max=12, step=.1).props("dense outlined").classes("w-full")
+                    ui.button("Apply vibration", on_click=lambda: attempt(lambda: engine.controls({"acceleration_m_s2": [0, 0, {"amplitude": amp.value, "frequency_hz": frequency.value}]}))).props("flat no-caps")
+                with ui.expansion("Magnetic field & infrasound", icon="sensors").classes("w-full"):
+                    fields = [ui.number(f"Field {axis} (µT)", value=value, step=1).props("dense outlined").classes("w-full") for axis, value in zip("XYZ", (0, 20, -45))]
+                    ui.button("Apply field", on_click=lambda: attempt(lambda: engine.controls({"magnetic_ut": [f.value for f in fields]}))).props("flat no-caps")
+                    pressure = ui.number("Pressure amplitude (Pa)", value=20, min=0, max=500).props("dense outlined").classes("w-full")
+                    pressure_hz = ui.number("Pressure frequency (Hz)", value=1, min=0, max=20, step=.1).props("dense outlined").classes("w-full")
+                    ui.button("Apply pressure", on_click=lambda: attempt(lambda: engine.controls({"pressure_pa": {"amplitude": pressure.value, "frequency_hz": pressure_hz.value}}))).props("flat no-caps")
+                with ui.expansion("GNSS & temperature", icon="satellite_alt").classes("w-full"):
+                    fix = ui.switch("GNSS fix", value=True)
+                    position = [ui.number(label, value=v).props("dense outlined").classes("w-full") for label, v in (("Latitude (°)",49),("Longitude (°)",-123),("Height (m)",0))]
+                    velocity = ui.number("North velocity (m/s)", value=0, min=-300, max=300).props("dense outlined").classes("w-full")
+                    temp = ui.number("Temperature (°C)", value=25, min=-40, max=85).props("dense outlined").classes("w-full")
+                    ui.button("Apply environment", on_click=lambda: attempt(lambda: engine.controls({"gnss_fix": fix.value, "gnss_position": [p.value for p in position], "gnss_velocity_ned_m_s": [velocity.value,0,0], "temperature_c": temp.value}))).props("flat no-caps")
+                with ui.expansion("Fault injection", icon="bug_report").classes("w-full"):
+                    fault_sensor = ui.select(NAMES, value=1, label="Sensor").props("dense outlined").classes("w-full")
+                    fault = ui.select(["none", "timeout", "nack", "disconnect", "not_ready", "saturation", "short_read"], value="none", label="Fault").props("dense outlined").classes("w-full")
+                    ui.label("Applies to one sensor; other active faults are preserved. Recovery follows the runtime retry budget.").classes("fine-print")
+                    def apply_fault():
+                        state, _ = engine.scenario.state_at(engine.now)
+                        engine.controls({"sensor_faults": {**state["sensor_faults"], str(fault_sensor.value): fault.value}})
+                    ui.button("Apply fault", on_click=lambda: attempt(apply_fault)).props("flat no-caps")
+
+    with ui.column().classes("panel timeline-panel"):
+        with ui.row().classes("w-full items-center"):
+            time_label = ui.label("00:00.000").classes("time-label")
+            ui.label("SESSION TIMELINE").classes("eyebrow")
+            ui.space()
+            capture_label = ui.label("Capture from start · up to 3 minutes / 8 MiB").classes("small muted")
+        timeline = ui.slider(min=0, max=180, step=.01, value=0).props('label aria-label="Replay time in seconds"').classes("w-full")
+        async def seek():
+            nonlocal busy
+            if engine.mode != "Replay":
+                return
+            busy = True
+            try:
+                await run.io_bound(engine.seek, timeline.value)
+            except ValueError as error:
+                ui.notify(str(error), type="negative")
+            finally:
+                busy = False
+        timeline.on("change", seek)
+        event_label = ui.label("Ready to start. Ideal sensor models; hardware qualification remains separate.").classes("small muted")
+        error_label = ui.label().classes("small text-amber-300")
+
+    def update_charts():
+        snap = engine.snapshot(selected)
+        for chart, field, label in ((primary, "primary", LABELS[selected][0]), (secondary, "secondary", LABELS[selected][1])):
+            chart.options["title"]["text"] = label
+            names = ["N", "E", "D"] if selected == 6 else ["Counts", "", ""] if selected == 8 else list("XYZ")
+            chart.options["legend"]["show"] = selected != 8
+            for axis, series in enumerate(chart.options["series"]):
+                series["name"] = names[axis]
+                series["data"] = [[p["t"], p[field][axis]] for p in snap["points"]]
+            chart.update()
+        secondary.set_visibility(selected not in (6, 7))
+        primary.style("grid-column:1 / -1" if selected in (6, 7) else "grid-column:auto")
+        point = snap["latest"][selected]
+        detail.set_text(f'{point["quality"]} · {point["detail"]}' if point else "Waiting for samples")
+        heading.set_text(f"{NAMES[selected]}  /  {MODELS[selected]}")
+        metrics.set_text(f'{snap["samples"]:,} samples · {snap["missing"]:,} missing')
+        for sid, point in snap["latest"].items():
+            status = point["quality"] if point else "waiting"
+            if point and snap["seconds"] - point["t"] > 2.5:
+                status = "Stale"
+            statuses[sid].set_text(f"{MODELS[sid]} · {status}")
+            statuses[sid].style(f'color:{TEAL if status == "Valid" else "#f3bd64"}')
+        mode.set_text(snap["mode"].upper())
+        state_label.set_text("Running" if snap["running"] else "Finished" if snap["ended"] else "Paused")
+        play.set_text("Pause" if snap["running"] else "Play" if snap["mode"] == "Replay" else "Start")
+        play.props(f'icon={"pause" if snap["running"] else "play_arrow"}')
+        save.set_enabled(snap["mode"] == "Simulate")
+        for element in stimuli.descendants():
+            if hasattr(element, "set_enabled") and not isinstance(element, ui.expansion):
+                element.set_enabled(snap["mode"] == "Simulate" and not snap["ended"])
+        timeline.props(f'max={max(snap["duration"], .01)}')
+        timeline.set_enabled(snap["mode"] == "Replay" and not busy)
+        timeline.set_value(snap["seconds"])
+        seconds = snap["seconds"]
+        time_label.set_text(f"{int(seconds // 60):02d}:{seconds % 60:06.3f}")
+        capture_label.set_text("Replay · drag timeline to seek" if snap["mode"] == "Replay" else "Capture from start · up to 3 minutes / 8 MiB")
+        if snap["events"]:
+            t, code, text = snap["events"][-1]
+            event_label.set_text(f"{t:.3f}s · {code} · {text}")
+        else:
+            event_label.set_text("Ideal sensor models • raw recordings • no hardware connected")
+        error_label.set_text(snap["error"])
+
+    async def tick():
+        if not busy:
+            await run.io_bound(engine.advance, 50)
+
+    choose(1)
+    ui.timer(.05, tick)
+    ui.timer(.25, update_charts)
+    ui.context.client.on_disconnect(engine.pause)
+    ui.context.client.on_delete(lambda: engine.acquisition.close())
+
+
+if __name__ in {"__main__", "__mp_main__"}:
+    parser = argparse.ArgumentParser(description="Local ShakeSense sensor workbench")
+    parser.add_argument("--port", type=int, default=8080)
+    args = parser.parse_args()
+    ui.run(host="127.0.0.1", port=args.port, title="ShakeSense · Sensor Workbench",
+           dark=True, reload=False, show=False, favicon="〰", reconnect_timeout=30)

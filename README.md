@@ -17,6 +17,12 @@ once if it predates the pinned Buf tool.
 **Virtual sensors:** drive motion, tilt, magnetic fields, pressure and GNSS with
 [saved stimulus scenarios](docs/stimulus-models.md), including timed faults.
 
+**Sensor workbench:** run `./ui.ps1` (Windows) or `./ui.sh` (Linux/macOS), then
+open `http://127.0.0.1:8080`. The dark-mode, Python-authored UI offers a selectable
+3D HAT, eight virtual sensors, raw-data charts, stimulus/fault controls and
+recording/replay. Requires `uv`; dependencies install into the project's ignored
+`.local/` folder. See the [workbench guide](docs/sensor-workbench.md).
+
 | Directory | Contents |
 | --- | --- |
 | [hw/](hw/README.md) | Atopile circuits, KiCad boards, models, hardware checks and SPICE. |

@@ -48,3 +48,12 @@ Do not refresh it just to bypass a breaking change. Generated descriptors belong
 in ignored `sw/build/` inside the lab. Follow `docs/sensor-software.md` for runtime,
 loss and recovery rules. Linux drivers have modeled-bus tests; physical sensor
 qualification and MCU firmware remain pending.
+
+The local workbench is Python/NiceGUI in `sw/ui/`; its framework-independent
+controller is `sw/pi/senseshake/workbench.py`. Preserve raw count/gap semantics,
+per-tab sessions, bounded recording/display buffers and separation of camera
+motion from stimulus controls. Keep `sw/ui/uv.lock` synchronized with its optional
+project dependencies; do not add UI packages to atopile's environment. For UI
+changes run its HTTP smoke check, controller tests and a browser interaction
+check. The sensor software profile includes the controller tests. Update the
+workbench guide and review model provenance after changing board display assets.

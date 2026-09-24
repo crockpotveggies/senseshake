@@ -15,6 +15,7 @@
 | `sw/field-head/` | Planned USB microcontroller firmware. |
 | `sw/fpga/` | Planned Trenz bitstream integration and board constraints. |
 | `sw/tests/` | Executable contract/framing fixtures; later acquisition integration tests. |
+| `sw/ui/` | Python/NiceGUI workbench, locked optional dependencies and display assets. |
 | `docs/` | Design decisions, interface contracts, validation limits, vendor references and build instructions. |
 | `environment/` | Pinned portable toolchain, launcher implementation and safeguard tests. |
 | `.lab/` | Ignored disposable reports, bounded by retention. |
