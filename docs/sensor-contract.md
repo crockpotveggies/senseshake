@@ -139,7 +139,8 @@ On corruption, drop that frame, increment a visible error counter and resume at
 the next delimiter. On overflow, discard without buffering until a delimiter.
 Disconnect resets partial framing state and requires identity/configuration
 again. A partial frame without a delimiter is bounded but needs a transport
-timeout in step 2. The Python decoder yields frames rather than accumulating an
+timeout in the transport layer (implemented as one second). The decoder yields
+frames rather than accumulating an
 unbounded list. Its caller must exhaust each feed iterator and use a bounded
 dispatch queue. CRC detects accidental corruption; it is not authentication.
 
@@ -164,8 +165,10 @@ Implemented checks include a manually specified binary producer fixture,
 signed-count boundaries, missing/zero distinction, all eight sensor payloads,
 timestamp/sequence rules, corruption, arbitrary frame splits, resynchronization,
 overflow, and a deliberate incompatible schema change rejected by Buf.
-Real adapters, cross-batch state, calibration storage, full fault recovery,
-USB enumeration, MCU firmware and physical testing remain subsequent work.
+The [acquisition layer](sensor-software.md) implements cross-batch state,
+bounded recovery, calibration artifacts, recording/replay and modeled/Linux
+adapters. Polling leaves conversion uncertainty and physical loss unknown.
+USB enumeration, MCU firmware and physical testing remain open.
 
 References: [Protobuf presence](https://protobuf.dev/programming-guides/field_presence/),
 [Buf breaking checks](https://buf.build/docs/reference/cli/buf/breaking/),

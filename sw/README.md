@@ -3,7 +3,7 @@
 The sensor HAT is driven by Pi software; it does not need separate MCU firmware.
 The [active plan](../docs/sensor-development-plan.md) focuses on sensors using the
 T1 FPGA stack; acquisition must run without Coldfoot or a configured FPGA.
-The initial sensor contract and framing implementation are now executable:
+The sensor contracts and Pi acquisition application are executable:
 
 - [interfaces/](interfaces/README.md): Protobuf schemas, semantic validation and bounded USB framing.
 - [pi/](pi/README.md): Pi device configuration, sensor drivers/adapters, acquisition,
@@ -15,6 +15,8 @@ The initial sensor contract and framing implementation are now executable:
 - [tests/](tests/README.md): portable replay, fault injection and host integration.
 
 Run `./lab.ps1 test -Profile software` after rebuilding the portable image.
-This checks schemas, compatibility, data semantics and stream framing. Pi drivers,
-acquisition/replay, USB-head firmware and the FPGA test bitstream are still pending.
-These tests do not emulate a Pi or enumerate a USB sensor head.
+This checks schemas, compatibility, acquisition/replay, modeled bus drivers,
+USB streams and recovery from injected faults. See the
+[software run guide](../docs/sensor-software.md). USB-head firmware, FPGA test
+bitstreams and physical qualification remain pending. Tests do not emulate
+Pi/MCU instructions or enumerate a USB sensor head.

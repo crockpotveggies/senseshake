@@ -26,8 +26,11 @@ checks, bounded USB framing, semantic validators and independent wire fixtures.
 The portable software profile runs the executable contract tests. Nanopb has
 candidate allocation bounds and a RAM budget assessment; C interoperability,
 ARM/USB linked-image sizing and stack measurements remain open before firmware
-selection. Steps 2–4 have not been implemented. The next work is Pi acquisition
-with real/simulated adapters, session/configuration ordering and recording/replay.
+selection. Steps 2–3 now have the [runnable application](sensor-software.md):
+Linux/modeled adapters, bounded acquisition, calibration, recording/replay,
+session/configuration ordering, USB ingestion and finite recovery. This software
+milestone runs without hardware. Step 4 remains open: USB-head firmware and
+physical sensor/FPGA-stack qualification, including Pi device-tree deployment.
 
 ## 1. Define sensor data contracts
 

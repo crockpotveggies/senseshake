@@ -20,7 +20,7 @@ From the project folder in PowerShell:
 .\lab.ps1 test                  # Full circuit + PCB + SPICE validation
 .\lab.ps1 test -Profile quick   # Saved compiled circuit/PCB + SPICE checks
 .\lab.ps1 test -Profile spice   # Only bounded SPICE cases
-.\lab.ps1 test -Profile software # Sensor contracts, compatibility and framing
+.\lab.ps1 test -Profile software # Sensor application, contracts and recovery
 .\lab.ps1 unit                  # Cleanup/staging safeguards
 ```
 
@@ -39,10 +39,10 @@ drive-sharing configuration. No host directory is mounted into the container.
 
 | Profile | Checks |
 | --- | --- |
-| `full` (default) | Fresh atopile builds for A2, USB field head, and T1; explicit numeric constraint solve for each; rejection of the deliberately unsafe 5 V IMU fixture; circuit invariants and nine GPIO mapping/fault/import cases; native KiCad ERC/DRC and connectivity checks for all three boards; 37 bounded SPICE cases; sensor contract/framing checks (14 steps). |
+| `full` (default) | Fresh atopile builds for A2, USB field head, and T1; numeric constraint solves; unsafe 5 V IMU rejection; circuit invariants and nine GPIO mapping/fault/import cases; native KiCad ERC/DRC/connectivity; 37 bounded SPICE cases; the software profile (14 steps). |
 | `quick` | Same GPIO fault, circuit/PCB consistency, SPICE and software checks using saved compiled layouts. Does **not** prove `.ato` changes were rebuilt. |
 | `spice` | 27 A2/field support-circuit cases and 10 Trenz support-circuit cases, including expected fault detection. |
-| `software` | Buf format/lint/build and FILE compatibility, deliberate incompatible-change rejection, and Python semantic/framing tests. No CAD tools or hardware execution. |
+| `software` | Buf format/lint/build and FILE compatibility, deliberate incompatible-change rejection, acquisition/replay, modeled driver and Linux TTY/worker fault tests; retained eight-sensor demo. No CAD or physical hardware execution. |
 
 The runner calls the existing project entrypoints. It does not reroute boards,
 rewrite source CAD, render images, or release fabrication files. A full test
@@ -150,25 +150,26 @@ An [inactive GitHub Actions template](../environment/ci/README.md) can run the
 structure checks, cleanup tests, and full hardware profile on pushes and pull
 requests, with report retention of seven days. It has not been installed because
 the current GitHub login lacks workflow-management scope. The local suite is
-fully usable. The local software/full/quick profiles validate the implemented sensor contract
-and framing. They do not validate the planned acquisition service or MCU firmware.
+fully usable. The software/full/quick profiles validate the sensor application,
+contracts, framing, recording/replay and bounded recovery. MCU firmware and
+physical device behavior remain outside these checks.
 Buf 1.73.0 is downloaded only during image build and SHA-256 checked; Protobuf
 5.29.6 reuses the existing Python lock. Runtime tests remain offline.
 
 ## Recorded validation
 
-The extended full profile passed all **14 steps** on 2026-09-24 in
-**82.31 seconds**, run `20260924T181645Z-b941ba9f`. It includes all three fresh
-circuit builds/constraint solves, the negative voltage fixture, nine GPIO tests,
-native ERC/DRC/connectivity, 37 bounded SPICE cases, and **24 sensor contract and
-framing tests** plus Buf lint/compatibility and deliberate breaking-change rejection.
+The full profile passed all **14 steps** on 2026-09-24 in **80.93 seconds**,
+run `20260924T185342Z-725219f6`. It includes fresh circuit builds/constraint
+solves, the negative voltage fixture, nine GPIO tests, native ERC/DRC/connectivity,
+37 bounded SPICE cases and **61 software tests**, plus Buf compatibility and
+deliberate breaking-change rejection. No software tests were skipped in Linux.
 
-Reports occupy 2.0 MiB under `.lab/runs/20260924T181645Z-b941ba9f` and are subject
-to the normal five-run retention. The software-only profile also passed earlier
-as `20260924T181551Z-600da7b5` (23 tests before the added unknown-loss presence case).
-Ten applicable cleanup/staging safeguard tests passed in Linux; the Windows-only
-junction test was skipped. The new staging test verifies software inputs and
-exclusion of generated `sw/build/` outputs.
+Reports occupy 2.1 MiB and follow five-run retention. The software-only profile
+also passed as `20260924T185330Z-752713b5`. Both execute and replay the eight-sensor
+demo: 480 samples, 30 MISSING and two SATURATED; repeated runs produce identical
+bytes. This is deterministic application testing, not sensor/MCU emulation.
+Ten cleanup/staging safeguards passed in Linux; the Windows-only junction test
+was skipped. Staging includes Pi sources/profiles and excludes generated output.
 
 Image ID: `sha256:cea708e4071d62e115358fa08176554f81d4e61c7503e6469e6fcd0879c2c3a3`. Toolchain: KiCad 9.0.9,
 atopile 0.15.9, Buf 1.73.0 and Protobuf 5.29.6.
@@ -179,20 +180,18 @@ replay evidence remain in the [hardware verification record](../hw/boards/shakes
 
 Add these as separate profiles using the same scratch/report rules:
 
-1. **Portable firmware logic:** compile the real sensor scheduling, framing,
-   calibration, and recovery code against fake I2C/SPI/UART/clock adapters. Replay
-   fixed-seed recordings and inject missing devices, short reads, bad frames,
-   disconnects, time jumps, saturation and buffer overflow. Compare against
-   independently specified expected outputs.
-2. **Pi host integration:** run the actual Linux host process against those
-   adapters and a simulated remote-head transport. Keep ARM compatibility checks
+1. **USB-head firmware:** compile the C codec and sensor scheduling against
+   fake buses, check C/Python interoperability and link the actual USB stack
+   against measured RAM/flash/stack budgets. Pi software scheduling, calibration,
+   replay and fault injection are already in the software profile.
+2. **Pi deployment:** qualify the five-select device tree and actual Linux
+   buses on the selected Pi. The host application and pseudo-terminal transport
+   are tested without hardware. Keep ARM compatibility checks
    separate from emulating physical Pi GPIO. USB descriptor/enumeration tests
    need a Linux virtual USB harness or a real head; normal containers do not
    emulate a USB microcontroller.
-3. **Coldfoot/FPGA:** invoke the existing RTL test flow from the Coldfoot repo
-   against its current runtime contract. Mount/copy only explicitly selected
-   inputs, pin simulator versions in a separate image, and retain waveforms only
-   on failure with a size limit. The Trenz pin/clock/bitstream port is still needed.
+3. **FPGA connectivity:** add a narrowly scoped test bitstream for the already
+   audited carrier pin map. Coldfoot and accelerator RTL work remains deferred.
 4. **Bench gates:** power sequencing/current limits, USB electrical behavior,
    physical fit, thermal drift/noise and hardware-in-the-loop remain required
    before fabrication confidence can be claimed.

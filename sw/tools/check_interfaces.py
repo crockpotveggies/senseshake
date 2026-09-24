@@ -33,13 +33,24 @@ def main():
         rejected = subprocess.run([BUF, "breaking", str(folder), "--against", str(INTERFACES / "baseline.binpb")],
                                   capture_output=True, text=True)
         assert rejected.returncode != 0 and "boot_id" in rejected.stdout + rejected.stderr, rejected
-    env = dict(os.environ, PYTHONPATH=str(INTERFACES / "python"),
+    env = dict(os.environ, PYTHONPATH=os.pathsep.join([str(INTERFACES / "python"), str(ROOT / "sw/pi")]),
                SENSESHAKE_DESCRIPTOR=str(BUILD / "schema.binpb"))
     run(sys.executable, "-m", "unittest", "discover", "-s", str(ROOT / "sw/tests"), "-p", "test_*.py", "-v", env=env)
+    # Run the public application entry point and retain one bounded review artifact.
+    demo = BUILD / "demo.ssrec"
+    if demo.exists(): demo.unlink()
+    cli = str(ROOT / "sw/tools/sensor.py")
+    simulated = run(sys.executable, cli, "simulate", "--remote", "--seconds", "2",
+                    "--faults", str(ROOT / "sw/tests/fixtures/acquisition_faults.json"),
+                    "--output", str(demo), env=env, capture_output=True, text=True)
+    replayed = run(sys.executable, cli, "replay", str(demo), env=env, capture_output=True, text=True)
+    assert json.loads(simulated.stdout) == json.loads(replayed.stdout)
+    (BUILD / "demo-summary.json").write_text(replayed.stdout)
     (BUILD / "verification.json").write_text(json.dumps({
         "status": "passed", "buf": run(BUF, "--version", capture_output=True, text=True).stdout.strip(),
         "breaking_baseline": "sw/interfaces/baseline.binpb", "incompatible_change_rejected": True,
-        "scope": "Schema, semantics and framing; not sensor drivers, USB enumeration or firmware emulation"
+        "application_demo": json.loads(replayed.stdout),
+        "scope": "Schemas, software acquisition/replay, modeled sensor buses and injected faults; not physical buses, USB enumeration or MCU emulation"
     }, indent=2) + "\n")
 
 

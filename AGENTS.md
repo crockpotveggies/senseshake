@@ -24,8 +24,9 @@ authoring inputs. Do not silently reroute or rewrite checked CAD during tests.
 
 The accelerometer HAT uses Pi drivers/runtime software; it has no separate
 microcontroller firmware. Firmware belongs to the remote USB sensor head.
-The Trenz variant needs an FPGA bitstream. These software implementations and
-hardware-in-the-loop qualification remain pending; do not claim emulation or
+The Trenz variant needs an FPGA bitstream. Pi acquisition/simulation and bounded
+recovery are implemented; USB-head firmware, FPGA bitstreams and physical
+qualification remain pending. Do not claim emulation or
 fabrication readiness from CAD/SPICE checks.
 
 After moving paths or changing circuits, run `python environment/check_project.py`,
@@ -44,4 +45,6 @@ Sensor v1 semantics live in `docs/sensor-contract.md`; field layouts are in
 Preserve explicit zero/missing/unknown distinctions and raw sensor precision.
 The Buf baseline is a compatibility fixture, not routine generated output.
 Do not refresh it just to bypass a breaking change. Generated descriptors belong
-in ignored `sw/build/` inside the lab. Firmware/real acquisition remain pending.
+in ignored `sw/build/` inside the lab. Follow `docs/sensor-software.md` for runtime,
+loss and recovery rules. Linux drivers have modeled-bus tests; physical sensor
+qualification and MCU firmware remain pending.

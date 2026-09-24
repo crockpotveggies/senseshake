@@ -113,7 +113,8 @@ class LabSafetyTests(unittest.TestCase):
         expected = ["sw/interfaces/buf.yaml", "sw/interfaces/baseline.binpb",
                     "sw/interfaces/proto/senseshake/sensor/v1/sensor.proto",
                     "sw/interfaces/python/senseshake_contract/framing.py",
-                    "sw/tests/fixtures/magnetic_boundary.json", "sw/tools/check_interfaces.py"]
+                    "sw/tests/fixtures/magnetic_boundary.json", "sw/tools/check_interfaces.py",
+                    "sw/pi/senseshake/runtime.py", "sw/pi/profiles/t1.example.json"]
         for rel in expected:
             path = source / rel
             path.parent.mkdir(parents=True, exist_ok=True)

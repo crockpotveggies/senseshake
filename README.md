@@ -9,13 +9,15 @@ connections while building sensor acquisition and tests; see the
 PowerShell. See the [portable lab guide](docs/portable-lab.md) for profiles,
 bounded scratch storage, automatic five-run retention, and cleanup previews.
 The [initial sensor contract](docs/sensor-contract.md) is implemented; run
-`./lab.ps1 test -Profile software` for schemas, compatibility, data and framing
-checks. Rebuild the image once to add the pinned Buf tool.
+`./lab.ps1 test -Profile software` for schemas, compatibility, acquisition,
+recording/replay and recovery tests. It saves an eight-sensor demo recording.
+See [running the sensor software](docs/sensor-software.md). Rebuild the image
+once if it predates the pinned Buf tool.
 
 | Directory | Contents |
 | --- | --- |
 | [hw/](hw/README.md) | Atopile circuits, KiCad boards, models, hardware checks and SPICE. |
-| [sw/](sw/README.md) | Planned Pi software, remote-head firmware, FPGA integration and software tests. |
+| [sw/](sw/README.md) | Pi acquisition/simulation, contracts and tests; remote firmware and FPGA bring-up scopes. |
 | [docs/](docs/README.md) | Design, interface contracts, validation and build instructions. |
 | [environment/](docs/portable-lab.md) | Pinned Docker test environment and cleanup tooling. |
 

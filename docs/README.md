@@ -12,6 +12,7 @@
 - [Sensor inventory](sensor-inventory.md) and [source references](sources.md).
 - [Sensor data contract v1](sensor-contract.md) and [executable interface checks](../sw/interfaces/README.md).
 - [Software responsibilities](../sw/README.md).
+- [Run sensor acquisition, simulation and replay](sensor-software.md).
 
 The design is an engineering prototype. Read each board's validation limits
 before interpreting a passing test as evidence about physical hardware.

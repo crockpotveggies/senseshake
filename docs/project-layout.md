@@ -33,8 +33,9 @@ relying on those migrated virtual environments.
 
 Keep normative interface documentation in its existing `docs/` location. Software
 READMEs link to those contracts rather than creating competing specifications.
-Software now includes tested contract/framing code. Drivers, MCU firmware and
-a Trenz bitstream remain pending. Generated descriptors stay in ignored `sw/build/`
+Software includes tested contracts, Pi acquisition/simulation, modeled Linux
+drivers, calibration and bounded recording/replay. MCU firmware, physical driver
+qualification and a Trenz bitstream remain pending. Generated descriptors stay in ignored `sw/build/`
 inside the disposable lab workspace.
 
 ## Reorganization validation

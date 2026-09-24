@@ -20,4 +20,6 @@ The lab retains a small report with its usual five-run retention/cleanup.
 
 `python/` contains the reference validator and incremental framing decoder.
 `sensor.options` records candidate Nanopb bounds; it is not generated firmware.
-There are no real sensor adapters or acquisition service yet.
+The [Pi application](../pi/README.md) uses these contracts for modeled/Linux
+adapters, recording/replay and USB input. Real sensor and firmware qualification
+remain separate from software checks.

@@ -128,6 +128,7 @@ def source_files(source):
         "hw/libraries": ("*.kicad_mod", "*.kicad_sym"),
         "sw/interfaces": ("*.proto", "*.yaml", "*.binpb", "*.py", "*.options"),
         "sw/tools": ("*.py",), "sw/tests": ("*.py", "*.json"),
+        "sw/pi": ("*.py", "*.json", "*.dts"),
     }.items():
         for pattern in patterns:
             files.extend((source / folder).rglob(pattern))
@@ -200,7 +201,7 @@ def commands(profile):
 
 
 def collect(workspace, report, profile):
-    files = list((workspace / "sw/build").glob("verification.json"))
+    files = [workspace / "sw/build" / name for name in ("verification.json", "demo.ssrec", "demo-summary.json")]
     for pattern in ("*.json", "*.cir", "*.log"):
         files.extend((workspace / "hw/simulation").rglob(pattern))
     for board in BOARDS:

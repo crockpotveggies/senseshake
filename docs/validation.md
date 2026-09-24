@@ -85,4 +85,6 @@ signal-integrity, magnetic-noise or physical bench qualification is claimed.
 The remote magnetometer needs its own orientation calibration; the HAT's
 inclinometer does not automatically compensate a separately mounted head.
 Aurora-related magnetic measurements are not optical aurora detection.
-Add acquisition/replay fault-injection tests when firmware is introduced.
+Acquisition/replay and fault tests are implemented in the portable software
+profile; see [software evidence and limits](sensor-software.md). These tests
+do not qualify USB-head firmware or physical sensor performance.

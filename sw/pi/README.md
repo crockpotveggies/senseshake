@@ -1,9 +1,8 @@
 # Raspberry Pi software
 
-Planned home for Pi device configuration, sensor bus adapters, acquisition and
-calibration, timestamp handling, recording and replay. Sensor acquisition must
-run independently of a configured FPGA. Follow the
-[sensor development plan](../../docs/sensor-development-plan.md).
+Executable acquisition, calibration, bounded recording/replay, Linux adapters
+and deterministic simulation are in `senseshake/`. No configured FPGA is needed.
+See the [run guide and recovery policy](../../docs/sensor-software.md).
 
 Separate pure processing/protocol logic from Linux I2C/SPI/UART/USB adapters so
 the same application can run against recorded samples and fault-injecting fakes.
@@ -12,4 +11,8 @@ Use the [T1 sensor/carrier design](../../docs/trenz-hat.md) and
 deferred; if resumed, its host semantics remain owned by the current
 `docs/runtime_contract.md` in the separate Coldfoot SoC repository.
 
-Implementation and software tests are pending.
+Run `./lab.ps1 test -Profile software` for the complete portable demo and tests.
+Live adapters cover LSM6DSO, SCL3300 and MAX-M10S. Bus logic has modeled-response
+tests; physical validation, Pi device-tree deployment, interrupt/FIFO acquisition
+and PPS correlation remain bring-up work. USB ingestion expects a v1 producer;
+the STM32 head still needs firmware.

@@ -1,0 +1,126 @@
+"""Shared bounded acquisition loop for modeled and Linux sensor adapters."""
+from dataclasses import dataclass
+from . import messages
+from .sensors import NotReady
+from .transport import Outbox
+
+
+@dataclass
+class Channel:
+    device: str
+    boot: int
+    settings: dict
+    adapter: object
+    sequence: int = 0
+    due: int = 0
+    last_time: int = -1
+    failures: int = 0
+    retries: int = 0
+    offline: bool = False
+    restart_at: int = 0
+
+
+class Acquisition:
+    def __init__(self, writer, sessions, channels, capacity=64, calibration_ids=None,
+                 retry_limit=2, failure_limit=3, cooldown_ns=1_000_000_000):
+        if not 1 <= len(channels) <= 8 or not 0 <= retry_limit <= 10 or not 1 <= failure_limit <= 10 or cooldown_ns < 1:
+            raise ValueError("acquisition bounds")
+        self.writer, self.sessions, self.channels = writer, sessions, channels
+        keys = [(c.device, c.boot, c.settings["sensor_id"]) for c in channels]
+        if len(set(keys)) != len(keys): raise ValueError("duplicate acquisition channel")
+        self.outbox = Outbox(keys, capacity)
+        self.retry_limit, self.failure_limit, self.cooldown = retry_limit, failure_limit, cooldown_ns
+        self.calibration_ids = calibration_ids or {}
+        self.reads = self.missing = self.recoveries = 0
+
+    def drain(self):
+        while self.outbox.queue:
+            message, arrived = self.outbox.pop()
+            self.sessions.accept(message)
+            self.writer.message(message, arrived)
+
+    def emit(self, message, now):
+        self.drain()
+        self.sessions.accept(message)
+        self.writer.message(message, now)
+
+    def event(self, code, detail, now, **fields):
+        self.drain()
+        self.writer.event(code, detail, now, **fields)
+
+    def start(self, now):
+        groups = {}
+        for c in self.channels:
+            c.due = now
+            groups.setdefault((c.device, c.boot), []).append(c)
+            # Never advertise an effective configuration before successful readback.
+            c.settings = c.adapter.configure(c.settings)
+        for (device, boot), channels in groups.items():
+            sensors = [c.settings["sensor_id"] for c in channels]
+            board = 1 if max(sensors) <= 6 else 2
+            self.emit(messages.identity(device, boot, board, sensors), now)
+            self.emit(messages.configuration(device, boot, [c.settings for c in channels]), now)
+
+    def report(self, c, code, detail, now):
+        self.emit(messages.status(c.device, c.boot, c.settings["sensor_id"], code, detail), now)
+
+    def tick(self, clock):
+        for c in self.channels:
+            now = clock()
+            if now < c.due: continue
+            period = c.settings["period_ns"]
+            skipped = (now - c.due) // period
+            c.sequence += skipped
+            c.due += (skipped + 1) * period
+            raw, quality = None, 2
+            if c.offline and now >= c.restart_at and c.retries < self.retry_limit:
+                c.retries += 1
+                try:
+                    effective = c.adapter.configure(c.settings)
+                    if effective != c.settings: raise ValueError("configuration readback changed during recovery")
+                    c.offline, c.failures = False, 0
+                    self.recoveries += 1
+                    self.report(c, 1, "sensor recovered", clock())
+                except (OSError, ValueError) as error:
+                    c.restart_at = clock() + self.cooldown
+                    self.report(c, 3, error, clock())
+            if not c.offline:
+                try:
+                    reading = c.adapter.read()
+                    raw, quality, c.failures = reading.raw, reading.quality, 0
+                except NotReady:
+                    # A polling miss is visible but does not reset a healthy sensor.
+                    pass
+                except (OSError, ValueError) as error:
+                    c.failures += 1
+                    self.report(c, 3, error, clock())
+                    if c.failures >= self.failure_limit or isinstance(error, TimeoutError):
+                        c.offline, c.restart_at = True, clock() + self.cooldown
+                        self.report(c, 2, "offline; finite retry policy active", clock())
+            acquired = clock()
+            if acquired <= c.last_time: raise ValueError("acquisition clock did not advance")
+            c.last_time = acquired
+            message = messages.batch(c.device, c.boot, c.settings["sensor_id"], c.sequence, acquired,
+                                     raw, quality, dropped=None if getattr(c.adapter, "loss_unknown", False) else skipped)
+            ident = self.calibration_ids.get(c.settings["sensor_id"])
+            if ident:
+                cfg = self.sessions.devices[c.device].settings[c.settings["sensor_id"]]
+                message = self.sessions.calibrations.apply(message, ident, cfg)
+            self.outbox.put(message, acquired)
+            c.sequence += 1
+            self.reads += 1
+            self.missing += raw is None
+
+    def finish(self, now):
+        self.drain()
+        self.writer.event("acquisition_summary", "bounded acquisition stopped", now,
+                          reads=self.reads, missing=self.missing, queue_dropped=self.outbox.dropped_samples,
+                          recoveries=self.recoveries,
+                          pending_loss=[dict(device=k[0], sensor=k[2], count=v) for k, v in self.outbox.pending.items() if v != 0])
+
+    def close(self):
+        errors = []
+        for c in self.channels:
+            try: c.adapter.close()
+            except Exception as error: errors.append(error)
+        if errors: raise errors[0]
