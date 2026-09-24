@@ -9,10 +9,12 @@
 | `hw/libraries/`, `hw/models/` | Shared KiCad symbols/footprints and local 3D models. |
 | `hw/tools/`, `hw/tests/`, `hw/simulation/` | CAD tooling, electrical fault fixture, bounded SPICE models and recorded results. |
 | `hw/reference/`, `hw/vendor/` | Component references and upstream board material. |
+| `sw/interfaces/` | Versioned Protobuf, compatibility baseline, reference validation/framing. |
+| `sw/tools/` | Offline schema and software check entrypoint. |
 | `sw/pi/` | Planned Pi drivers/configuration, acquisition, calibration and accelerator runtime. |
 | `sw/field-head/` | Planned USB microcontroller firmware. |
 | `sw/fpga/` | Planned Trenz bitstream integration and board constraints. |
-| `sw/tests/` | Planned software replay/fault-injection and integration tests. |
+| `sw/tests/` | Executable contract/framing fixtures; later acquisition integration tests. |
 | `docs/` | Design decisions, interface contracts, validation limits, vendor references and build instructions. |
 | `environment/` | Pinned portable toolchain, launcher implementation and safeguard tests. |
 | `.lab/` | Ignored disposable reports, bounded by retention. |
@@ -31,8 +33,9 @@ relying on those migrated virtual environments.
 
 Keep normative interface documentation in its existing `docs/` location. Software
 READMEs link to those contracts rather than creating competing specifications.
-Software directories currently contain scope and ownership notes, not functioning
-drivers, firmware, or a Trenz bitstream.
+Software now includes tested contract/framing code. Drivers, MCU firmware and
+a Trenz bitstream remain pending. Generated descriptors stay in ignored `sw/build/`
+inside the disposable lab workspace.
 
 ## Reorganization validation
 

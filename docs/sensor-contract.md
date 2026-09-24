@@ -1,0 +1,175 @@
+# Sensor contract v1
+
+Status: implemented schema, Python reference checks and USB framing; no sensor
+drivers or MCU firmware yet. This document owns semantic rules. The
+[Protobuf schema](../sw/interfaces/proto/senseshake/sensor/v1/sensor.proto) owns
+field numbers/types. Both apply. Coldfoot and a configured FPGA are unnecessary.
+
+## Identity and versioning
+
+Every Envelope has version 1, a nonempty device_id of at most 32 ASCII characters
+from letters, digits, underscore, dot, colon and hyphen, and a nonzero fixed64
+boot_id. Device IDs are provisioned physical/logical producer identities, never
+USB port paths. Pi software generates a fresh random boot_id at each acquisition
+session; the MCU needs a persistent counter or host-provided session nonce before
+streaming. Reusing boot_id after a reset is prohibited. Identity is advertised
+before configuration or data and after reconnect.
+
+One envelope contains identity, effective configuration, a sample batch, or
+status. Unknown envelope versions/body kinds and enum values are rejected.
+Unknown additive Protobuf fields are preserved by the reference parser and may
+be ignored by consumers. Never reuse field numbers; reserve removed names and
+numbers. Buf FILE rules compare against the checked-in initial descriptor
+baseline. Changes to these semantic rules need review even if Buf accepts them.
+Breaking meaning/units requires a new package and envelope version.
+
+| Sensor ID | Board and model | Raw representation |
+| --- | --- | --- |
+| 1–4 | T1 LSM6DSO U11–U14 | Signed 16-bit XYZ acceleration/gyro counts; optional signed temperature |
+| 5 | T1 SCL3300 U20 | Signed 16-bit XYZ acceleration and/or angle counts, optional temperature, required 16-bit device status |
+| 6 | T1 MAX-M10S U21 | Complete 92-byte UBX NAV-PVT payload, excluding UBX header/checksum |
+| 7 | USB head RM3100 | Signed 24-bit XYZ counts, sign-extended into sint32 |
+| 8 | Optional USB head DLVR | Four original response bytes, preserving pressure, temperature and status bits |
+
+The model is fixed by v1 sensor ID. Another model requires explicit schema
+evolution, not relabeling. Identity advertises only physically fitted sensors;
+the DNP pressure sensor is absent by default. Identity.firmware_version is the
+producer software build ID, including for the Pi. Raw axes are each package's
+documented axes, without inferred board alignment. The four IMUs remain separate.
+Tilt angles retain the manufacturer's per-axis convention; they are not Euler
+angles. The acquisition adapter must check SPI/UBX integrity before publishing.
+
+## Configuration and interpretation
+
+Configuration advertises an **effective** revision greater than zero. Revision
+increases within a boot; it changes whenever sampling mode, range or configuration
+changes. A batch names exactly that revision. Receivers must reject/quarantine
+data until the matching identity and configuration have been received. No
+unacknowledged control command is defined by this milestone.
+
+Up to eight unique sensor entries are allowed. Enabled entries have a positive
+nominal period_ns, at most 60 seconds. Disabled entries have period zero.
+The period is a requested/effective nominal interval, not proof that a device
+supports the rate; the real adapter must reject unsupported hardware settings.
+It must report readback/effective settings before data, never silently round.
+
+Enabled IMUs require acceleration_range_g (2, 4, 8 or 16) and
+angular_rate_range_dps (125, 250, 500, 1000 or 2000). SCL3300 requires tilt_mode
+1–4. RM3100 requires each XYZ cycle count in 1–65535; timing limits still apply.
+Pressure requires the actual part number and finite pressure_min_pa <
+pressure_max_pa from that part's transfer function. MAX-M10S uses the period
+and the fixed NAV-PVT payload profile. Configuration fields belonging to another
+sensor are invalid. Optional register_config contains at most 32 sorted, unique
+8-bit address/value pairs for LSM6DSO or RM3100; it is empty for other models.
+Driver-specific bus setup and filter controls must be captured by the eventual
+adapter configuration/recording metadata before hardware acquisition is qualified.
+
+## Time, ordering and loss
+
+Timestamp.domain is PI_MONOTONIC_RAW for IDs 1–6 and MCU_MONOTONIC for IDs 7–8.
+acquisition_ns is required with explicit presence: zero is a valid timestamp.
+MCU ticks are extended through timer wraps before conversion to nanoseconds;
+a reset begins a new boot/session. No timestamp wraps or decreases within a
+session. MCU time and Pi monotonic time have unrelated origins and rates.
+Report uncertainty_ns only when bounded; absent means unknown. Resolution is
+not accuracy. For polled/FIFO devices, include readout/sample-age uncertainty.
+
+UTC is an optional correlated estimate with an explicit utc_uncertainty_ns.
+Neither UTC field may appear alone. POSIX UTC nanoseconds exclude leap seconds;
+omit the estimate when the leap-second mapping/correlation is ambiguous.
+The Pi must retain the original acquisition time and later record its correlation
+and arrival time separately. USB arrival time cannot populate acquisition_ns.
+For GNSS, the Pi acquisition timestamp describes capture of the NAV-PVT message;
+the actual navigation epoch and fix flags remain in NAV-PVT. A VALID sample
+does **not** mean that NAV-PVT reports a valid position or UTC fix.
+
+Sequence is an explicit uint64 per sensor and boot, starting at zero; zero must
+be encoded with presence. It advances for every accounted acquisition slot,
+including known failed/dropped slots. A batch has 1–4 samples from one sensor,
+one configuration and one clock. Within a batch sequences are consecutive and
+acquisition times strictly increase. Split batches at a known loss, reset or
+configuration change. Exhausting uint64 starts a new session, never wraps.
+
+dropped_before is the number of known discarded slots before this batch since
+the prior batch, including initial discard. Explicit zero means none; absence
+means unknown. It cannot exceed the first sequence. A missing placeholder already
+occupies a sequence slot and must not also be counted as discarded. Unknown FIFO
+loss needs BUFFER_OVERFLOW status and absent loss count, never a fabricated zero.
+Receivers must enforce cross-batch ordering, configuration and reset epochs in
+the acquisition layer (step 2); the current validator is stateless.
+
+Quality is required. VALID and SATURATED retain raw measurements. MISSING has
+neither raw nor calibrated values; its timestamp is the scheduled/estimated slot
+with honest uncertainty. FAULT retains a captured but suspect raw response and
+has no calibrated values; a failed read without bytes is MISSING plus IO_ERROR.
+Pressure responses with non-normal sensor status cannot be labeled VALID or
+SATURATED. Status may target one sensor or zero for the producer. Status detail
+is at most 96 UTF-8 bytes with no control characters. Optional dropped_total is
+a cumulative known loss count for the current sensor/boot, not a reset counter.
+
+## Calibrated values
+
+Raw values are always retained. Calibrated doubles are optional, finite, in SI:
+m/s², rad/s, rad, tesla, pascal and kelvin. Temperature cannot be below 0 K.
+Vectors require all three axes, including explicit zeroes. Values remain in
+sensor package axes; no implicit rotation into geographic or HAT axes occurs.
+Calibration requires a nonempty calibration_id naming immutable coefficients,
+units, method and provenance stored with recordings by the acquisition layer.
+No anonymous/default calibration is permitted. Calibrated values are allowed
+only for VALID/SATURATED samples and must match the sensor kind. GNSS is kept
+losslessly as NAV-PVT in this revision; position/fix decoding is later work.
+
+## USB CDC framing and bounds
+
+Protobuf does not define byte-stream boundaries. A frame is:
+
+1. Serialize one Envelope, **1–1024 bytes**.
+2. Append CRC-32/ISO-HDLC of that payload as four little-endian bytes.
+   Parameters: reflected polynomial 0xEDB88320, initial/xorout 0xFFFFFFFF;
+   the check value for ASCII `123456789` is 0xCBF43926.
+3. COBS-encode payload plus CRC and append a zero delimiter.
+
+Maximum decoded length is 1028, encoded length is 1033 and wire length including
+delimiter is 1034 bytes. Send an initial zero when opening a stream. Ignore empty
+delimiters. Check length, COBS and CRC **before** Protobuf decoding, then apply
+semantic validation. A sample-count limit never overrides the payload-byte
+limit; split batches as needed. These bounds apply equally to recordings.
+
+On corruption, drop that frame, increment a visible error counter and resume at
+the next delimiter. On overflow, discard without buffering until a delimiter.
+Disconnect resets partial framing state and requires identity/configuration
+again. A partial frame without a delimiter is bounded but needs a transport
+timeout in step 2. The Python decoder yields frames rather than accumulating an
+unbounded list. Its caller must exhaust each feed iterator and use a bounded
+dispatch queue. CRC detects accidental corruption; it is not authentication.
+
+## MCU feasibility and remaining gates
+
+The STM32F042K6 has **6 KiB SRAM and 32 KiB flash**. Nanopb is the candidate C
+codec because bounded fields can use static allocations; proposed bounds are in
+[sensor.options](../sw/interfaces/proto/senseshake/sensor/v1/sensor.options).
+One RX encoded buffer (1033 bytes), one TX buffer (1034 bytes), and a provisional
+2048-byte cap for decoded messages total **4115 bytes**, leaving **2029 bytes**
+for USB state, sensor queues, stack and other globals. This is a tight budget,
+not a measured fit or a firmware selection. Prefer in-place RX decoding and
+streamed TX/one message at a time; do not queue decoded Envelopes on the MCU.
+
+Before selecting Nanopb, generate/compile the C codec, check ARM structure sizes,
+link the actual USB stack, enforce RAM/flash limits and measure stack high-water
+marks under reconnect/overflow. If it does not fit, stream batch elements or
+reduce the head's batch cap; do not silently truncate data. The Python reference
+implementation and options file do not prove C interoperability or MCU fit.
+
+Implemented checks include a manually specified binary producer fixture,
+signed-count boundaries, missing/zero distinction, all eight sensor payloads,
+timestamp/sequence rules, corruption, arbitrary frame splits, resynchronization,
+overflow, and a deliberate incompatible schema change rejected by Buf.
+Real adapters, cross-batch state, calibration storage, full fault recovery,
+USB enumeration, MCU firmware and physical testing remain subsequent work.
+
+References: [Protobuf presence](https://protobuf.dev/programming-guides/field_presence/),
+[Buf breaking checks](https://buf.build/docs/reference/cli/buf/breaking/),
+[Nanopb allocation bounds](https://jpa.kapsi.fi/nanopb/docs/concepts.html),
+[STM32F042 datasheet](https://www.st.com/resource/en/datasheet/stm32f042t6.pdf),
+[LSM6DSO](https://www.st.com/en/mems-and-sensors/lsm6dso.html),
+[SCL3300](https://www.murata.com/-/media/webrenewal/products/sensor/pdf/datasheet/datasheet_scl3300-d01.ashx).

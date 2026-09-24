@@ -8,6 +8,9 @@ connections while building sensor acquisition and tests; see the
 **Portable tests:** run `./lab.ps1 build` once, then `./lab.ps1 test` from
 PowerShell. See the [portable lab guide](docs/portable-lab.md) for profiles,
 bounded scratch storage, automatic five-run retention, and cleanup previews.
+The [initial sensor contract](docs/sensor-contract.md) is implemented; run
+`./lab.ps1 test -Profile software` for schemas, compatibility, data and framing
+checks. Rebuild the image once to add the pinned Buf tool.
 
 | Directory | Contents |
 | --- | --- |

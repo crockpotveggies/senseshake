@@ -10,6 +10,7 @@
 - [USB sensor-head interface and firmware contract](usb-sensor-head.md).
 - [Hardware rebuild](build.md) and [SPICE scope](../hw/simulation/README.md).
 - [Sensor inventory](sensor-inventory.md) and [source references](sources.md).
+- [Sensor data contract v1](sensor-contract.md) and [executable interface checks](../sw/interfaces/README.md).
 - [Software responsibilities](../sw/README.md).
 
 The design is an engineering prototype. Read each board's validation limits

@@ -1,0 +1,137 @@
+"""Stateless v1 semantic checks. Session ordering belongs to Pi acquisition."""
+import math
+import re
+from .framing import MAX_PAYLOAD
+
+
+def require(condition, description):
+    if not condition:
+        raise ValueError(description)
+
+
+def identifier(value, limit=32, optional=False):
+    require((optional and not value) or
+            (len(value) <= limit and re.fullmatch(r"[A-Za-z0-9_.:-]+", value)),
+            "invalid identifier")
+
+
+def vector(value, bits=None):
+    for axis in ("x", "y", "z"):
+        require(value.HasField(axis), "incomplete vector")
+        number = getattr(value, axis)
+        if bits:
+            require(-(1 << (bits - 1)) <= number < (1 << (bits - 1)), "raw count out of range")
+        else:
+            require(math.isfinite(number), "nonfinite calibrated value")
+
+
+def validate(message):
+    require(message.ByteSize() <= MAX_PAYLOAD, "message exceeds payload limit")
+    require(message.version == 1, "unsupported contract version")
+    identifier(message.device_id)
+    require(message.boot_id != 0, "boot identity required")
+    kind = message.WhichOneof("body")
+    require(kind is not None, "unknown or missing body")
+    body = getattr(message, kind)
+    if kind == "identity":
+        require(body.board in (1, 2), "unknown board")
+        identifier(body.firmware_version)
+        allowed = set(range(1, 7)) if body.board == 1 else {7, 8}
+        require(1 <= len(body.sensors) <= 8 and len(set(body.sensors)) == len(body.sensors), "sensor list size/duplicates")
+        require(set(body.sensors) <= allowed, "sensor does not belong on board")
+    elif kind == "configuration":
+        require(body.revision > 0, "configuration revision required")
+        require(1 <= len(body.sensors) <= 8, "configuration sensor bound")
+        require(len({s.sensor_id for s in body.sensors}) == len(body.sensors), "duplicate configuration")
+        for sensor in body.sensors:
+            require(1 <= sensor.sensor_id <= 8, "unknown sensor")
+            require((0 < sensor.period_ns <= 60_000_000_000) if sensor.enabled else sensor.period_ns == 0, "invalid sample period")
+            data = sensor.register_config
+            require(len(data) <= 64 and len(data) % 2 == 0, "invalid register configuration")
+            addresses = list(data[::2])
+            require(addresses == sorted(set(addresses)), "registers must be unique and sorted")
+            require(not data or sensor.sensor_id in (1, 2, 3, 4, 7), "8-bit register snapshot not applicable")
+            allowed = ({"acceleration_range_g", "angular_rate_range_dps"} if sensor.sensor_id <= 4 else
+                       {5: {"tilt_mode"}, 6: set(), 7: {"cycle_count_x", "cycle_count_y", "cycle_count_z"},
+                        8: {"pressure_min_pa", "pressure_max_pa", "pressure_part_number"}}[sensor.sensor_id])
+            supplied = {field.name for field, _ in sensor.ListFields() if field.number >= 5}
+            require(supplied <= allowed, "settings incompatible with sensor")
+            if sensor.enabled:
+                require(allowed <= supplied, "enabled sensor settings required")
+                if sensor.sensor_id <= 4:
+                    require(sensor.acceleration_range_g in (2, 4, 8, 16) and sensor.angular_rate_range_dps in (125, 250, 500, 1000, 2000), "unsupported IMU range")
+                elif sensor.sensor_id == 5:
+                    require(1 <= sensor.tilt_mode <= 4, "invalid tilt mode")
+                elif sensor.sensor_id == 7:
+                    require(all(1 <= getattr(sensor, field) <= 65535 for field in allowed), "invalid cycle count")
+                elif sensor.sensor_id == 8:
+                    identifier(sensor.pressure_part_number)
+                    require(math.isfinite(sensor.pressure_min_pa) and math.isfinite(sensor.pressure_max_pa)
+                            and sensor.pressure_min_pa < sensor.pressure_max_pa, "invalid pressure range")
+    elif kind == "status":
+        require(0 <= body.sensor_id <= 8 and 1 <= body.code <= 6, "unknown status")
+        require(len(body.detail.encode("utf-8")) <= 96 and all(ord(c) >= 32 for c in body.detail), "invalid status detail")
+    elif kind == "batch":
+        validate_batch(body)
+    return message
+
+
+def validate_batch(batch):
+    sensor = batch.sensor_id
+    require(1 <= sensor <= 8, "unknown sensor")
+    require(batch.configuration_revision > 0, "batch configuration required")
+    require(1 <= len(batch.samples) <= 4, "batch must contain 1..4 samples")
+    identifier(batch.calibration_id, optional=True)
+    expected = "imu" if sensor <= 4 else {5: "tilt", 6: "gnss", 7: "magnetic", 8: "pressure"}[sensor]
+    domain = 1 if sensor <= 6 else 2
+    previous = None
+    for sample in batch.samples:
+        require(sample.HasField("sequence") and sample.HasField("time"), "sequence/time required")
+        time = sample.time
+        require(time.domain == domain and time.HasField("acquisition_ns"), "wrong or absent acquisition clock")
+        require(time.HasField("utc_unix_ns") == time.HasField("utc_uncertainty_ns"), "UTC requires explicit uncertainty")
+        if previous is not None:
+            require(sample.sequence == previous.sequence + 1, "nonconsecutive sequence inside batch")
+            require(time.acquisition_ns > previous.time.acquisition_ns, "acquisition time must increase")
+        else:
+            require(batch.dropped_before <= sample.sequence, "drop count exceeds sequence")
+        previous = sample
+        require(sample.quality in (1, 2, 3, 4), "quality required")
+        raw = sample.WhichOneof("raw")
+        if sample.quality == 2:
+            require(raw is None and not sample.HasField("calibrated"), "missing sample cannot contain measurements")
+            continue
+        require(raw == expected, "wrong or absent raw measurement")
+        if raw == "imu":
+            vector(sample.imu.acceleration, 16)
+            vector(sample.imu.angular_rate, 16)
+            if sample.imu.HasField("temperature"):
+                require(-32768 <= sample.imu.temperature <= 32767, "temperature count range")
+        elif raw == "tilt":
+            require(sample.tilt.HasField("acceleration") or sample.tilt.HasField("angle"), "tilt data required")
+            for field in ("acceleration", "angle"):
+                if sample.tilt.HasField(field): vector(getattr(sample.tilt, field), 16)
+            if sample.tilt.HasField("temperature"):
+                require(-32768 <= sample.tilt.temperature <= 32767, "temperature count range")
+            require(sample.tilt.HasField("device_status") and sample.tilt.device_status <= 65535, "tilt status required")
+        elif raw == "magnetic":
+            vector(sample.magnetic.counts, 24)
+        elif raw == "pressure":
+            require(len(sample.pressure.response) == 4, "pressure response must be four bytes")
+            if sample.quality in (1, 3):
+                require(sample.pressure.response[0] >> 6 == 0, "non-normal pressure status")
+        else:
+            require(len(sample.gnss.nav_pvt) == 92, "NAV-PVT payload must be 92 bytes")
+        if sample.HasField("calibrated"):
+            require(bool(batch.calibration_id) and sample.quality in (1, 3), "calibration identity/usable raw data required")
+            allowed = {"imu": {"acceleration_m_s2", "angular_rate_rad_s", "temperature_k"},
+                       "tilt": {"acceleration_m_s2", "angle_rad", "temperature_k"},
+                       "magnetic": {"magnetic_t"}, "pressure": {"pressure_pa", "temperature_k"}, "gnss": set()}[raw]
+            fields = sample.calibrated.ListFields()
+            require(bool(fields), "empty calibrated measurement")
+            for field, value in fields:
+                require(field.name in allowed, "calibrated field incompatible with sensor")
+                if field.message_type: vector(value)
+                else:
+                    require(math.isfinite(value), "nonfinite calibrated value")
+                    if field.name == "temperature_k": require(value >= 0, "negative absolute temperature")

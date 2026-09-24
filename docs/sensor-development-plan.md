@@ -18,6 +18,17 @@ with 155 available Trenz GPIOs exposed on J85-J89. See the
 [hardware pin contract](trenz-gpio-breakout.csv) and [carrier limits](trenz-hat.md).
 This is a connectivity requirement, not an accelerator software dependency.
 
+## Implementation checkpoint (2026-09-24)
+
+The hardware prerequisite is committed and pushed as `3ff4111`.
+Step 1 now has the [v1 contract](sensor-contract.md), Protobuf/Buf compatibility
+checks, bounded USB framing, semantic validators and independent wire fixtures.
+The portable software profile runs the executable contract tests. Nanopb has
+candidate allocation bounds and a RAM budget assessment; C interoperability,
+ARM/USB linked-image sizing and stack measurements remain open before firmware
+selection. Steps 2–4 have not been implemented. The next work is Pi acquisition
+with real/simulated adapters, session/configuration ordering and recording/replay.
+
 ## 1. Define sensor data contracts
 
 - Define sensor samples/batches, acquisition configuration, device identity,

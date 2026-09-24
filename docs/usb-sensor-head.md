@@ -42,7 +42,10 @@ in every USB state; component budgets and a PTC are not compliance evidence.
 Start with a 100 kHz local sensor bus. Preserve signed 24-bit magnetic samples,
 pressure status bits, sequence numbers and MCU acquisition timestamps. Report
 sensor identity, configuration, overruns and reset reasons. The Pi correlates
-timestamps, calibrates/stores readings and prepares Coldfoot runtime requests.
+timestamps and calibrates/stores readings; Coldfoot integration is deferred.
+Use the [sensor v1 contract](sensor-contract.md) for Protobuf messages, explicit
+timestamp domains, loss reporting and bounded COBS/CRC framing. Its reference
+codec is tested; MCU implementation and enumeration are still pending.
 USB arrival time must not be represented as exact sensor acquisition time.
 
 Target operating envelope: 25 mA controller plus 25 mA sensors = 50 mA; verify

@@ -20,6 +20,7 @@ From the project folder in PowerShell:
 .\lab.ps1 test                  # Full circuit + PCB + SPICE validation
 .\lab.ps1 test -Profile quick   # Saved compiled circuit/PCB + SPICE checks
 .\lab.ps1 test -Profile spice   # Only bounded SPICE cases
+.\lab.ps1 test -Profile software # Sensor contracts, compatibility and framing
 .\lab.ps1 unit                  # Cleanup/staging safeguards
 ```
 
@@ -38,9 +39,10 @@ drive-sharing configuration. No host directory is mounted into the container.
 
 | Profile | Checks |
 | --- | --- |
-| `full` (default) | Fresh atopile builds for A2, USB field head, and T1; explicit numeric constraint solve for each; rejection of the deliberately unsafe 5 V IMU fixture; circuit invariants and nine GPIO mapping/fault/import cases; native KiCad ERC/DRC and connectivity checks for all three boards; 37 bounded SPICE cases. |
-| `quick` | Same GPIO fault, circuit/PCB consistency and SPICE checks using saved compiled layouts. Does **not** prove `.ato` changes were rebuilt. |
+| `full` (default) | Fresh atopile builds for A2, USB field head, and T1; explicit numeric constraint solve for each; rejection of the deliberately unsafe 5 V IMU fixture; circuit invariants and nine GPIO mapping/fault/import cases; native KiCad ERC/DRC and connectivity checks for all three boards; 37 bounded SPICE cases; sensor contract/framing checks (14 steps). |
+| `quick` | Same GPIO fault, circuit/PCB consistency, SPICE and software checks using saved compiled layouts. Does **not** prove `.ato` changes were rebuilt. |
 | `spice` | 27 A2/field support-circuit cases and 10 Trenz support-circuit cases, including expected fault detection. |
+| `software` | Buf format/lint/build and FILE compatibility, deliberate incompatible-change rejection, and Python semantic/framing tests. No CAD tools or hardware execution. |
 
 The runner calls the existing project entrypoints. It does not reroute boards,
 rewrite source CAD, render images, or release fabrication files. A full test
@@ -148,30 +150,30 @@ An [inactive GitHub Actions template](../environment/ci/README.md) can run the
 structure checks, cleanup tests, and full hardware profile on pushes and pull
 requests, with report retention of seven days. It has not been installed because
 the current GitHub login lacks workflow-management scope. The local suite is
-fully usable. Neither the local suite nor this template validates the planned
-software under `sw/`.
+fully usable. The local software/full/quick profiles validate the implemented sensor contract
+and framing. They do not validate the planned acquisition service or MCU firmware.
+Buf 1.73.0 is downloaded only during image build and SHA-256 checked; Protobuf
+5.29.6 reuses the existing Python lock. Runtime tests remain offline.
 
 ## Recorded validation
 
-The full profile passed on this Windows/Docker Desktop machine in **80.36 seconds**
-on 2026-09-24. Run ID: `20260924T175927Z-56b849c7`. It completed all **13 steps**,
-including three fresh builds and constraint solves, the negative voltage fixture,
-nine GPIO regression cases, native ERC/DRC/connectivity, and 37 bounded SPICE
-cases. Reports were retrieved to `.lab/runs/20260924T175927Z-56b849c7` (2.0 MiB).
-The container stopped and was removed. Detailed reports are subject to retention;
-the T1 [verification summary](../hw/boards/shakesense-trenz-hat/verification.json)
-records this run and the separate copper-replay check.
+The extended full profile passed all **14 steps** on 2026-09-24 in
+**82.31 seconds**, run `20260924T181645Z-b941ba9f`. It includes all three fresh
+circuit builds/constraint solves, the negative voltage fixture, nine GPIO tests,
+native ERC/DRC/connectivity, 37 bounded SPICE cases, and **24 sensor contract and
+framing tests** plus Buf lint/compatibility and deliberate breaking-change rejection.
 
-Nine applicable safeguard tests passed in Linux. Eight passed natively on
-Windows, including junction rejection and concurrent lock exclusion; two real
-symlink tests were skipped there because the Windows account cannot create
-symlinks, and both passed in Linux. Together these exercise all ten tests.
-An actual cleanup attempt during the full run also refused to proceed, and a
-subsequent `clean -All` preview listed only the two marked disposable runs.
+Reports occupy 2.0 MiB under `.lab/runs/20260924T181645Z-b941ba9f` and are subject
+to the normal five-run retention. The software-only profile also passed earlier
+as `20260924T181551Z-600da7b5` (23 tests before the added unknown-loss presence case).
+Ten applicable cleanup/staging safeguard tests passed in Linux; the Windows-only
+junction test was skipped. The new staging test verifies software inputs and
+exclusion of generated `sw/build/` outputs.
 
-Image ID:
-`sha256:a9be2b44b81bc1f9fe131df63a363cc9f28f99f75138432aadd483dd8e3ff804`.
-No authored circuit or PCB was changed by this validation.
+Image ID: `sha256:cea708e4071d62e115358fa08176554f81d4e61c7503e6469e6fcd0879c2c3a3`. Toolchain: KiCad 9.0.9,
+atopile 0.15.9, Buf 1.73.0 and Protobuf 5.29.6.
+The source CAD was unchanged. The earlier T1 hardware checkpoint and its copper
+replay evidence remain in the [hardware verification record](../hw/boards/shakesense-trenz-hat/verification.json).
 
 ## Next simulation layers
 

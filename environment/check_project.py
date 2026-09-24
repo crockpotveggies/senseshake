@@ -10,8 +10,8 @@ ROOT = Path(__file__).resolve().parents[1]
 def check(root=ROOT):
     errors = []
     counts = {"python_files": 0, "markdown_links": 0, "cad_references": 0}
-    for folder in ("environment", "hw/tools"):
-        for path in (root / folder).glob("*.py"):
+    for folder in ("environment", "hw/tools", "sw/interfaces/python", "sw/tools", "sw/tests"):
+        for path in (root / folder).rglob("*.py"):
             ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
             counts["python_files"] += 1
     documents = [root / "README.md", root / "AGENTS.md"]

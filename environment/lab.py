@@ -126,6 +126,8 @@ def source_files(source):
         "hw/elec": ("*.ato", "*.kicad_mod", "*.kicad_sym"),
         "hw/tools": ("*.py",), "hw/tests": ("*.py",), "docs": ("*.csv",),
         "hw/libraries": ("*.kicad_mod", "*.kicad_sym"),
+        "sw/interfaces": ("*.proto", "*.yaml", "*.binpb", "*.py", "*.options"),
+        "sw/tools": ("*.py",), "sw/tests": ("*.py", "*.json"),
     }.items():
         for pattern in patterns:
             files.extend((source / folder).rglob(pattern))
@@ -175,6 +177,8 @@ def versions():
         "system_python": sys.version,
         "atopile_python": output(["/opt/atopile/bin/python", "--version"]),
         "atopile": output(["/opt/atopile/bin/python", "-c", "import importlib.metadata as m; print(m.version('atopile'))"]),
+        "buf": output(["buf", "--version"]),
+        "protobuf": output(["/opt/atopile/bin/python", "-c", "import google.protobuf; print(google.protobuf.__version__)"]),
     }
 
 
@@ -188,12 +192,15 @@ def commands(profile):
     if profile in ("full", "quick"):
         steps += [("gpio-faults", ["python3", "-m", "unittest", "discover", "-s", "hw/tests", "-p", "test_gpio_audit.py"])]
         steps += [(name, ["python3", f"hw/tools/{name}.py"]) for name in ("check_circuit", "check_design", "check_trenz")]
-    steps += [(name, ["python3", f"hw/tools/{name}.py"]) for name in ("simulate", "simulate_trenz")]
+    if profile != "software":
+        steps += [(name, ["python3", f"hw/tools/{name}.py"]) for name in ("simulate", "simulate_trenz")]
+    if profile in ("full", "quick", "software"):
+        steps.append(("sensor-contracts", ["/opt/atopile/bin/python", "sw/tools/check_interfaces.py"]))
     return steps
 
 
 def collect(workspace, report, profile):
-    files = []
+    files = list((workspace / "sw/build").glob("verification.json"))
     for pattern in ("*.json", "*.cir", "*.log"):
         files.extend((workspace / "hw/simulation").rglob(pattern))
     for board in BOARDS:
@@ -263,7 +270,7 @@ def test(source, root, workspace, profile, ident=None):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("action", choices=("test", "clean", "doctor", "unit"))
-    parser.add_argument("--profile", choices=("full", "quick", "spice"), default="full")
+    parser.add_argument("--profile", choices=("full", "quick", "spice", "software"), default="full")
     parser.add_argument("--apply", action="store_true")
     parser.add_argument("--run-id")
     parser.add_argument("--all", action="store_true", help="Clean every marked run, including latest evidence")

@@ -38,3 +38,10 @@ installations and legacy caches belong in ignored `.local/`. Never commit
 virtualenvs, logs, credentials, downloaded tool binaries, or Docker image archives.
 Use the lab cleanup commands; do not run global Docker prune for this project.
 Keep vendor attribution and the existing GPL-3.0 license.
+
+Sensor v1 semantics live in `docs/sensor-contract.md`; field layouts are in
+`sw/interfaces/proto/`. Run the portable software profile when changing either.
+Preserve explicit zero/missing/unknown distinctions and raw sensor precision.
+The Buf baseline is a compatibility fixture, not routine generated output.
+Do not refresh it just to bypass a breaking change. Generated descriptors belong
+in ignored `sw/build/` inside the lab. Firmware/real acquisition remain pending.

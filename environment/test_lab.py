@@ -101,12 +101,24 @@ class LabSafetyTests(unittest.TestCase):
     def test_input_allowlist_excludes_generated_trees(self):
         source = Path(self.temp.name) / "source"
         source.mkdir()
-        for rel in (".local/legacy/.venv/lib/fake.py", ".lab/runs/report.json", "hw/models/large.step", "hw/logs/old.log", "hw/build/cache.py"):
+        for rel in (".local/legacy/.venv/lib/fake.py", ".lab/runs/report.json", "hw/models/large.step", "hw/logs/old.log", "hw/build/cache.py", "sw/build/schema.binpb", "sw/build/generated.py"):
             path = source / rel
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text("not an input")
         selected = source_files(source)
         self.assertFalse(any(p.exists() for p in selected))
+
+    def test_software_contract_inputs_are_staged(self):
+        source = Path(self.temp.name) / "source"
+        expected = ["sw/interfaces/buf.yaml", "sw/interfaces/baseline.binpb",
+                    "sw/interfaces/proto/senseshake/sensor/v1/sensor.proto",
+                    "sw/interfaces/python/senseshake_contract/framing.py",
+                    "sw/tests/fixtures/magnetic_boundary.json", "sw/tools/check_interfaces.py"]
+        for rel in expected:
+            path = source / rel
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text("fixture")
+        self.assertTrue({source / rel for rel in expected} <= set(source_files(source)))
 
 
 if __name__ == "__main__":

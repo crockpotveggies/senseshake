@@ -1,6 +1,10 @@
 # Software validation
 
-Planned suites should run actual software against independently specified
+The runnable contract suite (`test_contract.py`) uses an independently specified
+binary producer fixture and covers semantics, corruption and bounded framing.
+Run `./lab.ps1 test -Profile software` from the repository root.
+
+Subsequent acquisition suites should run actual software against independently specified
 fixtures: recorded sensor samples, bus errors, time jumps, malformed frames,
 buffer limits, USB disconnects and accelerator backpressure.
 
