@@ -1,6 +1,6 @@
 # ShakeSense T1 — Pi-outline Trenz carrier
 
-T1 is an **85 × 56 mm, six-layer** alternative to the A2 Coldfoot ASIC HAT.
+T1 is an **85 × 56 mm, eight-layer HDI** alternative to the A2 Coldfoot ASIC HAT.
 Electrical source: [`hw/elec/hat_trenz.ato`](../hw/elec/hat_trenz.ato).
 CAD: [`shakesense-trenz-hat.kicad_pcb`](../hw/boards/shakesense-trenz-hat/shakesense-trenz-hat.kicad_pcb).
 The original ASIC HAT and remote USB sensor head remain separate builds.
@@ -69,16 +69,100 @@ NOSEQ has a defined low idle bias, but its behavior is CPLD-firmware-dependent.
 J85 brings out three spare 3.3 V GPIOs. The UART service header is J4. The host
 link remains 2 Mbaud UART. The existing Nexys Video bitstream does **not** work
 unchanged: package pins, clocking and board reset handling must be ported and
-validated for this module before the Pi can use it as a Coldfoot accelerator.
+validated for this module before use. Coldfoot accelerator work is deferred;
+sensor acquisition must work without a configured FPGA.
+
+## GPIO expansion
+
+The carrier exposes **155 independent FPGA GPIOs**: the three existing J85
+signals plus **152 new routes** through four underside FFC connectors. The
+85 x 56 mm outline, sensor circuit, Pi UART/reset and JTAG connections remain.
+Three of the module's 158 ordinary I/Os are reserved for the Pi UART and reset.
+
+| FPGA bank | Total module I/O | Expansion connector | New GPIOs | Other contacts |
+| --- | ---: | --- | ---: | --- |
+| 13 | 30 | J86, 40 contacts | 30 | 9 grounds, 1 VREF |
+| 14 | 30 | J87, 40 contacts | 24 | 15 grounds, 1 VREF |
+| 15 | 50 | J88, 60 contacts | 50 | 9 grounds, 1 VREF |
+| 16 | 48 | J89, 60 contacts | 48 | 11 grounds, 1 VREF |
+
+Bank 14 also provides J85's three spares and the three reserved host signals.
+The [complete GPIO contract](trenz-gpio-breakout.csv) lists every module pin,
+carrier pad, bank, signal identity and expansion contact. The independent
+[module GPIO fixture](trenz-gpio-module.csv) and [ground fixture](trenz-ground-module.csv)
+were transcribed from the exact-SKU revision-03 schematic, page 6. Connector
+mating swaps odd/even pad numbers. P/N pairs remain adjacent at the expansion
+connector where both members are free; this is not a length-matching claim.
+
+J86/J87 use **Amphenol F32Q-1A7H1-11040**; J88/J89 use
+**F32Q-1A7H1-11060**. These are 0.5 mm-pitch, upper-contact ZIF connectors,
+2 mm nominal height, on the **underside** of the HAT. Use matching 40/60-way
+FFC/FPC cable and verify contact-side orientation against both connectors.
+The two solder anchor tabs share the grounded mechanical pad (41 or 61);
+that pad is not an extra cable contact.
+
+On all four connectors, **pin 2 is the FPGA 3.3 V reference OUTPUT**; pins 1
+and 3 are grounds. All unused cable contacts are grounds. Read GPIO contact
+numbers from the CSV and the marked pad 1, not from an assumed ribbon view.
+These are raw **3.3 V FPGA bank pins**, not 5 V-tolerant, isolated, ESD-protected,
+or hot-pluggable ports. Do not power the HAT through VREF or externally drive
+pins while the module is unpowered or configuring. External circuitry must
+share ground and satisfy the selected FPGA I/O standard and sequencing.
+Keep unused GPIOs as inputs until a pin-specific bitstream is qualified.
+
+Attach cables before stacking. Nominal 18.67 mm Pi-to-HAT spacing accommodates
+2 mm connector bodies. Where J88/J89 overlap the simplified Pi 4 port envelopes,
+only about **0.67 mm nominal clearance** remains over a 16 mm port body. Cable
+bends/exits, actual Pi cooler/port heights, solder protrusions and mounting
+hardware therefore require an assembly trial before release.
+Route cables clear of the Pi socket and standoffs; a final harness has not been
+specified or qualified. Models show connector envelopes without installed cables.
+
+The audit also corrected two old ground assignments: **JM1.12 is ETH_RD_N**
+and is now disconnected; **JM1.31 is B16_L22_P** and now reaches J89. It added
+missing ground contacts JM1.8/.26/.84 and disconnected unused JM2.29/.30.
+The audit checks all 260 module connector signal contacts, including pins that
+must stay isolated, rather than checking only the newly exposed GPIOs.
+
+Ethernet PHY pairs, GTP lanes, dedicated clocks, internal memory and module
+management pins are not GPIO expansion ports. Bank supplies are unchanged.
+No Coldfoot accelerator implementation is included in this revision.
+
+Sources: [exact-SKU schematic, page 6](vendor/trenz/SCH-TE0712-03-81I36-A.PDF),
+[Trenz reference manual](https://wiki.trenz-electronic.de/display/PD/TE0712+TRM),
+[40-contact connector](https://www.amphenol-cs.com/product/f32q1a7h111040.html),
+[60-contact connector](https://www.amphenol-cs.com/product/f32q1a7h111060.html).
+
+## Fabrication stack
+
+The complete GPIO breakout uses a provisional **eight-layer 1+6+1 HDI** stack.
+Ground planes are on In2.Cu and In5.Cu. Track width/clearance remain 0.15 mm;
+small through vias use 0.45 mm pads / 0.20 mm drills. Outer-layer microvias use
+0.30 mm pads / 0.10 mm laser holes and connect only F.Cu–In1.Cu or In6.Cu–B.Cu.
+Via-in-pad microvias require filling and planarization. Nominal board thickness
+is 1.6 mm, with 0.08 mm outer dielectrics. These values are explicitly recorded
+in the native PCB and `hw/layout-trenz.json`.
+
+This is a more expensive manufacturing process than the original carrier.
+The fabricator must approve the complete stack, drill separation, fill/cap process
+and materials. The changed ground-plane depth also requires recalculating the
+GNSS RF trace against the approved stack; its retained width is **not a verified
+50-ohm impedance**. Native DRC closure is not manufacturer DFM or RF signoff.
+Reducing GPIO count is the main available scope reduction; Ethernet is already
+excluded and adds no routing burden.
 
 ## Verification and release limits
 
 The delivered board passed:
 
 - atopile compilation and explicit numeric constraint solving;
-- 615 compiled physical-pin comparisons and 29 independently specified critical
-  module pin checks, plus sensor-net preservation and mounting/header geometry;
+- compiled physical-pin comparisons, all 158 ordinary GPIO mappings and all
+  260 module contacts, plus sensor-net preservation and mounting/header geometry;
+- nine GPIO regression cases: valid circuit, six injected wiring faults,
+  duplicate-pad identifier repair and preservation of project design rules;
 - native KiCad ERC and DRC: **0 findings, 0 unconnected items**;
+- a clean placement/import rebuild with all **5,316 tracks/vias identical** to
+  the delivered native copper, including **37 microvias**, and zero DRC/open nets;
 - ten bounded ngspice support checks: six DC power budgets, one expected
   undervoltage detection, and three 2 Mbaud UART RC-load cases.
 
@@ -93,6 +177,8 @@ are in [`validation.json`](../hw/boards/shakesense-trenz-hat/validation.json) an
 ## 3D artifacts
 
 - [`3d.png`](../hw/boards/shakesense-trenz-hat/3d.png): actual carrier PCB.
+- [`3d-bottom.png`](../hw/boards/shakesense-trenz-hat/3d-bottom.png): underside GPIO
+  connectors, shown with simplified 2 mm component envelopes.
 - [`trenz-mounted.png`](../hw/boards/shakesense-trenz-hat/trenz-mounted.png): carrier
   with the manufacturer's revision-03 Trenz STEP model.
 - [`pi-trenz-stack-concept.png`](../hw/boards/shakesense-trenz-hat/pi-trenz-stack-concept.png):
@@ -124,15 +210,18 @@ python3 hw/tools/trenz_models.py
 python3 hw/tools/render_trenz.py
 ```
 
-The supplied SES matches `hw/layout-trenz.json`. After changing placement or circuit,
-reroute its exported DSN before importing:
+The supplied SES is a complete native-copper snapshot, including locked tracks
+and HDI microvias. `import_routes.py` restores it; it is not a conventional
+Freerouting result. Placement and circuit changes require native KiCad routing
+and fresh validation. After completing changes, record the copper with:
 
 ```sh
-xvfb-run -a java -jar hw/tools/freerouting-1.9.0.jar \
-  -de hw/boards/shakesense-trenz-hat/shakesense-trenz-hat.dsn \
-  -do hw/boards/shakesense-trenz-hat/shakesense-trenz-hat.ses \
-  -mp 10 -mt 1 -oit 20 -da
+python3 hw/tools/export_session.py shakesense-trenz-hat
 ```
+
+The DSN is a connectivity/placement interchange artifact; the legacy autorouter
+flow does not qualify or reproduce the HDI fabrication process. Keep the native
+PCB, complete SES snapshot and pin contract synchronized.
 
 `bootstrap_trenz.py` and `pack_trenz.py` record initial authoring/placement and
 are **not routine rebuild steps**; they overwrite the maintained circuit/layout.

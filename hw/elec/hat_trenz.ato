@@ -47,7 +47,163 @@ from "trenz_parts.ato" import TZ_JP
 from "trenz_parts.ato" import TZ_JTAG
 from "trenz_parts.ato" import TZ_POWER
 
+from "trenz_parts.ato" import TZ_FFC40
+
+from "trenz_parts.ato" import TZ_FFC60
+
 module TrenzHat:
+    signal FPGA_B13_L1_P
+    signal FPGA_B13_L1_N
+    signal FPGA_B13_L2_P
+    signal FPGA_B13_L2_N
+    signal FPGA_B13_L3_P
+    signal FPGA_B13_L3_N
+    signal FPGA_B13_L4_P
+    signal FPGA_B13_L4_N
+    signal FPGA_B13_L5_P
+    signal FPGA_B13_L5_N
+    signal FPGA_B13_L6_P
+    signal FPGA_B13_L6_N
+    signal FPGA_B13_L9_P
+    signal FPGA_B13_L9_N
+    signal FPGA_B13_L10_P
+    signal FPGA_B13_L10_N
+    signal FPGA_B13_L11_P
+    signal FPGA_B13_L11_N
+    signal FPGA_B13_L12_P
+    signal FPGA_B13_L12_N
+    signal FPGA_B13_L13_P
+    signal FPGA_B13_L13_N
+    signal FPGA_B13_L14_P
+    signal FPGA_B13_L14_N
+    signal FPGA_B13_L15_P
+    signal FPGA_B13_L15_N
+    signal FPGA_B13_L16_P
+    signal FPGA_B13_L16_N
+    signal FPGA_B13_L17_P
+    signal FPGA_B13_L17_N
+    signal FPGA_B14_L4_P
+    signal FPGA_B14_L4_N
+    signal FPGA_B14_L5_P
+    signal FPGA_B14_L5_N
+    signal FPGA_B14_L9_P
+    signal FPGA_B14_L9_N
+    signal FPGA_B14_L11_P
+    signal FPGA_B14_L11_N
+    signal FPGA_B14_L12_P
+    signal FPGA_B14_L12_N
+    signal FPGA_B14_L13_P
+    signal FPGA_B14_L13_N
+    signal FPGA_B14_L14_P
+    signal FPGA_B14_L14_N
+    signal FPGA_B14_L15_P
+    signal FPGA_B14_L15_N
+    signal FPGA_B14_L16_P
+    signal FPGA_B14_L16_N
+    signal FPGA_B14_L18_P
+    signal FPGA_B14_L18_N
+    signal FPGA_B14_L20_P
+    signal FPGA_B14_L20_N
+    signal FPGA_B14_L24_P
+    signal FPGA_B14_L24_N
+    signal FPGA_B15_L1_P
+    signal FPGA_B15_L1_N
+    signal FPGA_B15_L2_P
+    signal FPGA_B15_L2_N
+    signal FPGA_B15_L3_P
+    signal FPGA_B15_L3_N
+    signal FPGA_B15_L4_P
+    signal FPGA_B15_L4_N
+    signal FPGA_B15_L5_P
+    signal FPGA_B15_L5_N
+    signal FPGA_B15_L6_P
+    signal FPGA_B15_L6_N
+    signal FPGA_B15_L7_P
+    signal FPGA_B15_L7_N
+    signal FPGA_B15_L8_P
+    signal FPGA_B15_L8_N
+    signal FPGA_B15_L9_P
+    signal FPGA_B15_L9_N
+    signal FPGA_B15_L10_P
+    signal FPGA_B15_L10_N
+    signal FPGA_B15_L11_P
+    signal FPGA_B15_L11_N
+    signal FPGA_B15_L12_P
+    signal FPGA_B15_L12_N
+    signal FPGA_B15_L13_P
+    signal FPGA_B15_L13_N
+    signal FPGA_B15_L14_P
+    signal FPGA_B15_L14_N
+    signal FPGA_B15_L15_P
+    signal FPGA_B15_L15_N
+    signal FPGA_B15_L16_P
+    signal FPGA_B15_L16_N
+    signal FPGA_B15_L17_P
+    signal FPGA_B15_L17_N
+    signal FPGA_B15_L18_P
+    signal FPGA_B15_L18_N
+    signal FPGA_B15_L19_P
+    signal FPGA_B15_L19_N
+    signal FPGA_B15_L20_P
+    signal FPGA_B15_L20_N
+    signal FPGA_B15_L21_P
+    signal FPGA_B15_L21_N
+    signal FPGA_B15_L22_P
+    signal FPGA_B15_L22_N
+    signal FPGA_B15_L23_P
+    signal FPGA_B15_L23_N
+    signal FPGA_B15_L24_P
+    signal FPGA_B15_L24_N
+    signal FPGA_B15_IO0
+    signal FPGA_B15_IO25
+    signal FPGA_B16_L1_P
+    signal FPGA_B16_L1_N
+    signal FPGA_B16_L2_P
+    signal FPGA_B16_L2_N
+    signal FPGA_B16_L3_P
+    signal FPGA_B16_L3_N
+    signal FPGA_B16_L4_P
+    signal FPGA_B16_L4_N
+    signal FPGA_B16_L5_P
+    signal FPGA_B16_L5_N
+    signal FPGA_B16_L6_P
+    signal FPGA_B16_L6_N
+    signal FPGA_B16_L7_P
+    signal FPGA_B16_L7_N
+    signal FPGA_B16_L8_P
+    signal FPGA_B16_L8_N
+    signal FPGA_B16_L9_P
+    signal FPGA_B16_L9_N
+    signal FPGA_B16_L10_P
+    signal FPGA_B16_L10_N
+    signal FPGA_B16_L11_P
+    signal FPGA_B16_L11_N
+    signal FPGA_B16_L12_P
+    signal FPGA_B16_L12_N
+    signal FPGA_B16_L13_P
+    signal FPGA_B16_L13_N
+    signal FPGA_B16_L14_P
+    signal FPGA_B16_L14_N
+    signal FPGA_B16_L15_P
+    signal FPGA_B16_L15_N
+    signal FPGA_B16_L16_P
+    signal FPGA_B16_L16_N
+    signal FPGA_B16_L17_P
+    signal FPGA_B16_L17_N
+    signal FPGA_B16_L18_P
+    signal FPGA_B16_L18_N
+    signal FPGA_B16_L19_P
+    signal FPGA_B16_L19_N
+    signal FPGA_B16_L20_P
+    signal FPGA_B16_L20_N
+    signal FPGA_B16_L21_P
+    signal FPGA_B16_L21_N
+    signal FPGA_B16_L22_P
+    signal FPGA_B16_L22_N
+    signal FPGA_B16_L23_P
+    signal FPGA_B16_L23_N
+    signal FPGA_B16_L24_P
+    signal FPGA_B16_L24_N
     signal EEP_WP
     signal EXT_3V3
     signal FPGA_3V3
@@ -721,21 +877,6 @@ module TrenzHat:
     j80.p29 ~ FPGA_PGOOD
     j80.p31 ~ FPGA_MODE
     j80.p90 ~ FPGA_JTAGEN
-    j80.p1 ~ GND
-    j80.p11 ~ GND
-    j80.p19 ~ GND
-    j80.p30 ~ GND
-    j80.p32 ~ GND
-    j80.p33 ~ GND
-    j80.p43 ~ GND
-    j80.p54 ~ GND
-    j80.p53 ~ GND
-    j80.p64 ~ GND
-    j80.p63 ~ GND
-    j80.p74 ~ GND
-    j80.p73 ~ GND
-    j80.p89 ~ GND
-    j80.p101 ~ GND
 
     # J81: LSHM-150-04.0-L-DV-A-S-K-TR; Mates JM2; opposite parity; 8 mm board surface gap
     j81 = new TZ100
@@ -762,40 +903,10 @@ module TrenzHat:
     j81.p15 ~ FPGA_AUX0
     j81.p16 ~ FPGA_AUX1
     j81.p18 ~ FPGA_AUX2
-    j81.p19 ~ GND
-    j81.p30 ~ GND
-    j81.p29 ~ GND
-    j81.p40 ~ GND
-    j81.p39 ~ GND
-    j81.p50 ~ GND
-    j81.p49 ~ GND
-    j81.p60 ~ GND
-    j81.p59 ~ GND
-    j81.p70 ~ GND
-    j81.p69 ~ GND
-    j81.p80 ~ GND
-    j81.p79 ~ GND
-    j81.p89 ~ GND
-    j81.p101 ~ GND
 
     # J82: LSHM-130-04.0-L-DV-A-S-K-TR; Mates JM3; opposite parity; 8 mm board surface gap
     j82 = new TZ60
     trait j82 has_designator<designator="J82">
-    j82.p6 ~ GND
-    j82.p5 ~ GND
-    j82.p12 ~ GND
-    j82.p11 ~ GND
-    j82.p18 ~ GND
-    j82.p17 ~ GND
-    j82.p24 ~ GND
-    j82.p23 ~ GND
-    j82.p30 ~ GND
-    j82.p29 ~ GND
-    j82.p36 ~ GND
-    j82.p35 ~ GND
-    j82.p46 ~ GND
-    j82.p45 ~ GND
-    j82.p61 ~ GND
 
     # J83: 1715721; REGULATED 3.3 V ONLY; current-limited external supply, 3 A initial operating budget
     j83 = new TZ_POWER
@@ -957,3 +1068,571 @@ module TrenzHat:
     trait TILT_AEXT has_net_name_suggestion<name="TILT_AEXT", level="EXPECTED">
     trait TILT_CS has_net_name_suggestion<name="TILT_CS", level="EXPECTED">
     trait TILT_DEXT has_net_name_suggestion<name="TILT_DEXT", level="EXPECTED">
+    j80.p1 ~ GND
+    j80.p7 ~ GND
+    j80.p19 ~ GND
+    j80.p25 ~ GND
+    j80.p30 ~ GND
+    j80.p33 ~ GND
+    j80.p43 ~ GND
+    j80.p54 ~ GND
+    j80.p53 ~ GND
+    j80.p64 ~ GND
+    j80.p63 ~ GND
+    j80.p74 ~ GND
+    j80.p73 ~ GND
+    j80.p83 ~ GND
+    j80.p89 ~ GND
+    j81.p19 ~ GND
+    j81.p40 ~ GND
+    j81.p39 ~ GND
+    j81.p50 ~ GND
+    j81.p49 ~ GND
+    j81.p60 ~ GND
+    j81.p59 ~ GND
+    j81.p70 ~ GND
+    j81.p69 ~ GND
+    j81.p80 ~ GND
+    j81.p79 ~ GND
+    j81.p89 ~ GND
+    j82.p6 ~ GND
+    j82.p5 ~ GND
+    j82.p12 ~ GND
+    j82.p11 ~ GND
+    j82.p18 ~ GND
+    j82.p17 ~ GND
+    j82.p24 ~ GND
+    j82.p23 ~ GND
+    j82.p30 ~ GND
+    j82.p29 ~ GND
+    j82.p36 ~ GND
+    j82.p35 ~ GND
+    j82.p46 ~ GND
+    j82.p45 ~ GND
+    j80.p101 ~ GND
+    j81.p101 ~ GND
+    j82.p61 ~ GND
+    j82.p41 ~ FPGA_B13_L1_P
+    j82.p43 ~ FPGA_B13_L1_N
+    j82.p53 ~ FPGA_B13_L2_P
+    j82.p51 ~ FPGA_B13_L2_N
+    j80.p18 ~ FPGA_B13_L3_P
+    j80.p20 ~ FPGA_B13_L3_N
+    j82.p47 ~ FPGA_B13_L4_P
+    j82.p49 ~ FPGA_B13_L4_N
+    j80.p23 ~ FPGA_B13_L5_P
+    j80.p21 ~ FPGA_B13_L5_N
+    j80.p17 ~ FPGA_B13_L6_P
+    j80.p15 ~ FPGA_B13_L6_N
+    j80.p28 ~ FPGA_B13_L9_P
+    j80.p26 ~ FPGA_B13_L9_N
+    j82.p38 ~ FPGA_B13_L10_P
+    j82.p40 ~ FPGA_B13_L10_N
+    j80.p24 ~ FPGA_B13_L11_P
+    j80.p22 ~ FPGA_B13_L11_N
+    j82.p57 ~ FPGA_B13_L12_P
+    j82.p59 ~ FPGA_B13_L12_N
+    j82.p58 ~ FPGA_B13_L13_P
+    j82.p60 ~ FPGA_B13_L13_N
+    j82.p1 ~ FPGA_B13_L14_P
+    j82.p3 ~ FPGA_B13_L14_N
+    j82.p42 ~ FPGA_B13_L15_P
+    j82.p44 ~ FPGA_B13_L15_N
+    j82.p37 ~ FPGA_B13_L16_P
+    j82.p39 ~ FPGA_B13_L16_N
+    j82.p2 ~ FPGA_B13_L17_P
+    j82.p4 ~ FPGA_B13_L17_N
+
+    # J86: bank 13; underside 0.5 mm FFC, pin 2 voltage reference OUTPUT.
+    j86 = new TZ_FFC40
+    trait j86 has_designator<designator="J86">
+    j86.p1 ~ GND
+    j86.p2 ~ FPGA_3V3
+    j86.p3 ~ GND
+    j86.p4 ~ FPGA_B13_L1_P
+    j86.p5 ~ FPGA_B13_L1_N
+    j86.p6 ~ FPGA_B13_L2_P
+    j86.p7 ~ FPGA_B13_L2_N
+    j86.p8 ~ FPGA_B13_L3_P
+    j86.p9 ~ FPGA_B13_L3_N
+    j86.p10 ~ GND
+    j86.p11 ~ FPGA_B13_L4_P
+    j86.p12 ~ FPGA_B13_L4_N
+    j86.p13 ~ FPGA_B13_L5_P
+    j86.p14 ~ FPGA_B13_L5_N
+    j86.p15 ~ GND
+    j86.p16 ~ FPGA_B13_L6_P
+    j86.p17 ~ FPGA_B13_L6_N
+    j86.p18 ~ FPGA_B13_L9_P
+    j86.p19 ~ FPGA_B13_L9_N
+    j86.p20 ~ GND
+    j86.p21 ~ FPGA_B13_L10_P
+    j86.p22 ~ FPGA_B13_L10_N
+    j86.p23 ~ FPGA_B13_L11_P
+    j86.p24 ~ FPGA_B13_L11_N
+    j86.p25 ~ GND
+    j86.p26 ~ FPGA_B13_L12_P
+    j86.p27 ~ FPGA_B13_L12_N
+    j86.p28 ~ FPGA_B13_L13_P
+    j86.p29 ~ FPGA_B13_L13_N
+    j86.p30 ~ GND
+    j86.p31 ~ FPGA_B13_L14_P
+    j86.p32 ~ FPGA_B13_L14_N
+    j86.p33 ~ FPGA_B13_L15_P
+    j86.p34 ~ FPGA_B13_L15_N
+    j86.p35 ~ GND
+    j86.p36 ~ FPGA_B13_L16_P
+    j86.p37 ~ FPGA_B13_L16_N
+    j86.p38 ~ FPGA_B13_L17_P
+    j86.p39 ~ FPGA_B13_L17_N
+    j86.p40 ~ GND
+    j86.p41 ~ GND
+    j80.p96 ~ FPGA_B14_L4_P
+    j80.p98 ~ FPGA_B14_L4_N
+    j82.p48 ~ FPGA_B14_L5_P
+    j82.p50 ~ FPGA_B14_L5_N
+    j80.p92 ~ FPGA_B14_L9_P
+    j80.p94 ~ FPGA_B14_L9_N
+    j81.p25 ~ FPGA_B14_L11_P
+    j81.p27 ~ FPGA_B14_L11_N
+    j81.p21 ~ FPGA_B14_L12_P
+    j81.p23 ~ FPGA_B14_L12_N
+    j81.p26 ~ FPGA_B14_L13_P
+    j81.p28 ~ FPGA_B14_L13_N
+    j81.p22 ~ FPGA_B14_L14_P
+    j81.p24 ~ FPGA_B14_L14_N
+    j81.p36 ~ FPGA_B14_L15_P
+    j81.p38 ~ FPGA_B14_L15_N
+    j81.p32 ~ FPGA_B14_L16_P
+    j81.p34 ~ FPGA_B14_L16_N
+    j80.p88 ~ FPGA_B14_L18_P
+    j80.p86 ~ FPGA_B14_L18_N
+    j82.p52 ~ FPGA_B14_L20_P
+    j82.p54 ~ FPGA_B14_L20_N
+    j80.p91 ~ FPGA_B14_L24_P
+    j80.p100 ~ FPGA_B14_L24_N
+
+    # J87: bank 14; underside 0.5 mm FFC, pin 2 voltage reference OUTPUT.
+    j87 = new TZ_FFC40
+    trait j87 has_designator<designator="J87">
+    j87.p1 ~ GND
+    j87.p2 ~ FPGA_3V3
+    j87.p3 ~ GND
+    j87.p4 ~ FPGA_B14_L4_P
+    j87.p5 ~ FPGA_B14_L4_N
+    j87.p6 ~ GND
+    j87.p7 ~ FPGA_B14_L5_P
+    j87.p8 ~ FPGA_B14_L5_N
+    j87.p9 ~ GND
+    j87.p10 ~ FPGA_B14_L9_P
+    j87.p11 ~ FPGA_B14_L9_N
+    j87.p12 ~ GND
+    j87.p13 ~ FPGA_B14_L11_P
+    j87.p14 ~ FPGA_B14_L11_N
+    j87.p15 ~ GND
+    j87.p16 ~ FPGA_B14_L12_P
+    j87.p17 ~ FPGA_B14_L12_N
+    j87.p18 ~ GND
+    j87.p19 ~ FPGA_B14_L13_P
+    j87.p20 ~ FPGA_B14_L13_N
+    j87.p21 ~ GND
+    j87.p22 ~ FPGA_B14_L14_P
+    j87.p23 ~ FPGA_B14_L14_N
+    j87.p24 ~ GND
+    j87.p25 ~ FPGA_B14_L15_P
+    j87.p26 ~ FPGA_B14_L15_N
+    j87.p27 ~ GND
+    j87.p28 ~ FPGA_B14_L16_P
+    j87.p29 ~ FPGA_B14_L16_N
+    j87.p30 ~ GND
+    j87.p31 ~ FPGA_B14_L18_P
+    j87.p32 ~ FPGA_B14_L18_N
+    j87.p33 ~ GND
+    j87.p34 ~ FPGA_B14_L20_P
+    j87.p35 ~ FPGA_B14_L20_N
+    j87.p36 ~ GND
+    j87.p37 ~ FPGA_B14_L24_P
+    j87.p38 ~ FPGA_B14_L24_N
+    j87.p39 ~ GND
+    j87.p40 ~ GND
+    j87.p41 ~ GND
+    j81.p72 ~ FPGA_B15_L1_P
+    j81.p74 ~ FPGA_B15_L1_N
+    j81.p78 ~ FPGA_B15_L2_P
+    j81.p76 ~ FPGA_B15_L2_N
+    j81.p56 ~ FPGA_B15_L3_P
+    j81.p58 ~ FPGA_B15_L3_N
+    j81.p82 ~ FPGA_B15_L4_P
+    j81.p84 ~ FPGA_B15_L4_N
+    j81.p88 ~ FPGA_B15_L5_P
+    j81.p86 ~ FPGA_B15_L5_N
+    j81.p83 ~ FPGA_B15_L6_P
+    j81.p81 ~ FPGA_B15_L6_N
+    j81.p43 ~ FPGA_B15_L7_P
+    j81.p41 ~ FPGA_B15_L7_N
+    j81.p37 ~ FPGA_B15_L8_P
+    j81.p35 ~ FPGA_B15_L8_N
+    j81.p33 ~ FPGA_B15_L9_P
+    j81.p31 ~ FPGA_B15_L9_N
+    j81.p63 ~ FPGA_B15_L10_P
+    j81.p61 ~ FPGA_B15_L10_N
+    j81.p52 ~ FPGA_B15_L11_P
+    j81.p54 ~ FPGA_B15_L11_N
+    j81.p55 ~ FPGA_B15_L12_P
+    j81.p57 ~ FPGA_B15_L12_N
+    j81.p45 ~ FPGA_B15_L13_P
+    j81.p47 ~ FPGA_B15_L13_N
+    j81.p51 ~ FPGA_B15_L14_P
+    j81.p53 ~ FPGA_B15_L14_N
+    j81.p75 ~ FPGA_B15_L15_P
+    j81.p77 ~ FPGA_B15_L15_N
+    j81.p66 ~ FPGA_B15_L16_P
+    j81.p68 ~ FPGA_B15_L16_N
+    j81.p64 ~ FPGA_B15_L17_P
+    j81.p62 ~ FPGA_B15_L17_N
+    j81.p65 ~ FPGA_B15_L18_P
+    j81.p67 ~ FPGA_B15_L18_N
+    j81.p46 ~ FPGA_B15_L19_P
+    j81.p48 ~ FPGA_B15_L19_N
+    j81.p71 ~ FPGA_B15_L20_P
+    j81.p73 ~ FPGA_B15_L20_N
+    j81.p85 ~ FPGA_B15_L21_P
+    j81.p87 ~ FPGA_B15_L21_N
+    j81.p97 ~ FPGA_B15_L22_P
+    j81.p95 ~ FPGA_B15_L22_N
+    j81.p42 ~ FPGA_B15_L23_P
+    j81.p44 ~ FPGA_B15_L23_N
+    j81.p93 ~ FPGA_B15_L24_P
+    j81.p91 ~ FPGA_B15_L24_N
+    j81.p90 ~ FPGA_B15_IO0
+    j81.p99 ~ FPGA_B15_IO25
+
+    # J88: bank 15; underside 0.5 mm FFC, pin 2 voltage reference OUTPUT.
+    j88 = new TZ_FFC60
+    trait j88 has_designator<designator="J88">
+    j80.p99 ~ FPGA_B16_L1_P
+    j80.p97 ~ FPGA_B16_L1_N
+    j80.p81 ~ FPGA_B16_L2_P
+    j80.p79 ~ FPGA_B16_L2_N
+    j80.p72 ~ FPGA_B16_L3_P
+    j80.p70 ~ FPGA_B16_L3_N
+    j80.p95 ~ FPGA_B16_L4_P
+    j80.p93 ~ FPGA_B16_L4_N
+    j80.p77 ~ FPGA_B16_L5_P
+    j80.p75 ~ FPGA_B16_L5_N
+    j80.p87 ~ FPGA_B16_L6_P
+    j80.p85 ~ FPGA_B16_L6_N
+    j80.p61 ~ FPGA_B16_L7_P
+    j80.p59 ~ FPGA_B16_L7_N
+    j80.p84 ~ FPGA_B16_L8_P
+    j80.p82 ~ FPGA_B16_L8_N
+    j80.p57 ~ FPGA_B16_L9_P
+    j80.p55 ~ FPGA_B16_L9_N
+    j80.p71 ~ FPGA_B16_L10_P
+    j80.p69 ~ FPGA_B16_L10_N
+    j80.p65 ~ FPGA_B16_L11_P
+    j80.p67 ~ FPGA_B16_L11_N
+    j80.p76 ~ FPGA_B16_L12_P
+    j80.p78 ~ FPGA_B16_L12_N
+    j80.p60 ~ FPGA_B16_L13_P
+    j80.p62 ~ FPGA_B16_L13_N
+    j80.p66 ~ FPGA_B16_L14_P
+    j80.p68 ~ FPGA_B16_L14_N
+    j80.p46 ~ FPGA_B16_L15_P
+    j80.p48 ~ FPGA_B16_L15_N
+    j80.p35 ~ FPGA_B16_L16_P
+    j80.p37 ~ FPGA_B16_L16_N
+    j80.p47 ~ FPGA_B16_L17_P
+    j80.p45 ~ FPGA_B16_L17_N
+    j80.p51 ~ FPGA_B16_L18_P
+    j80.p49 ~ FPGA_B16_L18_N
+    j80.p41 ~ FPGA_B16_L19_P
+    j80.p39 ~ FPGA_B16_L19_N
+    j80.p50 ~ FPGA_B16_L20_P
+    j80.p52 ~ FPGA_B16_L20_N
+    j80.p56 ~ FPGA_B16_L21_P
+    j80.p58 ~ FPGA_B16_L21_N
+    j80.p32 ~ FPGA_B16_L22_P
+    j80.p34 ~ FPGA_B16_L22_N
+    j80.p42 ~ FPGA_B16_L23_P
+    j80.p44 ~ FPGA_B16_L23_N
+    j80.p38 ~ FPGA_B16_L24_P
+    j80.p36 ~ FPGA_B16_L24_N
+
+    # J89: bank 16; underside 0.5 mm FFC, pin 2 voltage reference OUTPUT.
+    j89 = new TZ_FFC60
+    trait j89 has_designator<designator="J89">
+    trait FPGA_B13_L1_P has_net_name_suggestion<name="FPGA_B13_L1_P", level="EXPECTED">
+    trait FPGA_B13_L1_N has_net_name_suggestion<name="FPGA_B13_L1_N", level="EXPECTED">
+    trait FPGA_B13_L2_P has_net_name_suggestion<name="FPGA_B13_L2_P", level="EXPECTED">
+    trait FPGA_B13_L2_N has_net_name_suggestion<name="FPGA_B13_L2_N", level="EXPECTED">
+    trait FPGA_B13_L3_P has_net_name_suggestion<name="FPGA_B13_L3_P", level="EXPECTED">
+    trait FPGA_B13_L3_N has_net_name_suggestion<name="FPGA_B13_L3_N", level="EXPECTED">
+    trait FPGA_B13_L4_P has_net_name_suggestion<name="FPGA_B13_L4_P", level="EXPECTED">
+    trait FPGA_B13_L4_N has_net_name_suggestion<name="FPGA_B13_L4_N", level="EXPECTED">
+    trait FPGA_B13_L5_P has_net_name_suggestion<name="FPGA_B13_L5_P", level="EXPECTED">
+    trait FPGA_B13_L5_N has_net_name_suggestion<name="FPGA_B13_L5_N", level="EXPECTED">
+    trait FPGA_B13_L6_P has_net_name_suggestion<name="FPGA_B13_L6_P", level="EXPECTED">
+    trait FPGA_B13_L6_N has_net_name_suggestion<name="FPGA_B13_L6_N", level="EXPECTED">
+    trait FPGA_B13_L9_P has_net_name_suggestion<name="FPGA_B13_L9_P", level="EXPECTED">
+    trait FPGA_B13_L9_N has_net_name_suggestion<name="FPGA_B13_L9_N", level="EXPECTED">
+    trait FPGA_B13_L10_P has_net_name_suggestion<name="FPGA_B13_L10_P", level="EXPECTED">
+    trait FPGA_B13_L10_N has_net_name_suggestion<name="FPGA_B13_L10_N", level="EXPECTED">
+    trait FPGA_B13_L11_P has_net_name_suggestion<name="FPGA_B13_L11_P", level="EXPECTED">
+    trait FPGA_B13_L11_N has_net_name_suggestion<name="FPGA_B13_L11_N", level="EXPECTED">
+    trait FPGA_B13_L12_P has_net_name_suggestion<name="FPGA_B13_L12_P", level="EXPECTED">
+    trait FPGA_B13_L12_N has_net_name_suggestion<name="FPGA_B13_L12_N", level="EXPECTED">
+    trait FPGA_B13_L13_P has_net_name_suggestion<name="FPGA_B13_L13_P", level="EXPECTED">
+    trait FPGA_B13_L13_N has_net_name_suggestion<name="FPGA_B13_L13_N", level="EXPECTED">
+    trait FPGA_B13_L14_P has_net_name_suggestion<name="FPGA_B13_L14_P", level="EXPECTED">
+    trait FPGA_B13_L14_N has_net_name_suggestion<name="FPGA_B13_L14_N", level="EXPECTED">
+    trait FPGA_B13_L15_P has_net_name_suggestion<name="FPGA_B13_L15_P", level="EXPECTED">
+    trait FPGA_B13_L15_N has_net_name_suggestion<name="FPGA_B13_L15_N", level="EXPECTED">
+    trait FPGA_B13_L16_P has_net_name_suggestion<name="FPGA_B13_L16_P", level="EXPECTED">
+    trait FPGA_B13_L16_N has_net_name_suggestion<name="FPGA_B13_L16_N", level="EXPECTED">
+    trait FPGA_B13_L17_P has_net_name_suggestion<name="FPGA_B13_L17_P", level="EXPECTED">
+    trait FPGA_B13_L17_N has_net_name_suggestion<name="FPGA_B13_L17_N", level="EXPECTED">
+    trait FPGA_B14_L4_P has_net_name_suggestion<name="FPGA_B14_L4_P", level="EXPECTED">
+    trait FPGA_B14_L4_N has_net_name_suggestion<name="FPGA_B14_L4_N", level="EXPECTED">
+    trait FPGA_B14_L5_P has_net_name_suggestion<name="FPGA_B14_L5_P", level="EXPECTED">
+    trait FPGA_B14_L5_N has_net_name_suggestion<name="FPGA_B14_L5_N", level="EXPECTED">
+    trait FPGA_B14_L9_P has_net_name_suggestion<name="FPGA_B14_L9_P", level="EXPECTED">
+    trait FPGA_B14_L9_N has_net_name_suggestion<name="FPGA_B14_L9_N", level="EXPECTED">
+    trait FPGA_B14_L11_P has_net_name_suggestion<name="FPGA_B14_L11_P", level="EXPECTED">
+    trait FPGA_B14_L11_N has_net_name_suggestion<name="FPGA_B14_L11_N", level="EXPECTED">
+    trait FPGA_B14_L12_P has_net_name_suggestion<name="FPGA_B14_L12_P", level="EXPECTED">
+    trait FPGA_B14_L12_N has_net_name_suggestion<name="FPGA_B14_L12_N", level="EXPECTED">
+    trait FPGA_B14_L13_P has_net_name_suggestion<name="FPGA_B14_L13_P", level="EXPECTED">
+    trait FPGA_B14_L13_N has_net_name_suggestion<name="FPGA_B14_L13_N", level="EXPECTED">
+    trait FPGA_B14_L14_P has_net_name_suggestion<name="FPGA_B14_L14_P", level="EXPECTED">
+    trait FPGA_B14_L14_N has_net_name_suggestion<name="FPGA_B14_L14_N", level="EXPECTED">
+    trait FPGA_B14_L15_P has_net_name_suggestion<name="FPGA_B14_L15_P", level="EXPECTED">
+    trait FPGA_B14_L15_N has_net_name_suggestion<name="FPGA_B14_L15_N", level="EXPECTED">
+    trait FPGA_B14_L16_P has_net_name_suggestion<name="FPGA_B14_L16_P", level="EXPECTED">
+    trait FPGA_B14_L16_N has_net_name_suggestion<name="FPGA_B14_L16_N", level="EXPECTED">
+    trait FPGA_B14_L18_P has_net_name_suggestion<name="FPGA_B14_L18_P", level="EXPECTED">
+    trait FPGA_B14_L18_N has_net_name_suggestion<name="FPGA_B14_L18_N", level="EXPECTED">
+    trait FPGA_B14_L20_P has_net_name_suggestion<name="FPGA_B14_L20_P", level="EXPECTED">
+    trait FPGA_B14_L20_N has_net_name_suggestion<name="FPGA_B14_L20_N", level="EXPECTED">
+    trait FPGA_B14_L24_P has_net_name_suggestion<name="FPGA_B14_L24_P", level="EXPECTED">
+    trait FPGA_B14_L24_N has_net_name_suggestion<name="FPGA_B14_L24_N", level="EXPECTED">
+    trait FPGA_B15_L1_P has_net_name_suggestion<name="FPGA_B15_L1_P", level="EXPECTED">
+    trait FPGA_B15_L1_N has_net_name_suggestion<name="FPGA_B15_L1_N", level="EXPECTED">
+    trait FPGA_B15_L2_P has_net_name_suggestion<name="FPGA_B15_L2_P", level="EXPECTED">
+    trait FPGA_B15_L2_N has_net_name_suggestion<name="FPGA_B15_L2_N", level="EXPECTED">
+    trait FPGA_B15_L3_P has_net_name_suggestion<name="FPGA_B15_L3_P", level="EXPECTED">
+    trait FPGA_B15_L3_N has_net_name_suggestion<name="FPGA_B15_L3_N", level="EXPECTED">
+    trait FPGA_B15_L4_P has_net_name_suggestion<name="FPGA_B15_L4_P", level="EXPECTED">
+    trait FPGA_B15_L4_N has_net_name_suggestion<name="FPGA_B15_L4_N", level="EXPECTED">
+    trait FPGA_B15_L5_P has_net_name_suggestion<name="FPGA_B15_L5_P", level="EXPECTED">
+    trait FPGA_B15_L5_N has_net_name_suggestion<name="FPGA_B15_L5_N", level="EXPECTED">
+    trait FPGA_B15_L6_P has_net_name_suggestion<name="FPGA_B15_L6_P", level="EXPECTED">
+    trait FPGA_B15_L6_N has_net_name_suggestion<name="FPGA_B15_L6_N", level="EXPECTED">
+    trait FPGA_B15_L7_P has_net_name_suggestion<name="FPGA_B15_L7_P", level="EXPECTED">
+    trait FPGA_B15_L7_N has_net_name_suggestion<name="FPGA_B15_L7_N", level="EXPECTED">
+    trait FPGA_B15_L8_P has_net_name_suggestion<name="FPGA_B15_L8_P", level="EXPECTED">
+    trait FPGA_B15_L8_N has_net_name_suggestion<name="FPGA_B15_L8_N", level="EXPECTED">
+    trait FPGA_B15_L9_P has_net_name_suggestion<name="FPGA_B15_L9_P", level="EXPECTED">
+    trait FPGA_B15_L9_N has_net_name_suggestion<name="FPGA_B15_L9_N", level="EXPECTED">
+    trait FPGA_B15_L10_P has_net_name_suggestion<name="FPGA_B15_L10_P", level="EXPECTED">
+    trait FPGA_B15_L10_N has_net_name_suggestion<name="FPGA_B15_L10_N", level="EXPECTED">
+    trait FPGA_B15_L11_P has_net_name_suggestion<name="FPGA_B15_L11_P", level="EXPECTED">
+    trait FPGA_B15_L11_N has_net_name_suggestion<name="FPGA_B15_L11_N", level="EXPECTED">
+    trait FPGA_B15_L12_P has_net_name_suggestion<name="FPGA_B15_L12_P", level="EXPECTED">
+    trait FPGA_B15_L12_N has_net_name_suggestion<name="FPGA_B15_L12_N", level="EXPECTED">
+    trait FPGA_B15_L13_P has_net_name_suggestion<name="FPGA_B15_L13_P", level="EXPECTED">
+    trait FPGA_B15_L13_N has_net_name_suggestion<name="FPGA_B15_L13_N", level="EXPECTED">
+    trait FPGA_B15_L14_P has_net_name_suggestion<name="FPGA_B15_L14_P", level="EXPECTED">
+    trait FPGA_B15_L14_N has_net_name_suggestion<name="FPGA_B15_L14_N", level="EXPECTED">
+    trait FPGA_B15_L15_P has_net_name_suggestion<name="FPGA_B15_L15_P", level="EXPECTED">
+    trait FPGA_B15_L15_N has_net_name_suggestion<name="FPGA_B15_L15_N", level="EXPECTED">
+    trait FPGA_B15_L16_P has_net_name_suggestion<name="FPGA_B15_L16_P", level="EXPECTED">
+    trait FPGA_B15_L16_N has_net_name_suggestion<name="FPGA_B15_L16_N", level="EXPECTED">
+    trait FPGA_B15_L17_P has_net_name_suggestion<name="FPGA_B15_L17_P", level="EXPECTED">
+    trait FPGA_B15_L17_N has_net_name_suggestion<name="FPGA_B15_L17_N", level="EXPECTED">
+    trait FPGA_B15_L18_P has_net_name_suggestion<name="FPGA_B15_L18_P", level="EXPECTED">
+    trait FPGA_B15_L18_N has_net_name_suggestion<name="FPGA_B15_L18_N", level="EXPECTED">
+    trait FPGA_B15_L19_P has_net_name_suggestion<name="FPGA_B15_L19_P", level="EXPECTED">
+    trait FPGA_B15_L19_N has_net_name_suggestion<name="FPGA_B15_L19_N", level="EXPECTED">
+    trait FPGA_B15_L20_P has_net_name_suggestion<name="FPGA_B15_L20_P", level="EXPECTED">
+    trait FPGA_B15_L20_N has_net_name_suggestion<name="FPGA_B15_L20_N", level="EXPECTED">
+    trait FPGA_B15_L21_P has_net_name_suggestion<name="FPGA_B15_L21_P", level="EXPECTED">
+    trait FPGA_B15_L21_N has_net_name_suggestion<name="FPGA_B15_L21_N", level="EXPECTED">
+    trait FPGA_B15_L22_P has_net_name_suggestion<name="FPGA_B15_L22_P", level="EXPECTED">
+    trait FPGA_B15_L22_N has_net_name_suggestion<name="FPGA_B15_L22_N", level="EXPECTED">
+    trait FPGA_B15_L23_P has_net_name_suggestion<name="FPGA_B15_L23_P", level="EXPECTED">
+    trait FPGA_B15_L23_N has_net_name_suggestion<name="FPGA_B15_L23_N", level="EXPECTED">
+    trait FPGA_B15_L24_P has_net_name_suggestion<name="FPGA_B15_L24_P", level="EXPECTED">
+    trait FPGA_B15_L24_N has_net_name_suggestion<name="FPGA_B15_L24_N", level="EXPECTED">
+    trait FPGA_B15_IO0 has_net_name_suggestion<name="FPGA_B15_IO0", level="EXPECTED">
+    trait FPGA_B15_IO25 has_net_name_suggestion<name="FPGA_B15_IO25", level="EXPECTED">
+    trait FPGA_B16_L1_P has_net_name_suggestion<name="FPGA_B16_L1_P", level="EXPECTED">
+    trait FPGA_B16_L1_N has_net_name_suggestion<name="FPGA_B16_L1_N", level="EXPECTED">
+    trait FPGA_B16_L2_P has_net_name_suggestion<name="FPGA_B16_L2_P", level="EXPECTED">
+    trait FPGA_B16_L2_N has_net_name_suggestion<name="FPGA_B16_L2_N", level="EXPECTED">
+    trait FPGA_B16_L3_P has_net_name_suggestion<name="FPGA_B16_L3_P", level="EXPECTED">
+    trait FPGA_B16_L3_N has_net_name_suggestion<name="FPGA_B16_L3_N", level="EXPECTED">
+    trait FPGA_B16_L4_P has_net_name_suggestion<name="FPGA_B16_L4_P", level="EXPECTED">
+    trait FPGA_B16_L4_N has_net_name_suggestion<name="FPGA_B16_L4_N", level="EXPECTED">
+    trait FPGA_B16_L5_P has_net_name_suggestion<name="FPGA_B16_L5_P", level="EXPECTED">
+    trait FPGA_B16_L5_N has_net_name_suggestion<name="FPGA_B16_L5_N", level="EXPECTED">
+    trait FPGA_B16_L6_P has_net_name_suggestion<name="FPGA_B16_L6_P", level="EXPECTED">
+    trait FPGA_B16_L6_N has_net_name_suggestion<name="FPGA_B16_L6_N", level="EXPECTED">
+    trait FPGA_B16_L7_P has_net_name_suggestion<name="FPGA_B16_L7_P", level="EXPECTED">
+    trait FPGA_B16_L7_N has_net_name_suggestion<name="FPGA_B16_L7_N", level="EXPECTED">
+    trait FPGA_B16_L8_P has_net_name_suggestion<name="FPGA_B16_L8_P", level="EXPECTED">
+    trait FPGA_B16_L8_N has_net_name_suggestion<name="FPGA_B16_L8_N", level="EXPECTED">
+    trait FPGA_B16_L9_P has_net_name_suggestion<name="FPGA_B16_L9_P", level="EXPECTED">
+    trait FPGA_B16_L9_N has_net_name_suggestion<name="FPGA_B16_L9_N", level="EXPECTED">
+    trait FPGA_B16_L10_P has_net_name_suggestion<name="FPGA_B16_L10_P", level="EXPECTED">
+    trait FPGA_B16_L10_N has_net_name_suggestion<name="FPGA_B16_L10_N", level="EXPECTED">
+    trait FPGA_B16_L11_P has_net_name_suggestion<name="FPGA_B16_L11_P", level="EXPECTED">
+    trait FPGA_B16_L11_N has_net_name_suggestion<name="FPGA_B16_L11_N", level="EXPECTED">
+    trait FPGA_B16_L12_P has_net_name_suggestion<name="FPGA_B16_L12_P", level="EXPECTED">
+    trait FPGA_B16_L12_N has_net_name_suggestion<name="FPGA_B16_L12_N", level="EXPECTED">
+    trait FPGA_B16_L13_P has_net_name_suggestion<name="FPGA_B16_L13_P", level="EXPECTED">
+    trait FPGA_B16_L13_N has_net_name_suggestion<name="FPGA_B16_L13_N", level="EXPECTED">
+    trait FPGA_B16_L14_P has_net_name_suggestion<name="FPGA_B16_L14_P", level="EXPECTED">
+    trait FPGA_B16_L14_N has_net_name_suggestion<name="FPGA_B16_L14_N", level="EXPECTED">
+    trait FPGA_B16_L15_P has_net_name_suggestion<name="FPGA_B16_L15_P", level="EXPECTED">
+    trait FPGA_B16_L15_N has_net_name_suggestion<name="FPGA_B16_L15_N", level="EXPECTED">
+    trait FPGA_B16_L16_P has_net_name_suggestion<name="FPGA_B16_L16_P", level="EXPECTED">
+    trait FPGA_B16_L16_N has_net_name_suggestion<name="FPGA_B16_L16_N", level="EXPECTED">
+    trait FPGA_B16_L17_P has_net_name_suggestion<name="FPGA_B16_L17_P", level="EXPECTED">
+    trait FPGA_B16_L17_N has_net_name_suggestion<name="FPGA_B16_L17_N", level="EXPECTED">
+    trait FPGA_B16_L18_P has_net_name_suggestion<name="FPGA_B16_L18_P", level="EXPECTED">
+    trait FPGA_B16_L18_N has_net_name_suggestion<name="FPGA_B16_L18_N", level="EXPECTED">
+    trait FPGA_B16_L19_P has_net_name_suggestion<name="FPGA_B16_L19_P", level="EXPECTED">
+    trait FPGA_B16_L19_N has_net_name_suggestion<name="FPGA_B16_L19_N", level="EXPECTED">
+    trait FPGA_B16_L20_P has_net_name_suggestion<name="FPGA_B16_L20_P", level="EXPECTED">
+    trait FPGA_B16_L20_N has_net_name_suggestion<name="FPGA_B16_L20_N", level="EXPECTED">
+    trait FPGA_B16_L21_P has_net_name_suggestion<name="FPGA_B16_L21_P", level="EXPECTED">
+    trait FPGA_B16_L21_N has_net_name_suggestion<name="FPGA_B16_L21_N", level="EXPECTED">
+    trait FPGA_B16_L22_P has_net_name_suggestion<name="FPGA_B16_L22_P", level="EXPECTED">
+    trait FPGA_B16_L22_N has_net_name_suggestion<name="FPGA_B16_L22_N", level="EXPECTED">
+    trait FPGA_B16_L23_P has_net_name_suggestion<name="FPGA_B16_L23_P", level="EXPECTED">
+    trait FPGA_B16_L23_N has_net_name_suggestion<name="FPGA_B16_L23_N", level="EXPECTED">
+    trait FPGA_B16_L24_P has_net_name_suggestion<name="FPGA_B16_L24_P", level="EXPECTED">
+    trait FPGA_B16_L24_N has_net_name_suggestion<name="FPGA_B16_L24_N", level="EXPECTED">
+    j88.p1 ~ GND
+    j88.p2 ~ FPGA_3V3
+    j88.p3 ~ GND
+    j88.p4 ~ FPGA_B15_L1_P
+    j88.p5 ~ FPGA_B15_L1_N
+    j88.p6 ~ FPGA_B15_L2_P
+    j88.p7 ~ FPGA_B15_L2_N
+    j88.p8 ~ FPGA_B15_L3_P
+    j88.p9 ~ FPGA_B15_L3_N
+    j88.p10 ~ FPGA_B15_L4_P
+    j88.p11 ~ FPGA_B15_L4_N
+    j88.p12 ~ GND
+    j88.p13 ~ FPGA_B15_L5_P
+    j88.p14 ~ FPGA_B15_L5_N
+    j88.p15 ~ FPGA_B15_L6_P
+    j88.p16 ~ FPGA_B15_L6_N
+    j88.p17 ~ FPGA_B15_L7_P
+    j88.p18 ~ FPGA_B15_L7_N
+    j88.p19 ~ FPGA_B15_L8_P
+    j88.p20 ~ FPGA_B15_L8_N
+    j88.p21 ~ GND
+    j88.p22 ~ FPGA_B15_L9_P
+    j88.p23 ~ FPGA_B15_L9_N
+    j88.p24 ~ FPGA_B15_L10_P
+    j88.p25 ~ FPGA_B15_L10_N
+    j88.p26 ~ FPGA_B15_L11_P
+    j88.p27 ~ FPGA_B15_L11_N
+    j88.p28 ~ FPGA_B15_L12_P
+    j88.p29 ~ FPGA_B15_L12_N
+    j88.p30 ~ GND
+    j88.p31 ~ FPGA_B15_L13_P
+    j88.p32 ~ FPGA_B15_L13_N
+    j88.p33 ~ FPGA_B15_L14_P
+    j88.p34 ~ FPGA_B15_L14_N
+    j88.p35 ~ FPGA_B15_L15_P
+    j88.p36 ~ FPGA_B15_L15_N
+    j88.p37 ~ GND
+    j88.p38 ~ FPGA_B15_L16_P
+    j88.p39 ~ FPGA_B15_L16_N
+    j88.p40 ~ FPGA_B15_L17_P
+    j88.p41 ~ FPGA_B15_L17_N
+    j88.p42 ~ FPGA_B15_L18_P
+    j88.p43 ~ FPGA_B15_L18_N
+    j88.p44 ~ FPGA_B15_L19_P
+    j88.p45 ~ FPGA_B15_L19_N
+    j88.p46 ~ GND
+    j88.p47 ~ FPGA_B15_L20_P
+    j88.p48 ~ FPGA_B15_L20_N
+    j88.p49 ~ FPGA_B15_L21_P
+    j88.p50 ~ FPGA_B15_L21_N
+    j88.p51 ~ FPGA_B15_L22_P
+    j88.p52 ~ FPGA_B15_L22_N
+    j88.p53 ~ FPGA_B15_L23_P
+    j88.p54 ~ FPGA_B15_L23_N
+    j88.p55 ~ GND
+    j88.p56 ~ FPGA_B15_L24_P
+    j88.p57 ~ FPGA_B15_L24_N
+    j88.p58 ~ FPGA_B15_IO0
+    j88.p59 ~ FPGA_B15_IO25
+    j88.p60 ~ GND
+    j88.p61 ~ GND
+    j89.p1 ~ GND
+    j89.p2 ~ FPGA_3V3
+    j89.p3 ~ GND
+    j89.p4 ~ FPGA_B16_L1_P
+    j89.p5 ~ FPGA_B16_L1_N
+    j89.p6 ~ FPGA_B16_L2_P
+    j89.p7 ~ FPGA_B16_L2_N
+    j89.p8 ~ FPGA_B16_L3_P
+    j89.p9 ~ FPGA_B16_L3_N
+    j89.p10 ~ GND
+    j89.p11 ~ FPGA_B16_L4_P
+    j89.p12 ~ FPGA_B16_L4_N
+    j89.p13 ~ FPGA_B16_L5_P
+    j89.p14 ~ FPGA_B16_L5_N
+    j89.p15 ~ FPGA_B16_L6_P
+    j89.p16 ~ FPGA_B16_L6_N
+    j89.p17 ~ GND
+    j89.p18 ~ FPGA_B16_L7_P
+    j89.p19 ~ FPGA_B16_L7_N
+    j89.p20 ~ FPGA_B16_L8_P
+    j89.p21 ~ FPGA_B16_L8_N
+    j89.p22 ~ GND
+    j89.p23 ~ FPGA_B16_L9_P
+    j89.p24 ~ FPGA_B16_L9_N
+    j89.p25 ~ FPGA_B16_L10_P
+    j89.p26 ~ FPGA_B16_L10_N
+    j89.p27 ~ FPGA_B16_L11_P
+    j89.p28 ~ FPGA_B16_L11_N
+    j89.p29 ~ GND
+    j89.p30 ~ FPGA_B16_L12_P
+    j89.p31 ~ FPGA_B16_L12_N
+    j89.p32 ~ FPGA_B16_L13_P
+    j89.p33 ~ FPGA_B16_L13_N
+    j89.p34 ~ FPGA_B16_L14_P
+    j89.p35 ~ FPGA_B16_L14_N
+    j89.p36 ~ GND
+    j89.p37 ~ FPGA_B16_L15_P
+    j89.p38 ~ FPGA_B16_L15_N
+    j89.p39 ~ FPGA_B16_L16_P
+    j89.p40 ~ FPGA_B16_L16_N
+    j89.p41 ~ GND
+    j89.p42 ~ FPGA_B16_L17_P
+    j89.p43 ~ FPGA_B16_L17_N
+    j89.p44 ~ FPGA_B16_L18_P
+    j89.p45 ~ FPGA_B16_L18_N
+    j89.p46 ~ FPGA_B16_L19_P
+    j89.p47 ~ FPGA_B16_L19_N
+    j89.p48 ~ GND
+    j89.p49 ~ FPGA_B16_L20_P
+    j89.p50 ~ FPGA_B16_L20_N
+    j89.p51 ~ FPGA_B16_L21_P
+    j89.p52 ~ FPGA_B16_L21_N
+    j89.p53 ~ FPGA_B16_L22_P
+    j89.p54 ~ FPGA_B16_L22_N
+    j89.p55 ~ GND
+    j89.p56 ~ FPGA_B16_L23_P
+    j89.p57 ~ FPGA_B16_L23_N
+    j89.p58 ~ FPGA_B16_L24_P
+    j89.p59 ~ FPGA_B16_L24_N
+    j89.p60 ~ GND
+    j89.p61 ~ GND

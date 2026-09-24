@@ -4,6 +4,29 @@ import json,math,uuid
 import pcbnew as pcb
 NS=uuid.UUID('7418c0d1-4a75-4f9d-8db1-7c1f7c75a001')
 def uid(s): return str(uuid.uuid5(NS,s))
+def unique_ids(board):
+    # Atomic footprint copies retain child UUIDs. Mutate only duplicate IDs;
+    # numeric pins, nets, placements and all copper remain unchanged.
+    seen=set()
+    for fp in board.GetFootprints():
+        for item in [fp,fp.Reference(),fp.Value(),*fp.Pads(),*fp.GraphicalItems()]:
+            while item.m_Uuid.AsString() in seen:item.m_Uuid.Increment()
+            seen.add(item.m_Uuid.AsString())
+    for item in [*board.GetTracks(),*board.GetDrawings(),*board.Zones()]:
+        while item.m_Uuid.AsString() in seen:item.m_Uuid.Increment()
+        seen.add(item.m_Uuid.AsString())
+
+def save_board(path, board):
+    """Save copper without allowing pcbnew's standalone context to reset rules."""
+    project = Path(path).with_suffix('.kicad_pro')
+    existing = project.read_bytes() if project.exists() else None
+    try:
+        return pcb.SaveBoard(str(path), board)
+    finally:
+        if existing is not None:
+            project.write_bytes(existing)
+
+
 def q(s): return json.dumps(str(s),ensure_ascii=False)
 def v(x,y): return pcb.VECTOR2I(pcb.FromMM(x),pcb.FromMM(y))
 def add_shape(board,x1,y1,x2,y2,layer,width=.15):
@@ -51,10 +74,11 @@ def schematic(name,spec,folder):
           (property "Sheetname" {q(section)} (at {30+(i-1)%2*110} {43+(i-1)//2*50} 0) {effects(1.27,'left')})
           (property "Sheetfile" {q(file)} (at {30+(i-1)%2*110} {77+(i-1)//2*50} 0) {effects(1.27,'left')})
           (instances (project {q(name)} (path "/{root}" (page "{i+1}")))))''')
-        libs=[];body=[];x=45.72;y=35.56;row_height=0
+        start_x=50.8 if name=='shakesense-trenz-hat' else 45.72
+        libs=[];body=[];x=start_x;y=35.56;row_height=0
         for idx,part in enumerate(parts):
             lib,coords,height=libsym(part);libs.append(lib)
-            if idx and idx%4==0: x=45.72;y+=row_height+22.86;row_height=0
+            if idx and idx%4==0: x=start_x;y+=row_height+22.86;row_height=0
             row_height=max(row_height,height)
             cy=y+height/2; puid=uid(name+'/'+part.ref)
             body.append(f'''(symbol (lib_id "ShakeSense:Part_{part.ref}") (at {x} {cy} 0) (unit 1) (in_bom yes) (on_board yes) (dnp {'yes' if part.dnp else 'no'}) (uuid {puid})
@@ -81,9 +105,13 @@ def schematic(name,spec,folder):
                 body.append(f'(symbol (lib_id "ShakeSense:PWR_FLAG") (at {xx} {yy} 0) (unit 1) (in_bom no) (on_board no) (uuid {uid(name+reference)}) (property "Reference" "{reference}" (at {xx} {yy} 0) (effects (font (size 1 1)) hide)) (property "Value" "PWR_FLAG" (at {xx} {yy} 0) (effects (font (size 1 1)) hide)) (instances (project {q(name)} (path "/{root}/{sid}" (reference "{reference}") (unit 1)))))')
                 body.append(f'(global_label {q(net)} (shape input) (at {xx} {yy} 0) {effects(1.0,"left")} (uuid {uid(name+reference+"label")}))')
         all_libs.extend(libs)
-        header=f'(kicad_sch (version 20230121) (generator eeschema) (uuid {sid}) (paper "A3") (title_block (title {q(name+" / "+section)}) (date "2026-09-23") (rev "A2 PROTOTYPE"))'
+        revision='T1-GPIO' if name=='shakesense-trenz-hat' else 'A2 PROTOTYPE'
+        date='2026-09-24' if name=='shakesense-trenz-hat' else '2026-09-23'
+        header=f'(kicad_sch (version 20230121) (generator eeschema) (uuid {sid}) (paper "A3") (title_block (title {q(("ShakeSense T1" if name=="shakesense-trenz-hat" else name)+" / "+section)}) (date {q(date)}) (rev {q(revision)}))'
         (folder/file).write_text(header+'\n(lib_symbols\n'+'\n'.join(libs)+')\n'+'\n'.join(body)+'\n)',encoding='utf-8')
     note='Atopile-derived review schematic - prototype, not released.\nThe Pi hosts acquisition and Coldfoot processing; the USB head has a local MCU.\nGlobal net labels connect functional sheets.'
+    if name=='shakesense-trenz-hat':
+        note='Atopile-derived review schematic - T1 GPIO prototype, not released.\nPi sensor acquisition; 155 expansion GPIOs at 3.3 V; Coldfoot integration deferred.\nGlobal net labels connect functional sheets.'
     rootbody.append(f'(text {q(note)} (at 30 25 0) {effects(1.5,"left")} (uuid {uid(name+"note")}))')
     (folder/(name+'.kicad_sch')).write_text(f'(kicad_sch (version 20230121) (generator eeschema) (uuid {root}) (paper "A1") (lib_symbols)\n'+'\n'.join(rootbody)+f'\n(sheet_instances (path "/" (page "1"))))',encoding='utf-8')
 

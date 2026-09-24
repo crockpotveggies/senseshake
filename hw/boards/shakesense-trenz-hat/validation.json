@@ -4,16 +4,26 @@
     85,
     56
   ],
-  "compiled_pin_checks": 615,
+  "module_gpio_checks": 158,
+  "module_contact_checks": 260,
+  "exposed_gpio": 155,
+  "added_gpio": 152,
+  "gpio_voltage_v": 3.3,
+  "compiled_pin_checks": 819,
   "critical_module_pin_checks": 29,
   "drc_violations": 0,
   "unconnected_items": 0,
   "erc_violations": 0,
-  "tracks_and_vias": 1634,
+  "tracks_and_vias": 5316,
+  "copper_layers": 8,
+  "microvias": 37,
+  "hdi_structure": "1+6+1",
   "limits": [
+    "Provisional HDI stack requires manufacturer DFM, filled/planarized via-in-pad and GNSS RF impedance review",
     "No FPGA bitstream port or hardware test performed",
     "External regulated 3.3 V supply required; confirm 3.201\u20133.399 V at module under startup/load",
     "Copper resistance, heating, sensor thermal drift, EMI and physical mating remain unqualified",
+    "FFC cable routing, GPIO loading and high-speed signal integrity remain unqualified",
     "Pi rendering is conceptual; Trenz rendering uses vendor generic revision-03 STEP"
   ]
 }

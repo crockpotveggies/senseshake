@@ -1,0 +1,98 @@
+{
+  "date_utc": "2026-09-24T18:01:53.126070+00:00",
+  "portable_lab": {
+    "owner": "senseshake-lab-v1",
+    "id": "20260924T175927Z-56b849c7",
+    "profile": "full",
+    "status": "passed",
+    "steps": [
+      {
+        "name": "build-hat",
+        "exit_code": 0,
+        "seconds": 12.28
+      },
+      {
+        "name": "constraints-hat",
+        "exit_code": 0,
+        "seconds": 13.29
+      },
+      {
+        "name": "build-field_head",
+        "exit_code": 0,
+        "seconds": 6.63
+      },
+      {
+        "name": "constraints-field_head",
+        "exit_code": 0,
+        "seconds": 4.77
+      },
+      {
+        "name": "build-trenz_hat",
+        "exit_code": 0,
+        "seconds": 14.89
+      },
+      {
+        "name": "constraints-trenz_hat",
+        "exit_code": 0,
+        "seconds": 15.29
+      },
+      {
+        "name": "reject-overvoltage",
+        "exit_code": 0,
+        "seconds": 3.72
+      },
+      {
+        "name": "gpio-faults",
+        "exit_code": 0,
+        "seconds": 0.31
+      },
+      {
+        "name": "check_circuit",
+        "exit_code": 0,
+        "seconds": 0.21
+      },
+      {
+        "name": "check_design",
+        "exit_code": 0,
+        "seconds": 2.22
+      },
+      {
+        "name": "check_trenz",
+        "exit_code": 0,
+        "seconds": 1.87
+      },
+      {
+        "name": "simulate",
+        "exit_code": 0,
+        "seconds": 4.42
+      },
+      {
+        "name": "simulate_trenz",
+        "exit_code": 0,
+        "seconds": 0.06
+      }
+    ],
+    "seconds": 80.36
+  },
+  "toolchain": {
+    "image_id": "sha256:a9be2b44b81bc1f9fe131df63a363cc9f28f99f75138432aadd483dd8e3ff804",
+    "kicad": "9.0.9",
+    "ngspice": "******\n** ngspice-39 : Circuit level simulation program\n** The U. C. Berkeley CAD Group\n** Copyright 1985-1994, Regents of the University of California.\n** Copyright 2001-2022, The ngspice team.\n** Please get your ngspice manual from http://ngspice.sourceforge.net/docs.html\n** Please file your bug-reports at http://ngspice.sourceforge.net/bugrep.html\n** Creation Date: Sun Feb  5 13:44:35 UTC 2023\n******",
+    "system_python": "3.11.2 (main, Apr 28 2025, 14:11:48) [GCC 12.2.0]",
+    "atopile_python": "Python 3.14.7",
+    "atopile": "0.15.9"
+  },
+  "route_replay": {
+    "tracks_and_vias": 5316,
+    "copper_identical": true,
+    "drc_violations": 0,
+    "unconnected_items": 0
+  },
+  "route_replay_scope": "Clean placement from saved atopile output, complete SES import, ground/power pours, exact copper comparison and native KiCad DRC; no manufacturing or hardware validation",
+  "sha256": {
+    "shakesense-trenz-hat.kicad_pcb": "2aeabe781adc5b4f7e5405119087a05db36ec351aa28cccede6c397a5edf38d4",
+    "shakesense-trenz-hat.ses": "0af0e087c8779a267d3c988f77badef99b3064408ee75d93115d3962c35d3d9d",
+    "layout-trenz.json": "0cb5f8921a3fa2e228ff2be153eb4a030513f709ff754e52c818bcc5ddd3096e",
+    "hat_trenz.ato": "1d83014c445b05bed1ec320d254b0c9fc0fc332f4293f8d9ad4a825a73e51f3f"
+  }
+}

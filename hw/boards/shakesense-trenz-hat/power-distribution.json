@@ -1,16 +1,12 @@
 {
   "additional_parallel_vias_mm": [
     [
-      19.6,
+      20.6,
       7.5
     ],
     [
       22.6,
       7.5
-    ],
-    [
-      45,
-      48
     ]
   ],
   "note": "Parallel copper improves supply routing; thermal and extracted resistance signoff pending"

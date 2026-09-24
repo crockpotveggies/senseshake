@@ -94,3 +94,7 @@ H80,M3 / 8 mm spacer,M3 / 8 mm spacer,TZ_TZ_HOLE,False,
 H81,M3 / 8 mm spacer,M3 / 8 mm spacer,TZ_TZ_HOLE,False,
 H82,M3 / 8 mm spacer,M3 / 8 mm spacer,TZ_TZ_HOLE,False,
 H83,M3 / 8 mm spacer,M3 / 8 mm spacer,TZ_TZ_HOLE,False,
+J86,BANK13 / 40p FFC,F32Q-1A7H1-11040,TZ_FFC40,False,3.3 V logic only; pin 2 VREF output; fit FFC before stacking; no hot plug
+J87,BANK14 / 40p FFC,F32Q-1A7H1-11040,TZ_FFC40,False,3.3 V logic only; pin 2 VREF output; fit FFC before stacking; no hot plug
+J88,BANK15 / 60p FFC,F32Q-1A7H1-11060,TZ_FFC60,False,3.3 V logic only; pin 2 VREF output; fit FFC before stacking; no hot plug
+J89,BANK16 / 60p FFC,F32Q-1A7H1-11060,TZ_FFC60,False,3.3 V logic only; pin 2 VREF output; fit FFC before stacking; no hot plug

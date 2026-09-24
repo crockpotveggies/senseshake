@@ -1,6 +1,7 @@
 """Trim only KiCad-reported dangling copper, verifying connectivity after each pass."""
 from pathlib import Path
 import subprocess,json,sys
+from kicad_support import save_board
 import pcbnew as p
 ROOT=Path(__file__).resolve().parents[2]
 for name in sys.argv[1:] or ['shakesense-hat','shakesense-field-head']:
@@ -17,6 +18,6 @@ for name in sys.argv[1:] or ['shakesense-hat','shakesense-field-head']:
         for t in list(b.GetTracks()):
             if t.m_Uuid.AsString() in remove and not t.IsLocked():b.Delete(t);count+=1
         if not count:break
-        p.ZONE_FILLER(b).Fill(b.Zones());p.SaveBoard(str(path),b)
+        p.ZONE_FILLER(b).Fill(b.Zones());save_board(str(path),b)
     print(name,'dangling trim passes',iteration)
     assert not r['unconnected_items'],r['unconnected_items']

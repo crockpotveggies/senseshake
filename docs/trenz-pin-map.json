@@ -8,6 +8,13 @@
   },
   {
     "module_connector": "JM1",
+    "module_pin": 2,
+    "carrier_ref": "J80",
+    "carrier_pad": 1,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM1",
     "module_pin": 3,
     "carrier_ref": "J80",
     "carrier_pad": 4,
@@ -19,6 +26,20 @@
     "carrier_ref": "J80",
     "carrier_pad": 6,
     "net": "FPGA_VIN"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 7,
+    "carrier_ref": "J80",
+    "carrier_pad": 8,
+    "net": "FPGA_NOSEQ"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 8,
+    "carrier_ref": "J80",
+    "carrier_pad": 7,
+    "net": "GND"
   },
   {
     "module_connector": "JM1",
@@ -43,13 +64,6 @@
   },
   {
     "module_connector": "JM1",
-    "module_pin": 15,
-    "carrier_ref": "J80",
-    "carrier_pad": 16,
-    "net": "FPGA_VIN"
-  },
-  {
-    "module_connector": "JM1",
     "module_pin": 14,
     "carrier_ref": "J80",
     "carrier_pad": 13,
@@ -57,52 +71,38 @@
   },
   {
     "module_connector": "JM1",
-    "module_pin": 7,
+    "module_pin": 15,
     "carrier_ref": "J80",
-    "carrier_pad": 8,
-    "net": "FPGA_NOSEQ"
+    "carrier_pad": 16,
+    "net": "FPGA_VIN"
   },
   {
     "module_connector": "JM1",
-    "module_pin": 28,
+    "module_pin": 16,
     "carrier_ref": "J80",
-    "carrier_pad": 27,
-    "net": "FPGA_EN1"
+    "carrier_pad": 15,
+    "net": "FPGA_B13_L6_N"
   },
   {
     "module_connector": "JM1",
-    "module_pin": 30,
+    "module_pin": 17,
     "carrier_ref": "J80",
-    "carrier_pad": 29,
-    "net": "FPGA_PGOOD"
+    "carrier_pad": 18,
+    "net": "FPGA_B13_L3_P"
   },
   {
     "module_connector": "JM1",
-    "module_pin": 32,
+    "module_pin": 18,
     "carrier_ref": "J80",
-    "carrier_pad": 31,
-    "net": "FPGA_MODE"
+    "carrier_pad": 17,
+    "net": "FPGA_B13_L6_P"
   },
   {
     "module_connector": "JM1",
-    "module_pin": 89,
+    "module_pin": 19,
     "carrier_ref": "J80",
-    "carrier_pad": 90,
-    "net": "FPGA_JTAGEN"
-  },
-  {
-    "module_connector": "JM1",
-    "module_pin": 2,
-    "carrier_ref": "J80",
-    "carrier_pad": 1,
-    "net": "GND"
-  },
-  {
-    "module_connector": "JM1",
-    "module_pin": 12,
-    "carrier_ref": "J80",
-    "carrier_pad": 11,
-    "net": "GND"
+    "carrier_pad": 20,
+    "net": "FPGA_B13_L3_N"
   },
   {
     "module_connector": "JM1",
@@ -113,6 +113,62 @@
   },
   {
     "module_connector": "JM1",
+    "module_pin": 21,
+    "carrier_ref": "J80",
+    "carrier_pad": 22,
+    "net": "FPGA_B13_L11_N"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 22,
+    "carrier_ref": "J80",
+    "carrier_pad": 21,
+    "net": "FPGA_B13_L5_N"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 23,
+    "carrier_ref": "J80",
+    "carrier_pad": 24,
+    "net": "FPGA_B13_L11_P"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 24,
+    "carrier_ref": "J80",
+    "carrier_pad": 23,
+    "net": "FPGA_B13_L5_P"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 25,
+    "carrier_ref": "J80",
+    "carrier_pad": 26,
+    "net": "FPGA_B13_L9_N"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 26,
+    "carrier_ref": "J80",
+    "carrier_pad": 25,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 27,
+    "carrier_ref": "J80",
+    "carrier_pad": 28,
+    "net": "FPGA_B13_L9_P"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 28,
+    "carrier_ref": "J80",
+    "carrier_pad": 27,
+    "net": "FPGA_EN1"
+  },
+  {
+    "module_connector": "JM1",
     "module_pin": 29,
     "carrier_ref": "J80",
     "carrier_pad": 30,
@@ -120,10 +176,31 @@
   },
   {
     "module_connector": "JM1",
+    "module_pin": 30,
+    "carrier_ref": "J80",
+    "carrier_pad": 29,
+    "net": "FPGA_PGOOD"
+  },
+  {
+    "module_connector": "JM1",
     "module_pin": 31,
     "carrier_ref": "J80",
     "carrier_pad": 32,
-    "net": "GND"
+    "net": "FPGA_B16_L22_P"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 32,
+    "carrier_ref": "J80",
+    "carrier_pad": 31,
+    "net": "FPGA_MODE"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 33,
+    "carrier_ref": "J80",
+    "carrier_pad": 34,
+    "net": "FPGA_B16_L22_N"
   },
   {
     "module_connector": "JM1",
@@ -134,10 +211,122 @@
   },
   {
     "module_connector": "JM1",
+    "module_pin": 35,
+    "carrier_ref": "J80",
+    "carrier_pad": 36,
+    "net": "FPGA_B16_L24_N"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 36,
+    "carrier_ref": "J80",
+    "carrier_pad": 35,
+    "net": "FPGA_B16_L16_P"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 37,
+    "carrier_ref": "J80",
+    "carrier_pad": 38,
+    "net": "FPGA_B16_L24_P"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 38,
+    "carrier_ref": "J80",
+    "carrier_pad": 37,
+    "net": "FPGA_B16_L16_N"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 40,
+    "carrier_ref": "J80",
+    "carrier_pad": 39,
+    "net": "FPGA_B16_L19_N"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 41,
+    "carrier_ref": "J80",
+    "carrier_pad": 42,
+    "net": "FPGA_B16_L23_P"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 42,
+    "carrier_ref": "J80",
+    "carrier_pad": 41,
+    "net": "FPGA_B16_L19_P"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 43,
+    "carrier_ref": "J80",
+    "carrier_pad": 44,
+    "net": "FPGA_B16_L23_N"
+  },
+  {
+    "module_connector": "JM1",
     "module_pin": 44,
     "carrier_ref": "J80",
     "carrier_pad": 43,
     "net": "GND"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 45,
+    "carrier_ref": "J80",
+    "carrier_pad": 46,
+    "net": "FPGA_B16_L15_P"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 46,
+    "carrier_ref": "J80",
+    "carrier_pad": 45,
+    "net": "FPGA_B16_L17_N"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 47,
+    "carrier_ref": "J80",
+    "carrier_pad": 48,
+    "net": "FPGA_B16_L15_N"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 48,
+    "carrier_ref": "J80",
+    "carrier_pad": 47,
+    "net": "FPGA_B16_L17_P"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 49,
+    "carrier_ref": "J80",
+    "carrier_pad": 50,
+    "net": "FPGA_B16_L20_P"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 50,
+    "carrier_ref": "J80",
+    "carrier_pad": 49,
+    "net": "FPGA_B16_L18_N"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 51,
+    "carrier_ref": "J80",
+    "carrier_pad": 52,
+    "net": "FPGA_B16_L20_N"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 52,
+    "carrier_ref": "J80",
+    "carrier_pad": 51,
+    "net": "FPGA_B16_L18_P"
   },
   {
     "module_connector": "JM1",
@@ -155,6 +344,62 @@
   },
   {
     "module_connector": "JM1",
+    "module_pin": 55,
+    "carrier_ref": "J80",
+    "carrier_pad": 56,
+    "net": "FPGA_B16_L21_P"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 56,
+    "carrier_ref": "J80",
+    "carrier_pad": 55,
+    "net": "FPGA_B16_L9_N"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 57,
+    "carrier_ref": "J80",
+    "carrier_pad": 58,
+    "net": "FPGA_B16_L21_N"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 58,
+    "carrier_ref": "J80",
+    "carrier_pad": 57,
+    "net": "FPGA_B16_L9_P"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 59,
+    "carrier_ref": "J80",
+    "carrier_pad": 60,
+    "net": "FPGA_B16_L13_P"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 60,
+    "carrier_ref": "J80",
+    "carrier_pad": 59,
+    "net": "FPGA_B16_L7_N"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 61,
+    "carrier_ref": "J80",
+    "carrier_pad": 62,
+    "net": "FPGA_B16_L13_N"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 62,
+    "carrier_ref": "J80",
+    "carrier_pad": 61,
+    "net": "FPGA_B16_L7_P"
+  },
+  {
+    "module_connector": "JM1",
     "module_pin": 63,
     "carrier_ref": "J80",
     "carrier_pad": 64,
@@ -166,6 +411,62 @@
     "carrier_ref": "J80",
     "carrier_pad": 63,
     "net": "GND"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 65,
+    "carrier_ref": "J80",
+    "carrier_pad": 66,
+    "net": "FPGA_B16_L14_P"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 66,
+    "carrier_ref": "J80",
+    "carrier_pad": 65,
+    "net": "FPGA_B16_L11_P"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 67,
+    "carrier_ref": "J80",
+    "carrier_pad": 68,
+    "net": "FPGA_B16_L14_N"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 68,
+    "carrier_ref": "J80",
+    "carrier_pad": 67,
+    "net": "FPGA_B16_L11_N"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 69,
+    "carrier_ref": "J80",
+    "carrier_pad": 70,
+    "net": "FPGA_B16_L3_N"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 70,
+    "carrier_ref": "J80",
+    "carrier_pad": 69,
+    "net": "FPGA_B16_L10_N"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 71,
+    "carrier_ref": "J80",
+    "carrier_pad": 72,
+    "net": "FPGA_B16_L3_P"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 72,
+    "carrier_ref": "J80",
+    "carrier_pad": 71,
+    "net": "FPGA_B16_L10_P"
   },
   {
     "module_connector": "JM1",
@@ -183,10 +484,185 @@
   },
   {
     "module_connector": "JM1",
+    "module_pin": 75,
+    "carrier_ref": "J80",
+    "carrier_pad": 76,
+    "net": "FPGA_B16_L12_P"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 76,
+    "carrier_ref": "J80",
+    "carrier_pad": 75,
+    "net": "FPGA_B16_L5_N"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 77,
+    "carrier_ref": "J80",
+    "carrier_pad": 78,
+    "net": "FPGA_B16_L12_N"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 78,
+    "carrier_ref": "J80",
+    "carrier_pad": 77,
+    "net": "FPGA_B16_L5_P"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 80,
+    "carrier_ref": "J80",
+    "carrier_pad": 79,
+    "net": "FPGA_B16_L2_N"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 81,
+    "carrier_ref": "J80",
+    "carrier_pad": 82,
+    "net": "FPGA_B16_L8_N"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 82,
+    "carrier_ref": "J80",
+    "carrier_pad": 81,
+    "net": "FPGA_B16_L2_P"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 83,
+    "carrier_ref": "J80",
+    "carrier_pad": 84,
+    "net": "FPGA_B16_L8_P"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 84,
+    "carrier_ref": "J80",
+    "carrier_pad": 83,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 85,
+    "carrier_ref": "J80",
+    "carrier_pad": 86,
+    "net": "FPGA_B14_L18_N"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 86,
+    "carrier_ref": "J80",
+    "carrier_pad": 85,
+    "net": "FPGA_B16_L6_N"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 87,
+    "carrier_ref": "J80",
+    "carrier_pad": 88,
+    "net": "FPGA_B14_L18_P"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 88,
+    "carrier_ref": "J80",
+    "carrier_pad": 87,
+    "net": "FPGA_B16_L6_P"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 89,
+    "carrier_ref": "J80",
+    "carrier_pad": 90,
+    "net": "FPGA_JTAGEN"
+  },
+  {
+    "module_connector": "JM1",
     "module_pin": 90,
     "carrier_ref": "J80",
     "carrier_pad": 89,
     "net": "GND"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 91,
+    "carrier_ref": "J80",
+    "carrier_pad": 92,
+    "net": "FPGA_B14_L9_P"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 92,
+    "carrier_ref": "J80",
+    "carrier_pad": 91,
+    "net": "FPGA_B14_L24_P"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 93,
+    "carrier_ref": "J80",
+    "carrier_pad": 94,
+    "net": "FPGA_B14_L9_N"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 94,
+    "carrier_ref": "J80",
+    "carrier_pad": 93,
+    "net": "FPGA_B16_L4_N"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 95,
+    "carrier_ref": "J80",
+    "carrier_pad": 96,
+    "net": "FPGA_B14_L4_P"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 96,
+    "carrier_ref": "J80",
+    "carrier_pad": 95,
+    "net": "FPGA_B16_L4_P"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 97,
+    "carrier_ref": "J80",
+    "carrier_pad": 98,
+    "net": "FPGA_B14_L4_N"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 98,
+    "carrier_ref": "J80",
+    "carrier_pad": 97,
+    "net": "FPGA_B16_L1_N"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 99,
+    "carrier_ref": "J80",
+    "carrier_pad": 100,
+    "net": "FPGA_B14_L24_N"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 100,
+    "carrier_ref": "J80",
+    "carrier_pad": 99,
+    "net": "FPGA_B16_L1_P"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 1,
+    "carrier_ref": "J81",
+    "carrier_pad": 2,
+    "net": "FPGA_3V3"
   },
   {
     "module_connector": "JM2",
@@ -194,6 +670,13 @@
     "carrier_ref": "J81",
     "carrier_pad": 1,
     "net": "FPGA_VIN"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 3,
+    "carrier_ref": "J81",
+    "carrier_pad": 4,
+    "net": "FPGA_3V3"
   },
   {
     "module_connector": "JM2",
@@ -211,31 +694,17 @@
   },
   {
     "module_connector": "JM2",
-    "module_pin": 8,
-    "carrier_ref": "J81",
-    "carrier_pad": 7,
-    "net": "FPGA_VIN"
-  },
-  {
-    "module_connector": "JM2",
-    "module_pin": 1,
-    "carrier_ref": "J81",
-    "carrier_pad": 2,
-    "net": "FPGA_3V3"
-  },
-  {
-    "module_connector": "JM2",
-    "module_pin": 3,
-    "carrier_ref": "J81",
-    "carrier_pad": 4,
-    "net": "FPGA_3V3"
-  },
-  {
-    "module_connector": "JM2",
     "module_pin": 7,
     "carrier_ref": "J81",
     "carrier_pad": 8,
     "net": "FPGA_3V3"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 8,
+    "carrier_ref": "J81",
+    "carrier_pad": 7,
+    "net": "FPGA_VIN"
   },
   {
     "module_connector": "JM2",
@@ -253,59 +722,17 @@
   },
   {
     "module_connector": "JM2",
-    "module_pin": 12,
-    "carrier_ref": "J81",
-    "carrier_pad": 11,
-    "net": "FPGA_3V3"
-  },
-  {
-    "module_connector": "JM2",
-    "module_pin": 91,
-    "carrier_ref": "J81",
-    "carrier_pad": 92,
-    "net": "FPGA_3V3"
-  },
-  {
-    "module_connector": "JM2",
-    "module_pin": 93,
-    "carrier_ref": "J81",
-    "carrier_pad": 94,
-    "net": "JTAG_TMS"
-  },
-  {
-    "module_connector": "JM2",
-    "module_pin": 95,
-    "carrier_ref": "J81",
-    "carrier_pad": 96,
-    "net": "JTAG_TDI"
-  },
-  {
-    "module_connector": "JM2",
-    "module_pin": 97,
-    "carrier_ref": "J81",
-    "carrier_pad": 98,
-    "net": "JTAG_TDO"
-  },
-  {
-    "module_connector": "JM2",
-    "module_pin": 99,
-    "carrier_ref": "J81",
-    "carrier_pad": 100,
-    "net": "JTAG_TCK"
-  },
-  {
-    "module_connector": "JM2",
-    "module_pin": 18,
-    "carrier_ref": "J81",
-    "carrier_pad": 17,
-    "net": "FPGA_CONFIG_RESET_N"
-  },
-  {
-    "module_connector": "JM2",
     "module_pin": 11,
     "carrier_ref": "J81",
     "carrier_pad": 12,
     "net": "FPGA_UART_RX"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 12,
+    "carrier_ref": "J81",
+    "carrier_pad": 11,
+    "net": "FPGA_3V3"
   },
   {
     "module_connector": "JM2",
@@ -323,17 +750,17 @@
   },
   {
     "module_connector": "JM2",
-    "module_pin": 16,
-    "carrier_ref": "J81",
-    "carrier_pad": 15,
-    "net": "FPGA_AUX0"
-  },
-  {
-    "module_connector": "JM2",
     "module_pin": 15,
     "carrier_ref": "J81",
     "carrier_pad": 16,
     "net": "FPGA_AUX1"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 16,
+    "carrier_ref": "J81",
+    "carrier_pad": 15,
+    "net": "FPGA_AUX0"
   },
   {
     "module_connector": "JM2",
@@ -344,6 +771,13 @@
   },
   {
     "module_connector": "JM2",
+    "module_pin": 18,
+    "carrier_ref": "J81",
+    "carrier_pad": 17,
+    "net": "FPGA_CONFIG_RESET_N"
+  },
+  {
+    "module_connector": "JM2",
     "module_pin": 20,
     "carrier_ref": "J81",
     "carrier_pad": 19,
@@ -351,17 +785,115 @@
   },
   {
     "module_connector": "JM2",
-    "module_pin": 29,
+    "module_pin": 21,
     "carrier_ref": "J81",
-    "carrier_pad": 30,
-    "net": "GND"
+    "carrier_pad": 22,
+    "net": "FPGA_B14_L14_P"
   },
   {
     "module_connector": "JM2",
-    "module_pin": 30,
+    "module_pin": 22,
     "carrier_ref": "J81",
-    "carrier_pad": 29,
-    "net": "GND"
+    "carrier_pad": 21,
+    "net": "FPGA_B14_L12_P"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 23,
+    "carrier_ref": "J81",
+    "carrier_pad": 24,
+    "net": "FPGA_B14_L14_N"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 24,
+    "carrier_ref": "J81",
+    "carrier_pad": 23,
+    "net": "FPGA_B14_L12_N"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 25,
+    "carrier_ref": "J81",
+    "carrier_pad": 26,
+    "net": "FPGA_B14_L13_P"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 26,
+    "carrier_ref": "J81",
+    "carrier_pad": 25,
+    "net": "FPGA_B14_L11_P"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 27,
+    "carrier_ref": "J81",
+    "carrier_pad": 28,
+    "net": "FPGA_B14_L13_N"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 28,
+    "carrier_ref": "J81",
+    "carrier_pad": 27,
+    "net": "FPGA_B14_L11_N"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 31,
+    "carrier_ref": "J81",
+    "carrier_pad": 32,
+    "net": "FPGA_B14_L16_P"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 32,
+    "carrier_ref": "J81",
+    "carrier_pad": 31,
+    "net": "FPGA_B15_L9_N"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 33,
+    "carrier_ref": "J81",
+    "carrier_pad": 34,
+    "net": "FPGA_B14_L16_N"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 34,
+    "carrier_ref": "J81",
+    "carrier_pad": 33,
+    "net": "FPGA_B15_L9_P"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 35,
+    "carrier_ref": "J81",
+    "carrier_pad": 36,
+    "net": "FPGA_B14_L15_P"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 36,
+    "carrier_ref": "J81",
+    "carrier_pad": 35,
+    "net": "FPGA_B15_L8_N"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 37,
+    "carrier_ref": "J81",
+    "carrier_pad": 38,
+    "net": "FPGA_B14_L15_N"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 38,
+    "carrier_ref": "J81",
+    "carrier_pad": 37,
+    "net": "FPGA_B15_L8_P"
   },
   {
     "module_connector": "JM2",
@@ -379,6 +911,62 @@
   },
   {
     "module_connector": "JM2",
+    "module_pin": 41,
+    "carrier_ref": "J81",
+    "carrier_pad": 42,
+    "net": "FPGA_B15_L23_P"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 42,
+    "carrier_ref": "J81",
+    "carrier_pad": 41,
+    "net": "FPGA_B15_L7_N"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 43,
+    "carrier_ref": "J81",
+    "carrier_pad": 44,
+    "net": "FPGA_B15_L23_N"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 44,
+    "carrier_ref": "J81",
+    "carrier_pad": 43,
+    "net": "FPGA_B15_L7_P"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 45,
+    "carrier_ref": "J81",
+    "carrier_pad": 46,
+    "net": "FPGA_B15_L19_P"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 46,
+    "carrier_ref": "J81",
+    "carrier_pad": 45,
+    "net": "FPGA_B15_L13_P"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 47,
+    "carrier_ref": "J81",
+    "carrier_pad": 48,
+    "net": "FPGA_B15_L19_N"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 48,
+    "carrier_ref": "J81",
+    "carrier_pad": 47,
+    "net": "FPGA_B15_L13_N"
+  },
+  {
+    "module_connector": "JM2",
     "module_pin": 49,
     "carrier_ref": "J81",
     "carrier_pad": 50,
@@ -390,6 +978,62 @@
     "carrier_ref": "J81",
     "carrier_pad": 49,
     "net": "GND"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 51,
+    "carrier_ref": "J81",
+    "carrier_pad": 52,
+    "net": "FPGA_B15_L11_P"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 52,
+    "carrier_ref": "J81",
+    "carrier_pad": 51,
+    "net": "FPGA_B15_L14_P"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 53,
+    "carrier_ref": "J81",
+    "carrier_pad": 54,
+    "net": "FPGA_B15_L11_N"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 54,
+    "carrier_ref": "J81",
+    "carrier_pad": 53,
+    "net": "FPGA_B15_L14_N"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 55,
+    "carrier_ref": "J81",
+    "carrier_pad": 56,
+    "net": "FPGA_B15_L3_P"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 56,
+    "carrier_ref": "J81",
+    "carrier_pad": 55,
+    "net": "FPGA_B15_L12_P"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 57,
+    "carrier_ref": "J81",
+    "carrier_pad": 58,
+    "net": "FPGA_B15_L3_N"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 58,
+    "carrier_ref": "J81",
+    "carrier_pad": 57,
+    "net": "FPGA_B15_L12_N"
   },
   {
     "module_connector": "JM2",
@@ -407,6 +1051,62 @@
   },
   {
     "module_connector": "JM2",
+    "module_pin": 61,
+    "carrier_ref": "J81",
+    "carrier_pad": 62,
+    "net": "FPGA_B15_L17_N"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 62,
+    "carrier_ref": "J81",
+    "carrier_pad": 61,
+    "net": "FPGA_B15_L10_N"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 63,
+    "carrier_ref": "J81",
+    "carrier_pad": 64,
+    "net": "FPGA_B15_L17_P"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 64,
+    "carrier_ref": "J81",
+    "carrier_pad": 63,
+    "net": "FPGA_B15_L10_P"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 65,
+    "carrier_ref": "J81",
+    "carrier_pad": 66,
+    "net": "FPGA_B15_L16_P"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 66,
+    "carrier_ref": "J81",
+    "carrier_pad": 65,
+    "net": "FPGA_B15_L18_P"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 67,
+    "carrier_ref": "J81",
+    "carrier_pad": 68,
+    "net": "FPGA_B15_L16_N"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 68,
+    "carrier_ref": "J81",
+    "carrier_pad": 67,
+    "net": "FPGA_B15_L18_N"
+  },
+  {
+    "module_connector": "JM2",
     "module_pin": 69,
     "carrier_ref": "J81",
     "carrier_pad": 70,
@@ -418,6 +1118,62 @@
     "carrier_ref": "J81",
     "carrier_pad": 69,
     "net": "GND"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 71,
+    "carrier_ref": "J81",
+    "carrier_pad": 72,
+    "net": "FPGA_B15_L1_P"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 72,
+    "carrier_ref": "J81",
+    "carrier_pad": 71,
+    "net": "FPGA_B15_L20_P"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 73,
+    "carrier_ref": "J81",
+    "carrier_pad": 74,
+    "net": "FPGA_B15_L1_N"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 74,
+    "carrier_ref": "J81",
+    "carrier_pad": 73,
+    "net": "FPGA_B15_L20_N"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 75,
+    "carrier_ref": "J81",
+    "carrier_pad": 76,
+    "net": "FPGA_B15_L2_N"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 76,
+    "carrier_ref": "J81",
+    "carrier_pad": 75,
+    "net": "FPGA_B15_L15_P"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 77,
+    "carrier_ref": "J81",
+    "carrier_pad": 78,
+    "net": "FPGA_B15_L2_P"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 78,
+    "carrier_ref": "J81",
+    "carrier_pad": 77,
+    "net": "FPGA_B15_L15_N"
   },
   {
     "module_connector": "JM2",
@@ -435,10 +1191,171 @@
   },
   {
     "module_connector": "JM2",
+    "module_pin": 81,
+    "carrier_ref": "J81",
+    "carrier_pad": 82,
+    "net": "FPGA_B15_L4_P"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 82,
+    "carrier_ref": "J81",
+    "carrier_pad": 81,
+    "net": "FPGA_B15_L6_N"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 83,
+    "carrier_ref": "J81",
+    "carrier_pad": 84,
+    "net": "FPGA_B15_L4_N"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 84,
+    "carrier_ref": "J81",
+    "carrier_pad": 83,
+    "net": "FPGA_B15_L6_P"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 85,
+    "carrier_ref": "J81",
+    "carrier_pad": 86,
+    "net": "FPGA_B15_L5_N"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 86,
+    "carrier_ref": "J81",
+    "carrier_pad": 85,
+    "net": "FPGA_B15_L21_P"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 87,
+    "carrier_ref": "J81",
+    "carrier_pad": 88,
+    "net": "FPGA_B15_L5_P"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 88,
+    "carrier_ref": "J81",
+    "carrier_pad": 87,
+    "net": "FPGA_B15_L21_N"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 89,
+    "carrier_ref": "J81",
+    "carrier_pad": 90,
+    "net": "FPGA_B15_IO0"
+  },
+  {
+    "module_connector": "JM2",
     "module_pin": 90,
     "carrier_ref": "J81",
     "carrier_pad": 89,
     "net": "GND"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 91,
+    "carrier_ref": "J81",
+    "carrier_pad": 92,
+    "net": "FPGA_3V3"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 92,
+    "carrier_ref": "J81",
+    "carrier_pad": 91,
+    "net": "FPGA_B15_L24_N"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 93,
+    "carrier_ref": "J81",
+    "carrier_pad": 94,
+    "net": "JTAG_TMS"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 94,
+    "carrier_ref": "J81",
+    "carrier_pad": 93,
+    "net": "FPGA_B15_L24_P"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 95,
+    "carrier_ref": "J81",
+    "carrier_pad": 96,
+    "net": "JTAG_TDI"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 96,
+    "carrier_ref": "J81",
+    "carrier_pad": 95,
+    "net": "FPGA_B15_L22_N"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 97,
+    "carrier_ref": "J81",
+    "carrier_pad": 98,
+    "net": "JTAG_TDO"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 98,
+    "carrier_ref": "J81",
+    "carrier_pad": 97,
+    "net": "FPGA_B15_L22_P"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 99,
+    "carrier_ref": "J81",
+    "carrier_pad": 100,
+    "net": "JTAG_TCK"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 100,
+    "carrier_ref": "J81",
+    "carrier_pad": 99,
+    "net": "FPGA_B15_IO25"
+  },
+  {
+    "module_connector": "JM3",
+    "module_pin": 1,
+    "carrier_ref": "J82",
+    "carrier_pad": 2,
+    "net": "FPGA_B13_L17_P"
+  },
+  {
+    "module_connector": "JM3",
+    "module_pin": 2,
+    "carrier_ref": "J82",
+    "carrier_pad": 1,
+    "net": "FPGA_B13_L14_P"
+  },
+  {
+    "module_connector": "JM3",
+    "module_pin": 3,
+    "carrier_ref": "J82",
+    "carrier_pad": 4,
+    "net": "FPGA_B13_L17_N"
+  },
+  {
+    "module_connector": "JM3",
+    "module_pin": 4,
+    "carrier_ref": "J82",
+    "carrier_pad": 3,
+    "net": "FPGA_B13_L14_N"
   },
   {
     "module_connector": "JM3",
@@ -526,6 +1443,62 @@
   },
   {
     "module_connector": "JM3",
+    "module_pin": 37,
+    "carrier_ref": "J82",
+    "carrier_pad": 38,
+    "net": "FPGA_B13_L10_P"
+  },
+  {
+    "module_connector": "JM3",
+    "module_pin": 38,
+    "carrier_ref": "J82",
+    "carrier_pad": 37,
+    "net": "FPGA_B13_L16_P"
+  },
+  {
+    "module_connector": "JM3",
+    "module_pin": 39,
+    "carrier_ref": "J82",
+    "carrier_pad": 40,
+    "net": "FPGA_B13_L10_N"
+  },
+  {
+    "module_connector": "JM3",
+    "module_pin": 40,
+    "carrier_ref": "J82",
+    "carrier_pad": 39,
+    "net": "FPGA_B13_L16_N"
+  },
+  {
+    "module_connector": "JM3",
+    "module_pin": 41,
+    "carrier_ref": "J82",
+    "carrier_pad": 42,
+    "net": "FPGA_B13_L15_P"
+  },
+  {
+    "module_connector": "JM3",
+    "module_pin": 42,
+    "carrier_ref": "J82",
+    "carrier_pad": 41,
+    "net": "FPGA_B13_L1_P"
+  },
+  {
+    "module_connector": "JM3",
+    "module_pin": 43,
+    "carrier_ref": "J82",
+    "carrier_pad": 44,
+    "net": "FPGA_B13_L15_N"
+  },
+  {
+    "module_connector": "JM3",
+    "module_pin": 44,
+    "carrier_ref": "J82",
+    "carrier_pad": 43,
+    "net": "FPGA_B13_L1_N"
+  },
+  {
+    "module_connector": "JM3",
     "module_pin": 45,
     "carrier_ref": "J82",
     "carrier_pad": 46,
@@ -537,5 +1510,89 @@
     "carrier_ref": "J82",
     "carrier_pad": 45,
     "net": "GND"
+  },
+  {
+    "module_connector": "JM3",
+    "module_pin": 47,
+    "carrier_ref": "J82",
+    "carrier_pad": 48,
+    "net": "FPGA_B14_L5_P"
+  },
+  {
+    "module_connector": "JM3",
+    "module_pin": 48,
+    "carrier_ref": "J82",
+    "carrier_pad": 47,
+    "net": "FPGA_B13_L4_P"
+  },
+  {
+    "module_connector": "JM3",
+    "module_pin": 49,
+    "carrier_ref": "J82",
+    "carrier_pad": 50,
+    "net": "FPGA_B14_L5_N"
+  },
+  {
+    "module_connector": "JM3",
+    "module_pin": 50,
+    "carrier_ref": "J82",
+    "carrier_pad": 49,
+    "net": "FPGA_B13_L4_N"
+  },
+  {
+    "module_connector": "JM3",
+    "module_pin": 51,
+    "carrier_ref": "J82",
+    "carrier_pad": 52,
+    "net": "FPGA_B14_L20_P"
+  },
+  {
+    "module_connector": "JM3",
+    "module_pin": 52,
+    "carrier_ref": "J82",
+    "carrier_pad": 51,
+    "net": "FPGA_B13_L2_N"
+  },
+  {
+    "module_connector": "JM3",
+    "module_pin": 53,
+    "carrier_ref": "J82",
+    "carrier_pad": 54,
+    "net": "FPGA_B14_L20_N"
+  },
+  {
+    "module_connector": "JM3",
+    "module_pin": 54,
+    "carrier_ref": "J82",
+    "carrier_pad": 53,
+    "net": "FPGA_B13_L2_P"
+  },
+  {
+    "module_connector": "JM3",
+    "module_pin": 57,
+    "carrier_ref": "J82",
+    "carrier_pad": 58,
+    "net": "FPGA_B13_L13_P"
+  },
+  {
+    "module_connector": "JM3",
+    "module_pin": 58,
+    "carrier_ref": "J82",
+    "carrier_pad": 57,
+    "net": "FPGA_B13_L12_P"
+  },
+  {
+    "module_connector": "JM3",
+    "module_pin": 59,
+    "carrier_ref": "J82",
+    "carrier_pad": 60,
+    "net": "FPGA_B13_L13_N"
+  },
+  {
+    "module_connector": "JM3",
+    "module_pin": 60,
+    "carrier_ref": "J82",
+    "carrier_pad": 59,
+    "net": "FPGA_B13_L12_N"
   }
 ]

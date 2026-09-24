@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <export version="E">
   <design>
-    <source>/mnt/p/Personal/senseshake/hardware/shakesense-trenz-hat/shakesense-trenz-hat.kicad_sch</source>
-    <date>2026-09-23T21:18:56-0700</date>
+    <source>/mnt/p/Personal/senseshake/hw/boards/shakesense-trenz-hat/shakesense-trenz-hat.kicad_sch</source>
+    <date>2026-09-24T10:58:33-0700</date>
     <tool>Eeschema 9.0.9-9.0.9~ubuntu24.04.1</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -24,10 +24,10 @@
     </sheet>
     <sheet number="2" name="/01-host-power-page-01/" tstamps="/94e4fefa-b04f-5cb8-86ce-dd5f9a42bc5a/">
       <title_block>
-        <title>shakesense-trenz-hat / 01-host-power-page-01</title>
+        <title>ShakeSense T1 / 01-host-power-page-01</title>
         <company/>
-        <rev>A2 PROTOTYPE</rev>
-        <date>2026-09-23</date>
+        <rev>T1-GPIO</rev>
+        <date>2026-09-24</date>
         <source>01-host-power-page-01.kicad_sch</source>
         <comment number="1" value=""/>
         <comment number="2" value=""/>
@@ -42,10 +42,10 @@
     </sheet>
     <sheet number="3" name="/02-motion-array-page-01/" tstamps="/ffdf3372-c6c5-53e0-8c47-ee6c4f6710a6/">
       <title_block>
-        <title>shakesense-trenz-hat / 02-motion-array-page-01</title>
+        <title>ShakeSense T1 / 02-motion-array-page-01</title>
         <company/>
-        <rev>A2 PROTOTYPE</rev>
-        <date>2026-09-23</date>
+        <rev>T1-GPIO</rev>
+        <date>2026-09-24</date>
         <source>02-motion-array-page-01.kicad_sch</source>
         <comment number="1" value=""/>
         <comment number="2" value=""/>
@@ -60,10 +60,10 @@
     </sheet>
     <sheet number="4" name="/02-motion-array-page-02/" tstamps="/fa2b5122-49d2-5be0-853d-4a48b22c5fb3/">
       <title_block>
-        <title>shakesense-trenz-hat / 02-motion-array-page-02</title>
+        <title>ShakeSense T1 / 02-motion-array-page-02</title>
         <company/>
-        <rev>A2 PROTOTYPE</rev>
-        <date>2026-09-23</date>
+        <rev>T1-GPIO</rev>
+        <date>2026-09-24</date>
         <source>02-motion-array-page-02.kicad_sch</source>
         <comment number="1" value=""/>
         <comment number="2" value=""/>
@@ -78,10 +78,10 @@
     </sheet>
     <sheet number="5" name="/03-level-position-page-01/" tstamps="/30b3f632-5bdc-5bfd-9387-e670932c7991/">
       <title_block>
-        <title>shakesense-trenz-hat / 03-level-position-page-01</title>
+        <title>ShakeSense T1 / 03-level-position-page-01</title>
         <company/>
-        <rev>A2 PROTOTYPE</rev>
-        <date>2026-09-23</date>
+        <rev>T1-GPIO</rev>
+        <date>2026-09-24</date>
         <source>03-level-position-page-01.kicad_sch</source>
         <comment number="1" value=""/>
         <comment number="2" value=""/>
@@ -96,10 +96,10 @@
     </sheet>
     <sheet number="6" name="/05-coldfoot-interface-page-01/" tstamps="/a8fb55ae-e6bc-58ff-ab76-d63aa5198255/">
       <title_block>
-        <title>shakesense-trenz-hat / 05-coldfoot-interface-page-01</title>
+        <title>ShakeSense T1 / 05-coldfoot-interface-page-01</title>
         <company/>
-        <rev>A2 PROTOTYPE</rev>
-        <date>2026-09-23</date>
+        <rev>T1-GPIO</rev>
+        <date>2026-09-24</date>
         <source>05-coldfoot-interface-page-01.kicad_sch</source>
         <comment number="1" value=""/>
         <comment number="2" value=""/>
@@ -114,10 +114,10 @@
     </sheet>
     <sheet number="7" name="/06-supply-isolation-page-01/" tstamps="/83ea8eea-5acf-519e-b3dd-c6e81bed9ff6/">
       <title_block>
-        <title>shakesense-trenz-hat / 06-supply-isolation-page-01</title>
+        <title>ShakeSense T1 / 06-supply-isolation-page-01</title>
         <company/>
-        <rev>A2 PROTOTYPE</rev>
-        <date>2026-09-23</date>
+        <rev>T1-GPIO</rev>
+        <date>2026-09-24</date>
         <source>06-supply-isolation-page-01.kicad_sch</source>
         <comment number="1" value=""/>
         <comment number="2" value=""/>
@@ -132,10 +132,10 @@
     </sheet>
     <sheet number="8" name="/06-supply-isolation-page-02/" tstamps="/4dc81435-2067-58f7-86bc-65c557b51849/">
       <title_block>
-        <title>shakesense-trenz-hat / 06-supply-isolation-page-02</title>
+        <title>ShakeSense T1 / 06-supply-isolation-page-02</title>
         <company/>
-        <rev>A2 PROTOTYPE</rev>
-        <date>2026-09-23</date>
+        <rev>T1-GPIO</rev>
+        <date>2026-09-24</date>
         <source>06-supply-isolation-page-02.kicad_sch</source>
         <comment number="1" value=""/>
         <comment number="2" value=""/>
@@ -150,10 +150,10 @@
     </sheet>
     <sheet number="9" name="/07-fpga-host-isolation-page-01/" tstamps="/89e38af9-f7be-586c-81e3-b074de888243/">
       <title_block>
-        <title>shakesense-trenz-hat / 07-fpga-host-isolation-page-01</title>
+        <title>ShakeSense T1 / 07-fpga-host-isolation-page-01</title>
         <company/>
-        <rev>A2 PROTOTYPE</rev>
-        <date>2026-09-23</date>
+        <rev>T1-GPIO</rev>
+        <date>2026-09-24</date>
         <source>07-fpga-host-isolation-page-01.kicad_sch</source>
         <comment number="1" value=""/>
         <comment number="2" value=""/>
@@ -168,10 +168,10 @@
     </sheet>
     <sheet number="10" name="/08-trenz-JM1-page-01/" tstamps="/ba823ddc-bed9-58fe-8f46-6a34f5e93819/">
       <title_block>
-        <title>shakesense-trenz-hat / 08-trenz-JM1-page-01</title>
+        <title>ShakeSense T1 / 08-trenz-JM1-page-01</title>
         <company/>
-        <rev>A2 PROTOTYPE</rev>
-        <date>2026-09-23</date>
+        <rev>T1-GPIO</rev>
+        <date>2026-09-24</date>
         <source>08-trenz-JM1-page-01.kicad_sch</source>
         <comment number="1" value=""/>
         <comment number="2" value=""/>
@@ -186,10 +186,10 @@
     </sheet>
     <sheet number="11" name="/08-trenz-JM2-page-01/" tstamps="/f3686f7a-1200-5d82-96f8-474710b3cb3e/">
       <title_block>
-        <title>shakesense-trenz-hat / 08-trenz-JM2-page-01</title>
+        <title>ShakeSense T1 / 08-trenz-JM2-page-01</title>
         <company/>
-        <rev>A2 PROTOTYPE</rev>
-        <date>2026-09-23</date>
+        <rev>T1-GPIO</rev>
+        <date>2026-09-24</date>
         <source>08-trenz-JM2-page-01.kicad_sch</source>
         <comment number="1" value=""/>
         <comment number="2" value=""/>
@@ -204,10 +204,10 @@
     </sheet>
     <sheet number="12" name="/08-trenz-JM3-page-01/" tstamps="/67714a77-f600-51cc-abba-303e92e2b0df/">
       <title_block>
-        <title>shakesense-trenz-hat / 08-trenz-JM3-page-01</title>
+        <title>ShakeSense T1 / 08-trenz-JM3-page-01</title>
         <company/>
-        <rev>A2 PROTOTYPE</rev>
-        <date>2026-09-23</date>
+        <rev>T1-GPIO</rev>
+        <date>2026-09-24</date>
         <source>08-trenz-JM3-page-01.kicad_sch</source>
         <comment number="1" value=""/>
         <comment number="2" value=""/>
@@ -222,10 +222,10 @@
     </sheet>
     <sheet number="13" name="/08-trenz-carrier-page-01/" tstamps="/54e9a31c-9c4d-54b0-9a12-393601fa46bb/">
       <title_block>
-        <title>shakesense-trenz-hat / 08-trenz-carrier-page-01</title>
+        <title>ShakeSense T1 / 08-trenz-carrier-page-01</title>
         <company/>
-        <rev>A2 PROTOTYPE</rev>
-        <date>2026-09-23</date>
+        <rev>T1-GPIO</rev>
+        <date>2026-09-24</date>
         <source>08-trenz-carrier-page-01.kicad_sch</source>
         <comment number="1" value=""/>
         <comment number="2" value=""/>
@@ -240,11 +240,83 @@
     </sheet>
     <sheet number="14" name="/09-fpga-power-page-01/" tstamps="/58728244-4824-519b-b11b-fd8c62cff40d/">
       <title_block>
-        <title>shakesense-trenz-hat / 09-fpga-power-page-01</title>
+        <title>ShakeSense T1 / 09-fpga-power-page-01</title>
         <company/>
-        <rev>A2 PROTOTYPE</rev>
-        <date>2026-09-23</date>
+        <rev>T1-GPIO</rev>
+        <date>2026-09-24</date>
         <source>09-fpga-power-page-01.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="15" name="/11-gpio-bank13-page-01/" tstamps="/0a68b66e-46f9-566d-8fa0-82f08cfe212b/">
+      <title_block>
+        <title>ShakeSense T1 / 11-gpio-bank13-page-01</title>
+        <company/>
+        <rev>T1-GPIO</rev>
+        <date>2026-09-24</date>
+        <source>11-gpio-bank13-page-01.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="16" name="/11-gpio-bank14-page-01/" tstamps="/cd1a2a6e-223b-575c-aa50-3771ba06c09d/">
+      <title_block>
+        <title>ShakeSense T1 / 11-gpio-bank14-page-01</title>
+        <company/>
+        <rev>T1-GPIO</rev>
+        <date>2026-09-24</date>
+        <source>11-gpio-bank14-page-01.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="17" name="/11-gpio-bank15-page-01/" tstamps="/cc8377e1-4194-5465-9125-0712bf8981b8/">
+      <title_block>
+        <title>ShakeSense T1 / 11-gpio-bank15-page-01</title>
+        <company/>
+        <rev>T1-GPIO</rev>
+        <date>2026-09-24</date>
+        <source>11-gpio-bank15-page-01.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="18" name="/11-gpio-bank16-page-01/" tstamps="/1fa9dc0c-2a9e-50ef-9292-abeef45e1334/">
+      <title_block>
+        <title>ShakeSense T1 / 11-gpio-bank16-page-01</title>
+        <company/>
+        <rev>T1-GPIO</rev>
+        <date>2026-09-24</date>
+        <source>11-gpio-bank16-page-01.kicad_sch</source>
         <comment number="1" value=""/>
         <comment number="2" value=""/>
         <comment number="3" value=""/>
@@ -1650,6 +1722,70 @@
       <sheetpath names="/09-fpga-power-page-01/" tstamps="/58728244-4824-519b-b11b-fd8c62cff40d/"/>
       <tstamps>be2d299e-8eab-563f-b437-e25fca2845a2</tstamps>
     </comp>
+    <comp ref="J86">
+      <value>BANK13 / 40p FFC</value>
+      <footprint>ShakeSense:TZ_FFC40</footprint>
+      <fields>
+        <field name="MPN">F32Q-1A7H1-11040</field>
+        <field name="Footprint">ShakeSense:TZ_FFC40</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="ShakeSense" part="Part_J86" description=""/>
+      <property name="MPN" value="F32Q-1A7H1-11040"/>
+      <property name="Sheetname" value="11-gpio-bank13-page-01"/>
+      <property name="Sheetfile" value="11-gpio-bank13-page-01.kicad_sch"/>
+      <sheetpath names="/11-gpio-bank13-page-01/" tstamps="/0a68b66e-46f9-566d-8fa0-82f08cfe212b/"/>
+      <tstamps>81c2a6b7-3222-528c-b11a-243b27c71160</tstamps>
+    </comp>
+    <comp ref="J87">
+      <value>BANK14 / 40p FFC</value>
+      <footprint>ShakeSense:TZ_FFC40</footprint>
+      <fields>
+        <field name="MPN">F32Q-1A7H1-11040</field>
+        <field name="Footprint">ShakeSense:TZ_FFC40</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="ShakeSense" part="Part_J87" description=""/>
+      <property name="MPN" value="F32Q-1A7H1-11040"/>
+      <property name="Sheetname" value="11-gpio-bank14-page-01"/>
+      <property name="Sheetfile" value="11-gpio-bank14-page-01.kicad_sch"/>
+      <sheetpath names="/11-gpio-bank14-page-01/" tstamps="/cd1a2a6e-223b-575c-aa50-3771ba06c09d/"/>
+      <tstamps>17f2c9cf-e4bb-5316-b4b8-954da781d166</tstamps>
+    </comp>
+    <comp ref="J88">
+      <value>BANK15 / 60p FFC</value>
+      <footprint>ShakeSense:TZ_FFC60</footprint>
+      <fields>
+        <field name="MPN">F32Q-1A7H1-11060</field>
+        <field name="Footprint">ShakeSense:TZ_FFC60</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="ShakeSense" part="Part_J88" description=""/>
+      <property name="MPN" value="F32Q-1A7H1-11060"/>
+      <property name="Sheetname" value="11-gpio-bank15-page-01"/>
+      <property name="Sheetfile" value="11-gpio-bank15-page-01.kicad_sch"/>
+      <sheetpath names="/11-gpio-bank15-page-01/" tstamps="/cc8377e1-4194-5465-9125-0712bf8981b8/"/>
+      <tstamps>a42be1b4-00b2-50f3-9fe9-a794396bc2e8</tstamps>
+    </comp>
+    <comp ref="J89">
+      <value>BANK16 / 60p FFC</value>
+      <footprint>ShakeSense:TZ_FFC60</footprint>
+      <fields>
+        <field name="MPN">F32Q-1A7H1-11060</field>
+        <field name="Footprint">ShakeSense:TZ_FFC60</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="ShakeSense" part="Part_J89" description=""/>
+      <property name="MPN" value="F32Q-1A7H1-11060"/>
+      <property name="Sheetname" value="11-gpio-bank16-page-01"/>
+      <property name="Sheetfile" value="11-gpio-bank16-page-01.kicad_sch"/>
+      <sheetpath names="/11-gpio-bank16-page-01/" tstamps="/1fa9dc0c-2a9e-50ef-9292-abeef45e1334/"/>
+      <tstamps>f1a4b9d0-64ec-5880-be87-5e3b23c338cd</tstamps>
+    </comp>
   </components>
   <libparts>
     <libpart lib="ShakeSense" part="Part_C1">
@@ -2568,6 +2704,254 @@
         <pin num="6" name="6" type="passive"/>
       </pins>
     </libpart>
+    <libpart lib="ShakeSense" part="Part_J86">
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">BANK13 / 40p FFC</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="GND" type="power_in"/>
+        <pin num="2" name="VREF_OUT" type="passive"/>
+        <pin num="3" name="GND" type="power_in"/>
+        <pin num="4" name="B13_L1_P" type="passive"/>
+        <pin num="5" name="B13_L1_N" type="passive"/>
+        <pin num="6" name="B13_L2_P" type="passive"/>
+        <pin num="7" name="B13_L2_N" type="passive"/>
+        <pin num="8" name="B13_L3_P" type="passive"/>
+        <pin num="9" name="B13_L3_N" type="passive"/>
+        <pin num="10" name="GND" type="power_in"/>
+        <pin num="11" name="B13_L4_P" type="passive"/>
+        <pin num="12" name="B13_L4_N" type="passive"/>
+        <pin num="13" name="B13_L5_P" type="passive"/>
+        <pin num="14" name="B13_L5_N" type="passive"/>
+        <pin num="15" name="GND" type="power_in"/>
+        <pin num="16" name="B13_L6_P" type="passive"/>
+        <pin num="17" name="B13_L6_N" type="passive"/>
+        <pin num="18" name="B13_L9_P" type="passive"/>
+        <pin num="19" name="B13_L9_N" type="passive"/>
+        <pin num="20" name="GND" type="power_in"/>
+        <pin num="21" name="B13_L10_P" type="passive"/>
+        <pin num="22" name="B13_L10_N" type="passive"/>
+        <pin num="23" name="B13_L11_P" type="passive"/>
+        <pin num="24" name="B13_L11_N" type="passive"/>
+        <pin num="25" name="GND" type="power_in"/>
+        <pin num="26" name="B13_L12_P" type="passive"/>
+        <pin num="27" name="B13_L12_N" type="passive"/>
+        <pin num="28" name="B13_L13_P" type="passive"/>
+        <pin num="29" name="B13_L13_N" type="passive"/>
+        <pin num="30" name="GND" type="power_in"/>
+        <pin num="31" name="B13_L14_P" type="passive"/>
+        <pin num="32" name="B13_L14_N" type="passive"/>
+        <pin num="33" name="B13_L15_P" type="passive"/>
+        <pin num="34" name="B13_L15_N" type="passive"/>
+        <pin num="35" name="GND" type="power_in"/>
+        <pin num="36" name="B13_L16_P" type="passive"/>
+        <pin num="37" name="B13_L16_N" type="passive"/>
+        <pin num="38" name="B13_L17_P" type="passive"/>
+        <pin num="39" name="B13_L17_N" type="passive"/>
+        <pin num="40" name="GND" type="power_in"/>
+        <pin num="41" name="GND" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="ShakeSense" part="Part_J87">
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">BANK14 / 40p FFC</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="GND" type="power_in"/>
+        <pin num="2" name="VREF_OUT" type="passive"/>
+        <pin num="3" name="GND" type="power_in"/>
+        <pin num="4" name="B14_L4_P" type="passive"/>
+        <pin num="5" name="B14_L4_N" type="passive"/>
+        <pin num="6" name="GND" type="power_in"/>
+        <pin num="7" name="B14_L5_P" type="passive"/>
+        <pin num="8" name="B14_L5_N" type="passive"/>
+        <pin num="9" name="GND" type="power_in"/>
+        <pin num="10" name="B14_L9_P" type="passive"/>
+        <pin num="11" name="B14_L9_N" type="passive"/>
+        <pin num="12" name="GND" type="power_in"/>
+        <pin num="13" name="B14_L11_P" type="passive"/>
+        <pin num="14" name="B14_L11_N" type="passive"/>
+        <pin num="15" name="GND" type="power_in"/>
+        <pin num="16" name="B14_L12_P" type="passive"/>
+        <pin num="17" name="B14_L12_N" type="passive"/>
+        <pin num="18" name="GND" type="power_in"/>
+        <pin num="19" name="B14_L13_P" type="passive"/>
+        <pin num="20" name="B14_L13_N" type="passive"/>
+        <pin num="21" name="GND" type="power_in"/>
+        <pin num="22" name="B14_L14_P" type="passive"/>
+        <pin num="23" name="B14_L14_N" type="passive"/>
+        <pin num="24" name="GND" type="power_in"/>
+        <pin num="25" name="B14_L15_P" type="passive"/>
+        <pin num="26" name="B14_L15_N" type="passive"/>
+        <pin num="27" name="GND" type="power_in"/>
+        <pin num="28" name="B14_L16_P" type="passive"/>
+        <pin num="29" name="B14_L16_N" type="passive"/>
+        <pin num="30" name="GND" type="power_in"/>
+        <pin num="31" name="B14_L18_P" type="passive"/>
+        <pin num="32" name="B14_L18_N" type="passive"/>
+        <pin num="33" name="GND" type="power_in"/>
+        <pin num="34" name="B14_L20_P" type="passive"/>
+        <pin num="35" name="B14_L20_N" type="passive"/>
+        <pin num="36" name="GND" type="power_in"/>
+        <pin num="37" name="B14_L24_P" type="passive"/>
+        <pin num="38" name="B14_L24_N" type="passive"/>
+        <pin num="39" name="GND" type="power_in"/>
+        <pin num="40" name="GND" type="power_in"/>
+        <pin num="41" name="GND" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="ShakeSense" part="Part_J88">
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">BANK15 / 60p FFC</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="GND" type="power_in"/>
+        <pin num="2" name="VREF_OUT" type="passive"/>
+        <pin num="3" name="GND" type="power_in"/>
+        <pin num="4" name="B15_L1_P" type="passive"/>
+        <pin num="5" name="B15_L1_N" type="passive"/>
+        <pin num="6" name="B15_L2_P" type="passive"/>
+        <pin num="7" name="B15_L2_N" type="passive"/>
+        <pin num="8" name="B15_L3_P" type="passive"/>
+        <pin num="9" name="B15_L3_N" type="passive"/>
+        <pin num="10" name="B15_L4_P" type="passive"/>
+        <pin num="11" name="B15_L4_N" type="passive"/>
+        <pin num="12" name="GND" type="power_in"/>
+        <pin num="13" name="B15_L5_P" type="passive"/>
+        <pin num="14" name="B15_L5_N" type="passive"/>
+        <pin num="15" name="B15_L6_P" type="passive"/>
+        <pin num="16" name="B15_L6_N" type="passive"/>
+        <pin num="17" name="B15_L7_P" type="passive"/>
+        <pin num="18" name="B15_L7_N" type="passive"/>
+        <pin num="19" name="B15_L8_P" type="passive"/>
+        <pin num="20" name="B15_L8_N" type="passive"/>
+        <pin num="21" name="GND" type="power_in"/>
+        <pin num="22" name="B15_L9_P" type="passive"/>
+        <pin num="23" name="B15_L9_N" type="passive"/>
+        <pin num="24" name="B15_L10_P" type="passive"/>
+        <pin num="25" name="B15_L10_N" type="passive"/>
+        <pin num="26" name="B15_L11_P" type="passive"/>
+        <pin num="27" name="B15_L11_N" type="passive"/>
+        <pin num="28" name="B15_L12_P" type="passive"/>
+        <pin num="29" name="B15_L12_N" type="passive"/>
+        <pin num="30" name="GND" type="power_in"/>
+        <pin num="31" name="B15_L13_P" type="passive"/>
+        <pin num="32" name="B15_L13_N" type="passive"/>
+        <pin num="33" name="B15_L14_P" type="passive"/>
+        <pin num="34" name="B15_L14_N" type="passive"/>
+        <pin num="35" name="B15_L15_P" type="passive"/>
+        <pin num="36" name="B15_L15_N" type="passive"/>
+        <pin num="37" name="GND" type="power_in"/>
+        <pin num="38" name="B15_L16_P" type="passive"/>
+        <pin num="39" name="B15_L16_N" type="passive"/>
+        <pin num="40" name="B15_L17_P" type="passive"/>
+        <pin num="41" name="B15_L17_N" type="passive"/>
+        <pin num="42" name="B15_L18_P" type="passive"/>
+        <pin num="43" name="B15_L18_N" type="passive"/>
+        <pin num="44" name="B15_L19_P" type="passive"/>
+        <pin num="45" name="B15_L19_N" type="passive"/>
+        <pin num="46" name="GND" type="power_in"/>
+        <pin num="47" name="B15_L20_P" type="passive"/>
+        <pin num="48" name="B15_L20_N" type="passive"/>
+        <pin num="49" name="B15_L21_P" type="passive"/>
+        <pin num="50" name="B15_L21_N" type="passive"/>
+        <pin num="51" name="B15_L22_P" type="passive"/>
+        <pin num="52" name="B15_L22_N" type="passive"/>
+        <pin num="53" name="B15_L23_P" type="passive"/>
+        <pin num="54" name="B15_L23_N" type="passive"/>
+        <pin num="55" name="GND" type="power_in"/>
+        <pin num="56" name="B15_L24_P" type="passive"/>
+        <pin num="57" name="B15_L24_N" type="passive"/>
+        <pin num="58" name="B15_IO0" type="passive"/>
+        <pin num="59" name="B15_IO25" type="passive"/>
+        <pin num="60" name="GND" type="power_in"/>
+        <pin num="61" name="GND" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="ShakeSense" part="Part_J89">
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">BANK16 / 60p FFC</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="GND" type="power_in"/>
+        <pin num="2" name="VREF_OUT" type="passive"/>
+        <pin num="3" name="GND" type="power_in"/>
+        <pin num="4" name="B16_L1_P" type="passive"/>
+        <pin num="5" name="B16_L1_N" type="passive"/>
+        <pin num="6" name="B16_L2_P" type="passive"/>
+        <pin num="7" name="B16_L2_N" type="passive"/>
+        <pin num="8" name="B16_L3_P" type="passive"/>
+        <pin num="9" name="B16_L3_N" type="passive"/>
+        <pin num="10" name="GND" type="power_in"/>
+        <pin num="11" name="B16_L4_P" type="passive"/>
+        <pin num="12" name="B16_L4_N" type="passive"/>
+        <pin num="13" name="B16_L5_P" type="passive"/>
+        <pin num="14" name="B16_L5_N" type="passive"/>
+        <pin num="15" name="B16_L6_P" type="passive"/>
+        <pin num="16" name="B16_L6_N" type="passive"/>
+        <pin num="17" name="GND" type="power_in"/>
+        <pin num="18" name="B16_L7_P" type="passive"/>
+        <pin num="19" name="B16_L7_N" type="passive"/>
+        <pin num="20" name="B16_L8_P" type="passive"/>
+        <pin num="21" name="B16_L8_N" type="passive"/>
+        <pin num="22" name="GND" type="power_in"/>
+        <pin num="23" name="B16_L9_P" type="passive"/>
+        <pin num="24" name="B16_L9_N" type="passive"/>
+        <pin num="25" name="B16_L10_P" type="passive"/>
+        <pin num="26" name="B16_L10_N" type="passive"/>
+        <pin num="27" name="B16_L11_P" type="passive"/>
+        <pin num="28" name="B16_L11_N" type="passive"/>
+        <pin num="29" name="GND" type="power_in"/>
+        <pin num="30" name="B16_L12_P" type="passive"/>
+        <pin num="31" name="B16_L12_N" type="passive"/>
+        <pin num="32" name="B16_L13_P" type="passive"/>
+        <pin num="33" name="B16_L13_N" type="passive"/>
+        <pin num="34" name="B16_L14_P" type="passive"/>
+        <pin num="35" name="B16_L14_N" type="passive"/>
+        <pin num="36" name="GND" type="power_in"/>
+        <pin num="37" name="B16_L15_P" type="passive"/>
+        <pin num="38" name="B16_L15_N" type="passive"/>
+        <pin num="39" name="B16_L16_P" type="passive"/>
+        <pin num="40" name="B16_L16_N" type="passive"/>
+        <pin num="41" name="GND" type="power_in"/>
+        <pin num="42" name="B16_L17_P" type="passive"/>
+        <pin num="43" name="B16_L17_N" type="passive"/>
+        <pin num="44" name="B16_L18_P" type="passive"/>
+        <pin num="45" name="B16_L18_N" type="passive"/>
+        <pin num="46" name="B16_L19_P" type="passive"/>
+        <pin num="47" name="B16_L19_N" type="passive"/>
+        <pin num="48" name="GND" type="power_in"/>
+        <pin num="49" name="B16_L20_P" type="passive"/>
+        <pin num="50" name="B16_L20_N" type="passive"/>
+        <pin num="51" name="B16_L21_P" type="passive"/>
+        <pin num="52" name="B16_L21_N" type="passive"/>
+        <pin num="53" name="B16_L22_P" type="passive"/>
+        <pin num="54" name="B16_L22_N" type="passive"/>
+        <pin num="55" name="GND" type="power_in"/>
+        <pin num="56" name="B16_L23_P" type="passive"/>
+        <pin num="57" name="B16_L23_N" type="passive"/>
+        <pin num="58" name="B16_L24_P" type="passive"/>
+        <pin num="59" name="B16_L24_N" type="passive"/>
+        <pin num="60" name="GND" type="power_in"/>
+        <pin num="61" name="GND" type="power_in"/>
+      </pins>
+    </libpart>
     <libpart lib="ShakeSense" part="Part_JP1">
       <fields>
         <field name="Reference">J</field>
@@ -3227,7 +3611,7 @@
   </libparts>
   <libraries>
     <library logical="ShakeSense">
-      <uri>/mnt/p/Personal/senseshake/hardware/shakesense-trenz-hat/ShakeSense.kicad_sym</uri>
+      <uri>/mnt/p/Personal/senseshake/hw/boards/shakesense-trenz-hat/ShakeSense.kicad_sym</uri>
     </library>
   </libraries>
   <nets>
@@ -3256,6 +3640,10 @@
       <node ref="J81" pin="9" pinfunction="9" pintype="passive"/>
       <node ref="J81" pin="92" pinfunction="92" pintype="passive"/>
       <node ref="J84" pin="6" pinfunction="6" pintype="passive"/>
+      <node ref="J86" pin="2" pinfunction="VREF_OUT" pintype="passive"/>
+      <node ref="J87" pin="2" pinfunction="VREF_OUT" pintype="passive"/>
+      <node ref="J88" pin="2" pinfunction="VREF_OUT" pintype="passive"/>
+      <node ref="J89" pin="2" pinfunction="VREF_OUT" pintype="passive"/>
       <node ref="R63" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="R64" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="U51" pin="7" pinfunction="VCCB" pintype="passive"/>
@@ -3273,59 +3661,667 @@
       <node ref="J81" pin="18" pinfunction="18" pintype="passive"/>
       <node ref="J85" pin="5" pinfunction="5" pintype="passive"/>
     </net>
-    <net code="7" name="FPGA_CONFIG_RESET_N" class="Default">
+    <net code="7" name="FPGA_B13_L1_N" class="Default">
+      <node ref="J82" pin="43" pinfunction="43" pintype="passive"/>
+      <node ref="J86" pin="5" pinfunction="B13_L1_N" pintype="passive"/>
+    </net>
+    <net code="8" name="FPGA_B13_L1_P" class="Default">
+      <node ref="J82" pin="41" pinfunction="41" pintype="passive"/>
+      <node ref="J86" pin="4" pinfunction="B13_L1_P" pintype="passive"/>
+    </net>
+    <net code="9" name="FPGA_B13_L2_N" class="Default">
+      <node ref="J82" pin="51" pinfunction="51" pintype="passive"/>
+      <node ref="J86" pin="7" pinfunction="B13_L2_N" pintype="passive"/>
+    </net>
+    <net code="10" name="FPGA_B13_L2_P" class="Default">
+      <node ref="J82" pin="53" pinfunction="53" pintype="passive"/>
+      <node ref="J86" pin="6" pinfunction="B13_L2_P" pintype="passive"/>
+    </net>
+    <net code="11" name="FPGA_B13_L3_N" class="Default">
+      <node ref="J80" pin="20" pinfunction="20" pintype="passive"/>
+      <node ref="J86" pin="9" pinfunction="B13_L3_N" pintype="passive"/>
+    </net>
+    <net code="12" name="FPGA_B13_L3_P" class="Default">
+      <node ref="J80" pin="18" pinfunction="18" pintype="passive"/>
+      <node ref="J86" pin="8" pinfunction="B13_L3_P" pintype="passive"/>
+    </net>
+    <net code="13" name="FPGA_B13_L4_N" class="Default">
+      <node ref="J82" pin="49" pinfunction="49" pintype="passive"/>
+      <node ref="J86" pin="12" pinfunction="B13_L4_N" pintype="passive"/>
+    </net>
+    <net code="14" name="FPGA_B13_L4_P" class="Default">
+      <node ref="J82" pin="47" pinfunction="47" pintype="passive"/>
+      <node ref="J86" pin="11" pinfunction="B13_L4_P" pintype="passive"/>
+    </net>
+    <net code="15" name="FPGA_B13_L5_N" class="Default">
+      <node ref="J80" pin="21" pinfunction="21" pintype="passive"/>
+      <node ref="J86" pin="14" pinfunction="B13_L5_N" pintype="passive"/>
+    </net>
+    <net code="16" name="FPGA_B13_L5_P" class="Default">
+      <node ref="J80" pin="23" pinfunction="23" pintype="passive"/>
+      <node ref="J86" pin="13" pinfunction="B13_L5_P" pintype="passive"/>
+    </net>
+    <net code="17" name="FPGA_B13_L6_N" class="Default">
+      <node ref="J80" pin="15" pinfunction="15" pintype="passive"/>
+      <node ref="J86" pin="17" pinfunction="B13_L6_N" pintype="passive"/>
+    </net>
+    <net code="18" name="FPGA_B13_L6_P" class="Default">
+      <node ref="J80" pin="17" pinfunction="17" pintype="passive"/>
+      <node ref="J86" pin="16" pinfunction="B13_L6_P" pintype="passive"/>
+    </net>
+    <net code="19" name="FPGA_B13_L9_N" class="Default">
+      <node ref="J80" pin="26" pinfunction="26" pintype="passive"/>
+      <node ref="J86" pin="19" pinfunction="B13_L9_N" pintype="passive"/>
+    </net>
+    <net code="20" name="FPGA_B13_L9_P" class="Default">
+      <node ref="J80" pin="28" pinfunction="28" pintype="passive"/>
+      <node ref="J86" pin="18" pinfunction="B13_L9_P" pintype="passive"/>
+    </net>
+    <net code="21" name="FPGA_B13_L10_N" class="Default">
+      <node ref="J82" pin="40" pinfunction="40" pintype="passive"/>
+      <node ref="J86" pin="22" pinfunction="B13_L10_N" pintype="passive"/>
+    </net>
+    <net code="22" name="FPGA_B13_L10_P" class="Default">
+      <node ref="J82" pin="38" pinfunction="38" pintype="passive"/>
+      <node ref="J86" pin="21" pinfunction="B13_L10_P" pintype="passive"/>
+    </net>
+    <net code="23" name="FPGA_B13_L11_N" class="Default">
+      <node ref="J80" pin="22" pinfunction="22" pintype="passive"/>
+      <node ref="J86" pin="24" pinfunction="B13_L11_N" pintype="passive"/>
+    </net>
+    <net code="24" name="FPGA_B13_L11_P" class="Default">
+      <node ref="J80" pin="24" pinfunction="24" pintype="passive"/>
+      <node ref="J86" pin="23" pinfunction="B13_L11_P" pintype="passive"/>
+    </net>
+    <net code="25" name="FPGA_B13_L12_N" class="Default">
+      <node ref="J82" pin="59" pinfunction="59" pintype="passive"/>
+      <node ref="J86" pin="27" pinfunction="B13_L12_N" pintype="passive"/>
+    </net>
+    <net code="26" name="FPGA_B13_L12_P" class="Default">
+      <node ref="J82" pin="57" pinfunction="57" pintype="passive"/>
+      <node ref="J86" pin="26" pinfunction="B13_L12_P" pintype="passive"/>
+    </net>
+    <net code="27" name="FPGA_B13_L13_N" class="Default">
+      <node ref="J82" pin="60" pinfunction="60" pintype="passive"/>
+      <node ref="J86" pin="29" pinfunction="B13_L13_N" pintype="passive"/>
+    </net>
+    <net code="28" name="FPGA_B13_L13_P" class="Default">
+      <node ref="J82" pin="58" pinfunction="58" pintype="passive"/>
+      <node ref="J86" pin="28" pinfunction="B13_L13_P" pintype="passive"/>
+    </net>
+    <net code="29" name="FPGA_B13_L14_N" class="Default">
+      <node ref="J82" pin="3" pinfunction="3" pintype="passive"/>
+      <node ref="J86" pin="32" pinfunction="B13_L14_N" pintype="passive"/>
+    </net>
+    <net code="30" name="FPGA_B13_L14_P" class="Default">
+      <node ref="J82" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="J86" pin="31" pinfunction="B13_L14_P" pintype="passive"/>
+    </net>
+    <net code="31" name="FPGA_B13_L15_N" class="Default">
+      <node ref="J82" pin="44" pinfunction="44" pintype="passive"/>
+      <node ref="J86" pin="34" pinfunction="B13_L15_N" pintype="passive"/>
+    </net>
+    <net code="32" name="FPGA_B13_L15_P" class="Default">
+      <node ref="J82" pin="42" pinfunction="42" pintype="passive"/>
+      <node ref="J86" pin="33" pinfunction="B13_L15_P" pintype="passive"/>
+    </net>
+    <net code="33" name="FPGA_B13_L16_N" class="Default">
+      <node ref="J82" pin="39" pinfunction="39" pintype="passive"/>
+      <node ref="J86" pin="37" pinfunction="B13_L16_N" pintype="passive"/>
+    </net>
+    <net code="34" name="FPGA_B13_L16_P" class="Default">
+      <node ref="J82" pin="37" pinfunction="37" pintype="passive"/>
+      <node ref="J86" pin="36" pinfunction="B13_L16_P" pintype="passive"/>
+    </net>
+    <net code="35" name="FPGA_B13_L17_N" class="Default">
+      <node ref="J82" pin="4" pinfunction="4" pintype="passive"/>
+      <node ref="J86" pin="39" pinfunction="B13_L17_N" pintype="passive"/>
+    </net>
+    <net code="36" name="FPGA_B13_L17_P" class="Default">
+      <node ref="J82" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="J86" pin="38" pinfunction="B13_L17_P" pintype="passive"/>
+    </net>
+    <net code="37" name="FPGA_B14_L4_N" class="Default">
+      <node ref="J80" pin="98" pinfunction="98" pintype="passive"/>
+      <node ref="J87" pin="5" pinfunction="B14_L4_N" pintype="passive"/>
+    </net>
+    <net code="38" name="FPGA_B14_L4_P" class="Default">
+      <node ref="J80" pin="96" pinfunction="96" pintype="passive"/>
+      <node ref="J87" pin="4" pinfunction="B14_L4_P" pintype="passive"/>
+    </net>
+    <net code="39" name="FPGA_B14_L5_N" class="Default">
+      <node ref="J82" pin="50" pinfunction="50" pintype="passive"/>
+      <node ref="J87" pin="8" pinfunction="B14_L5_N" pintype="passive"/>
+    </net>
+    <net code="40" name="FPGA_B14_L5_P" class="Default">
+      <node ref="J82" pin="48" pinfunction="48" pintype="passive"/>
+      <node ref="J87" pin="7" pinfunction="B14_L5_P" pintype="passive"/>
+    </net>
+    <net code="41" name="FPGA_B14_L9_N" class="Default">
+      <node ref="J80" pin="94" pinfunction="94" pintype="passive"/>
+      <node ref="J87" pin="11" pinfunction="B14_L9_N" pintype="passive"/>
+    </net>
+    <net code="42" name="FPGA_B14_L9_P" class="Default">
+      <node ref="J80" pin="92" pinfunction="92" pintype="passive"/>
+      <node ref="J87" pin="10" pinfunction="B14_L9_P" pintype="passive"/>
+    </net>
+    <net code="43" name="FPGA_B14_L11_N" class="Default">
+      <node ref="J81" pin="27" pinfunction="27" pintype="passive"/>
+      <node ref="J87" pin="14" pinfunction="B14_L11_N" pintype="passive"/>
+    </net>
+    <net code="44" name="FPGA_B14_L11_P" class="Default">
+      <node ref="J81" pin="25" pinfunction="25" pintype="passive"/>
+      <node ref="J87" pin="13" pinfunction="B14_L11_P" pintype="passive"/>
+    </net>
+    <net code="45" name="FPGA_B14_L12_N" class="Default">
+      <node ref="J81" pin="23" pinfunction="23" pintype="passive"/>
+      <node ref="J87" pin="17" pinfunction="B14_L12_N" pintype="passive"/>
+    </net>
+    <net code="46" name="FPGA_B14_L12_P" class="Default">
+      <node ref="J81" pin="21" pinfunction="21" pintype="passive"/>
+      <node ref="J87" pin="16" pinfunction="B14_L12_P" pintype="passive"/>
+    </net>
+    <net code="47" name="FPGA_B14_L13_N" class="Default">
+      <node ref="J81" pin="28" pinfunction="28" pintype="passive"/>
+      <node ref="J87" pin="20" pinfunction="B14_L13_N" pintype="passive"/>
+    </net>
+    <net code="48" name="FPGA_B14_L13_P" class="Default">
+      <node ref="J81" pin="26" pinfunction="26" pintype="passive"/>
+      <node ref="J87" pin="19" pinfunction="B14_L13_P" pintype="passive"/>
+    </net>
+    <net code="49" name="FPGA_B14_L14_N" class="Default">
+      <node ref="J81" pin="24" pinfunction="24" pintype="passive"/>
+      <node ref="J87" pin="23" pinfunction="B14_L14_N" pintype="passive"/>
+    </net>
+    <net code="50" name="FPGA_B14_L14_P" class="Default">
+      <node ref="J81" pin="22" pinfunction="22" pintype="passive"/>
+      <node ref="J87" pin="22" pinfunction="B14_L14_P" pintype="passive"/>
+    </net>
+    <net code="51" name="FPGA_B14_L15_N" class="Default">
+      <node ref="J81" pin="38" pinfunction="38" pintype="passive"/>
+      <node ref="J87" pin="26" pinfunction="B14_L15_N" pintype="passive"/>
+    </net>
+    <net code="52" name="FPGA_B14_L15_P" class="Default">
+      <node ref="J81" pin="36" pinfunction="36" pintype="passive"/>
+      <node ref="J87" pin="25" pinfunction="B14_L15_P" pintype="passive"/>
+    </net>
+    <net code="53" name="FPGA_B14_L16_N" class="Default">
+      <node ref="J81" pin="34" pinfunction="34" pintype="passive"/>
+      <node ref="J87" pin="29" pinfunction="B14_L16_N" pintype="passive"/>
+    </net>
+    <net code="54" name="FPGA_B14_L16_P" class="Default">
+      <node ref="J81" pin="32" pinfunction="32" pintype="passive"/>
+      <node ref="J87" pin="28" pinfunction="B14_L16_P" pintype="passive"/>
+    </net>
+    <net code="55" name="FPGA_B14_L18_N" class="Default">
+      <node ref="J80" pin="86" pinfunction="86" pintype="passive"/>
+      <node ref="J87" pin="32" pinfunction="B14_L18_N" pintype="passive"/>
+    </net>
+    <net code="56" name="FPGA_B14_L18_P" class="Default">
+      <node ref="J80" pin="88" pinfunction="88" pintype="passive"/>
+      <node ref="J87" pin="31" pinfunction="B14_L18_P" pintype="passive"/>
+    </net>
+    <net code="57" name="FPGA_B14_L20_N" class="Default">
+      <node ref="J82" pin="54" pinfunction="54" pintype="passive"/>
+      <node ref="J87" pin="35" pinfunction="B14_L20_N" pintype="passive"/>
+    </net>
+    <net code="58" name="FPGA_B14_L20_P" class="Default">
+      <node ref="J82" pin="52" pinfunction="52" pintype="passive"/>
+      <node ref="J87" pin="34" pinfunction="B14_L20_P" pintype="passive"/>
+    </net>
+    <net code="59" name="FPGA_B14_L24_N" class="Default">
+      <node ref="J80" pin="100" pinfunction="100" pintype="passive"/>
+      <node ref="J87" pin="38" pinfunction="B14_L24_N" pintype="passive"/>
+    </net>
+    <net code="60" name="FPGA_B14_L24_P" class="Default">
+      <node ref="J80" pin="91" pinfunction="91" pintype="passive"/>
+      <node ref="J87" pin="37" pinfunction="B14_L24_P" pintype="passive"/>
+    </net>
+    <net code="61" name="FPGA_B15_IO0" class="Default">
+      <node ref="J81" pin="90" pinfunction="90" pintype="passive"/>
+      <node ref="J88" pin="58" pinfunction="B15_IO0" pintype="passive"/>
+    </net>
+    <net code="62" name="FPGA_B15_IO25" class="Default">
+      <node ref="J81" pin="99" pinfunction="99" pintype="passive"/>
+      <node ref="J88" pin="59" pinfunction="B15_IO25" pintype="passive"/>
+    </net>
+    <net code="63" name="FPGA_B15_L1_N" class="Default">
+      <node ref="J81" pin="74" pinfunction="74" pintype="passive"/>
+      <node ref="J88" pin="5" pinfunction="B15_L1_N" pintype="passive"/>
+    </net>
+    <net code="64" name="FPGA_B15_L1_P" class="Default">
+      <node ref="J81" pin="72" pinfunction="72" pintype="passive"/>
+      <node ref="J88" pin="4" pinfunction="B15_L1_P" pintype="passive"/>
+    </net>
+    <net code="65" name="FPGA_B15_L2_N" class="Default">
+      <node ref="J81" pin="76" pinfunction="76" pintype="passive"/>
+      <node ref="J88" pin="7" pinfunction="B15_L2_N" pintype="passive"/>
+    </net>
+    <net code="66" name="FPGA_B15_L2_P" class="Default">
+      <node ref="J81" pin="78" pinfunction="78" pintype="passive"/>
+      <node ref="J88" pin="6" pinfunction="B15_L2_P" pintype="passive"/>
+    </net>
+    <net code="67" name="FPGA_B15_L3_N" class="Default">
+      <node ref="J81" pin="58" pinfunction="58" pintype="passive"/>
+      <node ref="J88" pin="9" pinfunction="B15_L3_N" pintype="passive"/>
+    </net>
+    <net code="68" name="FPGA_B15_L3_P" class="Default">
+      <node ref="J81" pin="56" pinfunction="56" pintype="passive"/>
+      <node ref="J88" pin="8" pinfunction="B15_L3_P" pintype="passive"/>
+    </net>
+    <net code="69" name="FPGA_B15_L4_N" class="Default">
+      <node ref="J81" pin="84" pinfunction="84" pintype="passive"/>
+      <node ref="J88" pin="11" pinfunction="B15_L4_N" pintype="passive"/>
+    </net>
+    <net code="70" name="FPGA_B15_L4_P" class="Default">
+      <node ref="J81" pin="82" pinfunction="82" pintype="passive"/>
+      <node ref="J88" pin="10" pinfunction="B15_L4_P" pintype="passive"/>
+    </net>
+    <net code="71" name="FPGA_B15_L5_N" class="Default">
+      <node ref="J81" pin="86" pinfunction="86" pintype="passive"/>
+      <node ref="J88" pin="14" pinfunction="B15_L5_N" pintype="passive"/>
+    </net>
+    <net code="72" name="FPGA_B15_L5_P" class="Default">
+      <node ref="J81" pin="88" pinfunction="88" pintype="passive"/>
+      <node ref="J88" pin="13" pinfunction="B15_L5_P" pintype="passive"/>
+    </net>
+    <net code="73" name="FPGA_B15_L6_N" class="Default">
+      <node ref="J81" pin="81" pinfunction="81" pintype="passive"/>
+      <node ref="J88" pin="16" pinfunction="B15_L6_N" pintype="passive"/>
+    </net>
+    <net code="74" name="FPGA_B15_L6_P" class="Default">
+      <node ref="J81" pin="83" pinfunction="83" pintype="passive"/>
+      <node ref="J88" pin="15" pinfunction="B15_L6_P" pintype="passive"/>
+    </net>
+    <net code="75" name="FPGA_B15_L7_N" class="Default">
+      <node ref="J81" pin="41" pinfunction="41" pintype="passive"/>
+      <node ref="J88" pin="18" pinfunction="B15_L7_N" pintype="passive"/>
+    </net>
+    <net code="76" name="FPGA_B15_L7_P" class="Default">
+      <node ref="J81" pin="43" pinfunction="43" pintype="passive"/>
+      <node ref="J88" pin="17" pinfunction="B15_L7_P" pintype="passive"/>
+    </net>
+    <net code="77" name="FPGA_B15_L8_N" class="Default">
+      <node ref="J81" pin="35" pinfunction="35" pintype="passive"/>
+      <node ref="J88" pin="20" pinfunction="B15_L8_N" pintype="passive"/>
+    </net>
+    <net code="78" name="FPGA_B15_L8_P" class="Default">
+      <node ref="J81" pin="37" pinfunction="37" pintype="passive"/>
+      <node ref="J88" pin="19" pinfunction="B15_L8_P" pintype="passive"/>
+    </net>
+    <net code="79" name="FPGA_B15_L9_N" class="Default">
+      <node ref="J81" pin="31" pinfunction="31" pintype="passive"/>
+      <node ref="J88" pin="23" pinfunction="B15_L9_N" pintype="passive"/>
+    </net>
+    <net code="80" name="FPGA_B15_L9_P" class="Default">
+      <node ref="J81" pin="33" pinfunction="33" pintype="passive"/>
+      <node ref="J88" pin="22" pinfunction="B15_L9_P" pintype="passive"/>
+    </net>
+    <net code="81" name="FPGA_B15_L10_N" class="Default">
+      <node ref="J81" pin="61" pinfunction="61" pintype="passive"/>
+      <node ref="J88" pin="25" pinfunction="B15_L10_N" pintype="passive"/>
+    </net>
+    <net code="82" name="FPGA_B15_L10_P" class="Default">
+      <node ref="J81" pin="63" pinfunction="63" pintype="passive"/>
+      <node ref="J88" pin="24" pinfunction="B15_L10_P" pintype="passive"/>
+    </net>
+    <net code="83" name="FPGA_B15_L11_N" class="Default">
+      <node ref="J81" pin="54" pinfunction="54" pintype="passive"/>
+      <node ref="J88" pin="27" pinfunction="B15_L11_N" pintype="passive"/>
+    </net>
+    <net code="84" name="FPGA_B15_L11_P" class="Default">
+      <node ref="J81" pin="52" pinfunction="52" pintype="passive"/>
+      <node ref="J88" pin="26" pinfunction="B15_L11_P" pintype="passive"/>
+    </net>
+    <net code="85" name="FPGA_B15_L12_N" class="Default">
+      <node ref="J81" pin="57" pinfunction="57" pintype="passive"/>
+      <node ref="J88" pin="29" pinfunction="B15_L12_N" pintype="passive"/>
+    </net>
+    <net code="86" name="FPGA_B15_L12_P" class="Default">
+      <node ref="J81" pin="55" pinfunction="55" pintype="passive"/>
+      <node ref="J88" pin="28" pinfunction="B15_L12_P" pintype="passive"/>
+    </net>
+    <net code="87" name="FPGA_B15_L13_N" class="Default">
+      <node ref="J81" pin="47" pinfunction="47" pintype="passive"/>
+      <node ref="J88" pin="32" pinfunction="B15_L13_N" pintype="passive"/>
+    </net>
+    <net code="88" name="FPGA_B15_L13_P" class="Default">
+      <node ref="J81" pin="45" pinfunction="45" pintype="passive"/>
+      <node ref="J88" pin="31" pinfunction="B15_L13_P" pintype="passive"/>
+    </net>
+    <net code="89" name="FPGA_B15_L14_N" class="Default">
+      <node ref="J81" pin="53" pinfunction="53" pintype="passive"/>
+      <node ref="J88" pin="34" pinfunction="B15_L14_N" pintype="passive"/>
+    </net>
+    <net code="90" name="FPGA_B15_L14_P" class="Default">
+      <node ref="J81" pin="51" pinfunction="51" pintype="passive"/>
+      <node ref="J88" pin="33" pinfunction="B15_L14_P" pintype="passive"/>
+    </net>
+    <net code="91" name="FPGA_B15_L15_N" class="Default">
+      <node ref="J81" pin="77" pinfunction="77" pintype="passive"/>
+      <node ref="J88" pin="36" pinfunction="B15_L15_N" pintype="passive"/>
+    </net>
+    <net code="92" name="FPGA_B15_L15_P" class="Default">
+      <node ref="J81" pin="75" pinfunction="75" pintype="passive"/>
+      <node ref="J88" pin="35" pinfunction="B15_L15_P" pintype="passive"/>
+    </net>
+    <net code="93" name="FPGA_B15_L16_N" class="Default">
+      <node ref="J81" pin="68" pinfunction="68" pintype="passive"/>
+      <node ref="J88" pin="39" pinfunction="B15_L16_N" pintype="passive"/>
+    </net>
+    <net code="94" name="FPGA_B15_L16_P" class="Default">
+      <node ref="J81" pin="66" pinfunction="66" pintype="passive"/>
+      <node ref="J88" pin="38" pinfunction="B15_L16_P" pintype="passive"/>
+    </net>
+    <net code="95" name="FPGA_B15_L17_N" class="Default">
+      <node ref="J81" pin="62" pinfunction="62" pintype="passive"/>
+      <node ref="J88" pin="41" pinfunction="B15_L17_N" pintype="passive"/>
+    </net>
+    <net code="96" name="FPGA_B15_L17_P" class="Default">
+      <node ref="J81" pin="64" pinfunction="64" pintype="passive"/>
+      <node ref="J88" pin="40" pinfunction="B15_L17_P" pintype="passive"/>
+    </net>
+    <net code="97" name="FPGA_B15_L18_N" class="Default">
+      <node ref="J81" pin="67" pinfunction="67" pintype="passive"/>
+      <node ref="J88" pin="43" pinfunction="B15_L18_N" pintype="passive"/>
+    </net>
+    <net code="98" name="FPGA_B15_L18_P" class="Default">
+      <node ref="J81" pin="65" pinfunction="65" pintype="passive"/>
+      <node ref="J88" pin="42" pinfunction="B15_L18_P" pintype="passive"/>
+    </net>
+    <net code="99" name="FPGA_B15_L19_N" class="Default">
+      <node ref="J81" pin="48" pinfunction="48" pintype="passive"/>
+      <node ref="J88" pin="45" pinfunction="B15_L19_N" pintype="passive"/>
+    </net>
+    <net code="100" name="FPGA_B15_L19_P" class="Default">
+      <node ref="J81" pin="46" pinfunction="46" pintype="passive"/>
+      <node ref="J88" pin="44" pinfunction="B15_L19_P" pintype="passive"/>
+    </net>
+    <net code="101" name="FPGA_B15_L20_N" class="Default">
+      <node ref="J81" pin="73" pinfunction="73" pintype="passive"/>
+      <node ref="J88" pin="48" pinfunction="B15_L20_N" pintype="passive"/>
+    </net>
+    <net code="102" name="FPGA_B15_L20_P" class="Default">
+      <node ref="J81" pin="71" pinfunction="71" pintype="passive"/>
+      <node ref="J88" pin="47" pinfunction="B15_L20_P" pintype="passive"/>
+    </net>
+    <net code="103" name="FPGA_B15_L21_N" class="Default">
+      <node ref="J81" pin="87" pinfunction="87" pintype="passive"/>
+      <node ref="J88" pin="50" pinfunction="B15_L21_N" pintype="passive"/>
+    </net>
+    <net code="104" name="FPGA_B15_L21_P" class="Default">
+      <node ref="J81" pin="85" pinfunction="85" pintype="passive"/>
+      <node ref="J88" pin="49" pinfunction="B15_L21_P" pintype="passive"/>
+    </net>
+    <net code="105" name="FPGA_B15_L22_N" class="Default">
+      <node ref="J81" pin="95" pinfunction="95" pintype="passive"/>
+      <node ref="J88" pin="52" pinfunction="B15_L22_N" pintype="passive"/>
+    </net>
+    <net code="106" name="FPGA_B15_L22_P" class="Default">
+      <node ref="J81" pin="97" pinfunction="97" pintype="passive"/>
+      <node ref="J88" pin="51" pinfunction="B15_L22_P" pintype="passive"/>
+    </net>
+    <net code="107" name="FPGA_B15_L23_N" class="Default">
+      <node ref="J81" pin="44" pinfunction="44" pintype="passive"/>
+      <node ref="J88" pin="54" pinfunction="B15_L23_N" pintype="passive"/>
+    </net>
+    <net code="108" name="FPGA_B15_L23_P" class="Default">
+      <node ref="J81" pin="42" pinfunction="42" pintype="passive"/>
+      <node ref="J88" pin="53" pinfunction="B15_L23_P" pintype="passive"/>
+    </net>
+    <net code="109" name="FPGA_B15_L24_N" class="Default">
+      <node ref="J81" pin="91" pinfunction="91" pintype="passive"/>
+      <node ref="J88" pin="57" pinfunction="B15_L24_N" pintype="passive"/>
+    </net>
+    <net code="110" name="FPGA_B15_L24_P" class="Default">
+      <node ref="J81" pin="93" pinfunction="93" pintype="passive"/>
+      <node ref="J88" pin="56" pinfunction="B15_L24_P" pintype="passive"/>
+    </net>
+    <net code="111" name="FPGA_B16_L1_N" class="Default">
+      <node ref="J80" pin="97" pinfunction="97" pintype="passive"/>
+      <node ref="J89" pin="5" pinfunction="B16_L1_N" pintype="passive"/>
+    </net>
+    <net code="112" name="FPGA_B16_L1_P" class="Default">
+      <node ref="J80" pin="99" pinfunction="99" pintype="passive"/>
+      <node ref="J89" pin="4" pinfunction="B16_L1_P" pintype="passive"/>
+    </net>
+    <net code="113" name="FPGA_B16_L2_N" class="Default">
+      <node ref="J80" pin="79" pinfunction="79" pintype="passive"/>
+      <node ref="J89" pin="7" pinfunction="B16_L2_N" pintype="passive"/>
+    </net>
+    <net code="114" name="FPGA_B16_L2_P" class="Default">
+      <node ref="J80" pin="81" pinfunction="81" pintype="passive"/>
+      <node ref="J89" pin="6" pinfunction="B16_L2_P" pintype="passive"/>
+    </net>
+    <net code="115" name="FPGA_B16_L3_N" class="Default">
+      <node ref="J80" pin="70" pinfunction="70" pintype="passive"/>
+      <node ref="J89" pin="9" pinfunction="B16_L3_N" pintype="passive"/>
+    </net>
+    <net code="116" name="FPGA_B16_L3_P" class="Default">
+      <node ref="J80" pin="72" pinfunction="72" pintype="passive"/>
+      <node ref="J89" pin="8" pinfunction="B16_L3_P" pintype="passive"/>
+    </net>
+    <net code="117" name="FPGA_B16_L4_N" class="Default">
+      <node ref="J80" pin="93" pinfunction="93" pintype="passive"/>
+      <node ref="J89" pin="12" pinfunction="B16_L4_N" pintype="passive"/>
+    </net>
+    <net code="118" name="FPGA_B16_L4_P" class="Default">
+      <node ref="J80" pin="95" pinfunction="95" pintype="passive"/>
+      <node ref="J89" pin="11" pinfunction="B16_L4_P" pintype="passive"/>
+    </net>
+    <net code="119" name="FPGA_B16_L5_N" class="Default">
+      <node ref="J80" pin="75" pinfunction="75" pintype="passive"/>
+      <node ref="J89" pin="14" pinfunction="B16_L5_N" pintype="passive"/>
+    </net>
+    <net code="120" name="FPGA_B16_L5_P" class="Default">
+      <node ref="J80" pin="77" pinfunction="77" pintype="passive"/>
+      <node ref="J89" pin="13" pinfunction="B16_L5_P" pintype="passive"/>
+    </net>
+    <net code="121" name="FPGA_B16_L6_N" class="Default">
+      <node ref="J80" pin="85" pinfunction="85" pintype="passive"/>
+      <node ref="J89" pin="16" pinfunction="B16_L6_N" pintype="passive"/>
+    </net>
+    <net code="122" name="FPGA_B16_L6_P" class="Default">
+      <node ref="J80" pin="87" pinfunction="87" pintype="passive"/>
+      <node ref="J89" pin="15" pinfunction="B16_L6_P" pintype="passive"/>
+    </net>
+    <net code="123" name="FPGA_B16_L7_N" class="Default">
+      <node ref="J80" pin="59" pinfunction="59" pintype="passive"/>
+      <node ref="J89" pin="19" pinfunction="B16_L7_N" pintype="passive"/>
+    </net>
+    <net code="124" name="FPGA_B16_L7_P" class="Default">
+      <node ref="J80" pin="61" pinfunction="61" pintype="passive"/>
+      <node ref="J89" pin="18" pinfunction="B16_L7_P" pintype="passive"/>
+    </net>
+    <net code="125" name="FPGA_B16_L8_N" class="Default">
+      <node ref="J80" pin="82" pinfunction="82" pintype="passive"/>
+      <node ref="J89" pin="21" pinfunction="B16_L8_N" pintype="passive"/>
+    </net>
+    <net code="126" name="FPGA_B16_L8_P" class="Default">
+      <node ref="J80" pin="84" pinfunction="84" pintype="passive"/>
+      <node ref="J89" pin="20" pinfunction="B16_L8_P" pintype="passive"/>
+    </net>
+    <net code="127" name="FPGA_B16_L9_N" class="Default">
+      <node ref="J80" pin="55" pinfunction="55" pintype="passive"/>
+      <node ref="J89" pin="24" pinfunction="B16_L9_N" pintype="passive"/>
+    </net>
+    <net code="128" name="FPGA_B16_L9_P" class="Default">
+      <node ref="J80" pin="57" pinfunction="57" pintype="passive"/>
+      <node ref="J89" pin="23" pinfunction="B16_L9_P" pintype="passive"/>
+    </net>
+    <net code="129" name="FPGA_B16_L10_N" class="Default">
+      <node ref="J80" pin="69" pinfunction="69" pintype="passive"/>
+      <node ref="J89" pin="26" pinfunction="B16_L10_N" pintype="passive"/>
+    </net>
+    <net code="130" name="FPGA_B16_L10_P" class="Default">
+      <node ref="J80" pin="71" pinfunction="71" pintype="passive"/>
+      <node ref="J89" pin="25" pinfunction="B16_L10_P" pintype="passive"/>
+    </net>
+    <net code="131" name="FPGA_B16_L11_N" class="Default">
+      <node ref="J80" pin="67" pinfunction="67" pintype="passive"/>
+      <node ref="J89" pin="28" pinfunction="B16_L11_N" pintype="passive"/>
+    </net>
+    <net code="132" name="FPGA_B16_L11_P" class="Default">
+      <node ref="J80" pin="65" pinfunction="65" pintype="passive"/>
+      <node ref="J89" pin="27" pinfunction="B16_L11_P" pintype="passive"/>
+    </net>
+    <net code="133" name="FPGA_B16_L12_N" class="Default">
+      <node ref="J80" pin="78" pinfunction="78" pintype="passive"/>
+      <node ref="J89" pin="31" pinfunction="B16_L12_N" pintype="passive"/>
+    </net>
+    <net code="134" name="FPGA_B16_L12_P" class="Default">
+      <node ref="J80" pin="76" pinfunction="76" pintype="passive"/>
+      <node ref="J89" pin="30" pinfunction="B16_L12_P" pintype="passive"/>
+    </net>
+    <net code="135" name="FPGA_B16_L13_N" class="Default">
+      <node ref="J80" pin="62" pinfunction="62" pintype="passive"/>
+      <node ref="J89" pin="33" pinfunction="B16_L13_N" pintype="passive"/>
+    </net>
+    <net code="136" name="FPGA_B16_L13_P" class="Default">
+      <node ref="J80" pin="60" pinfunction="60" pintype="passive"/>
+      <node ref="J89" pin="32" pinfunction="B16_L13_P" pintype="passive"/>
+    </net>
+    <net code="137" name="FPGA_B16_L14_N" class="Default">
+      <node ref="J80" pin="68" pinfunction="68" pintype="passive"/>
+      <node ref="J89" pin="35" pinfunction="B16_L14_N" pintype="passive"/>
+    </net>
+    <net code="138" name="FPGA_B16_L14_P" class="Default">
+      <node ref="J80" pin="66" pinfunction="66" pintype="passive"/>
+      <node ref="J89" pin="34" pinfunction="B16_L14_P" pintype="passive"/>
+    </net>
+    <net code="139" name="FPGA_B16_L15_N" class="Default">
+      <node ref="J80" pin="48" pinfunction="48" pintype="passive"/>
+      <node ref="J89" pin="38" pinfunction="B16_L15_N" pintype="passive"/>
+    </net>
+    <net code="140" name="FPGA_B16_L15_P" class="Default">
+      <node ref="J80" pin="46" pinfunction="46" pintype="passive"/>
+      <node ref="J89" pin="37" pinfunction="B16_L15_P" pintype="passive"/>
+    </net>
+    <net code="141" name="FPGA_B16_L16_N" class="Default">
+      <node ref="J80" pin="37" pinfunction="37" pintype="passive"/>
+      <node ref="J89" pin="40" pinfunction="B16_L16_N" pintype="passive"/>
+    </net>
+    <net code="142" name="FPGA_B16_L16_P" class="Default">
+      <node ref="J80" pin="35" pinfunction="35" pintype="passive"/>
+      <node ref="J89" pin="39" pinfunction="B16_L16_P" pintype="passive"/>
+    </net>
+    <net code="143" name="FPGA_B16_L17_N" class="Default">
+      <node ref="J80" pin="45" pinfunction="45" pintype="passive"/>
+      <node ref="J89" pin="43" pinfunction="B16_L17_N" pintype="passive"/>
+    </net>
+    <net code="144" name="FPGA_B16_L17_P" class="Default">
+      <node ref="J80" pin="47" pinfunction="47" pintype="passive"/>
+      <node ref="J89" pin="42" pinfunction="B16_L17_P" pintype="passive"/>
+    </net>
+    <net code="145" name="FPGA_B16_L18_N" class="Default">
+      <node ref="J80" pin="49" pinfunction="49" pintype="passive"/>
+      <node ref="J89" pin="45" pinfunction="B16_L18_N" pintype="passive"/>
+    </net>
+    <net code="146" name="FPGA_B16_L18_P" class="Default">
+      <node ref="J80" pin="51" pinfunction="51" pintype="passive"/>
+      <node ref="J89" pin="44" pinfunction="B16_L18_P" pintype="passive"/>
+    </net>
+    <net code="147" name="FPGA_B16_L19_N" class="Default">
+      <node ref="J80" pin="39" pinfunction="39" pintype="passive"/>
+      <node ref="J89" pin="47" pinfunction="B16_L19_N" pintype="passive"/>
+    </net>
+    <net code="148" name="FPGA_B16_L19_P" class="Default">
+      <node ref="J80" pin="41" pinfunction="41" pintype="passive"/>
+      <node ref="J89" pin="46" pinfunction="B16_L19_P" pintype="passive"/>
+    </net>
+    <net code="149" name="FPGA_B16_L20_N" class="Default">
+      <node ref="J80" pin="52" pinfunction="52" pintype="passive"/>
+      <node ref="J89" pin="50" pinfunction="B16_L20_N" pintype="passive"/>
+    </net>
+    <net code="150" name="FPGA_B16_L20_P" class="Default">
+      <node ref="J80" pin="50" pinfunction="50" pintype="passive"/>
+      <node ref="J89" pin="49" pinfunction="B16_L20_P" pintype="passive"/>
+    </net>
+    <net code="151" name="FPGA_B16_L21_N" class="Default">
+      <node ref="J80" pin="58" pinfunction="58" pintype="passive"/>
+      <node ref="J89" pin="52" pinfunction="B16_L21_N" pintype="passive"/>
+    </net>
+    <net code="152" name="FPGA_B16_L21_P" class="Default">
+      <node ref="J80" pin="56" pinfunction="56" pintype="passive"/>
+      <node ref="J89" pin="51" pinfunction="B16_L21_P" pintype="passive"/>
+    </net>
+    <net code="153" name="FPGA_B16_L22_N" class="Default">
+      <node ref="J80" pin="34" pinfunction="34" pintype="passive"/>
+      <node ref="J89" pin="54" pinfunction="B16_L22_N" pintype="passive"/>
+    </net>
+    <net code="154" name="FPGA_B16_L22_P" class="Default">
+      <node ref="J80" pin="32" pinfunction="32" pintype="passive"/>
+      <node ref="J89" pin="53" pinfunction="B16_L22_P" pintype="passive"/>
+    </net>
+    <net code="155" name="FPGA_B16_L23_N" class="Default">
+      <node ref="J80" pin="44" pinfunction="44" pintype="passive"/>
+      <node ref="J89" pin="57" pinfunction="B16_L23_N" pintype="passive"/>
+    </net>
+    <net code="156" name="FPGA_B16_L23_P" class="Default">
+      <node ref="J80" pin="42" pinfunction="42" pintype="passive"/>
+      <node ref="J89" pin="56" pinfunction="B16_L23_P" pintype="passive"/>
+    </net>
+    <net code="157" name="FPGA_B16_L24_N" class="Default">
+      <node ref="J80" pin="36" pinfunction="36" pintype="passive"/>
+      <node ref="J89" pin="59" pinfunction="B16_L24_N" pintype="passive"/>
+    </net>
+    <net code="158" name="FPGA_B16_L24_P" class="Default">
+      <node ref="J80" pin="38" pinfunction="38" pintype="passive"/>
+      <node ref="J89" pin="58" pinfunction="B16_L24_P" pintype="passive"/>
+    </net>
+    <net code="159" name="FPGA_CONFIG_RESET_N" class="Default">
       <node ref="J81" pin="17" pinfunction="17" pintype="passive"/>
       <node ref="JP81" pin="1" pinfunction="1" pintype="passive"/>
     </net>
-    <net code="8" name="FPGA_EN1" class="Default">
+    <net code="160" name="FPGA_EN1" class="Default">
       <node ref="J80" pin="27" pinfunction="27" pintype="passive"/>
       <node ref="JP80" pin="1" pinfunction="1" pintype="passive"/>
     </net>
-    <net code="9" name="FPGA_IO_ENABLE" class="Default">
+    <net code="161" name="FPGA_IO_ENABLE" class="Default">
       <node ref="J1" pin="22" pinfunction="22" pintype="passive"/>
       <node ref="R62" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="U51" pin="6" pinfunction="OE" pintype="passive"/>
     </net>
-    <net code="10" name="FPGA_JTAGEN" class="Default">
+    <net code="162" name="FPGA_JTAGEN" class="Default">
       <node ref="J80" pin="90" pinfunction="90" pintype="passive"/>
       <node ref="R80" pin="1" pinfunction="1" pintype="passive"/>
     </net>
-    <net code="11" name="FPGA_NOSEQ" class="Default">
+    <net code="163" name="FPGA_NOSEQ" class="Default">
       <node ref="J80" pin="8" pinfunction="8" pintype="passive"/>
       <node ref="R81" pin="1" pinfunction="1" pintype="passive"/>
     </net>
-    <net code="12" name="FPGA_RESET_GATE" class="Default">
+    <net code="164" name="FPGA_RESET_GATE" class="Default">
       <node ref="Q1" pin="1" pinfunction="G" pintype="passive"/>
       <node ref="R65" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="R66" pin="1" pinfunction="1" pintype="passive"/>
     </net>
-    <net code="13" name="FPGA_RESET_GPIO" class="Default">
+    <net code="165" name="FPGA_RESET_GPIO" class="Default">
       <node ref="J1" pin="11" pinfunction="11" pintype="passive"/>
       <node ref="R65" pin="1" pinfunction="1" pintype="passive"/>
     </net>
-    <net code="14" name="FPGA_RESET_N" class="Default">
+    <net code="166" name="FPGA_RESET_N" class="Default">
       <node ref="J4" pin="4" pinfunction="4" pintype="passive"/>
       <node ref="J81" pin="13" pinfunction="13" pintype="passive"/>
       <node ref="Q1" pin="3" pinfunction="D" pintype="passive"/>
       <node ref="R64" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="U52" pin="2" pinfunction="RESET_N" pintype="passive"/>
     </net>
-    <net code="15" name="FPGA_UART_DRIVE" class="Default">
+    <net code="167" name="FPGA_UART_DRIVE" class="Default">
       <node ref="R61" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="U51" pin="8" pinfunction="B1Y_OUT" pintype="passive"/>
     </net>
-    <net code="16" name="FPGA_UART_RX" class="Default">
+    <net code="168" name="FPGA_UART_RX" class="Default">
       <node ref="J4" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="J81" pin="12" pinfunction="12" pintype="passive"/>
       <node ref="R61" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="R63" pin="1" pinfunction="1" pintype="passive"/>
     </net>
-    <net code="17" name="FPGA_UART_TX" class="Default">
+    <net code="169" name="FPGA_UART_TX" class="Default">
       <node ref="J4" pin="3" pinfunction="3" pintype="passive"/>
       <node ref="J81" pin="14" pinfunction="14" pintype="passive"/>
       <node ref="U51" pin="1" pinfunction="B2_IN" pintype="passive"/>
     </net>
-    <net code="18" name="FPGA_VIN" class="Default">
+    <net code="170" name="FPGA_VIN" class="Default">
       <node ref="C80" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="C81" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="C82" pin="1" pinfunction="1" pintype="passive"/>
@@ -3341,7 +4337,7 @@
       <node ref="J81" pin="5" pinfunction="5" pintype="passive"/>
       <node ref="J81" pin="7" pinfunction="7" pintype="passive"/>
     </net>
-    <net code="19" name="GND" class="Default">
+    <net code="171" name="GND" class="Default">
       <node ref="C1" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="C12" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="C13" pin="2" pinfunction="2" pintype="passive"/>
@@ -3391,23 +4387,22 @@
       <node ref="J4" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="J80" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="J80" pin="101" pinfunction="101" pintype="passive"/>
-      <node ref="J80" pin="11" pinfunction="11" pintype="passive"/>
       <node ref="J80" pin="19" pinfunction="19" pintype="passive"/>
+      <node ref="J80" pin="25" pinfunction="25" pintype="passive"/>
       <node ref="J80" pin="30" pinfunction="30" pintype="passive"/>
-      <node ref="J80" pin="32" pinfunction="32" pintype="passive"/>
       <node ref="J80" pin="33" pinfunction="33" pintype="passive"/>
       <node ref="J80" pin="43" pinfunction="43" pintype="passive"/>
       <node ref="J80" pin="53" pinfunction="53" pintype="passive"/>
       <node ref="J80" pin="54" pinfunction="54" pintype="passive"/>
       <node ref="J80" pin="63" pinfunction="63" pintype="passive"/>
       <node ref="J80" pin="64" pinfunction="64" pintype="passive"/>
+      <node ref="J80" pin="7" pinfunction="7" pintype="passive"/>
       <node ref="J80" pin="73" pinfunction="73" pintype="passive"/>
       <node ref="J80" pin="74" pinfunction="74" pintype="passive"/>
+      <node ref="J80" pin="83" pinfunction="83" pintype="passive"/>
       <node ref="J80" pin="89" pinfunction="89" pintype="passive"/>
       <node ref="J81" pin="101" pinfunction="101" pintype="passive"/>
       <node ref="J81" pin="19" pinfunction="19" pintype="passive"/>
-      <node ref="J81" pin="29" pinfunction="29" pintype="passive"/>
-      <node ref="J81" pin="30" pinfunction="30" pintype="passive"/>
       <node ref="J81" pin="39" pinfunction="39" pintype="passive"/>
       <node ref="J81" pin="40" pinfunction="40" pintype="passive"/>
       <node ref="J81" pin="49" pinfunction="49" pintype="passive"/>
@@ -3439,6 +4434,54 @@
       <node ref="J85" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="J85" pin="4" pinfunction="4" pintype="passive"/>
       <node ref="J85" pin="6" pinfunction="6" pintype="passive"/>
+      <node ref="J86" pin="1" pinfunction="GND" pintype="power_in"/>
+      <node ref="J86" pin="10" pinfunction="GND" pintype="power_in"/>
+      <node ref="J86" pin="15" pinfunction="GND" pintype="power_in"/>
+      <node ref="J86" pin="20" pinfunction="GND" pintype="power_in"/>
+      <node ref="J86" pin="25" pinfunction="GND" pintype="power_in"/>
+      <node ref="J86" pin="3" pinfunction="GND" pintype="power_in"/>
+      <node ref="J86" pin="30" pinfunction="GND" pintype="power_in"/>
+      <node ref="J86" pin="35" pinfunction="GND" pintype="power_in"/>
+      <node ref="J86" pin="40" pinfunction="GND" pintype="power_in"/>
+      <node ref="J86" pin="41" pinfunction="GND" pintype="power_in"/>
+      <node ref="J87" pin="1" pinfunction="GND" pintype="power_in"/>
+      <node ref="J87" pin="12" pinfunction="GND" pintype="power_in"/>
+      <node ref="J87" pin="15" pinfunction="GND" pintype="power_in"/>
+      <node ref="J87" pin="18" pinfunction="GND" pintype="power_in"/>
+      <node ref="J87" pin="21" pinfunction="GND" pintype="power_in"/>
+      <node ref="J87" pin="24" pinfunction="GND" pintype="power_in"/>
+      <node ref="J87" pin="27" pinfunction="GND" pintype="power_in"/>
+      <node ref="J87" pin="3" pinfunction="GND" pintype="power_in"/>
+      <node ref="J87" pin="30" pinfunction="GND" pintype="power_in"/>
+      <node ref="J87" pin="33" pinfunction="GND" pintype="power_in"/>
+      <node ref="J87" pin="36" pinfunction="GND" pintype="power_in"/>
+      <node ref="J87" pin="39" pinfunction="GND" pintype="power_in"/>
+      <node ref="J87" pin="40" pinfunction="GND" pintype="power_in"/>
+      <node ref="J87" pin="41" pinfunction="GND" pintype="power_in"/>
+      <node ref="J87" pin="6" pinfunction="GND" pintype="power_in"/>
+      <node ref="J87" pin="9" pinfunction="GND" pintype="power_in"/>
+      <node ref="J88" pin="1" pinfunction="GND" pintype="power_in"/>
+      <node ref="J88" pin="12" pinfunction="GND" pintype="power_in"/>
+      <node ref="J88" pin="21" pinfunction="GND" pintype="power_in"/>
+      <node ref="J88" pin="3" pinfunction="GND" pintype="power_in"/>
+      <node ref="J88" pin="30" pinfunction="GND" pintype="power_in"/>
+      <node ref="J88" pin="37" pinfunction="GND" pintype="power_in"/>
+      <node ref="J88" pin="46" pinfunction="GND" pintype="power_in"/>
+      <node ref="J88" pin="55" pinfunction="GND" pintype="power_in"/>
+      <node ref="J88" pin="60" pinfunction="GND" pintype="power_in"/>
+      <node ref="J88" pin="61" pinfunction="GND" pintype="power_in"/>
+      <node ref="J89" pin="1" pinfunction="GND" pintype="power_in"/>
+      <node ref="J89" pin="10" pinfunction="GND" pintype="power_in"/>
+      <node ref="J89" pin="17" pinfunction="GND" pintype="power_in"/>
+      <node ref="J89" pin="22" pinfunction="GND" pintype="power_in"/>
+      <node ref="J89" pin="29" pinfunction="GND" pintype="power_in"/>
+      <node ref="J89" pin="3" pinfunction="GND" pintype="power_in"/>
+      <node ref="J89" pin="36" pinfunction="GND" pintype="power_in"/>
+      <node ref="J89" pin="41" pinfunction="GND" pintype="power_in"/>
+      <node ref="J89" pin="48" pinfunction="GND" pintype="power_in"/>
+      <node ref="J89" pin="55" pinfunction="GND" pintype="power_in"/>
+      <node ref="J89" pin="60" pinfunction="GND" pintype="power_in"/>
+      <node ref="J89" pin="61" pinfunction="GND" pintype="power_in"/>
       <node ref="JP1" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="JP80" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="JP81" pin="2" pinfunction="2" pintype="passive"/>
@@ -3493,87 +4536,87 @@
       <node ref="U51" pin="2" pinfunction="GND" pintype="power_in"/>
       <node ref="U52" pin="1" pinfunction="GND" pintype="power_in"/>
     </net>
-    <net code="20" name="GNSS_PPS" class="Default">
+    <net code="172" name="GNSS_PPS" class="Default">
       <node ref="U21" pin="4" pinfunction="TIMEPULSE" pintype="output"/>
       <node ref="U42" pin="16" pinfunction="B6" pintype="passive"/>
     </net>
-    <net code="21" name="GNSS_RF" class="Default">
+    <net code="173" name="GNSS_RF" class="Default">
       <node ref="J2" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="U21" pin="11" pinfunction="RF_IN" pintype="passive"/>
     </net>
-    <net code="22" name="I2C_SCL" class="Default">
+    <net code="174" name="I2C_SCL" class="Default">
       <node ref="R53" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="U21" pin="17" pinfunction="SCL" pintype="passive"/>
       <node ref="U43" pin="6" pinfunction="SCL2" pintype="passive"/>
     </net>
-    <net code="23" name="I2C_SDA" class="Default">
+    <net code="175" name="I2C_SDA" class="Default">
       <node ref="R52" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="U21" pin="16" pinfunction="SDA" pintype="passive"/>
       <node ref="U43" pin="7" pinfunction="SDA2" pintype="passive"/>
     </net>
-    <net code="24" name="ID_SCL" class="Default">
+    <net code="176" name="ID_SCL" class="Default">
       <node ref="J1" pin="28" pinfunction="28" pintype="passive"/>
       <node ref="R2" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="U1" pin="6" pinfunction="SCL" pintype="passive"/>
     </net>
-    <net code="25" name="ID_SDA" class="Default">
+    <net code="177" name="ID_SDA" class="Default">
       <node ref="J1" pin="27" pinfunction="27" pintype="passive"/>
       <node ref="R1" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="U1" pin="5" pinfunction="SDA" pintype="passive"/>
     </net>
-    <net code="26" name="IMU1_CS" class="Default">
+    <net code="178" name="IMU1_CS" class="Default">
       <node ref="R11" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="U11" pin="12" pinfunction="CS" pintype="input"/>
       <node ref="U41" pin="19" pinfunction="B3" pintype="passive"/>
     </net>
-    <net code="27" name="IMU1_INT" class="Default">
+    <net code="179" name="IMU1_INT" class="Default">
       <node ref="U11" pin="4" pinfunction="INT1" pintype="output"/>
       <node ref="U42" pin="20" pinfunction="B2" pintype="passive"/>
     </net>
-    <net code="28" name="IMU2_CS" class="Default">
+    <net code="180" name="IMU2_CS" class="Default">
       <node ref="R12" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="U12" pin="12" pinfunction="CS" pintype="input"/>
       <node ref="U41" pin="18" pinfunction="B4" pintype="passive"/>
     </net>
-    <net code="29" name="IMU2_INT" class="Default">
+    <net code="181" name="IMU2_INT" class="Default">
       <node ref="U12" pin="4" pinfunction="INT1" pintype="output"/>
       <node ref="U42" pin="19" pinfunction="B3" pintype="passive"/>
     </net>
-    <net code="30" name="IMU3_CS" class="Default">
+    <net code="182" name="IMU3_CS" class="Default">
       <node ref="R13" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="U13" pin="12" pinfunction="CS" pintype="input"/>
       <node ref="U41" pin="17" pinfunction="B5" pintype="passive"/>
     </net>
-    <net code="31" name="IMU3_INT" class="Default">
+    <net code="183" name="IMU3_INT" class="Default">
       <node ref="U13" pin="4" pinfunction="INT1" pintype="output"/>
       <node ref="U42" pin="18" pinfunction="B4" pintype="passive"/>
     </net>
-    <net code="32" name="IMU4_CS" class="Default">
+    <net code="184" name="IMU4_CS" class="Default">
       <node ref="R14" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="U14" pin="12" pinfunction="CS" pintype="input"/>
       <node ref="U41" pin="16" pinfunction="B6" pintype="passive"/>
     </net>
-    <net code="33" name="IMU4_INT" class="Default">
+    <net code="185" name="IMU4_INT" class="Default">
       <node ref="U14" pin="4" pinfunction="INT1" pintype="output"/>
       <node ref="U42" pin="17" pinfunction="B5" pintype="passive"/>
     </net>
-    <net code="34" name="JTAG_TCK" class="Default">
+    <net code="186" name="JTAG_TCK" class="Default">
       <node ref="J81" pin="100" pinfunction="100" pintype="passive"/>
       <node ref="J84" pin="4" pinfunction="4" pintype="passive"/>
     </net>
-    <net code="35" name="JTAG_TDI" class="Default">
+    <net code="187" name="JTAG_TDI" class="Default">
       <node ref="J81" pin="96" pinfunction="96" pintype="passive"/>
       <node ref="J84" pin="2" pinfunction="2" pintype="passive"/>
     </net>
-    <net code="36" name="JTAG_TDO" class="Default">
+    <net code="188" name="JTAG_TDO" class="Default">
       <node ref="J81" pin="98" pinfunction="98" pintype="passive"/>
       <node ref="J84" pin="3" pinfunction="3" pintype="passive"/>
     </net>
-    <net code="37" name="JTAG_TMS" class="Default">
+    <net code="189" name="JTAG_TMS" class="Default">
       <node ref="J81" pin="94" pinfunction="94" pintype="passive"/>
       <node ref="J84" pin="1" pinfunction="1" pintype="passive"/>
     </net>
-    <net code="38" name="PI_3V3" class="Default">
+    <net code="190" name="PI_3V3" class="Default">
       <node ref="C1" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="C2" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="C44" pin="1" pinfunction="1" pintype="passive"/>
@@ -3593,7 +4636,7 @@
       <node ref="U43" pin="1" pinfunction="VCC1" pintype="passive"/>
       <node ref="U51" pin="3" pinfunction="VCCA" pintype="passive"/>
     </net>
-    <net code="39" name="PI_5V" class="Default">
+    <net code="191" name="PI_5V" class="Default">
       <node ref="C3" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="C40" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="C41" pin="1" pinfunction="1" pintype="passive"/>
@@ -3601,82 +4644,82 @@
       <node ref="J1" pin="4" pinfunction="4" pintype="passive"/>
       <node ref="U40" pin="3" pinfunction="IN" pintype="passive"/>
     </net>
-    <net code="40" name="PI_GNSS_PPS" class="Default">
+    <net code="192" name="PI_GNSS_PPS" class="Default">
       <node ref="J1" pin="7" pinfunction="7" pintype="passive"/>
       <node ref="U42" pin="8" pinfunction="A6" pintype="passive"/>
     </net>
-    <net code="41" name="PI_I2C_SCL" class="Default">
+    <net code="193" name="PI_I2C_SCL" class="Default">
       <node ref="J1" pin="5" pinfunction="5" pintype="passive"/>
       <node ref="U43" pin="3" pinfunction="SCL1" pintype="passive"/>
     </net>
-    <net code="42" name="PI_I2C_SDA" class="Default">
+    <net code="194" name="PI_I2C_SDA" class="Default">
       <node ref="J1" pin="3" pinfunction="3" pintype="passive"/>
       <node ref="U43" pin="2" pinfunction="SDA1" pintype="passive"/>
     </net>
-    <net code="43" name="PI_IMU1_CS" class="Default">
+    <net code="195" name="PI_IMU1_CS" class="Default">
       <node ref="J1" pin="24" pinfunction="24" pintype="passive"/>
       <node ref="U41" pin="5" pinfunction="A3" pintype="passive"/>
     </net>
-    <net code="44" name="PI_IMU1_INT" class="Default">
+    <net code="196" name="PI_IMU1_INT" class="Default">
       <node ref="J1" pin="13" pinfunction="13" pintype="passive"/>
       <node ref="U42" pin="4" pinfunction="A2" pintype="passive"/>
     </net>
-    <net code="45" name="PI_IMU2_CS" class="Default">
+    <net code="197" name="PI_IMU2_CS" class="Default">
       <node ref="J1" pin="26" pinfunction="26" pintype="passive"/>
       <node ref="U41" pin="6" pinfunction="A4" pintype="passive"/>
     </net>
-    <net code="46" name="PI_IMU2_INT" class="Default">
+    <net code="198" name="PI_IMU2_INT" class="Default">
       <node ref="J1" pin="15" pinfunction="15" pintype="passive"/>
       <node ref="U42" pin="5" pinfunction="A3" pintype="passive"/>
     </net>
-    <net code="47" name="PI_IMU3_CS" class="Default">
+    <net code="199" name="PI_IMU3_CS" class="Default">
       <node ref="J1" pin="29" pinfunction="29" pintype="passive"/>
       <node ref="U41" pin="7" pinfunction="A5" pintype="passive"/>
     </net>
-    <net code="48" name="PI_IMU3_INT" class="Default">
+    <net code="200" name="PI_IMU3_INT" class="Default">
       <node ref="J1" pin="16" pinfunction="16" pintype="passive"/>
       <node ref="U42" pin="6" pinfunction="A4" pintype="passive"/>
     </net>
-    <net code="49" name="PI_IMU4_CS" class="Default">
+    <net code="201" name="PI_IMU4_CS" class="Default">
       <node ref="J1" pin="31" pinfunction="31" pintype="passive"/>
       <node ref="U41" pin="8" pinfunction="A6" pintype="passive"/>
     </net>
-    <net code="50" name="PI_IMU4_INT" class="Default">
+    <net code="202" name="PI_IMU4_INT" class="Default">
       <node ref="J1" pin="18" pinfunction="18" pintype="passive"/>
       <node ref="U42" pin="7" pinfunction="A5" pintype="passive"/>
     </net>
-    <net code="51" name="PI_SPI_MISO" class="Default">
+    <net code="203" name="PI_SPI_MISO" class="Default">
       <node ref="J1" pin="21" pinfunction="21" pintype="passive"/>
       <node ref="U42" pin="3" pinfunction="A1" pintype="passive"/>
     </net>
-    <net code="52" name="PI_SPI_MOSI" class="Default">
+    <net code="204" name="PI_SPI_MOSI" class="Default">
       <node ref="J1" pin="19" pinfunction="19" pintype="passive"/>
       <node ref="U41" pin="3" pinfunction="A1" pintype="passive"/>
     </net>
-    <net code="53" name="PI_SPI_SCLK" class="Default">
+    <net code="205" name="PI_SPI_SCLK" class="Default">
       <node ref="J1" pin="23" pinfunction="23" pintype="passive"/>
       <node ref="U41" pin="4" pinfunction="A2" pintype="passive"/>
     </net>
-    <net code="54" name="PI_TILT_CS" class="Default">
+    <net code="206" name="PI_TILT_CS" class="Default">
       <node ref="J1" pin="33" pinfunction="33" pintype="passive"/>
       <node ref="U41" pin="9" pinfunction="A7" pintype="passive"/>
     </net>
-    <net code="55" name="PI_UART_RX" class="Default">
+    <net code="207" name="PI_UART_RX" class="Default">
       <node ref="J1" pin="10" pinfunction="10" pintype="passive"/>
       <node ref="U51" pin="4" pinfunction="A2Y_OUT" pintype="passive"/>
     </net>
-    <net code="56" name="PI_UART_TX" class="Default">
+    <net code="208" name="PI_UART_TX" class="Default">
       <node ref="J1" pin="8" pinfunction="8" pintype="passive"/>
       <node ref="U51" pin="5" pinfunction="A1_IN" pintype="passive"/>
     </net>
-    <net code="57" name="SENSOR_OE_N" class="Default">
+    <net code="209" name="SENSOR_OE_N" class="Default">
       <node ref="J1" pin="37" pinfunction="37" pintype="passive"/>
       <node ref="R50" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="TP4" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="U41" pin="22" pinfunction="OE_N" pintype="passive"/>
       <node ref="U42" pin="22" pinfunction="OE_N" pintype="passive"/>
     </net>
-    <net code="58" name="SENS_3V3" class="Default">
+    <net code="210" name="SENS_3V3" class="Default">
       <node ref="C12" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="C13" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="C14" pin="1" pinfunction="1" pintype="passive"/>
@@ -3722,7 +4765,7 @@
       <node ref="U42" pin="24" pinfunction="VCCB" pintype="passive"/>
       <node ref="U43" pin="8" pinfunction="VCC2" pintype="passive"/>
     </net>
-    <net code="59" name="SPI_MISO" class="Default">
+    <net code="211" name="SPI_MISO" class="Default">
       <node ref="R51" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="U11" pin="1" pinfunction="SDO" pintype="tri_state"/>
       <node ref="U12" pin="1" pinfunction="SDO" pintype="tri_state"/>
@@ -3731,7 +4774,7 @@
       <node ref="U20" pin="6" pinfunction="MISO" pintype="tri_state"/>
       <node ref="U42" pin="21" pinfunction="B1" pintype="passive"/>
     </net>
-    <net code="60" name="SPI_MOSI" class="Default">
+    <net code="212" name="SPI_MOSI" class="Default">
       <node ref="U11" pin="14" pinfunction="SDI" pintype="input"/>
       <node ref="U12" pin="14" pinfunction="SDI" pintype="input"/>
       <node ref="U13" pin="14" pinfunction="SDI" pintype="input"/>
@@ -3739,7 +4782,7 @@
       <node ref="U20" pin="7" pinfunction="MOSI" pintype="input"/>
       <node ref="U41" pin="21" pinfunction="B1" pintype="passive"/>
     </net>
-    <net code="61" name="SPI_SCLK" class="Default">
+    <net code="213" name="SPI_SCLK" class="Default">
       <node ref="U11" pin="13" pinfunction="SCLK" pintype="input"/>
       <node ref="U12" pin="13" pinfunction="SCLK" pintype="input"/>
       <node ref="U13" pin="13" pinfunction="SCLK" pintype="input"/>
@@ -3747,659 +4790,206 @@
       <node ref="U20" pin="8" pinfunction="SCK" pintype="input"/>
       <node ref="U41" pin="20" pinfunction="B2" pintype="passive"/>
     </net>
-    <net code="62" name="TILT_AEXT" class="Default">
+    <net code="214" name="TILT_AEXT" class="Default">
       <node ref="C21" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="U20" pin="2" pinfunction="A_EXTC" pintype="passive"/>
     </net>
-    <net code="63" name="TILT_CS" class="Default">
+    <net code="215" name="TILT_CS" class="Default">
       <node ref="R20" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="U20" pin="5" pinfunction="CSB" pintype="input"/>
       <node ref="U41" pin="15" pinfunction="B7" pintype="passive"/>
     </net>
-    <net code="64" name="TILT_DEXT" class="Default">
+    <net code="216" name="TILT_DEXT" class="Default">
       <node ref="C23" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="U20" pin="10" pinfunction="D_EXTC" pintype="passive"/>
     </net>
-    <net code="65" name="unconnected-(J1-Pad12)" class="Default">
+    <net code="217" name="unconnected-(J1-Pad12)" class="Default">
       <node ref="J1" pin="12" pinfunction="12" pintype="passive+no_connect"/>
     </net>
-    <net code="66" name="unconnected-(J1-Pad32)" class="Default">
+    <net code="218" name="unconnected-(J1-Pad32)" class="Default">
       <node ref="J1" pin="32" pinfunction="32" pintype="passive+no_connect"/>
     </net>
-    <net code="67" name="unconnected-(J1-Pad35)" class="Default">
+    <net code="219" name="unconnected-(J1-Pad35)" class="Default">
       <node ref="J1" pin="35" pinfunction="35" pintype="passive+no_connect"/>
     </net>
-    <net code="68" name="unconnected-(J1-Pad36)" class="Default">
+    <net code="220" name="unconnected-(J1-Pad36)" class="Default">
       <node ref="J1" pin="36" pinfunction="36" pintype="passive+no_connect"/>
     </net>
-    <net code="69" name="unconnected-(J1-Pad38)" class="Default">
+    <net code="221" name="unconnected-(J1-Pad38)" class="Default">
       <node ref="J1" pin="38" pinfunction="38" pintype="passive+no_connect"/>
     </net>
-    <net code="70" name="unconnected-(J1-Pad40)" class="Default">
+    <net code="222" name="unconnected-(J1-Pad40)" class="Default">
       <node ref="J1" pin="40" pinfunction="40" pintype="passive+no_connect"/>
     </net>
-    <net code="71" name="unconnected-(J80-Pad3)" class="Default">
+    <net code="223" name="unconnected-(J80-Pad3)" class="Default">
       <node ref="J80" pin="3" pinfunction="3" pintype="passive+no_connect"/>
     </net>
-    <net code="72" name="unconnected-(J80-Pad5)" class="Default">
+    <net code="224" name="unconnected-(J80-Pad5)" class="Default">
       <node ref="J80" pin="5" pinfunction="5" pintype="passive+no_connect"/>
     </net>
-    <net code="73" name="unconnected-(J80-Pad7)" class="Default">
-      <node ref="J80" pin="7" pinfunction="7" pintype="passive+no_connect"/>
-    </net>
-    <net code="74" name="unconnected-(J80-Pad9)" class="Default">
+    <net code="225" name="unconnected-(J80-Pad9)" class="Default">
       <node ref="J80" pin="9" pinfunction="9" pintype="passive+no_connect"/>
     </net>
-    <net code="75" name="unconnected-(J80-Pad15)" class="Default">
-      <node ref="J80" pin="15" pinfunction="15" pintype="passive+no_connect"/>
+    <net code="226" name="unconnected-(J80-Pad11)" class="Default">
+      <node ref="J80" pin="11" pinfunction="11" pintype="passive+no_connect"/>
     </net>
-    <net code="76" name="unconnected-(J80-Pad17)" class="Default">
-      <node ref="J80" pin="17" pinfunction="17" pintype="passive+no_connect"/>
-    </net>
-    <net code="77" name="unconnected-(J80-Pad18)" class="Default">
-      <node ref="J80" pin="18" pinfunction="18" pintype="passive+no_connect"/>
-    </net>
-    <net code="78" name="unconnected-(J80-Pad20)" class="Default">
-      <node ref="J80" pin="20" pinfunction="20" pintype="passive+no_connect"/>
-    </net>
-    <net code="79" name="unconnected-(J80-Pad21)" class="Default">
-      <node ref="J80" pin="21" pinfunction="21" pintype="passive+no_connect"/>
-    </net>
-    <net code="80" name="unconnected-(J80-Pad22)" class="Default">
-      <node ref="J80" pin="22" pinfunction="22" pintype="passive+no_connect"/>
-    </net>
-    <net code="81" name="unconnected-(J80-Pad23)" class="Default">
-      <node ref="J80" pin="23" pinfunction="23" pintype="passive+no_connect"/>
-    </net>
-    <net code="82" name="unconnected-(J80-Pad24)" class="Default">
-      <node ref="J80" pin="24" pinfunction="24" pintype="passive+no_connect"/>
-    </net>
-    <net code="83" name="unconnected-(J80-Pad25)" class="Default">
-      <node ref="J80" pin="25" pinfunction="25" pintype="passive+no_connect"/>
-    </net>
-    <net code="84" name="unconnected-(J80-Pad26)" class="Default">
-      <node ref="J80" pin="26" pinfunction="26" pintype="passive+no_connect"/>
-    </net>
-    <net code="85" name="unconnected-(J80-Pad28)" class="Default">
-      <node ref="J80" pin="28" pinfunction="28" pintype="passive+no_connect"/>
-    </net>
-    <net code="86" name="unconnected-(J80-Pad29)" class="Default">
+    <net code="227" name="unconnected-(J80-Pad29)" class="Default">
       <node ref="J80" pin="29" pinfunction="29" pintype="passive+no_connect"/>
     </net>
-    <net code="87" name="unconnected-(J80-Pad31)" class="Default">
+    <net code="228" name="unconnected-(J80-Pad31)" class="Default">
       <node ref="J80" pin="31" pinfunction="31" pintype="passive+no_connect"/>
     </net>
-    <net code="88" name="unconnected-(J80-Pad34)" class="Default">
-      <node ref="J80" pin="34" pinfunction="34" pintype="passive+no_connect"/>
-    </net>
-    <net code="89" name="unconnected-(J80-Pad35)" class="Default">
-      <node ref="J80" pin="35" pinfunction="35" pintype="passive+no_connect"/>
-    </net>
-    <net code="90" name="unconnected-(J80-Pad36)" class="Default">
-      <node ref="J80" pin="36" pinfunction="36" pintype="passive+no_connect"/>
-    </net>
-    <net code="91" name="unconnected-(J80-Pad37)" class="Default">
-      <node ref="J80" pin="37" pinfunction="37" pintype="passive+no_connect"/>
-    </net>
-    <net code="92" name="unconnected-(J80-Pad38)" class="Default">
-      <node ref="J80" pin="38" pinfunction="38" pintype="passive+no_connect"/>
-    </net>
-    <net code="93" name="unconnected-(J80-Pad39)" class="Default">
-      <node ref="J80" pin="39" pinfunction="39" pintype="passive+no_connect"/>
-    </net>
-    <net code="94" name="unconnected-(J80-Pad40)" class="Default">
+    <net code="229" name="unconnected-(J80-Pad40)" class="Default">
       <node ref="J80" pin="40" pinfunction="40" pintype="passive+no_connect"/>
     </net>
-    <net code="95" name="unconnected-(J80-Pad41)" class="Default">
-      <node ref="J80" pin="41" pinfunction="41" pintype="passive+no_connect"/>
-    </net>
-    <net code="96" name="unconnected-(J80-Pad42)" class="Default">
-      <node ref="J80" pin="42" pinfunction="42" pintype="passive+no_connect"/>
-    </net>
-    <net code="97" name="unconnected-(J80-Pad44)" class="Default">
-      <node ref="J80" pin="44" pinfunction="44" pintype="passive+no_connect"/>
-    </net>
-    <net code="98" name="unconnected-(J80-Pad45)" class="Default">
-      <node ref="J80" pin="45" pinfunction="45" pintype="passive+no_connect"/>
-    </net>
-    <net code="99" name="unconnected-(J80-Pad46)" class="Default">
-      <node ref="J80" pin="46" pinfunction="46" pintype="passive+no_connect"/>
-    </net>
-    <net code="100" name="unconnected-(J80-Pad47)" class="Default">
-      <node ref="J80" pin="47" pinfunction="47" pintype="passive+no_connect"/>
-    </net>
-    <net code="101" name="unconnected-(J80-Pad48)" class="Default">
-      <node ref="J80" pin="48" pinfunction="48" pintype="passive+no_connect"/>
-    </net>
-    <net code="102" name="unconnected-(J80-Pad49)" class="Default">
-      <node ref="J80" pin="49" pinfunction="49" pintype="passive+no_connect"/>
-    </net>
-    <net code="103" name="unconnected-(J80-Pad50)" class="Default">
-      <node ref="J80" pin="50" pinfunction="50" pintype="passive+no_connect"/>
-    </net>
-    <net code="104" name="unconnected-(J80-Pad51)" class="Default">
-      <node ref="J80" pin="51" pinfunction="51" pintype="passive+no_connect"/>
-    </net>
-    <net code="105" name="unconnected-(J80-Pad52)" class="Default">
-      <node ref="J80" pin="52" pinfunction="52" pintype="passive+no_connect"/>
-    </net>
-    <net code="106" name="unconnected-(J80-Pad55)" class="Default">
-      <node ref="J80" pin="55" pinfunction="55" pintype="passive+no_connect"/>
-    </net>
-    <net code="107" name="unconnected-(J80-Pad56)" class="Default">
-      <node ref="J80" pin="56" pinfunction="56" pintype="passive+no_connect"/>
-    </net>
-    <net code="108" name="unconnected-(J80-Pad57)" class="Default">
-      <node ref="J80" pin="57" pinfunction="57" pintype="passive+no_connect"/>
-    </net>
-    <net code="109" name="unconnected-(J80-Pad58)" class="Default">
-      <node ref="J80" pin="58" pinfunction="58" pintype="passive+no_connect"/>
-    </net>
-    <net code="110" name="unconnected-(J80-Pad59)" class="Default">
-      <node ref="J80" pin="59" pinfunction="59" pintype="passive+no_connect"/>
-    </net>
-    <net code="111" name="unconnected-(J80-Pad60)" class="Default">
-      <node ref="J80" pin="60" pinfunction="60" pintype="passive+no_connect"/>
-    </net>
-    <net code="112" name="unconnected-(J80-Pad61)" class="Default">
-      <node ref="J80" pin="61" pinfunction="61" pintype="passive+no_connect"/>
-    </net>
-    <net code="113" name="unconnected-(J80-Pad62)" class="Default">
-      <node ref="J80" pin="62" pinfunction="62" pintype="passive+no_connect"/>
-    </net>
-    <net code="114" name="unconnected-(J80-Pad65)" class="Default">
-      <node ref="J80" pin="65" pinfunction="65" pintype="passive+no_connect"/>
-    </net>
-    <net code="115" name="unconnected-(J80-Pad66)" class="Default">
-      <node ref="J80" pin="66" pinfunction="66" pintype="passive+no_connect"/>
-    </net>
-    <net code="116" name="unconnected-(J80-Pad67)" class="Default">
-      <node ref="J80" pin="67" pinfunction="67" pintype="passive+no_connect"/>
-    </net>
-    <net code="117" name="unconnected-(J80-Pad68)" class="Default">
-      <node ref="J80" pin="68" pinfunction="68" pintype="passive+no_connect"/>
-    </net>
-    <net code="118" name="unconnected-(J80-Pad69)" class="Default">
-      <node ref="J80" pin="69" pinfunction="69" pintype="passive+no_connect"/>
-    </net>
-    <net code="119" name="unconnected-(J80-Pad70)" class="Default">
-      <node ref="J80" pin="70" pinfunction="70" pintype="passive+no_connect"/>
-    </net>
-    <net code="120" name="unconnected-(J80-Pad71)" class="Default">
-      <node ref="J80" pin="71" pinfunction="71" pintype="passive+no_connect"/>
-    </net>
-    <net code="121" name="unconnected-(J80-Pad72)" class="Default">
-      <node ref="J80" pin="72" pinfunction="72" pintype="passive+no_connect"/>
-    </net>
-    <net code="122" name="unconnected-(J80-Pad75)" class="Default">
-      <node ref="J80" pin="75" pinfunction="75" pintype="passive+no_connect"/>
-    </net>
-    <net code="123" name="unconnected-(J80-Pad76)" class="Default">
-      <node ref="J80" pin="76" pinfunction="76" pintype="passive+no_connect"/>
-    </net>
-    <net code="124" name="unconnected-(J80-Pad77)" class="Default">
-      <node ref="J80" pin="77" pinfunction="77" pintype="passive+no_connect"/>
-    </net>
-    <net code="125" name="unconnected-(J80-Pad78)" class="Default">
-      <node ref="J80" pin="78" pinfunction="78" pintype="passive+no_connect"/>
-    </net>
-    <net code="126" name="unconnected-(J80-Pad79)" class="Default">
-      <node ref="J80" pin="79" pinfunction="79" pintype="passive+no_connect"/>
-    </net>
-    <net code="127" name="unconnected-(J80-Pad80)" class="Default">
+    <net code="230" name="unconnected-(J80-Pad80)" class="Default">
       <node ref="J80" pin="80" pinfunction="80" pintype="passive+no_connect"/>
     </net>
-    <net code="128" name="unconnected-(J80-Pad81)" class="Default">
-      <node ref="J80" pin="81" pinfunction="81" pintype="passive+no_connect"/>
-    </net>
-    <net code="129" name="unconnected-(J80-Pad82)" class="Default">
-      <node ref="J80" pin="82" pinfunction="82" pintype="passive+no_connect"/>
-    </net>
-    <net code="130" name="unconnected-(J80-Pad83)" class="Default">
-      <node ref="J80" pin="83" pinfunction="83" pintype="passive+no_connect"/>
-    </net>
-    <net code="131" name="unconnected-(J80-Pad84)" class="Default">
-      <node ref="J80" pin="84" pinfunction="84" pintype="passive+no_connect"/>
-    </net>
-    <net code="132" name="unconnected-(J80-Pad85)" class="Default">
-      <node ref="J80" pin="85" pinfunction="85" pintype="passive+no_connect"/>
-    </net>
-    <net code="133" name="unconnected-(J80-Pad86)" class="Default">
-      <node ref="J80" pin="86" pinfunction="86" pintype="passive+no_connect"/>
-    </net>
-    <net code="134" name="unconnected-(J80-Pad87)" class="Default">
-      <node ref="J80" pin="87" pinfunction="87" pintype="passive+no_connect"/>
-    </net>
-    <net code="135" name="unconnected-(J80-Pad88)" class="Default">
-      <node ref="J80" pin="88" pinfunction="88" pintype="passive+no_connect"/>
-    </net>
-    <net code="136" name="unconnected-(J80-Pad91)" class="Default">
-      <node ref="J80" pin="91" pinfunction="91" pintype="passive+no_connect"/>
-    </net>
-    <net code="137" name="unconnected-(J80-Pad92)" class="Default">
-      <node ref="J80" pin="92" pinfunction="92" pintype="passive+no_connect"/>
-    </net>
-    <net code="138" name="unconnected-(J80-Pad93)" class="Default">
-      <node ref="J80" pin="93" pinfunction="93" pintype="passive+no_connect"/>
-    </net>
-    <net code="139" name="unconnected-(J80-Pad94)" class="Default">
-      <node ref="J80" pin="94" pinfunction="94" pintype="passive+no_connect"/>
-    </net>
-    <net code="140" name="unconnected-(J80-Pad95)" class="Default">
-      <node ref="J80" pin="95" pinfunction="95" pintype="passive+no_connect"/>
-    </net>
-    <net code="141" name="unconnected-(J80-Pad96)" class="Default">
-      <node ref="J80" pin="96" pinfunction="96" pintype="passive+no_connect"/>
-    </net>
-    <net code="142" name="unconnected-(J80-Pad97)" class="Default">
-      <node ref="J80" pin="97" pinfunction="97" pintype="passive+no_connect"/>
-    </net>
-    <net code="143" name="unconnected-(J80-Pad98)" class="Default">
-      <node ref="J80" pin="98" pinfunction="98" pintype="passive+no_connect"/>
-    </net>
-    <net code="144" name="unconnected-(J80-Pad99)" class="Default">
-      <node ref="J80" pin="99" pinfunction="99" pintype="passive+no_connect"/>
-    </net>
-    <net code="145" name="unconnected-(J80-Pad100)" class="Default">
-      <node ref="J80" pin="100" pinfunction="100" pintype="passive+no_connect"/>
-    </net>
-    <net code="146" name="unconnected-(J81-Pad6)" class="Default">
+    <net code="231" name="unconnected-(J81-Pad6)" class="Default">
       <node ref="J81" pin="6" pinfunction="6" pintype="passive+no_connect"/>
     </net>
-    <net code="147" name="unconnected-(J81-Pad20)" class="Default">
+    <net code="232" name="unconnected-(J81-Pad20)" class="Default">
       <node ref="J81" pin="20" pinfunction="20" pintype="passive+no_connect"/>
     </net>
-    <net code="148" name="unconnected-(J81-Pad21)" class="Default">
-      <node ref="J81" pin="21" pinfunction="21" pintype="passive+no_connect"/>
+    <net code="233" name="unconnected-(J81-Pad29)" class="Default">
+      <node ref="J81" pin="29" pinfunction="29" pintype="passive+no_connect"/>
     </net>
-    <net code="149" name="unconnected-(J81-Pad22)" class="Default">
-      <node ref="J81" pin="22" pinfunction="22" pintype="passive+no_connect"/>
+    <net code="234" name="unconnected-(J81-Pad30)" class="Default">
+      <node ref="J81" pin="30" pinfunction="30" pintype="passive+no_connect"/>
     </net>
-    <net code="150" name="unconnected-(J81-Pad23)" class="Default">
-      <node ref="J81" pin="23" pinfunction="23" pintype="passive+no_connect"/>
-    </net>
-    <net code="151" name="unconnected-(J81-Pad24)" class="Default">
-      <node ref="J81" pin="24" pinfunction="24" pintype="passive+no_connect"/>
-    </net>
-    <net code="152" name="unconnected-(J81-Pad25)" class="Default">
-      <node ref="J81" pin="25" pinfunction="25" pintype="passive+no_connect"/>
-    </net>
-    <net code="153" name="unconnected-(J81-Pad26)" class="Default">
-      <node ref="J81" pin="26" pinfunction="26" pintype="passive+no_connect"/>
-    </net>
-    <net code="154" name="unconnected-(J81-Pad27)" class="Default">
-      <node ref="J81" pin="27" pinfunction="27" pintype="passive+no_connect"/>
-    </net>
-    <net code="155" name="unconnected-(J81-Pad28)" class="Default">
-      <node ref="J81" pin="28" pinfunction="28" pintype="passive+no_connect"/>
-    </net>
-    <net code="156" name="unconnected-(J81-Pad31)" class="Default">
-      <node ref="J81" pin="31" pinfunction="31" pintype="passive+no_connect"/>
-    </net>
-    <net code="157" name="unconnected-(J81-Pad32)" class="Default">
-      <node ref="J81" pin="32" pinfunction="32" pintype="passive+no_connect"/>
-    </net>
-    <net code="158" name="unconnected-(J81-Pad33)" class="Default">
-      <node ref="J81" pin="33" pinfunction="33" pintype="passive+no_connect"/>
-    </net>
-    <net code="159" name="unconnected-(J81-Pad34)" class="Default">
-      <node ref="J81" pin="34" pinfunction="34" pintype="passive+no_connect"/>
-    </net>
-    <net code="160" name="unconnected-(J81-Pad35)" class="Default">
-      <node ref="J81" pin="35" pinfunction="35" pintype="passive+no_connect"/>
-    </net>
-    <net code="161" name="unconnected-(J81-Pad36)" class="Default">
-      <node ref="J81" pin="36" pinfunction="36" pintype="passive+no_connect"/>
-    </net>
-    <net code="162" name="unconnected-(J81-Pad37)" class="Default">
-      <node ref="J81" pin="37" pinfunction="37" pintype="passive+no_connect"/>
-    </net>
-    <net code="163" name="unconnected-(J81-Pad38)" class="Default">
-      <node ref="J81" pin="38" pinfunction="38" pintype="passive+no_connect"/>
-    </net>
-    <net code="164" name="unconnected-(J81-Pad41)" class="Default">
-      <node ref="J81" pin="41" pinfunction="41" pintype="passive+no_connect"/>
-    </net>
-    <net code="165" name="unconnected-(J81-Pad42)" class="Default">
-      <node ref="J81" pin="42" pinfunction="42" pintype="passive+no_connect"/>
-    </net>
-    <net code="166" name="unconnected-(J81-Pad43)" class="Default">
-      <node ref="J81" pin="43" pinfunction="43" pintype="passive+no_connect"/>
-    </net>
-    <net code="167" name="unconnected-(J81-Pad44)" class="Default">
-      <node ref="J81" pin="44" pinfunction="44" pintype="passive+no_connect"/>
-    </net>
-    <net code="168" name="unconnected-(J81-Pad45)" class="Default">
-      <node ref="J81" pin="45" pinfunction="45" pintype="passive+no_connect"/>
-    </net>
-    <net code="169" name="unconnected-(J81-Pad46)" class="Default">
-      <node ref="J81" pin="46" pinfunction="46" pintype="passive+no_connect"/>
-    </net>
-    <net code="170" name="unconnected-(J81-Pad47)" class="Default">
-      <node ref="J81" pin="47" pinfunction="47" pintype="passive+no_connect"/>
-    </net>
-    <net code="171" name="unconnected-(J81-Pad48)" class="Default">
-      <node ref="J81" pin="48" pinfunction="48" pintype="passive+no_connect"/>
-    </net>
-    <net code="172" name="unconnected-(J81-Pad51)" class="Default">
-      <node ref="J81" pin="51" pinfunction="51" pintype="passive+no_connect"/>
-    </net>
-    <net code="173" name="unconnected-(J81-Pad52)" class="Default">
-      <node ref="J81" pin="52" pinfunction="52" pintype="passive+no_connect"/>
-    </net>
-    <net code="174" name="unconnected-(J81-Pad53)" class="Default">
-      <node ref="J81" pin="53" pinfunction="53" pintype="passive+no_connect"/>
-    </net>
-    <net code="175" name="unconnected-(J81-Pad54)" class="Default">
-      <node ref="J81" pin="54" pinfunction="54" pintype="passive+no_connect"/>
-    </net>
-    <net code="176" name="unconnected-(J81-Pad55)" class="Default">
-      <node ref="J81" pin="55" pinfunction="55" pintype="passive+no_connect"/>
-    </net>
-    <net code="177" name="unconnected-(J81-Pad56)" class="Default">
-      <node ref="J81" pin="56" pinfunction="56" pintype="passive+no_connect"/>
-    </net>
-    <net code="178" name="unconnected-(J81-Pad57)" class="Default">
-      <node ref="J81" pin="57" pinfunction="57" pintype="passive+no_connect"/>
-    </net>
-    <net code="179" name="unconnected-(J81-Pad58)" class="Default">
-      <node ref="J81" pin="58" pinfunction="58" pintype="passive+no_connect"/>
-    </net>
-    <net code="180" name="unconnected-(J81-Pad61)" class="Default">
-      <node ref="J81" pin="61" pinfunction="61" pintype="passive+no_connect"/>
-    </net>
-    <net code="181" name="unconnected-(J81-Pad62)" class="Default">
-      <node ref="J81" pin="62" pinfunction="62" pintype="passive+no_connect"/>
-    </net>
-    <net code="182" name="unconnected-(J81-Pad63)" class="Default">
-      <node ref="J81" pin="63" pinfunction="63" pintype="passive+no_connect"/>
-    </net>
-    <net code="183" name="unconnected-(J81-Pad64)" class="Default">
-      <node ref="J81" pin="64" pinfunction="64" pintype="passive+no_connect"/>
-    </net>
-    <net code="184" name="unconnected-(J81-Pad65)" class="Default">
-      <node ref="J81" pin="65" pinfunction="65" pintype="passive+no_connect"/>
-    </net>
-    <net code="185" name="unconnected-(J81-Pad66)" class="Default">
-      <node ref="J81" pin="66" pinfunction="66" pintype="passive+no_connect"/>
-    </net>
-    <net code="186" name="unconnected-(J81-Pad67)" class="Default">
-      <node ref="J81" pin="67" pinfunction="67" pintype="passive+no_connect"/>
-    </net>
-    <net code="187" name="unconnected-(J81-Pad68)" class="Default">
-      <node ref="J81" pin="68" pinfunction="68" pintype="passive+no_connect"/>
-    </net>
-    <net code="188" name="unconnected-(J81-Pad71)" class="Default">
-      <node ref="J81" pin="71" pinfunction="71" pintype="passive+no_connect"/>
-    </net>
-    <net code="189" name="unconnected-(J81-Pad72)" class="Default">
-      <node ref="J81" pin="72" pinfunction="72" pintype="passive+no_connect"/>
-    </net>
-    <net code="190" name="unconnected-(J81-Pad73)" class="Default">
-      <node ref="J81" pin="73" pinfunction="73" pintype="passive+no_connect"/>
-    </net>
-    <net code="191" name="unconnected-(J81-Pad74)" class="Default">
-      <node ref="J81" pin="74" pinfunction="74" pintype="passive+no_connect"/>
-    </net>
-    <net code="192" name="unconnected-(J81-Pad75)" class="Default">
-      <node ref="J81" pin="75" pinfunction="75" pintype="passive+no_connect"/>
-    </net>
-    <net code="193" name="unconnected-(J81-Pad76)" class="Default">
-      <node ref="J81" pin="76" pinfunction="76" pintype="passive+no_connect"/>
-    </net>
-    <net code="194" name="unconnected-(J81-Pad77)" class="Default">
-      <node ref="J81" pin="77" pinfunction="77" pintype="passive+no_connect"/>
-    </net>
-    <net code="195" name="unconnected-(J81-Pad78)" class="Default">
-      <node ref="J81" pin="78" pinfunction="78" pintype="passive+no_connect"/>
-    </net>
-    <net code="196" name="unconnected-(J81-Pad81)" class="Default">
-      <node ref="J81" pin="81" pinfunction="81" pintype="passive+no_connect"/>
-    </net>
-    <net code="197" name="unconnected-(J81-Pad82)" class="Default">
-      <node ref="J81" pin="82" pinfunction="82" pintype="passive+no_connect"/>
-    </net>
-    <net code="198" name="unconnected-(J81-Pad83)" class="Default">
-      <node ref="J81" pin="83" pinfunction="83" pintype="passive+no_connect"/>
-    </net>
-    <net code="199" name="unconnected-(J81-Pad84)" class="Default">
-      <node ref="J81" pin="84" pinfunction="84" pintype="passive+no_connect"/>
-    </net>
-    <net code="200" name="unconnected-(J81-Pad85)" class="Default">
-      <node ref="J81" pin="85" pinfunction="85" pintype="passive+no_connect"/>
-    </net>
-    <net code="201" name="unconnected-(J81-Pad86)" class="Default">
-      <node ref="J81" pin="86" pinfunction="86" pintype="passive+no_connect"/>
-    </net>
-    <net code="202" name="unconnected-(J81-Pad87)" class="Default">
-      <node ref="J81" pin="87" pinfunction="87" pintype="passive+no_connect"/>
-    </net>
-    <net code="203" name="unconnected-(J81-Pad88)" class="Default">
-      <node ref="J81" pin="88" pinfunction="88" pintype="passive+no_connect"/>
-    </net>
-    <net code="204" name="unconnected-(J81-Pad90)" class="Default">
-      <node ref="J81" pin="90" pinfunction="90" pintype="passive+no_connect"/>
-    </net>
-    <net code="205" name="unconnected-(J81-Pad91)" class="Default">
-      <node ref="J81" pin="91" pinfunction="91" pintype="passive+no_connect"/>
-    </net>
-    <net code="206" name="unconnected-(J81-Pad93)" class="Default">
-      <node ref="J81" pin="93" pinfunction="93" pintype="passive+no_connect"/>
-    </net>
-    <net code="207" name="unconnected-(J81-Pad95)" class="Default">
-      <node ref="J81" pin="95" pinfunction="95" pintype="passive+no_connect"/>
-    </net>
-    <net code="208" name="unconnected-(J81-Pad97)" class="Default">
-      <node ref="J81" pin="97" pinfunction="97" pintype="passive+no_connect"/>
-    </net>
-    <net code="209" name="unconnected-(J81-Pad99)" class="Default">
-      <node ref="J81" pin="99" pinfunction="99" pintype="passive+no_connect"/>
-    </net>
-    <net code="210" name="unconnected-(J82-Pad1)" class="Default">
-      <node ref="J82" pin="1" pinfunction="1" pintype="passive+no_connect"/>
-    </net>
-    <net code="211" name="unconnected-(J82-Pad2)" class="Default">
-      <node ref="J82" pin="2" pinfunction="2" pintype="passive+no_connect"/>
-    </net>
-    <net code="212" name="unconnected-(J82-Pad3)" class="Default">
-      <node ref="J82" pin="3" pinfunction="3" pintype="passive+no_connect"/>
-    </net>
-    <net code="213" name="unconnected-(J82-Pad4)" class="Default">
-      <node ref="J82" pin="4" pinfunction="4" pintype="passive+no_connect"/>
-    </net>
-    <net code="214" name="unconnected-(J82-Pad7)" class="Default">
+    <net code="235" name="unconnected-(J82-Pad7)" class="Default">
       <node ref="J82" pin="7" pinfunction="7" pintype="passive+no_connect"/>
     </net>
-    <net code="215" name="unconnected-(J82-Pad8)" class="Default">
+    <net code="236" name="unconnected-(J82-Pad8)" class="Default">
       <node ref="J82" pin="8" pinfunction="8" pintype="passive+no_connect"/>
     </net>
-    <net code="216" name="unconnected-(J82-Pad9)" class="Default">
+    <net code="237" name="unconnected-(J82-Pad9)" class="Default">
       <node ref="J82" pin="9" pinfunction="9" pintype="passive+no_connect"/>
     </net>
-    <net code="217" name="unconnected-(J82-Pad10)" class="Default">
+    <net code="238" name="unconnected-(J82-Pad10)" class="Default">
       <node ref="J82" pin="10" pinfunction="10" pintype="passive+no_connect"/>
     </net>
-    <net code="218" name="unconnected-(J82-Pad13)" class="Default">
+    <net code="239" name="unconnected-(J82-Pad13)" class="Default">
       <node ref="J82" pin="13" pinfunction="13" pintype="passive+no_connect"/>
     </net>
-    <net code="219" name="unconnected-(J82-Pad14)" class="Default">
+    <net code="240" name="unconnected-(J82-Pad14)" class="Default">
       <node ref="J82" pin="14" pinfunction="14" pintype="passive+no_connect"/>
     </net>
-    <net code="220" name="unconnected-(J82-Pad15)" class="Default">
+    <net code="241" name="unconnected-(J82-Pad15)" class="Default">
       <node ref="J82" pin="15" pinfunction="15" pintype="passive+no_connect"/>
     </net>
-    <net code="221" name="unconnected-(J82-Pad16)" class="Default">
+    <net code="242" name="unconnected-(J82-Pad16)" class="Default">
       <node ref="J82" pin="16" pinfunction="16" pintype="passive+no_connect"/>
     </net>
-    <net code="222" name="unconnected-(J82-Pad19)" class="Default">
+    <net code="243" name="unconnected-(J82-Pad19)" class="Default">
       <node ref="J82" pin="19" pinfunction="19" pintype="passive+no_connect"/>
     </net>
-    <net code="223" name="unconnected-(J82-Pad20)" class="Default">
+    <net code="244" name="unconnected-(J82-Pad20)" class="Default">
       <node ref="J82" pin="20" pinfunction="20" pintype="passive+no_connect"/>
     </net>
-    <net code="224" name="unconnected-(J82-Pad21)" class="Default">
+    <net code="245" name="unconnected-(J82-Pad21)" class="Default">
       <node ref="J82" pin="21" pinfunction="21" pintype="passive+no_connect"/>
     </net>
-    <net code="225" name="unconnected-(J82-Pad22)" class="Default">
+    <net code="246" name="unconnected-(J82-Pad22)" class="Default">
       <node ref="J82" pin="22" pinfunction="22" pintype="passive+no_connect"/>
     </net>
-    <net code="226" name="unconnected-(J82-Pad25)" class="Default">
+    <net code="247" name="unconnected-(J82-Pad25)" class="Default">
       <node ref="J82" pin="25" pinfunction="25" pintype="passive+no_connect"/>
     </net>
-    <net code="227" name="unconnected-(J82-Pad26)" class="Default">
+    <net code="248" name="unconnected-(J82-Pad26)" class="Default">
       <node ref="J82" pin="26" pinfunction="26" pintype="passive+no_connect"/>
     </net>
-    <net code="228" name="unconnected-(J82-Pad27)" class="Default">
+    <net code="249" name="unconnected-(J82-Pad27)" class="Default">
       <node ref="J82" pin="27" pinfunction="27" pintype="passive+no_connect"/>
     </net>
-    <net code="229" name="unconnected-(J82-Pad28)" class="Default">
+    <net code="250" name="unconnected-(J82-Pad28)" class="Default">
       <node ref="J82" pin="28" pinfunction="28" pintype="passive+no_connect"/>
     </net>
-    <net code="230" name="unconnected-(J82-Pad31)" class="Default">
+    <net code="251" name="unconnected-(J82-Pad31)" class="Default">
       <node ref="J82" pin="31" pinfunction="31" pintype="passive+no_connect"/>
     </net>
-    <net code="231" name="unconnected-(J82-Pad32)" class="Default">
+    <net code="252" name="unconnected-(J82-Pad32)" class="Default">
       <node ref="J82" pin="32" pinfunction="32" pintype="passive+no_connect"/>
     </net>
-    <net code="232" name="unconnected-(J82-Pad33)" class="Default">
+    <net code="253" name="unconnected-(J82-Pad33)" class="Default">
       <node ref="J82" pin="33" pinfunction="33" pintype="passive+no_connect"/>
     </net>
-    <net code="233" name="unconnected-(J82-Pad34)" class="Default">
+    <net code="254" name="unconnected-(J82-Pad34)" class="Default">
       <node ref="J82" pin="34" pinfunction="34" pintype="passive+no_connect"/>
     </net>
-    <net code="234" name="unconnected-(J82-Pad37)" class="Default">
-      <node ref="J82" pin="37" pinfunction="37" pintype="passive+no_connect"/>
-    </net>
-    <net code="235" name="unconnected-(J82-Pad38)" class="Default">
-      <node ref="J82" pin="38" pinfunction="38" pintype="passive+no_connect"/>
-    </net>
-    <net code="236" name="unconnected-(J82-Pad39)" class="Default">
-      <node ref="J82" pin="39" pinfunction="39" pintype="passive+no_connect"/>
-    </net>
-    <net code="237" name="unconnected-(J82-Pad40)" class="Default">
-      <node ref="J82" pin="40" pinfunction="40" pintype="passive+no_connect"/>
-    </net>
-    <net code="238" name="unconnected-(J82-Pad41)" class="Default">
-      <node ref="J82" pin="41" pinfunction="41" pintype="passive+no_connect"/>
-    </net>
-    <net code="239" name="unconnected-(J82-Pad42)" class="Default">
-      <node ref="J82" pin="42" pinfunction="42" pintype="passive+no_connect"/>
-    </net>
-    <net code="240" name="unconnected-(J82-Pad43)" class="Default">
-      <node ref="J82" pin="43" pinfunction="43" pintype="passive+no_connect"/>
-    </net>
-    <net code="241" name="unconnected-(J82-Pad44)" class="Default">
-      <node ref="J82" pin="44" pinfunction="44" pintype="passive+no_connect"/>
-    </net>
-    <net code="242" name="unconnected-(J82-Pad47)" class="Default">
-      <node ref="J82" pin="47" pinfunction="47" pintype="passive+no_connect"/>
-    </net>
-    <net code="243" name="unconnected-(J82-Pad48)" class="Default">
-      <node ref="J82" pin="48" pinfunction="48" pintype="passive+no_connect"/>
-    </net>
-    <net code="244" name="unconnected-(J82-Pad49)" class="Default">
-      <node ref="J82" pin="49" pinfunction="49" pintype="passive+no_connect"/>
-    </net>
-    <net code="245" name="unconnected-(J82-Pad50)" class="Default">
-      <node ref="J82" pin="50" pinfunction="50" pintype="passive+no_connect"/>
-    </net>
-    <net code="246" name="unconnected-(J82-Pad51)" class="Default">
-      <node ref="J82" pin="51" pinfunction="51" pintype="passive+no_connect"/>
-    </net>
-    <net code="247" name="unconnected-(J82-Pad52)" class="Default">
-      <node ref="J82" pin="52" pinfunction="52" pintype="passive+no_connect"/>
-    </net>
-    <net code="248" name="unconnected-(J82-Pad53)" class="Default">
-      <node ref="J82" pin="53" pinfunction="53" pintype="passive+no_connect"/>
-    </net>
-    <net code="249" name="unconnected-(J82-Pad54)" class="Default">
-      <node ref="J82" pin="54" pinfunction="54" pintype="passive+no_connect"/>
-    </net>
-    <net code="250" name="unconnected-(J82-Pad55)" class="Default">
+    <net code="255" name="unconnected-(J82-Pad55)" class="Default">
       <node ref="J82" pin="55" pinfunction="55" pintype="passive+no_connect"/>
     </net>
-    <net code="251" name="unconnected-(J82-Pad56)" class="Default">
+    <net code="256" name="unconnected-(J82-Pad56)" class="Default">
       <node ref="J82" pin="56" pinfunction="56" pintype="passive+no_connect"/>
     </net>
-    <net code="252" name="unconnected-(J82-Pad57)" class="Default">
-      <node ref="J82" pin="57" pinfunction="57" pintype="passive+no_connect"/>
-    </net>
-    <net code="253" name="unconnected-(J82-Pad58)" class="Default">
-      <node ref="J82" pin="58" pinfunction="58" pintype="passive+no_connect"/>
-    </net>
-    <net code="254" name="unconnected-(J82-Pad59)" class="Default">
-      <node ref="J82" pin="59" pinfunction="59" pintype="passive+no_connect"/>
-    </net>
-    <net code="255" name="unconnected-(J82-Pad60)" class="Default">
-      <node ref="J82" pin="60" pinfunction="60" pintype="passive+no_connect"/>
-    </net>
-    <net code="256" name="unconnected-(U11-INT2-Pad9)" class="Default">
+    <net code="257" name="unconnected-(U11-INT2-Pad9)" class="Default">
       <node ref="U11" pin="9" pinfunction="INT2" pintype="passive+no_connect"/>
     </net>
-    <net code="257" name="unconnected-(U11-OCS_AUX-Pad10)" class="Default">
+    <net code="258" name="unconnected-(U11-OCS_AUX-Pad10)" class="Default">
       <node ref="U11" pin="10" pinfunction="OCS_AUX" pintype="passive+no_connect"/>
     </net>
-    <net code="258" name="unconnected-(U11-SDO_AUX-Pad11)" class="Default">
+    <net code="259" name="unconnected-(U11-SDO_AUX-Pad11)" class="Default">
       <node ref="U11" pin="11" pinfunction="SDO_AUX" pintype="passive+no_connect"/>
     </net>
-    <net code="259" name="unconnected-(U12-INT2-Pad9)" class="Default">
+    <net code="260" name="unconnected-(U12-INT2-Pad9)" class="Default">
       <node ref="U12" pin="9" pinfunction="INT2" pintype="passive+no_connect"/>
     </net>
-    <net code="260" name="unconnected-(U12-OCS_AUX-Pad10)" class="Default">
+    <net code="261" name="unconnected-(U12-OCS_AUX-Pad10)" class="Default">
       <node ref="U12" pin="10" pinfunction="OCS_AUX" pintype="passive+no_connect"/>
     </net>
-    <net code="261" name="unconnected-(U12-SDO_AUX-Pad11)" class="Default">
+    <net code="262" name="unconnected-(U12-SDO_AUX-Pad11)" class="Default">
       <node ref="U12" pin="11" pinfunction="SDO_AUX" pintype="passive+no_connect"/>
     </net>
-    <net code="262" name="unconnected-(U13-INT2-Pad9)" class="Default">
+    <net code="263" name="unconnected-(U13-INT2-Pad9)" class="Default">
       <node ref="U13" pin="9" pinfunction="INT2" pintype="passive+no_connect"/>
     </net>
-    <net code="263" name="unconnected-(U13-OCS_AUX-Pad10)" class="Default">
+    <net code="264" name="unconnected-(U13-OCS_AUX-Pad10)" class="Default">
       <node ref="U13" pin="10" pinfunction="OCS_AUX" pintype="passive+no_connect"/>
     </net>
-    <net code="264" name="unconnected-(U13-SDO_AUX-Pad11)" class="Default">
+    <net code="265" name="unconnected-(U13-SDO_AUX-Pad11)" class="Default">
       <node ref="U13" pin="11" pinfunction="SDO_AUX" pintype="passive+no_connect"/>
     </net>
-    <net code="265" name="unconnected-(U14-INT2-Pad9)" class="Default">
+    <net code="266" name="unconnected-(U14-INT2-Pad9)" class="Default">
       <node ref="U14" pin="9" pinfunction="INT2" pintype="passive+no_connect"/>
     </net>
-    <net code="266" name="unconnected-(U14-OCS_AUX-Pad10)" class="Default">
+    <net code="267" name="unconnected-(U14-OCS_AUX-Pad10)" class="Default">
       <node ref="U14" pin="10" pinfunction="OCS_AUX" pintype="passive+no_connect"/>
     </net>
-    <net code="267" name="unconnected-(U14-SDO_AUX-Pad11)" class="Default">
+    <net code="268" name="unconnected-(U14-SDO_AUX-Pad11)" class="Default">
       <node ref="U14" pin="11" pinfunction="SDO_AUX" pintype="passive+no_connect"/>
     </net>
-    <net code="268" name="unconnected-(U21-LNA_EN-Pad13)" class="Default">
+    <net code="269" name="unconnected-(U21-LNA_EN-Pad13)" class="Default">
       <node ref="U21" pin="13" pinfunction="LNA_EN" pintype="passive+no_connect"/>
     </net>
-    <net code="269" name="unconnected-(U21-RESET_N-Pad9)" class="Default">
+    <net code="270" name="unconnected-(U21-RESET_N-Pad9)" class="Default">
       <node ref="U21" pin="9" pinfunction="RESET_N" pintype="passive+no_connect"/>
     </net>
-    <net code="270" name="unconnected-(U21-RXD_NC-Pad3)" class="Default">
+    <net code="271" name="unconnected-(U21-RXD_NC-Pad3)" class="Default">
       <node ref="U21" pin="3" pinfunction="RXD_NC" pintype="passive+no_connect"/>
     </net>
-    <net code="271" name="unconnected-(U21-SAFEBOOT_N-Pad18)" class="Default">
+    <net code="272" name="unconnected-(U21-SAFEBOOT_N-Pad18)" class="Default">
       <node ref="U21" pin="18" pinfunction="SAFEBOOT_N" pintype="passive+no_connect"/>
     </net>
-    <net code="272" name="unconnected-(U21-TXD_NC-Pad2)" class="Default">
+    <net code="273" name="unconnected-(U21-TXD_NC-Pad2)" class="Default">
       <node ref="U21" pin="2" pinfunction="TXD_NC" pintype="passive+no_connect"/>
     </net>
-    <net code="273" name="unconnected-(U21-VCC_RF-Pad14)" class="Default">
+    <net code="274" name="unconnected-(U21-VCC_RF-Pad14)" class="Default">
       <node ref="U21" pin="14" pinfunction="VCC_RF" pintype="passive+no_connect"/>
     </net>
-    <net code="274" name="unconnected-(U21-VIO_SEL_OPEN_3V3-Pad15)" class="Default">
+    <net code="275" name="unconnected-(U21-VIO_SEL_OPEN_3V3-Pad15)" class="Default">
       <node ref="U21" pin="15" pinfunction="VIO_SEL_OPEN_3V3" pintype="passive+no_connect"/>
     </net>
-    <net code="275" name="unconnected-(U21-V_BCKP-Pad6)" class="Default">
+    <net code="276" name="unconnected-(U21-V_BCKP-Pad6)" class="Default">
       <node ref="U21" pin="6" pinfunction="V_BCKP" pintype="power_in+no_connect"/>
     </net>
-    <net code="276" name="unconnected-(U41-B8-Pad14)" class="Default">
+    <net code="277" name="unconnected-(U41-B8-Pad14)" class="Default">
       <node ref="U41" pin="14" pinfunction="B8" pintype="passive+no_connect"/>
     </net>
-    <net code="277" name="unconnected-(U42-A7-Pad9)" class="Default">
+    <net code="278" name="unconnected-(U42-A7-Pad9)" class="Default">
       <node ref="U42" pin="9" pinfunction="A7" pintype="passive+no_connect"/>
     </net>
-    <net code="278" name="unconnected-(U42-A8-Pad10)" class="Default">
+    <net code="279" name="unconnected-(U42-A8-Pad10)" class="Default">
       <node ref="U42" pin="10" pinfunction="A8" pintype="passive+no_connect"/>
     </net>
   </nets>

@@ -6,6 +6,7 @@ still requires fabricated copper/thermal validation.
 """
 from pathlib import Path
 import json,subprocess
+from kicad_support import save_board
 import pcbnew as p
 ROOT=Path(__file__).resolve().parents[2];F=ROOT/'hw/boards/shakesense-trenz-hat';PATH=F/'shakesense-trenz-hat.kicad_pcb'
 b=p.LoadBoard(str(PATH));nets=b.GetNetsByName()
@@ -23,15 +24,17 @@ for layer,points in [
     z=p.ZONE(b);z.SetLayer(layer);z.SetNet(nets['FPGA_VIN']);z.SetLocalClearance(p.FromMM(.2));z.SetMinThickness(p.FromMM(.2));z.SetPadConnection(p.ZONE_CONNECTION_FULL);z.SetIslandRemovalMode(p.ISLAND_REMOVAL_MODE_ALWAYS);z.Outline().NewOutline()
     for x,y in points:z.Outline().Append(v(x,y))
     b.Add(z)
-b.BuildConnectivity();p.ZONE_FILLER(b).Fill(b.Zones());p.SaveBoard(str(PATH),b)
+b.BuildConnectivity();p.ZONE_FILLER(b).Fill(b.Zones());save_board(str(PATH),b)
 accepted=[]
 for x,y in [(19.6,7.5),(20.6,7.5),(21.6,7.5),(22.6,7.5),(43,9),(44,9),(45,9),(43,48),(44,48),(45,48)]:
+    if any(isinstance(t,p.PCB_VIA) and t.GetNetname()=='FPGA_VIN' and t.GetPosition()==v(x,y) for t in b.GetTracks()):
+        accepted.append([x,y]);continue
     t=p.PCB_VIA(b);t.SetPosition(v(x,y));t.SetWidth(p.FromMM(.6));t.SetDrill(p.FromMM(.3));t.SetViaType(p.VIATYPE_THROUGH);t.SetLayerPair(p.F_Cu,p.B_Cu);t.SetNet(nets['FPGA_VIN']);b.Add(t)
-    p.ZONE_FILLER(b).Fill(b.Zones());p.SaveBoard(str(PATH),b)
+    p.ZONE_FILLER(b).Fill(b.Zones());save_board(str(PATH),b)
     out=F/'power-via-trial.json';subprocess.run(['kicad-cli','pcb','drc','--format','json','-o',str(out),str(PATH)],check=True,stdout=subprocess.DEVNULL)
     j=json.loads(out.read_text())
     if j['violations'] or j['unconnected_items']:b.Delete(t)
     else:accepted.append([x,y]);t.SetLocked(True)
-p.ZONE_FILLER(b).Fill(b.Zones());p.SaveBoard(str(PATH),b)
+p.ZONE_FILLER(b).Fill(b.Zones());save_board(str(PATH),b)
 (F/'power-distribution.json').write_text(json.dumps({'additional_parallel_vias_mm':accepted,'note':'Parallel copper improves supply routing; thermal and extracted resistance signoff pending'},indent=2))
 print('Added module supply planes; accepted parallel vias:',accepted)

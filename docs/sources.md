@@ -41,3 +41,17 @@ The Coldfoot references are the user's existing sibling `coldfoot_soc` workspace
 
 See [USB circuit and manufacturer references](usb-sensor-head.md). The former PCA9615 cable has been removed from both boards.
 
+
+## T1 GPIO expansion
+
+- Trenz exact-SKU revision-03 schematic, page 6, archived under `docs/vendor/trenz`:
+  source for `trenz-gpio-module.csv` and `trenz-ground-module.csv`.
+- [Amphenol F32Q 40-contact connector](https://www.amphenol-cs.com/product/f32q1a7h111040.html)
+  and [60-contact connector](https://www.amphenol-cs.com/product/f32q1a7h111060.html):
+  0.5 mm pitch, upper contacts, 2 mm nominal height.
+- Footprints copied from KiCad 9 `Connector_FFC-FPC.pretty`, Amphenol F32Q family;
+  mechanical MP tabs renumbered 41/61 for atopile and grounded. Library footprint
+  geometry is retained. The separate FFC 3D bodies are simplified envelopes,
+  not manufacturer STEP models or cable-clearance certification.
+
+HDI fabrication reference: [JLCPCB HDI capabilities](https://jlcpcb.com/help/article/hdi-pcb-capabilities-faq). T1 uses a provisional 1+6+1 stack; manufacturer DFM, material selection and RF impedance approval remain open.

@@ -1,5 +1,8 @@
 # Documentation
 
+- **Active work:** [four-step sensor development plan](sensor-development-plan.md)
+  on the Pi/T1/Trenz stack; Coldfoot integration is deferred.
+
 - [Project map](project-layout.md) and [portable lab](portable-lab.md).
 - [A2 design](design-a0.md), [Coldfoot module integration](coldfoot-integration.md),
   and [validation limits](validation.md).

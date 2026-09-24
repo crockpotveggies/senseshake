@@ -4,6 +4,7 @@ The Pi model is conceptual; the HAT geometry is the actual KiCad PCB. Run after
 routing. Does not change the circuit or create a fictitious routed board.
 """
 from pathlib import Path
+from kicad_support import save_board
 import pcbnew as p
 ROOT=Path(__file__).resolve().parents[2];M=ROOT/'hw/models'
 F=ROOT/'hw/boards/shakesense-trenz-hat';NAME='shakesense-trenz-hat'
@@ -27,20 +28,35 @@ for n in [50,30]:
     for i in range(n):
         for y in [-1.85,1.85]:s+=box((i-(n-1)/2)*.5,y,.3,.2,1.1,.6,'0.72 0.58 0.25')
     write(f'LSHM_{n}_4mm',s)
+# F32Q envelopes: footprint body outline, manufacturer 2 mm nominal height.
+# No supplier STEP is available locally; these are visual envelopes, not tolerance models.
+for n in (40,60):
+    width=(n-1)*.5+7
+    body=box(0,.3,1,width,5.1,2,'0.84 0.81 0.68')
+    body+=box(0,-1.9,1.2,width-1,1.2,1.6,'0.16 0.17 0.18')
+    for i in range(n):body+=box((i-(n-1)/2)*.5,3,.15,.3,1,.3,'0.73 0.57 0.22')
+    write(f'FFC_F32Q_{n}_envelope',body)
 b=p.LoadBoard(str(F/(NAME+'.kicad_pcb')))
-custom={'U20':'SCL3300','U21':'MAX_M10S','J1':'Pi_ESQ_120_23','J80':'LSHM_50_4mm','J81':'LSHM_50_4mm','J82':'LSHM_30_4mm'}
+title=b.GetTitleBlock();title.SetRevision('T1-GPIO HDI');title.SetDate('2026-09-24');b.SetTitleBlock(title)
+custom={'U20':'SCL3300','U21':'MAX_M10S','J1':'Pi_ESQ_120_23','J80':'LSHM_50_4mm','J81':'LSHM_50_4mm','J82':'LSHM_30_4mm','J86':'FFC_F32Q_40_envelope','J87':'FFC_F32Q_40_envelope','J88':'FFC_F32Q_60_envelope','J89':'FFC_F32Q_60_envelope'}
 for fp in b.GetFootprints():
     if fp.GetReference() in custom:model(fp,'${KIPRJMOD}/../../models/'+custom[fp.GetReference()]+'.wrl')
     else:
         for m in fp.Models():m.m_Filename=m.m_Filename.replace('${KICAD7_3DMODEL_DIR}','${KICAD9_3DMODEL_DIR}')
-p.SaveBoard(str(F/(NAME+'.kicad_pcb')),b)
+# Mark each underside bank without covering the fine-pitch pads.
+for item in list(b.GetDrawings()):
+    if isinstance(item,p.PCB_TEXT) and item.GetText().startswith('GPIO J8'):b.Delete(item)
+for ref,bank,x,y in [('J86',13,17,16),('J87',14,17,33),('J88',15,57,14),('J89',16,57,31)]:
+    t=p.PCB_TEXT(b);t.SetText(f'GPIO {ref} B{bank} 3V3');t.SetLayer(p.B_SilkS);t.SetMirrored(True)
+    t.SetPosition(p.VECTOR2I(p.FromMM(x+50),p.FromMM(y+50)));t.SetTextSize(p.VECTOR2I(p.FromMM(.8),p.FromMM(.8)));t.SetTextThickness(p.FromMM(.1));b.Add(t)
+save_board(str(F/(NAME+'.kicad_pcb')),b)
 # Actual carrier + manufacturer's module geometry; separate assembly view file.
 add(b,'MODEL_TE0712','${KIPRJMOD}/../../models/trenz/STP-TE0712-03-No Variations.step',(80,98),(0,0,9.6099917))
 st=''
 for x,y in [(33,11),(77,11),(33,45),(77,45)]:
     st+=cylinder(x,-y,4,2.5,8,'0.7 0.72 0.74')
 write('Trenz_spacers',st);add(b,'MODEL_SPACERS','${KIPRJMOD}/../../models/Trenz_spacers.wrl',(50,50))
-p.SaveBoard(str(F/'trenz-mounted.kicad_pcb'),b)
+save_board(str(F/'trenz-mounted.kicad_pcb'),b)
 # Pi 4 concept. Top surface is below carrier by 1.6+16.129+2.54 mm.
 z=-20.269
 pi=box(42.5,-28,z-.8,85,56,1.6,'0.04 0.28 0.15')
@@ -56,11 +72,11 @@ for x,y in [(3.5,3.5),(61.5,3.5),(3.5,52.5),(61.5,52.5)]:
     pi+=cylinder(x,-y,(z-1.6)/2,2.4,18.669,'0.69 0.7 0.72')
 for x,y in [(12,11),(20,42),(45,15),(57,43),(62,20)]:pi+=box(x,-y,z+.5,4,3,1,'0.12 0.13 0.14')
 write('Pi4_stack_concept',pi);add(b,'MODEL_PI4','${KIPRJMOD}/../../models/Pi4_stack_concept.wrl',(50,50))
-p.SaveBoard(str(F/'pi-trenz-stack-concept.kicad_pcb'),b)
+save_board(str(F/'pi-trenz-stack-concept.kicad_pcb'),b)
 # Exploded view separates assemblies; spacer bodies are hidden intentionally.
 for fp in list(b.GetFootprints()):
     if fp.GetReference()=='MODEL_TE0712':model(fp,'${KIPRJMOD}/../../models/trenz/STP-TE0712-03-No Variations.step',(0,0,27.6099917))
     elif fp.GetReference()=='MODEL_PI4':model(fp,'${KIPRJMOD}/../../models/Pi4_stack_concept.wrl',(0,0,-20))
     elif fp.GetReference()=='MODEL_SPACERS':b.Delete(fp)
-p.SaveBoard(str(F/'stack-exploded.kicad_pcb'),b)
+save_board(str(F/'stack-exploded.kicad_pcb'),b)
 print('Models attached; actual HAT, mounted Trenz and conceptual Pi stack saved')

@@ -1,5 +1,6 @@
 """One-time A2-derived Trenz variant authoring. Maintained circuit is hat_trenz.ato.
 
+Legacy pre-expansion authoring only: this does not include J86-J89.
 Run only when intentionally resetting this variant's circuit and placement.
 Vendor module pin numbers are mapped to opposite-parity carrier pad numbers.
 """
@@ -58,8 +59,8 @@ def part(ref,typ,mpn,lib,fpname,xy,pins,section='08-trenz-carrier',angle=0,note=
 jm1={1:'FPGA_VIN',3:'FPGA_VIN',5:'FPGA_VIN',9:'FPGA_3V3',11:'FPGA_3V3',13:'FPGA_VIN',15:'FPGA_VIN',14:'FPGA_3V3',7:'FPGA_NOSEQ',28:'FPGA_EN1',30:'FPGA_PGOOD',32:'FPGA_MODE',89:'FPGA_JTAGEN'}
 jm2={2:'FPGA_VIN',4:'FPGA_VIN',6:'FPGA_VIN',8:'FPGA_VIN',1:'FPGA_3V3',3:'FPGA_3V3',7:'FPGA_3V3',9:'FPGA_3V3',10:'FPGA_3V3',12:'FPGA_3V3',91:'FPGA_3V3',93:'JTAG_TMS',95:'JTAG_TDI',97:'JTAG_TDO',99:'JTAG_TCK',18:'FPGA_CONFIG_RESET_N',11:'FPGA_UART_RX',13:'FPGA_UART_TX',14:'FPGA_RESET_N',16:'FPGA_AUX0',15:'FPGA_AUX1',17:'FPGA_AUX2'}
 jm3={}
-for i in [2,12,20,29,31,34,44,53,54,63,64,73,74,90]:jm1[i]='GND'
-for i in [20,29,30,39,40,49,50,59,60,69,70,79,80,90]:jm2[i]='GND'
+for i in [2,8,20,26,29,34,44,53,54,63,64,73,74,84,90]:jm1[i]='GND'
+for i in [20,39,40,49,50,59,60,69,70,79,80,90]:jm2[i]='GND'
 for i in [5,6,11,12,17,18,23,24,29,30,35,36,45,46]:jm3[i]='GND'
 audit=[]
 for ref,jm,xy,n,angle in [('J80',jm1,[105,44],50,0),('J81',jm2,[105,12],50,0),('J82',jm3,[84,28],30,90)]:

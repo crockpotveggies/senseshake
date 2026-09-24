@@ -38,8 +38,8 @@ drive-sharing configuration. No host directory is mounted into the container.
 
 | Profile | Checks |
 | --- | --- |
-| `full` (default) | Fresh atopile builds for A2, USB field head, and T1; explicit numeric constraint solve for each; rejection of the deliberately unsafe 5 V IMU fixture; circuit invariants; native KiCad ERC/DRC and connectivity checks for all three boards; 37 bounded SPICE cases. |
-| `quick` | Same circuit/PCB consistency and SPICE checks using saved compiled layouts. Does **not** prove `.ato` changes were rebuilt. |
+| `full` (default) | Fresh atopile builds for A2, USB field head, and T1; explicit numeric constraint solve for each; rejection of the deliberately unsafe 5 V IMU fixture; circuit invariants and nine GPIO mapping/fault/import cases; native KiCad ERC/DRC and connectivity checks for all three boards; 37 bounded SPICE cases. |
+| `quick` | Same GPIO fault, circuit/PCB consistency and SPICE checks using saved compiled layouts. Does **not** prove `.ato` changes were rebuilt. |
 | `spice` | 27 A2/field support-circuit cases and 10 Trenz support-circuit cases, including expected fault detection. |
 
 The runner calls the existing project entrypoints. It does not reroute boards,
@@ -153,13 +153,14 @@ software under `sw/`.
 
 ## Recorded validation
 
-The full profile passed on this Windows/Docker Desktop machine in 74.69 seconds
-(2026-09-23 Pacific / 2026-09-24 UTC). Run ID:
-`20260924T064109Z-31a9e9c0`. It completed all 12 steps, including all three fresh
-builds and constraint solves, the negative voltage fixture, native ERC/DRC,
-connectivity checks, and 37 SPICE cases. Reports were successfully retrieved to
-`P:\Personal\senseshake\.lab\runs\20260924T064109Z-31a9e9c0`, using 1.9 MiB.
-The container then stopped and was removed. This report is subject to retention.
+The full profile passed on this Windows/Docker Desktop machine in **80.36 seconds**
+on 2026-09-24. Run ID: `20260924T175927Z-56b849c7`. It completed all **13 steps**,
+including three fresh builds and constraint solves, the negative voltage fixture,
+nine GPIO regression cases, native ERC/DRC/connectivity, and 37 bounded SPICE
+cases. Reports were retrieved to `.lab/runs/20260924T175927Z-56b849c7` (2.0 MiB).
+The container stopped and was removed. Detailed reports are subject to retention;
+the T1 [verification summary](../hw/boards/shakesense-trenz-hat/verification.json)
+records this run and the separate copper-replay check.
 
 Nine applicable safeguard tests passed in Linux. Eight passed natively on
 Windows, including junction rejection and concurrent lock exclusion; two real

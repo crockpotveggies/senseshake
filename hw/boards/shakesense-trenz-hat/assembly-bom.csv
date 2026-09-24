@@ -9,3 +9,5 @@ Host,1,Raspberry Pi with 40-pin header,User-supplied; rendering uses a simplifie
 Module power,1,Regulated current-limited 3.3 V supply,Maintain 3.201-3.399 V at module; 3 A initial operating budget
 Programming adapter,1,Compatible external JTAG probe,Match J84 signal order and 3.3 V reference; not permanently fitted
 Cooling,1,Workload-dependent FPGA heatsink,Select after power/thermal testing; not included in nominal height model
+Expansion cables (optional),2,40-way 0.5 mm FFC/FPC,For J86/J87; upper-contact connector; qualify thickness contact orientation length and bend path before procurement
+Expansion cables (optional),2,60-way 0.5 mm FFC/FPC,For J88/J89; upper-contact connector; qualify thickness contact orientation length and bend path before procurement

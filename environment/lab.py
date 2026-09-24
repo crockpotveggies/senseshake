@@ -124,7 +124,7 @@ def source_files(source):
     files = [source / "hw" / name for name in ("ato.yaml", "layout.json", "layout-trenz.json")]
     for folder, patterns in {
         "hw/elec": ("*.ato", "*.kicad_mod", "*.kicad_sym"),
-        "hw/tools": ("*.py",), "docs": ("*.csv",),
+        "hw/tools": ("*.py",), "hw/tests": ("*.py",), "docs": ("*.csv",),
         "hw/libraries": ("*.kicad_mod", "*.kicad_sym"),
     }.items():
         for pattern in patterns:
@@ -186,6 +186,7 @@ def commands(profile):
                       (f"constraints-{target}", ["/opt/atopile/bin/python", "hw/tools/solve_constraints.py", "--target", target])]
         steps.append(("reject-overvoltage", ["/opt/atopile/bin/python", "hw/tools/solve_constraints.py", "--negative"]))
     if profile in ("full", "quick"):
+        steps += [("gpio-faults", ["python3", "-m", "unittest", "discover", "-s", "hw/tests", "-p", "test_gpio_audit.py"])]
         steps += [(name, ["python3", f"hw/tools/{name}.py"]) for name in ("check_circuit", "check_design", "check_trenz")]
     steps += [(name, ["python3", f"hw/tools/{name}.py"]) for name in ("simulate", "simulate_trenz")]
     return steps

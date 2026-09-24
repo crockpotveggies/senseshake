@@ -1,5 +1,10 @@
 # ShakeSense — sensors, Raspberry Pi HATs and Coldfoot integration
 
+**Current focus:** sensor development on the Pi → T1 HAT → Trenz FPGA stack.
+Coldfoot ASIC/runtime integration is deferred. Preserve the required FPGA
+connections while building sensor acquisition and tests; see the
+[four-step sensor plan](docs/sensor-development-plan.md).
+
 **Portable tests:** run `./lab.ps1 build` once, then `./lab.ps1 test` from
 PowerShell. See the [portable lab guide](docs/portable-lab.md) for profiles,
 bounded scratch storage, automatic five-run retention, and cleanup previews.
@@ -17,7 +22,11 @@ See the [project map](docs/project-layout.md) for ownership and generated-file r
 with [carrier 3D](hw/boards/shakesense-trenz-hat/3d.png) and
 [three-board stack concept](hw/boards/shakesense-trenz-hat/pi-trenz-stack-concept.png).
 It is an alternative to the ASIC HAT below and requires external regulated 3.3 V
-FPGA power. Its FPGA bitstream port and physical qualification remain pending.
+FPGA power. J85-J89 expose 155 GPIOs at 3.3 V, including four underside ribbon
+connectors; see the [pin contract](docs/trenz-gpio-breakout.csv). Its FPGA
+bitstream port, cable/stack fit and physical qualification remain pending.
+The complete breakout uses an eight-layer HDI stack; manufacturer DFM and GNSS
+RF impedance review are required before fabrication. Ethernet is not exposed.
 
 An engineering prototype with four LSM6DSO IMUs, an SCL3300 inclinometer,
 MAX-M10S GNSS, a remote RM3100 XYZ magnetometer and optional DLVR differential

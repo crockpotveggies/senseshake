@@ -2,7 +2,9 @@
 from pathlib import Path
 import subprocess,sys
 ROOT=Path(__file__).resolve().parents[2];F=ROOT/'hw/boards/shakesense-trenz-hat'
+(ROOT/'hw/logs').mkdir(parents=True,exist_ok=True)
 for pcb,png,angle,zoom in [
+ ('shakesense-trenz-hat','3d-bottom','145,0,205','.9'),
  ('shakesense-trenz-hat','3d','325,0,25','.9'),
  ('trenz-mounted','trenz-mounted','315,0,30','.8'),
  ('pi-trenz-stack-concept','pi-trenz-stack-concept','300,0,30','.78'),

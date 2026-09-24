@@ -1,5 +1,16 @@
 # ShakeSense repository guidance
 
+Current priority is the [sensor development plan](docs/sensor-development-plan.md)
+on the Pi/T1/Trenz stack. Defer Coldfoot ASIC/runtime/RTL integration. Keep sensor
+software independent of a configured FPGA; preserve the existing FPGA interfaces.
+The Trenz GPIO expansion exposes 155 user I/Os on J85-J89 while retaining
+sensors, existing interfaces and the 85 x 56 mm outline. Preserve the vendor
+GPIO/ground fixtures and run their full module-contact audit when changing T1.
+T1 uses a provisional eight-layer 1+6+1 HDI stack and a complete native SES
+routing snapshot. Manufacturer DFM, GNSS RF impedance, cable/stack fit and GPIO
+signal integrity still need qualification. Ethernet is not exposed.
+Keep the A2 ASIC design deferred for this phase.
+
 Keep authored inputs separate from disposable build output. Preserve unrelated
 work. Hardware changes belong under `hw/`, software under `sw/`, shared design
 and interface documentation under `docs/`, and portable test tooling under

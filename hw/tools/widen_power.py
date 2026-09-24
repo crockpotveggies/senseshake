@@ -5,6 +5,7 @@ uses real DRC; every implicated trial segment returns to its previous width.
 """
 from pathlib import Path
 import json,subprocess,collections,sys
+from kicad_support import save_board
 import pcbnew as p
 ROOT=Path(__file__).resolve().parents[2]
 power={'PI_5V','PI_3V3','SENS_3V3','USB_VBUS','USB_5V','V3_SENSOR','V3','CF_REG_3V3','CF_3V3','CF_SW','FPGA_VIN','FPGA_3V3','EXT_3V3'}
@@ -16,19 +17,26 @@ for name in sys.argv[1:] or ['shakesense-hat','shakesense-field-head']:
         for t in b.GetTracks():
             if t.GetClass()=='PCB_TRACK' and t.GetNetname() in power and t.GetWidth()<p.FromMM(width):
                 changed[t.m_Uuid.AsString()]=(t,t.GetWidth());t.SetWidth(p.FromMM(width))
-        p.SaveBoard(str(path),b)
-        out=ROOT/'hw/logs'/f'widen-{name}-{width}.json'
-        subprocess.run(['kicad-cli','pcb','drc','--format','json','-o',str(out),str(path)],check=True,stdout=subprocess.DEVNULL)
-        report=json.loads(out.read_text())
         reverted=set()
-        for v in report['violations']:
-            if v['severity']=='error':
-                for item in v['items']:
+        # KiCad caps large violation lists. Recheck after each rollback until
+        # every remaining trial is clean, including freshly filled zone copper.
+        while True:
+            p.ZONE_FILLER(b).Fill(b.Zones());save_board(str(path),b)
+            out=ROOT/'hw/logs'/f'widen-{name}-{width}.json'
+            subprocess.run(['kicad-cli','pcb','drc','--format','json','-o',str(out),str(path)],check=True,stdout=subprocess.DEVNULL)
+            report=json.loads(out.read_text())
+            if not report['violations'] and not report['unconnected_items']:break
+            undo=set()
+            for violation in report['violations']+report['unconnected_items']:
+                for item in violation['items']:
                     key=item['uuid']
-                    if key in changed:
-                        t,old=changed[key];t.SetWidth(old);reverted.add(key)
+                    if key in changed and key not in reverted:undo.add(key)
+            assert undo,'DRC failure is unrelated to remaining width trials; inspect saved report'
+            for key in undo:
+                t,old=changed[key];t.SetWidth(old)
+            reverted.update(undo)
         trials[str(width)]={'attempted':len(changed),'retained':len(changed)-len(reverted)}
-    p.ZONE_FILLER(b).Fill(b.Zones());p.SaveBoard(str(path),b)
+    p.ZONE_FILLER(b).Fill(b.Zones());save_board(str(path),b)
     lengths=collections.defaultdict(float)
     for t in b.GetTracks():
         if t.GetClass()=='PCB_TRACK' and t.GetNetname() in power:lengths[(t.GetNetname(),round(p.ToMM(t.GetWidth()),3))]+=p.ToMM(t.GetLength())

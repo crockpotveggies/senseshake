@@ -1,6 +1,7 @@
 """Emit paginated review schematics from the compiled/routed board connectivity."""
 from pathlib import Path
 import json,types,collections,sys
+from kicad_support import save_board
 import pcbnew as p
 from kicad_support import schematic,uid
 ROOT=Path(__file__).resolve().parents[2]
@@ -25,6 +26,6 @@ def main():
         active={name+'.kicad_sch'}|{x.section+'.kicad_sch' for x in parts}
         for old in folder.glob('*.kicad_sch'):
             if old.name not in active and old.name[:2].isdigit():old.unlink()
-        p.SaveBoard(str(path),b);(folder/'electrical.json').write_text(json.dumps(data,indent=2))
+        save_board(str(path),b);(folder/'electrical.json').write_text(json.dumps(data,indent=2))
         print(name,'review sheets',len({x.section for x in parts}))
 if __name__=='__main__':main()
