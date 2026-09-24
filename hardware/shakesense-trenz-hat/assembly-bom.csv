@@ -1,0 +1,11 @@
+Item,Quantity,Part,Note
+Carrier assembly,1,ShakeSense T1,Use generated bom.csv for carrier electronic components
+FPGA module,1,TE0712-03-81I36-A,XC7A200T-1FBG484I; standard 4 mm connectors
+Trenz spacers,4,M3 8 mm surface-gap spacers,Match actual mating stack; insulated hardware preferred near copper
+Trenz fasteners,4,M3 screws,Select length for actual spacers; avoid bottoming
+Pi spacers,4,Approximately 18.67 mm effective clearance,Select measured spacers/shims for ESQ-120-23-G-D plus Pi header mating
+Pi fasteners,4,M2.5 screws,Select length for actual spacers
+Host,1,Raspberry Pi with 40-pin header,User-supplied; rendering uses a simplified Pi 4 Model B
+Module power,1,Regulated current-limited 3.3 V supply,Maintain 3.201-3.399 V at module; 3 A initial operating budget
+Programming adapter,1,Compatible external JTAG probe,Match J84 signal order and 3.3 V reference; not permanently fitted
+Cooling,1,Workload-dependent FPGA heatsink,Select after power/thermal testing; not included in nominal height model

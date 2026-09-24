@@ -1,0 +1,14 @@
+ShakeSense A2 supporting circuit: power_3p18_1p0_0p2
+Vreg source 0 3.18
+Rsource source feed 0.2
+Ltrace feed board 500n
+Rbulk board bulk 0.03
+Cbulk bulk 0 2.2e-05
+Rlocal board local 0.04
+Clocal local 0 1u
+Iload board 0 PULSE(0.02 0.20 100u 1u 1u 200u 500u)
+.tran 100n 800u
+.measure tran vmin MIN v(board) FROM=90u TO=800u
+.measure tran vmax MAX v(board) FROM=90u TO=800u
+
+.end

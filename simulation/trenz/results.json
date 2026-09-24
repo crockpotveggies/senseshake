@@ -1,0 +1,78 @@
+{
+  "cases": [
+    {
+      "case": "dc_3.267_0.1",
+      "measured": {
+        "vmodule": 3.2655
+      },
+      "pass_check": true
+    },
+    {
+      "case": "dc_3.267_1.5",
+      "measured": {
+        "vmodule": 3.2445
+      },
+      "pass_check": true
+    },
+    {
+      "case": "dc_3.267_3.0",
+      "measured": {
+        "vmodule": 3.222
+      },
+      "pass_check": true
+    },
+    {
+      "case": "dc_3.333_0.1",
+      "measured": {
+        "vmodule": 3.3315
+      },
+      "pass_check": true
+    },
+    {
+      "case": "dc_3.333_1.5",
+      "measured": {
+        "vmodule": 3.3105
+      },
+      "pass_check": true
+    },
+    {
+      "case": "dc_3.333_3.0",
+      "measured": {
+        "vmodule": 3.288
+      },
+      "pass_check": true
+    },
+    {
+      "case": "reject_long_power_lead",
+      "measured": {
+        "vmodule": 2.967
+      },
+      "undervoltage_detected": true
+    },
+    {
+      "case": "uart_25pf",
+      "measured": {
+        "rise": 2.265217e-09,
+        "sample": 3.201
+      },
+      "pass_check": true
+    },
+    {
+      "case": "uart_100pf",
+      "measured": {
+        "rise": 6.099502e-09,
+        "sample": 3.201
+      },
+      "pass_check": true
+    },
+    {
+      "case": "uart_200pf",
+      "measured": {
+        "rise": 1.220111e-08,
+        "sample": 3.201
+      },
+      "pass_check": true
+    }
+  ],
+  "scope": "6 DC budget checks, 1 expected undervoltage detection, 3 lumped UART RC checks; not regulator stability, silicon, FPGA firmware or signal-integrity signoff"
+}

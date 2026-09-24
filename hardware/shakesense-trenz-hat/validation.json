@@ -1,0 +1,19 @@
+{
+  "status": "T1 engineering prototype; not fabrication released",
+  "outline_mm": [
+    85,
+    56
+  ],
+  "compiled_pin_checks": 615,
+  "critical_module_pin_checks": 29,
+  "drc_violations": 0,
+  "unconnected_items": 0,
+  "erc_violations": 0,
+  "tracks_and_vias": 1634,
+  "limits": [
+    "No FPGA bitstream port or hardware test performed",
+    "External regulated 3.3 V supply required; confirm 3.201\u20133.399 V at module under startup/load",
+    "Copper resistance, heating, sensor thermal drift, EMI and physical mating remain unqualified",
+    "Pi rendering is conceptual; Trenz rendering uses vendor generic revision-03 STEP"
+  ]
+}

@@ -1,0 +1,8 @@
+ShakeSense Trenz support check: dc_3.333_0.1
+Vsource src 0 3.333
+Rpath src module 0.015
+Iload module 0 0.1
+Cbulk module 0 26.4u
+.tran 1u 100u
+.measure tran vmodule FIND v(module) AT=99u
+.end

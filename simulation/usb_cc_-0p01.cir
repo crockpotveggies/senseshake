@@ -1,0 +1,9 @@
+ShakeSense A2 supporting circuit: usb_cc_-0p01
+Vhost src 0 5
+Rrp src cc 56000
+Rrd cc 0 5049.0
+Ccc cc 0 100p
+.tran 1n 20u
+.measure tran cc_voltage FIND v(cc) AT=19u
+
+.end

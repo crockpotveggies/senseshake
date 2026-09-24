@@ -1,0 +1,225 @@
+{
+  "trial_counts": {
+    "1.2": {
+      "attempted": 370,
+      "retained": 82
+    },
+    "0.8": {
+      "attempted": 288,
+      "retained": 60
+    },
+    "0.6": {
+      "attempted": 228,
+      "retained": 40
+    },
+    "0.4": {
+      "attempted": 188,
+      "retained": 50
+    },
+    "0.3": {
+      "attempted": 138,
+      "retained": 39
+    },
+    "0.25": {
+      "attempted": 99,
+      "retained": 17
+    },
+    "0.2": {
+      "attempted": 82,
+      "retained": 20
+    }
+  },
+  "track_length_mm": [
+    {
+      "net": "EXT_3V3",
+      "width_mm": 0.8,
+      "length_mm": 5.1
+    },
+    {
+      "net": "EXT_3V3",
+      "width_mm": 1.2,
+      "length_mm": 4.95
+    },
+    {
+      "net": "FPGA_3V3",
+      "width_mm": 0.15,
+      "length_mm": 44.203
+    },
+    {
+      "net": "FPGA_3V3",
+      "width_mm": 0.2,
+      "length_mm": 23.535
+    },
+    {
+      "net": "FPGA_3V3",
+      "width_mm": 0.25,
+      "length_mm": 25.71
+    },
+    {
+      "net": "FPGA_3V3",
+      "width_mm": 0.3,
+      "length_mm": 5.546
+    },
+    {
+      "net": "FPGA_3V3",
+      "width_mm": 0.4,
+      "length_mm": 12.084
+    },
+    {
+      "net": "FPGA_3V3",
+      "width_mm": 0.6,
+      "length_mm": 16.675
+    },
+    {
+      "net": "FPGA_3V3",
+      "width_mm": 0.8,
+      "length_mm": 6.055
+    },
+    {
+      "net": "FPGA_3V3",
+      "width_mm": 1.2,
+      "length_mm": 29.231
+    },
+    {
+      "net": "FPGA_VIN",
+      "width_mm": 0.15,
+      "length_mm": 33.353
+    },
+    {
+      "net": "FPGA_VIN",
+      "width_mm": 0.2,
+      "length_mm": 5.434
+    },
+    {
+      "net": "FPGA_VIN",
+      "width_mm": 0.3,
+      "length_mm": 2.152
+    },
+    {
+      "net": "FPGA_VIN",
+      "width_mm": 0.4,
+      "length_mm": 14.744
+    },
+    {
+      "net": "FPGA_VIN",
+      "width_mm": 0.6,
+      "length_mm": 24.897
+    },
+    {
+      "net": "FPGA_VIN",
+      "width_mm": 0.8,
+      "length_mm": 16.929
+    },
+    {
+      "net": "FPGA_VIN",
+      "width_mm": 1.2,
+      "length_mm": 8.887
+    },
+    {
+      "net": "PI_3V3",
+      "width_mm": 0.15,
+      "length_mm": 62.778
+    },
+    {
+      "net": "PI_3V3",
+      "width_mm": 0.2,
+      "length_mm": 10.464
+    },
+    {
+      "net": "PI_3V3",
+      "width_mm": 0.25,
+      "length_mm": 2.625
+    },
+    {
+      "net": "PI_3V3",
+      "width_mm": 0.3,
+      "length_mm": 32.721
+    },
+    {
+      "net": "PI_3V3",
+      "width_mm": 0.4,
+      "length_mm": 9.938
+    },
+    {
+      "net": "PI_3V3",
+      "width_mm": 0.6,
+      "length_mm": 17.819
+    },
+    {
+      "net": "PI_3V3",
+      "width_mm": 0.8,
+      "length_mm": 12.492
+    },
+    {
+      "net": "PI_3V3",
+      "width_mm": 1.2,
+      "length_mm": 36.792
+    },
+    {
+      "net": "PI_5V",
+      "width_mm": 0.15,
+      "length_mm": 20.244
+    },
+    {
+      "net": "PI_5V",
+      "width_mm": 0.4,
+      "length_mm": 46.682
+    },
+    {
+      "net": "PI_5V",
+      "width_mm": 0.6,
+      "length_mm": 11.721
+    },
+    {
+      "net": "PI_5V",
+      "width_mm": 0.8,
+      "length_mm": 1.551
+    },
+    {
+      "net": "PI_5V",
+      "width_mm": 1.2,
+      "length_mm": 20.873
+    },
+    {
+      "net": "SENS_3V3",
+      "width_mm": 0.15,
+      "length_mm": 70.075
+    },
+    {
+      "net": "SENS_3V3",
+      "width_mm": 0.2,
+      "length_mm": 23.506
+    },
+    {
+      "net": "SENS_3V3",
+      "width_mm": 0.25,
+      "length_mm": 7.464
+    },
+    {
+      "net": "SENS_3V3",
+      "width_mm": 0.3,
+      "length_mm": 20.512
+    },
+    {
+      "net": "SENS_3V3",
+      "width_mm": 0.4,
+      "length_mm": 3.723
+    },
+    {
+      "net": "SENS_3V3",
+      "width_mm": 0.6,
+      "length_mm": 46.355
+    },
+    {
+      "net": "SENS_3V3",
+      "width_mm": 0.8,
+      "length_mm": 36.285
+    },
+    {
+      "net": "SENS_3V3",
+      "width_mm": 1.2,
+      "length_mm": 45.651
+    }
+  ],
+  "scope": "Width cleanup checked by DRC; not current/thermal signoff"
+}

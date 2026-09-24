@@ -1,0 +1,1224 @@
+# Explicit manufacturer-selected parts. Pin numbers are physical pads.
+# Pin-map sources and limitations: docs/sources.md.
+#pragma experiment("TRAITS")
+import is_atomic_part
+import has_designator_prefix
+import ElectricPower
+
+component P_1:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="Samtec ESQ-120-23-G-D", footprint="Connector_PinHeader_2.54mm__PinHeader_2x20_P2.54mm_Vertical.kicad_mod", symbol="symbols/P_1.kicad_sym">
+    trait has_designator_prefix<prefix="J">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+    signal p3 ~ pin 3
+    signal p4 ~ pin 4
+    signal p5 ~ pin 5
+    signal p6 ~ pin 6
+    signal p7 ~ pin 7
+    signal p8 ~ pin 8
+    signal p9 ~ pin 9
+    signal p10 ~ pin 10
+    signal p11 ~ pin 11
+    signal p12 ~ pin 12
+    signal p13 ~ pin 13
+    signal p14 ~ pin 14
+    signal p15 ~ pin 15
+    signal p16 ~ pin 16
+    signal p17 ~ pin 17
+    signal p18 ~ pin 18
+    signal p19 ~ pin 19
+    signal p20 ~ pin 20
+    signal p21 ~ pin 21
+    signal p22 ~ pin 22
+    signal p23 ~ pin 23
+    signal p24 ~ pin 24
+    signal p25 ~ pin 25
+    signal p26 ~ pin 26
+    signal p27 ~ pin 27
+    signal p28 ~ pin 28
+    signal p29 ~ pin 29
+    signal p30 ~ pin 30
+    signal p31 ~ pin 31
+    signal p32 ~ pin 32
+    signal p33 ~ pin 33
+    signal p34 ~ pin 34
+    signal p35 ~ pin 35
+    signal p36 ~ pin 36
+    signal p37 ~ pin 37
+    signal p38 ~ pin 38
+    signal p39 ~ pin 39
+    signal p40 ~ pin 40
+
+component P_2:
+    power = new ElectricPower
+    power.hv ~ p8
+    power.lv ~ p4
+    assert power.voltage within 2.5V to 5.5V
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="24LC32A-I/SN", footprint="Package_SO__SOIC-8_3.9x4.9mm_P1.27mm.kicad_mod", symbol="symbols/P_2.kicad_sym">
+    trait has_designator_prefix<prefix="U">
+    signal p1 ~ pin 1  # A0
+    signal p2 ~ pin 2  # A1
+    signal p3 ~ pin 3  # A2
+    signal p4 ~ pin 4  # VSS
+    signal p5 ~ pin 5  # SDA
+    signal p6 ~ pin 6  # SCL
+    signal p7 ~ pin 7  # WP
+    signal p8 ~ pin 8  # VCC
+
+component P_3:
+    resistance: ohm
+    resistance = 3.9kohm +/- 1%
+    trait is_atomic_part<manufacturer="Yageo", partnumber="RC0603FR-073K9L", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/P_3.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component P_4:
+    resistance: ohm
+    resistance = 1kohm +/- 1%
+    trait is_atomic_part<manufacturer="Yageo", partnumber="RC0603FR-071KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/P_4.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component P_5:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="EEPROM write enable", footprint="Connector_PinHeader_2.54mm__PinHeader_1x02_P2.54mm_Vertical.kicad_mod", symbol="symbols/P_5.kicad_sym">
+    trait has_designator_prefix<prefix="JP">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component P_6:
+    capacitance: F
+    capacitance = 100nF +/- 10%
+    rated_voltage: V
+    rated_voltage = 50V
+    trait is_atomic_part<manufacturer="Murata", partnumber="GRM188R71H104KA93D", footprint="Capacitor_SMD__C_0603_1608Metric.kicad_mod", symbol="symbols/P_6.kicad_sym">
+    trait has_designator_prefix<prefix="C">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component P_7:
+    capacitance: F
+    capacitance = 10uF +/- 10%
+    rated_voltage: V
+    rated_voltage = 10V
+    trait is_atomic_part<manufacturer="Murata", partnumber="GRM21BR61A106KE19L", footprint="Capacitor_SMD__C_0805_2012Metric.kicad_mod", symbol="symbols/P_7.kicad_sym">
+    trait has_designator_prefix<prefix="C">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component P_8:
+    power = new ElectricPower
+    power.hv ~ p8
+    power.lv ~ p6
+    assert power.voltage within 1.71V to 3.6V
+    io = new ElectricPower
+    io.hv ~ p5
+    io.lv ~ p7
+    assert io.voltage within 1.62V to 3.6V
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="LSM6DSOTR", footprint="Package_LGA__LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y.kicad_mod", symbol="symbols/P_8.kicad_sym">
+    trait has_designator_prefix<prefix="U">
+    signal p1 ~ pin 1  # SDO
+    signal p2 ~ pin 2  # SDx
+    signal p3 ~ pin 3  # SCx
+    signal p4 ~ pin 4  # INT1
+    signal p5 ~ pin 5  # VDDIO
+    signal p6 ~ pin 6  # GND
+    signal p7 ~ pin 7  # GND
+    signal p8 ~ pin 8  # VDD
+    signal p9 ~ pin 9  # INT2
+    signal p10 ~ pin 10  # OCS_AUX
+    signal p11 ~ pin 11  # SDO_AUX
+    signal p12 ~ pin 12  # CS
+    signal p13 ~ pin 13  # SCLK
+    signal p14 ~ pin 14  # SDI
+
+component P_9:
+    capacitance: F
+    capacitance = 100nF +/- 10%
+    rated_voltage: V
+    rated_voltage = 16V
+    trait is_atomic_part<manufacturer="Murata", partnumber="GRM155R71C104KA88D", footprint="Capacitor_SMD__C_0402_1005Metric.kicad_mod", symbol="symbols/P_9.kicad_sym">
+    trait has_designator_prefix<prefix="C">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component P_10:
+    resistance: ohm
+    resistance = 10kohm +/- 1%
+    trait is_atomic_part<manufacturer="Yageo", partnumber="RC0603FR-0710KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/P_10.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component P_11:
+    power = new ElectricPower
+    power.hv ~ p4
+    power.lv ~ p1
+    assert power.voltage within 3.0V to 3.6V
+    io = new ElectricPower
+    io.hv ~ p9
+    io.lv ~ p11
+    assert io.voltage within 1.7V to 3.6V
+    trait is_atomic_part<manufacturer="Murata", partnumber="SCL3300-D01-10", footprint="ShakeSense__SCL3300_D01.kicad_mod", symbol="symbols/P_11.kicad_sym">
+    trait has_designator_prefix<prefix="U">
+    signal p1 ~ pin 1  # AVSS
+    signal p2 ~ pin 2  # A_EXTC
+    signal p3 ~ pin 3  # RESERVED_GND
+    signal p4 ~ pin 4  # VDD
+    signal p5 ~ pin 5  # CSB
+    signal p6 ~ pin 6  # MISO
+    signal p7 ~ pin 7  # MOSI
+    signal p8 ~ pin 8  # SCK
+    signal p9 ~ pin 9  # DVIO
+    signal p10 ~ pin 10  # D_EXTC
+    signal p11 ~ pin 11  # DVSS
+    signal p12 ~ pin 12  # EMC_GND
+
+component P_12:
+    power = new ElectricPower
+    power.hv ~ p8
+    power.lv ~ p10
+    assert power.voltage within 1.76V to 3.6V
+    io = new ElectricPower
+    io.hv ~ p7
+    io.lv ~ p10
+    assert io.voltage within 2.7V to 3.6V
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="MAX-M10S-00B", footprint="RF_GPS__ublox_MAX.kicad_mod", symbol="symbols/P_12.kicad_sym">
+    trait has_designator_prefix<prefix="U">
+    signal p1 ~ pin 1  # GND
+    signal p2 ~ pin 2  # TXD_NC
+    signal p3 ~ pin 3  # RXD_NC
+    signal p4 ~ pin 4  # TIMEPULSE
+    signal p5 ~ pin 5  # EXTINT
+    signal p6 ~ pin 6  # V_BCKP
+    signal p7 ~ pin 7  # VCC_IO
+    signal p8 ~ pin 8  # VCC
+    signal p9 ~ pin 9  # RESET_N
+    signal p10 ~ pin 10  # GND
+    signal p11 ~ pin 11  # RF_IN
+    signal p12 ~ pin 12  # GND
+    signal p13 ~ pin 13  # LNA_EN
+    signal p14 ~ pin 14  # VCC_RF
+    signal p15 ~ pin 15  # VIO_SEL_OPEN_3V3
+    signal p16 ~ pin 16  # SDA
+    signal p17 ~ pin 17  # SCL
+    signal p18 ~ pin 18  # SAFEBOOT_N
+
+component P_13:
+    capacitance: F
+    capacitance = 4.7uF +/- 10%
+    rated_voltage: V
+    rated_voltage = 10V
+    trait is_atomic_part<manufacturer="Murata", partnumber="GRM21BR71A475KA73L", footprint="Capacitor_SMD__C_0805_2012Metric.kicad_mod", symbol="symbols/P_13.kicad_sym">
+    trait has_designator_prefix<prefix="C">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component P_14:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="U.FL-R-SMT-1(10)", footprint="Connector_Coaxial__U.FL_Hirose_U.FL-R-SMT-1_Vertical.kicad_mod", symbol="symbols/P_14.kicad_sym">
+    trait has_designator_prefix<prefix="J">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component P_15:
+    power = new ElectricPower
+    power.hv ~ p1
+    power.lv ~ p5
+    assert power.voltage within 2.3V to 5.5V
+    line_power = new ElectricPower
+    line_power.hv ~ p10
+    line_power.lv ~ p5
+    assert line_power.voltage within 3.0V to 5.5V
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="PCA9615DP,118", footprint="Package_SO__TSSOP-10_3x3mm_P0.5mm.kicad_mod", symbol="symbols/P_15.kicad_sym">
+    trait has_designator_prefix<prefix="U">
+    signal p1 ~ pin 1  # VDDA
+    signal p2 ~ pin 2  # SDA
+    signal p3 ~ pin 3  # EN
+    signal p4 ~ pin 4  # SCL
+    signal p5 ~ pin 5  # VSS
+    signal p6 ~ pin 6  # DSCLM
+    signal p7 ~ pin 7  # DSCLP
+    signal p8 ~ pin 8  # DSDAP
+    signal p9 ~ pin 9  # DSDAM
+    signal p10 ~ pin 10  # VDDB
+
+component P_16:
+    resistance: ohm
+    resistance = 390ohm +/- 1%
+    trait is_atomic_part<manufacturer="Yageo", partnumber="RC0603FR-07390RL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/P_16.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component P_17:
+    resistance: ohm
+    resistance = 120ohm +/- 1%
+    trait is_atomic_part<manufacturer="Yageo", partnumber="RC0603FR-07120RL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/P_17.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component P_18:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="Wurth 61200821621", footprint="Connector_IDC__IDC-Header_2x04_P2.54mm_Vertical.kicad_mod", symbol="symbols/P_18.kicad_sym">
+    trait has_designator_prefix<prefix="J">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+    signal p3 ~ pin 3
+    signal p4 ~ pin 4
+    signal p5 ~ pin 5
+    signal p6 ~ pin 6
+    signal p7 ~ pin 7
+    signal p8 ~ pin 8
+
+component P_19:
+    resistance: ohm
+    resistance = 47ohm +/- 1%
+    trait is_atomic_part<manufacturer="Yageo", partnumber="RC0603FR-0747RL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/P_19.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component P_20:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="Coldfoot UART service ONLY", footprint="Connector_PinHeader_2.54mm__PinHeader_1x04_P2.54mm_Vertical.kicad_mod", symbol="symbols/P_20.kicad_sym">
+    trait has_designator_prefix<prefix="J">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+    signal p3 ~ pin 3
+    signal p4 ~ pin 4
+
+component P_21:
+    input_power = new ElectricPower
+    input_power.hv ~ p3
+    input_power.lv ~ p1
+    assert input_power.voltage within 2.0V to 5.5V
+    output_power = new ElectricPower
+    output_power.hv ~ p2
+    output_power.lv ~ p1
+    assert output_power.voltage within 3.18V to 3.42V
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="TLV1117LV33DCYR", footprint="Package_TO_SOT_SMD__SOT-223-3_TabPin2.kicad_mod", symbol="symbols/P_21.kicad_sym">
+    trait has_designator_prefix<prefix="U">
+    signal p1 ~ pin 1  # GND
+    signal p2 ~ pin 2  # OUT
+    signal p3 ~ pin 3  # IN
+
+component P_22:
+    capacitance: F
+    capacitance = 22uF +/- 10%
+    rated_voltage: V
+    rated_voltage = 10V
+    trait is_atomic_part<manufacturer="Murata", partnumber="GRM31CR61A226KE19L", footprint="Capacitor_SMD__C_1206_3216Metric.kicad_mod", symbol="symbols/P_22.kicad_sym">
+    trait has_designator_prefix<prefix="C">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component P_23:
+    host_power = new ElectricPower
+    host_power.hv ~ p1
+    host_power.lv ~ p11
+    assert host_power.voltage within 1.65V to 5.5V
+    sensor_power = new ElectricPower
+    sensor_power.hv ~ p23
+    sensor_power.lv ~ p12
+    assert sensor_power.voltage within 1.65V to 5.5V
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="SN74LVC8T245PWR", footprint="Package_SO__TSSOP-24_4.4x7.8mm_P0.65mm.kicad_mod", symbol="symbols/P_23.kicad_sym">
+    trait has_designator_prefix<prefix="U">
+    signal p1 ~ pin 1  # VCCA
+    signal p2 ~ pin 2  # DIR
+    signal p11 ~ pin 11  # GND
+    signal p12 ~ pin 12  # GND
+    signal p13 ~ pin 13  # GND
+    signal p22 ~ pin 22  # OE_N
+    signal p23 ~ pin 23  # VCCB
+    signal p24 ~ pin 24  # VCCB
+    signal p3 ~ pin 3  # A1
+    signal p21 ~ pin 21  # B1
+    signal p4 ~ pin 4  # A2
+    signal p20 ~ pin 20  # B2
+    signal p5 ~ pin 5  # A3
+    signal p19 ~ pin 19  # B3
+    signal p6 ~ pin 6  # A4
+    signal p18 ~ pin 18  # B4
+    signal p7 ~ pin 7  # A5
+    signal p17 ~ pin 17  # B5
+    signal p8 ~ pin 8  # A6
+    signal p16 ~ pin 16  # B6
+    signal p9 ~ pin 9  # A7
+    signal p15 ~ pin 15  # B7
+    signal p10 ~ pin 10  # A8
+    signal p14 ~ pin 14  # B8
+
+component P_24:
+    resistance: ohm
+    resistance = 100kohm +/- 1%
+    trait is_atomic_part<manufacturer="Yageo", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/P_24.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component P_25:
+    host_power = new ElectricPower
+    host_power.hv ~ p1
+    host_power.lv ~ p4
+    assert host_power.voltage within 3.0V to 5.5V
+    sensor_power = new ElectricPower
+    sensor_power.hv ~ p8
+    sensor_power.lv ~ p5
+    assert sensor_power.voltage within 2.25V to 5.5V
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="ISO1640BDR", footprint="Package_SO__SOIC-8_3.9x4.9mm_P1.27mm.kicad_mod", symbol="symbols/P_25.kicad_sym">
+    trait has_designator_prefix<prefix="U">
+    signal p1 ~ pin 1  # VCC1
+    signal p2 ~ pin 2  # SDA1
+    signal p3 ~ pin 3  # SCL1
+    signal p4 ~ pin 4  # GND1
+    signal p5 ~ pin 5  # GND2
+    signal p6 ~ pin 6  # SCL2
+    signal p7 ~ pin 7  # SDA2
+    signal p8 ~ pin 8  # VCC2
+
+component P_26:
+    resistance: ohm
+    resistance = 4.7kohm +/- 1%
+    trait is_atomic_part<manufacturer="Yageo", partnumber="RC0603FR-074K7L", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/P_26.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component P_27:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="MF-MSMF050-2", footprint="Fuse__Fuse_1812_4532Metric.kicad_mod", symbol="symbols/P_27.kicad_sym">
+    trait has_designator_prefix<prefix="F">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component P_28:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="USBLC6-2SC6", footprint="Package_TO_SOT_SMD__SOT-23-6.kicad_mod", symbol="symbols/P_28.kicad_sym">
+    trait has_designator_prefix<prefix="D">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+    signal p3 ~ pin 3
+    signal p4 ~ pin 4
+    signal p5 ~ pin 5
+    signal p6 ~ pin 6
+
+component P_29:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="SENS_3V3", footprint="TestPoint__TestPoint_Pad_D1.5mm.kicad_mod", symbol="symbols/P_29.kicad_sym">
+    trait has_designator_prefix<prefix="TP">
+    signal p1 ~ pin 1
+
+component P_30:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="GND", footprint="TestPoint__TestPoint_Pad_D1.5mm.kicad_mod", symbol="symbols/P_30.kicad_sym">
+    trait has_designator_prefix<prefix="TP">
+    signal p1 ~ pin 1
+
+component P_31:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="REMOTE_3V3", footprint="TestPoint__TestPoint_Pad_D1.5mm.kicad_mod", symbol="symbols/P_31.kicad_sym">
+    trait has_designator_prefix<prefix="TP">
+    signal p1 ~ pin 1
+
+component P_32:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="SENSOR_OE_N", footprint="TestPoint__TestPoint_Pad_D1.5mm.kicad_mod", symbol="symbols/P_32.kicad_sym">
+    trait has_designator_prefix<prefix="TP">
+    signal p1 ~ pin 1
+
+component P_33:
+    power = new ElectricPower
+    power.hv ~ p1
+    power.lv ~ p5
+    assert power.voltage within 2.3V to 5.5V
+    line_power = new ElectricPower
+    line_power.hv ~ p10
+    line_power.lv ~ p5
+    assert line_power.voltage within 3.0V to 5.5V
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="PCA9615DP,118", footprint="Package_SO__TSSOP-10_3x3mm_P0.5mm.kicad_mod", symbol="symbols/P_33.kicad_sym">
+    trait has_designator_prefix<prefix="U">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+    signal p3 ~ pin 3
+    signal p4 ~ pin 4
+    signal p5 ~ pin 5
+    signal p6 ~ pin 6
+    signal p7 ~ pin 7
+    signal p8 ~ pin 8
+    signal p9 ~ pin 9
+    signal p10 ~ pin 10
+
+component P_34:
+    power = new ElectricPower
+    power.hv ~ p13
+    power.lv ~ p7
+    assert power.voltage within 2.0V to 3.6V
+    io = new ElectricPower
+    io.hv ~ p12
+    io.lv ~ p14
+    assert io.voltage within 1.62V to 3.6V
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="PNI 14190", footprint="ShakeSense__PNI_14190_Module.kicad_mod", symbol="symbols/P_34.kicad_sym">
+    trait has_designator_prefix<prefix="U">
+    signal p1 ~ pin 1  # SCL
+    signal p2 ~ pin 2  # SA1
+    signal p3 ~ pin 3  # SDA
+    signal p4 ~ pin 4  # SA0
+    signal p5 ~ pin 5  # DRDY
+    signal p6 ~ pin 6  # NC
+    signal p7 ~ pin 7  # AVSS
+    signal p8 ~ pin 8  # NC
+    signal p9 ~ pin 9  # NC
+    signal p10 ~ pin 10  # I2CEN
+    signal p11 ~ pin 11  # NC
+    signal p12 ~ pin 12  # DVDD
+    signal p13 ~ pin 13  # AVDD
+    signal p14 ~ pin 14  # DVSS
+
+component P_35:
+    power = new ElectricPower
+    power.hv ~ p2
+    power.lv ~ p1
+    assert power.voltage within 2.97V to 3.63V
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="DLVR-F50D-E1BS-I-NI3F", footprint="ShakeSense__DLVR_E1BS.kicad_mod", symbol="symbols/P_35.kicad_sym">
+    trait has_designator_prefix<prefix="U">
+    signal p1 ~ pin 1  # GND
+    signal p2 ~ pin 2  # VS_3V3
+    signal p3 ~ pin 3  # SDA
+    signal p4 ~ pin 4  # SCL
+
+
+
+
+component CF_J5:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="HC-PBB40C-70DS-0.4V-3.0-02", footprint="Coldfoot_Run1_70DS.kicad_mod", symbol="symbols/CF_J5.kicad_sym">
+    trait has_designator_prefix<prefix="J">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+    signal p3 ~ pin 3
+    signal p4 ~ pin 4
+    signal p5 ~ pin 5
+    signal p6 ~ pin 6
+    signal p7 ~ pin 7
+    signal p8 ~ pin 8
+    signal p9 ~ pin 9
+    signal p10 ~ pin 10
+    signal p11 ~ pin 11
+    signal p12 ~ pin 12
+    signal p13 ~ pin 13
+    signal p14 ~ pin 14
+    signal p15 ~ pin 15
+    signal p16 ~ pin 16
+    signal p17 ~ pin 17
+    signal p18 ~ pin 18
+    signal p19 ~ pin 19
+    signal p20 ~ pin 20
+    signal p21 ~ pin 21
+    signal p22 ~ pin 22
+    signal p23 ~ pin 23
+    signal p24 ~ pin 24
+    signal p25 ~ pin 25
+    signal p26 ~ pin 26
+    signal p27 ~ pin 27
+    signal p28 ~ pin 28
+    signal p29 ~ pin 29
+    signal p30 ~ pin 30
+    signal p31 ~ pin 31
+    signal p32 ~ pin 32
+    signal p33 ~ pin 33
+    signal p34 ~ pin 34
+    signal p35 ~ pin 35
+    signal p36 ~ pin 36
+    signal p37 ~ pin 37
+    signal p38 ~ pin 38
+    signal p39 ~ pin 39
+    signal p40 ~ pin 40
+    signal p41 ~ pin 41
+    signal p42 ~ pin 42
+    signal p43 ~ pin 43
+    signal p44 ~ pin 44
+    signal p45 ~ pin 45
+    signal p46 ~ pin 46
+    signal p47 ~ pin 47
+    signal p48 ~ pin 48
+    signal p49 ~ pin 49
+    signal p50 ~ pin 50
+    signal p51 ~ pin 51
+    signal p52 ~ pin 52
+    signal p53 ~ pin 53
+    signal p54 ~ pin 54
+    signal p55 ~ pin 55
+    signal p56 ~ pin 56
+    signal p57 ~ pin 57
+    signal p58 ~ pin 58
+    signal p59 ~ pin 59
+    signal p60 ~ pin 60
+    signal p61 ~ pin 61
+    signal p62 ~ pin 62
+    signal p63 ~ pin 63
+    signal p64 ~ pin 64
+    signal p65 ~ pin 65
+    signal p66 ~ pin 66
+    signal p67 ~ pin 67
+    signal p68 ~ pin 68
+    signal p69 ~ pin 69
+    signal p70 ~ pin 70
+
+
+component CF_U50:
+    input_power = new ElectricPower
+    input_power.hv ~ p3
+    input_power.lv ~ p4
+    assert input_power.voltage within 3.8V to 32V
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="AP63203WU-7", footprint="Package_TO_SOT_SMD__TSOT-23-6.kicad_mod", symbol="symbols/CF_U50.kicad_sym">
+    trait has_designator_prefix<prefix="U">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+    signal p3 ~ pin 3
+    signal p4 ~ pin 4
+    signal p5 ~ pin 5
+    signal p6 ~ pin 6
+
+component CF_L1:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="SRN6045TA-4R7M", footprint="Inductor_SMD__L_Bourns_SRN6045TA.kicad_mod", symbol="symbols/CF_L1.kicad_sym">
+    trait has_designator_prefix<prefix="L">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_C60:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="GRM21BR61A106KE19L", footprint="Capacitor_SMD__C_0805_2012Metric.kicad_mod", symbol="symbols/CF_C60.kicad_sym">
+    trait has_designator_prefix<prefix="C">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_C61:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="GRM21BR61A106KE19L", footprint="Capacitor_SMD__C_0805_2012Metric.kicad_mod", symbol="symbols/CF_C61.kicad_sym">
+    trait has_designator_prefix<prefix="C">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_C62:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="GRM188R71H104KA93D", footprint="Capacitor_SMD__C_0603_1608Metric.kicad_mod", symbol="symbols/CF_C62.kicad_sym">
+    trait has_designator_prefix<prefix="C">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_C63:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="GRM31CR61A226KE19L", footprint="Capacitor_SMD__C_1206_3216Metric.kicad_mod", symbol="symbols/CF_C63.kicad_sym">
+    trait has_designator_prefix<prefix="C">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_C64:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="GRM31CR61A226KE19L", footprint="Capacitor_SMD__C_1206_3216Metric.kicad_mod", symbol="symbols/CF_C64.kicad_sym">
+    trait has_designator_prefix<prefix="C">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_C65:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="GRM31CR61A226KE19L", footprint="Capacitor_SMD__C_1206_3216Metric.kicad_mod", symbol="symbols/CF_C65.kicad_sym">
+    trait has_designator_prefix<prefix="C">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R60:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="ERJ-8CWFR100V", footprint="Resistor_SMD__R_1206_3216Metric.kicad_mod", symbol="symbols/CF_R60.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_C66:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="GRM31CR61A226KE19L", footprint="Capacitor_SMD__C_1206_3216Metric.kicad_mod", symbol="symbols/CF_C66.kicad_sym">
+    trait has_designator_prefix<prefix="C">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_C67:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="GRM188R71H104KA93D", footprint="Capacitor_SMD__C_0603_1608Metric.kicad_mod", symbol="symbols/CF_C67.kicad_sym">
+    trait has_designator_prefix<prefix="C">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_C68:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="GRM188R71H104KA93D", footprint="Capacitor_SMD__C_0603_1608Metric.kicad_mod", symbol="symbols/CF_C68.kicad_sym">
+    trait has_designator_prefix<prefix="C">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_C69:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="GRM188R71H104KA93D", footprint="Capacitor_SMD__C_0603_1608Metric.kicad_mod", symbol="symbols/CF_C69.kicad_sym">
+    trait has_designator_prefix<prefix="C">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_C70:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="GRM188R71H104KA93D", footprint="Capacitor_SMD__C_0603_1608Metric.kicad_mod", symbol="symbols/CF_C70.kicad_sym">
+    trait has_designator_prefix<prefix="C">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_C71:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="GRM188R71H104KA93D", footprint="Capacitor_SMD__C_0603_1608Metric.kicad_mod", symbol="symbols/CF_C71.kicad_sym">
+    trait has_designator_prefix<prefix="C">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_C72:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="GRM188R71H104KA93D", footprint="Capacitor_SMD__C_0603_1608Metric.kicad_mod", symbol="symbols/CF_C72.kicad_sym">
+    trait has_designator_prefix<prefix="C">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_C73:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="GRM188R71H104KA93D", footprint="Capacitor_SMD__C_0603_1608Metric.kicad_mod", symbol="symbols/CF_C73.kicad_sym">
+    trait has_designator_prefix<prefix="C">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_C74:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="GRM188R71H104KA93D", footprint="Capacitor_SMD__C_0603_1608Metric.kicad_mod", symbol="symbols/CF_C74.kicad_sym">
+    trait has_designator_prefix<prefix="C">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_U51:
+    host_power = new ElectricPower
+    host_power.hv ~ p3
+    host_power.lv ~ p2
+    assert host_power.voltage within 1.1V to 5.5V
+    chip_power = new ElectricPower
+    chip_power.hv ~ p7
+    chip_power.lv ~ p2
+    assert chip_power.voltage within 1.1V to 5.5V
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="TXU0202DCUR", footprint="Package_SO__VSSOP-8_2.3x2mm_P0.5mm.kicad_mod", symbol="symbols/CF_U51.kicad_sym">
+    trait has_designator_prefix<prefix="U">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+    signal p3 ~ pin 3
+    signal p4 ~ pin 4
+    signal p5 ~ pin 5
+    signal p6 ~ pin 6
+    signal p7 ~ pin 7
+    signal p8 ~ pin 8
+
+component CF_C75:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="GRM188R71H104KA93D", footprint="Capacitor_SMD__C_0603_1608Metric.kicad_mod", symbol="symbols/CF_C75.kicad_sym">
+    trait has_designator_prefix<prefix="C">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_C76:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="GRM188R71H104KA93D", footprint="Capacitor_SMD__C_0603_1608Metric.kicad_mod", symbol="symbols/CF_C76.kicad_sym">
+    trait has_designator_prefix<prefix="C">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R61:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-0747RL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R61.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R62:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R62.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R63:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-0710KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R63.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_U52:
+    power = new ElectricPower
+    power.hv ~ p3
+    power.lv ~ p1
+    assert power.voltage within 1.7V to 6V
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="TLV803EA30DBZR", footprint="Package_TO_SOT_SMD__SOT-23.kicad_mod", symbol="symbols/CF_U52.kicad_sym">
+    trait has_designator_prefix<prefix="U">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+    signal p3 ~ pin 3
+
+component CF_C77:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="GRM188R71H104KA93D", footprint="Capacitor_SMD__C_0603_1608Metric.kicad_mod", symbol="symbols/CF_C77.kicad_sym">
+    trait has_designator_prefix<prefix="C">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R64:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-0710KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R64.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_Q1:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="2N7002", footprint="Package_TO_SOT_SMD__SOT-23.kicad_mod", symbol="symbols/CF_Q1.kicad_sym">
+    trait has_designator_prefix<prefix="Q">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+    signal p3 ~ pin 3
+
+component CF_R65:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-071KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R65.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R66:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R66.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_Y1:
+    power = new ElectricPower
+    power.hv ~ p4
+    power.lv ~ p2
+    assert power.voltage within 3.135V to 3.465V
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="ASE-25.000MHZ-L-C-T", footprint="Crystal__Crystal_SMD_3225-4Pin_3.2x2.5mm.kicad_mod", symbol="symbols/CF_Y1.kicad_sym">
+    trait has_designator_prefix<prefix="Y">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+    signal p3 ~ pin 3
+    signal p4 ~ pin 4
+
+component CF_R67:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-0733RL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R67.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_C78:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="GRM188R71H104KA93D", footprint="Capacitor_SMD__C_0603_1608Metric.kicad_mod", symbol="symbols/CF_C78.kicad_sym">
+    trait has_designator_prefix<prefix="C">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_Y2:
+    power = new ElectricPower
+    power.hv ~ p4
+    power.lv ~ p2
+    assert power.voltage within 3.135V to 3.465V
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="ASE-25.000MHZ-L-C-T", footprint="Crystal__Crystal_SMD_3225-4Pin_3.2x2.5mm.kicad_mod", symbol="symbols/CF_Y2.kicad_sym">
+    trait has_designator_prefix<prefix="Y">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+    signal p3 ~ pin 3
+    signal p4 ~ pin 4
+
+component CF_R68:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-0733RL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R68.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_C79:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="GRM188R71H104KA93D", footprint="Capacitor_SMD__C_0603_1608Metric.kicad_mod", symbol="symbols/CF_C79.kicad_sym">
+    trait has_designator_prefix<prefix="C">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R100:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R100.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R101:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R101.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R102:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R102.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R103:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R103.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R104:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R104.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R105:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R105.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R106:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R106.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R107:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R107.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R108:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R108.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R109:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R109.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R110:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R110.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R111:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R111.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R112:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R112.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R113:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R113.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R114:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R114.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R115:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R115.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R116:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R116.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R117:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R117.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R118:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R118.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R119:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R119.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R120:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R120.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R121:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R121.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R122:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R122.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R123:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R123.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R124:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R124.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R125:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R125.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R126:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R126.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R127:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R127.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R128:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R128.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R129:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R129.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R130:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R130.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R131:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R131.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R132:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R132.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R133:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R133.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R134:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R134.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R135:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R135.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R136:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R136.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R137:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R137.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R138:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R138.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R139:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R139.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R140:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R140.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R141:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R141.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R142:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R142.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R143:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R143.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R144:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R144.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R145:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R145.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R146:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R146.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component CF_R147:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-07100KL", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/CF_R147.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+
+
+component FieldUsbConnector:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="USB4105-GF-A", footprint="Connector_USB__USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal.kicad_mod", symbol="symbols/USB_C.kicad_sym">
+    trait has_designator_prefix<prefix="J">
+    signal pA1 ~ pin A1
+    signal pA4 ~ pin A4
+    signal pA5 ~ pin A5
+    signal pA6 ~ pin A6
+    signal pA7 ~ pin A7
+    signal pA8 ~ pin A8
+    signal pA9 ~ pin A9
+    signal pA12 ~ pin A12
+    signal pB1 ~ pin B1
+    signal pB4 ~ pin B4
+    signal pB5 ~ pin B5
+    signal pB6 ~ pin B6
+    signal pB7 ~ pin B7
+    signal pB8 ~ pin B8
+    signal pB9 ~ pin B9
+    signal pB12 ~ pin B12
+    signal pS1 ~ pin S1
+
+component USB_MCU:
+    power = new ElectricPower
+    power.hv ~ p1
+    power.lv ~ p32
+    assert power.voltage within 3V to 3.6V
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="STM32F042K6T6", footprint="Package_QFP__LQFP-32_7x7mm_P0.8mm.kicad_mod", symbol="symbols/USB_MCU.kicad_sym">
+    trait has_designator_prefix<prefix="U">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+    signal p3 ~ pin 3
+    signal p4 ~ pin 4
+    signal p5 ~ pin 5
+    signal p6 ~ pin 6
+    signal p7 ~ pin 7
+    signal p8 ~ pin 8
+    signal p9 ~ pin 9
+    signal p10 ~ pin 10
+    signal p11 ~ pin 11
+    signal p12 ~ pin 12
+    signal p13 ~ pin 13
+    signal p14 ~ pin 14
+    signal p15 ~ pin 15
+    signal p16 ~ pin 16
+    signal p17 ~ pin 17
+    signal p18 ~ pin 18
+    signal p19 ~ pin 19
+    signal p20 ~ pin 20
+    signal p21 ~ pin 21
+    signal p22 ~ pin 22
+    signal p23 ~ pin 23
+    signal p24 ~ pin 24
+    signal p25 ~ pin 25
+    signal p26 ~ pin 26
+    signal p27 ~ pin 27
+    signal p28 ~ pin 28
+    signal p29 ~ pin 29
+    signal p30 ~ pin 30
+    signal p31 ~ pin 31
+    signal p32 ~ pin 32
+
+component USB_LDO:
+    input_power = new ElectricPower
+    input_power.hv ~ p1
+    input_power.lv ~ p2
+    assert input_power.voltage within 2.5V to 6V
+    output_power = new ElectricPower
+    output_power.hv ~ p5
+    output_power.lv ~ p2
+    assert output_power.voltage within 3.234V to 3.366V
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="AP2112K-3.3TRG1", footprint="Package_TO_SOT_SMD__SOT-23-5.kicad_mod", symbol="symbols/USB_LDO.kicad_sym">
+    trait has_designator_prefix<prefix="U">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+    signal p3 ~ pin 3
+    signal p4 ~ pin 4
+    signal p5 ~ pin 5
+
+component USB_SWITCH:
+    power = new ElectricPower
+    power.hv ~ p1
+    power.lv ~ p2
+    assert power.voltage within 1.6V to 5.5V
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="TPS22919DCKR", footprint="Package_TO_SOT_SMD__SOT-363_SC-70-6.kicad_mod", symbol="symbols/USB_SWITCH.kicad_sym">
+    trait has_designator_prefix<prefix="U">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+    signal p3 ~ pin 3
+    signal p4 ~ pin 4
+    signal p5 ~ pin 5
+    signal p6 ~ pin 6
+
+component USB_R51:
+    resistance: ohm
+    resistance = 5.1kohm +/- 1%
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="RC0603FR-075K1L", footprint="Resistor_SMD__R_0603_1608Metric.kicad_mod", symbol="symbols/USB_R51.kicad_sym">
+    trait has_designator_prefix<prefix="R">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component USB_CIN:
+    capacitance: F
+    capacitance = 2.2uF +/- 10%
+    rated_voltage: V
+    rated_voltage = 25V
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="GRM21BR71E225KA73L", footprint="Capacitor_SMD__C_0805_2012Metric.kicad_mod", symbol="symbols/USB_CIN.kicad_sym">
+    trait has_designator_prefix<prefix="C">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component USB_SWD:
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="M20-9990545", footprint="Connector_PinHeader_2.54mm__PinHeader_1x05_P2.54mm_Vertical.kicad_mod", symbol="symbols/USB_SWD.kicad_sym">
+    trait has_designator_prefix<prefix="J">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+    signal p3 ~ pin 3
+    signal p4 ~ pin 4
+    signal p5 ~ pin 5

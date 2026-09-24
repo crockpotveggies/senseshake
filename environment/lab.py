@@ -1,0 +1,290 @@
+"""Disposable Linux test runner. Source is read-only; only /lab persists."""
+import argparse
+import contextlib
+import hashlib
+import json
+import os
+from pathlib import Path
+import re
+import shutil
+import subprocess
+import sys
+import time
+import uuid
+
+if os.name == "nt":
+    import msvcrt
+else:
+    import fcntl
+    import resource
+
+MARKER = "senseshake-lab-v1"
+RUN_RE = re.compile(r"\d{8}T\d{6}Z-[0-9a-f]{8}")
+BOARDS = ("shakesense-hat", "shakesense-field-head", "shakesense-trenz-hat")
+TARGETS = ("hat", "field_head", "trenz_hat")
+MiB = 1024 * 1024
+
+
+def write_json(path, data):
+    path.write_text(json.dumps(data, indent=2) + "\n")
+
+
+def no_links(path):
+    """Fail closed on links, including any ancestor below the filesystem root."""
+    for part in (path, *path.parents):
+        if part.is_symlink() or (hasattr(part, "is_junction") and part.is_junction()):
+            raise RuntimeError(f"Refusing symbolic link: {part}")
+
+
+def tree_bytes(path):
+    no_links(path)
+    total = 0
+    for item in path.rglob("*"):
+        no_links(item)
+        if item.is_file():
+            total += item.stat().st_size
+        elif not item.is_dir():
+            raise RuntimeError(f"Unexpected file type: {item}")
+    return total
+
+
+@contextlib.contextmanager
+def lab_lock(root):
+    no_links(root)
+    root.mkdir(parents=True, exist_ok=True)
+    marker = root / ".senseshake-lab"
+    no_links(marker)
+    # O_EXCL avoids racing initialization. Never adopt a nonempty directory.
+    if not marker.exists():
+        if any(root.iterdir()):
+            raise RuntimeError("Unmarked .lab is not empty; refusing to adopt it")
+        with marker.open("x") as stream:
+            stream.write(MARKER)
+    if marker.read_text() != MARKER:
+        raise RuntimeError("Invalid lab ownership marker")
+    no_links(root / ".lock")
+    with (root / ".lock").open("a") as lock:
+        try:
+            if os.name == "nt":
+                lock.seek(0)
+                msvcrt.locking(lock.fileno(), msvcrt.LK_NBLCK, 1)
+            else:
+                fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except OSError:
+            raise RuntimeError("Another lab command is active; nothing was deleted")
+        try:
+            yield
+        finally:
+            if os.name == "nt":
+                lock.seek(0)
+                msvcrt.locking(lock.fileno(), msvcrt.LK_UNLCK, 1)
+            else:
+                fcntl.flock(lock, fcntl.LOCK_UN)
+
+
+def managed_runs(root):
+    base = root / "runs"
+    no_links(base)
+    if not base.exists():
+        return []
+    runs = []
+    for path in base.iterdir():
+        # Validate every candidate before deleting any of them.
+        tree_bytes(path)
+        if not path.is_dir() or not RUN_RE.fullmatch(path.name):
+            raise RuntimeError(f"Unrecognized run directory: {path}")
+        marker = path / "run.json"
+        if not marker.is_file():
+            raise RuntimeError(f"Missing run marker: {path}")
+        data = json.loads(marker.read_text())
+        if data.get("owner") != MARKER or data.get("id") != path.name:
+            raise RuntimeError(f"Invalid run marker: {path}")
+        runs.append(path)
+    return sorted(runs, key=lambda p: p.name, reverse=True)
+
+
+def clean(root, keep=5, apply=False):
+    if keep < 0:
+        raise ValueError("keep must be nonnegative")
+    paths = managed_runs(root)[keep:]
+    for path in paths:
+        # Resolve and check the final absolute target immediately before removal.
+        no_links(path)
+        if path.resolve().parent != (root / "runs").resolve():
+            raise RuntimeError(f"Cleanup escaped the run directory: {path}")
+        print(f"{'DELETE' if apply else 'WOULD DELETE'} {path.name} ({tree_bytes(path)/MiB:.1f} MiB)", flush=True)
+        if apply:
+            shutil.rmtree(path)
+    if not paths:
+        print("No old runs to remove.", flush=True)
+    return paths
+
+
+def source_files(source):
+    files = [source / name for name in ("ato.yaml", "layout.json", "layout-trenz.json")]
+    for folder, patterns in {
+        "elec": ("*.ato", "*.kicad_mod", "*.kicad_sym"),
+        "tools": ("*.py",), "docs": ("*.csv",),
+        "hardware/libraries": ("*.kicad_mod", "*.kicad_sym"),
+    }.items():
+        for pattern in patterns:
+            files.extend((source / folder).rglob(pattern))
+    files.append(source / "tests/overvoltage.ato")
+    for target in TARGETS:
+        folder = source / "layout" / target
+        files.append(folder / f"{target}.kicad_pcb")
+        files.extend(folder.glob("*-lib-table"))
+    for board in BOARDS:
+        folder = source / "hardware" / board
+        files.extend(folder.glob("*.kicad_sch"))
+        files.extend(folder.glob("*.kicad_sym"))
+        files.extend(folder.glob("*-lib-table"))
+        files.extend(folder / name for name in (
+            f"{board}.kicad_pcb", f"{board}.kicad_pro", "electrical.json", "bom.csv"))
+    return sorted(set(files))
+
+
+def stage(source, workspace, report):
+    manifest = {}
+    for path in source_files(source):
+        no_links(path)
+        if not path.is_file() or not path.resolve().is_relative_to(source.resolve()):
+            raise RuntimeError(f"Invalid source input: {path}")
+        rel = path.relative_to(source)
+        target = workspace / rel
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(path, target)
+        manifest[str(rel)] = hashlib.sha256(target.read_bytes()).hexdigest()
+    for path in sorted((source / "environment").glob("*")):
+        no_links(path)
+        if path.is_file():
+            manifest[str(path.relative_to(source))] = hashlib.sha256(path.read_bytes()).hexdigest()
+    for name in ("simulation", "logs"):
+        (workspace / name).mkdir(exist_ok=True)
+    write_json(report / "inputs.sha256.json", manifest)
+    return manifest
+
+
+def versions():
+    def output(args):
+        return subprocess.check_output(args, text=True, stderr=subprocess.STDOUT).strip()
+    return {
+        "image_id": os.environ.get("SENSESHAKE_IMAGE_ID", "unknown"),
+        "kicad": output(["kicad-cli", "version"]),
+        "ngspice": output(["ngspice", "--version"]),
+        "system_python": sys.version,
+        "atopile_python": output(["/opt/atopile/bin/python", "--version"]),
+        "atopile": output(["/opt/atopile/bin/python", "-c", "import importlib.metadata as m; print(m.version('atopile'))"]),
+    }
+
+
+def commands(profile):
+    steps = []
+    if profile == "full":
+        for target in TARGETS:
+            steps += [(f"build-{target}", ["/opt/atopile/bin/python", "-m", "atopile", "build", "-b", target, "."]),
+                      (f"constraints-{target}", ["/opt/atopile/bin/python", "tools/solve_constraints.py", "--target", target])]
+        steps.append(("reject-overvoltage", ["/opt/atopile/bin/python", "tools/solve_constraints.py", "--negative"]))
+    if profile in ("full", "quick"):
+        steps += [(name, ["python3", f"tools/{name}.py"]) for name in ("check_circuit", "check_design", "check_trenz")]
+    steps += [(name, ["python3", f"tools/{name}.py"]) for name in ("simulate", "simulate_trenz")]
+    return steps
+
+
+def collect(workspace, report, profile):
+    files = []
+    for pattern in ("*.json", "*.cir", "*.log"):
+        files.extend((workspace / "simulation").rglob(pattern))
+    for board in BOARDS:
+        folder = workspace / "hardware" / board
+        files.extend(folder / name for name in ("drc.json", "erc.json", "validation.json", "schematic-netlist.xml"))
+    if profile == "full":
+        for target in TARGETS:
+            files.append(workspace / "layout" / target / f"{target}.kicad_pcb")
+    for path in files:
+        if path.is_file():
+            no_links(path)
+            dest = report / "results" / path.relative_to(workspace)
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(path, dest)
+
+
+def test(source, root, workspace, profile, ident=None):
+    # Retain at most five runs, including the new one. No hidden unlimited history.
+    clean(root, keep=4, apply=True)
+    if tree_bytes(root) > 1024 * MiB:
+        raise RuntimeError("Lab exceeds the 1 GiB start budget; review and clean old runs")
+    ident = ident or time.strftime("%Y%m%dT%H%M%SZ", time.gmtime()) + "-" + uuid.uuid4().hex[:8]
+    if not RUN_RE.fullmatch(ident):
+        raise RuntimeError("Invalid run ID")
+    report = root / "runs" / ident
+    report.mkdir(parents=True)
+    record = {"owner": MARKER, "id": ident, "profile": profile, "status": "running", "steps": []}
+    write_json(report / "run.json", record)
+    print(f"Report: .lab/runs/{ident}", flush=True)
+    started = time.monotonic()
+    result = 1
+    try:
+        write_json(report / "toolchain.json", versions())
+        manifest = stage(source, workspace, report)
+        for name, cmd in commands(profile):
+            print(f"RUN {name}", flush=True)
+            tick = time.monotonic()
+            with (report / f"{name}.log").open("w") as log:
+                completed = subprocess.run(cmd, cwd=workspace, stdout=log, stderr=subprocess.STDOUT, timeout=600)
+            record["steps"].append({"name": name, "exit_code": completed.returncode, "seconds": round(time.monotonic()-tick, 2)})
+            if completed.returncode:
+                print((report / f"{name}.log").read_text(errors="replace")[-5000:], flush=True)
+                raise RuntimeError(f"{name} failed (see its log)")
+        # Detect source edits during the run as well as accidental writes.
+        for rel, digest in manifest.items():
+            if hashlib.sha256((source / rel).read_bytes()).hexdigest() != digest:
+                raise RuntimeError(f"Source changed during run: {rel}")
+        record["status"] = "passed"
+        result = 0
+    except Exception as error:
+        record["status"] = "failed"
+        record["error"] = str(error)
+        print(f"FAIL: {error}", flush=True)
+    finally:
+        try:
+            collect(workspace, report, profile)
+        except Exception as error:
+            record["collection_error"] = str(error)
+            record["status"] = "failed"
+            result = 1
+        record["seconds"] = round(time.monotonic()-started, 2)
+        write_json(report / "run.json", record)
+    print(f"{record['status'].upper()}: {len(record['steps'])} steps; {tree_bytes(report)/MiB:.1f} MiB retained", flush=True)
+    return result
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("action", choices=("test", "clean", "doctor", "unit"))
+    parser.add_argument("--profile", choices=("full", "quick", "spice"), default="full")
+    parser.add_argument("--apply", action="store_true")
+    parser.add_argument("--run-id")
+    parser.add_argument("--all", action="store_true", help="Clean every marked run, including latest evidence")
+    args = parser.parse_args()
+    # Bound individual output/log files. Scratch mounts have separate hard size limits.
+    resource.setrlimit(resource.RLIMIT_FSIZE, (32 * MiB, 32 * MiB))
+    Path(os.environ["HOME"]).mkdir(parents=True, exist_ok=True)
+    if args.action == "unit":
+        return subprocess.call(["python3", "-m", "unittest", "discover", "-s", "/source/environment", "-p", "test_lab.py", "-v"])
+    if args.action == "doctor":
+        print(json.dumps(versions(), indent=2))
+        return 0
+    with lab_lock(Path("/lab")):
+        if args.action == "clean":
+            clean(Path("/lab"), keep=0 if args.all else 5, apply=args.apply)
+            return 0
+        return test(Path("/source"), Path("/lab"), Path("/work"), args.profile, args.run_id)
+
+
+if __name__ == "__main__":
+    try:
+        sys.exit(main())
+    except Exception as error:
+        print(f"LAB ERROR: {error}", file=sys.stderr)
+        sys.exit(1)

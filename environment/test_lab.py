@@ -1,0 +1,113 @@
+"""Cleanup and staging failure modes, tested in disposable temporary directories."""
+import json
+import os
+from pathlib import Path
+import tempfile
+import unittest
+from lab import MARKER, clean, lab_lock, managed_runs, source_files, write_json
+
+
+class LabSafetyTests(unittest.TestCase):
+    def symlink(self, link, target, directory=False):
+        try:
+            link.symlink_to(target, target_is_directory=directory)
+        except OSError as error:
+            if getattr(error, "winerror", None) == 1314:
+                self.skipTest("Windows symlink privilege unavailable; exercised inside Linux container")
+            raise
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.root = Path(self.temp.name) / "lab"
+        self.root.mkdir()
+
+    def run_folder(self, number):
+        ident = f"20260923T1200{number:02d}Z-00000000"
+        path = self.root / "runs" / ident
+        path.mkdir(parents=True)
+        write_json(path / "run.json", {"id": ident, "owner": MARKER})
+        (path / "evidence.log").write_text("evidence")
+        return path
+
+    def test_preview_and_retention(self):
+        paths = [self.run_folder(i) for i in range(7)]
+        clean(self.root, keep=5)
+        self.assertTrue(all(p.exists() for p in paths))
+        clean(self.root, keep=5, apply=True)
+        self.assertEqual(set(managed_runs(self.root)), set(paths[2:]))
+
+    def test_unknown_folder_refuses_all_deletion(self):
+        known = self.run_folder(0)
+        (self.root / "runs" / "user-notes").mkdir()
+        with self.assertRaises(RuntimeError):
+            clean(self.root, keep=0, apply=True)
+        self.assertTrue(known.exists())
+
+    def test_marker_mismatch_refuses_all_deletion(self):
+        known = self.run_folder(0)
+        bad = self.run_folder(1)
+        write_json(bad / "run.json", {"owner": MARKER, "id": "../../outside"})
+        with self.assertRaises(RuntimeError):
+            clean(self.root, keep=0, apply=True)
+        self.assertTrue(known.exists())
+
+    def test_nested_symlink_preserves_external_file(self):
+        known = self.run_folder(0)
+        outside = Path(self.temp.name) / "design.ato"
+        outside.write_text("preserve me")
+        self.symlink(known / "link", outside)
+        with self.assertRaises(RuntimeError):
+            clean(self.root, keep=0, apply=True)
+        self.assertEqual(outside.read_text(), "preserve me")
+
+    def test_linked_runs_directory_is_refused(self):
+        outside = Path(self.temp.name) / "outside"
+        outside.mkdir()
+        self.symlink(self.root / "runs", outside, directory=True)
+        with self.assertRaises(RuntimeError):
+            clean(self.root, keep=0, apply=True)
+
+    def test_nonempty_unmarked_lab_is_not_adopted(self):
+        (self.root / "keep.txt").write_text("keep")
+        with self.assertRaises(RuntimeError):
+            with lab_lock(self.root):
+                self.fail("Should not acquire ownership")
+
+    @unittest.skipUnless(os.name == "nt", "Windows junction test")
+    def test_windows_junction_is_refused(self):
+        import _winapi
+        outside = Path(self.temp.name) / "outside"
+        outside.mkdir()
+        _winapi.CreateJunction(str(outside), str(self.root / "runs"))
+        with self.assertRaises(RuntimeError):
+            clean(self.root, keep=0, apply=True)
+        self.assertTrue(outside.exists())
+
+    def test_lock_blocks_concurrent_cleanup(self):
+        with lab_lock(self.root):
+            with self.assertRaises(RuntimeError):
+                with lab_lock(self.root):
+                    self.fail("Concurrent lock was granted")
+
+    def test_all_removes_runs_only(self):
+        with lab_lock(self.root):
+            self.run_folder(0)
+            clean(self.root, keep=0, apply=True)
+            self.assertEqual(managed_runs(self.root), [])
+            self.assertEqual((self.root / ".senseshake-lab").read_text(), MARKER)
+            self.assertTrue((self.root / ".lock").exists())
+
+    def test_input_allowlist_excludes_generated_trees(self):
+        source = Path(self.temp.name) / "source"
+        source.mkdir()
+        for rel in (".venv/lib/fake.py", ".lab/runs/report.json", "hardware/models/large.step", "logs/old.log", "build/cache.py"):
+            path = source / rel
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text("not an input")
+        selected = source_files(source)
+        self.assertFalse(any(p.exists() for p in selected))
+
+
+if __name__ == "__main__":
+    unittest.main()

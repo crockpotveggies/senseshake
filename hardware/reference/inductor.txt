@@ -1,0 +1,391 @@
+                                                                Features                                                           Additional Information
+
+
+
+
+             PL & ,
+                              AUTOMOTIVE
+
+
+
+            M EE NT
+                                      GRADE
+
+         CO FR LIA
+                                                                ■ Semi-shielded construction
+
+
+
+
+                  NT
+                                                                                                                                Click these links for more information:
+
+
+
+               IA
+       00 EN P
+     Q2 OG OM                                                   ■ Inductance range: 1 to 470 µH
+   C- AL C
+ AE **H oHS
+
+
+                                                                ■ Rated current up to 8 A
+      *R
+
+
+
+
+                                                                ■ AEC-Q200 compliant
+                                                                                                                                 PRODUCT TECHNICAL INVENTORY SAMPLES                 CONTACT
+                                                                ■ RoHS compliant* and halogen free**                             SELECTOR LIBRARY
+
+
+
+
+                                                                SRN6045TA Series – Semi-shielded Power Inductors
+
+  Electrical Specifications @ 25 °C                                                                                                General Specifications
+
+                                 Inductance                                                                                     Operating Temp. ........... -55 °C to +125 °C
+                                                           Q              SRF         DCR          Irms            Isat
+                                @ 1 MHz / 1 V                                                                                                      (Temperature rise included)
+                                                         (Min.)          (MHz)       (mΩ)           (A)             (A)         Storage Temperature ... -55 °C to +125 °C
+ Bourns Part No.               L (μH)       Tol. %      @ 1 MHz           Typ.       ±20 %         Typ.           Typ.
+                                                                                                                                Temperature Rise ......40 °C at rated Irms
+ SRN6045TA-1R0Y                 1.0          ± 30          15             110          10          8.00           13.50         Rated Current
+ SRN6045TA-1R2Y                 1.2          ± 30          15              90         10.5         7.50            12.5           ............. Inductance drops 30 % at Isat
+ SRN6045TA-1R5Y                 1.5          ± 30          15              75         11.7         7.00            12.0         Failure In Time (FIT) .........24.7/109 hours
+ SRN6045TA-2R2Y                 2.2          ± 30          15              55          15          6.00            9.50         Mean Time Between Failures (MTBF)
+                                                                                                                                  ...................................40.4 x 106 hours
+ SRN6045TA-3R3Y                 3.3          ± 30          15              45          21          5.00            7.80
+                                                                                                                                Moisture Sensitivity Level ......................1
+ SRN6045TA-3R6Y                 3.6          ± 30          15              42         22.5         4.90            7.40                                     ............................. N/A
+ SRN6045TA-4R7M                 4.7          ± 20          15              40          26          4.50            6.80
+ SRN6045TA-6R3M                 6.3          ± 20          15              35          33          3.80            5.90            Materials
+ SRN6045TA-6R8M                 6.8          ± 20          15              30          34          3.60            5.70         Core .............................................. Ferrite
+ SRN6045TA-8R2M                 8.2          ± 20          15              27          46          3.40            5.10         Wire .............................Enameled copper
+ SRN6045TA-100M                  10          ± 20          15              25          52          3.20            4.60         Terminal Finish ................................... Sn
+ SRN6045TA-120M                  12          ± 20          15              22          65          3.00            4.00         Coating ..................Magnetic epoxy resin
+ SRN6045TA-150M                  15          ± 20          15              20          71          2.80            3.80         Packaging ...... 1000 pcs. per 13-inch reel
+ SRN6045TA-220M                  22          ± 20          15              17          96          2.30            3.30
+                                                                                                                                   Product Dimensions
+ SRN6045TA-330M                  33          ± 20          15              13         145          1.80            2.50
+                                                                                                                                                          6.0 ± 0.3
+ SRN6045TA-470M                  47          ± 20          15              12         200          1.60            2.00                                (.236 ± .012)
+ SRN6045TA-560M                  56          ± 20          15              11         230          1.40            1.80
+ SRN6045TA-680M                  68          ± 20          15              10         305          1.10            1.60
+ SRN6045TA-820M                  82          ± 20          15               9         365          0.98            1.50
+ SRN6045TA-101M                 100          ± 20          15              8.5        456          0.92            1.33
+ SRN6045TA-121M                 120          ± 20          15               7         500          0.85            1.20                               2R2                            6.0 ± 0.3
+                                                                                                                                                                                  (.236 ± .012)
+
+ SRN6045TA-151M                 150          ± 20          15              6.5        626          0.75            1.10
+ SRN6045TA-181M                 180          ± 20          15               6         745          0.68            1.00
+ SRN6045TA-221M                 220          ± 20          15               5          900         0.60            0.88
+ SRN6045TA-331K                 330          ± 10          15               4         1400         0.55            0.60                                                       4.2 ± 0.3
+                                                                                                                                                                           (.165 ± .012)
+ SRN6045TA-471K                 470          ± 10          15               3         2050         0.40            0.50
+
+  Electrical Schematic                                             Recommended Layout
+                                                                                                                                                                            4.25 ± 0.3
+                                                                                                                                                                          (.167 ± .012)
+                                                                                                               1.8
+                                                                                                             (.071)
+
+
+
+                                                                           6.5
+                                                                                                                                                          4.8 ± 0.3                  1.9 ± 0.3
+  How to Order                                                           (.256)
+                                                                                                                                                       (.189 ± .012)              (.075 ± .012)
+
+                         SRN6045TA - 100M
+Model
+Value Code (see table)                                                                     5.1
+                                                                                         (.201)
+                                                                                                     MM
+                                                                                  DIMENSIONS:
+                                                                                                  (INCHES)
+
+
+             WARNING Cancer and Reproductive Harm www.P65Warnings.ca.gov
+                                                                                                                                                                          MM
+* RoHS Directive 2015/863, Mar 31, 2015 and Annex.                                                                                                DIMENSIONS:
+                                                                                                                                                                       (INCHES)
+** Bourns considers a product to be “halogen free” if (a) the Bromine (Br) content is 900 ppm or less; (b) the Chlorine
+   (Cl) content is 900 ppm or less; and (c) the total Bromine (Br) and Chlorine (Cl) content is 1500 ppm or less.
+Specifications are subject to change without notice. Users should verify actual device performance in their specific applications. The products described herein and this document are
+subject to specific legal disclaimers as set forth on the last page of this document, and at www.bourns.com/docs/legal/disclaimer.pdf.
+                               SRN6045TA Series – Semi-shielded Power Inductors
+
+                   Temperature Rise vs. Current
+
+                                                                               40
+                                                                                                                                                                      4R7M
+                                                                                                                   100M
+                                                                                           151M 820M 560M 220M 150M 8R2M 6R3M                                        3R6Y                                                                 1R0Y
+                                                                                        181M 121M      470M                                                          3R3Y
+                                                                                        221M 101M        330M       6R8M                                                                                2R2Y                    1R2Y
+                                                                               32                680M
+
+                                                                                                                                                                                                        1R5Y
+                                                       Temperature Rise (°C)
+
+
+
+
+                                                                               24
+
+
+
+
+                                                                               16
+
+
+
+
+                                                                                8
+
+
+
+
+                                                                               0
+                                                                                    0                  2                                          4                         6                            8                                    10
+                                                                                                                                                      DC Current (A)
+
+
+                   Inductance vs. Current
+
+                              SRN6045TA-1R0Y ~ SRN6045TA-3R6Y                                                                          SRN6045TA-4R7M ~ SRN6045TA-220M                                                                             SRN6045TA-120M
+                    4.0                                                                                                      25                                                                                                18.0                                          70
+
+
+                    3.2                                                                                                      20                                                                                                14.4                                          56
+
+
+
+
+                                                                                                                                                                                                                                                                                  Temperature Rise (°C)
+                                          3R6Y
+Inductance (µH)
+
+
+
+
+                                                                                                                                                         220M
+                                                                                                                                                                                                             Inductance (μH)
+                                                                                                           Inductance (µH)
+
+
+
+
+                    2.4                       3R3Y                                                                           15                                                                                                10.8                                          42
+
+                                                                                                                                                              150M
+                                                 2R2Y
+                    1.6                                                                                                      10                                                                                                 7.2                                          28
+                                                                                                                                                              100M
+                                                                         1R5Y                                                                                           8R2M
+                                                                                                                                                                                6R8M
+                    0.8                                                     1R2Y                                              5                                                    6R3M                                         3.6                                          14
+                                                                             1R0Y
+                                                                                                                                                                                          4R7M
+                     0                                                                                                        0                                                                                                  0                                            0
+                          0        4      8            12                           16           20                                0       1.6         3.2       4.8            6.4          8.0                                      0     1.2      2.4      3.6     4.8   6.0
+                                          DC Current (A)                                                                                               DC Current (A)                                                                                DC Current (A)
+
+
+                              SRN6045TA-330M ~ SRN6045TA-101M                                                                          SRN6045TA-121M ~ SRN6045TA-221M
+                   110                                                                                                       250
+
+
+                    88                                                                                                       200
+ Inductance (µH)
+
+
+
+
+                                                                                                       Inductance (µH)
+
+
+
+
+                                               101M                                                                                                                         221M
+                    66                                                                                                       150
+                                                     820M                                                                                                                          181M
+                                                        680M                                                                                                                              151M
+                    44                                                   560M                                                100
+                                                                               470M                                                                                                       121M
+                                                                                          330M
+                    22                                                                                                        50
+
+
+                     0                                                                                                         0
+                         0        0.6    1.2           1.8                          2.4          3.0                               0       0.28        0.56          0.84          1.12          1.40
+                                         DC Current (A)                                                                                                DC Current (A)
+
+
+
+
+Specifications are subject to change without notice.
+Users should verify actual device performance in their specific applications.
+The products described herein and this document are subject to specific legal disclaimers as set forth on the last page of this document, and at www.bourns.com/docs/legal/disclaimer.pdf.
+         SRN6045TA Series – Semi-shielded Power Inductors
+
+  Soldering Profile
+
+                                                                                              Preheating                          Soldering      Natural Cooling
+
+
+                                                                                               TP (260 °C, 10 Sec. Max.)
+
+                                                                                 tp (245 °C, 20~40 Sec.)
+                                              Temperature (°C)
+
+
+
+
+                                                                                        217 °C
+                                                                            200 °C
+                                                                                                                             60~150 Sec.
+                                                                         150°C
+
+                                                                                          60~180
+                                                                                           Sec.
+
+                                                                                               480 Sec. Max.
+                                                                 25
+                                                                                                                Time (Seconds)
+
+  Packaging Specifications
+
+                          DIA.
+                       330 ± 3.0                               2.0 ± 0.5
+                     (12.99 ± .118)                         (.079 ± .020)
+
+
+                                                                                            13.5 ± 0.5
+                                                                                          (.531 ± .020)
+                                                                                               DIA.
+
+                                                                                                                   80.0 ± 2.0
+                                                                                                                 (3.150 ± .079)
+
+
+                                  13.5 ± 0.5
+                                              DIA.
+                                (.531 ± .020)
+
+
+                                                                                         16.4 +2.0/-0
+                                                                                       (.646 +.079/-0)
+
+
+
+                                                                                                                                                    DIA.
+                                        1.75 ± 0.1                      4.0 ± 0.1                          2.0 ± 0.1
+                                                                                                                                                  1.5 ± 0.1                              0.4 ± 0.1
+                                      (.069 ± .004)                   (.157 ± .004)                     (.079 ± .004)
+                                                                                                                                               (.059 ± .004)                          (.016 ± .004)
+
+
+                                                                                                                                                                      6.4 ± 0.1
+                                 7.5 ± 0.1                                                                                                                         (.252 ± .004)
+                              (.295 ± .004)
+                                                                                 2R2                      2R2               2R2                 2R2
+                        16.0 ± 0.3
+                      (.630 ± .012)
+
+
+                                                                                                                                            6.4 ± 0.1                                       4.7 ± 0.1
+                                                                                          12.0 ± 0.1                                     (.252 ± .004)                                   (.185 ± .004)
+                                                                                        (.472 ± .004)
+
+
+
+
+                                                                                                 USER DIRECTION OF FEED                                                                          MM
+                                                                                                                                                                               DIMENSIONS:
+                                                                                                 QTY: 1000 PCS. PER REEL                                                                      (INCHES)
+
+
+
+REV. 06/24
+Specifications are subject to change without notice.
+Users should verify actual device performance in their specific applications.
+The products described herein and this document are subject to specific legal disclaimers as set forth on the last page of this document, and at www.bourns.com/docs/legal/disclaimer.pdf.
+        Legal Disclaimer Notice
+
+This legal disclaimer applies to purchasers and users of Bourns® products manufactured by or on behalf of Bourns, Inc. and its affiliates (collectively,
+“Bourns”).
+
+Unless otherwise expressly indicated in writing, Bourns® products and data sheets relating thereto are subject to change without notice. Users should check
+for and obtain the latest relevant information and verify that such information is current and complete before placing orders for Bourns® products.
+
+The characteristics and parameters of a Bourns® product set forth in its data sheet are based on laboratory conditions, and statements regarding the
+suitability of products for certain “typical” applications are based on Bourns’ knowledge of typical requirements in generic applications. Bourns assumes
+that “typical” applications include failsafe/backup features to address critical risks to users and are designed to allow rework of Bourns® product to
+avoid scrap of a device solely due to malfunctioning Bourns® product. The characteristics and parameters of a Bourns® product in a user application
+may vary from the data sheet characteristics and parameters due to (i) the combination of the Bourns® product with other components in the user’s
+application, or (ii) the environment of the user application itself. The characteristics and parameters of a Bourns® product also can and do vary in
+different applications and actual performance may vary over time. Thus, users should always verify the actual performance of the Bourns® product in
+their specific devices and applications and make their own independent judgments regarding the suitability of Bourns® product and the amount of
+additional test margin to design into their device or application to compensate for differences between laboratory and real-world conditions.
+
+Unless Bourns has explicitly designated an individual Bourns® product as meeting the requirements of a particular industry standard (e.g., IATF
+16949) or a particular qualification (e.g., UL listed or recognized), Bourns is not responsible for any failure of an individual Bourns® product to meet
+the requirements of such industry standard or particular qualification even if such industry standard or qualification is a “state of art”. Users of Bourns®
+products are responsible for ensuring compliance with safety-related requirements and standards applicable to their devices or applications.
+
+Bourns® products are not recommended, authorized or intended for use in applications where failure or malfunction may result in personal injury,
+death, or severe property or environmental damage, such as without limitation nuclear, life-critical medical and certain automotive and aviation
+applications. Except as set forth in the bullet points below or unless expressly and specifically approved in writing on a case-by-case basis by an
+authorized Bourns’ representative, use of any Bourns® products in such unauthorized high-risk applications is at the user’s sole risk.
+
+     • Bourns considers implantable/invasive devices and devices/procedures designed as life-supporting or life-sustaining by the U.S. Food and Drug
+       Administration or equivalent organizations outside of the United States as “life-critical” medical applications. Bourns expressly identifies those
+       Bourns® standard products that are suitable for use in typical medical applications that are not life-critical in its publication entitled “Bourns
+       Medical Grade Component Guide.”
+
+     • Bourns expressly identifies those Bourns® standard products that are suitable for use in typical automotive applications associated with any
+       Automate Safety Integrity Level (ASIL) in its publication entitled “Bourns Automotive Grade Component Guide.” Bourns’ designation of Bourns®
+       product as compliant with the AEC-Q standard does not by itself mean that Bourns has approved such product for use in an automotive
+       application.
+
+     • Bourns expressly identifies Bourns® standard products that are suitable for use in the typical aviation applications/systems requiring System
+       Design Assurance Level (RTCA DO-254 DAL) of C, D or E in its publication entitled “Bourns Civilian Aerospace/Aviation Grade Component Guide.”
+       Bourns does not test its products for compliance with United States Federal Aviation Administration standards or any other generally equivalent
+       governmental organization standard applicable to products designed or manufactured for use in aviation applications. Use of Bourns® standard
+       components in aviation applications associated with RTCA DO-254 DAL A or B without proper approval noted above shall be at the user’s sole
+       risk.
+
+     • Bourns will review and authorize on a case-by-case basis the use of Bourns® standard products which are at least AEC-Q compliant in space-
+       related civil applications (rockets, satellites) with a negotiated cross-waiver and indemnity agreement.
+
+The use and level of testing applicable to Bourns® custom products shall be negotiated on a case-by-case basis by Bourns and the user for which such
+Bourns® custom products are specially designed. Absent a written agreement between Bourns and the user regarding the use and level of such testing,
+the above provisions applicable to Bourns® standard products shall also apply to such Bourns® custom products.
+
+Use of Bourns® products or Bourns’ technology in military/defense applications must be reviewed with Bourns for compliance with applicable export
+control laws and embargoes. Users shall not sell, transfer, export or re-export (which includes transfers within a country) any Bourns® products or
+technology or technical data for use in activities which involve the design, development, production, use or stockpiling of nuclear, chemical or
+biological weapons or missiles, nor shall they use Bourns® products or technology or technical data in any facility which engages in activities relating
+to such devices. Further, Bourns® products and Bourns’ technology and technical data may not under any circumstance be exported or re-exported to
+countries subject to international sanctions or embargoes. Bourns® products and technology may not, without prior authorization from Bourns and/or
+the Government of a country where such product/technology is designed and/or manufactured, be resold, transferred, or re-exported (including within
+the same country) to any party not eligible to receive commodities, software, and technical data originating in such country.
+
+To the maximum extent permitted by applicable law, Bourns disclaims (i) any and all liability for special, punitive, consequential, incidental or indirect
+damages or lost revenues or lost profits, and (ii) any and all implied warranties (those not based on parameters specified in Bourns’ data sheets and/or
+specifications), including implied warranties of fitness for particular purpose, non-infringement and merchantability.
+
+For your convenience, copies of this Legal Disclaimer Notice with German, Spanish, Japanese, Traditional Chinese and Simplified Chinese bilingual versions are
+available at:
+                                         Web Page: https://www.bourns.com/legal/disclaimers-terms-and-policies
+                                                PDF: https://www.bourns.com/docs/Legal/disclaimer.pdf
+
+
+
+
+                                                                                                                                                    K2540 05/26R
+

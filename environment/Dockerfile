@@ -1,0 +1,13 @@
+# Linux/amd64 is deliberate: this is the verified KiCad/atopile toolchain.
+FROM ghcr.io/astral-sh/uv:0.12.18@sha256:34532673531cdce6019c0919595b2b7f9207ed3a46dabc606d563c4c569cf82a AS uv
+FROM kicad/kicad:9.0.9@sha256:cef4a572df1465b98fa63cdac88780e0f8d39f03c5493434802bcd92f62123fb
+USER root
+COPY --from=uv /uv /usr/local/bin/uv
+ENV UV_PYTHON_INSTALL_DIR=/opt/python UV_NO_CACHE=1
+COPY requirements.lock /opt/requirements.lock
+RUN uv python install 3.14.7 && uv venv --python 3.14.7 /opt/atopile \
+    && uv pip sync --python /opt/atopile/bin/python --require-hashes /opt/requirements.lock
+ENV HOME=/tmp/home XDG_CACHE_HOME=/tmp/cache XDG_CONFIG_HOME=/tmp/config \
+    PYTHONDONTWRITEBYTECODE=1 CI=1 QT_QPA_PLATFORM=offscreen
+WORKDIR /work
+ENTRYPOINT ["python3", "/source/environment/lab.py"]

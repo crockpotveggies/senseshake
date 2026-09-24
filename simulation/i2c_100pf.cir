@@ -1,0 +1,12 @@
+ShakeSense A2 supporting circuit: i2c_100pf
+Vcc vcc 0 3.3
+Vctl ctl 0 PULSE(1 0 5u 1n 1n 5u 10u)
+Rpull vcc bus 4747
+Cbus bus 0 1e-10
+Sdrive bus 0 ctl 0 SW
+.model SW SW(Ron=20 Roff=1e12 Vt=0.5 Vh=0)
+.tran 1n 9u
+.measure tran rise TRIG v(bus) VAL=0.99 RISE=1 TARG v(bus) VAL=2.31 RISE=1
+.measure tran low FIND v(bus) AT=4u
+
+.end

@@ -1,0 +1,1807 @@
+{
+  "shakesense-trenz-hat": {
+    "target": "trenz_hat",
+    "size": [
+      85,
+      56
+    ],
+    "parts": [
+      {
+        "ref": "J1",
+        "value": "Raspberry Pi 40-pin",
+        "footprint": "Connector_PinHeader_2.54mm:PinHeader_2x20_P2.54mm_Vertical",
+        "names": {},
+        "xy": [
+          8.38,
+          4.77
+        ],
+        "section": "01-host-power",
+        "angle": 90,
+        "mpn": "Samtec ESQ-120-23-G-D",
+        "note": "Header land pattern matches bottom mounted socket top-view numbering; tall stack, check Pi 4/5 cooler clearance.",
+        "dnp": false,
+        "local_fp": "Connector_PinHeader_2.54mm__PinHeader_2x20_P2.54mm_Vertical",
+        "type": "P_1"
+      },
+      {
+        "ref": "U1",
+        "value": "24LC32A",
+        "footprint": "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm",
+        "names": {
+          "1": "A0",
+          "2": "A1",
+          "3": "A2",
+          "4": "VSS",
+          "5": "SDA",
+          "6": "SCL",
+          "7": "WP",
+          "8": "VCC"
+        },
+        "xy": [
+          73,
+          24
+        ],
+        "section": "01-host-power",
+        "angle": 0,
+        "mpn": "24LC32A-I/SN",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Package_SO__SOIC-8_3.9x4.9mm_P1.27mm",
+        "type": "P_2"
+      },
+      {
+        "ref": "R1",
+        "value": "3.9k",
+        "footprint": "Resistor_SMD:R_0603_1608Metric",
+        "names": {},
+        "xy": [
+          72.0,
+          18.0
+        ],
+        "section": "01-host-power",
+        "angle": 0,
+        "mpn": "RC0603FR-073K9L",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Resistor_SMD__R_0603_1608Metric",
+        "type": "P_3"
+      },
+      {
+        "ref": "R2",
+        "value": "3.9k",
+        "footprint": "Resistor_SMD:R_0603_1608Metric",
+        "names": {},
+        "xy": [
+          76.0,
+          18.0
+        ],
+        "section": "01-host-power",
+        "angle": 0,
+        "mpn": "RC0603FR-073K9L",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Resistor_SMD__R_0603_1608Metric",
+        "type": "P_3"
+      },
+      {
+        "ref": "R3",
+        "value": "1k",
+        "footprint": "Resistor_SMD:R_0603_1608Metric",
+        "names": {},
+        "xy": [
+          24.0,
+          50.0
+        ],
+        "section": "01-host-power",
+        "angle": 0,
+        "mpn": "RC0603FR-071KL",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Resistor_SMD__R_0603_1608Metric",
+        "type": "P_4"
+      },
+      {
+        "ref": "JP1",
+        "value": "EEPROM write enable",
+        "footprint": "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical",
+        "names": {},
+        "xy": [
+          23,
+          53
+        ],
+        "section": "01-host-power",
+        "angle": 90,
+        "mpn": "EEPROM write enable",
+        "note": "Fit shunt only while programming ID EEPROM.",
+        "dnp": false,
+        "local_fp": "Connector_PinHeader_2.54mm__PinHeader_1x02_P2.54mm_Vertical",
+        "type": "P_5"
+      },
+      {
+        "ref": "C1",
+        "value": "100n",
+        "footprint": "Capacitor_SMD:C_0603_1608Metric",
+        "names": {},
+        "xy": [
+          73.0,
+          29.0
+        ],
+        "section": "01-host-power",
+        "angle": 0,
+        "mpn": "GRM188R71H104KA93D",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Capacitor_SMD__C_0603_1608Metric",
+        "type": "P_6"
+      },
+      {
+        "ref": "C2",
+        "value": "10u",
+        "footprint": "Capacitor_SMD:C_0805_2012Metric",
+        "names": {},
+        "xy": [
+          66.0,
+          7.0
+        ],
+        "section": "01-host-power",
+        "angle": 90,
+        "mpn": "GRM21BR61A106KE19L",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Capacitor_SMD__C_0805_2012Metric",
+        "type": "P_7"
+      },
+      {
+        "ref": "C3",
+        "value": "10u",
+        "footprint": "Capacitor_SMD:C_0805_2012Metric",
+        "names": {},
+        "xy": [
+          68.5,
+          7.0
+        ],
+        "section": "01-host-power",
+        "angle": 90,
+        "mpn": "GRM21BR61A106KE19L",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Capacitor_SMD__C_0805_2012Metric",
+        "type": "P_7"
+      },
+      {
+        "ref": "U11",
+        "value": "LSM6DSOTR",
+        "footprint": "Package_LGA:LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y",
+        "names": {
+          "1": "SDO",
+          "2": "SDx",
+          "3": "SCx",
+          "4": "INT1",
+          "5": "VDDIO",
+          "6": "GND",
+          "7": "GND",
+          "8": "VDD",
+          "9": "INT2",
+          "10": "OCS_AUX",
+          "11": "SDO_AUX",
+          "12": "CS",
+          "13": "SCLK",
+          "14": "SDI"
+        },
+        "xy": [
+          13,
+          24
+        ],
+        "section": "02-motion-array",
+        "angle": 0,
+        "mpn": "LSM6DSOTR",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Package_LGA__LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y",
+        "type": "P_8"
+      },
+      {
+        "ref": "C12",
+        "value": "100n",
+        "footprint": "Capacitor_SMD:C_0402_1005Metric",
+        "names": {},
+        "xy": [
+          9.8,
+          24.1
+        ],
+        "section": "02-motion-array",
+        "angle": 0,
+        "mpn": "GRM155R71C104KA88D",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Capacitor_SMD__C_0402_1005Metric",
+        "type": "P_9"
+      },
+      {
+        "ref": "C13",
+        "value": "100n",
+        "footprint": "Capacitor_SMD:C_0402_1005Metric",
+        "names": {},
+        "xy": [
+          14.6,
+          26.4
+        ],
+        "section": "02-motion-array",
+        "angle": 0,
+        "mpn": "GRM155R71C104KA88D",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Capacitor_SMD__C_0402_1005Metric",
+        "type": "P_9"
+      },
+      {
+        "ref": "R11",
+        "value": "10k",
+        "footprint": "Resistor_SMD:R_0603_1608Metric",
+        "names": {},
+        "xy": [
+          16.7,
+          22.8
+        ],
+        "section": "02-motion-array",
+        "angle": 0,
+        "mpn": "RC0603FR-0710KL",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Resistor_SMD__R_0603_1608Metric",
+        "type": "P_10"
+      },
+      {
+        "ref": "U12",
+        "value": "LSM6DSOTR",
+        "footprint": "Package_LGA:LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y",
+        "names": {
+          "1": "SDO",
+          "2": "SDx",
+          "3": "SCx",
+          "4": "INT1",
+          "5": "VDDIO",
+          "6": "GND",
+          "7": "GND",
+          "8": "VDD",
+          "9": "INT2",
+          "10": "OCS_AUX",
+          "11": "SDO_AUX",
+          "12": "CS",
+          "13": "SCLK",
+          "14": "SDI"
+        },
+        "xy": [
+          24,
+          24
+        ],
+        "section": "02-motion-array",
+        "angle": 0,
+        "mpn": "LSM6DSOTR",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Package_LGA__LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y",
+        "type": "P_8"
+      },
+      {
+        "ref": "C14",
+        "value": "100n",
+        "footprint": "Capacitor_SMD:C_0402_1005Metric",
+        "names": {},
+        "xy": [
+          20.8,
+          24.1
+        ],
+        "section": "02-motion-array",
+        "angle": 0,
+        "mpn": "GRM155R71C104KA88D",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Capacitor_SMD__C_0402_1005Metric",
+        "type": "P_9"
+      },
+      {
+        "ref": "C15",
+        "value": "100n",
+        "footprint": "Capacitor_SMD:C_0402_1005Metric",
+        "names": {},
+        "xy": [
+          25.6,
+          26.4
+        ],
+        "section": "02-motion-array",
+        "angle": 0,
+        "mpn": "GRM155R71C104KA88D",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Capacitor_SMD__C_0402_1005Metric",
+        "type": "P_9"
+      },
+      {
+        "ref": "R12",
+        "value": "10k",
+        "footprint": "Resistor_SMD:R_0603_1608Metric",
+        "names": {},
+        "xy": [
+          27.7,
+          22.8
+        ],
+        "section": "02-motion-array",
+        "angle": 0,
+        "mpn": "RC0603FR-0710KL",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Resistor_SMD__R_0603_1608Metric",
+        "type": "P_10"
+      },
+      {
+        "ref": "U13",
+        "value": "LSM6DSOTR",
+        "footprint": "Package_LGA:LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y",
+        "names": {
+          "1": "SDO",
+          "2": "SDx",
+          "3": "SCx",
+          "4": "INT1",
+          "5": "VDDIO",
+          "6": "GND",
+          "7": "GND",
+          "8": "VDD",
+          "9": "INT2",
+          "10": "OCS_AUX",
+          "11": "SDO_AUX",
+          "12": "CS",
+          "13": "SCLK",
+          "14": "SDI"
+        },
+        "xy": [
+          13,
+          36
+        ],
+        "section": "02-motion-array",
+        "angle": 0,
+        "mpn": "LSM6DSOTR",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Package_LGA__LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y",
+        "type": "P_8"
+      },
+      {
+        "ref": "C16",
+        "value": "100n",
+        "footprint": "Capacitor_SMD:C_0402_1005Metric",
+        "names": {},
+        "xy": [
+          9.8,
+          36.1
+        ],
+        "section": "02-motion-array",
+        "angle": 0,
+        "mpn": "GRM155R71C104KA88D",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Capacitor_SMD__C_0402_1005Metric",
+        "type": "P_9"
+      },
+      {
+        "ref": "C17",
+        "value": "100n",
+        "footprint": "Capacitor_SMD:C_0402_1005Metric",
+        "names": {},
+        "xy": [
+          14.6,
+          38.4
+        ],
+        "section": "02-motion-array",
+        "angle": 0,
+        "mpn": "GRM155R71C104KA88D",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Capacitor_SMD__C_0402_1005Metric",
+        "type": "P_9"
+      },
+      {
+        "ref": "R13",
+        "value": "10k",
+        "footprint": "Resistor_SMD:R_0603_1608Metric",
+        "names": {},
+        "xy": [
+          16.7,
+          34.8
+        ],
+        "section": "02-motion-array",
+        "angle": 0,
+        "mpn": "RC0603FR-0710KL",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Resistor_SMD__R_0603_1608Metric",
+        "type": "P_10"
+      },
+      {
+        "ref": "U14",
+        "value": "LSM6DSOTR",
+        "footprint": "Package_LGA:LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y",
+        "names": {
+          "1": "SDO",
+          "2": "SDx",
+          "3": "SCx",
+          "4": "INT1",
+          "5": "VDDIO",
+          "6": "GND",
+          "7": "GND",
+          "8": "VDD",
+          "9": "INT2",
+          "10": "OCS_AUX",
+          "11": "SDO_AUX",
+          "12": "CS",
+          "13": "SCLK",
+          "14": "SDI"
+        },
+        "xy": [
+          24,
+          36
+        ],
+        "section": "02-motion-array",
+        "angle": 0,
+        "mpn": "LSM6DSOTR",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Package_LGA__LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y",
+        "type": "P_8"
+      },
+      {
+        "ref": "C18",
+        "value": "100n",
+        "footprint": "Capacitor_SMD:C_0402_1005Metric",
+        "names": {},
+        "xy": [
+          20.8,
+          36.1
+        ],
+        "section": "02-motion-array",
+        "angle": 0,
+        "mpn": "GRM155R71C104KA88D",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Capacitor_SMD__C_0402_1005Metric",
+        "type": "P_9"
+      },
+      {
+        "ref": "C19",
+        "value": "100n",
+        "footprint": "Capacitor_SMD:C_0402_1005Metric",
+        "names": {},
+        "xy": [
+          25.6,
+          38.4
+        ],
+        "section": "02-motion-array",
+        "angle": 0,
+        "mpn": "GRM155R71C104KA88D",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Capacitor_SMD__C_0402_1005Metric",
+        "type": "P_9"
+      },
+      {
+        "ref": "R14",
+        "value": "10k",
+        "footprint": "Resistor_SMD:R_0603_1608Metric",
+        "names": {},
+        "xy": [
+          27.7,
+          34.8
+        ],
+        "section": "02-motion-array",
+        "angle": 0,
+        "mpn": "RC0603FR-0710KL",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Resistor_SMD__R_0603_1608Metric",
+        "type": "P_10"
+      },
+      {
+        "ref": "U20",
+        "value": "SCL3300-D01",
+        "footprint": "ShakeSense:SCL3300_D01",
+        "names": {
+          "1": "AVSS",
+          "2": "A_EXTC",
+          "3": "RESERVED_GND",
+          "4": "VDD",
+          "5": "CSB",
+          "6": "MISO",
+          "7": "MOSI",
+          "8": "SCK",
+          "9": "DVIO",
+          "10": "D_EXTC",
+          "11": "DVSS",
+          "12": "EMC_GND"
+        },
+        "xy": [
+          45,
+          28
+        ],
+        "section": "03-level-position",
+        "angle": 0,
+        "mpn": "SCL3300-D01-10",
+        "note": "",
+        "dnp": false,
+        "local_fp": "ShakeSense__SCL3300_D01",
+        "type": "P_11"
+      },
+      {
+        "ref": "C20",
+        "value": "100n",
+        "footprint": "Capacitor_SMD:C_0402_1005Metric",
+        "names": {},
+        "xy": [
+          42.0,
+          22.0
+        ],
+        "section": "03-level-position",
+        "angle": 0,
+        "mpn": "GRM155R71C104KA88D",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Capacitor_SMD__C_0402_1005Metric",
+        "type": "P_9"
+      },
+      {
+        "ref": "C21",
+        "value": "100n",
+        "footprint": "Capacitor_SMD:C_0402_1005Metric",
+        "names": {},
+        "xy": [
+          46.0,
+          22.0
+        ],
+        "section": "03-level-position",
+        "angle": 0,
+        "mpn": "GRM155R71C104KA88D",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Capacitor_SMD__C_0402_1005Metric",
+        "type": "P_9"
+      },
+      {
+        "ref": "C22",
+        "value": "100n",
+        "footprint": "Capacitor_SMD:C_0402_1005Metric",
+        "names": {},
+        "xy": [
+          42.0,
+          34.0
+        ],
+        "section": "03-level-position",
+        "angle": 0,
+        "mpn": "GRM155R71C104KA88D",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Capacitor_SMD__C_0402_1005Metric",
+        "type": "P_9"
+      },
+      {
+        "ref": "C23",
+        "value": "100n",
+        "footprint": "Capacitor_SMD:C_0402_1005Metric",
+        "names": {},
+        "xy": [
+          46.0,
+          34.0
+        ],
+        "section": "03-level-position",
+        "angle": 0,
+        "mpn": "GRM155R71C104KA88D",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Capacitor_SMD__C_0402_1005Metric",
+        "type": "P_9"
+      },
+      {
+        "ref": "R20",
+        "value": "10k",
+        "footprint": "Resistor_SMD:R_0603_1608Metric",
+        "names": {},
+        "xy": [
+          44.0,
+          34.5
+        ],
+        "section": "03-level-position",
+        "angle": 90,
+        "mpn": "RC0603FR-0710KL",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Resistor_SMD__R_0603_1608Metric",
+        "type": "P_10"
+      },
+      {
+        "ref": "U21",
+        "value": "MAX-M10S",
+        "footprint": "RF_GPS:ublox_MAX",
+        "names": {
+          "1": "GND",
+          "2": "TXD_NC",
+          "3": "RXD_NC",
+          "4": "TIMEPULSE",
+          "5": "EXTINT",
+          "6": "V_BCKP",
+          "7": "VCC_IO",
+          "8": "VCC",
+          "9": "RESET_N",
+          "10": "GND",
+          "11": "RF_IN",
+          "12": "GND",
+          "13": "LNA_EN",
+          "14": "VCC_RF",
+          "15": "VIO_SEL_OPEN_3V3",
+          "16": "SDA",
+          "17": "SCL",
+          "18": "SAFEBOOT_N"
+        },
+        "xy": [
+          14,
+          46
+        ],
+        "section": "03-level-position",
+        "angle": 0,
+        "mpn": "MAX-M10S-00B",
+        "note": "I2C 0x42. Passive external GNSS antenna; no DC bias at RF connector.",
+        "dnp": false,
+        "local_fp": "RF_GPS__ublox_MAX",
+        "type": "P_12"
+      },
+      {
+        "ref": "C24",
+        "value": "100n",
+        "footprint": "Capacitor_SMD:C_0603_1608Metric",
+        "names": {},
+        "xy": [
+          5.0,
+          43.0
+        ],
+        "section": "03-level-position",
+        "angle": 0,
+        "mpn": "GRM188R71H104KA93D",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Capacitor_SMD__C_0603_1608Metric",
+        "type": "P_6"
+      },
+      {
+        "ref": "C25",
+        "value": "4.7u",
+        "footprint": "Capacitor_SMD:C_0805_2012Metric",
+        "names": {},
+        "xy": [
+          5.0,
+          46.0
+        ],
+        "section": "03-level-position",
+        "angle": 0,
+        "mpn": "GRM21BR71A475KA73L",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Capacitor_SMD__C_0805_2012Metric",
+        "type": "P_13"
+      },
+      {
+        "ref": "C26",
+        "value": "100n",
+        "footprint": "Capacitor_SMD:C_0603_1608Metric",
+        "names": {},
+        "xy": [
+          5.0,
+          48.5
+        ],
+        "section": "03-level-position",
+        "angle": 0,
+        "mpn": "GRM188R71H104KA93D",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Capacitor_SMD__C_0603_1608Metric",
+        "type": "P_6"
+      },
+      {
+        "ref": "J2",
+        "value": "Passive GNSS antenna",
+        "footprint": "Connector_Coaxial:U.FL_Hirose_U.FL-R-SMT-1_Vertical",
+        "names": {},
+        "xy": [
+          25,
+          46
+        ],
+        "section": "03-level-position",
+        "angle": 0,
+        "mpn": "U.FL-R-SMT-1(10)",
+        "note": "50 ohm line; external passive antenna.",
+        "dnp": false,
+        "local_fp": "Connector_Coaxial__U.FL_Hirose_U.FL-R-SMT-1_Vertical",
+        "type": "P_14"
+      },
+      {
+        "ref": "J4",
+        "value": "FPGA test UART/reset",
+        "footprint": "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical",
+        "names": {},
+        "xy": [
+          82.5,
+          37
+        ],
+        "section": "05-coldfoot-interface",
+        "angle": 0,
+        "mpn": "Coldfoot UART service ONLY",
+        "note": "Test points for assembled module UART and active-low reset; do not connect a second driving host.",
+        "dnp": false,
+        "local_fp": "Connector_PinHeader_2.54mm__PinHeader_1x04_P2.54mm_Vertical",
+        "type": "P_20"
+      },
+      {
+        "ref": "H1",
+        "value": "M2.5 NPTH",
+        "footprint": "MountingHole:MountingHole_2.7mm_M2.5",
+        "names": {},
+        "xy": [
+          3.5,
+          3.5
+        ],
+        "section": "01-host-power",
+        "angle": 0,
+        "mpn": "M2.5 NPTH",
+        "note": "Nonmagnetic standoffs.",
+        "dnp": false,
+        "local_fp": "MountingHole__MountingHole_2.7mm_M2.5",
+        "type": null
+      },
+      {
+        "ref": "H2",
+        "value": "M2.5 NPTH",
+        "footprint": "MountingHole:MountingHole_2.7mm_M2.5",
+        "names": {},
+        "xy": [
+          61.5,
+          3.5
+        ],
+        "section": "01-host-power",
+        "angle": 0,
+        "mpn": "M2.5 NPTH",
+        "note": "Nonmagnetic standoffs.",
+        "dnp": false,
+        "local_fp": "MountingHole__MountingHole_2.7mm_M2.5",
+        "type": null
+      },
+      {
+        "ref": "H3",
+        "value": "M2.5 NPTH",
+        "footprint": "MountingHole:MountingHole_2.7mm_M2.5",
+        "names": {},
+        "xy": [
+          3.5,
+          52.5
+        ],
+        "section": "01-host-power",
+        "angle": 0,
+        "mpn": "M2.5 NPTH",
+        "note": "Nonmagnetic standoffs.",
+        "dnp": false,
+        "local_fp": "MountingHole__MountingHole_2.7mm_M2.5",
+        "type": null
+      },
+      {
+        "ref": "H4",
+        "value": "M2.5 NPTH",
+        "footprint": "MountingHole:MountingHole_2.7mm_M2.5",
+        "names": {},
+        "xy": [
+          61.5,
+          52.5
+        ],
+        "section": "01-host-power",
+        "angle": 0,
+        "mpn": "M2.5 NPTH",
+        "note": "Nonmagnetic standoffs.",
+        "dnp": false,
+        "local_fp": "MountingHole__MountingHole_2.7mm_M2.5",
+        "type": null
+      },
+      {
+        "ref": "U40",
+        "value": "TLV1117LV33DCYR",
+        "footprint": "Package_TO_SOT_SMD:SOT-223-3_TabPin2",
+        "names": {
+          "1": "GND",
+          "2": "OUT",
+          "3": "IN"
+        },
+        "xy": [
+          73,
+          36
+        ],
+        "section": "06-supply-isolation",
+        "angle": 0,
+        "mpn": "TLV1117LV33DCYR",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Package_TO_SOT_SMD__SOT-223-3_TabPin2",
+        "type": "P_21"
+      },
+      {
+        "ref": "C40",
+        "value": "10u",
+        "footprint": "Capacitor_SMD:C_0805_2012Metric",
+        "names": {},
+        "xy": [
+          70.0,
+          30.0
+        ],
+        "section": "06-supply-isolation",
+        "angle": 90,
+        "mpn": "GRM21BR61A106KE19L",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Capacitor_SMD__C_0805_2012Metric",
+        "type": "P_7"
+      },
+      {
+        "ref": "C41",
+        "value": "100n",
+        "footprint": "Capacitor_SMD:C_0603_1608Metric",
+        "names": {},
+        "xy": [
+          74.0,
+          31.0
+        ],
+        "section": "06-supply-isolation",
+        "angle": 0,
+        "mpn": "GRM188R71H104KA93D",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Capacitor_SMD__C_0603_1608Metric",
+        "type": "P_6"
+      },
+      {
+        "ref": "C42",
+        "value": "22u",
+        "footprint": "Capacitor_SMD:C_1206_3216Metric",
+        "names": {},
+        "xy": [
+          67.0,
+          38.0
+        ],
+        "section": "06-supply-isolation",
+        "angle": 90,
+        "mpn": "GRM31CR61A226KE19L",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Capacitor_SMD__C_1206_3216Metric",
+        "type": "P_22"
+      },
+      {
+        "ref": "C43",
+        "value": "100n",
+        "footprint": "Capacitor_SMD:C_0603_1608Metric",
+        "names": {},
+        "xy": [
+          74.0,
+          40.5
+        ],
+        "section": "06-supply-isolation",
+        "angle": 0,
+        "mpn": "GRM188R71H104KA93D",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Capacitor_SMD__C_0603_1608Metric",
+        "type": "P_6"
+      },
+      {
+        "ref": "U41",
+        "value": "SN74LVC8T245PWR",
+        "footprint": "Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm",
+        "names": {
+          "1": "VCCA",
+          "2": "DIR",
+          "11": "GND",
+          "12": "GND",
+          "13": "GND",
+          "22": "OE_N",
+          "23": "VCCB",
+          "24": "VCCB",
+          "3": "A1",
+          "21": "B1",
+          "4": "A2",
+          "20": "B2",
+          "5": "A3",
+          "19": "B3",
+          "6": "A4",
+          "18": "B4",
+          "7": "A5",
+          "17": "B5",
+          "8": "A6",
+          "16": "B6",
+          "9": "A7",
+          "15": "B7",
+          "10": "A8",
+          "14": "B8"
+        },
+        "xy": [
+          60,
+          23
+        ],
+        "section": "06-supply-isolation",
+        "angle": 0,
+        "mpn": "SN74LVC8T245PWR",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Package_SO__TSSOP-24_4.4x7.8mm_P0.65mm",
+        "type": "P_23"
+      },
+      {
+        "ref": "U42",
+        "value": "SN74LVC8T245PWR",
+        "footprint": "Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm",
+        "names": {
+          "1": "VCCA",
+          "2": "DIR",
+          "11": "GND",
+          "12": "GND",
+          "13": "GND",
+          "22": "OE_N",
+          "23": "VCCB",
+          "24": "VCCB",
+          "3": "A1",
+          "21": "B1",
+          "4": "A2",
+          "20": "B2",
+          "5": "A3",
+          "19": "B3",
+          "6": "A4",
+          "18": "B4",
+          "7": "A5",
+          "17": "B5",
+          "8": "A6",
+          "16": "B6",
+          "9": "A7",
+          "15": "B7",
+          "10": "A8",
+          "14": "B8"
+        },
+        "xy": [
+          60,
+          35
+        ],
+        "section": "06-supply-isolation",
+        "angle": 0,
+        "mpn": "SN74LVC8T245PWR",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Package_SO__TSSOP-24_4.4x7.8mm_P0.65mm",
+        "type": "P_23"
+      },
+      {
+        "ref": "C44",
+        "value": "100n",
+        "footprint": "Capacitor_SMD:C_0603_1608Metric",
+        "names": {},
+        "xy": [
+          55.0,
+          17.0
+        ],
+        "section": "06-supply-isolation",
+        "angle": 0,
+        "mpn": "GRM188R71H104KA93D",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Capacitor_SMD__C_0603_1608Metric",
+        "type": "P_6"
+      },
+      {
+        "ref": "C45",
+        "value": "100n",
+        "footprint": "Capacitor_SMD:C_0603_1608Metric",
+        "names": {},
+        "xy": [
+          65.0,
+          17.0
+        ],
+        "section": "06-supply-isolation",
+        "angle": 0,
+        "mpn": "GRM188R71H104KA93D",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Capacitor_SMD__C_0603_1608Metric",
+        "type": "P_6"
+      },
+      {
+        "ref": "C46",
+        "value": "100n",
+        "footprint": "Capacitor_SMD:C_0603_1608Metric",
+        "names": {},
+        "xy": [
+          55.0,
+          29.0
+        ],
+        "section": "06-supply-isolation",
+        "angle": 0,
+        "mpn": "GRM188R71H104KA93D",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Capacitor_SMD__C_0603_1608Metric",
+        "type": "P_6"
+      },
+      {
+        "ref": "C47",
+        "value": "100n",
+        "footprint": "Capacitor_SMD:C_0603_1608Metric",
+        "names": {},
+        "xy": [
+          65.0,
+          29.0
+        ],
+        "section": "06-supply-isolation",
+        "angle": 0,
+        "mpn": "GRM188R71H104KA93D",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Capacitor_SMD__C_0603_1608Metric",
+        "type": "P_6"
+      },
+      {
+        "ref": "R50",
+        "value": "10k",
+        "footprint": "Resistor_SMD:R_0603_1608Metric",
+        "names": {},
+        "xy": [
+          66.0,
+          24.0
+        ],
+        "section": "06-supply-isolation",
+        "angle": 0,
+        "mpn": "RC0603FR-0710KL",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Resistor_SMD__R_0603_1608Metric",
+        "type": "P_10"
+      },
+      {
+        "ref": "R51",
+        "value": "100k",
+        "footprint": "Resistor_SMD:R_0603_1608Metric",
+        "names": {},
+        "xy": [
+          48.0,
+          34.5
+        ],
+        "section": "06-supply-isolation",
+        "angle": 90,
+        "mpn": "RC0603FR-07100KL",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Resistor_SMD__R_0603_1608Metric",
+        "type": "P_24"
+      },
+      {
+        "ref": "U43",
+        "value": "ISO1640BDR",
+        "footprint": "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm",
+        "names": {
+          "1": "VCC1",
+          "2": "SDA1",
+          "3": "SCL1",
+          "4": "GND1",
+          "5": "GND2",
+          "6": "SCL2",
+          "7": "SDA2",
+          "8": "VCC2"
+        },
+        "xy": [
+          42,
+          18
+        ],
+        "section": "06-supply-isolation",
+        "angle": 0,
+        "mpn": "ISO1640BDR",
+        "note": "Power-domain isolation only: grounds are joined. Side-1 VOL max 0.71V requires host VIL >=0.8V; verify Pi revision.",
+        "dnp": false,
+        "local_fp": "Package_SO__SOIC-8_3.9x4.9mm_P1.27mm",
+        "type": "P_25"
+      },
+      {
+        "ref": "C48",
+        "value": "100n",
+        "footprint": "Capacitor_SMD:C_0603_1608Metric",
+        "names": {},
+        "xy": [
+          36.5,
+          15.5
+        ],
+        "section": "06-supply-isolation",
+        "angle": 0,
+        "mpn": "GRM188R71H104KA93D",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Capacitor_SMD__C_0603_1608Metric",
+        "type": "P_6"
+      },
+      {
+        "ref": "C49",
+        "value": "100n",
+        "footprint": "Capacitor_SMD:C_0603_1608Metric",
+        "names": {},
+        "xy": [
+          47.0,
+          18.0
+        ],
+        "section": "06-supply-isolation",
+        "angle": 90,
+        "mpn": "GRM188R71H104KA93D",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Capacitor_SMD__C_0603_1608Metric",
+        "type": "P_6"
+      },
+      {
+        "ref": "R52",
+        "value": "4.7k",
+        "footprint": "Resistor_SMD:R_0603_1608Metric",
+        "names": {},
+        "xy": [
+          29.0,
+          24.5
+        ],
+        "section": "06-supply-isolation",
+        "angle": 0,
+        "mpn": "RC0603FR-074K7L",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Resistor_SMD__R_0603_1608Metric",
+        "type": "P_26"
+      },
+      {
+        "ref": "R53",
+        "value": "4.7k",
+        "footprint": "Resistor_SMD:R_0603_1608Metric",
+        "names": {},
+        "xy": [
+          29.0,
+          26.5
+        ],
+        "section": "06-supply-isolation",
+        "angle": 0,
+        "mpn": "RC0603FR-074K7L",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Resistor_SMD__R_0603_1608Metric",
+        "type": "P_26"
+      },
+      {
+        "ref": "TP1",
+        "value": "SENS_3V3",
+        "footprint": "TestPoint:TestPoint_Pad_D1.5mm",
+        "names": {},
+        "xy": [
+          29.0,
+          52.0
+        ],
+        "section": "06-supply-isolation",
+        "angle": 0,
+        "mpn": "SENS_3V3",
+        "note": "",
+        "dnp": false,
+        "local_fp": "TestPoint__TestPoint_Pad_D1.5mm",
+        "type": "P_29"
+      },
+      {
+        "ref": "TP2",
+        "value": "GND",
+        "footprint": "TestPoint:TestPoint_Pad_D1.5mm",
+        "names": {},
+        "xy": [
+          32.0,
+          52.0
+        ],
+        "section": "06-supply-isolation",
+        "angle": 0,
+        "mpn": "GND",
+        "note": "",
+        "dnp": false,
+        "local_fp": "TestPoint__TestPoint_Pad_D1.5mm",
+        "type": "P_30"
+      },
+      {
+        "ref": "TP4",
+        "value": "SENSOR_OE_N",
+        "footprint": "TestPoint:TestPoint_Pad_D1.5mm",
+        "names": {},
+        "xy": [
+          12.0,
+          53.0
+        ],
+        "section": "06-supply-isolation",
+        "angle": 0,
+        "mpn": "SENSOR_OE_N",
+        "note": "",
+        "dnp": false,
+        "local_fp": "TestPoint__TestPoint_Pad_D1.5mm",
+        "type": "P_32"
+      },
+      {
+        "ref": "U51",
+        "value": "TXU0202DCUR",
+        "footprint": "Package_SO:VSSOP-8_2.3x2mm_P0.5mm",
+        "names": {
+          "1": "B2_IN",
+          "2": "GND",
+          "3": "VCCA",
+          "4": "A2Y_OUT",
+          "5": "A1_IN",
+          "6": "OE",
+          "7": "VCCB",
+          "8": "B1Y_OUT"
+        },
+        "xy": [
+          21,
+          13
+        ],
+        "section": "07-fpga-host-isolation",
+        "angle": 0,
+        "mpn": "TXU0202DCUR",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Package_SO__VSSOP-8_2.3x2mm_P0.5mm",
+        "type": "CF_U51"
+      },
+      {
+        "ref": "C75",
+        "value": "100n",
+        "footprint": "Capacitor_SMD:C_0603_1608Metric",
+        "names": {},
+        "xy": [
+          19.0,
+          10.5
+        ],
+        "section": "07-fpga-host-isolation",
+        "angle": 0,
+        "mpn": "GRM188R71H104KA93D",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Capacitor_SMD__C_0603_1608Metric",
+        "type": "CF_C75"
+      },
+      {
+        "ref": "C76",
+        "value": "100n",
+        "footprint": "Capacitor_SMD:C_0603_1608Metric",
+        "names": {},
+        "xy": [
+          24.0,
+          9.0
+        ],
+        "section": "07-fpga-host-isolation",
+        "angle": 0,
+        "mpn": "GRM188R71H104KA93D",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Capacitor_SMD__C_0603_1608Metric",
+        "type": "CF_C76"
+      },
+      {
+        "ref": "R61",
+        "value": "47",
+        "footprint": "Resistor_SMD:R_0603_1608Metric",
+        "names": {},
+        "xy": [
+          22.0,
+          17.0
+        ],
+        "section": "07-fpga-host-isolation",
+        "angle": 0,
+        "mpn": "RC0603FR-0747RL",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Resistor_SMD__R_0603_1608Metric",
+        "type": "CF_R61"
+      },
+      {
+        "ref": "R62",
+        "value": "100k",
+        "footprint": "Resistor_SMD:R_0603_1608Metric",
+        "names": {},
+        "xy": [
+          18.0,
+          17.0
+        ],
+        "section": "07-fpga-host-isolation",
+        "angle": 0,
+        "mpn": "RC0603FR-07100KL",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Resistor_SMD__R_0603_1608Metric",
+        "type": "CF_R62"
+      },
+      {
+        "ref": "R63",
+        "value": "10k",
+        "footprint": "Resistor_SMD:R_0603_1608Metric",
+        "names": {},
+        "xy": [
+          26.0,
+          17.0
+        ],
+        "section": "07-fpga-host-isolation",
+        "angle": 0,
+        "mpn": "RC0603FR-0710KL",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Resistor_SMD__R_0603_1608Metric",
+        "type": "CF_R63"
+      },
+      {
+        "ref": "U52",
+        "value": "TLV803EA30DBZR",
+        "footprint": "Package_TO_SOT_SMD:SOT-23",
+        "names": {
+          "1": "GND",
+          "2": "RESET_N",
+          "3": "VDD"
+        },
+        "xy": [
+          45,
+          38
+        ],
+        "section": "07-fpga-host-isolation",
+        "angle": 0,
+        "mpn": "TLV803EA30DBZR",
+        "note": "3.0V falling threshold, 200ms nominal release delay; open-drain output.",
+        "dnp": false,
+        "local_fp": "Package_TO_SOT_SMD__SOT-23",
+        "type": "CF_U52"
+      },
+      {
+        "ref": "C77",
+        "value": "100n",
+        "footprint": "Capacitor_SMD:C_0603_1608Metric",
+        "names": {},
+        "xy": [
+          42.0,
+          38.0
+        ],
+        "section": "07-fpga-host-isolation",
+        "angle": 90,
+        "mpn": "GRM188R71H104KA93D",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Capacitor_SMD__C_0603_1608Metric",
+        "type": "CF_C77"
+      },
+      {
+        "ref": "R64",
+        "value": "10k",
+        "footprint": "Resistor_SMD:R_0603_1608Metric",
+        "names": {},
+        "xy": [
+          50.0,
+          34.5
+        ],
+        "section": "07-fpga-host-isolation",
+        "angle": 90,
+        "mpn": "RC0603FR-0710KL",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Resistor_SMD__R_0603_1608Metric",
+        "type": "CF_R64"
+      },
+      {
+        "ref": "Q1",
+        "value": "2N7002",
+        "footprint": "Package_TO_SOT_SMD:SOT-23",
+        "names": {
+          "1": "G",
+          "2": "S",
+          "3": "D"
+        },
+        "xy": [
+          50,
+          38
+        ],
+        "section": "07-fpga-host-isolation",
+        "angle": 0,
+        "mpn": "2N7002",
+        "note": "Pi GPIO17 HIGH asserts chip reset; does not drive a live voltage into unpowered chip.",
+        "dnp": false,
+        "local_fp": "Package_TO_SOT_SMD__SOT-23",
+        "type": "CF_Q1"
+      },
+      {
+        "ref": "R65",
+        "value": "1k",
+        "footprint": "Resistor_SMD:R_0603_1608Metric",
+        "names": {},
+        "xy": [
+          51.0,
+          32.0
+        ],
+        "section": "07-fpga-host-isolation",
+        "angle": 0,
+        "mpn": "RC0603FR-071KL",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Resistor_SMD__R_0603_1608Metric",
+        "type": "CF_R65"
+      },
+      {
+        "ref": "R66",
+        "value": "100k",
+        "footprint": "Resistor_SMD:R_0603_1608Metric",
+        "names": {},
+        "xy": [
+          52.0,
+          34.5
+        ],
+        "section": "07-fpga-host-isolation",
+        "angle": 90,
+        "mpn": "RC0603FR-07100KL",
+        "note": "",
+        "dnp": false,
+        "local_fp": "Resistor_SMD__R_0603_1608Metric",
+        "type": "CF_R66"
+      },
+      {
+        "ref": "J80",
+        "value": "LSHM-150-04.0-L-DV-A-S-K-TR",
+        "mpn": "LSHM-150-04.0-L-DV-A-S-K-TR",
+        "footprint": "Connector_Samtec:Samtec_LSHM-150-xx.x-x-DV-S_2x50-1SH_P0.50mm_Vertical",
+        "local_fp": "TZ_TZ100",
+        "xy": [
+          55,
+          44
+        ],
+        "angle": 0,
+        "type": "TZ100",
+        "section": "08-trenz-JM1",
+        "note": "Mates JM1; opposite parity; 8 mm board surface gap",
+        "names": {},
+        "dnp": false
+      },
+      {
+        "ref": "J81",
+        "value": "LSHM-150-04.0-L-DV-A-S-K-TR",
+        "mpn": "LSHM-150-04.0-L-DV-A-S-K-TR",
+        "footprint": "Connector_Samtec:Samtec_LSHM-150-xx.x-x-DV-S_2x50-1SH_P0.50mm_Vertical",
+        "local_fp": "TZ_TZ100",
+        "xy": [
+          55,
+          12
+        ],
+        "angle": 0,
+        "type": "TZ100",
+        "section": "08-trenz-JM2",
+        "note": "Mates JM2; opposite parity; 8 mm board surface gap",
+        "names": {},
+        "dnp": false
+      },
+      {
+        "ref": "J82",
+        "value": "LSHM-130-04.0-L-DV-A-S-K-TR",
+        "mpn": "LSHM-130-04.0-L-DV-A-S-K-TR",
+        "footprint": "Connector_Samtec:Samtec_LSHM-130-xx.x-x-DV-S_2x30-1SH_P0.50mm_Vertical",
+        "local_fp": "TZ_TZ60",
+        "xy": [
+          34,
+          28
+        ],
+        "angle": 90,
+        "type": "TZ60",
+        "section": "08-trenz-JM3",
+        "note": "Mates JM3; opposite parity; 8 mm board surface gap",
+        "names": {},
+        "dnp": false
+      },
+      {
+        "ref": "J83",
+        "value": "1715721",
+        "mpn": "1715721",
+        "footprint": "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal",
+        "local_fp": "TZ_TZ_POWER",
+        "xy": [
+          7,
+          12
+        ],
+        "angle": 270,
+        "type": "TZ_POWER",
+        "section": "08-trenz-carrier",
+        "note": "REGULATED 3.3 V ONLY; external current-limited supply; 3 A initial operating budget",
+        "names": {},
+        "dnp": false
+      },
+      {
+        "ref": "F80",
+        "value": "0467005.NR",
+        "mpn": "0467005.NR",
+        "footprint": "Fuse:Fuse_1206_3216Metric",
+        "local_fp": "TZ_TZ_FUSE",
+        "xy": [
+          17,
+          8.5
+        ],
+        "angle": 0,
+        "type": "TZ_FUSE",
+        "section": "08-trenz-carrier",
+        "note": "5 A fast fuse; not reverse-polarity or overvoltage protection",
+        "names": {},
+        "dnp": false
+      },
+      {
+        "ref": "J84",
+        "value": "TSW-106-07-G-S",
+        "mpn": "TSW-106-07-G-S",
+        "footprint": "Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical",
+        "local_fp": "TZ_TZ_JTAG",
+        "xy": [
+          82.5,
+          19
+        ],
+        "angle": 0,
+        "type": "TZ_JTAG",
+        "section": "08-trenz-carrier",
+        "note": "Digilent 6-pin JTAG signal order; reference is an output, not a power input",
+        "names": {},
+        "dnp": false
+      },
+      {
+        "ref": "J85",
+        "value": "TSW-103-07-G-D",
+        "mpn": "TSW-103-07-G-D",
+        "footprint": "Connector_PinHeader_2.54mm:PinHeader_2x03_P2.54mm_Vertical",
+        "local_fp": "TZ_TZ_AUX",
+        "xy": [
+          43,
+          52
+        ],
+        "angle": 90,
+        "type": "TZ_AUX",
+        "section": "08-trenz-carrier",
+        "note": "3.3 V spare I/O at accessible lower edge",
+        "names": {},
+        "dnp": false
+      },
+      {
+        "ref": "JP80",
+        "value": "TSW-102-07-G-S",
+        "mpn": "TSW-102-07-G-S",
+        "footprint": "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical",
+        "local_fp": "TZ_TZ_JP",
+        "xy": [
+          68,
+          52
+        ],
+        "angle": 90,
+        "type": "TZ_JP",
+        "section": "08-trenz-carrier",
+        "note": "Fit shunt to DISABLE module; open enables on-board sequence",
+        "names": {},
+        "dnp": false
+      },
+      {
+        "ref": "JP81",
+        "value": "TSW-102-07-G-S",
+        "mpn": "TSW-102-07-G-S",
+        "footprint": "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical",
+        "local_fp": "TZ_TZ_JP",
+        "xy": [
+          75,
+          52
+        ],
+        "angle": 90,
+        "type": "TZ_JP",
+        "section": "08-trenz-carrier",
+        "note": "Fit shunt to request module configuration reset",
+        "names": {},
+        "dnp": false
+      },
+      {
+        "ref": "R80",
+        "value": "10k",
+        "footprint": "Resistor_SMD:R_0603_1608Metric",
+        "names": {},
+        "xy": [
+          73.0,
+          16.0
+        ],
+        "section": "08-trenz-carrier",
+        "angle": 0,
+        "mpn": "RC0603FR-0710KL",
+        "note": "FPGA JTAG selection / spare CPLD control idle pull-down",
+        "dnp": false,
+        "local_fp": "Resistor_SMD__R_0603_1608Metric",
+        "type": "P_10"
+      },
+      {
+        "ref": "R81",
+        "value": "10k",
+        "footprint": "Resistor_SMD:R_0603_1608Metric",
+        "names": {},
+        "xy": [
+          39.0,
+          40.0
+        ],
+        "section": "08-trenz-carrier",
+        "angle": 0,
+        "mpn": "RC0603FR-0710KL",
+        "note": "FPGA JTAG selection / spare CPLD control idle pull-down",
+        "dnp": false,
+        "local_fp": "Resistor_SMD__R_0603_1608Metric",
+        "type": "P_10"
+      },
+      {
+        "ref": "C80",
+        "value": "22u",
+        "footprint": "Capacitor_SMD:C_1206_3216Metric",
+        "names": {},
+        "xy": [
+          55.0,
+          51.0
+        ],
+        "section": "09-fpga-power",
+        "angle": 0,
+        "mpn": "GRM31CR61A226KE19L",
+        "note": "Carrier local decoupling; module contains core decoupling",
+        "dnp": false,
+        "local_fp": "Capacitor_SMD__C_1206_3216Metric",
+        "type": "P_22"
+      },
+      {
+        "ref": "C81",
+        "value": "22u",
+        "footprint": "Capacitor_SMD:C_1206_3216Metric",
+        "names": {},
+        "xy": [
+          50.5,
+          16.5
+        ],
+        "section": "09-fpga-power",
+        "angle": 0,
+        "mpn": "GRM31CR61A226KE19L",
+        "note": "Carrier local decoupling; module contains core decoupling",
+        "dnp": false,
+        "local_fp": "Capacitor_SMD__C_1206_3216Metric",
+        "type": "P_22"
+      },
+      {
+        "ref": "C82",
+        "value": "22u",
+        "footprint": "Capacitor_SMD:C_1206_3216Metric",
+        "names": {},
+        "xy": [
+          50.5,
+          19.0
+        ],
+        "section": "09-fpga-power",
+        "angle": 0,
+        "mpn": "GRM31CR61A226KE19L",
+        "note": "Carrier local decoupling; module contains core decoupling",
+        "dnp": false,
+        "local_fp": "Capacitor_SMD__C_1206_3216Metric",
+        "type": "P_22"
+      },
+      {
+        "ref": "C83",
+        "value": "100n",
+        "footprint": "Capacitor_SMD:C_0603_1608Metric",
+        "names": {},
+        "xy": [
+          53.0,
+          8.0
+        ],
+        "section": "09-fpga-power",
+        "angle": 0,
+        "mpn": "GRM188R71H104KA93D",
+        "note": "Carrier local decoupling; module contains core decoupling",
+        "dnp": false,
+        "local_fp": "Capacitor_SMD__C_0603_1608Metric",
+        "type": "P_6"
+      },
+      {
+        "ref": "C84",
+        "value": "4.7u",
+        "footprint": "Capacitor_SMD:C_0805_2012Metric",
+        "names": {},
+        "xy": [
+          39.0,
+          22.0
+        ],
+        "section": "09-fpga-power",
+        "angle": 0,
+        "mpn": "GRM21BR71A475KA73L",
+        "note": "Carrier local decoupling; module contains core decoupling",
+        "dnp": false,
+        "local_fp": "Capacitor_SMD__C_0805_2012Metric",
+        "type": "P_13"
+      },
+      {
+        "ref": "C85",
+        "value": "4.7u",
+        "footprint": "Capacitor_SMD:C_0805_2012Metric",
+        "names": {},
+        "xy": [
+          55.0,
+          39.0
+        ],
+        "section": "09-fpga-power",
+        "angle": 90,
+        "mpn": "GRM21BR71A475KA73L",
+        "note": "Carrier local decoupling; module contains core decoupling",
+        "dnp": false,
+        "local_fp": "Capacitor_SMD__C_0805_2012Metric",
+        "type": "P_13"
+      },
+      {
+        "ref": "H80",
+        "value": "M3 / 8 mm spacer",
+        "mpn": "M3 / 8 mm spacer",
+        "footprint": "MountingHole:MountingHole_3.2mm_M3",
+        "local_fp": "TZ_TZ_HOLE",
+        "xy": [
+          33,
+          11
+        ],
+        "angle": 0,
+        "type": "",
+        "section": "10-mechanical",
+        "note": "",
+        "names": {},
+        "dnp": false
+      },
+      {
+        "ref": "H81",
+        "value": "M3 / 8 mm spacer",
+        "mpn": "M3 / 8 mm spacer",
+        "footprint": "MountingHole:MountingHole_3.2mm_M3",
+        "local_fp": "TZ_TZ_HOLE",
+        "xy": [
+          77,
+          11
+        ],
+        "angle": 0,
+        "type": "",
+        "section": "10-mechanical",
+        "note": "",
+        "names": {},
+        "dnp": false
+      },
+      {
+        "ref": "H82",
+        "value": "M3 / 8 mm spacer",
+        "mpn": "M3 / 8 mm spacer",
+        "footprint": "MountingHole:MountingHole_3.2mm_M3",
+        "local_fp": "TZ_TZ_HOLE",
+        "xy": [
+          33,
+          45
+        ],
+        "angle": 0,
+        "type": "",
+        "section": "10-mechanical",
+        "note": "",
+        "names": {},
+        "dnp": false
+      },
+      {
+        "ref": "H83",
+        "value": "M3 / 8 mm spacer",
+        "mpn": "M3 / 8 mm spacer",
+        "footprint": "MountingHole:MountingHole_3.2mm_M3",
+        "local_fp": "TZ_TZ_HOLE",
+        "xy": [
+          77,
+          45
+        ],
+        "angle": 0,
+        "type": "",
+        "section": "10-mechanical",
+        "note": "",
+        "names": {},
+        "dnp": false
+      }
+    ]
+  }
+}

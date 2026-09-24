@@ -1,0 +1,16 @@
+ShakeSense A2 supporting circuit: usb_supply_5p25_0p025
+Vhost host 0 5.25
+Rcable host fused 2
+Rptc fused input 1
+Cin input 0 2.2u
+Iload input 0 0.025
+Bldo reg 0 V=min(3.234,v(input)-0.4)
+Cout reg 0 4.7u
+Rswitch reg sensor 0.5
+Isensor sensor 0 PULSE(0.001 0.025 100u 2u 2u 200u 500u)
+Csensor sensor 0 200n
+.tran 100n 800u
+.measure tran input_min MIN v(input) FROM=90u TO=800u
+.measure tran sensor_min MIN v(sensor) FROM=90u TO=800u
+
+.end

@@ -1,0 +1,39 @@
+"""Attach real stock package models plus explicit simplified module envelopes.
+
+Custom VRMLs represent dimensions, not qualified supplier STEP geometry. The
+Coldfoot PCB envelope follows the actual run-1 14x16mm outline and 3mm mating
+stack; die/encapsulation is a visualization envelope, not a wirebond drawing.
+"""
+from pathlib import Path
+import pcbnew as p
+ROOT=Path(__file__).resolve().parents[1];DEST=ROOT/'hardware/models';DEST.mkdir(exist_ok=True)
+def box(x,y,z,w,d,h,color):
+    return f'Transform {{ translation {x/2.54} {y/2.54} {z/2.54} children [ Shape {{ appearance Appearance {{ material Material {{ diffuseColor {color} }} }} geometry Box {{ size {w/2.54} {d/2.54} {h/2.54} }} }} ] }}\n'
+def write(name,geometry): (DEST/(name+'.wrl')).write_text('#VRML V2.0 utf8\n# Simplified mechanical envelope; dimensions in 0.1 inch model units.\n'+geometry)
+write('SCL3300',box(0,0,1.5,7.6,8.6,3,'0.12 0.13 0.15'))
+write('MAX_M10S',box(0,0,.4,9.7,10.1,.8,'0.06 0.14 0.22')+box(0,0,1.7,8.3,8.7,1.8,'0.65 0.66 0.68'))
+write('PTC1812',box(0,0,.6,4.5,3.2,1.2,'0.63 0.53 0.21'))
+write('Coldfoot_Run1',box(0,0,1.45,16.6,3.42,2.9,'0.1 0.1 0.11')+box(0,0,3.4,16,14,.8,'0.06 0.23 0.11')+box(0,0,4.0,5.122,3.932,.4,'0.18 0.2 0.22')+box(0,0,4.7,8.5,7,1.2,'0.06 0.06 0.065'))
+write('PNI14190',box(0,0,2,25.4,25.4,1,'0.05 0.23 0.1')+box(0,-8,4,18,3.2,3,'0.22 0.13 0.055')+box(-8,0,4,3.2,18,3,'0.22 0.13 0.055')+box(7,7,5.5,4,4,6,'0.22 0.13 0.055')+box(1,1,3,4,4,1,'0.1 0.1 0.1'))
+write('DLVR_option',box(3.7,2.8,7,12.7,8,12,'0.15 0.15 0.17')+box(1,2.8,15,3,3,5,'0.15 0.15 0.17')+box(7,2.8,15,3,3,5,'0.15 0.15 0.17'))
+# Correct bottom-mounted socket envelope aligned to the PTH pad array. The
+# cavities are separate dark boxes over a gold contact row, not a solid header.
+socket=box(1.27,-24.13,-5.5,5.1,50.8,8,'0.055 0.055 0.06')
+for i in range(20):
+    for x in [0,2.54]:
+        socket+=box(x,-i*2.54,-9.55,1.25,1.25,.15,'0.01 0.01 0.012')
+        socket+=box(x,-i*2.54,.5,.64,.64,2,'0.65 0.52 0.22')
+write('Pi_bottom_socket',socket)
+for name in ['shakesense-hat','shakesense-field-head']:
+    path=ROOT/'hardware'/name/(name+'.kicad_pcb');b=p.LoadBoard(str(path))
+    custom={'U20':'SCL3300','U21':'MAX_M10S','F1':'PTC1812','J5':'Coldfoot_Run1','J1':'Pi_bottom_socket'} if name.endswith('-hat') else {'U2':'PNI14190','U3':'DLVR_option','F1':'PTC1812'}
+    missing=[]
+    for fp in b.GetFootprints():
+        if fp.GetReference() in custom:
+            fp.Models().clear();m=p.FP_3DMODEL();m.m_Filename='${KIPRJMOD}/../models/'+custom[fp.GetReference()]+'.wrl';m.m_Show=True;fp.Models().push_back(m)
+        else:
+            for model in fp.Models():
+                model.m_Filename=model.m_Filename.replace('${KICAD7_3DMODEL_DIR}','${KICAD9_3DMODEL_DIR}')
+                check=model.m_Filename.replace('${KICAD9_3DMODEL_DIR}','/usr/share/kicad/3dmodels')
+                if not Path(check).exists():missing.append((fp.GetReference(),check))
+    p.SaveBoard(str(path),b);print(name,'unresolved stock model paths:',missing)

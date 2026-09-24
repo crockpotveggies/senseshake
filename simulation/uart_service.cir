@@ -1,0 +1,10 @@
+ShakeSense A2 supporting circuit: uart_service
+Vdrive src 0 PULSE(0 3.135 100n 5n 5n 500n 1u)
+Rdriver src out 25
+Rseries out receiver 47
+Cload receiver 0 100p
+.tran 0.5n 900n
+.measure tran rise TRIG v(receiver) VAL=0.9405 RISE=1 TARG v(receiver) VAL=2.1945 RISE=1
+.measure tran sampled FIND v(receiver) AT=350n
+
+.end

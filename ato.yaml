@@ -1,0 +1,19 @@
+requires-atopile: "0.15.9"
+paths:
+  src: elec
+  layout: layout
+builds:
+  trenz_hat:
+    standardize_designators: false
+    keep_net_names: false
+    entry: elec/hat_trenz.ato:TrenzHat
+  hat:
+    standardize_designators: false
+    keep_net_names: false
+    entry: elec/hat.ato:Hat
+  field_head:
+    standardize_designators: false
+    keep_net_names: false
+    entry: elec/field_head.ato:FieldHead
+
+

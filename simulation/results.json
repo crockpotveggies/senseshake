@@ -1,0 +1,571 @@
+{
+  "simulator": "******\n** ngspice-42 : Circuit level simulation program\n** Compiled with KLU Direct Linear Solver\n** The U. C. Berkeley CAD Group\n** Copyright 1985-1994, Regents of the University of California.\n** Copyright 2001-2023, The ngspice team.\n** Please get your ngspice manual from https://ngspice.sourceforge.io/docs.html\n** Please file your bug-reports at http://ngspice.sourceforge.net/bugrep.html\n** Creation Date: Sun Mar 31 20:15:14 UTC 2024\n******\n",
+  "cases": [
+    {
+      "case": "power_3p18_0p4_0p05",
+      "measured": {
+        "vmin": 3.139459,
+        "vmax": 3.209541
+      },
+      "acceptance": {
+        "vmin": [
+          3.0,
+          3.6
+        ],
+        "vmax": [
+          3.0,
+          3.6
+        ]
+      },
+      "failures": []
+    },
+    {
+      "case": "power_3p18_0p4_0p2",
+      "measured": {
+        "vmin": 3.12767,
+        "vmax": 3.18833
+      },
+      "acceptance": {
+        "vmin": [
+          3.0,
+          3.6
+        ],
+        "vmax": [
+          3.0,
+          3.6
+        ]
+      },
+      "failures": []
+    },
+    {
+      "case": "power_3p18_1p0_0p05",
+      "measured": {
+        "vmin": 3.153339,
+        "vmax": 3.195661
+      },
+      "acceptance": {
+        "vmin": [
+          3.0,
+          3.6
+        ],
+        "vmax": [
+          3.0,
+          3.6
+        ]
+      },
+      "failures": []
+    },
+    {
+      "case": "power_3p18_1p0_0p2",
+      "measured": {
+        "vmin": 3.138594,
+        "vmax": 3.177406
+      },
+      "acceptance": {
+        "vmin": [
+          3.0,
+          3.6
+        ],
+        "vmax": [
+          3.0,
+          3.6
+        ]
+      },
+      "failures": []
+    },
+    {
+      "case": "power_3p42_0p4_0p05",
+      "measured": {
+        "vmin": 3.379459,
+        "vmax": 3.449541
+      },
+      "acceptance": {
+        "vmin": [
+          3.0,
+          3.6
+        ],
+        "vmax": [
+          3.0,
+          3.6
+        ]
+      },
+      "failures": []
+    },
+    {
+      "case": "power_3p42_0p4_0p2",
+      "measured": {
+        "vmin": 3.36767,
+        "vmax": 3.42833
+      },
+      "acceptance": {
+        "vmin": [
+          3.0,
+          3.6
+        ],
+        "vmax": [
+          3.0,
+          3.6
+        ]
+      },
+      "failures": []
+    },
+    {
+      "case": "power_3p42_1p0_0p05",
+      "measured": {
+        "vmin": 3.393339,
+        "vmax": 3.435661
+      },
+      "acceptance": {
+        "vmin": [
+          3.0,
+          3.6
+        ],
+        "vmax": [
+          3.0,
+          3.6
+        ]
+      },
+      "failures": []
+    },
+    {
+      "case": "power_3p42_1p0_0p2",
+      "measured": {
+        "vmin": 3.378594,
+        "vmax": 3.417406
+      },
+      "acceptance": {
+        "vmin": [
+          3.0,
+          3.6
+        ],
+        "vmax": [
+          3.0,
+          3.6
+        ]
+      },
+      "failures": []
+    },
+    {
+      "case": "usb_supply_4p75_0p025",
+      "measured": {
+        "input_min": 4.675,
+        "sensor_min": 3.2215
+      },
+      "acceptance": {
+        "input_min": [
+          4.35,
+          5.25
+        ],
+        "sensor_min": [
+          3.2,
+          3.366
+        ]
+      },
+      "failures": []
+    },
+    {
+      "case": "usb_supply_4p75_0p05",
+      "measured": {
+        "input_min": 4.6,
+        "sensor_min": 3.2215
+      },
+      "acceptance": {
+        "input_min": [
+          4.35,
+          5.25
+        ],
+        "sensor_min": [
+          3.2,
+          3.366
+        ]
+      },
+      "failures": []
+    },
+    {
+      "case": "usb_supply_5p25_0p025",
+      "measured": {
+        "input_min": 5.175,
+        "sensor_min": 3.2215
+      },
+      "acceptance": {
+        "input_min": [
+          4.35,
+          5.25
+        ],
+        "sensor_min": [
+          3.2,
+          3.366
+        ]
+      },
+      "failures": []
+    },
+    {
+      "case": "usb_supply_5p25_0p05",
+      "measured": {
+        "input_min": 5.1,
+        "sensor_min": 3.2215
+      },
+      "acceptance": {
+        "input_min": [
+          4.35,
+          5.25
+        ],
+        "sensor_min": [
+          3.2,
+          3.366
+        ]
+      },
+      "failures": []
+    },
+    {
+      "case": "usb_cc_-0p01",
+      "measured": {
+        "cc_voltage": 0.4135203
+      },
+      "acceptance": {
+        "cc_voltage": [
+          0.4,
+          0.43
+        ]
+      },
+      "failures": []
+    },
+    {
+      "case": "usb_cc_0p01",
+      "measured": {
+        "cc_voltage": 0.4211705
+      },
+      "acceptance": {
+        "cc_voltage": [
+          0.4,
+          0.43
+        ]
+      },
+      "failures": []
+    },
+    {
+      "case": "i2c_50pf",
+      "measured": {
+        "rise": 2.011057e-07,
+        "low": 0.01384519
+      },
+      "acceptance": {
+        "rise": [
+          0,
+          1e-06
+        ],
+        "low": [
+          0,
+          0.4
+        ]
+      },
+      "failures": []
+    },
+    {
+      "case": "i2c_100pf",
+      "measured": {
+        "rise": 4.022121e-07,
+        "low": 0.01384519
+      },
+      "acceptance": {
+        "rise": [
+          0,
+          1e-06
+        ],
+        "low": [
+          0,
+          0.4
+        ]
+      },
+      "failures": []
+    },
+    {
+      "case": "i2c_200pf",
+      "measured": {
+        "rise": 8.044245e-07,
+        "low": 0.01384519
+      },
+      "acceptance": {
+        "rise": [
+          0,
+          1e-06
+        ],
+        "low": [
+          0,
+          0.4
+        ]
+      },
+      "failures": []
+    },
+    {
+      "case": "uart_service",
+      "measured": {
+        "rise": 6.099501e-09,
+        "sampled": 3.135
+      },
+      "acceptance": {
+        "rise": [
+          0,
+          5e-08
+        ],
+        "sampled": [
+          2.31,
+          3.465
+        ]
+      },
+      "failures": []
+    },
+    {
+      "case": "cf_buck_4p75_0p05_0p8",
+      "measured": {
+        "vmin": 3.290539,
+        "vmax": 3.291141,
+        "ripple": 0.0006012972,
+        "peak_current": 0.171145
+      },
+      "acceptance": {
+        "vmin": [
+          3.0,
+          3.6
+        ],
+        "vmax": [
+          3.0,
+          3.6
+        ],
+        "ripple": [
+          0,
+          0.1
+        ],
+        "peak_current": [
+          0,
+          2.0
+        ]
+      },
+      "failures": []
+    },
+    {
+      "case": "cf_buck_4p75_0p05_1p2",
+      "measured": {
+        "vmin": 3.290658,
+        "vmax": 3.291106,
+        "ripple": 0.0004485232,
+        "peak_current": 0.1308371
+      },
+      "acceptance": {
+        "vmin": [
+          3.0,
+          3.6
+        ],
+        "vmax": [
+          3.0,
+          3.6
+        ],
+        "ripple": [
+          0,
+          0.1
+        ],
+        "peak_current": [
+          0,
+          2.0
+        ]
+      },
+      "failures": []
+    },
+    {
+      "case": "cf_buck_4p75_0p6_0p8",
+      "measured": {
+        "vmin": 3.134418,
+        "vmax": 3.135015,
+        "ripple": 0.0005973267,
+        "peak_current": 0.720345
+      },
+      "acceptance": {
+        "vmin": [
+          3.0,
+          3.6
+        ],
+        "vmax": [
+          3.0,
+          3.6
+        ],
+        "ripple": [
+          0,
+          0.1
+        ],
+        "peak_current": [
+          0,
+          2.0
+        ]
+      },
+      "failures": []
+    },
+    {
+      "case": "cf_buck_4p75_0p6_1p2",
+      "measured": {
+        "vmin": 3.134536,
+        "vmax": 3.134984,
+        "ripple": 0.0004485404,
+        "peak_current": 0.6803037
+      },
+      "acceptance": {
+        "vmin": [
+          3.0,
+          3.6
+        ],
+        "vmax": [
+          3.0,
+          3.6
+        ],
+        "ripple": [
+          0,
+          0.1
+        ],
+        "peak_current": [
+          0,
+          2.0
+        ]
+      },
+      "failures": []
+    },
+    {
+      "case": "cf_buck_5p25_0p05_0p8",
+      "measured": {
+        "vmin": 3.291139,
+        "vmax": 3.291945,
+        "ripple": 0.0008062591,
+        "peak_current": 0.1975935
+      },
+      "acceptance": {
+        "vmin": [
+          3.0,
+          3.6
+        ],
+        "vmax": [
+          3.0,
+          3.6
+        ],
+        "ripple": [
+          0,
+          0.1
+        ],
+        "peak_current": [
+          0,
+          2.0
+        ]
+      },
+      "failures": []
+    },
+    {
+      "case": "cf_buck_5p25_0p05_1p2",
+      "measured": {
+        "vmin": 3.291299,
+        "vmax": 3.291935,
+        "ripple": 0.000636348,
+        "peak_current": 0.148493
+      },
+      "acceptance": {
+        "vmin": [
+          3.0,
+          3.6
+        ],
+        "vmax": [
+          3.0,
+          3.6
+        ],
+        "ripple": [
+          0,
+          0.1
+        ],
+        "peak_current": [
+          0,
+          2.0
+        ]
+      },
+      "failures": []
+    },
+    {
+      "case": "cf_buck_5p25_0p6_0p8",
+      "measured": {
+        "vmin": 3.137092,
+        "vmax": 3.137894,
+        "ripple": 0.0008014481,
+        "peak_current": 0.7467117
+      },
+      "acceptance": {
+        "vmin": [
+          3.0,
+          3.6
+        ],
+        "vmax": [
+          3.0,
+          3.6
+        ],
+        "ripple": [
+          0,
+          0.1
+        ],
+        "peak_current": [
+          0,
+          2.0
+        ]
+      },
+      "failures": []
+    },
+    {
+      "case": "cf_buck_5p25_0p6_1p2",
+      "measured": {
+        "vmin": 3.137252,
+        "vmax": 3.137888,
+        "ripple": 0.0006367476,
+        "peak_current": 0.697905
+      },
+      "acceptance": {
+        "vmin": [
+          3.0,
+          3.6
+        ],
+        "vmax": [
+          3.0,
+          3.6
+        ],
+        "ripple": [
+          0,
+          0.1
+        ],
+        "peak_current": [
+          0,
+          2.0
+        ]
+      },
+      "failures": []
+    },
+    {
+      "case": "reset_release",
+      "measured": {
+        "before": 0.01641791,
+        "after": 3.3
+      },
+      "acceptance": {
+        "before": [
+          0,
+          0.4
+        ],
+        "after": [
+          2.31,
+          3.465
+        ]
+      },
+      "failures": []
+    }
+  ],
+  "power_budget": {
+    "input_max_v": 5.25,
+    "regulated_min_v": 3.18,
+    "sensor_budget_a": 0.2,
+    "ambient_max_c": 60,
+    "assumed_theta_ja_c_per_w": 100,
+    "ldo_dissipation_w": 0.414,
+    "junction_estimate_c": 101.4
+  },
+  "status": "PASS \u2014 supporting-circuit behavioral models only"
+}

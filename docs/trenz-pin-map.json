@@ -1,0 +1,541 @@
+[
+  {
+    "module_connector": "JM1",
+    "module_pin": 1,
+    "carrier_ref": "J80",
+    "carrier_pad": 2,
+    "net": "FPGA_VIN"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 3,
+    "carrier_ref": "J80",
+    "carrier_pad": 4,
+    "net": "FPGA_VIN"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 5,
+    "carrier_ref": "J80",
+    "carrier_pad": 6,
+    "net": "FPGA_VIN"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 9,
+    "carrier_ref": "J80",
+    "carrier_pad": 10,
+    "net": "FPGA_3V3"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 11,
+    "carrier_ref": "J80",
+    "carrier_pad": 12,
+    "net": "FPGA_3V3"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 13,
+    "carrier_ref": "J80",
+    "carrier_pad": 14,
+    "net": "FPGA_VIN"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 15,
+    "carrier_ref": "J80",
+    "carrier_pad": 16,
+    "net": "FPGA_VIN"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 14,
+    "carrier_ref": "J80",
+    "carrier_pad": 13,
+    "net": "FPGA_3V3"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 7,
+    "carrier_ref": "J80",
+    "carrier_pad": 8,
+    "net": "FPGA_NOSEQ"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 28,
+    "carrier_ref": "J80",
+    "carrier_pad": 27,
+    "net": "FPGA_EN1"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 30,
+    "carrier_ref": "J80",
+    "carrier_pad": 29,
+    "net": "FPGA_PGOOD"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 32,
+    "carrier_ref": "J80",
+    "carrier_pad": 31,
+    "net": "FPGA_MODE"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 89,
+    "carrier_ref": "J80",
+    "carrier_pad": 90,
+    "net": "FPGA_JTAGEN"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 2,
+    "carrier_ref": "J80",
+    "carrier_pad": 1,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 12,
+    "carrier_ref": "J80",
+    "carrier_pad": 11,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 20,
+    "carrier_ref": "J80",
+    "carrier_pad": 19,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 29,
+    "carrier_ref": "J80",
+    "carrier_pad": 30,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 31,
+    "carrier_ref": "J80",
+    "carrier_pad": 32,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 34,
+    "carrier_ref": "J80",
+    "carrier_pad": 33,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 44,
+    "carrier_ref": "J80",
+    "carrier_pad": 43,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 53,
+    "carrier_ref": "J80",
+    "carrier_pad": 54,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 54,
+    "carrier_ref": "J80",
+    "carrier_pad": 53,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 63,
+    "carrier_ref": "J80",
+    "carrier_pad": 64,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 64,
+    "carrier_ref": "J80",
+    "carrier_pad": 63,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 73,
+    "carrier_ref": "J80",
+    "carrier_pad": 74,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 74,
+    "carrier_ref": "J80",
+    "carrier_pad": 73,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM1",
+    "module_pin": 90,
+    "carrier_ref": "J80",
+    "carrier_pad": 89,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 2,
+    "carrier_ref": "J81",
+    "carrier_pad": 1,
+    "net": "FPGA_VIN"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 4,
+    "carrier_ref": "J81",
+    "carrier_pad": 3,
+    "net": "FPGA_VIN"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 6,
+    "carrier_ref": "J81",
+    "carrier_pad": 5,
+    "net": "FPGA_VIN"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 8,
+    "carrier_ref": "J81",
+    "carrier_pad": 7,
+    "net": "FPGA_VIN"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 1,
+    "carrier_ref": "J81",
+    "carrier_pad": 2,
+    "net": "FPGA_3V3"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 3,
+    "carrier_ref": "J81",
+    "carrier_pad": 4,
+    "net": "FPGA_3V3"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 7,
+    "carrier_ref": "J81",
+    "carrier_pad": 8,
+    "net": "FPGA_3V3"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 9,
+    "carrier_ref": "J81",
+    "carrier_pad": 10,
+    "net": "FPGA_3V3"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 10,
+    "carrier_ref": "J81",
+    "carrier_pad": 9,
+    "net": "FPGA_3V3"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 12,
+    "carrier_ref": "J81",
+    "carrier_pad": 11,
+    "net": "FPGA_3V3"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 91,
+    "carrier_ref": "J81",
+    "carrier_pad": 92,
+    "net": "FPGA_3V3"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 93,
+    "carrier_ref": "J81",
+    "carrier_pad": 94,
+    "net": "JTAG_TMS"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 95,
+    "carrier_ref": "J81",
+    "carrier_pad": 96,
+    "net": "JTAG_TDI"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 97,
+    "carrier_ref": "J81",
+    "carrier_pad": 98,
+    "net": "JTAG_TDO"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 99,
+    "carrier_ref": "J81",
+    "carrier_pad": 100,
+    "net": "JTAG_TCK"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 18,
+    "carrier_ref": "J81",
+    "carrier_pad": 17,
+    "net": "FPGA_CONFIG_RESET_N"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 11,
+    "carrier_ref": "J81",
+    "carrier_pad": 12,
+    "net": "FPGA_UART_RX"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 13,
+    "carrier_ref": "J81",
+    "carrier_pad": 14,
+    "net": "FPGA_UART_TX"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 14,
+    "carrier_ref": "J81",
+    "carrier_pad": 13,
+    "net": "FPGA_RESET_N"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 16,
+    "carrier_ref": "J81",
+    "carrier_pad": 15,
+    "net": "FPGA_AUX0"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 15,
+    "carrier_ref": "J81",
+    "carrier_pad": 16,
+    "net": "FPGA_AUX1"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 17,
+    "carrier_ref": "J81",
+    "carrier_pad": 18,
+    "net": "FPGA_AUX2"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 20,
+    "carrier_ref": "J81",
+    "carrier_pad": 19,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 29,
+    "carrier_ref": "J81",
+    "carrier_pad": 30,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 30,
+    "carrier_ref": "J81",
+    "carrier_pad": 29,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 39,
+    "carrier_ref": "J81",
+    "carrier_pad": 40,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 40,
+    "carrier_ref": "J81",
+    "carrier_pad": 39,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 49,
+    "carrier_ref": "J81",
+    "carrier_pad": 50,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 50,
+    "carrier_ref": "J81",
+    "carrier_pad": 49,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 59,
+    "carrier_ref": "J81",
+    "carrier_pad": 60,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 60,
+    "carrier_ref": "J81",
+    "carrier_pad": 59,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 69,
+    "carrier_ref": "J81",
+    "carrier_pad": 70,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 70,
+    "carrier_ref": "J81",
+    "carrier_pad": 69,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 79,
+    "carrier_ref": "J81",
+    "carrier_pad": 80,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 80,
+    "carrier_ref": "J81",
+    "carrier_pad": 79,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM2",
+    "module_pin": 90,
+    "carrier_ref": "J81",
+    "carrier_pad": 89,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM3",
+    "module_pin": 5,
+    "carrier_ref": "J82",
+    "carrier_pad": 6,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM3",
+    "module_pin": 6,
+    "carrier_ref": "J82",
+    "carrier_pad": 5,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM3",
+    "module_pin": 11,
+    "carrier_ref": "J82",
+    "carrier_pad": 12,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM3",
+    "module_pin": 12,
+    "carrier_ref": "J82",
+    "carrier_pad": 11,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM3",
+    "module_pin": 17,
+    "carrier_ref": "J82",
+    "carrier_pad": 18,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM3",
+    "module_pin": 18,
+    "carrier_ref": "J82",
+    "carrier_pad": 17,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM3",
+    "module_pin": 23,
+    "carrier_ref": "J82",
+    "carrier_pad": 24,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM3",
+    "module_pin": 24,
+    "carrier_ref": "J82",
+    "carrier_pad": 23,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM3",
+    "module_pin": 29,
+    "carrier_ref": "J82",
+    "carrier_pad": 30,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM3",
+    "module_pin": 30,
+    "carrier_ref": "J82",
+    "carrier_pad": 29,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM3",
+    "module_pin": 35,
+    "carrier_ref": "J82",
+    "carrier_pad": 36,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM3",
+    "module_pin": 36,
+    "carrier_ref": "J82",
+    "carrier_pad": 35,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM3",
+    "module_pin": 45,
+    "carrier_ref": "J82",
+    "carrier_pad": 46,
+    "net": "GND"
+  },
+  {
+    "module_connector": "JM3",
+    "module_pin": 46,
+    "carrier_ref": "J82",
+    "carrier_pad": 45,
+    "net": "GND"
+  }
+]

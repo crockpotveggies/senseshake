@@ -1,0 +1,228 @@
+3.3V CMOS Compatible 3.2 x 2.5mm SMD Crystal Oscillator
+
+                 ASE Series                          Request Samples                Check Inventory           3.2 x 2.5 x 1.2 mm
+                                                                                                              RoHS/RoHS II Compliant
+                                                                                                              MSL Level = 1
+
+Features                                                                  Applications
+•   Low height 1.2mm max                                                  •     CCD clock for VTR camera
+•   Tri-state function                                                    •     Equipment connected to PC or PC cards
+•   Low current consumption                                               •     PDA, wireless communication
+•   30mA max for 200MHz                                                   •     Laptop, SSD (Solid State Drive)
+•   Low RMS jitter 5ps max
+•   Suitable for RoHS reflow
+•   Available for tight stability option
+
+Key Electrical Specifications
+
+
+              Parameters                   Minimum              Typical          Maximum              Unite          Notes
+Frequency Range                              0.625                                  200               MHz
+Operating Temperature                         -10                                  +70                 °C      STD (See options)
+Storage Temperature                           -55                                  +125                °C
+Overall Frequency Stability                  -100                                  +100               ppm         See options
+Supply Voltage (Vdd)                        +3.135                3.3             +3.465               V
+                                                                  2.5                 7                           0.5 ~ 20 MHz
+                                                                  4.4                13                         20.1 ~ 40.0 MHz
+                                                                  6.5                19                         40.01 ~ 60.0 MHz
+Supply Current (Idd)                                              12.7               24               mA        60.01 ~ 75.0 MHz
+                                                                  7.4                20                         75.01 ~ 80.0 MHz
+                                                                  7.4                25                        80.01 ~ 133.0MHz
+                                                                  11.7               30                       133.01 ~ 200.0 MHz
+                                                45                 50                55                          0.5 ~ 80.0MHz
+Symmetry @ 1/2Vdd
+                                                40                 50                60                %       80.01 ~ 200.0MHz
+                                                                  2.5               4.0                           0.5 ~ 20 MHz
+                                                                  2.4               4.0                         20.1 ~ 40.0 MHz
+                                                                  2.4               4.0                         40.01 ~ 60.0 MHz
+Rise and Fall Time (Tr/Tf)                                                                             ns
+                                                                  2.3               4.0                         60.01 ~ 75.0 MHz
+                                                                  1.5               4.0                        75.01 ~ 133.0 MHz
+                                                                  1.9               4.0                       133.01 ~ 200.0 MHz
+Output Load                                                                          15                pF            CMOS
+Output Voltage (VOH)                       0.9* Vdd                                                    V
+Output Voltage (VOL)                                                              0.1* Vdd             V
+                                                                    1                2.0                          0.5 ~ 20 MHz
+                                                                    1                2.0                        20.1 ~ 40.0 MHz
+                                                                    1                2.0                        40.01 ~ 60.0 MHz
+Start-up Time                                                                                          ms
+                                                                    1                2.0                        60.01 ~ 75.0 MHz
+                                                                   1.2               2.0                       75.01 ~ 133.0 MHz
+                                                                   1.5               2.0                      133.01 ~ 200.0 MHz
+
+
+
+                                           5101 Hidden Creek Ln Spicewood TX 78669                                       ABRACON IS
+                                           Phone: 512-371-6159 | Fax: 512-351-8858            REVISED: 02-18-22          ISO9001-2015
+                                           For terms and conditions of sales, please visit:
+                                                                                                                          CERTIFIED
+                                           www.abracon.com
+3.3V CMOS Compatible 3.2 x 2.5mm SMD Crystal Oscillator
+
+                ASE Series                Request Samples                Check Inventory           3.2 x 2.5 x 1.2 mm
+                                                                                                   RoHS/RoHS II Compliant
+                                                                                                   MSL Level = 1
+
+
+
+
+               Parameters        Minimum      Typical      Maximum                         Unite          Notes
+                                "1"(VIH≥0.7*Vdd) or Open: Oscillation;
+Tri-state function (Stand-by)
+                                 "0" (VIL<0.3*Vdd) : No oscillation/Hi Z
+                                                                                                      Reference only.
+Peak to Peak Jitter                                      28                                 ps     Contact ABRACON
+                                                                                                       for the Jitter
+                                                        3.2                    5                       0.5 ~ 20 MHz
+                                                        3.2                    5                     20.1 ~ 40.0 MHz
+                                                        3.2                    5                     40.01 ~ 60.0 MHz
+RMS Jitter:                                                                                 ps
+                                                        3.2                    5                     60.01 ~ 75.0 MHz
+                                                        2.2                    5                    75.01 ~ 133.0 MHz
+                                                        2.2                    5                   133.01 ~ 200.0 MHz
+Aging at 25°C (first year)           -3                                       +3           ppm
+Stand-by Current:                                                             10           µA
+
+
+
+
+                                5101 Hidden Creek Ln Spicewood TX 78669                                       ABRACON IS
+                                Phone: 512-371-6159 | Fax: 512-351-8858            REVISED: 02-18-22          ISO9001-2015
+                                For terms and conditions of sales, please visit:
+                                                                                                               CERTIFIED
+                                www.abracon.com
+3.3V CMOS Compatible 3.2 x 2.5mm SMD Crystal Oscillator
+
+              ASE Series                            Request Samples                Check Inventory        3.2 x 2.5 x 1.2 mm
+                                                                                                          RoHS/RoHS II Compliant
+                                                                                                          MSL Level = 1
+
+Options and Part Identification (Left blank if standard)
+
+
+                                      ASE -                                MHz -              -      -
+
+
+
+      Frequency in MHz                  Operating Temp.                           Overall Freq.             Packaging
+      e.g. 0.625MHz                      I: 0°C ~ +50°C                             Stability              Blank: Bulk
+           24.576MHz                    D: -10°C ~ +60°C                          J(*): ±20ppm           T: 1000pcs/Reel
+           14.31818MHz                  E: -20°C ~ +70°C                           R: ±25ppm             T2: 250pcs/Reel
+           26.000MHz                    F: -30°C ~ +70°C                           K: ±30ppm             T3: 3000pcs/Reel
+           200.000MHz                   N: -30°C ~ +85°C                           H: ±35ppm
+                                        L: -40°C ~ +85°C                           B: ±40ppm
+                                                                                   C: ±50ppm
+                                  Contact ABRACON for
+                                                                          *: Temp options I, D, E,
+                                  wider temperature range.
+                                                                          and -10°C to + 70°C only
+
+
+
+
+                                          5101 Hidden Creek Ln Spicewood TX 78669                                    ABRACON IS
+                                          Phone: 512-371-6159 | Fax: 512-351-8858            REVISED: 02-18-22       ISO9001-2015
+                                          For terms and conditions of sales, please visit:
+                                                                                                                      CERTIFIED
+                                          www.abracon.com
+3.3V CMOS Compatible 3.2 x 2.5mm SMD Crystal Oscillator
+
+            ASE Series                                                Request Samples                     Check Inventory                           3.2 x 2.5 x 1.2 mm
+                                                                                                                                                    RoHS/RoHS II Compliant
+                                                                                                                                                    MSL Level = 1
+Reflow Profile [JEDEC J-STD-020]
+
+
+
+
+                                                                                                                      Table 1
+                                                                                                                      SnPb Eutectic Process
+                                                                                                                      Classification Temperatures (Tc)
+                                                                                                                        Package       Volume mm3           Volume mm3
+                                                                                                                       Thickness          <350                 >350
+                                                                                                                        <2.5 mm            235 °C             220 °C
+                                                                                                                        >2.5 mm            220 °C             220 °C
+                                                                                                               Table 2
+                                                                                                               Pb-Free Process
+                                                                                                               Classification Temperatures (Tc)
+                                                                                                                     Package       Volume mm3         Volume mm3        Volume mm3
+                                                                                                                    Thickness          <350            350-2000            >2000
+                                                                                                                    <1.6 mm           260 °C             260 °C           260 °C
+                                                                                                               1.6 mm - 2.5 mm        260 °C             250 °C           245 °C
+                                                                                                                    >2.5 mm           250 °C             245 °C           245 °C
+
+
+
+
+                                                                                                                        Sn-Pb Eutectic                Pb-Free
+                Profile Feature
+                                                                                                                          Assembly                   Assembly
+                Preheat / soak
+                  Temperature minimum (Tsmin)                                                                                 100°C                    150°C
+                  Temperature maximum (Tsmax)                                                                                 150°C                    200°C
+                  Time (Tsmin to Tsmax) (ts)                                                                               60 - 120 sec.            60 - 120 sec.
+                Average ramp-up rate (Tsmax to TP)                                                                         3°C/sec. max             3°C/sec. max
+                Liquidous temperature (TL)                                                                                    183°C                    217°C
+                Time at liquidous (tL)                                                                                     60 - 150 sec.            60 - 150 sec.
+                Peak package body temperature (TP)*                                                                         see Table 1              see Table 2
+                Time (tp)** within 5°C of the specified classification temperature (TC)                                       20 sec.                  30 sec.
+                Ramp-down rate (Tp to Tsmax)                                                                               6°C/sec. max             6°C/sec. max
+                Time 25°C to peak temperature                                                                               6 min. max               8 min. max
+                Reflow cycles                                                                                                 2 max                    2 max
+                *Tolerance for peak profile temperature (TP) is defined as a supplier minimum and a user maximum.
+                **Tolerance for time at peak profile temperature (tp) is defined as supplier minimum and a user maximum.
+
+
+
+
+                                                          5101 Hidden Creek Ln Spicewood TX 78669                                                                   ABRACON IS
+                                                          Phone: 512-371-6159 | Fax: 512-351-8858                          REVISED: 02-18-22                        ISO9001-2015
+                                                          For terms and conditions of sales, please visit:
+                                                                                                                                                                       CERTIFIED
+                                                          www.abracon.com
+3.3V CMOS Compatible 3.2 x 2.5mm SMD Crystal Oscillator
+
+              ASE Series                             Request Samples                Check Inventory        3.2 x 2.5 x 1.2 mm
+                                                                                                           RoHS/RoHS II Compliant
+                                                                                                           MSL Level = 1
+
+Mechanical Dimensions
+
+
+
+
+    Note1: Recommend using an approximately 0.01uF bypass capacitor between PIN 2 and 4.
+    Note2: The outline package configuration varies with frequency range. Electrical properties, pin configuration, and
+    land pattern are the same.
+
+
+
+
+                                           5101 Hidden Creek Ln Spicewood TX 78669                                    ABRACON IS
+                                           Phone: 512-371-6159 | Fax: 512-351-8858            REVISED: 02-18-22       ISO9001-2015
+                                           For terms and conditions of sales, please visit:
+                                                                                                                       CERTIFIED
+                                           www.abracon.com
+             3.3V CMOS Compatible 3.2 x 2.5mm SMD Crystal Oscillator
+
+                                     ASE Series                                            Request Samples                  Check Inventory                    3.2 x 2.5 x 1.2 mm
+                                                                                                                                                               RoHS/RoHS II Compliant
+                                                                                                                                                               MSL Level = 1
+
+               Packaging
+
+
+
+
+ATTENTION: Abracon LLC’s products are COTS – Commercial-Off-The-Shelf products; suitable for Commercial, Industrial and, where designated, Automotive Applications. Abracon’s products
+are not specifically designed for Military, Aviation, Aerospace, Life-dependent Medical applications or any application requiring high reliability where component failure could result in loss of life
+and/or property. For applications requiring high reliability and/or presenting an extreme operating environment, written consent and authorization from Abracon LLC is required. Please contact
+Abracon LLC for more information.
+
+
+                                                                                5101 Hidden Creek Ln Spicewood TX 78669                                                         ABRACON IS
+                                                                                Phone: 512-371-6159 | Fax: 512-351-8858                  REVISED: 02-18-22                      ISO9001-2015
+                                                                                For terms and conditions of sales, please visit:
+                                                                                                                                                                                  CERTIFIED
+                                                                                www.abracon.com
+

@@ -1,0 +1,1889 @@
+              DLVR Low Voltage Digital Pressure Sensor Series
+
+
+
+
+                                                                                                                                                         all sensors
+                                                                                                                                                           e www.allsensors.com
+                                                                                   Introduction
+Table of Contents
+                                                                                   The DLVR Series Mini Digital Output Sensor is based on All
+Features & Applications .............................................. 2
+                                                                                   Sensors’ CoBeam2 TM Technology. This reduces package stress
+Maximum Ratings ....................................................... 2          susceptibility, resulting in improved overall long term stabil-
+Environmental Specifications ...................................... 2              ity. The technology also vastly improves position sensitivity
+Standard Pressure Ranges ............................................ 2            compared to single die devices.
+
+
+
+
+                                                                                                                                                           f 408 225 2079
+Performance Characteristics ........................................ 3
+                                                                                   The supply voltage options ease integration of the sensors
+I2C / SPI Electrical Parameters ..................................... 4
+                                                                                   into a wide range of process control and measurement sys-
+Equivalent Circuit........................................................ 4
+                                                                                   tems, allowing direct connection to serial communications
+Device Options ........................................................... 5
+                                                                                   channels. For battery-powered systems, the sensors can enter
+Parylene Coating ......................................................... 5       very low-power modes between readings to minimize load
+
+
+
+
+                                                                                                                                                           p 408 225 4314
+Soldering Recommendations ....................................... 5                on the power supply.
+Operation Overview ................................................ 6-7
+Digital Interface Data Format ...................................... 8             These calibrated and compensated sensors provide accurate,
+                                                                                   stable output over a wide temperature range. This series is
+I2C Interface .......................................................... 8-10
+                                                                                   intended for use with non-corrosive, non-ionic working fluids
+SPI Interface .............................................................. 11
+                                                                                   such as air, dry gases and the like. A protective parylene coat-
+
+
+                                                                                                                                                           a 16035 Vineyard Blvd. Morgan Hill, CA 95037
+Interface Timing Diagrams ........................................ 12
+                                                                                   ing is optionally available for moisture/harsh media protec-
+How to Order ........................................................... 13        tion.
+Dimensional Package Drawings
+             SIP ......................................................... 14-15   https://www.allsensors.com/products/dlvr-series
+             DIP ........................................................ 16-17
+             SMT J-Lead ................................................. 18
+Suggested Pad Layouts .............................................. 19
+Product Labeling ....................................................... 19
+
+
+
+
+                                                                                                   For All Sensors Corporation’s most recent quality
+                                                                                              certification documents, please visit www.allsensors.com
+
+
+                                                       DS-0300 / DCN 11279 / Rev J
+
+                                                                                                                                         Page 1 of 19
+DLVR Series Low Voltage Digital Pressure Sensors
+                             Features                                                   Applications
+  • Pressure Ranges from 0.5 to 60 inH2O                                 • Medical Breathing
+
+  • 3.3V Supply Voltage Standard / 5V Option                             • Environmental Controls
+
+  • I2C Standard Interface / SPI Interface Option • HVAC
+
+  • Better than 1.0% Accuracy Over                                       • Industrial Controls
+    Temperature Typical
+                                                                         • Portable / Hand-Held Devices
+
+
+
+             Pressure Sensor Maximum Ratings                                     Environmental Specifications
+     Supply Voltage (Vs)                                6 Vdc             Temperature Ranges
+     Common Mode Pressure                               10 psig             Compensated:     Commercial     0°C to 70°C
+                                                                          		                 Industrial   -20°C to 85°C
+     Lead Temperature (soldering 2-4 sec.)               270°C              Operating                    -25°C to 85 °C
+     Device Temperature                                  245°C              Storage                     -40°C to 125 °C
+                                                                          Humidity Limits (non condensing) 0 to 95% RH
+
+
+                                               Standard Pressure Ranges
+                                               A
+                          Operating Range                  Proof Pressure               Burst Pressure       Nominal Span
+        Device
+                         inH2O            Pa            inH2O            kPa         inH2O         kPa          Counts
+     DLVR-F50D            ± 0.5          125             100             25           300           75          ±6,554
+     DLVR-L01D             ±1            250             100             25           300           75          ±6,554
+     DLVR-L02D             ±2            500             100             25           300           75          ±6,554
+     DLVR-L05D             ±5           1,250            200             50           300           75          ±6,554
+     DLVR-L10D            ± 10          2,500            200             50           300           75          ±6,554
+     DLVR-L20D            ± 20          5,000            200             50           500          125          ±6,554
+     DLVR-L30D            ± 30          7,500            200             50           500          125          ±6,554
+     DLVR-L60D            ± 60         15,000            200             50           800          200          ±6,554
+     DLVR-L01G           0 to 1          250             100             25           300           75          13,108
+     DLVR-L02G           0 to 2          500             100             25           300           75          13,108
+     DLVR-L05G           0 to 5         1,250            200             50           300           75          13,108
+     DLVR-L10G           0 to 10        2,500            200             50           300           75          13,108
+     DLVR-L20G           0 to 20        5,000            200             50           500          125          13,108
+     DLVR-L30G           0 to 30        7,500            200             50           500          125          13,108
+     DLVR-L60G           0 to 60       15,000            200             50           800          200          13,108
+
+
+
+
+   Note A: Operating range in Pa is expressed as an approximate value.
+
+
+                                                               DLVR Series Low Voltage Digital Pressure Sensors
+
+                                                                                                                Page 2 of 19
+    Performance Characteristics for DLVR Series
+    All parameters are measured at 3.3V ±5% or 5.0V ±5% (depending on selected voltage option) excitation and
+    25°C unless otherwise specified. Pressure measurements are with positive pressure applied to PORT B.
+
+    Parameter                                           Min               Typ     Max      Units       Notes
+    Output Span
+         LxxD, FxxD                                        -             ±6,554     -     Dec count      1
+         LxxG                                              -             13,108     -     Dec count      1
+    Offset Output @ Zero Differential Pressure
+         LxxD, FxxD                                        -             8,192      -     Dec count      -
+
+
+
+
+                                                                                                                     all sensors
+         LxxG                                              -             1,638      -     Dec count      -
+    Total Error Band
+         F50D                                              -             ±0.60    ±1.5     %Span         2
+         L01x, L02x                                        -             ±0.50    ±1.0     %Span         2
+         L05x, L10x, L20x, L30x, L60x                     -              ±0.30    ±0.75    %Span         2
+    Span Temperature Shift
+         F50D, L01x, L02x                                 -              ±0.50      -       %FSS         3
+         L05x, L10x, L20x, L30x, L60x                     -              ±0.20      -       %FSS         3
+    Offset Temperature Shift
+         F50D, L01x, L02x                                 -              ±0.50      -       %FSS         3
+         L05x, L10x, L20x, L30x, L60x                     -              ±0.20      -       %FSS         3
+
+
+
+
+                                                                                                                       e www.allsensors.com
+    Offset Warm-Up Shift
+         F50D, L01x, L02x                                 -              ±0.25      -       %FSS         4
+         L05x, L10x, L20x, L30x, L60x                     -              ±0.15      -       %FSS         4
+    Offset Position Sensitivity (±1g)
+         F50D, L01x, L02x                                 -              ±0.10      -       %FSS         -
+         L05x, L10x, L20x, L30x, L60x                     -              ±0.05      -       %FSS         -
+    Offset Long Term Dfrift (One Year)
+         F50D, L01x, L02x                                 -              ±0.25      -       %FSS         -
+
+
+
+
+                                                                                                                       f 408 225 2079
+         L05x, L10x, L20x, L30x, L60x                     -              ±0.15      -       %FSS         -
+    Linearity, Hysteresis Error
+         F50D                                             -              ±0.30      -       %FSS         6
+         LxxD                                             -              ±0.25      -       %FSS         6
+         LxxG                                             -              ±0.10      -       %FSS         6
+    Response Delay
+         Sleep - Wake Pressure                             -              0.46    0.53       ms         5, 9
+
+
+
+
+                                                                                                                       p 408 225 4314
+         Sleep - Wake All                                  -              1.10    1.40       ms         5, 9
+         Power-On to First Reading Attempt       6.0 + 1 update period     -        -        ms         5, 9
+    Update Rate
+         Fast                                              -              0.50    1.15       ms          5
+         Noise Reduced                                     -              1.3      3.1       ms          5
+         Low Power                                         -              6.5      9.5       ms          5
+    Digital Resolution
+
+
+
+
+                                                                                                                       a 16035 Vineyard Blvd. Morgan Hill, CA 95037
+         Output Resolution                                 -              14        -        bit         -
+         No Missing Codes                                12               13        -        bit         -
+    Temperature Output
+         Resolution                                        -              11        -        bit         7
+         Overall Accuracy                                  -               2        -        °C          7
+    Current Requirement (3.3V Option)
+         Fast                                              -              3.5      4.3       mA          5
+         Noise Reduced                                     -              3.6      4.5       mA          5
+         Low Power                                         -              0.72     0.9       mA          5
+         Sleep (Idle)                                      -              0.5      5.0       uA          5
+    Current Requirement (5V Option)
+         Fast                                              -              5.0      6.0       mA          5
+         Noise Reduced                                     -              5.2      6.2       mA          5
+         Low Power                                         -              1.1      1.3       mA          5
+         Sleep (Idle)                                      -              0.5      5.0       uA          5
+
+
+
+    See following page for performance characteristics table notes
+
+
+All Sensors                                      DS-0300 / DCN 11279 / Rev J
+
+                                                                                                      Page 3 of 19
+ I2C / SPI Electrical Parameters for DLVR Series
+ Parameter                                                 Symbol                  Min              Typ      Max        Units         Notes
+
+ Input High Level                                             -                     80               -       100        % of Vs         5
+
+ Input Low Level                                              -                     0                -       20         % of Vs         5
+
+ Output Low Level                                             -                     -                -       10         % of Vs         5
+
+ I2C Pull-up Resistor                                         -                    1000              -        -           Ω            5,8
+
+ I2C Load Capacitance on SDA, @ 400 kHz                    CSDA                     -                -       200          pF            5
+
+ I2C Input Capacitance (each pin)                         CI2C_IN                   -                -       10           pF            5
+
+
+
+Pressure Output Transfer Function
+                             Pressure (inH 2 O) = 1.25 x   ( Pout 2 dig - OS dig
+                                                                       14          ) x FSS(inH O)
+                                                                                             2
+
+   Where:
+          Pout dig          is the sensor 14-bit output
+
+          OS dig            is the specified digital offset output (gage = 1,638 and differential = 8,192)
+
+          FSS(inH 2 O)      is the sensor Full Scale Span in inH2O
+                            for Gage Operating Range sensors: Full Scale Pressure
+                            for Differential Operaing Range sensors: 2X Full Scale Pressure
+
+
+Specification Notes
+note 1:   THE SPAN IS THE ALGEBRAIC DIFFERENCE BETWEEN FULL SCALE DECIMAL COUNTS AND THE OFFSET DECIMAL COUNTS. THE FULL SCALE PRESSURE IS THE
+    MAXIMUM POSITIVE CALIBRATED PRESSURE.
+note 2:   TOTAL ERROR BAND (TEB) IS THE COMBINATION OF ERRORS INCLUDING OFFSET, SPAN, LINEARITY, PRESSURE HYSTERESIS, TEMPERATURE EFFECT ON
+    OFFSET, AND TEMPERATURE EFFECT ON SPAN.
+note 3:   SHIFT IS RELATIVE TO 25C.
+note 4:   SHIFT IS WITHIN THE FIRST HOUR OF EXCITATION APPLIED TO THE DEVICE.
+note 5:   PARAMETER IS CHARACTERIZED AND NOT 100% TESTED.
+note 6:   MEASURED AT ONE-HALF FULL SCALE RATED PRESSURE USING BEST STRAIGHT LINE CURVE FIT.
+note 7: TEMPERATURE OUTPUT CONVERSION FUNCTION:
+
+
+                                                                                       200
+                                      𝑇𝑇𝑇𝑇𝑇𝑇𝑇𝑇𝑇𝑇𝑇𝑇𝑇𝑇𝑇𝑇𝑇𝑇𝑇𝑇𝑇𝑇 (℃) = 𝑇𝑇𝑇𝑇𝑇𝑇𝑇𝑇𝑑𝑑𝑑𝑑𝑑𝑑 × � 11   � − 50
+                                                                                     2 −1
+
+note 8: A PULL-UP RESISTOR IS REQUIRED FOR CORRECT I2C USAGE. THE MINIMUM VALUE INDICATED IS FOR 5.0V OR 3.3V OPERATION.
+
+note 9: FOLLOWING SENSOR POWER-UP, THE APPLICATION MUST WAIT AT LEAST THE INDICATED TIME BEFORE ATTEMPTING TO COMMUNICATE WITH THE
+
+    SENSOR.
+
+
+
+
+Equivalent Circuit
+
+
+                                                    Vs                                                             Vs
+                                                    SCL                                                            SCLK
+                                                                                               SPI
+                         I2C                        SDA                                                            MISO
+                                                                                              Option
+                                                    INT                                                            SS
+
+                                                    Gnd                                                            Gnd
+
+
+                                                                               DLVR Series Low Voltage Digital Pressure Sensors
+
+                                                                                                                                   Page 4 of 19
+    Device Options
+    The following is a list of factory programmable options. Consult the factory to learn more about the options.
+        Interface
+        I2C and SPI interfaces are available. NOTE: SPI interface is only available with eight (8) lead
+        packages.
+
+        Supply Voltage
+        Devices are characterized at either 3.3V or 5.0V depending on the options selected. It is suggested
+        to select the option that most closely matches the application supply voltage for best possible
+
+
+
+
+                                                                                                                             all sensors
+        performance.
+
+        Speed/Power
+        There are four options of Speed/Power. These are Fast(F), Noise Reduced(N), Low Power(L) and Sleep
+        mode(S).
+
+
+            Fast Mode(F) Is the fastest operating mode where the device operates with continuous sampling at the
+            fastest internal speed.
+
+            Noise Reduced(N): Also operates with continuous samples however the ADC is set for over sampling
+
+
+
+
+                                                                                                                               e www.allsensors.com
+            for noise reduction. The conversion times are resultantly longer than the Fast(F) mode however, there is
+            approximately 1/2 bit reduction in noise.
+
+            Low Power(L): Is similar to the Fast(F) mode with exception that the device uses an internal timer to delay
+            between pressure conversions. The internal timer time-out triggers the next conversion cycle. The update
+            rate is commensurately lower for this mode as a result.
+
+            Sleep(S): Is similar to the Low Power(L) mode however the trigger to initiate a sample comes from the user
+            instead of an internal timer. This is ideal for very low update rate applications that requirelow power usage.
+
+
+
+
+                                                                                                                               f 408 225 2079
+            It is also ideal for synchronizing the data conversions with the host microprocessor.
+
+
+
+
+    Coating
+
+
+
+
+                                                                                                                               p 408 225 4314
+    Parylene coating provides a moisture barrier and protection from some harsh media. Consult factory
+    for applicability of Parylene for the target application and sensor type. This option is not available for
+    pressure ranges below 10 inH2O nor for J-Lead packages in any pressure range.
+
+
+
+
+                                                                                                                               a 16035 Vineyard Blvd. Morgan Hill, CA 95037
+    Soldering Recommendations
+    Vapor phase reflow processes are not compatible with this product.
+
+    If these devices are to be subjected to solder reflow assembly or other high temperature processing, they
+    must be baked for 1 hour at 125°C within 24 hours prior to exposure. Failure to comply may result in
+    cracking and/or delamination of critcal interfaces within the package, and is not covered by warranty.
+
+
+
+
+All Sensors                              DS-0300 / DCN 11279 / Rev J
+
+                                                                                                              Page 5 of 19
+Operation Overview
+The DLVR is a digital sensor with a signal path that includes a sensing element, a 14 bit analog to digital converter,
+a DSP and an IO block that supports either an I2C or SPI interface (see Figure 1 below). The sensor also includes an
+internal temperature reference and associated control logic to support the configured operating mode. The sensing
+element is powered down while not being sampled to conserve power. Since there is a single ADC, there is also a
+multiplexer at the front end of the ADC that selects the signal source for the ADC.
+Figure 1 - DLVR Essential Model
+
+
+
+
+                      Zero        2                rawP/           Pressure
+              Vs
+                                           A       rawT                                    I2C/SPI
+                        T   o     1                         DSP    Temperature    I/O
+                                               D
+                                  0
+     Sensor                           Sample   Over
+                             P/T/Z             Sample
+                            Select             Enable
+                                                           Control Wake
+                                                            Logic
+              Gnd
+
+
+
+
+The ADC performs conversions on the raw sensor signal (P), the temperature reference (T) and a zero reference (Z)
+during an ADC zero cycle. It also has an oversampling mode for a noise reduced output. A conversion cycle that is
+measuring pressure is called a Normal cycle. A cycle where either a temperature measurement or zeroing is being
+performed is called a Special cycle.
+
+The DSP receives the converted pressure and temperature information and applies a multi-order transfer function to
+compensate the pressure output. This transfer function includes compensation for span, offset, temperature effects on
+span, temperature effects on offset and second order temperature effects on both span and offset. There is also linearity
+compensation for gage devices and front to back linearity compensation for differential devices.
+
+There are two effective operating modes of the sensor 1) Free Running and 2) Triggered. The control logic performs
+the synchronization of the internal functions according the factory programmed Power/Speed option (see Table 1).
+The Control Logic also determines the Delay between ADC samples, the regularity of the Special cycles and whether
+or not the ADC performs the Over Sampling. Refer to Figure 2 for the communication model associated with the
+operating modes listed below.
+
+     Free Running Mode: In the free running mode, conversion cycles are initiated internally at regular intervals.
+     There are three options available that operate in the Free Running mode (F, N and L). Two of these (F and N)
+     run continuously while the third option (L) has an approximate 6 ms delay between conversion cycles. All
+     three options have Special cycles inserted at regular intervals to accomplish the ADC zeroing and temperature
+     measurements. Two of the options utilize oversampling. Refer to Table 1 for specific option controls.
+
+     Triggered Mode: In the Triggered Mode, a conversion cycle is initiated by the user (or host uP). There are two
+     available methods to wake the sensor from sleep mode. The first method (Wake All) is to wake the sensor and
+     perform all three measurement cycles (Z, T and P). This provides completely fresh data from the sensor. The
+     second method (Wake P) is to wake the sensor from sleep and only perform the pressure measurement (P).When
+     using this second method, it is up to the user to interleave Wake All commands at regular intervals to ensure there
+     is sufficiently up to date temperature information. Also, the Wake Pressure method is only available from the I2C
+     interface (not available using a SPI interface).
+
+
+
+
+                                                           DLVR Series Low Voltage Digital Pressure Sensors
+
+                                                                                                             Page 6 of 19
+    Operation Overview (Cont’d)
+    Table 1 - DLVR Control Logic Detail
+
+                                                                              Control Logic
+      Power/                                                                                        Delay            Normal          Special         Special
+                          Power/Speed                         Operating  Over
+      Speed                                                                                        Between            ADC             ADC           ADC Cycle
+                           Description                         Mode     Sample
+      Option                                                                                       Samples           Cycles          Cycles          Interval
+         F           Fast                                                            No            No                   1 (P)        1 (Z or T)          255
+                                                                 Free
+         N           Noise Reduced                                                   Yes           No                   1 (P)        1 (Z or T)          255
+
+
+
+
+                                                                                                                                                                                all sensors
+                                                                Running
+         L           Low Power                                                       Yes           Yes                  1 (P)        1 (Z or T)           31
+                     Sleep(1) (Wake Pressure)                                        No        User Defined             1 (P)           n/a             Never
+         S                                                     Triggered
+                     Sleep (Wake All)                                                No        User Defined             1 (P)        2 (Z + T)         Always
+     Note 1) Wake from sleep with pressure only reading is not available with SPI interface (I2C only).
+
+
+
+
+    Figure 2 - DLVR Communication Model
+
+
+
+
+                                                                                                                                                                                  e www.allsensors.com
+      Free Running Mode [(F)ast, (N)oise Reduced and (L)ow Power Option]
+
+                Cycle Type                    Normal Cycle                    Normal Cycle                       Special Cycle (1)
+         Internal Operation DSP       Delay       ADC (P)     DSP     Delay     ADC (P)      DSP    Delay   ADC (P)       ADC (T or Z)   DSP   Delay   ADC (P)
+        New Data Available
+                              Note 1: See Table 1 for frequency of Special Cycles
+
+
+
+
+      Triggered Mode - Wake All [(S)leep Option]
+
+
+
+
+                                                                                                                                                                                  f 408 225 2079
+               I2C                     Wake All                                                 Read Data        Wake All
+                or
+             SPI (SS)                                                                           Read Data
+
+         Internal Operation         Sleep           ADC (Z)    ADC (T)    ADC (P)    DSP                Sleep                 ADC (Z)    ADC (T)   ADC (P)   DSP   Sleep
+        New Data Available
+
+
+
+
+                                                                                                                                                                                  p 408 225 4314
+      Triggered Mode - Wake Pressure [(S)leep Option]
+               I2C                     Wake P.                             Read Data         Wake P.
+
+
+         Internal Operation         Sleep          ADC (P)     DSP                  Sleep              ADC (P)    DSP       Sleep
+        New Data Available
+
+
+
+
+                                                                                                                                                                                  a 16035 Vineyard Blvd. Morgan Hill, CA 95037
+
+
+
+
+All Sensors                                                 DS-0300 / DCN 11279 / Rev J
+
+                                                                                                                                                                 Page 7 of 19
+Digital Interface Data Format
+For either type of digital interface, the format of data returned from the sensor is the same. The first 16 bits consist
+of the 2 Status bits followed by the 14-bit the pressure value. The third byte provides the 8 most significant bits of
+the measured temperature; the fourth byte provides the 3 least significant bits of temperature, followed by 5 bits of
+undefined filler data. With either interface, the host may terminate the transfer after receiving the first two bytes of data
+from the sensor, or following the third byte (if just the most-significant 8 bits of temperature are needed). Refer to Table
+2 for the overall data format of the sensor. Table 3 shows the Status Bit definition.
+
+           Table 2 - Output Data Format
+
+
+
+
+          Bit Definitions:
+          Status (S): Normal/command / busy / diagnostic
+          Pressure (P): Digital pressure reading
+          Temperature (T): Compensated temperature reading
+
+          Table 3- Status Bit Definitions
+
+
+
+
+I2C Interface
+I2C Communications Overview
+The I2C interface uses a set of signal sequences for communication. The following is a description of the supported
+sequences and their associated mnemonics. Refer to Figure 3 for the associated usage of the following signal
+sequences.
+     Bus not Busy (I): During idle periods both data line (SDA) and clock line (SCL) remain HIGH.
+     START condition (ST): A HIGH to LOW transition of SDA line while the clock (SCL) is HIGH is interpreted as
+     START condition. START conditions are always set by the master. Each initial request for a pressure value has
+     to begin with a START condition.
+     Slave address (An): The I²C-bus requires a unique address for each device. After setting a START condition the
+     master sends the address byte containing the 7 bit sensor address followed by a data direction bit (R/W). A "0"
+     indicates a transmission from master to slave (WRITE), a "1" indicates a data request (READ).
+     Acknowledge (A or N): Data is transferred in units of 8 bits (1 byte) at a time, MSB first. Each data-receiving
+     device, whether master or slave, is required to pull the data line LOW to acknowledge receipt of the data. The
+     Master must generate an extra clock pulse for this purpose. If the receiver does not pull the data line down, a
+     NACK condition exists, and the slave transmitter becomes inactive. The master determines whether to send
+     the last command again or to set the STOP condition, ending the transfer.
+     DATA valid (Dn): State of data line represents valid data when, after a START condition, data line is stable for
+     duration of HIGH period of clock signal. Data on line must be changed during LOW period of clock signal.
+     There is one clock pulse per data bit.
+     DATA operation: The sensor starts to send 4 data bytes containing the current pressure and temperature values.
+     The transmission may be halted by the host after any of the bytes by responding with a NACK.
+     STOP condition (P): LOW to HIGH transition of the SDA line while clock (SCL) is HIGH indicates a STOP
+     condition. STOP conditions are always generated by the master.
+
+
+
+                                                         DLVR Series Low Voltage Digital Pressure Sensors
+
+                                                                                                                Page 8 of 19
+    I2C Communications Overview (Cont’d)
+
+          Figure 3 - I2C Communication Diagram
+
+          I2C Communications Diagram
+
+          1. Start All ( to wake sensor from Sleep mode, Zero ADC, read Temperature and read Pressure )
+
+                   Set by bus master: -I - - ST
+                                              - A6 A5 A4 A3 A2 A1 A0 R                          SP I
+                   Set by sensor: - - - - - - - - - - - - - - - - - - - - - - - - - - - - - A- - - - - - - - -
+
+
+
+
+                                                                                                                                                                   all sensors
+          2. Start Pressure ( to wake sensor from Sleep mode and read Pressure only )
+
+                   Set by bus master: -I - - ST
+                                              - A6 A5 A4 A3 A2 A1 A0 W                          SP I
+                   Set by sensor: - - - - - - - - - - - - - - - - - - - - - - - - - - - - - A- - - - - - - - -
+
+          3. Read Data ( with examples of reading pressure, pressure plus 8 bits of temperature and pressure plus 11 bits of temperature )
+
+                   Set by bus master: -I - - ST
+                                             - A6 A5 A4 A3 A2 A1 A0 R                               A
+                   Set by sensor ( pressure plus status ): - - - - - - - - - - - -A- -D31
+                                                                                       - - -…- -D24
+                                                                                                -     D23 … D16
+                        …then, one of the following:
+                   a) Set by bus master, to stop transfer after pressure data received: - - - - - - - - - - - - - -N- - -SP      - - - I- - - -
+                        --OR--
+                   b) Set by bus master, to stop transfer after first temperature data byte received: - - - - -A- - - - - - - - - N SP I
+
+
+
+
+                                                                                                                                                                     e www.allsensors.com
+                     Set by sensor ( high order 8 bits of temperature ): - - - - - - - - - - - - - - - - - - - - - - - - - - - D15
+                                                                                                                               - - - -… - - -D8
+                                                                                                                                              -
+                        --OR--
+                   c) Set by bus master, to stop transfer after last temperature data byte received: - - - - - A- - - - - - - - -               A         N SP I
+                     Set by sensor ( all 11 bits of temperature plus padding bits ): - - - - - - - - - - - - - - - - - - - D15 - - - -…- - -D8-   D7 … D0
+
+
+
+                                   Bus states                             Sensor Address                  Data format
+                                   Idle:             I                    A6 … A0                         Status:             D31 D30
+                                   Start:           ST                                                    Pressure data:      D29 … D16
+                                   Stop:            SP                                                    Temperature data:   D15 … D5
+
+
+
+
+                                                                                                                                                                     f 408 225 2079
+                                   Ack:             A                                                     (padding bits:)     D4 … D0
+                                   Nack:            N
+                                   “Read” bit (1): R
+                                   “Write” bit (0): W
+
+
+
+
+                                                                                                                                                                     p 408 225 4314
+    Figure 3 illustrates the sequence of signals set by both the host and the sensor for each command. Note that for the
+    DataRead command, the host has the option of responding to the second or third bytes of data with a NACK instead
+    of ACK. This terminates the data transmission after the pressure data, or after the pressure data and upper byte of tem-
+    perature, have been transmitted. See Figure 6 for the I2C timing details.
+
+
+
+
+                                                                                                                                                                     a 16035 Vineyard Blvd. Morgan Hill, CA 95037
+
+
+
+
+All Sensors                                              DS-0300 / DCN 11279 / Rev J
+
+                                                                                                                                                    Page 9 of 19
+I2C Command Sequence
+
+Depending on whether the Fast, Noise Reduced, Low-Power, or Sleep options have been selected, the command
+sequence differs slightly. See Figure 3 for details of the three I2C commands.
+
+
+         Fast, Noise Reduced or Low-power Configuration
+
+         The part enters Free Running mode (see table 1) after power-up: it performs an initial complete
+         measurement, writes the calculated data to the output registers, sets the INT pin high, then goes to sleep.
+         After a delay determined by the update rate option, the part will wake up, perform measurements, update
+         the output registers, then go back to sleep. DataRead is the only command recognized; as with the Sleep
+         configuration, if the INT pin is ignored, the host processor can repeat this command until the Status bits
+         indicate an updated reading.
+
+         Sleep Configuration
+
+         The part enters Triggered mode (see table 1) after power-up, and waits for a command from the bus master.
+         If the StartAll command is received, the temperature, ADC zero, and pressure readings are all measured,
+         and correction calculations are performed. When valid data is written to the output registers, the INT pin is
+         set high, and the processing core goes back to sleep. The host processor then sends the DataRead command
+         to shift out the updated values. If the INT pin is not monitored, the host can poll the output registers by
+         repeating the DataRead command until the Status bits indicate that the values have been updated (see
+         Tables 2 and 3). The response time depends on configuration options (refer to Table 1 and Performance
+         Characteristics).
+
+         Depending on the application, pressure measurements may be performed by sending the StartPressure
+         command, which only measures the pressure value and uses previously measured temperature data in
+         calculating the compensated output value. This presents the result faster (in about 1/3 the delay time) than
+         the StartAll command. This can be a useful method to synchronize the sensor with the host controller as
+         well as attaining the fastest overall response time without Special cycles occuring at unwanted times. The
+         system designer should determine the interval required for sending StartAll commands, necessary to refresh
+         the internal temperature value and zero point data, in order to maintain accurate output values.
+
+I2C Exceptions
+         1. Sending a Start condition, then a Stop condition, without any transitions on the CLK line, creates a
+         communication error for the next communication, even if the next start condition is correct and the clock
+         pulse is applied. A second Start condition must be set, which clears the error and allows communication to
+         proceed.
+
+         2. The Restart condition—a falling SDA edge during data transmission when the CLK clock line is still
+         high— creates the same stall/deadlock. In the following data request, an additional Start condition must be
+         sent for correct communication.
+
+         3. A falling SDA edge is not allowed between the start condition and the first rising SCL edge. If using an
+         I2C address with the first bit 0, SDA must be held low from the start condition through the first bit.
+
+
+
+
+                                                      DLVR Series Low Voltage Digital Pressure Sensors
+
+                                                                                                          Page 10 of 19
+    SPI Interface
+    SPI Command Sequence
+
+    DLVR sensors using the SPI interface option provide 3 signals for communication: SCLK, SS (Slave Select), and MISO.
+    This read-only signaling uses a hardware protocol to control the sensor, differing slightly with the speed/power option
+    selected as described below:
+
+        Fast(F), Noise Reduced(N) and Low-Power(L) Configurations: After power-up, the part enters Free Running mode
+        and begins its periodic conversion cycle, at the interval determined by the programmed Power/Speed option.
+        This is the simplest configuration. The only bus interaction with the host is the SPI DataRead operations. Polling
+
+
+
+
+                                                                                                                              all sensors
+        the sensor at a rate slower than the internal update rate will minimize bus activity and ensure that new values
+        are presented with each transfer. Note that the Status bits should still be checked to verify updated data and the
+        absence of error conditions.
+
+        Sleep(S) Configuration: As with the I2C option, the part enters Triggered mode after power-up, and waits for a
+        command from the bus master. To wake the part and start a measurement cycle, the SS pin must be driven low
+        by the host for at least 8usec, then driven high. This can be done by shifting a dummy byte of 8 bits from the
+        sensor. This bus activity can be considered the SPI StartAll command, where the rising edge of SS is the required
+        input to start conversion. Updated conversion data is written to the output registers after a period dependent
+        on configuration options ( see Performance Characteristics). After this update of the registers, the core goes to
+        an inactive (sleep) state. The DataRead command simply consists of shifting out 2, 3, or 4 bytes of data from
+
+
+
+
+                                                                                                                                e www.allsensors.com
+        the sensor. The host can check the Status bits of the output to verify that new data has been provided. The part
+        remains inactive following this read operation, and another StartAll operation is needed to wake the part when
+        the next conversion is to be performed.
+
+    SPI Bit Pattern
+
+    The sequence of bits and bus signals are shown in the following illustration (Figure 4). Refer to Figure 5 in the
+    Interface Timing Diagram section for detailed timing data. As previously described, the incoming data may be
+
+
+
+
+                                                                                                                                f 408 225 2079
+    terminated by raising SS after 2, 3, or 4 bytes have been received as illustrated below.
+
+           Figure 4 - SPI Bit Pattern
+
+
+
+
+                                                                                                                                p 408 225 4314
+                                                                                                                                a 16035 Vineyard Blvd. Morgan Hill, CA 95037
+
+
+
+
+All Sensors                              DS-0300 / DCN 11279 / Rev J
+
+                                                                                                              Page 11 of 19
+Interface Timing Diagrams
+
+Figure 5: SPI Timing Diagram
+
+                                                                            tSCLK
+
+                               tSSCLK                                tLOW           tHIGH
+
+       SCLK
+
+                    (HI•Z)                                                                                                                 (HI•Z)
+       MISO
+                                      tCLKD            tCLKD
+
+
+       SS
+                                                                                                                          tCLKSS
+                                                                                                                                            tIDLE
+
+     P ARAMETER                                                               S YMBOL                        MIN    TYP             MAX              UNITS
+    S CLK clock frequency (4MHz clock)                                              f SCLK                   50                      800              kHz
+    S CLK clock frequency (1MHz clock)                                              f SCLK                   50                      200              kHz
+    S S drop to firs t clock edge                                               tSSCLK                       2.5                                       us
+    Minimum S CLK clock low width                                                 tLOW                       0.6                                       us
+    Minimum S CLK clock high width                                               tHIGH                       0.6                                       us
+    Clock edge to data trans ition                                               tCLKD                        0                      0.1               us
+    Ris e of S S relative to las t clock edge                                   tCLKSS                       0.1                                       us
+    Bus free time between ris e and fall of S S                                   tIDLE                       2                                        us
+
+
+
+
+Figure 6: I2C Timing Diagram
+
+
+
+
+                                              tH STA      tHIGH                              tLOW
+
+
+                  SCL
+
+
+                  SDA
+                             tSUSTA                               tSUDAT                            tH DAT
+                                                                                                                          tSUSTP   tIDLE
+
+    P ARAMETER                                                               S YMBOL                     MIN       TYP             MAX              UNITS
+    S CL clock frequency                                                         fSCL                        100                   400              kHz
+    S tart condition hold time relative to S CL edge                            tHSTA                        0.6                                      us
+    Minimum S CL clock low width                                                 tLOW                        0.6                                      us
+    Minim um S CL clock high width                                              tHIGH                        0.6                                      us
+    S tart condition s etup time relative to S CL edge                         tSUSTA                        0.1                                      us
+    Data hold time on S DA relative to S CL edge                               tHDA T                         0                                       us
+    Data s etup time on S DA relative to S CL edge                             tSUDA T                       0.1                                      us
+    S top condition s etup time on S CL                                        tSUSTP                        0.6                                      us
+    Bus free time between s top condition and s tart cond .                     tIDLE                         2                                       us
+
+
+
+
+                                                                           DLVR Series Low Voltage Digital Pressure Sensors
+
+                                                                                                                                                    Page 12 of 19
+    How to Order
+    Refer to Table 4 for configuring a standard base part number which includes the pressure range, package and
+    temperature range. Table 5 shows the available configuring options. The option identifier is required to complete the
+    device part number. Refer to Table 6 for the available device package options.
+    Example P/N with options: DLVR-L02D-E1NS-C-NI3F
+
+    Table 4: How to configure a base part number
+                                                       ^Z/^       WZ^^hZZE'                                                        W<'                                                    dDWZdhZZE'
+                                                                                               ĂƐĞ         WŽƌƚKƌŝĞŶƚĂƚŝŽŶ                    >ŝĚ^ƚǇůĞ                >ĞĂĚdǇƉĞ
+                                                        /           /    ĞƐĐƌŝƉƚŝŽŶ          /    /   ĞƐĐƌŝƉƚŝŽŶ               /   ĞƐĐƌŝƉƚŝŽŶ          /     ĞƐĐƌŝƉƚŝŽŶ                     /   ĞƐĐƌŝƉƚŝŽŶ
+
+
+
+
+                                                                                                                                                                                                                                            all sensors
+                                                       >sZ        &ϱϬ   цϬ͘ϱŝŶ,ϮK                 ϭ   ƵĂůWŽƌƚ^ĂŵĞ^ŝĚĞ       E    EŽŶͲĂƌďĞĚ            ^     ^/W;ƐĞĞŶŽƚĞϭϬͿ                   ŽŵŵĞƌĐŝĂů
+                                                                    >Ϭϭ   цϭŝŶ,ϮK                    Ϯ   ƵĂůWŽƌƚKƉƉŽƐŝƚĞ^ŝĚĞ       ĂƌďĞĚ                     /W                              /   /ŶĚƵƐƚƌŝĂů
+             KZZ/E'/E&KZDd/KE
+
+
+
+
+                                                                    >ϬϮ   цϮŝŶ,ϮK                                                                             :     :Ͳ>ĞĂĚ^Dd
+                                                                    >Ϭϱ   цϱŝŶ,ϮK                                                                                                                       
+                                                                    >ϭϬ   цϭϬŝŶ,ϮK
+                                                                    >ϮϬ   цϮϬŝŶ,ϮK
+                                                                    >ϯϬ   цϯϬŝŶ,ϮK
+                                                                    >ϲϬ   цϲϬŝŶ,ϮK
+                                                                    >Ϭϭ'   ϬƚŽϭŝŶ,ϮK
+                                                                    >ϬϮ'   ϬƚŽϮŝŶ,ϮK
+                                                                    >Ϭϱ'   ϬƚŽϱŝŶ,ϮK
+                                                                    >ϭϬ'   ϬƚŽϭϬŝŶ,ϮK
+                                                                    >ϮϬ'   ϬƚŽϮϬŝŶ,ϮK
+                                                                    >ϯϬ'   ϬƚŽϯϬŝŶ,ϮK
+                                                                    >ϲϬ'   ϬƚŽϲϬŝŶ,ϮK
+
+          ǆĂŵƉůĞ >sZ Ͳ >ϬϮ                                                              Ͳ          ϭ                            E                         ^                                 Ͳ    
+
+
+
+
+                                                                                                                                                                                                                                              e www.allsensors.com
+    Table 5: How to configure an option identifier
+                                                                         Kd/E'                                      /EdZ&                         ^hWW>zsK>d'                         ^WͬWKtZ
+                                KZZ/E'/E&KZDd/KE
+
+
+
+
+                                                                 / ĞƐĐƌŝƉƚŝŽŶ                              /     ĞƐĐƌŝƉƚŝŽŶ                       / ĞƐĐƌŝƉƚŝŽŶ                      /     ĞƐĐƌŝƉƚŝŽŶ
+                                                                 E EŽŽĂƚŝŶŐ                                 /     /Ϯ͕ĂĚĚƌĞƐƐϬǆϮϴ                  ϯ ϯ͘ϯs                              &     &ĂƐƚ
+                                                                  W WĂƌǇůĞŶĞŽĂƚŝŶŐϴ                         ^     ^W/;ƐĞĞŶŽƚĞϭϬͿ                  ϱ ϱ͘Ϭs                             E      EŽŝƐĞƌĞĚƵĐĞĚ
+                                                                                                              ϯ     /Ϯ͕ĂĚĚƌĞƐƐϬǆϯϴ                                                      >     >ŽǁWŽǁĞƌ
+                                                                                                              ϰ     /Ϯ͕ĂĚĚƌĞƐƐϬǆϰϴ                                                      ^     ^ůĞĞƉDŽĚĞ
+                                                                                                              ϱ     /Ϯ͕ĂĚĚƌĞƐƐϬǆϱϴ
+                                                                                                              ϲ     /Ϯ͕ĂĚĚƌĞƐƐϬǆϲϴ
+
+
+
+
+                                                                                                                                                                                                                                              f 408 225 2079
+                                                                                                              ϳ     /Ϯ͕ĂĚĚƌĞƐƐϬǆϳϴ
+                                                                                                              ϵ     /Ϯ͕ĂĚĚƌĞƐƐϬǆϮϵ
+         ǆĂŵƉůĞ E                                                                                           /                                        ϯ                                  &
+    Table 6: Available E-Series Package Configurations
+                                                                                   Non-Barbed Lid                                                                          Barbed Lid
+
+
+
+
+                                                                                                                                                                                                                                              p 408 225 4314
+         Port
+                                                                                     Lead Style                                                                            Lead Style
+     Orientation
+                                                           SIP                 DIP                  J Lead SMT        Low Proﬁle DIP               SIP              DIP                   J Lead SMT           Low Proﬁle DIP
+
+
+
+
+       Dual Port
+                                                                                                                             N/A                                                               N/A                  N/A
+      Same Side
+
+
+
+
+                                                                                                                                                                                                                                              a 16035 Vineyard Blvd. Morgan Hill, CA 95037
+                                                         E1NS                 E1ND                    E1NJ                                        E1BS          E1BD
+
+
+
+      Dual Port
+      Opposite                                                                                                               N/A                                                               N/A                  N/A
+        Side
+
+
+                                                         E2NS                 E2ND                    E2NJ                                        E2BS          E2BD
+
+
+
+
+     Single Port
+                                                          N/A                  N/A                     N/A                   N/A                  N/A           N/A                            N/A                  N/A
+       (Gage)
+
+
+
+
+    Specification Notes (Cont’d.)
+    Note 10: SPI INTERFACE IS ONLY AVAILABLE IN 8-LEAD DIP PACKAGES.
+
+
+
+
+All Sensors                                                                                           DS-0300 / DCN 11279 / Rev J
+
+                                                                                                                                                                                                                            Page 13 of 19
+Package Drawings
+
+  E1BS Package
+
+
+
+                                          9.15
+                                         0.360                                                                          2.11
+                                                                                                   12.70               0.083
+                                          4.88                                                     0.500
+                                         0.192                                                                          1.14
+                          0.64                                                                     10.80               0.045
+                         0.025                                                                     0.425
+                                                                                                                           Port B
+
+
+
+
+                                                              15.75
+                                                              0.620
+
+                                                                             10.80
+                                                                             0.425
+
+
+
+
+                                                                                                                        0.066
+
+                                                                                                                                 0.088
+                                                                                                                         1.68
+
+                                                                                                                                  2.24
+                        0.386
+                         9.80
+
+
+
+
+                                                 0.254
+                                                  6.45
+
+                                                                                                                           Port A
+
+
+
+
+                                                                             0.107
+                                                              0.380 (nom)
+
+                                                                              2.73
+                                                                  [9.65]
+                                 0.25
+                                 0.010                                                0.51                   2.54
+                                                                                     0.020                  0.100
+
+                                                                                      Pin 1 2 3 4
+
+
+
+                                                                                                                     All Sensors
+                                                                                                            TITLE:
+
+
+ NOTES
+                                                                                                                        E-Series Package
+ 1) Dimensions are in inches [mm].                                                                          SIZE     FILE NAME
+
+
+ 2) For suggested pad layout, see drawing: PAD-01.                                                          A                    E1BS Package
+
+
+                                                                                                                                         Pin   Definition
+  E2BS Package
+                                                                                                                                         1        Gnd
+                                                                                                                                         2         Vs
+                                                                                                                                         3        SDA
+                                                                                                                                         4        SCL
+
+
+                                         9.15                                                                           2.11
+                                        0.360                                                       12.70              0.083
+                         0.64
+                                                                                                    0.500
+                        0.025                                                                                           1.14
+                         2.12                                                                       10.80              0.045
+                                                                                                    0.425
+                        0.084                                   Port A
+                                                                                                                           Port B
+                                                                     15.75
+                                                                     0.620
+                                                                                   10.80
+                                                                                   0.425
+
+
+
+
+                                                                                                                        0.066
+
+                                                                                                                                 0.088
+                                                                                                                         1.68
+
+                                                                                                                                  2.24
+                        0.386
+                         9.80
+
+
+
+
+                                                                                    0.107
+                                                                     0.380 (nom)
+
+                                                                                     2.73
+                                                                         [9.65]
+
+
+
+
+                                0.25                                                        0.51              2.54
+                                0.010                                                      0.020             0.100
+
+                                                                                           Pin 1 2 3 4
+
+
+
+                                                                                                                     All Sensors
+                                                                                                            TITLE:
+
+
+ NOTES
+                                                                                                                        E-Series Package
+ 1) Dimensions are in inches [mm].                                                                          SIZE     FILE NAME
+
+
+ 2) For suggested pad layout, see drawing: PAD-01.                                                          A                    E2BS Package
+
+
+
+                                                         DLVR Series Low Voltage Digital Pressure Sensors
+
+                                                                                                                                               Page 14 of 19
+    Package Drawings (Cont’d)
+
+      E1NS Package
+
+
+
+                                             7.17
+                                            0.282                                                       12.70
+                                             4.88                                                       0.500
+
+
+
+
+                                                                                                                                                                    all sensors
+                             0.64           0.192                                                       10.79                     2.10
+                            0.025                                                                       0.425                    0.082
+
+                                                                                                                                     Port B
+
+
+
+
+                                                                          15.75
+                                                                          0.620
+
+                                                                                        10.79
+                                                                                        0.425
+
+
+
+
+                                                                                                                              0.080
+                                                                                                                               2.04
+                            0.386
+                             9.80
+
+
+
+
+                                                       0.254
+                                                        6.45
+
+
+                                                                                                                                     Port A
+
+
+
+
+                                                                          0.380 (nom)
+
+
+                                                                                        0.107
+                                                                                         2.73
+                                                                              [9.65]
+                                    0.25
+
+
+
+
+                                                                                                                                                                      e www.allsensors.com
+                                    0.010                                                    0.51                     2.54
+                                                                                            0.020                    0.100
+
+                                                                                                Pin 1 2 3 4
+
+
+
+                                                                                                                      All Sensors
+                                                                                                            TITLE:
+
+
+      NOTES
+                                                                                                                        E-Series Package
+      1) Dimensions are in inches [mm].                                                                     SIZE     FILE NAME
+
+                                                                                                            A
+
+
+
+
+                                                                                                                                                                      f 408 225 2079
+                                                                                                                                 E1NS Package
+      2) For suggested pad layout, see drawing: PAD-01.
+
+                                                                                                                                              Pin     Definition
+      E2NS Package
+                                                                                                                                              1          Gnd
+                                                                                                                                              2           Vs
+                                                                                                                                              3          SDA
+
+
+
+
+                                                                                                                                                                      p 408 225 4314
+                                                                                                                                              4          SCL
+
+                                                                                                    12.70
+                                                7.17
+                                                                                                    0.500
+                                     0.64      0.282
+                                    0.025                                                           10.79                     2.10
+                                     2.12                      Port A                               0.425                    0.082
+                                    0.084
+                                                                                                                              Port B
+
+
+
+
+                                                                                                                                                                      a 16035 Vineyard Blvd. Morgan Hill, CA 95037
+                                                               15.75
+                                                               0.620
+
+                                                                          10.79
+                                                                          0.425
+
+
+
+
+                                                                                                                        0.080
+                                                                                                                         2.04
+                              0.386
+                               9.80
+
+
+
+
+                                                                0.380 (nom)
+
+
+                                                                               0.107
+                                                                                2.73
+                                                                    [9.65]
+
+
+
+
+                                       0.25                                              0.51                2.54
+                                       0.010                                            0.020               0.100
+
+                                                                                         Pin 1 2 3 4
+
+
+
+
+                                                                                                                      All Sensors
+                                                                                                            TITLE:
+
+
+      NOTES
+                                                                                                                        E-Series Package
+      1) Dimensions are in inches [mm].                                                                     SIZE     FILE NAME
+
+
+      2) For suggested pad layout, see drawing: PAD-01.                                                     A                    E2NS Package
+
+
+
+All Sensors                                    DS-0300 / DCN 11279 / Rev J
+
+                                                                                                                                                    Page 15 of 19
+Package Drawings (Cont’d)
+
+  E1BD Package
+
+
+
+
+                                                                     0.018
+                                                                      0.46
+                                                              5.72
+                                                             0.225
+
+
+
+                                                                                                  Pin 8 7 6 5
+                                           9.15
+                                          0.360                                                                                2.11
+                                                                                                           12.70              0.083
+                                           4.88                                                            0.500               1.14
+                                          0.192
+                             0.64                                                                         10.80               0.045
+                            0.025                                                                         0.425
+
+                                                                                                                                  Port B
+
+
+
+
+                                                                                    15.75
+                                                                                    0.620
+
+                                                                                              10.80
+                                                                                              0.425
+                                                                   0.630
+                                                                    16
+
+
+
+
+                                                                                                                               0.066
+                                                                                                                                1.68
+
+
+
+                                                                                                                                        0.088
+                          0.386
+
+
+
+
+                                                                                                                                        2.24
+                           9.80
+
+
+
+
+                                                      0.254
+                                                      6.45
+
+
+
+
+                                                                                                                                       Port A
+
+
+
+
+                                                                                              0.107
+                                                                                               2.73
+                                                                   0.010
+                                                                    0.25
+                          0.058
+                           1.48
+
+
+
+
+                                                                                                                     2.54
+                                                    8.89
+                                                                                                                    0.100
+                                                   0.350
+                                                   (min)
+                                                                                                  Pin 1 2 3 4
+
+
+                                                                                                                             All Sensors
+                                                                                                                    TITLE:
+
+
+ NOTES
+                                                                                                                                E-Series Package
+ 1) Dimensions are in inches [mm].                                                                                  SIZE     FILE NAME
+
+
+ 2) For suggested pad layout, see drawing: PAD-03.                                                                  A                    E1BD Package
+
+
+                                                                                                                                                Pin   Definition
+  E2BD Package
+                                                                                                                                                1        Gnd
+                                                                                                                                                2         Vs
+                                                                                                                                                3     SDA/MISO
+                                                                                                                                                4     SCL/SCLK
+                                                          0.018
+                                                           0.46
+
+
+
+
+                                                                                                                                                5       INT/SS
+
+                                                   5.72
+                                                                                                                                                6        N/C
+                                                  0.225
+                                                                                                                                                7        N/C
+                                           9.15                                                                                                 8        N/C
+                                          0.360                                                       Pin 8 7 6 5               2.11
+                                                                                                            12.70              0.083
+                                   0.64
+                                                                                                            0.500               1.14
+                                  0.025
+                                                                                                           10.80               0.045
+                             2.12
+                            0.084                                                                          0.425
+                                                                                   Port A
+                                                                                                                                  Port B
+                                                                                      15.75
+                                                                                      0.620
+                                                                                              10.80
+                                                                                              0.425
+                                                                  0.630
+                                                                   16
+
+
+
+
+                                                                                                                              0.066
+
+
+                                                                                                                                       0.088
+                          0.386
+
+
+
+
+                                                                                                                               1.68
+
+
+                                                                                                                                        2.24
+                           9.80
+
+
+
+
+                                                                                                0.107
+                                                                                                 2.73
+                                                                  0.010
+                                                                   0.25
+                          0.058
+                           1.48
+
+
+
+
+                                                                                                                      2.54
+                                                                                                                     0.100
+                                                   8.89
+                                                  0.350
+                                                  (min)                                               Pin 1 2 3 4
+
+
+
+                                                                                                                             All Sensors
+                                                                                                                    TITLE:
+
+
+ NOTES
+                                                                                                                                E-Series Package
+ 1) Dimensions are in inches [mm].                                                                                  SIZE     FILE NAME
+
+
+ 2) For suggested pad layout, see drawing: PAD-03.                                                                  A                    E2BD Package
+
+
+
+                                                                             DLVR Series Low Voltage Digital Pressure Sensors
+
+                                                                                                                                                      Page 16 of 19
+    Package Drawings (Cont’d)
+
+      E1ND Package
+
+
+
+
+                                                                               0.018
+                                                                                0.46
+                                                                        5.72
+                                                                       0.225
+
+
+
+
+                                                                                                                                                                                   all sensors
+                                                                                                              Pin 8 7 6 5
+                                                      7.17
+                                                                                                                          12.70
+                                                     0.282
+                                                                                                                          0.500
+
+                                                     0.192                                                                10.79              2.10
+                                        0.64                                                                              0.425             0.082
+                                       0.025
+
+                                                                                                                                                Port B
+
+
+
+
+                                                                                                  15.75
+                                                                                                  0.620
+
+                                                                                                          10.79
+                                                                                                          0.425
+                                                                           0.630
+
+
+
+
+                                                                                                                                            0.080
+                                                                                                                                             2.04
+                                                                            16
+                                     0.386
+                                      9.80
+
+
+
+
+                                                               0.254
+                                                                6.45
+
+
+
+
+                                                                                                                                                    Port A
+
+
+
+
+                                                                                                          0.107
+
+
+
+
+                                                                                                                                                                                     e www.allsensors.com
+                                                                                                           2.73
+                                                                           0.010
+                                                                            0.25
+                                     0.058
+                                      1.48
+
+
+
+
+                                                                                                                                    2.54
+                                                              8.89                                                                 0.100
+                                                             0.350
+                                                             (min)                                            Pin 1 2 3 4
+
+
+
+                                                                                                                                             All Sensors
+                                                                                                                                   TITLE:
+
+
+      NOTES
+                                                                                                                                               E-Series Package
+      1) Dimensions are in inches [mm].                                                                                             SIZE    FILE NAME
+
+                                                                                                                                    A
+
+
+
+
+                                                                                                                                                                                     f 408 225 2079
+                                                                                                                                                        E1ND Package
+      2) For suggested pad layout, see drawing: PAD-03.
+
+                                                                                                                                                             Pin     Definition
+      E2ND Package
+                                                                                                                                                              1         Gnd
+                                                                                                                                                              2          Vs
+                                                                                                                                                              3      SDA/MISO
+
+
+
+
+                                                                                                                                                                                     p 408 225 4314
+                                                               0.018
+                                                                0.46
+
+
+
+
+                                                                                                                                                              4      SCL/SCLK
+                                                                                                                                                              5       INT/SS
+                                                        5.72
+                                                       0.225                                                                                                  6         N/C
+                                                                                                                                                              7         N/C
+                                      7.17                                                             Pin 8 7 6 5                                            8         N/C
+                                     0.282
+
+
+
+
+                                                                                                                                                                                     a 16035 Vineyard Blvd. Morgan Hill, CA 95037
+                                                                                                                  12.70
+                              0.64
+                                                                                                                  0.500
+                             0.025
+                              2.12                                                                                10.79              2.10
+                             0.084                                                     Port A                     0.425             0.082
+
+
+                                                                                                                                           Port B
+                                                                                       15.75
+                                                                                       0.620
+
+                                                                                               10.79
+                                                                                               0.425
+
+
+
+
+                                                                                                                                    0.080
+                                                             0.630
+
+
+
+
+                                                                                                                                     2.04
+                                                              16
+                           0.386
+                            9.80
+
+
+
+
+                                                                                               0.107
+                                                                                                2.73
+                                                             0.010
+                                                              0.25
+
+
+
+
+                                              8.89
+                           0.058
+                            1.48
+
+
+
+
+                                             0.350                                                                         2.54
+                                             (min)                                                                         0.100
+
+                                                                                                       Pin 1 2 3 4
+
+                                                                                                                                             All Sensors
+                                                                                                                                   TITLE:
+
+
+      NOTES
+                                                                                                                                               E-Series Package
+      1) Dimensions are in inches [mm].                                                                                             SIZE    FILE NAME
+
+
+      2) For suggested pad layout, see drawing: PAD-03.                                                                             A                   E2ND Package
+
+
+
+All Sensors                                  DS-0300 / DCN 11279 / Rev J
+
+                                                                                                                                                                   Page 17 of 19
+Package Drawings (Cont’d)
+
+  E1NJ Package                                                                                                                                      Pin    Definition
+                                                                                                                                                    1         Gnd
+                                                                                                                                                    2          Vs
+                                                                                                                                                    3     SDA/MISO
+                                                                                                                                                    4     SCL/SCLK
+                                                                                                                                                    5        INT/SS
+                                                                                                                                                    6         N/C
+                                                                                                         Pin 8 7 6 5                                7         N/C
+                                                                  7.17                                           12.70                2.10
+                                                                 0.282                                           0.500               0.082          8         N/C
+                                                                  4.88                                           10.79
+                                                                 0.192                                           0.425
+                                                       0.64
+                                                      0.025
+                                                                                                                                           Port B
+
+
+
+
+                                                                                         0.620
+
+
+                                                                                                  0.425
+                                                                                         15.75
+
+
+                                                                                                  10.79
+                      0.25
+
+
+
+
+                                                                                                                                     0.080
+                                                                                                                                      2.04
+                     0.010        0.81
+                                                    0.386
+                                                     9.80
+
+
+
+
+                                 R0.032
+
+
+
+                                                                           0.254
+                                                                           6.45
+                                                                                                                                           Port A
+
+
+
+
+                                                                                                  0.107
+              3.94
+
+
+
+
+                                                                                                   2.73
+                         0.059
+                          1.51
+
+
+
+
+             0.155
+
+
+            DETAIL A                                                  A                                  1.27
+                                                                                                        0.050
+                                                                                                                            2.54
+                                                                                                                           0.100
+
+           SCALE 4 : 1                                                                                   Pin 1 2 3 4
+
+
+
+                                                                                                                                   All Sensors
+                                                                                                                         TITLE:
+
+
+ NOTES
+                                                                                                                                     E-Series Package
+ 1) Dimensions are in inches [mm].                                                                                       SIZE     FILE NAME
+
+
+ 2) For suggested pad layout, see drawing: PAD-10.                                                                       A                    E1NJ Package
+
+
+                                                                                                                                                    Pin    Definition
+  E2NJ Package
+                                                                                                                                                    1         Gnd
+                                                                                                                                                    2          Vs
+                                                                                                                                                    3     SDA/MISO
+                                                                                                                                                    4     SCL/SCLK
+                                                                                                                                                    5        INT/SS
+                                                                                                                                                    6         N/C
+                                                                                                                                                    7         N/C
+                                                                                                        Pin 8 7 6 5                                 8         N/C
+                                                               7.17
+                                                                                                                12.70               2.10
+                                                              0.282
+                                                     2.12                                                       0.500              0.082
+                                                    0.084
+                                                                                                                10.79
+                                                     0.64
+                                                    0.025                               Port A                  0.425
+
+
+                                                                                                                                       Port B
+                              0.25
+                             0.010        0.81
+                                         R0.032
+                                                                         0.630
+
+
+
+
+                                                                                        15.75
+                                                                                        0.620
+
+                                                                                                10.79
+                                                                                                0.425
+                                                                           16
+
+
+
+
+                                                                                                                                   0.080
+                                                                                                                                    2.04
+                                                  0.386
+                                                   9.80
+
+
+
+
+                      3.94
+                                 0.059
+                                  1.51
+
+
+
+
+                     0.155
+
+
+                DETAIL A
+                                                                                                0.107
+                                                                                                 2.73
+
+
+
+
+               SCALE 4 : 1                                     A                                         1.27
+                                                                                                        0.050
+                                                                                                                          2.54
+                                                                                                                         0.100
+
+                                                                                                        Pin 1 2 3 4
+
+
+                                                                                                                                   All Sensors
+                                                                                                                         TITLE:
+
+
+ NOTES
+                                                                                                                                     E-Series Package
+ 1) Dimensions are in inches [mm].                                                                                       SIZE     FILE NAME
+
+
+ 2) For suggested pad layout, see drawing: PAD-10.                                                                       A                    E2NJ Package
+
+
+
+                                                                                 DLVR Series Low Voltage Digital Pressure Sensors
+
+                                                                                                                                                          Page 18 of 19
+    Suggested Pad Layouts
+
+
+                                                                           0.035~0.039 inch                                                   2.29
+                      0.035~0.039 inch
+
+
+
+
+                                                                                                                                                                     (typ.)
+                                                                            (Finish Size)
+
+
+
+
+                                                                                                         (typ.)
+
+
+
+
+                                                                                                                                                                     0.100
+                                                                                                         0.100
+
+
+
+
+                                                                                                                                                                      2.54
+                                                                                                          2.54
+                      (Finished Size)                                                                                                        0.090
+
+
+
+
+                                                                                                                                               0.050
+                                                                                                                                                1.27
+
+
+
+
+                                                                                                                                                                                        all sensors
+      (typ.)
+      0.100
+       2.54
+
+
+
+
+                                                                                         16                                                             14.99
+                                                                                       0.630                                                            0.590
+
+
+
+                        PAD-01                                                       PAD-03                                                        PAD-10
+
+
+
+
+                                                                                                                                                                                          e www.allsensors.com
+    Product Labeling
+
+
+        All Sensors                                                          Company
+
+        DLVR-L02D-
+
+
+
+
+                                                                                                                                                                                          f 408 225 2079
+                                                                             Part Number
+          E1NS-C-
+            NI3F
+         R13J21-12
+
+
+                                                                                                                                                                                          p 408 225 4314
+                                                                             Lot Number
+
+       Example Device Label
+
+
+
+                                                                                                                                                                                          a 16035 Vineyard Blvd. Morgan Hill, CA 95037
+
+
+
+
+     All Sensors reserves the right to make changes to any products herein. All Sensors does not assume any liability arising out of the application or use of any product or circuit
+                                           described herein, neither does it convey any license under its patent rights nor the rights of others.
+
+
+
+
+All Sensors                                               DS-0300 / DCN 11279 / Rev J
+
+                                                                                                                                                                 Page 19 of 19
+

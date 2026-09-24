@@ -1,0 +1,13 @@
+# This circuit MUST fail electrical constraint solving (5V applied to a 3.6V IMU).
+#pragma experiment("TRAITS")
+import ElectricPower
+import has_designator
+from "../elec/parts.ato" import P_8
+
+module InvalidVoltage:
+    rail = new ElectricPower
+    rail.voltage = 5V
+    imu = new P_8
+    trait imu has_designator<designator="U1">
+    imu.power ~ rail
+    imu.io ~ rail

@@ -1,0 +1,9 @@
+ShakeSense Trenz support check: uart_25pf
+Vdrive src 0 PULSE(0 3.201 100n 5n 5n 500n 1u)
+Rdriver src driver 25
+Rseries driver rx 47
+Cload rx 0 25p
+.tran .5n 900n
+.measure tran rise TRIG v(rx) VAL=0.9603 RISE=1 TARG v(rx) VAL=2.2407 RISE=1
+.measure tran sample FIND v(rx) AT=350n
+.end
