@@ -3,6 +3,9 @@
 Executable acquisition, calibration, bounded recording/replay, Linux adapters
 and deterministic simulation are in `senseshake/`. No configured FPGA is needed.
 See the [run guide and recovery policy](../../docs/sensor-software.md).
+Use the [stimulus guide](../../docs/stimulus-models.md) for motion/field/pressure
+waveforms, GNSS trajectories and timed faults. Example: add
+`--scenario sw/pi/profiles/stimulus-demo.json` to the simulation command.
 
 Separate pure processing/protocol logic from Linux I2C/SPI/UART/USB adapters so
 the same application can run against recorded samples and fault-injecting fakes.

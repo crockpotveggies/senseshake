@@ -13,6 +13,7 @@
 - [Sensor data contract v1](sensor-contract.md) and [executable interface checks](../sw/interfaces/README.md).
 - [Software responsibilities](../sw/README.md).
 - [Run sensor acquisition, simulation and replay](sensor-software.md).
+- [Virtual sensor controls and stimulus scenarios](stimulus-models.md).
 
 The design is an engineering prototype. Read each board's validation limits
 before interpreting a passing test as evidence about physical hardware.

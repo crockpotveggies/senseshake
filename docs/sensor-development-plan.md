@@ -31,6 +31,8 @@ Linux/modeled adapters, bounded acquisition, calibration, recording/replay,
 session/configuration ordering, USB ingestion and finite recovery. This software
 milestone runs without hardware. Step 4 remains open: USB-head firmware and
 physical sensor/FPGA-stack qualification, including Pi device-tree deployment.
+Virtual sensors now include [time-based stimulus models](stimulus-models.md),
+saved/interactive control schedules, timed faults and reproducible scenario export.
 
 ## 1. Define sensor data contracts
 

@@ -14,6 +14,7 @@ from .recording import Reader, Writer
 from .runtime import Acquisition, Channel
 from .session import Sessions
 from .simulation import Simulated, defaults
+from .stimulus import Scenario
 
 
 def load_json(path, limit=16384):
@@ -48,6 +49,29 @@ def replay(path):
     return dict(counts, completed=completed, message_sha256=digest.hexdigest())
 
 
+def export_scenario(recording, output):
+    """Recover scheduled and interactive changes from a validated recording."""
+    replay(recording)
+    with open(recording, "rb") as stream:
+        reader = Reader(stream)
+        if reader.metadata.get("stimulus_model") != "ideal-v1": raise ValueError("recording has no supported stimulus model")
+        document = Scenario(reader.metadata["scenario"]).export()
+        pending, applied = document["events"][:], []
+        for arrived, item in reader:
+            if not isinstance(item, dict) or item.get("code") != "stimulus_change": continue
+            event = {"at_ns": item["at_ns"], "set": item["set"]}
+            if type(event["at_ns"]) is not int or not 0 <= event["at_ns"] <= arrived:
+                raise ValueError("invalid recorded control time")
+            if event in pending: pending.remove(event)
+            applied.append(event)
+            if len(applied) > 256: raise ValueError("recorded control limit")
+        document["events"] = sorted(applied + pending, key=lambda e: e["at_ns"])
+        document = Scenario(document).export()
+    with open(output, "x", encoding="utf-8") as stream:
+        stream.write(json.dumps(document, indent=2, allow_nan=False) + "\n")
+    return dict(scenario=str(output), events=len(document["events"]), seed=reader.metadata["seed"], remote=reader.metadata["remote"])
+
+
 def run(args):
     simulated = args.command == "simulate"
     faults = load_json(args.faults) if getattr(args, "faults", None) else []
@@ -61,13 +85,15 @@ def run(args):
     settings = defaults()
     channels, enable, usb = [], None, None
     if simulated:
-        for cfg in settings:
-            channels.append(Channel("sim-pi", 1, cfg, Simulated(cfg["sensor_id"], args.seed, faults)))
-        if args.remote:
-            for cfg in defaults(True):
-                channels.append(Channel("sim-head", 2, cfg, Simulated(cfg["sensor_id"], args.seed, faults)))
+        # Human-readable JSON may exceed its bounded canonical representation.
+        scenario = Scenario(load_json(args.scenario, 65536) if args.scenario else None)
         current = 0
         clock = lambda: current
+        for cfg in settings:
+            channels.append(Channel("sim-pi", 1, cfg, Simulated(cfg["sensor_id"], args.seed, faults, scenario, clock)))
+        if args.remote:
+            for cfg in defaults(True):
+                channels.append(Channel("sim-head", 2, cfg, Simulated(cfg["sensor_id"], args.seed, faults, scenario, clock)))
     else:
         if not sys.platform.startswith("linux"): raise ValueError("live acquisition requires Linux")
         from .live import Factory, USB
@@ -89,7 +115,7 @@ def run(args):
     sessions = Sessions(calibrations)
     metadata = dict(format="senseshake-acquisition-v1", source="simulation" if simulated else "linux-polling",
                     calibrations=list(calibrations.records.values()), timing="poll completion; uncertainty unknown")
-    if simulated: metadata.update(seed=args.seed, faults=faults, remote=args.remote)
+    if simulated: metadata.update(seed=args.seed, faults=faults, remote=args.remote, stimulus_model="ideal-v1", scenario=scenario.export())
     else: metadata["profile"] = profile
     try:
         # Exclusive create prevents accidentally replacing a prior recording.
@@ -106,6 +132,9 @@ def run(args):
             app.start(start)
             end, tick = clock() + int(args.seconds * 1e9), 0
             while clock() < end:
+                if simulated:
+                    for change in scenario.advance(current):
+                        app.event("stimulus_change", "simulation controls changed", current, **change)
                 app.tick(clock)
                 if usb:
                     app.drain()
@@ -140,15 +169,21 @@ def main(argv=None):
         if name == "simulate":
             p.add_argument("--seed", type=int, default=1)
             p.add_argument("--faults", type=Path)
+            p.add_argument("--scenario", type=Path, help="versioned SI stimulus scenario JSON")
             p.add_argument("--remote", action="store_true")
         else:
             p.add_argument("--profile", type=Path, required=True)
             p.add_argument("--usb")
     p = commands.add_parser("replay")
     p.add_argument("recording", type=Path)
+    p = commands.add_parser("export-scenario", help="recover controls for another deterministic simulation")
+    p.add_argument("recording", type=Path)
+    p.add_argument("--output", type=Path, required=True)
     args = parser.parse_args(argv)
     try:
-        result = replay(args.recording) if args.command == "replay" else run(args)
+        if args.command == "replay": result = replay(args.recording)
+        elif args.command == "export-scenario": result = export_scenario(args.recording, args.output)
+        else: result = run(args)
     except (ValueError, OSError, KeyError, TypeError) as error:
         parser.exit(1, f"senseshake: {error}\n")
     print(json.dumps(result, sort_keys=True))

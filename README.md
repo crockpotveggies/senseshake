@@ -14,6 +14,9 @@ recording/replay and recovery tests. It saves an eight-sensor demo recording.
 See [running the sensor software](docs/sensor-software.md). Rebuild the image
 once if it predates the pinned Buf tool.
 
+**Virtual sensors:** drive motion, tilt, magnetic fields, pressure and GNSS with
+[saved stimulus scenarios](docs/stimulus-models.md), including timed faults.
+
 | Directory | Contents |
 | --- | --- |
 | [hw/](hw/README.md) | Atopile circuits, KiCad boards, models, hardware checks and SPICE. |

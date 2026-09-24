@@ -9,6 +9,9 @@ independent expectations: recordings, bus errors, time jumps, malformed frames,
 queue limits, disconnects, a real pseudo-terminal and a hung subprocess. The
 portable runner retains a bounded demo recording and replay summary.
 See [the runtime guide](../../docs/sensor-software.md) for limits and commands.
+`test_stimulus.py` checks independent physical/raw-count expectations, control
+boundaries, deterministic noise, GNSS movement, timed faults and scenario export
+followed by byte-identical regeneration through the actual CLI.
 
 Keep small deterministic input fixtures here. Put generated logs, traces and
 coverage in the portable lab's disposable workspace. Reserve bounded waveform

@@ -1,11 +1,15 @@
 """Deterministic device models, not electrical or instruction-set emulation."""
-import struct
-from .sensors import Reading, NotReady
+from .sensors import NotReady
+from .stimulus import Scenario, reading
 
 
 class Simulated:
-    def __init__(self, sensor, seed=1, faults=()):
+    def __init__(self, sensor, seed=1, faults=(), scenario=None, clock=None):
+        if type(sensor) is not int or not 1 <= sensor <= 8: raise ValueError("simulated sensor ID")
+        if type(seed) is not int or not 0 <= seed < 1 << 64: raise ValueError("seed must be uint64")
         self.sensor, self.seed, self.index = sensor, seed, 0
+        self.scenario, self.clock = scenario or Scenario(), clock
+        self.settings = next(c for c in defaults() + defaults(True) if c["sensor_id"] == sensor)
         if len(faults) > 256: raise ValueError("fault fixture bound")
         self.faults = {}
         for f in faults:
@@ -17,28 +21,28 @@ class Simulated:
                 if f["sample"] in self.faults: raise ValueError("duplicate fault")
                 self.faults[f["sample"]] = f["action"]
 
-    def configure(self, settings): return dict(settings)
+    def configure(self, settings):
+        self.settings = dict(settings)
+        return dict(settings)
 
     def read(self):
         i = self.index
         self.index += 1
-        fault = self.faults.get(i)
+        now = self.clock() if self.clock is not None else i * self.settings["period_ns"]
+        controls, _ = self.scenario.state_at(now)
+        fault = controls["sensor_faults"].get(str(self.sensor), self.faults.get(i))
         if fault == "not_ready": raise NotReady("simulated data not ready")
         if fault == "timeout": raise TimeoutError("simulated timeout")
         if fault in ("nack", "disconnect", "short_read"): raise OSError("simulated " + fault)
-        n = (i * 17 + self.sensor * 101 + self.seed * 13) % 2001 - 1000
-        quality = 3 if fault == "saturation" and self.sensor != 6 else 1
-        if self.sensor <= 4:
-            raw = dict(acceleration=(32767 if quality == 3 else n, -n, 16384), angular_rate=(n // 3, 0, -n // 3), temperature=0)
-        elif self.sensor == 5:
-            raw = dict(acceleration=(n, -n, 6000), angle=(n, -n, 0), temperature=-100, device_status=64 if quality == 3 else 0)
-        elif self.sensor == 6:
-            payload = bytearray(92)
-            struct.pack_into("<I", payload, 0, (i * 1000) % 604800000)
-            raw = dict(nav_pvt=bytes(payload))
-        elif self.sensor == 7: raw = dict(counts=(8388607 if quality == 3 else n * 10, -n * 10, 50000))
-        else: raw = dict(response=struct.pack(">HH", 16383 if quality == 3 else 8192 + n, 1024 << 5))
-        return Reading(raw, quality)
+        result = reading(self.sensor, self.settings, self.scenario, now, self.seed)
+        if fault == "saturation" and self.sensor != 6:
+            result.quality = 3
+            if self.sensor <= 5:
+                result.raw["acceleration"] = (32767, *result.raw["acceleration"][1:])
+                if self.sensor == 5: result.raw["device_status"] |= 64
+            elif self.sensor == 7: result.raw["counts"] = (8388607, *result.raw["counts"][1:])
+            else: result.raw["response"] = b"\x3f\xff" + result.raw["response"][2:]
+        return result
 
     def close(self): pass
 

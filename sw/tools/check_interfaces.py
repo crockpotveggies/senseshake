@@ -42,6 +42,7 @@ def main():
     cli = str(ROOT / "sw/tools/sensor.py")
     simulated = run(sys.executable, cli, "simulate", "--remote", "--seconds", "2",
                     "--faults", str(ROOT / "sw/tests/fixtures/acquisition_faults.json"),
+                    "--scenario", str(ROOT / "sw/pi/profiles/stimulus-demo.json"),
                     "--output", str(demo), env=env, capture_output=True, text=True)
     replayed = run(sys.executable, cli, "replay", str(demo), env=env, capture_output=True, text=True)
     assert json.loads(simulated.stdout) == json.loads(replayed.stdout)

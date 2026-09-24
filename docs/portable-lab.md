@@ -158,6 +158,13 @@ Buf 1.73.0 is downloaded only during image build and SHA-256 checked; Protobuf
 
 ## Recorded validation
 
+The stimulus-model update passed the software profile as
+`20260924T200116Z-fcdb78d1`: **80 tests**, Buf compatibility and the CLI demo/replay.
+The retained two-second scenario has 480 samples, 30 MISSING, 52 SATURATED and
+three timed control events. The test suite separately regenerates an exported
+scenario byte-for-byte. No CAD or environment changes were needed for this update;
+the preceding full hardware/software checkpoint is recorded below.
+
 The full profile passed all **14 steps** on 2026-09-24 in **80.93 seconds**,
 run `20260924T185342Z-725219f6`. It includes fresh circuit builds/constraint
 solves, the negative voltage fixture, nine GPIO tests, native ERC/DRC/connectivity,

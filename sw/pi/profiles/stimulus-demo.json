@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "initial": {
+    "orientation_deg": [{"amplitude": 5, "frequency_hz": 0.5}, 0, 0],
+    "acceleration_m_s2": [{"amplitude": 0.2, "frequency_hz": 3, "noise_peak": 0.01}, 0, 0],
+    "magnetic_ut": [0, {"offset": 20, "drift_per_s": 0.02, "pulse_start_s": 0.75, "pulse_duration_s": 0.25, "pulse_amplitude": 2}, -45],
+    "pressure_pa": {"amplitude": 4, "frequency_hz": 1, "noise_peak": 0.05},
+    "gnss_position": [49, -123, 10],
+    "gnss_velocity_ned_m_s": [1, 0, 0]
+  },
+  "events": [
+    {"at_ns": 500000000, "set": {"head_orientation_deg": [0, 0, 90]}},
+    {"at_ns": 1000000000, "set": {"gnss_fix": false, "pressure_pa": {"offset": 300}}},
+    {"at_ns": 1500000000, "set": {"gnss_fix": true, "pressure_pa": 0, "orientation_deg": [0, 30, 0]}}
+  ]
+}

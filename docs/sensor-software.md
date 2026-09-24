@@ -41,6 +41,12 @@ in fragments through a Linux pseudo-terminal. `--queue 1 --drain-every 100`
 exercises a slow consumer. Simulated time starts at zero; Pi and remote clocks
 retain distinct domains even when numerically equal.
 
+Virtual sensors now use controllable motion, magnetic, pressure and GNSS
+[stimulus models](stimulus-models.md). Pass `--scenario` for saved waveforms and
+timed controls; `export-scenario` recovers controls from a recording. Without a
+scenario, sensors start stationary and level, with a constant magnetic field,
+zero differential pressure and a fixed GNSS position.
+
 ## Linux device adapters
 
 The live path uses Linux SPI/I²C ioctls, GPIO character-device line requests,
