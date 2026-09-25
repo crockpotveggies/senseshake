@@ -39,9 +39,9 @@ drive-sharing configuration. No host directory is mounted into the container.
 
 | Profile | Checks |
 | --- | --- |
-| `full` (default) | Fresh atopile builds for A2, USB field head, and T1; numeric constraint solves; unsafe 5 V IMU rejection; circuit invariants and nine GPIO mapping/fault/import cases; native KiCad ERC/DRC/connectivity; 37 bounded SPICE cases; the software profile (14 steps). |
+| `full` (default) | Fresh atopile builds for A2, USB field head, and T1; numeric constraint solves; unsafe 5 V IMU rejection; circuit invariants and 14 hardware regression cases; native KiCad ERC/DRC/connectivity; T1 RF/power/clearance checks; 41 bounded SPICE cases; the software profile (15 steps). |
 | `quick` | Same GPIO fault, circuit/PCB consistency, SPICE and software checks using saved compiled layouts. Does **not** prove `.ato` changes were rebuilt. |
-| `spice` | 27 A2/field support-circuit cases and 10 Trenz support-circuit cases, including expected fault detection. |
+| `spice` | 27 A2/field support-circuit cases and 14 Trenz support-circuit cases, including expected fault detection. |
 | `software` | Buf format/lint/build and FILE compatibility, deliberate incompatible-change rejection, acquisition/replay, modeled driver and Linux TTY/worker fault tests; retained eight-sensor demo. No CAD or physical hardware execution. |
 
 The runner calls the existing project entrypoints. It does not reroute boards,
@@ -128,6 +128,7 @@ Clone the Git repository, or copy the authored project and environment directory
 then run `build`. No absolute `C:` or `P:` paths are encoded in the runner. The
 image pins the KiCad base and uv installer by digest; atopile 0.15.9 and its
 transitive Python dependencies are pinned with package hashes. Python is 3.14.7.
+Device-tree compiler 1.6.1-4+b1 supplies real overlay compile/merge tests.
 The KiCad base supplies KiCad 9.0.9 and ngspice 39; previous WSL validation used
 ngspice 42. The reports explicitly record this difference.
 
@@ -157,6 +158,17 @@ Buf 1.73.0 is downloaded only during image build and SHA-256 checked; Protobuf
 5.29.6 reuses the existing Python lock. Runtime tests remain offline.
 
 ## Recorded validation
+
+The T1 engineering update passed all **15 stages** in
+`20260925T033256Z-8be95398`: fresh atopile builds, native ERC/DRC/connectivity,
+14 hardware regressions, RF/power/clearance checks, **41 bounded SPICE cases**,
+and **121 software tests** without skips. The software suite includes real
+device-tree compile/merge and modeled FIFO integration. Ten lab containment
+tests passed; the Windows junction case was skipped inside Linux. Browser
+verification passed **10/10 modeled HAT signal checks**, 1,040 samples.
+Current toolchain and board hashes are retained in the
+[verification record](../hw/boards/shakesense-trenz-hat/verification.json).
+The records below describe earlier checkpoints, not the current test count.
 
 The stimulus-model update passed the software profile as
 `20260924T200116Z-fcdb78d1`: **80 tests**, Buf compatibility and the CLI demo/replay.

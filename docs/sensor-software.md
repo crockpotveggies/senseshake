@@ -73,13 +73,11 @@ normal/error cleanup.
 | Sensor buffer OE, active low | 26 | 37 |
 | GNSS I²C SDA / SCL | 2 / 3 | 3 / 5 |
 
-**Deployment prerequisite:** configure the Pi device tree for all five SPI
-chip-selects in that order and enable I²C1. The standard two-select setup is
-insufficient. A board-specific overlay and verification on the selected
-Pi/kernel remain bring-up work; none is auto-installed here. Bind sensor
-devices to `spidev` using the kernel's documented `driver_override` mechanism
-where needed. Do not run a kernel sensor driver and this polling driver against
-the same device. Grant access to the selected SPI/I²C/GPIO/TTY devices.
+The [Pi 4 deployment package](../sw/pi/deploy/README.md) now supplies the five-CS
+overlay, 100 kHz I²C configuration and an identity-checked `driver_override`
+binding tool. Its compiled overlay is merge-tested in the portable lab. The
+selected physical Pi/kernel must still be boot-tested. No overlay is installed
+automatically and no unrelated kernel device is detached.
 
 ```sh
 python sw/tools/sensor.py live --profile sw/pi/profiles/t1.example.json \
@@ -98,9 +96,59 @@ uncertainty and physical overwritten-conversion counts are unknown. Live
 batches omit `dropped_before`. Sequences count scheduled application slots;
 overdue slots are skipped and unavailable scheduled samples are MISSING.
 Do not infer lossless acquisition or synchronized devices from polling time.
-FIFO/interrupt acquisition, PPS/UTC correlation, sensor self-test qualification,
-board-axis transforms and GNSS fix decoding remain follow-on work. SCL3300
+The optional FIFO path below replaces these polling semantics for the IMUs.
+PPS/UTC association, sensor self-test qualification, board-axis transforms and
+GNSS fix decoding in the live CLI remain follow-on work. SCL3300
 register reads are sequential, not an atomic six-axis snapshot.
+
+## Buffered IMUs and PPS capture
+
+Add `--fifo` to the live command with the updated T1 profile. Four rising-edge
+GPIO requests use BCM27/22/23/24. FIFO watermark/overrun interrupts are hints;
+a 20 ms periodic service interval also checks each FIFO. SPI transfer work is
+limited to 96 seven-byte records (32 complete IMU slots) per call. A larger
+backlog, hardware overrun, bad tag parity, unexpected sensor/configuration tag,
+duplicate field or missing slot discards the drain, resets the FIFO and records
+an overflow/error status and a MISSING marker. The existing finite restart policy
+still applies. Normal scheduling delays do not discard buffered conversions.
+
+Each sample pairs the acceleration, gyro and timestamp tags by their two-bit
+slot counter. The 32-bit 25 μs device timestamp is mapped to a bracketed RAW-clock
+read of the current device counter. Wrap is handled modulo 2^32; stale, future,
+duplicate or backward timestamps are rejected. Unknown filter delay, oscillator
+error and absolute mapping accuracy remain unqualified, so uncertainty is absent.
+The raw six-axis counts are retained; no same-slot temperature is invented.
+Use the polling path for temperature characterization. FIFO calibration artifacts
+must therefore omit temperature and use the FIFO effective-configuration hash.
+
+FIFO sequences enumerate delivered samples and explicit missing markers, not
+all physical conversions. Physical losses remain unknown (`dropped_before`
+absent), including after a FIFO flush; output queue losses remain accounted for.
+No samples are emitted for a healthy empty FIFO. Acquisition shuts down rather
+than continue using a failed GPIO event descriptor.
+
+BCM4 PPS edges are recorded as events with the original kernel MONOTONIC time,
+an estimated RAW time and the clock-mapping read bracket. A bracket is not total
+timestamp uncertainty. No UTC value is assigned from receipt time or an assumed
+NAV-PVT-to-pulse relationship. Correct TIM-TP association remains open.
+
+Reference: [ST AN5192, FIFO tags and timestamp correlation](https://www.st.com/resource/en/application_note/DM00517282-.pdf).
+
+## Stationary bench analysis
+
+`python sw/tools/measure_hat.py sw/build/bench-001.ssrec --output
+sw/build/bench-001.json` streams a recording through contract/session validation
+and reports per-axis mean, standard deviation, peak-to-peak, linear drift per
+second, gravity magnitude, sample intervals, sequence gaps and quality counts.
+PPS events produce interval statistics. Values use advertised nominal sensitivity
+in package axes; no measured calibration or physical PASS is fabricated.
+
+Repeat the same stationary acquisition with the FPGA off, idle and active.
+Use `--baseline sw/build/off.ssrec` while analyzing idle/active recordings to
+report mean changes and noise ratios. A zero-noise baseline yields an unknown
+ratio, not infinity or a passing result. Configuration mismatches and incomplete
+comparisons are rejected. These statistics require controlled test conditions;
+standard deviation is not noise spectral density or an Allan-deviation analysis.
 
 ## Recovery and bounds
 
@@ -179,6 +227,10 @@ Next: generate/compile Nanopb C, establish C/Python interoperability, link USB-h
 firmware within measured RAM/flash/stack budgets, then test enumeration and
 sensors on assembled boards. Physical FPGA pin, power, clearance, thermal and
 noise qualification remains in step 4.
+
+The T1 correction adds FIFO/IRQ acquisition, deployment and stationary measurement
+tools. See [engineering closure](t1-engineering-closure.md) for measured versus
+modeled evidence and the remaining PPS-to-UTC software boundary.
 
 References: [ST LSM6DSO](https://github.com/STMicroelectronics/stm32-lsm6dso),
 [Murata SCL3300 rev. 4](https://www.murata.com/-/media/webrenewal/products/sensor/pdf/datasheet/datasheet_scl3300-d01.ashx),

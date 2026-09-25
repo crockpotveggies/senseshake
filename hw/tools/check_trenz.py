@@ -86,5 +86,13 @@ for kind,extension,check in [('pcb','kicad_pcb','drc'),('sch','kicad_sch','erc')
 drc=json.loads((F/'drc.json').read_text());erc=json.loads((F/'erc.json').read_text())
 er=[v for s in erc['sheets'] for v in s['violations']]
 report={'status':'T1 engineering prototype; not fabrication released','outline_mm':[85,56],**gpio_report,'compiled_pin_checks':len(cp),'critical_module_pin_checks':checks,'drc_violations':len(drc['violations']),'unconnected_items':len(drc['unconnected_items']),'erc_violations':len(er),'tracks_and_vias':len(board.GetTracks()),'copper_layers':8,'microvias':len(microvias),'hdi_structure':'1+6+1','limits':['Provisional HDI stack requires manufacturer DFM, filled/planarized via-in-pad and GNSS RF impedance review','No FPGA bitstream port or hardware test performed','External regulated 3.3 V supply required; confirm 3.201–3.399 V at module under startup/load','Copper resistance, heating, sensor thermal drift, EMI and physical mating remain unqualified','FFC cable routing, GPIO loading and high-speed signal integrity remain unqualified','Pi rendering is conceptual; Trenz rendering uses vendor generic revision-03 STEP']}
+report['limits'] = [
+ 'Fabrication process approval is owned by the project owner; calculations use the recorded provisional stack',
+ 'GNSS microstrip calculates 49.98 ohms with continuous sampled return plane; mask, launches and actual dielectric require RF qualification',
+ 'J83 source: 3.35 V +/-0.5%, total hot loop resistance <=30 milliohms, <=3 A; verify startup and load waveform at module',
+ 'Pi4 conceptual stack uses SSQ-120-02-G-D riser; selected cooler, cables and mating need physical fit verification',
+ 'No FPGA bitstream or physical sensor/rail/thermal/EMI/high-speed GPIO tests performed',
+ 'Pi FIFO/IRQ deployment is tested on modeled buses; PPS edges are not associated with UTC',
+ 'Trenz rendering uses vendor generic revision-03 STEP']
 (F/'validation.json').write_text(json.dumps(report,indent=2));print(json.dumps(report,indent=2))
 assert not drc['violations'] and not drc['unconnected_items'] and not er

@@ -83,7 +83,7 @@ def run(args):
         ids[record["sensor_id"]] = ident
     if not 0 < args.seconds <= 3600 or not 1 <= args.drain_every <= 10000: raise ValueError("run bounds")
     settings = defaults()
-    channels, enable, usb = [], None, None
+    channels, enable, usb, pps = [], None, None, None
     if simulated:
         # Human-readable JSON may exceed its bounded canonical representation.
         scenario = Scenario(load_json(args.scenario, 65536) if args.scenario else None)
@@ -97,11 +97,11 @@ def run(args):
     else:
         if not sys.platform.startswith("linux"): raise ValueError("live acquisition requires Linux")
         from .live import Factory, USB
-        from .linux_io import SensorEnable
+        from .linux_io import SensorEnable, RisingEdges
         from .worker import Worker
         from .transport import Receiver
         profile = load_json(args.profile)
-        if set(profile) != {"device_id", "spi", "i2c", "sensor_enable"} or len(profile["spi"]) != 5:
+        if set(profile) - {"device_id", "spi", "i2c", "sensor_enable", "imu_irq", "pps"} or len(profile["spi"]) != 5:
             raise ValueError("live profile requires five explicit SPI paths and sensor OE")
         if len(set(profile["spi"])) != 5: raise ValueError("each sensor needs a separate chip select")
         boot = secrets.randbits(64) or 1
@@ -110,13 +110,16 @@ def run(args):
         for cfg in settings:
             sid = cfg["sensor_id"]
             path = profile["spi"][sid - 1] if sid <= 5 else profile["i2c"]
-            channels.append(Channel(profile["device_id"], boot, cfg, Worker(Factory(sid, path), cfg)))
+            channels.append(Channel(profile["device_id"], boot, cfg, Worker(Factory(sid, path, args.fifo and sid <= 4), cfg)))
         clock = lambda: time.clock_gettime_ns(time.CLOCK_MONOTONIC_RAW)
     sessions = Sessions(calibrations)
     metadata = dict(format="senseshake-acquisition-v1", source="simulation" if simulated else "linux-polling",
                     calibrations=list(calibrations.records.values()), timing="poll completion; uncertainty unknown")
     if simulated: metadata.update(seed=args.seed, faults=faults, remote=args.remote, stimulus_model="ideal-v1", scenario=scenario.export())
-    else: metadata["profile"] = profile
+    else:
+        metadata["profile"] = profile
+        if args.fifo:
+            metadata.update(source='linux-fifo', timing='IMU device timestamp mapped to RAW; absolute uncertainty unknown; tilt/GNSS poll completion')
     try:
         # Exclusive create prevents accidentally replacing a prior recording.
         with open(args.output, "xb") as stream:
@@ -124,6 +127,14 @@ def run(args):
             app = Acquisition(writer, sessions, channels, args.queue, ids)
             if not simulated:
                 enable = SensorEnable(**profile["sensor_enable"])
+                if args.fifo:
+                    irqs = profile.get('imu_irq')
+                    if irqs is None or len(irqs) != 4: raise ValueError('FIFO profile needs four IMU IRQ lines')
+                    pins = [(x['chip'], x['line']) for x in irqs] + [(profile['sensor_enable']['chip'], profile['sensor_enable']['line'])]
+                    if profile.get('pps'): pins.append((profile['pps']['chip'], profile['pps']['line']))
+                    if len(set(pins)) != len(pins): raise ValueError('duplicate GPIO role')
+                    for channel, mapping in zip(channels[:4], irqs): channel.adapter.irq = RisingEdges(**mapping)
+                    if profile.get('pps'): pps = RisingEdges(**profile['pps'])
                 enable.enabled(True)
                 if args.usb:
                     # Independent USB session state prevents peers replacing local identities.
@@ -136,6 +147,14 @@ def run(args):
                     for change in scenario.advance(current):
                         app.event("stimulus_change", "simulation controls changed", current, **change)
                 app.tick(clock)
+                if pps:
+                    raw_before = clock()
+                    mono = time.clock_gettime_ns(time.CLOCK_MONOTONIC)
+                    raw_after = clock()
+                    for edge in pps.read():
+                        app.event('pps_edge', 'kernel MONOTONIC edge; UTC association not established', clock(),
+                                  monotonic_ns=edge, estimated_raw_ns=edge + (raw_before + raw_after)//2 - mono,
+                                  mapping_bracket_ns=raw_after - raw_before)
                 if usb:
                     app.drain()
                     usb.poll(clock(), lambda m, t: app.emit(m, t), app.event)
@@ -147,7 +166,7 @@ def run(args):
     finally:
         # Close every independent resource even if one worker cannot be reaped.
         errors = []
-        for obj in [usb, *[c.adapter for c in channels], enable]:
+        for obj in [usb, pps, *[c.adapter for c in channels], enable]:
             if obj is not None:
                 try: obj.close()
                 except Exception as error: errors.append(error)
@@ -174,6 +193,7 @@ def main(argv=None):
         else:
             p.add_argument("--profile", type=Path, required=True)
             p.add_argument("--usb")
+            p.add_argument('--fifo', action='store_true', help='buffered IMUs with hardware timestamps and IRQ hints; explicit profile required')
     p = commands.add_parser("replay")
     p.add_argument("recording", type=Path)
     p = commands.add_parser("export-scenario", help="recover controls for another deterministic simulation")

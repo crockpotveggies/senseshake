@@ -50,8 +50,10 @@ It is an alternative to the ASIC HAT below and requires external regulated 3.3 V
 FPGA power. J85-J89 expose 155 GPIOs at 3.3 V, including four underside ribbon
 connectors; see the [pin contract](docs/trenz-gpio-breakout.csv). Its FPGA
 bitstream port, cable/stack fit and physical qualification remain pending.
-The complete breakout uses an eight-layer HDI stack; manufacturer DFM and GNSS
-RF impedance review are required before fabrication. Ethernet is not exposed.
+The complete breakout uses an eight-layer HDI stack. The revised GNSS route,
+power envelope, GPIO riser and buffered acquisition are tracked in
+[engineering closure](docs/t1-engineering-closure.md); physical qualification
+remains open. Fabrication approval belongs to the project owner. Ethernet is not exposed.
 
 An engineering prototype with four LSM6DSO IMUs, an SCL3300 inclinometer,
 MAX-M10S GNSS, a remote RM3100 XYZ magnetometer and optional DLVR differential

@@ -7,6 +7,7 @@
 - [A2 design](design-a0.md), [Coldfoot module integration](coldfoot-integration.md),
   and [validation limits](validation.md).
 - [T1 Pi-size Trenz carrier](trenz-hat.md) and [FPGA selection](fpga-options.md).
+- [T1 electrical, mechanical and acquisition closure](t1-engineering-closure.md).
 - [USB sensor-head interface and firmware contract](usb-sensor-head.md).
 - [Hardware rebuild](build.md) and [SPICE scope](../hw/simulation/README.md).
 - [Sensor inventory](sensor-inventory.md) and [source references](sources.md).

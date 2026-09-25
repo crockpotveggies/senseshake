@@ -8,9 +8,10 @@ def run(name,body):
     r=subprocess.run(['ngspice','-b',str(path)],capture_output=True,text=True);log=r.stdout+r.stderr;(OUT/(name+'.log')).write_text(log)
     assert r.returncode==0,log
     return {k:float(v) for k,v in re.findall(r'^([a-z][a-z0-9_]*)\s*=\s*([-+0-9.eE]+)',log,re.M)}
-for vin,load in itertools.product([3.267,3.333],[.1,1.5,3.0]):
-    # 15 milliohms is a design budget for fuse+PCB, NOT extracted resistance.
-    m=run(f'dc_{vin}_{load}',f'Vsource src 0 {vin}\nRpath src module 0.015\nIload module 0 {load}\nCbulk module 0 26.4u\n.tran 1u 100u\n.measure tran vmodule FIND v(module) AT=99u')
+for vin,load in itertools.product([3.33325,3.36675],[.1,1.5,3.0]):
+    # Source at J83: 3.35 V +/-0.5%. Budget includes BOTH supply and ground,
+    # fuse, hot copper and mating contacts. This is a limit, not an extraction.
+    m=run(f'dc_{vin}_{load}',f'Vsource src 0 {vin}\nRpath src module 0.030\nIload module 0 {load}\nCbulk module 0 26.4u\n.tran 1u 100u\n.measure tran vmodule FIND v(module) AT=99u')
     assert 3.201<=m['vmodule']<=3.399,m
     results.append(dict(case=f'dc_{vin}_{load}',measured=m,pass_check=True))
 # Negative case: excessive wiring resistance must be recognized as unsafe.
@@ -20,4 +21,16 @@ for cap in [25,100,200]:
     m=run(f'uart_{cap}pf',f'Vdrive src 0 PULSE(0 3.201 100n 5n 5n 500n 1u)\nRdriver src driver 25\nRseries driver rx 47\nCload rx 0 {cap}p\n.tran .5n 900n\n.measure tran rise TRIG v(rx) VAL=0.9603 RISE=1 TARG v(rx) VAL=2.2407 RISE=1\n.measure tran sample FIND v(rx) AT=350n')
     assert m['rise']<50e-9 and m['sample']>2.31,m
     results.append(dict(case=f'uart_{cap}pf',measured=m,pass_check=True))
-(OUT/'results.json').write_text(json.dumps({'cases':results,'scope':'6 DC budget checks, 1 expected undervoltage detection, 3 lumped UART RC checks; not regulator stability, silicon, FPGA firmware or signal-integrity signoff'},indent=2));print('PASS:',len(results),'bounded support-circuit cases')
+for vin,inductance in itertools.product([3.33325,3.36675],[50,200]):
+    m=run(f'load_step_{vin}_{inductance}n',f'''Vsource src 0 {vin}
+Rpath src wire .030
+Lpath wire module {inductance}n
+Resr module cap .020
+Cbulk cap 0 26.4u
+Iload module 0 PULSE(.1 3 1m 100u 100u 1m 3m)
+.tran .1u 4m
+.measure tran vmin MIN v(module) FROM=.5m TO=4m
+.measure tran vmax MAX v(module) FROM=.5m TO=4m''')
+    assert 3.201 <= m['vmin'] and m['vmax'] <= 3.399,m
+    results.append(dict(case=f'load_step_{vin}_{inductance}n',measured=m,pass_check=True))
+(OUT/'results.json').write_text(json.dumps({'cases':results,'scope':'6 DC budgets, expected undervoltage rejection, 3 UART RC checks, 4 bounded 0.1-to-3 A / 100 us load steps with 50/200 nH loop inductance and 26.4 uF effective capacitance. No regulator control loop, fast FPGA load edge, startup inrush or thermal qualification.'},indent=2));print('PASS:',len(results),'bounded support-circuit cases')

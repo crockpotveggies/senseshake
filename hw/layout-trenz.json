@@ -2137,6 +2137,12 @@
       ],
       "mask_thickness_mm": 0.01,
       "nominal_thickness_mm": 1.6
+    },
+    "rf": {
+      "width_mm": 0.388,
+      "epsilon_r": 4.3,
+      "reference_layer": "In2.Cu",
+      "model": "Hammerstad-Jensen; conditional on recorded stack; mask/launch effects excluded"
     }
   }
 }

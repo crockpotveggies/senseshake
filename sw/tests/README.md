@@ -21,6 +21,14 @@ The software profile retains `hat-signals.ssrec` and `hat-signals.json`; the UI'
 **Test HAT signals** button runs the same analyzer and displays its exact capture.
 These thresholds apply to ideal models, not unqualified physical hardware.
 
+`test_fifo.py` checks independent FIFO tag vectors, buffered sample preservation,
+counter/timestamp wrap and concealed gaps, overrun rejection, recovery and the
+driver-to-runtime-to-recording path. `test_deployment.py` compiles and merges the
+Pi overlay with actual device-tree tools, checks five chip selects, refuses wrong
+SPI bindings and exercises the GPIO event ABI. `test_measurements.py` checks
+known moments, SI conversions and incompatible bench-comparison rejection.
+None of these substitutes for live Pi/kernel/sensor qualification.
+
 Keep small deterministic input fixtures here. Put generated logs, traces and
 coverage in the portable lab's disposable workspace. Reserve bounded waveform
 capture for failures. Add runnable profiles when their implementations and

@@ -16,6 +16,7 @@ deferred; if resumed, its host semantics remain owned by the current
 
 Run `./lab.ps1 test -Profile software` for the complete portable demo and tests.
 Live adapters cover LSM6DSO, SCL3300 and MAX-M10S. Bus logic has modeled-response
-tests; physical validation, Pi device-tree deployment, interrupt/FIFO acquisition
-and PPS correlation remain bring-up work. USB ingestion expects a v1 producer;
+tests. [Pi 4 deployment](deploy/README.md), IRQ-assisted FIFO acquisition and PPS
+edge recording are implemented; physical validation and absolute UTC correlation
+remain bring-up work. USB ingestion expects a v1 producer;
 the STM32 head still needs firmware.

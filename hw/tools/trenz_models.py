@@ -57,19 +57,23 @@ for x,y in [(33,11),(77,11),(33,45),(77,45)]:
     st+=cylinder(x,-y,4,2.5,8,'0.7 0.72 0.74')
 write('Trenz_spacers',st);add(b,'MODEL_SPACERS','${KIPRJMOD}/../../models/Trenz_spacers.wrl',(50,50))
 save_board(str(F/'trenz-mounted.kicad_pcb'),b)
-# Pi 4 concept. Top surface is below carrier by 1.6+16.129+2.54 mm.
-z=-20.269
+# Pi 4 concept with unmounted SSQ-120-02-G-D socket used as a 1:1 riser.
+# Its 8.51 mm body adds clearance; 4.93 mm square tails mate into HAT J1.
+z=-28.779
 pi=box(42.5,-28,z-.8,85,56,1.6,'0.04 0.28 0.15')
 pi+=box(32.5,-3.5,z+1.27,51,5.1,2.54,'0.045 0.045 0.055')
 for i in range(20):
     for y in [2.23,4.77]:pi+=box(8.38+i*2.54,-y,z+5,.64,.64,6,'0.75 0.6 0.25')
+pi+=box(32.51,-3.5,z+2.54+8.51/2,51.31,4.95,8.51,'0.08 0.085 0.095')
+for i in range(20):
+    for y in [2.23,4.77]:pi+=box(8.38+i*2.54,-y,z+2.54+8.51+4.93/2,.64,.64,4.93,'0.75 0.6 0.25')
 pi+=box(31,-28,z+1.4,15,15,2.8,'0.16 0.17 0.18')
 pi+=box(50,-31,z+.7,11,14,1.4,'0.055 0.06 0.07')
 # Approximate connector clearance envelopes, not certified vendor geometry.
 for x,y,w,d,h in [(76,-10.5,21,16,15.5),(76,-29,21,15,16),(76,-47,21,15,16),(11,-54,9,6,3.2),(26,-54,7,6,3),(39,-54,7,6,3)]:
     pi+=box(x,y,z+h/2,w,d,h,'0.6 0.64 0.67')
 for x,y in [(3.5,3.5),(61.5,3.5),(3.5,52.5),(61.5,52.5)]:
-    pi+=cylinder(x,-y,(z-1.6)/2,2.4,18.669,'0.69 0.7 0.72')
+    pi+=cylinder(x,-y,(z-1.6)/2,2.4,27.179,'0.69 0.7 0.72')
 for x,y in [(12,11),(20,42),(45,15),(57,43),(62,20)]:pi+=box(x,-y,z+.5,4,3,1,'0.12 0.13 0.14')
 write('Pi4_stack_concept',pi);add(b,'MODEL_PI4','${KIPRJMOD}/../../models/Pi4_stack_concept.wrl',(50,50))
 save_board(str(F/'pi-trenz-stack-concept.kicad_pcb'),b)

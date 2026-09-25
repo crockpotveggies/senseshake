@@ -20,10 +20,11 @@ Use four matching M3 spacers. Components under the module are low-profile;
 the tall service connectors are outside its outline.
 
 J1 retains the Samtec ESQ-120-23-G-D bottom socket. Its specified body height is
-16.129 mm, giving approximately **18.67 mm Pi-top to HAT-underside clearance**
-with a 2.54 mm Pi header base. Use measured spacers/shims for the actual header
-mating depth; do not force the connector to match an arbitrary spacer length.
-The conceptual model uses this nominal stack with a 1.6 mm HAT PCB.
+16.129 mm. A **Samtec SSQ-120-02-G-D** 1:1 GPIO riser now adds 8.51 mm between
+the Pi and J1, giving **27.18 mm nominal Pi-top to HAT-underside clearance** with
+a 2.54 mm Pi header base. Its 4.93 mm square tails point into J1; the socket face
+mates to the Pi. Use measured spacers/shims for actual seating, without forcing
+the connector stack. The conceptual model and assembly BOM include this riser.
 
 This compact stack increases thermal and electrical coupling compared with
 placing the FPGA beside the Pi. Accelerometer/tilt drift and noise must be
@@ -32,17 +33,21 @@ motion sensors. Pi cooler compatibility needs a physical check.
 
 ## Power and interfaces
 
-**J83 requires an external regulated 3.3 V supply, not 5 V.** Pin 1 is positive;
+**J83 requires an external regulated 3.3 V-class supply, not 5 V.** Pin 1 is positive;
 pin 2 is ground. It powers Trenz VIN and 3.3VIN through F80, a 5 A fast fuse.
 The Pi continues to supply the sensor circuit. Grounds are common; positive
 supplies are separate. There is no new USB connector on the HAT.
 
 Start with a current-limited supply capable of module startup. The initial
 operating budget is 3 A; this is a design envelope, not a measured FPGA load.
-Keep **3.201–3.399 V at the module management supply under load**, including
-fuse, wiring and PCB drop. There is no reverse-polarity or overvoltage protection
-on this prototype input. The 15 mΩ fuse-plus-PCB resistance used in the budget
-simulation is an acceptance target, not an extracted or measured result.
+Set **3.35 V ±0.5% at J83** and keep **3.201–3.399 V at the module management
+supply under load**. The revised hot loop resistance budget is **30 mΩ total**,
+including positive and ground paths, fuse, PCB and mating contacts. At 3 A this
+leaves a calculated DC range of 3.243–3.367 V, before transients. This limit must
+be verified by differential voltage measurements; no extracted or measured
+resistance is claimed. Current-limit first startup and check inrush before raising
+the limit. This prototype input still has no reverse-polarity or overvoltage
+protection; those protections must be supplied by the external bench source.
 
 The module's sequenced 3.3 V output powers the exposed FPGA banks and the B
 side of the TXU0202 UART isolator. Pi GPIO25 enables that interface, with a
@@ -110,11 +115,12 @@ pins while the module is unpowered or configuring. External circuitry must
 share ground and satisfy the selected FPGA I/O standard and sequencing.
 Keep unused GPIOs as inputs until a pin-specific bitstream is qualified.
 
-Attach cables before stacking. Nominal 18.67 mm Pi-to-HAT spacing accommodates
-2 mm connector bodies. Where J88/J89 overlap the simplified Pi 4 port envelopes,
-only about **0.67 mm nominal clearance** remains over a 16 mm port body. Cable
-bends/exits, actual Pi cooler/port heights, solder protrusions and mounting
-hardware therefore require an assembly trial before release.
+Attach cables before stacking. The revised 27.18 mm gap leaves **9.18 mm nominal
+clearance** between a 2 mm underside connector and the modeled 16 mm Pi port.
+Reserving 1 mm for cable envelope and 1 mm for combined seating/height tolerance
+leaves **7.18 mm calculated margin**. These allowances are engineering targets,
+not supplier tolerance certification. Cable bends/exits, the actual Pi cooler,
+solder protrusions and mounting hardware still need an assembly trial.
 Route cables clear of the Pi socket and standoffs; a final harness has not been
 specified or qualified. Models show connector envelopes without installed cables.
 
@@ -145,9 +151,13 @@ in the native PCB and `hw/layout-trenz.json`.
 
 This is a more expensive manufacturing process than the original carrier.
 The fabricator must approve the complete stack, drill separation, fill/cap process
-and materials. The changed ground-plane depth also requires recalculating the
-GNSS RF trace against the approved stack; its retained width is **not a verified
-50-ohm impedance**. Native DRC closure is not manufacturer DFM or RF signoff.
+and materials; fabrication approval is the project owner's responsibility.
+The GNSS trace is now **0.388 mm wide**, calculated as **49.98 Ω** using the
+recorded 0.215 mm depth to In2.Cu, 35 μm copper and dielectric constant 4.3.
+The route was shifted away from a via antipad, and 900 points under the RF copper
+are checked for continuous ground. The analytical model excludes solder mask,
+launches and dielectric variation: update it if stack properties change. This
+closes the carried-over-width error, not RF measurement qualification.
 Reducing GPIO count is the main available scope reduction; Ethernet is already
 excluded and adds no routing burden.
 
@@ -163,15 +173,18 @@ The delivered board passed:
 - native KiCad ERC and DRC: **0 findings, 0 unconnected items**;
 - a clean placement/import rebuild with all **5,316 tracks/vias identical** to
   the delivered native copper, including **37 microvias**, and zero DRC/open nets;
-- ten bounded ngspice support checks: six DC power budgets, one expected
-  undervoltage detection, and three 2 Mbaud UART RC-load cases.
+- fourteen bounded ngspice support checks: six revised DC power budgets, one
+  expected undervoltage detection, three UART RC cases and four load-step cases.
+- RF geometry/return-plane, Pi IRQ/PPS mapping and revised stack-margin checks;
+  see [engineering closure](t1-engineering-closure.md).
 
 Power copper was widened using DRC-checked trials and supplemented with front/
 back pours and parallel vias. This does not establish ampacity, transient supply
 performance, RF impedance, thermal behavior or EMC. No FPGA silicon simulation,
 bitstream implementation or physical board test was performed for T1.
 **Engineering prototype; not fabrication released.** Machine-readable results
-are in [`validation.json`](../hw/boards/shakesense-trenz-hat/validation.json) and
+are in [`validation.json`](../hw/boards/shakesense-trenz-hat/validation.json),
+[`engineering.json`](../hw/boards/shakesense-trenz-hat/engineering.json) and
 [`hw/simulation/trenz/results.json`](../hw/simulation/trenz/results.json).
 
 ## 3D artifacts
@@ -236,6 +249,8 @@ are not part of the reproducible flow.
 - [Vendor STEP archive](https://www.trenz-electronic.de/trenzdownloads/Trenz_Electronic/Modules_and_Module_Carriers/4x5/TE0712/REV03/HW_Design/STP-TE0712-03-No%20Variations.zip).
 - [CPLD behavior](https://wiki.trenz-electronic.de/display/PD/TE0712+CPLD).
 - [Samtec Pi socket](https://www.samtec.com/products/esq-120-23-g-d).
+- [Samtec riser family dimensions](https://suddendocs.samtec.com/catalog_english/ssw_th.pdf).
+- [Microstrip equations](https://qucs.sourceforge.net/tech/node75.html).
 - [Raspberry Pi 4 mechanical resources](https://pip.raspberrypi.com/categories/559-mechanical).
 
 Vendor files in `docs/vendor/trenz` and `hw/models/trenz` retain their

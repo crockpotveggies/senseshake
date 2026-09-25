@@ -1,0 +1,38 @@
+/dts-v1/;
+/plugin/;
+
+/* Pi 4 / BCM2711: userspace acquisition owns these devices and GPIO events.
+ * Do not combine with spi0-*cs, pps-gpio, w1-gpio or kernel IMU overlays.
+ * No fabricated compatible string for an unrelated supported spidev device.
+ * bind_spi.py explicitly selects spidev through Linux driver_override.
+ */
+/ {
+    compatible = "brcm,bcm2711";
+    fragment@0 {
+        target = <&spi0_cs_pins>;
+        __overlay__ {
+            brcm,pins = <8 7 5 6 13>;
+            brcm,function = <1>;
+            brcm,pull = <2 2 2 2 2>;
+        };
+    };
+    fragment@1 {
+        target = <&spi0>;
+        __overlay__ {
+            #address-cells = <1>;
+            #size-cells = <0>;
+            status = "okay";
+            num-cs = <5>;
+            cs-gpios = <&gpio 8 1>, <&gpio 7 1>, <&gpio 5 1>, <&gpio 6 1>, <&gpio 13 1>;
+            spidev@0 { compatible = "senseshake,lsm6dso-userspace"; reg = <0>; spi-max-frequency = <1000000>; status = "okay"; };
+            spidev@1 { compatible = "senseshake,lsm6dso-userspace"; reg = <1>; spi-max-frequency = <1000000>; status = "okay"; };
+            spidev@2 { compatible = "senseshake,lsm6dso-userspace"; reg = <2>; spi-max-frequency = <1000000>; status = "okay"; };
+            spidev@3 { compatible = "senseshake,lsm6dso-userspace"; reg = <3>; spi-max-frequency = <1000000>; status = "okay"; };
+            spidev@4 { compatible = "senseshake,scl3300-userspace"; reg = <4>; spi-max-frequency = <1000000>; status = "okay"; };
+        };
+    };
+    fragment@2 {
+        target = <&i2c1>;
+        __overlay__ { status = "okay"; clock-frequency = <100000>; };
+    };
+};

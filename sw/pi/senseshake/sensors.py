@@ -13,6 +13,7 @@ class NotReady(OSError):
 class Reading:
     raw: dict
     quality: int = 1
+    acquisition_ns: int | None = None
 
 
 class LSM6DSO:

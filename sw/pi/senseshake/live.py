@@ -9,10 +9,15 @@ from .sensors import LSM6DSO, SCL3300, MAXM10S
 class Factory:
     sensor: int
     path: str
+    fifo: bool = False
 
     def __call__(self):
         from .linux_io import SPI, I2C
-        if self.sensor <= 4: return LSM6DSO(SPI(self.path))
+        if self.sensor <= 4:
+            if self.fifo:
+                from .fifo import LSM6DSOFIFO
+                return LSM6DSOFIFO(SPI(self.path))
+            return LSM6DSO(SPI(self.path))
         if self.sensor == 5: return SCL3300(SPI(self.path))
         if self.sensor == 6: return MAXM10S(I2C(self.path))
         raise ValueError("remote sensors use USB firmware")

@@ -23149,7 +23149,7 @@
 	(gr_text "GPIO J86 B13 3V3"
 		(at 67 66 0)
 		(layer "B.SilkS")
-		(uuid "51e88691-c607-4554-8b5d-5c40fed24350")
+		(uuid "74783d31-ed8c-4f11-bc94-09af658599c9")
 		(effects
 			(font
 				(size 0.8 0.8)
@@ -23161,7 +23161,7 @@
 	(gr_text "GPIO J87 B14 3V3"
 		(at 67 83 0)
 		(layer "B.SilkS")
-		(uuid "3b67968e-1289-48b7-b34b-572486c42531")
+		(uuid "31f8cb7f-1d71-4d69-8bb4-5835906f19c0")
 		(effects
 			(font
 				(size 0.8 0.8)
@@ -23173,7 +23173,7 @@
 	(gr_text "GPIO J88 B15 3V3"
 		(at 107 64 0)
 		(layer "B.SilkS")
-		(uuid "a88ec249-2db0-4bc7-a84d-bef98e6a6c21")
+		(uuid "5110951e-378a-4d71-a5ac-afef20df1a92")
 		(effects
 			(font
 				(size 0.8 0.8)
@@ -23185,7 +23185,7 @@
 	(gr_text "GPIO J89 B16 3V3"
 		(at 107 81 0)
 		(layer "B.SilkS")
-		(uuid "e1b0de8e-b1c1-44c4-a08e-7f02dc720cfa")
+		(uuid "5c89c57a-2e47-4f65-8eb6-1b8d4ee6f1e1")
 		(effects
 			(font
 				(size 0.8 0.8)
@@ -27573,9 +27573,9 @@
 		(uuid "7d235a2d-e308-4f0c-b9dc-519e2c373497")
 	)
 	(segment
-		(start 73.95 97.15)
+		(start 73.95 97.45)
 		(end 73.95 96)
-		(width 0.3)
+		(width 0.388)
 		(locked yes)
 		(layer "F.Cu")
 		(net 17)
@@ -27583,17 +27583,17 @@
 	)
 	(segment
 		(start 68.75 99.3)
-		(end 71.8 99.3)
-		(width 0.3)
+		(end 72.1 99.3)
+		(width 0.388)
 		(locked yes)
 		(layer "F.Cu")
 		(net 17)
 		(uuid "d677723f-4bbe-4515-abd1-eb895e6187c3")
 	)
 	(segment
-		(start 71.8 99.3)
-		(end 73.95 97.15)
-		(width 0.3)
+		(start 72.1 99.3)
+		(end 73.95 97.45)
+		(width 0.388)
 		(locked yes)
 		(layer "F.Cu")
 		(net 17)

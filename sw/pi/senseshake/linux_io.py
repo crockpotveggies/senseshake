@@ -84,3 +84,43 @@ class SensorEnable:
     def close(self):
         try: self.enabled(False)
         finally: os.close(self.fd)
+
+
+class GPIOEventRequest(c.Structure):
+    _fields_ = [("offset", c.c_uint32), ("handleflags", c.c_uint32),
+                ("eventflags", c.c_uint32), ("consumer", c.c_char * 32), ("fd", c.c_int)]
+
+
+class RisingEdges:
+    """GPIO v1 rising-edge notifications; timestamps are MONOTONIC, NOT RAW."""
+    def __init__(self, chip, line):
+        import fcntl
+        if not re.fullmatch(r"/dev/gpiochip\d+", chip) or not 0 <= line < 1024: raise ValueError("GPIO chip/line")
+        chipfd = os.open(chip, os.O_RDONLY | os.O_CLOEXEC)
+        self.fd = None
+        try:
+            request = GPIOEventRequest(offset=line, handleflags=1, eventflags=1,
+                                       consumer=b'senseshake-edge')
+            data = bytearray(bytes(request))
+            ioctl(chipfd, (3 << 30) | (c.sizeof(request) << 16) | (0xb4 << 8) | 4, data, True)
+            self.fd = GPIOEventRequest.from_buffer_copy(data).fd
+            fcntl.fcntl(self.fd, fcntl.F_SETFL, os.O_NONBLOCK)
+        except BaseException:
+            if self.fd is not None: os.close(self.fd); self.fd = None
+            raise
+        finally: os.close(chipfd)
+
+    def read(self):
+        try: data = os.read(self.fd, 16 * 64)
+        except BlockingIOError: return []
+        if not data or len(data) % 16: raise OSError('short GPIO edge record')
+        result = []
+        for timestamp, kind in struct.iter_unpack('=QI4x', data):
+            if kind != 1: raise OSError('unexpected GPIO edge')
+            result.append(timestamp)
+        return result
+
+    def poll(self): return bool(self.read())
+
+    def close(self):
+        if self.fd is not None: os.close(self.fd); self.fd = None

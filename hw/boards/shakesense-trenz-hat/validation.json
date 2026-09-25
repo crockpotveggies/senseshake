@@ -19,11 +19,12 @@
   "microvias": 37,
   "hdi_structure": "1+6+1",
   "limits": [
-    "Provisional HDI stack requires manufacturer DFM, filled/planarized via-in-pad and GNSS RF impedance review",
-    "No FPGA bitstream port or hardware test performed",
-    "External regulated 3.3 V supply required; confirm 3.201\u20133.399 V at module under startup/load",
-    "Copper resistance, heating, sensor thermal drift, EMI and physical mating remain unqualified",
-    "FFC cable routing, GPIO loading and high-speed signal integrity remain unqualified",
-    "Pi rendering is conceptual; Trenz rendering uses vendor generic revision-03 STEP"
+    "Fabrication process approval is owned by the project owner; calculations use the recorded provisional stack",
+    "GNSS microstrip calculates 49.98 ohms with continuous sampled return plane; mask, launches and actual dielectric require RF qualification",
+    "J83 source: 3.35 V +/-0.5%, total hot loop resistance <=30 milliohms, <=3 A; verify startup and load waveform at module",
+    "Pi4 conceptual stack uses SSQ-120-02-G-D riser; selected cooler, cables and mating need physical fit verification",
+    "No FPGA bitstream or physical sensor/rail/thermal/EMI/high-speed GPIO tests performed",
+    "Pi FIFO/IRQ deployment is tested on modeled buses; PPS edges are not associated with UTC",
+    "Trenz rendering uses vendor generic revision-03 STEP"
   ]
 }

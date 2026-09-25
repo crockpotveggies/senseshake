@@ -736,71 +736,6 @@
 			)
 		)
 	)
-	(footprint ""
-		(layer "F.Cu")
-		(uuid "079a9f29-6af8-406b-855f-1a1e6261a93f")
-		(at 50 50)
-		(property "Reference" "MODEL_PI4"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "57c37971-5acc-4840-b535-0ba1c8ce3c6b")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Value" "Visualization only"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "068f260a-ebac-43a4-a620-f522525bc1b3")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "88e5c560-047a-4146-a401-054c9e54a342")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "cd818b4b-af12-4d92-a25c-4f5df144b3f1")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(embedded_fonts no)
-		(model "${KIPRJMOD}/../../models/Pi4_stack_concept.wrl"
-			(offset
-				(xyz 0 0 0)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz 0 0 0)
-			)
-		)
-	)
 	(footprint "ShakeSense:Package_TO_SOT_SMD__SOT-23"
 		(layer "F.Cu")
 		(uuid "0803d28d-6d54-4406-aefb-64aa4642524b")
@@ -2932,71 +2867,6 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint ""
-		(layer "F.Cu")
-		(uuid "129e9130-e203-4e4a-98ac-30f4791663f5")
-		(at 80 98)
-		(property "Reference" "MODEL_TE0712"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "c380832c-4295-4c40-94f9-f6b5c498be7e")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Value" "Visualization only"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "1f16a8e8-7efb-4267-9948-37f4750904f7")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "fe71dc86-ccf4-4906-9d43-cb3eb3da8d7d")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "e9feb389-7809-4ef9-aa58-7ecc29140b32")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(embedded_fonts no)
-		(model "${KIPRJMOD}/../../models/trenz/STP-TE0712-03-No Variations.step"
-			(offset
-				(xyz 0 0 9.6099917)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz 0 0 0)
-			)
-		)
-	)
 	(footprint "ShakeSense:Resistor_SMD__R_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "12e5445e-b273-4824-bf81-9a984642524b")
@@ -3379,6 +3249,71 @@
 		)
 		(embedded_fonts no)
 		(model "${KICAD9_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x06_P2.54mm_Vertical.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint ""
+		(layer "F.Cu")
+		(uuid "17ad82b5-f392-44b0-bcf1-d3057bb96a5e")
+		(at 50 50)
+		(property "Reference" "MODEL_SPACERS"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "3992cf99-cd2c-4b73-90d9-a4e6e10af705")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "Visualization only"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "c8cb5d3a-747c-48c8-92f6-ef49819eb76e")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "70d60a85-45dc-4f4b-8730-334ccf452a46")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "3caeeb57-60fa-4f6d-8e8a-ce3ba4a2da62")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(embedded_fonts no)
+		(model "${KIPRJMOD}/../../models/Trenz_spacers.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -11351,6 +11286,71 @@
 			)
 		)
 	)
+	(footprint ""
+		(layer "F.Cu")
+		(uuid "91b7bdef-3a7d-4c02-ae15-72d724f7aa87")
+		(at 80 98)
+		(property "Reference" "MODEL_TE0712"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "f7c6482e-f519-4f82-a73c-eeb43c951bab")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "Visualization only"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "aed94874-d123-4531-8ddb-d58933ea157b")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e941aa7d-c79e-44c0-b800-36d0bc0f0c49")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "3f0bc52c-368a-4d10-a662-8b303660bc21")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(embedded_fonts no)
+		(model "${KIPRJMOD}/../../models/trenz/STP-TE0712-03-No Variations.step"
+			(offset
+				(xyz 0 0 9.6099917)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
 	(footprint "ShakeSense:Package_LGA__LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y"
 		(layer "F.Cu")
 		(uuid "927bfa1a-ad51-435a-9be6-d7db4642524b")
@@ -17079,71 +17079,6 @@
 			)
 		)
 	)
-	(footprint ""
-		(layer "F.Cu")
-		(uuid "ddcd407a-6e8e-4a87-a59b-7a1de5005436")
-		(at 50 50)
-		(property "Reference" "MODEL_SPACERS"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "8261b84f-3a3a-47ca-ba69-e6f06a9cdf37")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Value" "Visualization only"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "e4b45ecc-eb1d-4ba3-a80c-409577838b02")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "1b65b01f-2a47-4cfb-afa1-128eea70266d")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "3a72c93c-ea68-4a9d-a66f-b0583a539832")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(embedded_fonts no)
-		(model "${KIPRJMOD}/../../models/Trenz_spacers.wrl"
-			(offset
-				(xyz 0 0 0)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz 0 0 0)
-			)
-		)
-	)
 	(footprint "ShakeSense:Capacitor_SMD__C_0805_2012Metric"
 		(layer "F.Cu")
 		(uuid "ddfdbb16-4939-4e89-86a7-d6584642524b")
@@ -17785,6 +17720,71 @@
 		)
 		(embedded_fonts no)
 		(model "${KICAD9_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0603_1608Metric.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint ""
+		(layer "F.Cu")
+		(uuid "e63d0d6b-2800-48c8-a12c-67a9e2c465e2")
+		(at 50 50)
+		(property "Reference" "MODEL_PI4"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "4d9347f1-52d0-4263-bc3a-cc3fca6bd836")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "Visualization only"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "04c25201-da73-4176-95fe-14f4d1919381")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a78e7489-eee6-4974-b592-3ce8fa2acfd0")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "afd8e576-93be-4bb1-93ea-c51613436529")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(embedded_fonts no)
+		(model "${KIPRJMOD}/../../models/Pi4_stack_concept.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -23344,7 +23344,7 @@
 	(gr_text "GPIO J86 B13 3V3"
 		(at 67 66 0)
 		(layer "B.SilkS")
-		(uuid "51e88691-c607-4554-8b5d-5c40fed24350")
+		(uuid "74783d31-ed8c-4f11-bc94-09af658599c9")
 		(effects
 			(font
 				(size 0.8 0.8)
@@ -23356,7 +23356,7 @@
 	(gr_text "GPIO J87 B14 3V3"
 		(at 67 83 0)
 		(layer "B.SilkS")
-		(uuid "3b67968e-1289-48b7-b34b-572486c42531")
+		(uuid "31f8cb7f-1d71-4d69-8bb4-5835906f19c0")
 		(effects
 			(font
 				(size 0.8 0.8)
@@ -23368,7 +23368,7 @@
 	(gr_text "GPIO J88 B15 3V3"
 		(at 107 64 0)
 		(layer "B.SilkS")
-		(uuid "a88ec249-2db0-4bc7-a84d-bef98e6a6c21")
+		(uuid "5110951e-378a-4d71-a5ac-afef20df1a92")
 		(effects
 			(font
 				(size 0.8 0.8)
@@ -23380,7 +23380,7 @@
 	(gr_text "GPIO J89 B16 3V3"
 		(at 107 81 0)
 		(layer "B.SilkS")
-		(uuid "e1b0de8e-b1c1-44c4-a08e-7f02dc720cfa")
+		(uuid "5c89c57a-2e47-4f65-8eb6-1b8d4ee6f1e1")
 		(effects
 			(font
 				(size 0.8 0.8)
@@ -27768,9 +27768,9 @@
 		(uuid "7d235a2d-e308-4f0c-b9dc-519e2c373497")
 	)
 	(segment
-		(start 73.95 97.15)
+		(start 73.95 97.45)
 		(end 73.95 96)
-		(width 0.3)
+		(width 0.388)
 		(locked yes)
 		(layer "F.Cu")
 		(net 17)
@@ -27778,17 +27778,17 @@
 	)
 	(segment
 		(start 68.75 99.3)
-		(end 71.8 99.3)
-		(width 0.3)
+		(end 72.1 99.3)
+		(width 0.388)
 		(locked yes)
 		(layer "F.Cu")
 		(net 17)
 		(uuid "d677723f-4bbe-4515-abd1-eb895e6187c3")
 	)
 	(segment
-		(start 71.8 99.3)
-		(end 73.95 97.15)
-		(width 0.3)
+		(start 72.1 99.3)
+		(end 73.95 97.45)
+		(width 0.388)
 		(locked yes)
 		(layer "F.Cu")
 		(net 17)

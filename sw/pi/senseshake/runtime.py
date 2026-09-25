@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from . import messages
 from .sensors import NotReady
 from .transport import Outbox
+from .fifo import Drain, FifoFault
 
 
 @dataclass
@@ -66,6 +67,9 @@ class Acquisition:
 
     def tick(self, clock):
         for c in self.channels:
+            if getattr(c.adapter, 'buffered', False):
+                self.tick_buffered(c, clock)
+                continue
             now = clock()
             if now < c.due: continue
             period = c.settings["period_ns"]
@@ -110,6 +114,59 @@ class Acquisition:
             c.sequence += 1
             self.reads += 1
             self.missing += raw is None
+
+    def tick_buffered(self, c, clock):
+        now = clock()
+        if now < c.due and not c.adapter.ready(): return
+        c.due = now + 20_000_000  # IRQ wakeup plus periodic drain if an edge is lost.
+        if c.offline:
+            if now < c.restart_at or c.retries >= self.retry_limit: return
+            c.retries += 1
+            try:
+                if c.adapter.configure(c.settings) != c.settings: raise ValueError('FIFO configuration changed')
+                c.offline, c.failures = False, 0
+                self.recoveries += 1
+                self.report(c, 1, 'FIFO recovered; timestamp mapping restarted', clock())
+            except (OSError, ValueError) as error:
+                c.restart_at = clock() + self.cooldown
+                self.report(c, 3, error, clock())
+                return
+        try:
+            drain = c.adapter.read()
+            if not isinstance(drain, Drain) or len(drain.readings) > 32: raise ValueError('FIFO IPC bound')
+            # Validate complete drain before emitting any of it.
+            last = c.last_time
+            for reading in drain.readings:
+                if reading.acquisition_ns is None or not last < reading.acquisition_ns <= clock():
+                    raise FifoFault('FIFO timestamp ordering; drain discarded')
+                last = reading.acquisition_ns
+            c.failures = 0
+        except (OSError, ValueError) as error:
+            c.failures += 1
+            self.report(c, 4 if isinstance(error, FifoFault) else 3, error, clock())
+            # One explicit missing marker; unknown conversion loss is never zero.
+            at = clock()
+            self.outbox.put(messages.batch(c.device, c.boot, c.settings['sensor_id'], c.sequence,
+                                           at, None, 2, dropped=None), at)
+            c.sequence += 1
+            c.last_time = at
+            self.reads += 1
+            self.missing += 1
+            if c.failures >= self.failure_limit or isinstance(error, TimeoutError):
+                c.offline, c.restart_at = True, clock() + self.cooldown
+                self.report(c, 2, 'FIFO offline; finite retry policy active', clock())
+            return
+        for reading in drain.readings:
+            sid, at = c.settings['sensor_id'], reading.acquisition_ns
+            message = messages.batch(c.device, c.boot, sid, c.sequence, at, reading.raw,
+                                     reading.quality, dropped=None)
+            ident = self.calibration_ids.get(sid)
+            if ident:
+                message = self.sessions.calibrations.apply(message, ident, self.sessions.devices[c.device].settings[sid])
+            self.outbox.put(message, clock())
+            c.sequence += 1
+            c.last_time = at
+            self.reads += 1
 
     def finish(self, now):
         self.drain()

@@ -128,9 +128,9 @@ def main():
             # Short RF connection uses retained reviewed coordinates; impedance
             # remains subject to the selected fabrication stackup.
             nets=b.GetNetsByName()
-            pts=[(68.75,97.3),(69.8,97.3),(71.95,95.15),(71.95,94)] if target=='hat' else [(68.75,99.3),(71.8,99.3),(73.95,97.15),(73.95,96)]
+            pts=[(68.75,97.3),(69.8,97.3),(71.95,95.15),(71.95,94)] if target=='hat' else [(68.75,99.3),(72.1,99.3),(73.95,97.45),(73.95,96)]
             for a,c in zip(pts,pts[1:]):
-                t=p.PCB_TRACK(b);t.SetStart(v(*a));t.SetEnd(v(*c));t.SetWidth(p.FromMM(.3));t.SetLayer(p.F_Cu);t.SetNet(nets['GNSS_RF']);t.SetLocked(True);b.Add(t)
+                t=p.PCB_TRACK(b);t.SetStart(v(*a));t.SetEnd(v(*c));t.SetWidth(p.FromMM(spec.get('rf',{}).get('width_mm',.3)));t.SetLayer(p.F_Cu);t.SetNet(nets['GNSS_RF']);t.SetLocked(True);b.Add(t)
             if target=='hat':
                 add_text(b,'ShakeSense A2 | atopile',87,104.5,.85)
                 add_text(b,'COLDFOOT / RUN-1',145,53,.8)

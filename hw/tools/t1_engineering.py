@@ -1,0 +1,129 @@
+"""Reproducible T1 design calculations. Analytical limits are not bench evidence."""
+import json
+import math
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+BOARD = ROOT / "hw/boards/shakesense-trenz-hat"
+
+
+def microstrip(width, height, thickness, er):
+    """Hammerstad-Jensen quasi-static microstrip, dimensions in the same units.
+
+    Finite copper thickness correction; uncoated homogeneous substrate. A solder
+    mask, pads, vias and discontinuities require a field-solver/measurement check.
+    Equations: Qucs technical documentation, Single microstrip line, node75.
+    """
+    if not (width > 0 and height > 0 and thickness >= 0 and er >= 1):
+        raise ValueError("microstrip geometry")
+    u, t = width / height, thickness / height
+    du = t / math.pi * math.log(1 + 4 * math.e / (t * (1 / math.tanh(math.sqrt(6.517 * u))) ** 2)) if t else 0
+    ur = u + du * (1 + 1 / math.cosh(math.sqrt(er - 1))) / 2
+    u1 = u + du
+
+    def air(v):
+        f = 6 + (2 * math.pi - 6) * math.exp(-(30.666 / v) ** .7528)
+        return 376.730313668 / (2 * math.pi) * math.log(f / v + math.sqrt(1 + (2 / v) ** 2))
+
+    a = 1 + math.log((ur ** 4 + (ur / 52) ** 2) / (ur ** 4 + .432)) / 49 + math.log(1 + (ur / 18.1) ** 3) / 18.7
+    b = .564 * ((er - .9) / (er + 3)) ** .053
+    ee = (er + 1) / 2 + (er - 1) / 2 * (1 + 10 / ur) ** (-a * b)
+    # Z(ur)/sqrt(ee); effective permittivity corrected for thickness separately.
+    return air(ur) / math.sqrt(ee), ee * (air(u1) / air(ur)) ** 2
+
+
+def width_for(target, height, thickness, er):
+    lo, hi = .001 * height, 100 * height
+    for _ in range(70):
+        mid = (lo + hi) / 2
+        if microstrip(mid, height, thickness, er)[0] > target: lo = mid
+        else: hi = mid
+    return (lo + hi) / 2
+
+
+def supply_range(setpoint, tolerance, resistance, current):
+    if not (0 < setpoint and 0 <= tolerance < 1 and resistance >= 0 and current >= 0):
+        raise ValueError("power budget")
+    return setpoint * (1 - tolerance) - resistance * current, setpoint * (1 + tolerance)
+
+
+def clearance(gap, port_height=16, connector_height=2, cable_allowance=1,
+              stack_tolerance=1):
+    return gap - port_height - connector_height - cable_allowance - stack_tolerance
+
+
+POWER_PINS = {
+    ('U41','1'):'PI_3V3', ('U41','23'):'SENS_3V3', ('U41','24'):'SENS_3V3',
+    ('U42','1'):'PI_3V3', ('U42','23'):'SENS_3V3', ('U42','24'):'SENS_3V3',
+    ('U41','22'):'SENSOR_OE_N', ('U42','22'):'SENSOR_OE_N',
+    ('R50','1'):'SENSOR_OE_N', ('R50','2'):'PI_3V3',
+    ('U43','1'):'PI_3V3', ('U43','8'):'SENS_3V3',
+    ('U51','3'):'PI_3V3', ('U51','7'):'FPGA_3V3', ('U51','6'):'FPGA_IO_ENABLE',
+    ('R62','1'):'FPGA_IO_ENABLE', ('R62','2'):'GND',
+    ('Q1','1'):'FPGA_RESET_GATE', ('Q1','2'):'GND', ('Q1','3'):'FPGA_RESET_N',
+    ('R66','1'):'FPGA_RESET_GATE', ('R66','2'):'GND',
+    ('U52','1'):'GND', ('U52','2'):'FPGA_RESET_N', ('U52','3'):'FPGA_3V3',
+    ('R64','1'):'FPGA_RESET_N', ('R64','2'):'FPGA_3V3',
+    ('J83','1'):'EXT_3V3', ('J83','2'):'GND', ('F80','1'):'EXT_3V3', ('F80','2'):'FPGA_VIN',
+}
+
+
+def power_interfaces(pins):
+    for key, expected in POWER_PINS.items():
+        if pins.get(key) != expected: raise ValueError(f'power isolation/bias mismatch: {key}')
+    return len(POWER_PINS)
+
+
+def main():
+    import pcbnew as p
+    spec = json.loads((ROOT / "hw/layout-trenz.json").read_text())[BOARD.name]
+    hdi = spec["hdi"]
+    h = sum(hdi["dielectric_thickness_mm"][:2]) + hdi["copper_thickness_mm"][1]
+    board = p.LoadBoard(str(BOARD / (BOARD.name + ".kicad_pcb")))
+    pins = {(f.GetReference(), pad.GetNumber()):pad.GetNetname() for f in board.GetFootprints() for pad in f.Pads()}
+    power_checks = power_interfaces(pins)
+    for pin, net in {7:'PI_GNSS_PPS',13:'PI_IMU1_INT',15:'PI_IMU2_INT',16:'PI_IMU3_INT',18:'PI_IMU4_INT'}.items():
+        assert pins[('J1',str(pin))] == net, ('Pi IRQ/PPS mapping', pin)
+    rf = [t for t in board.GetTracks() if t.GetNetname() == "GNSS_RF"]
+    assert len(rf) == 3 and all(not isinstance(t, p.PCB_VIA) and t.GetLayer() == p.F_Cu for t in rf)
+    widths = sorted({round(p.ToMM(t.GetWidth()), 6) for t in rf})
+    assert widths == [spec["rf"]["width_mm"]], widths
+    ground = next(z.GetFilledPolysList(p.In2_Cu) for z in board.Zones()
+                  if not z.GetIsRuleArea() and z.GetLayer() == p.In2_Cu and z.GetNetname() == "GND")
+    # Sample directly underneath the complete RF copper width, including bends.
+    # This is a return-plane continuity guard, not an electromagnetic solver.
+    samples = 0
+    for trace in rf:
+        a, b = trace.GetStart(), trace.GetEnd()
+        dx, dy = b.x - a.x, b.y - a.y
+        length = math.hypot(dx, dy)
+        for i in range(math.ceil(p.ToMM(length) / .025) + 1):
+            f = min(1, i * p.FromMM(.025) / length)
+            for offset in (-trace.GetWidth() / 2, 0, trace.GetWidth() / 2):
+                point = p.VECTOR2I(round(a.x + f * dx - offset * dy / length),
+                                   round(a.y + f * dy + offset * dx / length))
+                assert ground.Contains(point), ('RF reference-plane gap', p.ToMM(point.x), p.ToMM(point.y))
+                samples += 1
+    z, ee = microstrip(widths[0], h, hdi["copper_thickness_mm"][0], spec["rf"]["epsilon_r"])
+    low, high = supply_range(3.35, .005, .030, 3)
+    gap = 16.129 + 2.54 + 8.51
+    report = dict(
+        rf=dict(model="Hammerstad-Jensen, uncoated microstrip", width_mm=widths[0],
+                reference="In2.Cu", reference_depth_mm=h, impedance_ohm=z,
+                effective_er=ee, length_mm=sum(p.ToMM(t.GetLength()) for t in rf), return_plane_points=samples,
+                limitations="Recorded provisional dielectric; solder mask and connector launches not modeled"),
+        power=dict(interface_pin_checks=power_checks, input_setpoint_v=3.35, input_tolerance=.005,
+                   total_hot_loop_resistance_limit_ohm=.030, current_limit_a=3,
+                   dc_module_min_v=low, dc_module_max_v=high,
+                   limitations="30 milliohms includes positive AND ground paths, fuse and contacts; must be measured"),
+        mechanical=dict(pi_to_hat_underside_mm=gap, riser="Samtec SSQ-120-02-G-D",
+                        conservative_clearance_mm=clearance(gap),
+                        limitations="1 mm stack tolerance plus 1 mm cable envelope; actual cooler/harness not modeled"))
+    assert 49 <= z <= 51
+    assert 3.201 < low < high < 3.399
+    assert clearance(gap) >= 3
+    (BOARD / "engineering.json").write_text(json.dumps(report, indent=2) + "\n")
+    print(json.dumps(report, indent=2))
+
+
+if __name__ == "__main__": main()

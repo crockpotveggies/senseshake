@@ -1,9 +1,9 @@
 {
   "kicad": "9.0.9",
   "sha256": {
-    "hw/boards/shakesense-trenz-hat/shakesense-trenz-hat.kicad_pcb": "2aeabe781adc5b4f7e5405119087a05db36ec351aa28cccede6c397a5edf38d4",
-    "hw/layout-trenz.json": "0cb5f8921a3fa2e228ff2be153eb4a030513f709ff754e52c818bcc5ddd3096e",
+    "hw/boards/shakesense-trenz-hat/shakesense-trenz-hat.kicad_pcb": "503930578f2948445ccdb844dcff293601ffd28e6ba5c1525a86413c3551cc90",
+    "hw/layout-trenz.json": "c879fb3c733fb21d743b06040da11f06d57cc07fc663f34e87d2e06f1ec94c4e",
     "hw/layout.json": "fe4a66fe29c0a9c6474ebf016875aa3a4faf05717ef60251079794c619eb7a5b",
-    "sw/ui/assets/t1.glb": "54ffa4e295488eefcf594f44b5604c8e2bb067b51aa500c68511dda9b268e714"
+    "sw/ui/assets/t1.glb": "ff6cf6badc4f019aca7d98e0e90221d56199e4527b0524e3d450130568277fc7"
   }
 }

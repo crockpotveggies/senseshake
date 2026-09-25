@@ -1,6 +1,6 @@
-ShakeSense Trenz support check: dc_3.267_3.0
-Vsource src 0 3.267
-Rpath src module 0.015
+ShakeSense Trenz support check: dc_3.36675_3.0
+Vsource src 0 3.36675
+Rpath src module 0.030
 Iload module 0 3.0
 Cbulk module 0 26.4u
 .tran 1u 100u
