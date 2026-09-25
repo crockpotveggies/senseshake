@@ -10,6 +10,15 @@ CHECKS = {
     'hot_loop_resistance': ('ohm', 0, .030, None),
     'power_sequence': ('boolean', True, True, None),
     'partial_power_isolation': ('boolean', True, True, None),
+    'fpga_jtag_programming': ('boolean', True, True, None),
+    'fpga_mode_handoff': ('boolean', True, True, None),
+    'fpga_loopback_errors': ('count', 0, 0, None),
+    'fpga_spi_clock_max': ('Hz', 1000, 1_000_000, None),
+    'fpga_sclk_high_min': ('ns', 500, None, None),
+    'fpga_sclk_low_min': ('ns', 500, None, None),
+    'fpga_cs_setup_min': ('ns', 1000, None, None),
+    'fpga_cs_hold_min': ('ns', 1000, None, None),
+    'fpga_cs_inactive_min': ('ns', 1000, None, None),
     'connector_cable_cooler_fit': ('boolean', True, True, None),
     'irq_fifo_fault_recovery': ('boolean', True, True, None),
     'unexpected_missing_samples': ('count', 0, 0, None),
@@ -24,7 +33,7 @@ CHECKS = {
 
 
 def template():
-    return dict(version=2, scope='physical-bench', operator=None, date_utc=None,
+    return dict(version=3, scope='physical-bench', operator=None, date_utc=None,
                 hardware_revision=None, board_serial=None, software_commit=None,
                 pi_and_kernel=None, geophone_serial=None, fpga_image=None,
                 conditions=dict(temperature_range_c=None, noise_band_hz=None, sample_rates_hz=None,
@@ -45,7 +54,7 @@ def evidence(path, root):
 
 
 def evaluate(report, root):
-    if report.get('version') != 2 or report.get('scope') != 'physical-bench': raise ValueError('bench report version/scope')
+    if report.get('version') != 3 or report.get('scope') != 'physical-bench': raise ValueError('bench report version/scope')
     if set(report.get('checks', {})) != set(CHECKS): raise ValueError('bench check inventory')
     results, missing = {}, []
     for key in ('operator','date_utc','hardware_revision','board_serial','software_commit','pi_and_kernel','geophone_serial','fpga_image'):

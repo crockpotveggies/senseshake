@@ -23,7 +23,7 @@ module t1_link (
     reg [7:0] rx=0, tx=0, command=0, error=0;
     reg [2:0] bits=0;
     reg [9:0] bytes_seen=0;
-    reg ready=0, overflow=0;
+    reg ready=0, overflow=0, transaction=0;
     reg [15:0] ack=0;
     reg [31:0] crc=32'hffffffff;
     wire [7:0] received={rx[6:0],di[2]};
@@ -31,7 +31,7 @@ module t1_link (
     wire [15:0] sequence_id={memory[7],memory[6]};
     wire [9:0] frame_length={2'b0,memory[8]}+10'd14;
     // Immediate CS disables output; synchronous logic prepares the next bit.
-    assign dq1=cs_n ? 1'bz : tx[7];
+    assign dq1=(cs_n || !reset_n || rst) ? 1'bz : tx[7];
     assign dq2=1'bz;
     assign dq3=1'bz;
     // Electrical UART loopback only; no software protocol is implied.
@@ -60,11 +60,12 @@ module t1_link (
         old_ck<=ck[2]; old_cs<=cs[2];
         if(rst) begin
             rx<=0;tx<=0;command<=0;error<=0;bits<=0;bytes_seen<=0;
-            ready<=0;overflow<=0;ack<=0;crc<=32'hffffffff;
+            ready<=0;overflow<=0;ack<=0;crc<=32'hffffffff;transaction<=0;
         end else if(!cs[2] && old_cs) begin
             rx<=0;tx<=0;command<=0;bits<=0;bytes_seen<=0;
-            overflow<=0;ack<=0;crc<=32'hffffffff;
-        end else if(cs[2] && !old_cs) begin
+            overflow<=0;ack<=0;crc<=32'hffffffff;transaction<=1;
+        end else if(cs[2] && !old_cs && transaction) begin
+            transaction<=0;
             // Commit only after a complete CS-delimited transaction.
             if(bits!=0 || bytes_seen==0) error<=4;
             else case(command)
@@ -83,7 +84,7 @@ module t1_link (
                else ready<=0;
             default:error<=7;
             endcase
-        end else if(!cs[2]) begin
+        end else if(!cs[2] && transaction) begin
             if(rise) begin
                 rx<=received; bits<=bits+1'b1;
                 if(bits==7) begin

@@ -203,5 +203,95 @@ class LinkTests(unittest.TestCase):
         self.assertEqual(gap.call_count,peer.count)
         gap.assert_called_with(.001)
 
+    def test_result_at_or_after_deadline_is_not_read_or_acknowledged(self):
+        for elapsed in (1.0, 1.001):
+            peer=Peer()
+            ticks=iter((0,0,elapsed))
+            with self.assertRaises(TimeoutError):
+                Packets(peer,clock=lambda:next(ticks),sleep=lambda _:None).exchange(b'late',4)
+            self.assertEqual(peer.count,3)
+            self.assertIsNotNone(peer.frame)
+
+    def test_lost_acknowledgement_is_not_reported_as_success(self):
+        class LostAck(Peer):
+            def transfer(self,data,**kwargs):
+                if data[0]==3:return bytes(len(data))
+                return super().transfer(data,**kwargs)
+        peer=LostAck()
+        with self.assertRaisesRegex(OSError,'acknowledgement'):
+            Packets(peer,sleep=lambda _:None).exchange(b'retained',9)
+        self.assertIsNotNone(peer.frame)
+
+    def test_every_transfer_fault_stops_without_retry(self):
+        # Status, submit, ready poll, result read, ACK, ACK confirmation.
+        for failed in range(1,7):
+            for failure in ('short','io'):
+                class Fault(Peer):
+                    def transfer(self,data,**kwargs):
+                        if self.count+1==failed:
+                            self.count+=1
+                            if failure=='io':raise OSError('injected')
+                            return bytes(len(data)-1)
+                        return super().transfer(data,**kwargs)
+                peer=Fault()
+                with self.assertRaises(OSError):
+                    Packets(peer,sleep=lambda _:None).exchange(b'fault',5)
+                self.assertEqual(peer.count,failed)
+
+    def test_stale_sequence_and_operation_are_not_acknowledged(self):
+        for operation,sequence in ((1,10),(2,9)):
+            class Stale(Peer):
+                def transfer(self,data,**kwargs):
+                    result=super().transfer(data,**kwargs)
+                    if data[0]==1:self.frame=encode(b'stale',sequence,operation)
+                    return result
+            peer=Stale()
+            with self.assertRaisesRegex(ValueError,'mismatched'):
+                Packets(peer,sleep=lambda _:None).exchange(b'original',9)
+            self.assertIsNotNone(peer.frame)
+
+    def test_register_readback_mismatch_never_arms(self):
+        from unittest.mock import patch
+        control,bus,owner,arm=self.make()
+        original=bus.exchange
+        def mismatch(address,write,count):
+            result=original(address,write,count)
+            return b'\xff' if count else result
+        with patch.object(bus,'exchange',side_effect=mismatch):
+            with self.assertRaisesRegex(OSError,'readback'):
+                with control.active('spi'):self.fail('enabled despite mismatch')
+        self.assertFalse(any(arm.history))
+        self.assertTrue(control.faulted)
+
+    def test_driver_restore_failure_latches_faulted_ownership(self):
+        from unittest.mock import patch
+        control,bus,owner,arm=self.make()
+        with patch.object(owner,'release',side_effect=OSError('rebind failed')):
+            with self.assertRaisesRegex(OSError,'rebind'):
+                with control.active('jtag'):pass
+        self.assertFalse(arm.on)
+        self.assertEqual(bus.r[1],1)
+        self.assertTrue(control.faulted)
+        with self.assertRaises(RuntimeError):
+            with control.active('spi'):pass
+
+    def test_sigterm_unwinds_and_restores_handler(self):
+        import importlib.util
+        from pathlib import Path
+        import signal
+        path=Path(__file__).resolve().parents[1]/'tools/fpga.py'
+        spec=importlib.util.spec_from_file_location('fpga_cli',path)
+        cli=importlib.util.module_from_spec(spec);spec.loader.exec_module(cli)
+        previous=signal.getsignal(signal.SIGTERM)
+        control,bus,owner,arm=self.make()
+        with self.assertRaises(SystemExit) as error:
+            with cli.termination_cleanup(),control.active('jtag'):
+                signal.raise_signal(signal.SIGTERM)
+        self.assertEqual(error.exception.code,128+signal.SIGTERM)
+        self.assertEqual(signal.getsignal(signal.SIGTERM),previous)
+        self.assertFalse(arm.on)
+        self.assertEqual(bus.r[1],1)
+        self.assertEqual(owner.events[-1],('release','jtag'))
+
 
 if __name__=='__main__':unittest.main()

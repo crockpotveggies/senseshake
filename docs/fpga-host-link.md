@@ -67,8 +67,8 @@ The Pi tool checks the overlay and inserts a 1 ms transaction gap. MISO is undri
 when CS is high. UART has electrical loopback for separate diagnostic testing.
 Unused quad ports are optimized out; the bitstream leaves unused pins undriven.
 
-Vivado 2025.2 built the XC7A200T-FBG484-1 bitstream. Recorded timing is +10.431 ns
-setup / +0.105 ns hold slack at 50 MHz, zero internal unconstrained endpoints;
+Vivado 2025.2 built the XC7A200T-FBG484-1 bitstream. Recorded timing is +10.143 ns
+setup / +0.109 ns hold slack at 50 MHz, zero internal unconstrained endpoints;
 see [reports and source hashes](../sw/fpga/verification/result.json). Asynchronous
 input exceptions and bounded output propagation are explicit in the XDC.
 These reports do not qualify the Pi controller, switch or board timing.
@@ -93,6 +93,10 @@ Status errors are sticky until application reset/reconfiguration: 1 overflow,
 7 unknown command. Busy writes preserve the existing result. Invalid results
 are never acknowledged by the Python client. A timed-out write has unknown
 outcome; the client does not automatically repeat it.
+The processing timeout is checked before and after each status transaction;
+late ready responses are not consumed. ACK completion requires a subsequent empty
+status. An interrupted reset discards the current transaction through CS release;
+MISO is undriven during reset, and the next complete transaction starts cleanly.
 
 ## Bring-up
 
@@ -118,7 +122,9 @@ before directions, and verifies register readback. For JTAG it unbinds SPI6's
 controller, claims safe GPIO directions, then enables the switch. It isolates
 before restoring SPI6. GPIO25 provides disarm even if I2C fails; I2C disable
 is attempted even if the GPIO operation fails. A control-bus failure keeps
-ownership faulted; restore power/control and reinitialize before reuse. Termination that bypasses cleanup has no hardware watchdog: GPIO output
+ownership faulted; restore power/control and reinitialize before reuse. Driver
+restoration failure also latches this fault. SIGTERM and Ctrl-C unwind the
+isolation path. Termination that bypasses cleanup (including SIGKILL) has no hardware watchdog: GPIO output
 state may remain latched. Restart through this tool (which first drives BCM25
 low), or power-cycle/reboot before manual driver changes. Reboot restores a
 controller left unbound. Sensor acquisition remains independent.
@@ -132,16 +138,21 @@ vivado -mode batch -source /absolute/path/to/senseshake/sw/fpga/build.tcl
 
 ## Verification and remaining measurements
 
-The portable lab includes RTL packet/fault simulation, host framing/ownership
-tests, 38 behavioral-switch/RC checks, native CAD checks and sensor regressions.
-`hw/tools/replay_trenz.py` separately rebuilds the complete native routing in a
-temporary directory and compares every copper object. Current rendered and
+The portable lab includes RTL packet/fault simulation, production Python-to-RTL
+co-simulation, host framing/ownership tests, 38 behavioral-switch/RC checks,
+native CAD checks and sensor regressions. Full and quick profiles now run
+`hw/tools/replay_trenz.py`, rebuilding the complete native routing in a
+temporary directory and comparing every copper object. A separate parts fixture
+checks all 32 link components against authored metadata, BOM and PCB fields.
+Current rendered and
 interactive models use the revised board; the Pi model remains conceptual.
 
 Still measure first-article rail ramps/current, actual stack seating, SPI/JTAG
 edges and switching, and sensor noise with the FPGA idle and active. Linux driver
 handoff and JTAG programming have not been exercised on a physical Pi/Trenz stack.
 Quad throughput and accelerated processing remain future work.
+See the [hardening and prototype preparation review](t1-link-hardening.md) for
+test coverage, fixes and the remaining release/first-article steps.
 
 Sources: [exact module schematic](vendor/trenz/SCH-TE0712-03-81I36-A.PDF),
 [TMUX1574](https://www.ti.com/lit/ds/symlink/tmux1574.pdf),

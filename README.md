@@ -10,6 +10,10 @@ reserves six QSPI wires, keeps UART, adds switched Pi-driven JTAG, and removes
 the external GPIO ribbons/connectors and cable guide. Pi 4 initially uses SPI6;
 native quad transfers need a separate host solution. The circuit, routed PCB and renders use this internal connection.
 
+**Latest validation:** the [T1-LINK hardening review](docs/t1-link-hardening.md)
+records the expanded tests, fixes, prototype fabrication preparation steps and
+physical qualification still required on first articles.
+
 **Portable tests:** run `./lab.ps1 build` once, then `./lab.ps1 test` from
 PowerShell. See the [portable lab guide](docs/portable-lab.md) for profiles,
 bounded scratch storage, automatic five-run retention, and cleanup previews.

@@ -11,6 +11,7 @@
   "exposed_gpio": 0,
   "host_link_pin_checks": 143,
   "gpio_voltage_v": 3.3,
+  "host_link_component_checks": 32,
   "compiled_pin_checks": 744,
   "critical_module_pin_checks": 29,
   "drc_violations": 0,

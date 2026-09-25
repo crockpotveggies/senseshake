@@ -3,8 +3,8 @@
 **T1-GEO revision:** GNSS is removed; one external Racotech vertical geophone
 uses an ADS122C04 input. See [current circuit, acquisition and validation](geophone-input.md).
 GNSS/PPS/RF details below describe the preceding revision or legacy recordings.
-The current physical bench template is version 2, with geophone response/noise/timing
-checks replacing the GNSS UTC check.
+The current physical bench template is version 3, with geophone and internal
+FPGA programming/transport measurements. See the [bench procedure](bench-procedure.md).
 
 The project now has one disposable Docker test environment. Keep authored files
 in their existing locations and use the root `lab.ps1` or `lab.sh` launcher for
@@ -45,18 +45,18 @@ drive-sharing configuration. No host directory is mounted into the container.
 
 | Profile | Checks |
 | --- | --- |
-| `full` (default) | Fresh atopile builds for A2, USB field head, and T1; numeric constraint solves; unsafe 5 V IMU rejection; circuit invariants and 19 hardware regression tests; native KiCad ERC/DRC/connectivity; T1 power/clearance and pre-fab review; 64 bounded SPICE cases; the software profile (18 stages). |
-| `quick` | Same GPIO fault, circuit/PCB consistency, SPICE and software checks using saved compiled layouts. Does **not** prove `.ato` changes were rebuilt. |
-| `spice` | 27 A2/field, 14 Trenz, 15 geophone response and 8 geophone transient cases, including expected fault detection. |
-| `software` | Buf format/lint/build and FILE compatibility, deliberate incompatible-change rejection, acquisition/replay, modeled driver and Linux TTY/worker fault tests; retained eight-sensor demo. No CAD or physical hardware execution. |
+| `full` (default) | Fresh atopile builds for A2, USB field head, and T1; numeric constraint solves; unsafe 5 V IMU rejection; independent hardware regressions; native KiCad ERC/DRC/connectivity; T1 power/clearance and pre-fab review; clean routing replay; SPICE; the software profile (22 stages). |
+| `quick` | Same GPIO/component fault, circuit/PCB consistency, routing replay, SPICE and software checks using saved compiled layouts. Does **not** prove `.ato` changes were rebuilt. |
+| `spice` | 27 A2/field, 14 Trenz, 15 geophone response, 8 geophone transient and 38 host-link switch/RC cases, including expected fault detection. |
+| `software` | RTL and Python-to-RTL co-simulation; recorded Vivado evidence/hash gate; Buf format/lint/build and compatibility; acquisition/replay, modeled driver and Linux TTY/worker fault tests; retained eight-sensor demo. No physical hardware execution. |
 
-The runner calls the existing project entrypoints. It does not reroute boards,
-rewrite source CAD, render images, or release fabrication files. A full test
+The runner calls the existing project entrypoints. Routing reconstruction stays
+in a temporary tree; it does not rewrite source CAD, render images, or release fabrication files. A full test
 compares freshly compiled connectivity with the saved routed boards and should
 fail if they disagree.
 
-These are bounded electrical models and CAD checks. They do not simulate sensor
-silicon, USB enumeration, a Raspberry Pi, a Trenz bitstream, or Coldfoot execution.
+These are bounded electrical models, RTL simulations and CAD checks. They do not
+emulate sensor silicon, USB enumeration, a booted Raspberry Pi or Coldfoot execution.
 They do not establish regulator stability, extracted signal/power integrity,
 thermal performance, physical mating, or fabrication readiness.
 
@@ -237,22 +237,27 @@ References: [official KiCad container images](https://www.kicad.org/download/doc
 
 ## Current T1-LINK validation
 
-Run `20260925T205022Z-ba3afc04` passes all **20 portable stages**, including
-three Atopile builds/solves, the invalid-voltage fixture, **28 hardware regressions**,
-native ERC/DRC/connectivity, existing analog/sensor checks, **38 new switch/RC cases**,
-FPGA loopback RTL simulation and **169 software tests without skips**.
-A separate clean route replay reproduces all **7,522 copper objects**, including
-**11 microvias**, with zero DRC/unrouted findings. The geophone signal copper is
-unchanged. Four straight supports and the selected cooler/connector envelopes pass.
-The updated UI passes 10/10 modeled-driver signal checks over 3,672 samples.
-See [the verification record](../hw/boards/shakesense-trenz-hat/verification.json).
+Run `20260925T214440Z-e4e115ce` passes all **22 portable stages**: three Atopile
+builds/solves, invalid-voltage rejection, **33 hardware regressions**, native
+ERC/DRC/connectivity, clean routing replay, **102 SPICE cases**, RTL/host
+co-simulation, the implementation-evidence gate and **181 software tests without
+skips**. Replay reproduces all **7,522 copper objects**, including **11 microvias**,
+with zero DRC/unrouted findings. Sensor acquisition passes all 10 modeled signal
+checks over 3,672 samples. The UI HTTP/model check also passes.
 
-Icarus Verilog 11.0 is pinned in the image; rebuild once after this revision.
-Vivado implementation is separate, using `sw/fpga/build.tcl` from an ignored
-`.local/` output directory. The reference bitstream passed its recorded 50 MHz
-implementation constraints; physical SPI/JTAG timing remains unmeasured.
+The Python client talks to real simulated RTL pins across all 193 payload sizes,
+sequence wrap, 20 clock phases and 491 fault/reset cases. Independent fixtures
+check all 32 link components and all 260 module contacts. See the
+[verification record](../hw/boards/shakesense-trenz-hat/verification.json) and
+[hardening review](t1-link-hardening.md).
 
-The pre-fab analog review and acquisition stress tests remain available.
+Rebuild the image after this revision: Icarus 11.0 and hash-pinned sexpdata 1.0.2
+for the native KiCad Python interpreter are required. Vivado implementation is
+separate, using `sw/fpga/build.tcl` from ignored `.local/` storage. The portable
+suite checks the recorded report/source hashes; it does not synthesize in Docker.
+Current 50 MHz setup/hold slack is +10.143 / +0.109 ns.
+
 Passing simulations and CAD envelopes do not replace physical power, fit, noise,
-thermal or signal measurements. The Pi/Trenz programming path still needs a
-hardware bring-up. See [the host-link guide](fpga-host-link.md).
+thermal or signal measurements. Pi/Trenz programming and switching still need
+hardware bring-up. The version-3 [bench procedure](bench-procedure.md) requires
+internal-link measurements and rejects old or incomplete report inventories.

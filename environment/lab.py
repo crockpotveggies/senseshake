@@ -129,11 +129,12 @@ def source_files(source):
         "sw/interfaces": ("*.proto", "*.yaml", "*.binpb", "*.py", "*.options"),
         "sw/tools": ("*.py",), "sw/tests": ("*.py", "*.json"),
         "sw/pi": ("*.py", "*.json", "*.dts", "*.cfg"),
-        "sw/fpga": ("*.py", "*.sv", "*.xdc", "*.tcl"),
+        "sw/fpga": ("*.py", "*.sv", "*.xdc", "*.tcl", "*.rpt", "*.json"),
     }.items():
         for pattern in patterns:
             files.extend((source / folder).rglob(pattern))
     files.append(source / "hw/tests/overvoltage.ato")
+    files.append(source / "hw/boards/shakesense-trenz-hat/shakesense-trenz-hat.ses")
     for target in TARGETS:
         folder = source / "hw/layout" / target
         files.append(folder / f"{target}.kicad_pcb")
@@ -177,6 +178,9 @@ def versions():
         "kicad": output(["kicad-cli", "version"]),
         "ngspice": output(["ngspice", "--version"]),
         "system_python": sys.version,
+        "system_sexpdata": output(["python3", "-c", "import importlib.metadata as m; print(m.version('sexpdata'))"]),
+        "iverilog": output(["iverilog", "-V"]).splitlines()[0],
+        "device_tree_compiler": output(["dtc", "--version"]),
         "atopile_python": output(["/opt/atopile/bin/python", "--version"]),
         "atopile": output(["/opt/atopile/bin/python", "-c", "import importlib.metadata as m; print(m.version('atopile'))"]),
         "buf": output(["buf", "--version"]),
@@ -194,10 +198,12 @@ def commands(profile):
     if profile in ("full", "quick"):
         steps += [("hardware-regressions", ["python3", "-m", "unittest", "discover", "-s", "hw/tests", "-p", "test_*.py"])]
         steps += [(name, ["python3", f"hw/tools/{name}.py"]) for name in ("check_circuit", "check_design", "check_trenz", "t1_engineering", "prefab_review")]
+        steps.append(("routing-replay", ["python3", "hw/tools/replay_trenz.py"]))
     if profile != "software":
         steps += [(name, ["python3", f"hw/tools/{name}.py"]) for name in ("simulate", "simulate_trenz", "simulate_geophone", "simulate_geophone_review", "simulate_host_link")]
     if profile in ("full", "quick", "software"):
         steps.append(("fpga-loopback-rtl", ["python3", "sw/fpga/test.py"]))
+        steps.append(("fpga-implementation-evidence", ["python3", "sw/fpga/verify_reports.py"]))
         steps.append(("sensor-contracts", ["/opt/atopile/bin/python", "sw/tools/check_interfaces.py"]))
     return steps
 
@@ -208,7 +214,7 @@ def collect(workspace, report, profile):
         files.extend((workspace / "hw/simulation").rglob(pattern))
     for board in BOARDS:
         folder = workspace / "hw/boards" / board
-        files.extend(folder / name for name in ("drc.json", "erc.json", "validation.json", "schematic-netlist.xml", "engineering.json", "prefab-review.json"))
+        files.extend(folder / name for name in ("drc.json", "erc.json", "validation.json", "schematic-netlist.xml", "engineering.json", "prefab-review.json", "replay.json"))
     if profile == "full":
         for target in TARGETS:
             files.append(workspace / "hw/layout" / target / f"{target}.kicad_pcb")

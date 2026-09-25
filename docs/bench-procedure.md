@@ -3,8 +3,10 @@
 **T1-GEO revision:** GNSS is removed; one external Racotech vertical geophone
 uses an ADS122C04 input. See [current circuit, acquisition and validation](geophone-input.md).
 GNSS/PPS/RF details below describe the preceding revision or legacy recordings.
-The current physical bench template is version 2, with geophone response/noise/timing
-checks replacing the GNSS UTC check.
+The current T1-LINK physical bench template is version 3, with geophone
+response/noise/timing and internal FPGA programming/transport checks. Version 2
+reports cannot qualify this revision; create a new report and retain old evidence
+with its original hardware revision.
 
 This procedure qualifies the assembled Pi/T1/Trenz stack. It is separate from
 preparing a prototype fabrication submission. Physical tests run when an assembly
@@ -78,13 +80,40 @@ they are evaluated against the actual component ratings, not invented thresholds
 
 ## 2. Mechanical fit
 
-Assemble the intended Pi, SSQ riser, T1, Trenz, cooler and all four intended FFCs.
+Assemble the intended Pi, SSQ riser, T1, Trenz, cooler and four straight supports.
 Check full socket engagement and pin orientation, spacer seating without board
-bow, fastener clearance, connector/cable withdrawal, minimum cable bend radius
-from the selected cable specification, cooling access and JTAG access. Measure
+bow, fastener clearance, geophone/power-plug withdrawal and cooling access. The
+internal FPGA link needs no ribbon cables or external JTAG connector. Measure
 closest gaps and record photos. The nominal Pi-to-HAT gap is 27.179 mm; fit depends
 on actual socket seating/cooler/cables. A dimensioned mock-up can precede assembly.
 Set `connector_cable_cooler_fit=true` only after the intended configuration fits.
+
+## 2a. Internal FPGA programming and transport
+
+1. Follow the [host-link bring-up](fpga-host-link.md#bring-up) on the selected Pi 4
+   and kernel. Record JTAG IDCODE, actual TCK frequency and successful volatile
+   programming of the recorded bitstream. Set `fpga_jtag_programming=true` only
+   after the real scan/load passes; a simulated mailbox is insufficient.
+2. Capture BCM25 arm, switch select/request/OE, SCLK/CS and JTAG at both sides
+   during SPI-to-JTAG-to-SPI transitions, startup, normal termination and recovery
+   from a control-bus failure. Confirm isolation before ownership/direction
+   changes. Check Pi-only and FPGA-only power in section 1, including rail ramps.
+   Record `fpga_mode_handoff` separately from `partial_power_isolation`. SIGKILL
+   and loss of the host have no hardware watchdog; exercise the documented
+   disarm/reboot recovery before manually changing ownership.
+3. Measure the signals **at the FPGA-side pins**, including the switch and series
+   resistors. Enter maximum SPI clock (initially 1 kHz–1 MHz), minimum SCLK high
+   and low (each at least 500 ns), and minimum CS setup/hold/inactive (each at
+   least 1000 ns). Include instrument uncertainty. The checker enforces these
+   conservative bring-up limits; Linux overlay settings alone are not evidence.
+   Inspect overshoot, ringing, logic levels and MISO output release against the
+   actual devices' limits; retain scope traces and interpretation with the report.
+4. Run a recorded loopback soak covering payload lengths 0–192, sequence wrap,
+   repeated mode handoffs and concurrent sensor/CPU/storage load. Record duration,
+   transaction count, payload seeds, voltage/temperature and all errors. Require
+   `fpga_loopback_errors=0` for this valid-traffic soak; report deliberately injected
+   faults and recovery separately. A numerical zero without captures and test
+   conditions does not establish a bit-error-rate guarantee.
 
 ## 3. Geophone, IRQ and acquisition timing
 
@@ -148,8 +177,8 @@ measurements, targets, context or evidence never become a pass. Correct failed
 items and repeat the affected tests with traceable revisions.
 
 For the next **prototype fab submission**, freeze the intended T1 revision and
-actual stack/copper/dielectric values; close the [pre-fab review](pre-fab-review.md)
-layout and harness findings;
+actual stack/copper/dielectric values; use the current
+[hardening review](t1-link-hardening.md) and internal-link assembly;
 run the full CAD/build checks; review footprint pin numbering, BOM availability,
 DNPs, drill/microvia instructions and mechanical fit; then export and independently
 inspect Gerbers/drills, assembly drawings and placements from that same revision.

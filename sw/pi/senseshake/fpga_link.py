@@ -94,7 +94,11 @@ class ModeControl:
                 self.faulted=True
                 raise
             finally:
-                if acquired and not self.faulted:self.owner.release(mode)
+                if acquired and not self.faulted:
+                    try:self.owner.release(mode)
+                    except BaseException:
+                        self.faulted=True
+                        raise
                 if not self.faulted:self.mode=None
 
 
@@ -129,9 +133,10 @@ class Packets:
         self.transfer(b'\x01'+frame)
         deadline=self.clock()+timeout
         for _ in range(1000):
-            status=self.status()
-            if status&2:break
             if self.clock()>=deadline:raise TimeoutError('FPGA processing timeout; write outcome unknown')
+            status=self.status()
+            if self.clock()>=deadline:raise TimeoutError('FPGA processing timeout; write outcome unknown')
+            if status&2:break
             self.sleep(.001)
         else:raise TimeoutError('FPGA polling limit')
         raw=self.transfer(b'\x02'+bytes(MAX_FRAME))[1:]
@@ -140,4 +145,5 @@ class Packets:
         operation,received,result=decode(raw[:HEADER.size+length+4])
         if operation!=1 or received!=sequence:raise ValueError('Stale or mismatched FPGA result')
         self.transfer(b'\x03'+struct.pack('<H',sequence))
+        if self.status()!=1:raise OSError('FPGA acknowledgement not confirmed; do not repeat submit')
         return result

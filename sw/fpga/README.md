@@ -16,3 +16,11 @@ Icarus installation, or use the full/software lab profile. `build.tcl` implement
 it for XC7A200T-FBG484-1 in Vivado; run from ignored `.local/` storage. The
 [recorded implementation evidence](verification/result.json) includes timing,
 CDC, DRC and source hashes. Physical Pi/Trenz programming remains untested.
+
+`cosim.py` connects the production Python client to simulated RTL pins, covering
+all 193 payload sizes, sequence wrap, 20 clock phases and 491 malformed/reset cases.
+`verify_reports.py` rejects stale source/report hashes, missing timing coverage,
+negative slack and reported CDC/DRC findings. After a successful Vivado build,
+record it with `python sw/fpga/verify_reports.py --record /path/to/output`, then
+run the portable tests. The portable evidence check verifies those recorded
+results; it does not run Vivado inside Docker.

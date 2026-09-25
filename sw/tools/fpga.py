@@ -1,11 +1,23 @@
 """Optional Pi 4 SPI/JTAG bring-up, with a process lock and independent disarm."""
 import argparse
+from contextlib import contextmanager
 from pathlib import Path
+import signal
 import subprocess
 import sys
 import tempfile
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'pi'))
 from senseshake.fpga_link import ModeControl,Packets
+
+
+@contextmanager
+def termination_cleanup():
+    """Normal service termination unwinds the same isolation path as Ctrl-C."""
+    def terminate(signum, frame):
+        raise SystemExit(128+signum)
+    previous=signal.signal(signal.SIGTERM,terminate)
+    try:yield
+    finally:signal.signal(signal.SIGTERM,previous)
 
 
 def main():
@@ -58,4 +70,5 @@ def main():
                 if bus is not None:bus.close()
 
 
-if __name__=='__main__':main()
+if __name__=='__main__':
+    with termination_cleanup():main()

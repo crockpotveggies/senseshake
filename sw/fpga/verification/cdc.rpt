@@ -1,9 +1,9 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
-| Date         : Fri Sep 25 13:52:05 2026
+| Date         : Fri Sep 25 14:38:35 2026
 | Host         : jTower running 64-bit major release  (build 9200)
-| Command      : report_cdc -details -file cdc.rpt
+| Command      : report_cdc -details -file cdc.rpt -return_string
 | Design       : t1_link
 | Device       : 7a200t-fbg484
 | Speed File   : -1  PRODUCTION 1.23 2018-06-13

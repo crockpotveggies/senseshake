@@ -5,7 +5,7 @@ page 6 and mechanical drawing, independently of the atopile authoring script.
 """
 from pathlib import Path
 from collections import Counter
-import json,subprocess,xml.etree.ElementTree as ET
+import csv,json,subprocess,xml.etree.ElementTree as ET
 import pcbnew as p
 from gpio_audit import check as check_gpio
 ROOT=Path(__file__).resolve().parents[2];F=ROOT/'hw/boards/shakesense-trenz-hat';N=F.name
@@ -26,6 +26,9 @@ fixture={
 gpio_report=check_gpio(bp)
 check_gpio(cp)
 spec=json.loads((ROOT/'hw/layout-trenz.json').read_text())[N]
+from host_link_checks import verify_parts
+with (F/'bom.csv').open(newline='',encoding='utf8') as stream:
+    gpio_report['host_link_component_checks']=verify_parts(spec,list(csv.DictReader(stream)),board)
 assert board.GetCopperLayerCount()==spec['copper_layers']==8
 assert abs(p.ToMM(board.GetDesignSettings().GetBoardThickness())-1.6)<1e-6
 planes={board.GetLayerName(z.GetLayer()) for z in board.Zones() if not z.GetIsRuleArea() and z.GetNetname()=='GND'}

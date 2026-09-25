@@ -21181,7 +21181,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Value" ""
+		(property "Value" "SN74LVC1G08DCKR"
 			(at 0 -1.95 180)
 			(layer "B.Fab")
 			(hide yes)
@@ -26508,7 +26508,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Value" ""
+		(property "Value" "100n"
 			(at 0 -1.43 180)
 			(layer "B.Fab")
 			(hide yes)

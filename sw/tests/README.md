@@ -49,3 +49,10 @@ recovery without hardware reset storms. `acquisition-stress.json` retains the
 six speed/clock cases; its throughput qualification remains false. The worker
 tests also exercise the new conversion-gap exception over actual subprocess IPC.
 These tests do not run on a Raspberry Pi or establish its maximum acquisition rate.
+
+`test_fpga_link.py` checks independent framing/CRC, transfer failures at every
+stage, late responses, stale results, dropped ACKs, readback faults, ownership
+restoration and SIGTERM isolation. `test_fpga_evidence.py` injects timing and
+report-coverage failures. The FPGA stage additionally runs the real Python client
+against RTL pins, rather than relying only on a byte-level mock peer. See the
+[hardening review](../../docs/t1-link-hardening.md).

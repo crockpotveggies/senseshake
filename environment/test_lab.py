@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 import tempfile
 import unittest
-from lab import MARKER, clean, lab_lock, managed_runs, source_files, write_json
+from lab import MARKER, clean, lab_lock, managed_runs, source_files, write_json, commands
 
 
 class LabSafetyTests(unittest.TestCase):
@@ -120,6 +120,12 @@ class LabSafetyTests(unittest.TestCase):
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text("fixture")
         self.assertTrue({source / rel for rel in expected} <= set(source_files(source)))
+
+    def test_hardware_profiles_replay_authored_routing(self):
+        for profile in ('full','quick'):
+            self.assertIn('routing-replay',dict(commands(profile)))
+        root=Path(self.temp.name)
+        self.assertIn(root/'hw/boards/shakesense-trenz-hat/shakesense-trenz-hat.ses',source_files(root))
 
 
 if __name__ == "__main__":

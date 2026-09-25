@@ -5,6 +5,41 @@ and default bias resistors are included; a logical net name alone is insufficien
 """
 from collections import Counter
 
+# Independent purchasing/package fixture: pin connectivity cannot detect a
+# wrong reset polarity/threshold variant, a DNP bypass or a decade-value error.
+PARTS = {
+ 'U100':('TMUX1574PWR','TMUX1574PWR','Package_SO__TSSOP-16_4.4x5mm_P0.65mm'),
+ 'U101':('TMUX1574PWR','TMUX1574PWR','Package_SO__TSSOP-16_4.4x5mm_P0.65mm'),
+ 'U102':('TCA9534PWR','TCA9534PWR','Package_SO__TSSOP-16_4.4x5mm_P0.65mm'),
+ 'U103':('SN74LVC1G10DCKR','SN74LVC1G10DCKR','Package_TO_SOT_SMD__SOT-363_SC-70-6'),
+ 'U104':('TLV809EA30DBZR','TLV809EA30DBZR','Package_TO_SOT_SMD__SOT-23'),
+ 'U105':('TLV809EA30DBZR','TLV809EA30DBZR','Package_TO_SOT_SMD__SOT-23'),
+ 'U106':('SN74LVC1G08DCKR','SN74LVC1G08DCKR','Package_TO_SOT_SMD__SOT-353_SC-70-5'),
+}
+for i in range(100,107):
+    PARTS[f'C{i}']=('100n','GRM188R71H104KA93D','Capacitor_SMD__C_0603_1608Metric')
+for i in range(100,118):
+    value,mpn=('22','RC0603FR-0722RL') if i<106 else (
+        ('100k','RC0603FR-07100KL') if i in (112,114,116,117) else ('10k','RC0603FR-0710KL'))
+    PARTS[f'R{i}']=(value,mpn,'Resistor_SMD__R_0603_1608Metric')
+
+
+def verify_parts(spec, bom, board):
+    placement={row['ref']:row for row in spec['parts']}
+    rows={row['Reference']:row for row in bom}
+    assert len(rows)==len(bom),'Duplicate BOM reference'
+    footprints={f.GetReference():f for f in board.GetFootprints()}
+    for ref,(value,mpn,footprint) in PARTS.items():
+        meta,row,physical=placement[ref],rows[ref],footprints[ref]
+        assert (meta['value'],meta['mpn'],meta['local_fp'])==(value,mpn,footprint),('Part variant',ref)
+        assert meta['dnp'] is False,('Required part marked DNP',ref)
+        assert (row['Value'],row['MPN'],row['Footprint'])==(value,mpn,footprint),('BOM part',ref)
+        assert row['DNP']=='False',('BOM DNP',ref)
+        assert not physical.IsDNP(),('PCB DNP',ref)
+        assert physical.GetValue()==value,('PCB value',ref)
+        assert physical.GetFPID().GetLibItemName()==footprint,('PCB package',ref)
+    return len(PARTS)
+
 FIXTURE = {
  'J1':{12:'PI_LINK_CS_N',32:'PI_LINK_DQ3',35:'PI_LINK_DQ1',36:'PI_LINK_DQ2',
        38:'PI_LINK_DQ0',40:'PI_LINK_SCLK',8:'PI_UART_TX',10:'PI_UART_RX'},

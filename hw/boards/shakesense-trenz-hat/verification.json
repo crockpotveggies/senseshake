@@ -1,51 +1,51 @@
 {
-  "date_utc": "2026-09-25T20:52:49.608146+00:00",
+  "date_utc": "2026-09-25T21:49:07.338977+00:00",
   "revision": "T1-LINK internal SPI/QSPI reservation, UART and Pi JTAG",
   "portable_lab": {
     "owner": "senseshake-lab-v1",
-    "id": "20260925T205022Z-ba3afc04",
+    "id": "20260925T214440Z-e4e115ce",
     "profile": "full",
     "status": "passed",
     "steps": [
       {
         "name": "build-hat",
         "exit_code": 0,
-        "seconds": 12.6
+        "seconds": 12.14
       },
       {
         "name": "constraints-hat",
         "exit_code": 0,
-        "seconds": 14.06
+        "seconds": 13.34
       },
       {
         "name": "build-field_head",
         "exit_code": 0,
-        "seconds": 7.34
+        "seconds": 7.03
       },
       {
         "name": "constraints-field_head",
         "exit_code": 0,
-        "seconds": 5.33
+        "seconds": 5.2
       },
       {
         "name": "build-trenz_hat",
         "exit_code": 0,
-        "seconds": 15.27
+        "seconds": 14.5
       },
       {
         "name": "constraints-trenz_hat",
         "exit_code": 0,
-        "seconds": 21.55
+        "seconds": 20.05
       },
       {
         "name": "reject-overvoltage",
         "exit_code": 0,
-        "seconds": 4.03
+        "seconds": 3.82
       },
       {
         "name": "hardware-regressions",
         "exit_code": 0,
-        "seconds": 0.26
+        "seconds": 1.02
       },
       {
         "name": "check_circuit",
@@ -55,32 +55,37 @@
       {
         "name": "check_design",
         "exit_code": 0,
-        "seconds": 2.35
+        "seconds": 2.22
       },
       {
         "name": "check_trenz",
         "exit_code": 0,
-        "seconds": 2.23
+        "seconds": 1.92
       },
       {
         "name": "t1_engineering",
         "exit_code": 0,
-        "seconds": 0.42
+        "seconds": 0.36
       },
       {
         "name": "prefab_review",
         "exit_code": 0,
-        "seconds": 0.62
+        "seconds": 0.57
+      },
+      {
+        "name": "routing-replay",
+        "exit_code": 0,
+        "seconds": 15.95
       },
       {
         "name": "simulate",
         "exit_code": 0,
-        "seconds": 4.87
+        "seconds": 4.63
       },
       {
         "name": "simulate_trenz",
         "exit_code": 0,
-        "seconds": 0.41
+        "seconds": 0.42
       },
       {
         "name": "simulate_geophone",
@@ -90,38 +95,46 @@
       {
         "name": "simulate_geophone_review",
         "exit_code": 0,
-        "seconds": 0.46
+        "seconds": 0.47
       },
       {
         "name": "simulate_host_link",
         "exit_code": 0,
-        "seconds": 0.21
+        "seconds": 0.16
       },
       {
         "name": "fpga-loopback-rtl",
         "exit_code": 0,
-        "seconds": 1.17
+        "seconds": 45.83
+      },
+      {
+        "name": "fpga-implementation-evidence",
+        "exit_code": 0,
+        "seconds": 0.03
       },
       {
         "name": "sensor-contracts",
         "exit_code": 0,
-        "seconds": 10.13
+        "seconds": 9.49
       }
     ],
-    "seconds": 103.98
+    "seconds": 159.83
   },
   "toolchain": {
-    "image_id": "sha256:995a1acd50ed2dc7c38540c825dcc05acc5bef35571dd3bdf81329f1347e50a2",
+    "image_id": "sha256:3925d5c13c9e87001550cc4530f6a87094523cf9dd36f7ca669e190ba07133a0",
     "kicad": "9.0.9",
     "ngspice": "******\n** ngspice-39 : Circuit level simulation program\n** The U. C. Berkeley CAD Group\n** Copyright 1985-1994, Regents of the University of California.\n** Copyright 2001-2022, The ngspice team.\n** Please get your ngspice manual from http://ngspice.sourceforge.net/docs.html\n** Please file your bug-reports at http://ngspice.sourceforge.net/bugrep.html\n** Creation Date: Sun Feb  5 13:44:35 UTC 2023\n******",
     "system_python": "3.11.2 (main, Apr 28 2025, 14:11:48) [GCC 12.2.0]",
+    "system_sexpdata": "1.0.2",
+    "iverilog": "Icarus Verilog version 11.0 (stable) ()",
+    "device_tree_compiler": "Version: DTC 1.6.1",
     "atopile_python": "Python 3.14.7",
     "atopile": "0.15.9",
     "buf": "1.73.0",
     "protobuf": "5.29.6"
   },
-  "hardware_regressions": 28,
-  "software_regressions": 169,
+  "hardware_regressions": 33,
+  "software_regressions": 181,
   "host_link_spice_cases": 38,
   "fpga_rtl_checked_transactions": 23,
   "route_replay": {
@@ -131,28 +144,36 @@
     "unconnected_items": 0
   },
   "fpga_implementation": {
-    "tool": "Vivado 2025.2",
+    "tool": "Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025",
     "part": "xc7a200tfbg484-1",
     "clock_mhz": 50,
-    "setup_slack_ns": 10.431,
-    "hold_slack_ns": 0.105,
+    "setup_slack_ns": 10.143,
+    "hold_slack_ns": 0.109,
+    "pulse_width_slack_ns": 9.5,
     "bitstream_generated": true,
-    "bitstream_sha256": "0a47ff6958b69e76ea49ea15465a27f047ace8fff0297b600da1fea2296a0c6a",
+    "bitstream_sha256": "31aae221f5ffec5be239b9cca922b7d7d11f198c8a9b0aa898be52add5974777",
     "source_sha256": {
-      "sw/fpga/rtl/t1_link.sv": "2f12c75805f0d65b0d7a7479affc5a60ee61dae43e5111629e89d66ee3a9245f",
+      "sw/fpga/rtl/t1_link.sv": "ffb3ca9b90b85c65a5e8796554db25755449a6be36295d3d5e5fc22b80033b7b",
       "sw/fpga/t1.xdc": "0c94f70c0455228b94400c13edca6500d695ba4a7f8a7c79b468310fe09dcd85",
-      "sw/fpga/build.tcl": "bbc123d2d5191a55928aaca2d5847411ae6b8e0eb107a5044ff143ed9a12107e"
+      "sw/fpga/build.tcl": "460aa5ef031a665956a35cd8a1e198a26677db1720aaa4de15bdc29210b24f6d"
+    },
+    "report_sha256": {
+      "timing.rpt": "95774666593916ad1177aff550d2e72156e1f1e3781c012671bb68dd7092cc94",
+      "cdc.rpt": "73b73995691313166f9fab809bfab7637c1d5a3bce6377c6c32e337f4a4d926a",
+      "drc.rpt": "7c1096427a73b15107ff5e4ee743a973bfdabc2f367026fd8c004dd65244d3d3",
+      "utilization.rpt": "b22852ebffd6b7ffdf9444e742c95ac3f7616f99e2da037c5fc9d6716b113725"
     },
     "limits": [
-      "External SPI pins are asynchronous and oversampled; false paths apply only to first synchronizer stages and asynchronous reset",
-      "DQ2/DQ3 are unconnected and optimized out; UNUSEDPIN PULLNONE leaves reserved package pins undriven",
-      "Not programmed onto hardware; Pi/Linux ownership and signal timing require physical bring-up"
+      "Asynchronous input-to-first-stage and reset exceptions are intentional; board timing is not measured",
+      "Reserved DQ2/DQ3 optimized out; unused pins remain undriven",
+      "No physical Pi/Linux/JTAG qualification; reports are digital implementation evidence only"
     ]
   },
   "workbench": {
     "http_glb_pass": true,
-    "browser_signal_checks": 10,
+    "modeled_signal_checks": 10,
     "samples": 3672,
+    "browser_rerun": false,
     "physical_hardware_connected": false
   },
   "sensor_analog_copper_preserved": true,
@@ -221,9 +242,10 @@
     "hw/boards/shakesense-trenz-hat/bom.csv": "26f1cba291f2adbfec346ef117e57f5a7d65dfee44d49380e1e36db40ee485cb",
     "hw/boards/shakesense-trenz-hat/electrical.json": "4f227aef430387e965cc3a4d4aab3f5673c904943239d015d8517149387c6cd5",
     "hw/boards/shakesense-trenz-hat/fp-lib-table": "bb7c59bbb74f047466d87a84a216e678fe77d5cd12552564803ff4e3b42d63ed",
-    "hw/boards/shakesense-trenz-hat/shakesense-trenz-hat.kicad_pcb": "e3791aad302061b795620a096a441c869c697034ebc23d58bd2f693ed1763b79",
+    "hw/boards/shakesense-trenz-hat/shakesense-trenz-hat.kicad_pcb": "4b1ef20c3139f9ffbaf5b5fdafb200333814483a46685d0b3f10d84685dd40db",
     "hw/boards/shakesense-trenz-hat/shakesense-trenz-hat.kicad_pro": "3eb0a2cc76cf134bc5f6dfb7c4baa9c3f3e21e9faefefe1b49924835fec68e70",
     "hw/boards/shakesense-trenz-hat/shakesense-trenz-hat.kicad_sch": "ca9a2370ad774fbc44ebaeb19a3b7d018e373d49a9ec14c3a45ec51816dbdbdd",
+    "hw/boards/shakesense-trenz-hat/shakesense-trenz-hat.ses": "5b56b26b1a771264eb48bbe6c445392751d7af3679fc88b59af967a3b6febbf3",
     "hw/boards/shakesense-trenz-hat/sym-lib-table": "73261d1ebdc99e14a430d8e30cde51c0378c89994042a4e9e0bd20ca362f9187",
     "hw/elec/Capacitor_SMD__C_0402_1005Metric.kicad_mod": "175ecc7fd401554c6f5d160e85603e58544be5b93f7de8c18d63e09b73ff4c45",
     "hw/elec/Capacitor_SMD__C_0603_1608Metric.kicad_mod": "fdb53e4ae0a5030d2863a19d27fe145470374583a6b28bd9d4f3e08bd6776054",
@@ -496,6 +518,7 @@
     "hw/tests/test_engineering.py": "1fa44b822d39dc1166c470e08375555e1d05da109054f28376b410438eebc8d8",
     "hw/tests/test_geophone.py": "fbfd8842e160f3b2e6fc31193f0017404adfb9912c76eb251a5722f6b1327af6",
     "hw/tests/test_gpio_audit.py": "3cb8cb5b3fd895edff3760d18c25cbab96d08b15b7f2ec207eed787c486af41e",
+    "hw/tests/test_host_link_parts.py": "08dfb361f7eb82a64d7874f97a84bd260a00d101172f6df2b75758dc771c4236",
     "hw/tests/test_prefab_review.py": "8e0c6b382db68b934c36d34b7caa52c19717dd42518435da5c6db6fc00912649",
     "hw/tools/assemble_pcb.py": "72ff1e0b7de75c6194bf8b749dfc2b5a5e57fea01e85f98ea12633895d05e161",
     "hw/tools/assembly_fit.py": "a8407f2e3a071a9050b522877ed0ea5232fd546f6e56cfe748325bcf82e450f4",
@@ -504,7 +527,7 @@
     "hw/tools/bootstrap_trenz.py": "e514d5f9b1bf0055227751bf009d3e1f500ea4bfdb89f265b4d14f7065303d22",
     "hw/tools/check_circuit.py": "c031349aa0931a2612d2ec521b321038ef906f21f6ef46376b93933cb18bef33",
     "hw/tools/check_design.py": "3b22574d7de35ad2e05e32773c9a741c87392e7fe7f7092b303b5081652f38cd",
-    "hw/tools/check_trenz.py": "305a86f8b35ea3bf20e2d9ac896c00578150c7f82dfdfba1ef9dfb07818b25e8",
+    "hw/tools/check_trenz.py": "45b641a01865e038078b497c12523ec2c6bce20eb515857702cc36f32d417531",
     "hw/tools/clean_route_objects.py": "158be6882cdd21a45bdac3365670e5c42d852ed18dc54c9d7bb58ad31be0ea2e",
     "hw/tools/export_previews.py": "af13a94c2874bdace4687b3d55a622ca2abfc6f15a1f804788b46c0c4adf6f25",
     "hw/tools/export_routes.py": "faa1e3e777a1709d89afaa2a4506ce7824889b05b8a2348c5a109146c33435d9",
@@ -512,7 +535,7 @@
     "hw/tools/fixed_routes.py": "127cb78e97b23690db9df79d1c1f521394eb599c66f6dff9d1f5c7ae761b4a30",
     "hw/tools/geophone_checks.py": "a6190aead1ec09c42bccd2bafff588c5142ef0f7ac38e14385bb214ec9619b9d",
     "hw/tools/gpio_audit.py": "026c8a1c0cd2c0a3f0f8f0f09b3db17f815bcfef4dfbfd191f8b4d5136c5bf9d",
-    "hw/tools/host_link_checks.py": "72969345e7dc727640b3510f672f2f3d58e7863fd8ccec4b057aa8123d31a45c",
+    "hw/tools/host_link_checks.py": "3bb3ba9edb68231b41a3dc163920b5206a6376ff83eb704c2f39694601cfdd4d",
     "hw/tools/import_routes.py": "34860295f9389f9df7de8bfbf300a27dbaa4888beec3d6af01395c84c8c0e7f8",
     "hw/tools/inspect_references.py": "bc1fdfa52f256b16aa4a6e1d71ca0a295a2a3d92ec520e6ef1df46f3372fbfdb",
     "hw/tools/inspect_trenz_step.py": "a0ab1c6f508e4a880058f0c3713de627907188e11fff1214c436e68ca26dba59",
@@ -541,11 +564,19 @@
     "hw/tools/trenz_power.py": "aff4ae591265d61010715cebd82e11c360c853ff2329742ded9205c377ae7789",
     "hw/tools/trim_dangling.py": "39333efd4b250defba50320b5a9e1951973990b937ed02497f6bd68901056d75",
     "hw/tools/widen_power.py": "738e94208c277088adbc8f0ec91c6b02bce3d2a67681d1fed0179e3e6cffd8af",
-    "sw/fpga/build.tcl": "bbc123d2d5191a55928aaca2d5847411ae6b8e0eb107a5044ff143ed9a12107e",
-    "sw/fpga/rtl/t1_link.sv": "2f12c75805f0d65b0d7a7479affc5a60ee61dae43e5111629e89d66ee3a9245f",
+    "sw/fpga/build.tcl": "460aa5ef031a665956a35cd8a1e198a26677db1720aaa4de15bdc29210b24f6d",
+    "sw/fpga/cosim.py": "7e1d8267864f55c3f7b8f6cfc44839ee45cda816c01dbb62c3aa402688bcbb93",
+    "sw/fpga/rtl/t1_link.sv": "ffb3ca9b90b85c65a5e8796554db25755449a6be36295d3d5e5fc22b80033b7b",
     "sw/fpga/t1.xdc": "0c94f70c0455228b94400c13edca6500d695ba4a7f8a7c79b468310fe09dcd85",
-    "sw/fpga/test.py": "6d3d3587f7ec0ffa4b73e6884c0bd2751e5998de28e9a4169e9151941805d47d",
+    "sw/fpga/test.py": "ecff358168658f57afa662f0d2eaef8905de283ee6b5e59f1d1e436096620dd5",
+    "sw/fpga/tests/tb_host.sv": "066414c0f9d6b71daa6fe383f6828dbf4a9551b2b48c754eebdc1b649ac54590",
     "sw/fpga/tests/tb_link.sv": "8e3abd88333112d229b86ec14bd407423792c29da9677380e671e051644ebd4e",
+    "sw/fpga/verification/cdc.rpt": "73b73995691313166f9fab809bfab7637c1d5a3bce6377c6c32e337f4a4d926a",
+    "sw/fpga/verification/drc.rpt": "7c1096427a73b15107ff5e4ee743a973bfdabc2f367026fd8c004dd65244d3d3",
+    "sw/fpga/verification/result.json": "8f907d15e0cd82243799a1e1999a3902b64456c2bb282d0ec8f19fa53c00966d",
+    "sw/fpga/verification/timing.rpt": "95774666593916ad1177aff550d2e72156e1f1e3781c012671bb68dd7092cc94",
+    "sw/fpga/verification/utilization.rpt": "b22852ebffd6b7ffdf9444e742c95ac3f7616f99e2da037c5fc9d6716b113725",
+    "sw/fpga/verify_reports.py": "fd786e233c76a98432055672b21e0c7d2103ab05cec12b812cd77a2fb3c982ea",
     "sw/interfaces/baseline.binpb": "7177780d921a4962fbbd7fa7035a745578a802c7d3e2272ca31c4f6f602e359b",
     "sw/interfaces/buf.yaml": "bda68586bbdf808b33c348d4c11029efaedf23a94b5e078208337606e24cd1ce",
     "sw/interfaces/proto/senseshake/sensor/v1/sensor.options": "87956c8565f7739b5b0bee94e3a8ce43666fc701f8e602299f6196ed45ad328f",
@@ -563,11 +594,11 @@
     "sw/pi/profiles/utc-policy.template.json": "1f95ea883e56f316cb85fe388ee16d1a07f3ea7e5ccc6df1af084a440cb9d5f4",
     "sw/pi/senseshake/__init__.py": "c741ee6ba54b33e026cf91542b509be2f71e55277ef8885a5280ee5af3a33aab",
     "sw/pi/senseshake/__main__.py": "4dc4f1ff4ff0887cf7e5da0da1432bfcb7aa534f30bcb72cd2ed0a2ac23f87a2",
-    "sw/pi/senseshake/bench.py": "5cccfa2a34fb26f33b3df142ddf0f17a7d1ebc688e2d8720d366d0c1506ed046",
+    "sw/pi/senseshake/bench.py": "862a7ae36f54121774d85cc8e4b4a3e6c3ea8be867d5dd0180ea8015d6f19057",
     "sw/pi/senseshake/calibration.py": "4e511c6355b4c3885d08ca0e4650222c10437502f89924411bf6bdeff29b8c18",
     "sw/pi/senseshake/cli.py": "f7b987324e387cfa7a8357cf973cb9688b4090c736fc7d90193ff2451a4d519e",
     "sw/pi/senseshake/fifo.py": "92d5f244e0e9782e5eb621b897ee961ab2fc770834026b17b23579b0114dd589",
-    "sw/pi/senseshake/fpga_link.py": "51dbd9dcb3fc7ece44ead4fa8e2b955911f1110be803e3c9d45e8d0dadd0cbde",
+    "sw/pi/senseshake/fpga_link.py": "c884810a7833ed1f164d4334e6f3090c43731c34d7006a3e99b07780c75a7e68",
     "sw/pi/senseshake/fpga_linux.py": "92815fd2b91cc5fe18c166f2d021b4bfa8ee3acf3669c3f6b715e8079361ab81",
     "sw/pi/senseshake/geophone.py": "7bbe8c3d8b4fb4d51056c68ea6f6b431f661e9b8671a39c924c77579b46ccb85",
     "sw/pi/senseshake/gnss_timing.py": "1e32c015b6dabcd3f5905f87c2b5b0e714feb21b702c9d2351bbd57b1d53b28f",
@@ -590,11 +621,12 @@
     "sw/tests/fixtures/acquisition_faults.json": "05288407b8f36023d797655a3129564ff3191e87cd58c096526b3bc7080a0b07",
     "sw/tests/fixtures/magnetic_boundary.json": "ccb3d9fd7dd47dd9f14d61fec27da48657afd3196c04d832105fc51fb7428167",
     "sw/tests/test_acquisition.py": "205be697ed1c0b5f3df521ded30f04265e4c89afbfbbd8ff3876174d2e85e160",
-    "sw/tests/test_bench.py": "13190670588d94e6411f7868b098d49133c6ba62a130ffef7cc7492f62756879",
+    "sw/tests/test_bench.py": "05bc33691b507fcc1c099c65ba7f18bb41dd86eb9d1a4680ded85518361d1ba3",
     "sw/tests/test_contract.py": "2b7353c4fa7e3bd72972c6006e7eac01cb047d9247c4fbb795f762b320e8b311",
     "sw/tests/test_deployment.py": "0e347a277e549d5a7ca805cf4018d186ea254cc9cb85fad10eac0727aa6f0b0d",
     "sw/tests/test_fifo.py": "a547be0d7c7ae3c98abd825c49f6f2142e7e437da5333a102fd60b73edf92a21",
-    "sw/tests/test_fpga_link.py": "cbacd4d84e9775ea9e7f8c23fb5afa76507daa5893dd9d774790dd1e3bcc1f49",
+    "sw/tests/test_fpga_evidence.py": "0c33eabaf09dcd23fc3bc27344a6ea0db1ef89bee95509987211ae5b47184d30",
+    "sw/tests/test_fpga_link.py": "03ed6d792d5e4e62fae1c154d9da4ba81236bda01bcc27b4d8bf5bf6711ad1ea",
     "sw/tests/test_geophone.py": "73b8fb55a1d49c1edf3a875729f6403d3aa146027aaaab928834589cbabf2a7d",
     "sw/tests/test_geophone_timing.py": "3ab55f37b2181bac8fb5dc5f70de49f20793a0631207ec45199746e0b8d5e233",
     "sw/tests/test_hat_signals.py": "a9b575e18a62f82cb5aeddf33a6dd47d7e95124b5842ec18fa674515d4b5241a",
@@ -608,18 +640,69 @@
     "sw/tools/check_hat_signals.py": "5b3c42d8418ae94060004fa70a068db0ffb8dcb6382572f73a49ac8f636585d3",
     "sw/tools/check_interfaces.py": "e6fac9912a248981673bedba601f28aededbb1d1c231f179aedbce1359096a7d",
     "sw/tools/correlate_utc.py": "a73f9e0399ef84bff6ec5c4b53fb8132461337d1e02e8e1416d9ee14e50aa47c",
-    "sw/tools/fpga.py": "96dd0d78d7bd10a3016d639f038588d45cc7fcc36f87a0e42e81e4765f3f404e",
+    "sw/tools/fpga.py": "807ebfab1bac93e72fa5bf3734d264af02d3d7a894fd6697b423a8a67002396a",
     "sw/tools/measure_hat.py": "a65c5ec760990ff828533f8002db8320a705253767d3c16c91d74e9119c3f2d3",
     "sw/tools/sensor.py": "1986c573a15087e51bc9d6c9d258d368dad7ac6cd29c436af4f9042affdf7f4a",
-    "environment/.dockerignore": "e544fdfa5c93e6c639008aafeff79415070ab5db1f7ce390ea0b259038605663",
-    "environment/Dockerfile": "f22b68b29730d10f3bc72d6185829df6548dc17f02574f5ae5ae8e1457f6fc8e",
-    "environment/check_project.py": "5564a8204de66c90cf7171d1e8783a56e4ae2d8aca43368f4b1c09d236276fae",
+    "environment/.dockerignore": "4a3a2ab275786aca06f21fd0feeb0bdc399b4c3987ca6c568f804b164f6d2d3d",
+    "environment/Dockerfile": "91e4bcc16a02a91fefcb4c3eb0e703781f04cb4f31951eb8afb6465ee3ddd469",
+    "environment/check_project.py": "04232cd5e2c41d01eeeddbe00fb8572122df40487ed15de9fe4721541b6b6791",
     "environment/host.py": "bbdeea8a6ca861cc1805c461c9b625d80552f7c16d728c1b29c415cdaeca7207",
     "environment/install_buf.py": "841e38a11af99ab4ee2aee42cf0f305489e2ffa72fad260fe4816d69035adba1",
     "environment/installed-constraints.txt": "1d605c32ea4f7f5c560586b5f54590bf821cf35a8782e66e5addd1bcd512919f",
-    "environment/lab.py": "9b3655906034cae94347a7ffa219ec076a4b96062928d9a6941c184a7bea6fff",
+    "environment/lab.py": "8bbfe8ff5dcc416bbbe3b6884358e0a63240bd72572ceb611178aea86f385fbe",
     "environment/requirements.in": "de39e673de9fce6df52ff37bfaeee133f8302fe175acb5f428f728ab1eff502f",
     "environment/requirements.lock": "d7b47cd3000c67fc356d59b84ce104a3be244f565eb60c593a7ae002ec06933d",
-    "environment/test_lab.py": "5332ccbf778562023756b711f22188665328ab5a8f03113fe03f260e1095b11f"
+    "environment/system-requirements.txt": "33abbeaf3102c7b10720163556b8582e124fe286ca75c9e6538184d3c10d8805",
+    "environment/test_lab.py": "dd2aa847383c645fc970c330f06eea5019bc23cb827b3190fa17538f68ef4ea6"
+  },
+  "fpga_cosimulation": {
+    "payload_sizes": 193,
+    "clock_phases": 20,
+    "fault_reset_cases": 491,
+    "host_transactions": 1670
+  },
+  "lab_safety": {
+    "unique_tests": 12,
+    "linux_passed": 11,
+    "windows_passed": 10,
+    "platform_skips_covered_on_other_host": true
+  },
+  "prototype_fab_preparation_recommended": true,
+  "manufacturing_package_released": false,
+  "other_board_checks": {
+    "shakesense-hat": {
+      "pin_checks": 538,
+      "atopile_pin_checks": 538,
+      "connectivity_errors": [],
+      "drc_findings_by_type": {},
+      "drc_errors": 0,
+      "erc_findings": 0,
+      "unconnected_items": 0,
+      "tracks_and_vias": 2197,
+      "status": "A2 PROTOTYPE - NOT FABRICATION RELEASED",
+      "limits": [
+        "USB sensor firmware is not implemented; enumeration, suspend and USB signal integrity are unvalidated",
+        "No bench, magnetic-noise, RF impedance, EMC or mechanical stack validation",
+        "SPICE models are supporting-circuit behavioral/passive models, not full sensor/Coldfoot silicon models",
+        "Run-1 Coldfoot bond map must accompany module assembly; current draw remains a bounded design assumption"
+      ]
+    },
+    "shakesense-field-head": {
+      "pin_checks": 131,
+      "atopile_pin_checks": 131,
+      "connectivity_errors": [],
+      "drc_findings_by_type": {},
+      "drc_errors": 0,
+      "erc_findings": 0,
+      "unconnected_items": 0,
+      "tracks_and_vias": 348,
+      "status": "A2 PROTOTYPE - NOT FABRICATION RELEASED",
+      "limits": [
+        "USB sensor firmware is not implemented; enumeration, suspend and USB signal integrity are unvalidated",
+        "No bench, magnetic-noise, RF impedance, EMC or mechanical stack validation",
+        "SPICE models are supporting-circuit behavioral/passive models, not full sensor/Coldfoot silicon models",
+        "Run-1 Coldfoot bond map must accompany module assembly; current draw remains a bounded design assumption"
+      ]
+    }
   }
 }
