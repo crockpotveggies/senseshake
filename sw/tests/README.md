@@ -29,6 +29,12 @@ SPI bindings and exercises the GPIO event ABI. `test_measurements.py` checks
 known moments, SI conversions and incompatible bench-comparison rejection.
 None of these substitutes for live Pi/kernel/sensor qualification.
 
+`test_utc.py` exercises GNSS timing configuration/readback, fragmented/corrupt
+UBX, PPS association faults, leap/midnight guards and UTC-copy replay through the
+real correlator. `test_bench.py` proves missing measurements/limits cannot pass,
+fixed power limits reject violations, and changed evidence hashes are rejected.
+See [UTC timing](../../docs/utc-timing.md) and [bench procedure](../../docs/bench-procedure.md).
+
 Keep small deterministic input fixtures here. Put generated logs, traces and
 coverage in the portable lab's disposable workspace. Reserve bounded waveform
 capture for failures. Add runnable profiles when their implementations and

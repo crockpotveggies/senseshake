@@ -53,8 +53,11 @@ qualification and MCU firmware remain pending.
 
 The optional live FIFO path pairs IMU tags by slot counter, preserves buffered
 samples and rejects overrun/parity/timestamp faults. Retain unknown loss and timing
-uncertainty semantics. PPS event timestamps are not correlated UTC. Pi deployment
-and measurement tooling live under sw/pi/deploy and sw/tools/measure_hat.py.
+uncertainty semantics. `--utc` captures acknowledged/read-back GNSS timing and PPS
+evidence. Offline correlation requires a recording-bound timing policy, never
+extrapolates across invalid intervals, and preserves raw data. See docs/utc-timing.md
+and docs/bench-procedure.md; missing measurements/limits must never pass a bench
+report. Pi deployment and measurement tooling live under sw/pi/deploy and sw/tools.
 
 The local workbench is Python/NiceGUI in `sw/ui/`; its framework-independent
 controller is `sw/pi/senseshake/workbench.py`. Preserve raw count/gap semantics,

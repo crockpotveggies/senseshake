@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "recording_sha256": null,
+  "scope": "bench",
+  "evidence": null,
+  "transport_max_ns": null,
+  "edge_error_ns": null,
+  "pulse_error_ns": null,
+  "capture_age_max_ns": null,
+  "clock_rate_ppm": null,
+  "sample_error_ns": {"1": null, "2": null, "3": null, "4": null, "5": null, "6": null}
+}

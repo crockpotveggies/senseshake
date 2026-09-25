@@ -30,8 +30,10 @@ requests GPIO inputs without a bias; the board drives them through U42.
 
 PPS events retain the kernel MONOTONIC timestamp and a bracketed estimate in
 MONOTONIC_RAW. Neither is UTC. NAV-PVT calendar time alone cannot unambiguously
-identify a particular pulse; UTC assignment remains disabled until TIM-TP/UTC
-association and receiver timepulse configuration are implemented and checked.
+identify a particular pulse. Add `--utc` to configure/read back the timepulse and
+capture TIM-TP/TIMEUTC evidence. [Offline correlation](../../../docs/utc-timing.md)
+then creates a separate UTC-labelled recording using supplied timing bounds.
+Physical qualification follows the [bench procedure](../../../docs/bench-procedure.md).
 
 Build/merge checks run against a small controller fixture. They establish overlay
 structure, not a boot test of Raspberry Pi OS or the connected devices.

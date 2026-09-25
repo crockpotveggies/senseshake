@@ -159,6 +159,13 @@ Buf 1.73.0 is downloaded only during image build and SHA-256 checked; Protobuf
 
 ## Recorded validation
 
+The UTC/bench update passed the software profile in
+`20260925T040959Z-8ae6ce16`: **140 tests** without skips, including 15 UTC/timed-GNSS
+tests and four bench-report tests, plus existing contract compatibility and demos.
+Ten containment tests passed; the Windows junction case was skipped inside Linux.
+CAD is unchanged from the T1 engineering checkpoint below. See
+[UTC timing](utc-timing.md) and [physical bench procedure](bench-procedure.md).
+
 The T1 engineering update passed all **15 stages** in
 `20260925T033256Z-8be95398`: fresh atopile builds, native ERC/DRC/connectivity,
 14 hardware regressions, RF/power/clearance checks, **41 bounded SPICE cases**,

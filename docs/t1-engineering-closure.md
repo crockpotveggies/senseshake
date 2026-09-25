@@ -10,7 +10,7 @@ Physical measurements are never replaced by a simulated PASS.
 | GNSS RF | Widened the front trace from 0.300 to 0.388 mm: calculated 57.33 to 49.98 Ω. Moved a bend away from a return-plane void; 900 sampled center/edge points now lie over filled In2.Cu ground. | Actual dielectric properties, mask effects, connector/antenna launches and RF measurement. |
 | Power | Defined a 3.35 V ±0.5% source, ≤30 mΩ total hot loop and ≤3 A envelope. Added four bounded load-step cases and 31 independent interface/bias pin checks. | Real module startup/inrush, hot path resistance, regulator stability, fast transients and temperature. |
 | Fit | Added SSQ-120-02-G-D GPIO riser: 27.179 mm nominal Pi-to-HAT gap; 7.179 mm calculated clearance after connector, cable and tolerance allowances. Updated assembly BOM and 3D assets. | Selected Pi/cooler and installed cable trial; riser seating and spacer shims. |
-| Acquisition | Added opt-in IMU FIFO, hardware timestamp mapping, IRQ hints, explicit overrun/gap rejection, Pi 4 five-select overlay and safe SPI binding. PPS edges are recorded with their clock domain. | Actual Pi boot and bus throughput, IRQ timing, physical sensor behavior. UTC pulse association remains unimplemented. |
+| Acquisition | Added opt-in IMU FIFO, hardware timestamp mapping, IRQ hints, explicit overrun/gap rejection, Pi 4 five-select overlay and safe SPI binding. GNSS configuration/TIM-TP/TIMEUTC/PPS capture and bounded offline UTC association are implemented and modeled-test covered. | Actual Pi boot/bus throughput, physical sensor behavior and measured UTC/acquisition uncertainty bounds. |
 | Measurement | Added stationary recording analysis: SI means, noise standard deviation, trend, gravity norm, sample periods, gaps and FPGA off/idle/active comparisons. | Physical recordings, alignment/calibration references and application acceptance limits. |
 
 This table tracks engineering closure, not a purchase or fabrication authorization.
@@ -79,10 +79,14 @@ tests, including negative controls. Results are conditional on these models.
 polling remains available. The UI's HAT signal test still exercises its existing
 polling-driver model. Separate FIFO integration tests cover buffered acquisition.
 The GPIO event reader records PPS in kernel MONOTONIC and an estimated RAW domain.
-**It does not assign UTC to samples.** That requires receiver timepulse
-configuration/readback and a bounded association with TIM-TP/UTC information;
-NAV-PVT reception time is insufficient. This remains a software task as well as
-a physical timing qualification, not a completed item hidden behind bench work.
+The timed GNSS path now configures/read-backs the timepulse and records TIM-TP and
+TIMEUTC evidence. [Offline correlation](utc-timing.md) can add UTC with explicit
+uncertainty to a copy of a completed recording. It requires measured bounds,
+rejects ambiguous intervals and preserves raw timing. NAV-PVT reception time is
+not treated as the pulse timestamp. Software behavior is covered by modeled tests;
+physical timing accuracy remains unqualified. The [bench procedure and report
+checker](bench-procedure.md) make the remaining physical tests executable and
+retain incomplete status when measurements or acceptance limits are absent.
 
 Coldfoot, USB-head firmware and FPGA application bitstreams remain outside this
 sensor-HAT correction. All 155 FPGA GPIOs and the original A2/head circuits remain

@@ -74,6 +74,8 @@ def export_scenario(recording, output):
 
 def run(args):
     simulated = args.command == "simulate"
+    utc = getattr(args, 'utc', False)
+    if utc and not args.fifo: raise ValueError('--utc requires --fifo and PPS profile')
     faults = load_json(args.faults) if getattr(args, "faults", None) else []
     records = load_json(args.calibrations) if args.calibrations else []
     calibrations = Calibrations(records)
@@ -110,7 +112,7 @@ def run(args):
         for cfg in settings:
             sid = cfg["sensor_id"]
             path = profile["spi"][sid - 1] if sid <= 5 else profile["i2c"]
-            channels.append(Channel(profile["device_id"], boot, cfg, Worker(Factory(sid, path, args.fifo and sid <= 4), cfg)))
+            channels.append(Channel(profile["device_id"], boot, cfg, Worker(Factory(sid, path, args.fifo and sid <= 4, utc and sid == 6), cfg)))
         clock = lambda: time.clock_gettime_ns(time.CLOCK_MONOTONIC_RAW)
     sessions = Sessions(calibrations)
     metadata = dict(format="senseshake-acquisition-v1", source="simulation" if simulated else "linux-polling",
@@ -118,6 +120,7 @@ def run(args):
     if simulated: metadata.update(seed=args.seed, faults=faults, remote=args.remote, stimulus_model="ideal-v1", scenario=scenario.export())
     else:
         metadata["profile"] = profile
+        if utc: metadata['utc_capture'] = 'm10-tim-tp-v1'
         if args.fifo:
             metadata.update(source='linux-fifo', timing='IMU device timestamp mapped to RAW; absolute uncertainty unknown; tilt/GNSS poll completion')
     try:
@@ -127,6 +130,7 @@ def run(args):
             app = Acquisition(writer, sessions, channels, args.queue, ids)
             if not simulated:
                 enable = SensorEnable(**profile["sensor_enable"])
+                if utc and not profile.get('pps'): raise ValueError('--utc requires PPS line')
                 if args.fifo:
                     irqs = profile.get('imu_irq')
                     if irqs is None or len(irqs) != 4: raise ValueError('FIFO profile needs four IMU IRQ lines')
@@ -154,7 +158,7 @@ def run(args):
                     for edge in pps.read():
                         app.event('pps_edge', 'kernel MONOTONIC edge; UTC association not established', clock(),
                                   monotonic_ns=edge, estimated_raw_ns=edge + (raw_before + raw_after)//2 - mono,
-                                  mapping_bracket_ns=raw_after - raw_before)
+                                  mapping_bracket_ns=raw_after - raw_before, mapping_monotonic_ns=mono)
                 if usb:
                     app.drain()
                     usb.poll(clock(), lambda m, t: app.emit(m, t), app.event)
@@ -194,6 +198,7 @@ def main(argv=None):
             p.add_argument("--profile", type=Path, required=True)
             p.add_argument("--usb")
             p.add_argument('--fifo', action='store_true', help='buffered IMUs with hardware timestamps and IRQ hints; explicit profile required')
+            p.add_argument('--utc', action='store_true', help='capture configured GNSS/PPS evidence for offline UTC correlation')
     p = commands.add_parser("replay")
     p.add_argument("recording", type=Path)
     p = commands.add_parser("export-scenario", help="recover controls for another deterministic simulation")

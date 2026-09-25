@@ -10,6 +10,7 @@ class Factory:
     sensor: int
     path: str
     fifo: bool = False
+    utc: bool = False
 
     def __call__(self):
         from .linux_io import SPI, I2C
@@ -19,7 +20,11 @@ class Factory:
                 return LSM6DSOFIFO(SPI(self.path))
             return LSM6DSO(SPI(self.path))
         if self.sensor == 5: return SCL3300(SPI(self.path))
-        if self.sensor == 6: return MAXM10S(I2C(self.path))
+        if self.sensor == 6:
+            if self.utc:
+                from .gnss_timing import TimedGNSS
+                return TimedGNSS(I2C(self.path))
+            return MAXM10S(I2C(self.path))
         raise ValueError("remote sensors use USB firmware")
 
 

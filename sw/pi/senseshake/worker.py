@@ -30,7 +30,7 @@ class Worker:
         self.timeout, self.startup_timeout, self.restart_limit = timeout, startup_timeout, restart_limit
         self.process = self.connection = None
         self.restarts, self.started = 0, False
-        self.buffered = getattr(factory, 'fifo', False)
+        self.buffered = getattr(factory, 'fifo', False) or getattr(factory, 'utc', False)
         self.irq = irq
 
     def ready(self): return self.irq is not None and self.irq.poll()

@@ -185,10 +185,13 @@ class MAXM10S:
         if self.parser.errors != before: raise OSError("GNSS corrupt UBX frame rejected")
         return packets
 
-    def configure(self, cfg):
+    def configuration_values(self, cfg):
         ns = cfg["period_ns"]
         if ns % 1_000_000 or not 1000 <= ns // 1_000_000 <= 60000: raise ValueError("GNSS profile requires integer milliseconds, 1..60 seconds")
-        wanted = (ns // 1_000_000, 1, 1)
+        return (ns // 1_000_000, 1, 1)
+
+    def configure(self, cfg):
+        wanted = self.configuration_values(cfg)
         fields = b"".join(key.to_bytes(4, "little") + value.to_bytes(size, "little")
                           for (key, size), value in zip(self.KEYS, wanted))
         self.bus.exchange(0x42, ubx_packet(6, 0x8a, b"\x00\x01\x00\x00" + fields), 0)
@@ -212,7 +215,7 @@ class MAXM10S:
                         if offset + 4 > len(payload): raise OSError("GNSS readback truncated")
                         key = int.from_bytes(payload[offset:offset + 4], "little")
                         size = sizes.get(key)
-                        if size is None or offset + 4 + size > len(payload): raise OSError("GNSS readback key/size")
+                        if size is None or key in values or offset + 4 + size > len(payload): raise OSError("GNSS readback key/size")
                         values[key] = int.from_bytes(payload[offset + 4:offset + 4 + size], "little")
                         offset += 4 + size
                     if values != dict(zip(sizes, wanted)): raise OSError("GNSS configuration readback mismatch")

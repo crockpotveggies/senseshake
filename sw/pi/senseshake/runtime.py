@@ -140,6 +140,10 @@ class Acquisition:
                 if reading.acquisition_ns is None or not last < reading.acquisition_ns <= clock():
                     raise FifoFault('FIFO timestamp ordering; drain discarded')
                 last = reading.acquisition_ns
+            for event in getattr(drain, 'events', []):
+                fields = dict(event)
+                code = fields.pop('code')
+                self.event(code, 'GNSS timing evidence; UTC not yet correlated', clock(), **fields)
             c.failures = 0
         except (OSError, ValueError) as error:
             c.failures += 1

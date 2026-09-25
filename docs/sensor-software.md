@@ -97,7 +97,7 @@ batches omit `dropped_before`. Sequences count scheduled application slots;
 overdue slots are skipped and unavailable scheduled samples are MISSING.
 Do not infer lossless acquisition or synchronized devices from polling time.
 The optional FIFO path below replaces these polling semantics for the IMUs.
-PPS/UTC association, sensor self-test qualification, board-axis transforms and
+Sensor self-test qualification, board-axis transforms and
 GNSS fix decoding in the live CLI remain follow-on work. SCL3300
 register reads are sequential, not an atomic six-axis snapshot.
 
@@ -130,7 +130,10 @@ than continue using a failed GPIO event descriptor.
 BCM4 PPS edges are recorded as events with the original kernel MONOTONIC time,
 an estimated RAW time and the clock-mapping read bracket. A bracket is not total
 timestamp uncertainty. No UTC value is assigned from receipt time or an assumed
-NAV-PVT-to-pulse relationship. Correct TIM-TP association remains open.
+NAV-PVT-to-pulse relationship. Add `--utc` to configure/read back the receiver's
+timepulse and collect timing messages. [Offline UTC correlation](utc-timing.md)
+creates a separate recording using explicit, recording-bound timing-error limits.
+It preserves raw timestamps and omits UTC across ambiguous or unbounded intervals.
 
 Reference: [ST AN5192, FIFO tags and timestamp correlation](https://www.st.com/resource/en/application_note/DM00517282-.pdf).
 
@@ -230,7 +233,8 @@ noise qualification remains in step 4.
 
 The T1 correction adds FIFO/IRQ acquisition, deployment and stationary measurement
 tools. See [engineering closure](t1-engineering-closure.md) for measured versus
-modeled evidence and the remaining PPS-to-UTC software boundary.
+modeled evidence. [UTC association](utc-timing.md) is implemented; the
+[physical bench procedure](bench-procedure.md) covers its remaining qualification.
 
 References: [ST LSM6DSO](https://github.com/STMicroelectronics/stm32-lsm6dso),
 [Murata SCL3300 rev. 4](https://www.murata.com/-/media/webrenewal/products/sensor/pdf/datasheet/datasheet_scl3300-d01.ashx),

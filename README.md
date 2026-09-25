@@ -55,6 +55,10 @@ power envelope, GPIO riser and buffered acquisition are tracked in
 [engineering closure](docs/t1-engineering-closure.md); physical qualification
 remains open. Fabrication approval belongs to the project owner. Ethernet is not exposed.
 
+[UTC timing capture/correlation](docs/utc-timing.md) and an
+[executable physical bench checklist](docs/bench-procedure.md) are available.
+UTC estimates require explicit timing bounds; physical measurements remain pending.
+
 An engineering prototype with four LSM6DSO IMUs, an SCL3300 inclinometer,
 MAX-M10S GNSS, a remote RM3100 XYZ magnetometer and optional DLVR differential
 pressure. No geophone. The Pi acquires/preprocesses samples and submits compatible
