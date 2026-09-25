@@ -65,6 +65,53 @@ An exhausted retry budget requires a new run, as in the acquisition runtime.
 
 ## Data and timing
 
+### HAT acquisition signal test
+
+Press **Test HAT signals** in the top bar. Save your current experiment first:
+the button replaces the displayed session with the test recording. This runs
+eight seconds of simulated time faster than real time and loads the resulting
+capture into replay. The pass/fail panel belongs to that capture and is cleared
+when you start a different run or import another recording. Download the exact
+recording and its JSON report using the panel buttons; the report includes the
+recording's SHA-256. Seek backward and press Play to inspect the checked signals.
+
+Unlike ordinary simulation, this test feeds the models through register/packet
+buses into the production `LSM6DSO`, `SCL3300` and `MAXM10S` driver classes,
+then through the acquisition, session validation and recording code. It checks
+1,040 samples from the six HAT sensors. Remote-head sensors are outside this test.
+
+The fixed excitation is a 2 Hz, 0.300 m/s² X-axis acceleration sine wave, 0.5 Hz,
+5° roll, and GNSS motion at N/E/D = 1/2/−0.5 m/s. The independent recording
+analyzer checks inventory/quality, effective configuration, sample timing and
+continuity, tone frequency/gain/phase, gravity magnitude, prescribed roll,
+integrated gyro versus gravity-derived roll, agreement across four IMUs,
+inclinometer angle/acceleration consistency, and GNSS position/velocity units.
+Measurements and explicit tolerances are expandable in the UI. These are
+**ideal-model regression limits**, not manufacturing acceptance specifications.
+GNSS follows a separately commanded track; this test does not establish
+IMU/GNSS sensor-fusion consistency.
+
+![HAT driver signal test passing in the workbench](images/hat-signal-test.png)
+
+The portable software profile also saves `results/sw/build/hat-signals.ssrec`
+and `hat-signals.json` in its retained run. After starting the UI once, the
+same check can be run from the Windows UI environment:
+
+```powershell
+$env:SENSESHAKE_DESCRIPTOR = "$PWD/sw/build/ui-schema.binpb"
+./.local/ui-venv/Scripts/python.exe sw/tools/check_hat_signals.py --output .local/hat-check.ssrec
+```
+
+Choose a new output filename for each manual run; existing recordings are never
+overwritten. The thirteen regression tests include negative controls which alter
+otherwise valid, CRC-correct records or excitation. Wrong frequency, gain,
+polarity, motion, stuck channels, gyro scale, tilt sign, GNSS units, timestamps
+and missing measurements must fail. Existing independent bus-vector tests remain
+the guard for wire constants/CRC logic shared by a driver and a modeled bus.
+This does not exercise Linux ioctls, physical SPI/I²C timing, or real HAT noise.
+
+### Display semantics
+
 All eight sensors use the existing `Acquisition`, `Simulated`, `Scenario`,
 `Sessions` and CRC-protected recording code. The display does not generate a
 second stream of decorative data. Stimulus changes are recorded before the
@@ -136,3 +183,10 @@ seeking and resumed replay. The downloaded 2,546-sample recording passed the
 existing CLI validator with a completion summary. A 680 px requested viewport
 showed the narrow layout without horizontal page overflow. This is UI and modeled
 software evidence, not a claim about physical sensor or FPGA behavior.
+
+The HAT-signal follow-up passed **107 software tests** in portable run
+`20260925T024114Z-68747905` (2026-09-25 UTC), including 13 new driver/signal
+regressions. Its ten quantitative checks passed on 1,040 samples. The UI button
+was exercised in the browser; both downloaded artifacts matched an independent
+recheck, including the recording SHA-256. The HTTP/GLB smoke check, repository
+structure check and applicable cleanup tests also passed. No CAD source changed.

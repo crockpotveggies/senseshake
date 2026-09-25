@@ -47,10 +47,17 @@ def main():
     replayed = run(sys.executable, cli, "replay", str(demo), env=env, capture_output=True, text=True)
     assert json.loads(simulated.stdout) == json.loads(replayed.stdout)
     (BUILD / "demo-summary.json").write_text(replayed.stdout)
+    signal_capture = BUILD / "hat-signals.ssrec"
+    signal_report = signal_capture.with_suffix(".json")
+    for path in (signal_capture, signal_report):
+        if path.exists(): path.unlink()
+    run(sys.executable, str(ROOT / "sw/tools/check_hat_signals.py"), "--output", str(signal_capture),
+        env=env, capture_output=True, text=True)
     (BUILD / "verification.json").write_text(json.dumps({
         "status": "passed", "buf": run(BUF, "--version", capture_output=True, text=True).stdout.strip(),
         "breaking_baseline": "sw/interfaces/baseline.binpb", "incompatible_change_rejected": True,
         "application_demo": json.loads(replayed.stdout),
+        "hat_signals": json.loads(signal_report.read_text()),
         "scope": "Schemas, software acquisition/replay, modeled sensor buses and injected faults; not physical buses, USB enumeration or MCU emulation"
     }, indent=2) + "\n")
 

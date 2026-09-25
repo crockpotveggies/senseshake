@@ -30,6 +30,7 @@ def build_descriptor():
 build_descriptor()
 from nicegui import app, run, ui  # noqa: E402
 from senseshake.workbench import MAX_BYTES, NAMES, Workbench  # noqa: E402
+from senseshake.hat_signals import run_bench  # noqa: E402
 
 ASSETS = Path(__file__).parent / "assets"
 for relative, expected in json.loads((ASSETS / "provenance.json").read_text())["sha256"].items():
@@ -119,11 +120,15 @@ def page():
     engine = Workbench()
     selected = 1
     busy = False
+    verified_capture, signal_report = None, None
     ui.dark_mode().enable()
     ui.colors(primary=TEAL, secondary="#a7a3ff", dark="#131c26", dark_page="#0d131c")
     ui.add_css((Path(__file__).parent / "style.css").read_text())
 
     def attempt(action):
+        if busy:
+            ui.notify("Please wait for the current operation")
+            return
         try:
             action()
         except (ValueError, OSError, TypeError) as error:
@@ -147,7 +152,10 @@ def page():
                           look_at_x=0, look_at_y=0, look_at_z=0, up_x=0, up_y=0, up_z=1)
 
     def fresh(document=None):
+        nonlocal verified_capture, signal_report
         engine.reset(document, int(seed.value))
+        verified_capture, signal_report = None, None
+        verification_panel.set_visibility(False)
         ui.notify("New run ready. Press Start; save the recording before starting another run.")
 
     def save_recording():
@@ -159,7 +167,9 @@ def page():
         ui.download.content(json.dumps(engine.scenario_json(), indent=2) + "\n", "senseshake-scenario.json", "application/json")
 
     async def upload_recording(event):
-        nonlocal busy
+        nonlocal busy, verified_capture, signal_report
+        if busy:
+            return
         if event.file.size() > MAX_BYTES:
             ui.notify("Maximum recording size is 8 MiB", type="negative")
             return
@@ -167,6 +177,8 @@ def page():
         engine.pause()
         try:
             await run.io_bound(engine.load_recording, await event.file.read())
+            verified_capture, signal_report = None, None
+            verification_panel.set_visibility(False)
             ui.notify("Recording validated. Use Play or the replay timeline.")
         except (ValueError, OSError, TypeError, KeyError, RecursionError) as error:
             ui.notify(str(error), type="negative")
@@ -175,6 +187,8 @@ def page():
             replay_upload.reset()
 
     async def upload_scenario(event):
+        if busy:
+            return
         if event.file.size() > 65536:
             ui.notify("Scenario file is too large", type="negative")
             return
@@ -184,6 +198,42 @@ def page():
             ui.notify(str(error), type="negative")
         scenario_upload.reset()
 
+    async def run_signal_test():
+        nonlocal busy, verified_capture, signal_report
+        if busy:
+            return
+        busy = True
+        engine.pause()
+        test_button.disable()
+        test_button.set_text("Testing HAT signals…")
+        verification_panel.set_visibility(False)
+        try:
+            data, report = await run.io_bound(run_bench)
+            await run.io_bound(engine.load_recording, data)
+            await run.io_bound(engine.seek, 8)
+            verified_capture, signal_report = data, report
+            choose(2)
+            verification_title.set_text(f'{"PASS" if report["passed"] else "FAIL"} · {sum(c["passed"] for c in report["checks"])}/{len(report["checks"])} HAT signal checks')
+            verification_scope.set_text(f'MODELED SPI / I²C BUSES → ACTUAL PI DRIVERS → ACQUISITION → CHECKED RECORDING · 8 simulated seconds · {report["samples"]:,} HAT samples')
+            verification_title.style(f'color:{TEAL if report["passed"] else "#ff9a89"}')
+            check_badges.clear()
+            check_details.clear()
+            with check_badges:
+                for check in report["checks"]:
+                    ui.badge(check["name"], color="positive" if check["passed"] else "negative").props("outline").tooltip(check["detail"])
+            with check_details:
+                for check in report["checks"]:
+                    ui.label(f'{"PASS" if check["passed"] else "FAIL"} · {check["name"]}: {check["detail"]}').classes("small")
+                ui.label(f'Recording SHA-256: {report["recording_sha256"]}').classes("fine-print break-all")
+            verification_panel.set_visibility(True)
+            ui.notify("HAT signal test passed; the checked capture is loaded below" if report["passed"] else "HAT signal test failed; inspect the report", type="positive" if report["passed"] else "negative")
+        except (ValueError, OSError) as error:
+            ui.notify(str(error), type="negative")
+        finally:
+            busy = False
+            test_button.enable()
+            test_button.set_text("Test HAT signals")
+
     with ui.row().classes("topbar"):
         ui.icon("graphic_eq", size="30px").style(f"color:{TEAL}")
         with ui.column().classes("gap-0"):
@@ -192,8 +242,22 @@ def page():
         ui.space()
         mode = ui.badge("SIMULATION", color="primary").props("outline")
         state_label = ui.label("Ready").classes("muted")
+        test_button = ui.button("Test HAT signals", icon="fact_check", on_click=run_signal_test).props("outline no-caps").tooltip("Replaces this session with a fixed 8-second modeled-bus test; download any current run first")
         play = ui.button("Start", icon="play_arrow", on_click=lambda: attempt(engine.toggle)).props("unelevated no-caps")
         save = ui.button("Finish & save", icon="download", on_click=lambda: attempt(save_recording)).props("outline no-caps")
+
+    with ui.column().classes("panel w-full") as verification_panel:
+        with ui.row().classes("w-full items-center"):
+            verification_title = ui.label().classes("section-title")
+            ui.space()
+            ui.button("Test recording", icon="download", on_click=lambda: ui.download.content(verified_capture, "hat-signals.ssrec", "application/octet-stream")).props("flat no-caps")
+            ui.button("Report JSON", icon="download", on_click=lambda: ui.download.content(json.dumps(signal_report, indent=2), "hat-signals.json", "application/json")).props("flat no-caps")
+        verification_scope = ui.label().classes("eyebrow")
+        check_badges = ui.row().classes("gap-2")
+        with ui.expansion("Measurements & tolerances").classes("w-full"):
+            check_details = ui.column().classes("gap-1")
+        ui.label("Bench inputs: 2 Hz / 0.300 m/s² vibration and 0.5 Hz / 5° rocking. No physical HAT connected; remote-head sensors are outside this test.").classes("small muted")
+    verification_panel.set_visibility(False)
 
     with ui.element("div").classes("workspace"):
         with ui.column().classes("panel sensor-panel"):
@@ -331,8 +395,9 @@ def page():
         mode.set_text(snap["mode"].upper())
         state_label.set_text("Running" if snap["running"] else "Finished" if snap["ended"] else "Paused")
         play.set_text("Pause" if snap["running"] else "Play" if snap["mode"] == "Replay" else "Start")
+        play.set_enabled(not busy and not snap["ended"])
         play.props(f'icon={"pause" if snap["running"] else "play_arrow"}')
-        save.set_enabled(snap["mode"] == "Simulate")
+        save.set_enabled(snap["mode"] == "Simulate" and not busy)
         for element in stimuli.descendants():
             if hasattr(element, "set_enabled") and not isinstance(element, ui.expansion):
                 element.set_enabled(snap["mode"] == "Simulate" and not snap["ended"])

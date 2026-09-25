@@ -201,7 +201,7 @@ def commands(profile):
 
 
 def collect(workspace, report, profile):
-    files = [workspace / "sw/build" / name for name in ("verification.json", "demo.ssrec", "demo-summary.json")]
+    files = [workspace / "sw/build" / name for name in ("verification.json", "demo.ssrec", "demo-summary.json", "hat-signals.ssrec", "hat-signals.json")]
     for pattern in ("*.json", "*.cir", "*.log"):
         files.extend((workspace / "hw/simulation").rglob(pattern))
     for board in BOARDS:
