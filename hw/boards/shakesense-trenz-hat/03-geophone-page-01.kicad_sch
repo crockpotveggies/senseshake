@@ -142,7 +142,7 @@
               (property "Reference" "C90" (at 147.32 77.28 0) (effects (font (size 1.27 1.27))))
               (property "Value" "100n C0G" (at 147.32 79.78 0) (effects (font (size 1.0 1.0))))
               (property "Footprint" "ShakeSense:Capacitor_SMD__C_1206_3216Metric" (at 147.32 83.82000000000001 0) (effects (font (size 1 1)) hide))
-              (property "MPN" "C1206C104J5GACTU" (at 147.32 83.82000000000001 0) (effects (font (size 1 1)) hide))
+              (property "MPN" "C3216C0G1H104J160AA" (at 147.32 83.82000000000001 0) (effects (font (size 1 1)) hide))
               (instances (project "shakesense-trenz-hat" (path "/4ffaaa5d-c728-540d-9f0f-f1cafbdbe36e/0c18b12e-d7e6-548b-b124-7cc01c20072f" (reference "C90") (unit 1)))))
 (wire (pts (xy 132.08 83.82) (xy 127.0 83.82)) (stroke (width 0) (type default)) (uuid 668be3a2-4e93-566e-b4e3-6e4cb0796d6a))
 (global_label "GEO_AIN_P" (shape bidirectional) (at 127.0 83.82 180) (effects (font (size 0.9 0.9)) (justify right)) (uuid e3e3feee-7209-504c-983b-f72dd4091d64))

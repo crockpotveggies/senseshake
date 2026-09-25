@@ -268,7 +268,27 @@ class HangingDevice:
     def read(self): time.sleep(30)
 
 
+class GappedDevice:
+    def configure(self, settings): return settings
+    def read(self):
+        from senseshake.sensors import DataGap
+        raise DataGap('conversion gap; loss unknown')
+
+
 class WorkerTests(unittest.TestCase):
+    def test_conversion_gap_type_survives_real_worker_ipc(self):
+        from senseshake.sensors import DataGap
+        worker = Worker(GappedDevice, {}, startup_timeout=5)
+        try:
+            worker.configure()
+            pid = worker.process.pid
+            for _ in range(4):
+                with self.assertRaises(DataGap): worker.read()
+                self.assertTrue(worker.process.is_alive())
+                self.assertEqual(worker.process.pid, pid)
+                self.assertEqual(worker.restarts, 0)
+        finally: worker.close()
+
     def test_hung_bus_is_reaped_and_restart_budget_enforced(self):
         worker = Worker(HangingDevice, {}, timeout=.05, startup_timeout=5, restart_limit=1)
         try:

@@ -7,6 +7,12 @@ and tolerance corners. See [the circuit and limits](../../docs/geophone-input.md
 These models omit ADC digital filtering, self-noise, parasitic coupling and
 physical mounting. The older A2 GNSS circuit below remains historical.
 
+`simulate_geophone_review.py` adds eight passive startup/pulse/recovery cases in
+`geophone-review/`, with asymmetric components and leakage. A 50 mV input exceeds
+the ADC range, but this model checks passive recovery only. `prefab_review.py`
+adds 256 analytical corners at eleven frequencies, a planning noise budget and
+read-only layout/fit measurements. See the [pre-fab findings](../../docs/pre-fab-review.md).
+
 The FPGA carrier has fourteen additional bounded checks in `trenz/`, run with
 `python3 hw/tools/simulate_trenz.py`. These cover DC input budgets, detection of
 excessive supply-lead resistance and lumped UART RC loads. They do not simulate

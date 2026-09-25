@@ -1,0 +1,138 @@
+{
+  "scope": "deterministic six-channel model; no target Pi or real IPC benchmark",
+  "cases": [
+    {
+      "bus_hz": 100000,
+      "oscillator_ratio": 0.98,
+      "stalls": [],
+      "valid": 729,
+      "missing": 262,
+      "gaps": 119,
+      "ambiguous": 0,
+      "valid_hz": 242.84862435748386,
+      "other_sensor_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        9
+      ],
+      "unknown_loss_preserved": true,
+      "completion_timestamps": true,
+      "recoveries": 0,
+      "offline": false
+    },
+    {
+      "bus_hz": 100000,
+      "oscillator_ratio": 1,
+      "stalls": [],
+      "valid": 741,
+      "missing": 250,
+      "gaps": 123,
+      "ambiguous": 0,
+      "valid_hz": 246.77707803950432,
+      "other_sensor_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        9
+      ],
+      "unknown_loss_preserved": true,
+      "completion_timestamps": true,
+      "recoveries": 0,
+      "offline": false
+    },
+    {
+      "bus_hz": 100000,
+      "oscillator_ratio": 1.02,
+      "stalls": [],
+      "valid": 721,
+      "missing": 270,
+      "gaps": 143,
+      "ambiguous": 0,
+      "valid_hz": 240.11642815989555,
+      "other_sensor_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        9
+      ],
+      "unknown_loss_preserved": true,
+      "completion_timestamps": true,
+      "recoveries": 0,
+      "offline": false
+    },
+    {
+      "bus_hz": 400000,
+      "oscillator_ratio": 0.98,
+      "stalls": [],
+      "valid": 854,
+      "missing": 136,
+      "gaps": 56,
+      "ambiguous": 0,
+      "valid_hz": 284.6666666666667,
+      "other_sensor_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        9
+      ],
+      "unknown_loss_preserved": true,
+      "completion_timestamps": true,
+      "recoveries": 0,
+      "offline": false
+    },
+    {
+      "bus_hz": 400000,
+      "oscillator_ratio": 1,
+      "stalls": [],
+      "valid": 838,
+      "missing": 152,
+      "gaps": 74,
+      "ambiguous": 0,
+      "valid_hz": 279.28725093692873,
+      "other_sensor_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        9
+      ],
+      "unknown_loss_preserved": true,
+      "completion_timestamps": true,
+      "recoveries": 0,
+      "offline": false
+    },
+    {
+      "bus_hz": 400000,
+      "oscillator_ratio": 1.02,
+      "stalls": [],
+      "valid": 825,
+      "missing": 165,
+      "gaps": 90,
+      "ambiguous": 0,
+      "valid_hz": 274.97823089005453,
+      "other_sensor_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        9
+      ],
+      "unknown_loss_preserved": true,
+      "completion_timestamps": true,
+      "recoveries": 0,
+      "offline": false
+    }
+  ],
+  "throughput_qualified": false
+}

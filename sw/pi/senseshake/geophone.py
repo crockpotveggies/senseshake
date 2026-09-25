@@ -5,7 +5,7 @@ Counter plus inverted data detect repeat, skipped and corrupt conversions.
 No FIFO or sample clock timestamp is fabricated; loss and latency stay unknown.
 """
 import time
-from .sensors import Reading, NotReady
+from .sensors import Reading, NotReady, DataGap
 
 SETTINGS = dict(sensor_id=9, enabled=True, period_ns=3_030_303,
                 geophone_gain=64, geophone_reference_v=2.048)
@@ -58,13 +58,18 @@ class ADS122C04:
         counter = data[0]
         now = self.clock()
         old, elapsed = self.counter, None if self.last_read is None else now - self.last_read
-        self.counter, self.last_read = counter, now
         if elapsed is not None and (elapsed < 0 or elapsed >= .7):
-            raise OSError('geophone counter interval ambiguous')
+            # Re-anchor only after explicitly rejecting the ambiguous interval.
+            self.counter, self.last_read = counter, now
+            raise DataGap('geophone counter interval ambiguous')
         if old is not None:
             delta = (counter - old) & 255
             if delta == 0: raise NotReady('duplicate geophone conversion')
-            if delta != 1: raise OSError('geophone conversion gap; loss unknown')
+            if delta != 1:
+                self.counter, self.last_read = counter, now
+                raise DataGap('geophone conversion gap; loss unknown')
+        # Duplicate polls must not restart the rollover ambiguity timer.
+        self.counter, self.last_read = counter, now
         count = int.from_bytes(data[1:4], 'big', signed=True)
         return Reading(dict(counts=count, conversion_counter=counter),
                        3 if count in (-8388608, 8388607) else 1)

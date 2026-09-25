@@ -1,0 +1,4 @@
+#VRML V2.0 utf8
+# Conceptual geometry, millimetres converted to KiCad VRML units.
+Transform { translation 32.48031496062992 -9.980314960629922 3.755905511811023 children [ Shape { appearance Appearance { material Material { diffuseColor 0.09 0.10 0.13 } } geometry Box { size 0.984251968503937 6.078740157480315 5.511811023622047 } } ] }
+Transform { translation 5.586614173228346 -20.039370078740156 5.807086614173229 children [ Shape { appearance Appearance { material Material { diffuseColor 0.12 0.5 0.23 } } geometry Box { size 4.811023622047244 6.338582677165355 4.3700787401574805 } } ] }

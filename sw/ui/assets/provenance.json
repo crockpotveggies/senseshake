@@ -1,9 +1,10 @@
 {
   "kicad": "9.0.9",
   "sha256": {
-    "hw/boards/shakesense-trenz-hat/shakesense-trenz-hat.kicad_pcb": "9414425f30f981ba317967e71b183cbf5ba7792a78115aa3957d1fc0e6468f52",
-    "hw/layout-trenz.json": "a104a7fa107f1202357118c4cba52e6aab221af9e016325e29218bfe0cfb2054",
+    "hw/boards/shakesense-trenz-hat/shakesense-trenz-hat.kicad_pcb": "1d27a63a74d2fb38a9e2f848bc817169576ba550a55c91fa82cbc6ac45a89558",
+    "hw/layout-trenz.json": "b8083de297255f6fb539e9599e743053ef3c0b8a214de53a1b101f8c018859cd",
     "hw/layout.json": "fe4a66fe29c0a9c6474ebf016875aa3a4faf05717ef60251079794c619eb7a5b",
-    "sw/ui/assets/t1.glb": "012801ab8a722b01831f90323012b5df164c5eec853f6a16a602634752731d8d"
-  }
+    "sw/ui/assets/t1.glb": "492b1922f69ca4ace9c71674f6fd695cce3d6fab5a190452e0b343182aa67ed0"
+  },
+  "metadata_review": "Re-exported after C90/C95/C96/D90 placement and analog routing cleanup. Sensor XY positions unchanged; front/back KiCad renders inspected."
 }

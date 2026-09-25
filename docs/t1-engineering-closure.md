@@ -6,6 +6,13 @@ GNSS/PPS/RF details below describe the preceding revision or legacy recordings.
 The current physical bench template is version 2, with geophone response/noise/timing
 checks replacing the GNSS UTC check.
 
+**Current pre-fab assessment:** see the [four-check review](pre-fab-review.md).
+It fixes two acquisition loss-handling defects and closes the six analog path
+targets. Optional flex-harness fit remains conditional; see the
+[selected assembly](stack-assembly.md). The GNSS/RF history below is retained for
+traceability, not as evidence about the current T1-GEO. Current evidence has 6,444 copper
+items; the earlier counts below refer to the preceding layout revision.
+
 Fabrication process approval is owned by the project owner. This work concerns
 the sensor HAT and its Trenz interfaces; Coldfoot and USB-head firmware are separate.
 Analysis against the recorded stack is conditional on those stack parameters.

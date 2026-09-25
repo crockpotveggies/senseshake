@@ -2,7 +2,7 @@
 <export version="E">
   <design>
     <source>/work/hw/boards/shakesense-trenz-hat/shakesense-trenz-hat.kicad_sch</source>
-    <date>2026-09-25T05:29:43+0000</date>
+    <date>2026-09-25T07:00:03+0000</date>
     <tool>Eeschema 9.0.9</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -770,13 +770,13 @@
       <value>100n C0G</value>
       <footprint>ShakeSense:Capacitor_SMD__C_1206_3216Metric</footprint>
       <fields>
-        <field name="MPN">C1206C104J5GACTU</field>
+        <field name="MPN">C3216C0G1H104J160AA</field>
         <field name="Footprint">ShakeSense:Capacitor_SMD__C_1206_3216Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="ShakeSense" part="Part_C90" description=""/>
-      <property name="MPN" value="C1206C104J5GACTU"/>
+      <property name="MPN" value="C3216C0G1H104J160AA"/>
       <property name="Sheetname" value="03-geophone-page-01"/>
       <property name="Sheetfile" value="03-geophone-page-01.kicad_sch"/>
       <sheetpath names="/03-geophone-page-01/" tstamps="/0c18b12e-d7e6-548b-b124-7cc01c20072f/"/>

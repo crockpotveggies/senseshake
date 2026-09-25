@@ -68,6 +68,9 @@ pi+=box(32.51,-3.5,z+2.54+8.51/2,51.31,4.95,8.51,'0.08 0.085 0.095')
 for i in range(20):
     for y in [2.23,4.77]:pi+=box(8.38+i*2.54,-y,z+2.54+8.51+4.93/2,.64,.64,4.93,'0.75 0.6 0.25')
 pi+=box(31,-28,z+1.4,15,15,2.8,'0.16 0.17 0.18')
+# Pi 4 Case Fan kit's 18 x 18 x 10 mm heatsink only; fan not installed.
+# Allow 0.5 mm adhesive thickness in the conservative envelope.
+pi+=box(31,-28,z+2.8+.5+5,18,18,10,'0.27 0.29 0.32')
 pi+=box(50,-31,z+.7,11,14,1.4,'0.055 0.06 0.07')
 # Approximate connector clearance envelopes, not certified vendor geometry.
 for x,y,w,d,h in [(76,-10.5,21,16,15.5),(76,-29,21,15,16),(76,-47,21,15,16),(11,-54,9,6,3.2),(26,-54,7,6,3),(39,-54,7,6,3)]:
@@ -77,6 +80,15 @@ for x,y in [(3.5,3.5),(61.5,3.5),(3.5,52.5),(61.5,52.5)]:
 for x,y in [(12,11),(20,42),(45,15),(57,43),(62,20)]:pi+=box(x,-y,z+.5,4,3,1,'0.12 0.13 0.14')
 write('Pi4_stack_concept',pi);add(b,'MODEL_PI4','${KIPRJMOD}/../../models/Pi4_stack_concept.wrl',(50,50))
 save_board(str(F/'pi-trenz-stack-concept.kicad_pcb'),b)
+# Separate service-envelope view: bounding volumes, not exact mated solids.
+# The ordinary stack remains uncluttered and does not imply flex fit approval.
+service=box(82.5,-25.35,2.54+7,2.5,15.44,14,'0.09 0.10 0.13')
+service+=box(14.19,-50.9,9.2+11.1/2,12.22,16.1,11.1,'0.12 0.5 0.23')
+write('T1_service_envelopes',service)
+add(b,'MODEL_SERVICE','${KIPRJMOD}/../../models/T1_service_envelopes.wrl',(50,50))
+save_board(str(F/'stack-service-envelopes.kicad_pcb'),b)
+for fp in list(b.GetFootprints()):
+    if fp.GetReference()=='MODEL_SERVICE':b.Delete(fp)
 # Exploded view separates assemblies; spacer bodies are hidden intentionally.
 for fp in list(b.GetFootprints()):
     if fp.GetReference()=='MODEL_TE0712':model(fp,'${KIPRJMOD}/../../models/trenz/STP-TE0712-03-No Variations.step',(0,0,27.6099917))

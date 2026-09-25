@@ -2039,16 +2039,17 @@
         "footprint": "Package_TO_SOT_SMD:SOT-323_SC-70",
         "names": {},
         "xy": [
-          27,
-          47.8
+          16.1,
+          47.6
         ],
-        "angle": 0,
+        "angle": 90,
         "section": "03-geophone",
         "mpn": "TPD2E2U06DCKR",
         "note": "Connector ESD suppression only; not lightning protection.",
         "dnp": false,
         "local_fp": "Package_TO_SOT_SMD__SOT-323_SC-70",
-        "type": "GEO_ESD"
+        "type": "GEO_ESD",
+        "side": "back"
       },
       {
         "ref": "R90",
@@ -2090,16 +2091,17 @@
         "footprint": "Capacitor_SMD:C_1206_3216Metric",
         "names": {},
         "xy": [
-          25,
-          43.0
+          19.05,
+          45.0
         ],
-        "angle": 90,
+        "angle": 270,
         "section": "03-geophone",
-        "mpn": "C1206C104J5GACTU",
+        "mpn": "C3216C0G1H104J160AA",
         "note": "C0G differential filter; no piezoelectric X7R on signal path.",
         "dnp": false,
         "local_fp": "Capacitor_SMD__C_1206_3216Metric",
-        "type": "GEO_C100N"
+        "type": "GEO_C100N",
+        "side": "front"
       },
       {
         "ref": "C91",
@@ -2260,16 +2262,17 @@
         "footprint": "Capacitor_SMD:C_0603_1608Metric",
         "names": {},
         "xy": [
-          18.9,
-          45.5
+          15.2,
+          44.5
         ],
-        "angle": 90,
+        "angle": 180,
         "section": "03-geophone",
         "mpn": "GRM188R71H104KA93D",
         "note": "",
         "dnp": false,
         "local_fp": "Capacitor_SMD__C_0603_1608Metric",
-        "type": "P_6"
+        "type": "P_6",
+        "side": "back"
       },
       {
         "ref": "C96",
@@ -2277,16 +2280,17 @@
         "footprint": "Capacitor_SMD:C_0603_1608Metric",
         "names": {},
         "xy": [
-          18.9,
-          42.2
+          18.7,
+          44.5
         ],
-        "angle": 90,
+        "angle": 270,
         "section": "03-geophone",
         "mpn": "GRM188R71H104KA93D",
         "note": "",
         "dnp": false,
         "local_fp": "Capacitor_SMD__C_0603_1608Metric",
-        "type": "P_6"
+        "type": "P_6",
+        "side": "back"
       },
       {
         "ref": "R97",

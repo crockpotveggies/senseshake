@@ -1,6 +1,6 @@
 """One outstanding call per worker, finite restart and bounded reap attempts."""
 import multiprocessing as mp
-from .sensors import NotReady
+from .sensors import NotReady, DataGap
 from .fifo import FifoFault
 
 
@@ -13,6 +13,7 @@ def child(connection, factory, settings):
             try: connection.send(("sample", device.read()))
             except FifoFault as error: connection.send(("fifo_error", str(error)[:160]))
             except NotReady as error: connection.send(("missing", str(error)[:160]))
+            except DataGap as error: connection.send(("data_gap", str(error)[:160]))
             except (OSError, ValueError) as error: connection.send(("error", str(error)[:160]))
     except (EOFError, BrokenPipeError): pass
     except Exception as error:
@@ -83,6 +84,7 @@ class Worker:
             raise OSError("sensor worker disconnected")
         kind, value = self._receive(self.timeout)
         if kind == "missing": raise NotReady(value)
+        if kind == "data_gap": raise DataGap(value)
         if kind == "fifo_error": raise FifoFault(value)
         if kind != "sample": raise OSError(value)
         return value

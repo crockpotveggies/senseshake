@@ -173,6 +173,13 @@ that run. Data-not-ready is a polling miss, not a reset trigger. Recovered
 settings must match the recorded configuration. Exhausted channels stay offline
 until a new run. Status messages explain failures and recovery.
 
+Geophone conversion discontinuities are separate from I/O failures: the bus can
+be healthy while the host misses ADC conversions. `DataGap` survives worker IPC,
+emits a discontinuity status and MISSING record with unknown loss, and clears the
+consecutive I/O-failure count. It does not reset the ADC. Duplicate reads do not
+extend the counter-wrap ambiguity timer. See the [pre-fab stress review](pre-fab-review.md)
+for the measured model limits of polling and the planned DRDY acquisition path.
+
 The queue defaults to 64 batches (configurable 1–4096). It drops newest data on
 overflow, carries known/unknown loss into the next accepted batch and retains
 a final summary of losses without subsequent batches. Control messages drain

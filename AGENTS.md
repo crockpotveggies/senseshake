@@ -45,6 +45,10 @@ Keep vendor attribution and the existing GPL-3.0 license.
 Sensor v1 semantics live in `docs/sensor-contract.md`; field layouts are in
 `sw/interfaces/proto/`. Run the portable software profile when changing either.
 Preserve explicit zero/missing/unknown distinctions and raw sensor precision.
+Conversion discontinuities use `DataGap`: preserve it across worker IPC and emit
+unknown-loss/missing records without treating host service jitter as broken hardware.
+Do not reset the ADC just because conversions were overwritten. Preserve the
+independent-clock stress tests and open findings in docs/pre-fab-review.md.
 The Buf baseline is a compatibility fixture, not routine generated output.
 Do not refresh it just to bypass a breaking change. Generated descriptors belong
 in ignored `sw/build/` inside the lab. Follow `docs/sensor-software.md` for runtime,
@@ -67,3 +71,9 @@ project dependencies; do not add UI packages to atopile's environment. For UI
 changes run its HTTP smoke check, controller tests and a browser interaction
 check. The sensor software profile includes the controller tests. Update the
 workbench guide and review model provenance after changing board display assets.
+
+The T1-GEO analog path targets are enforced by prefab_review.py. Preserve local
+filter/protection routing and ground stitches. Optional flex-harness fit remains
+conditional; use docs/stack-assembly.md and do not portray the candidate four-flex
+route as a qualified assembly. ADC supply-pad through-vias need filled/capped
+processing in the fabrication notes.

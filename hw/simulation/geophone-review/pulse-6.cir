@@ -1,0 +1,32 @@
+Geophone passive startup and pulse recovery; no ADC overload model
+Vsupply supply 0 PWL(0 0 1m 3.465)
+R96 supply avdd 22
+Iadc avdd 0 500u
+C94 avdd 0 1.2e-05
+C95 avdd 0 100n
+R94 avdd vcm 10.1k
+R95 vcm 0 9.9k
+C93 vcm 0 1.2e-05
+Vcoil coilp coilm PULSE(0 0.002 .4 10u 10u .02 1)
+Rcoil coilp leadp 414.75
+R90 leadp ainp 1.01k
+R91 coilm ainm .99k
+R92 ainp vcm 1.01meg
+R93 ainm vcm .99meg
+C90 ainp ainm 105n
+C91 ainp 0 1.05n
+C92 ainm 0 .95n
+Ileakp leadp 0 10n
+Ileakn coilm 0 0
+.control
+tran 20u .5
+let differential = v(ainp)-v(ainm)
+let commonmode = (v(ainp)+v(ainm))/2
+meas tran baseline FIND differential AT=.39
+meas tran pulse FIND differential AT=.419
+meas tran recovered FIND differential AT=.425
+meas tran bias_start FIND commonmode AT=.3
+meas tran bias_final FIND commonmode AT=.5
+quit
+.endc
+.end

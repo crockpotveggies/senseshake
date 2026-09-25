@@ -52,6 +52,11 @@ connectors; see the [pin contract](docs/trenz-gpio-breakout.csv). Its FPGA
 bitstream port, cable/stack fit and physical qualification remain pending.
 The active T1 has a [single Racotech geophone input](docs/geophone-input.md) and no GNSS.
 
+The [pre-fab review](docs/pre-fab-review.md) adds analog tolerance/transient checks
+and acquisition stress tests, fixes two loss-handling defects, and identifies
+the remaining optional harness-fit work. The geophone filter/protection layout
+now meets its path-length targets; see the [selected assembly notes](docs/stack-assembly.md).
+
 ![T1 geophone HAT](hw/boards/shakesense-trenz-hat/3d.png)
 
 The complete breakout uses an eight-layer HDI stack. The geophone input,

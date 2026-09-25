@@ -9,6 +9,13 @@ class NotReady(OSError):
     pass
 
 
+class DataGap(OSError):
+    """Communication succeeded, but conversion continuity was lost.
+
+    Emit a missing marker and unknown loss without resetting a healthy device.
+    """
+
+
 @dataclass
 class Reading:
     raw: dict

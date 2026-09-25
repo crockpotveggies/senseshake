@@ -1,7 +1,7 @@
 """Shared bounded acquisition loop for modeled and Linux sensor adapters."""
 from dataclasses import dataclass
 from . import messages
-from .sensors import NotReady
+from .sensors import NotReady, DataGap
 from .transport import Outbox
 from .fifo import Drain, FifoFault
 
@@ -95,6 +95,10 @@ class Acquisition:
                 except NotReady:
                     # A polling miss is visible but does not reset a healthy sensor.
                     pass
+                except DataGap as error:
+                    # A scheduler overrun is not a failed bus or configuration.
+                    c.failures = 0
+                    self.report(c, 4, error, clock())
                 except (OSError, ValueError) as error:
                     c.failures += 1
                     self.report(c, 3, error, clock())

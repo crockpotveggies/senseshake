@@ -148,7 +148,8 @@ measurements, targets, context or evidence never become a pass. Correct failed
 items and repeat the affected tests with traceable revisions.
 
 For the next **prototype fab submission**, freeze the intended T1 revision and
-actual stack/copper/dielectric values; reconcile GNSS geometry with that stack;
+actual stack/copper/dielectric values; close the [pre-fab review](pre-fab-review.md)
+layout and harness findings;
 run the full CAD/build checks; review footprint pin numbering, BOM availability,
 DNPs, drill/microvia instructions and mechanical fit; then export and independently
 inspect Gerbers/drills, assembly drawings and placements from that same revision.

@@ -98,7 +98,7 @@ J90,GEO + / - / SHIELD,1803439,"Connector_Phoenix_MC__PhoenixContact_MCV_1,5_3-G
 D90,TPD2E2U06,TPD2E2U06DCKR,Package_TO_SOT_SMD__SOT-323_SC-70,False,Connector ESD suppression only; not lightning protection.
 R90,1k,RC0603FR-071KL,Resistor_SMD__R_0603_1608Metric,False,Matched series input filter / current limiting.
 R91,1k,RC0603FR-071KL,Resistor_SMD__R_0603_1608Metric,False,
-C90,100n C0G,C1206C104J5GACTU,Capacitor_SMD__C_1206_3216Metric,False,C0G differential filter; no piezoelectric X7R on signal path.
+C90,100n C0G,C3216C0G1H104J160AA,Capacitor_SMD__C_1206_3216Metric,False,C0G differential filter; no piezoelectric X7R on signal path.
 C91,1n C0G,C0603C102J5GACTU,Capacitor_SMD__C_0603_1608Metric,False,
 C92,1n C0G,C0603C102J5GACTU,Capacitor_SMD__C_0603_1608Metric,False,
 R92,1M,RC0603FR-071ML,Resistor_SMD__R_0603_1608Metric,False,

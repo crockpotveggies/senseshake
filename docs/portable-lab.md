@@ -45,9 +45,9 @@ drive-sharing configuration. No host directory is mounted into the container.
 
 | Profile | Checks |
 | --- | --- |
-| `full` (default) | Fresh atopile builds for A2, USB field head, and T1; numeric constraint solves; unsafe 5 V IMU rejection; circuit invariants and 14 hardware regression cases; native KiCad ERC/DRC/connectivity; T1 RF/power/clearance checks; 41 bounded SPICE cases; the software profile (15 steps). |
+| `full` (default) | Fresh atopile builds for A2, USB field head, and T1; numeric constraint solves; unsafe 5 V IMU rejection; circuit invariants and 19 hardware regression tests; native KiCad ERC/DRC/connectivity; T1 power/clearance and pre-fab review; 64 bounded SPICE cases; the software profile (18 stages). |
 | `quick` | Same GPIO fault, circuit/PCB consistency, SPICE and software checks using saved compiled layouts. Does **not** prove `.ato` changes were rebuilt. |
-| `spice` | 27 A2/field support-circuit cases and 14 Trenz support-circuit cases, including expected fault detection. |
+| `spice` | 27 A2/field, 14 Trenz, 15 geophone response and 8 geophone transient cases, including expected fault detection. |
 | `software` | Buf format/lint/build and FILE compatibility, deliberate incompatible-change rejection, acquisition/replay, modeled driver and Linux TTY/worker fault tests; retained eight-sensor demo. No CAD or physical hardware execution. |
 
 The runner calls the existing project entrypoints. It does not reroute boards,
@@ -237,11 +237,19 @@ References: [official KiCad container images](https://www.kicad.org/download/doc
 
 ## Current T1-GEO validation
 
-Run `20260925T052808Z-f2a7e74a` passes all **16 portable stages**: three Atopile
-builds and numeric solves, the invalid-voltage fixture, **16 hardware regressions**,
-KiCad ERC/DRC/connectivity, **56 SPICE cases** (15 geophone), and **147 software
+Run `20260925T065831Z-3ac9bf91` passes all **18 portable stages**: three Atopile
+builds and numeric solves, the invalid-voltage fixture, **20 hardware regressions**,
+KiCad ERC/DRC/connectivity, **64 SPICE cases** (23 geophone), and **152 software
 tests without skips**, including contract compatibility. Clean route replay preserves
-all **6,452 tracks/vias**, with **38 microvias**, and zero DRC/open connections.
-The UI passes 10/10 modeled-driver checks across 3,672 samples.
+all **6,444 tracks/vias**, with **38 microvias**, and zero DRC/open connections.
+All non-geophone signal copper and the physical pad/net map are preserved.
+The UI passes 10/10 modeled-driver checks across 3,672 samples; its refreshed
+board model and geophone chart were inspected in the browser.
 See [the current verification record](../hw/boards/shakesense-trenz-hat/verification.json).
 This does not replace physical noise, power, fit or timing measurements.
+
+The read-only pre-fab review retains 256 analog corners, layout/fit measurements,
+and explicit open findings; see [the assessment](pre-fab-review.md) and
+[optional flex-harness limitations](stack-assembly.md). The software profile
+retains `acquisition-stress.json`; passing loss-handling tests does not imply
+lossless capture.

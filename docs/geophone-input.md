@@ -29,7 +29,8 @@ The render shows the PCB header, not the cable plug or external geophone.
 - D90: TPD2E2U06DCKR at the connector; R90/R91 are 1 kΩ series input resistors.
   Protection is intended for handling ESD, not outdoor lightning or arbitrary
   sustained applied voltage. Qualification of the protection remains physical.
-- C90: 100 nF C0G across the differential input; C91/C92: 1 nF C0G to ground.
+- C90: TDK C3216C0G1H104J160AA, 100 nF C0G across the differential input;
+  C91/C92: 1 nF C0G to ground.
   C0G avoids using piezoelectric high-k ceramics on the measurement input.
 - R92/R93: 1 MΩ bias returns to filtered mid-supply. R94/R95: 10 kΩ divider;
   C93: 10 µF. This loads the coil lightly; no additional damping shunt is fitted.
@@ -78,6 +79,15 @@ target Pi; 330 SPS conversion rate does not guarantee 330 delivered samples/s.
 ADC data validity does not prove coil continuity; automatic open-coil detection
 is not implemented. The current T1 rejects `--utc`; it contains neither GNSS nor a UTC/PPS source.
 
+Duplicate reads do not extend the counter ambiguity window. Conversion gaps emit
+missing records with unknown loss, without resetting an otherwise healthy ADC.
+Actual communication faults retain bounded hardware recovery. The nominal
+330-SPS setting has a 3.04296875 ms conversion period at nominal clock; do not
+interpret the configured nominal period as a calibrated device timestamp.
+See the [pre-fab review](pre-fab-review.md) for measured geometry, noise estimates,
+2,816 analytical corner evaluations, eight added passive SPICE transients and
+six-channel timing stress. The six analog path targets are now closed; optional flex-harness fit remains open.
+
 Tests include independent pin maps, four-IMU orientation, ADC wire faults,
 counter rollover, signed precision, saturation, contract clock/ID validation,
 and a known 10 Hz / 100 µm/s waveform through the actual driver on a modeled bus.
@@ -99,8 +109,9 @@ sequence and physical cable/stack fit. Blank physical evidence never passes.
 ## Recorded validation
 
 The [T1-GEO verification record](../hw/boards/shakesense-trenz-hat/verification.json)
-records all 16 portable stages passing, 147 software tests without skips, 16
-hardware regression tests and 56 total SPICE cases. Native KiCad ERC/DRC and
-connectivity report zero findings. Clean SES replay reproduces all 6,452 copper
-items exactly. The [UI test screenshot](images/hat-signal-test.png) shows the
-geophone selected after all 10 modeled-driver checks pass.
+records all 18 portable stages passing, 152 software tests without skips, 20
+hardware regressions and 64 total SPICE cases. Native KiCad ERC/DRC and
+connectivity report zero findings. Clean SES replay reproduces all 6,444 copper
+items exactly. The refreshed UI passes all 10 modeled-driver checks.
+See [the layout review](pre-fab-review.md) for the shortened filter/protection
+paths and [assembly notes](stack-assembly.md) for component sides and via-in-pad.

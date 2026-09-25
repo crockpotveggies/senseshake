@@ -192,21 +192,21 @@ def commands(profile):
         steps.append(("reject-overvoltage", ["/opt/atopile/bin/python", "hw/tools/solve_constraints.py", "--negative"]))
     if profile in ("full", "quick"):
         steps += [("hardware-regressions", ["python3", "-m", "unittest", "discover", "-s", "hw/tests", "-p", "test_*.py"])]
-        steps += [(name, ["python3", f"hw/tools/{name}.py"]) for name in ("check_circuit", "check_design", "check_trenz", "t1_engineering")]
+        steps += [(name, ["python3", f"hw/tools/{name}.py"]) for name in ("check_circuit", "check_design", "check_trenz", "t1_engineering", "prefab_review")]
     if profile != "software":
-        steps += [(name, ["python3", f"hw/tools/{name}.py"]) for name in ("simulate", "simulate_trenz", "simulate_geophone")]
+        steps += [(name, ["python3", f"hw/tools/{name}.py"]) for name in ("simulate", "simulate_trenz", "simulate_geophone", "simulate_geophone_review")]
     if profile in ("full", "quick", "software"):
         steps.append(("sensor-contracts", ["/opt/atopile/bin/python", "sw/tools/check_interfaces.py"]))
     return steps
 
 
 def collect(workspace, report, profile):
-    files = [workspace / "sw/build" / name for name in ("verification.json", "demo.ssrec", "demo-summary.json", "hat-signals.ssrec", "hat-signals.json")]
+    files = [workspace / "sw/build" / name for name in ("verification.json", "demo.ssrec", "demo-summary.json", "hat-signals.ssrec", "hat-signals.json", "acquisition-stress.json")]
     for pattern in ("*.json", "*.cir", "*.log"):
         files.extend((workspace / "hw/simulation").rglob(pattern))
     for board in BOARDS:
         folder = workspace / "hw/boards" / board
-        files.extend(folder / name for name in ("drc.json", "erc.json", "validation.json", "schematic-netlist.xml", "engineering.json"))
+        files.extend(folder / name for name in ("drc.json", "erc.json", "validation.json", "schematic-netlist.xml", "engineering.json", "prefab-review.json"))
     if profile == "full":
         for target in TARGETS:
             files.append(workspace / "hw/layout" / target / f"{target}.kicad_pcb")

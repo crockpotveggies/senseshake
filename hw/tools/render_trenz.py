@@ -8,6 +8,7 @@ for pcb,png,angle,zoom in [
  ('shakesense-trenz-hat','3d','325,0,25','.9'),
  ('trenz-mounted','trenz-mounted','315,0,30','.8'),
  ('pi-trenz-stack-concept','pi-trenz-stack-concept','300,0,30','.78'),
+ ('stack-service-envelopes','stack-service-envelopes','300,0,30','.68'),
  ('stack-exploded','stack-exploded','305,0,30','.62')]:
     if len(sys.argv)>1 and png not in sys.argv[1:]:continue
     with open(ROOT/'hw/logs'/('render-'+png+'.log'),'w') as log:

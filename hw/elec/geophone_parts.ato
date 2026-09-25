@@ -75,7 +75,7 @@ component GEO_C100N:
     capacitance = 100nF +/- 5%
     rated_voltage: V
     rated_voltage = 50V
-    trait is_atomic_part<manufacturer="See BOM", partnumber="C1206C104J5GACTU", footprint="Capacitor_SMD__C_1206_3216Metric.kicad_mod", symbol="symbols/GEO_C100N.kicad_sym">
+    trait is_atomic_part<manufacturer="See BOM", partnumber="C3216C0G1H104J160AA", footprint="Capacitor_SMD__C_1206_3216Metric.kicad_mod", symbol="symbols/GEO_C100N.kicad_sym">
     trait has_designator_prefix<prefix="C">
     signal p1 ~ pin 1
     signal p2 ~ pin 2

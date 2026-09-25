@@ -8,6 +8,8 @@
   and [validation limits](validation.md).
 - [T1 Pi-size Trenz carrier](trenz-hat.md) and [FPGA selection](fpga-options.md).
 - [Current T1-GEO circuit, Racotech input and accelerometer axes](geophone-input.md).
+- [Selected Pi, cooling, JTAG and geophone assembly; optional flex fit](stack-assembly.md).
+- [Pre-fab review: analog, timing, components/layout and stack fit](pre-fab-review.md).
 - [T1 electrical, mechanical and acquisition closure](t1-engineering-closure.md).
 - [Legacy UTC capture and pulse association](utc-timing.md) and [physical bench procedure/report](bench-procedure.md).
 - [USB sensor-head interface and firmware contract](usb-sensor-head.md).

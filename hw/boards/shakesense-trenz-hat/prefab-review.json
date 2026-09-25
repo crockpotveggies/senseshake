@@ -1,0 +1,903 @@
+{
+  "scope": "pre-fab engineering review; no physical qualification",
+  "disposition": "analog path targets closed; optional flex harness and acquisition-throughput qualification remain open",
+  "board_sha256": "1d27a63a74d2fb38a9e2f848bc817169576ba550a55c91fa82cbc6ac45a89558",
+  "physical_pin_checks": 51,
+  "purchasing_package_checks": 18,
+  "analog": {
+    "corner_count": 256,
+    "frequency_cases": 2816,
+    "response": [
+      {
+        "hz": 0.5,
+        "nominal_v_per_m_s": 0.28859254451397104,
+        "minimum_v_per_m_s": 0.2099410946462534,
+        "maximum_v_per_m_s": 0.4029700800265954
+      },
+      {
+        "hz": 1,
+        "nominal_v_per_m_s": 1.1539048196386983,
+        "minimum_v_per_m_s": 0.8345225590973248,
+        "maximum_v_per_m_s": 1.6247385422246978
+      },
+      {
+        "hz": 4,
+        "nominal_v_per_m_s": 14.632464633022146,
+        "minimum_v_per_m_s": 10.488005420114195,
+        "maximum_v_per_m_s": 20.404455065367767
+      },
+      {
+        "hz": 4.5,
+        "nominal_v_per_m_s": 16.693908630797065,
+        "minimum_v_per_m_s": 12.178454520605058,
+        "maximum_v_per_m_s": 22.562197663987487
+      },
+      {
+        "hz": 5,
+        "nominal_v_per_m_s": 18.341329760683877,
+        "minimum_v_per_m_s": 13.6580853506644,
+        "maximum_v_per_m_s": 24.019447889199228
+      },
+      {
+        "hz": 10,
+        "nominal_v_per_m_s": 22.994083646280355,
+        "minimum_v_per_m_s": 19.565999168780916,
+        "maximum_v_per_m_s": 26.245772833945285
+      },
+      {
+        "hz": 20,
+        "nominal_v_per_m_s": 23.35507321505312,
+        "minimum_v_per_m_s": 20.743689359368116,
+        "maximum_v_per_m_s": 25.98549410875558
+      },
+      {
+        "hz": 40,
+        "nominal_v_per_m_s": 23.333503518215718,
+        "minimum_v_per_m_s": 20.9273123786511,
+        "maximum_v_per_m_s": 25.749098759623333
+      },
+      {
+        "hz": 80,
+        "nominal_v_per_m_s": 23.204559632331023,
+        "minimum_v_per_m_s": 20.846026219963164,
+        "maximum_v_per_m_s": 25.56812770893137
+      },
+      {
+        "hz": 150.1,
+        "nominal_v_per_m_s": 22.793879033949516,
+        "minimum_v_per_m_s": 20.43972903459787,
+        "maximum_v_per_m_s": 25.15766474202002
+      },
+      {
+        "hz": 256000,
+        "nominal_v_per_m_s": 0.060439796317214606,
+        "minimum_v_per_m_s": 0.050959777515688434,
+        "maximum_v_per_m_s": 0.07116400241309903
+      }
+    ],
+    "passive_noise_25c_rms_v": 2.0238392640391842e-07,
+    "adc_typical_rms_v": 5e-07,
+    "combined_typical_rms_v": 5.394063900869794e-07,
+    "tvs_opposite_10na_leakage_differential_bound_v": 3.95e-06,
+    "tvs_same_direction_10na_common_mode_shift_v": 0.010110000000000001,
+    "minimum_full_scale_common_mode_margin_v": 1.0832418339826189,
+    "nominal_conversion_period_s": 0.00304296875,
+    "nominal_actual_sps": 328.62644415917845,
+    "oscillator_2pct_sps_range": [
+      322.0539152759948,
+      335.198973042362
+    ],
+    "digital_filter": {
+      "type": "vendor linear-phase FIR, one-cycle settling",
+      "minus3db_hz": 150.1,
+      "coefficients_available": false,
+      "exact_alias_rejection_qualified": false
+    },
+    "modulator_image": {
+      "hz": 256000,
+      "passive_attenuation_db": -51.75785723697938,
+      "input_sine_rms_for_0_5uv_output_v": 0.00019358106114618362
+    },
+    "startup_vcm": {
+      "nominal_tau_s": 0.05,
+      "maximum_assumed_tau_s": 0.0606,
+      "residual_fraction_after_300ms": 0.007079903158804942
+    },
+    "limits": [
+      "Symmetric RC corners omit coil inductance, parasitics and common-mode conversion",
+      "ADC noise is typical, not a guaranteed assembled-board bound",
+      "TVS bound assumes specified leakage at its test bias; ADC bias and contamination need measurement",
+      "No invented FIR coefficients or quantitative credit for digital stopband rejection",
+      "ADC overload recovery is unspecified here; passive settling does not prove ADC recovery"
+    ]
+  },
+  "layout_and_fit": {
+    "paths": [
+      {
+        "start": [
+          "U22",
+          "12"
+        ],
+        "end": [
+          "C95",
+          "1"
+        ],
+        "xy_copper_length_mm": 0.9045889950690313
+      },
+      {
+        "start": [
+          "U22",
+          "13"
+        ],
+        "end": [
+          "C96",
+          "1"
+        ],
+        "xy_copper_length_mm": 1.8381801462315928
+      },
+      {
+        "start": [
+          "U22",
+          "11"
+        ],
+        "end": [
+          "C90",
+          "1"
+        ],
+        "xy_copper_length_mm": 2.0610281374238575
+      },
+      {
+        "start": [
+          "U22",
+          "10"
+        ],
+        "end": [
+          "C90",
+          "2"
+        ],
+        "xy_copper_length_mm": 2.5395815280171306
+      },
+      {
+        "start": [
+          "J90",
+          "1"
+        ],
+        "end": [
+          "D90",
+          "1"
+        ],
+        "xy_copper_length_mm": 1.7677683671799314
+      },
+      {
+        "start": [
+          "J90",
+          "2"
+        ],
+        "end": [
+          "D90",
+          "2"
+        ],
+        "xy_copper_length_mm": 1.7819076743765376
+      }
+    ],
+    "findings": [],
+    "analog_reference_plane_samples": {
+      "GEO_P": {
+        "samples": 104,
+        "over_ground_by_plane": {
+          "In2.Cu": 56,
+          "In5.Cu": 56
+        },
+        "signal_layers": [
+          "B.Cu",
+          "F.Cu"
+        ]
+      },
+      "GEO_N": {
+        "samples": 179,
+        "over_ground_by_plane": {
+          "In2.Cu": 129,
+          "In5.Cu": 129
+        },
+        "signal_layers": [
+          "B.Cu",
+          "F.Cu"
+        ]
+      },
+      "GEO_AIN_P": {
+        "samples": 285,
+        "over_ground_by_plane": {
+          "In2.Cu": 268,
+          "In5.Cu": 268
+        },
+        "signal_layers": [
+          "F.Cu",
+          "In1.Cu"
+        ]
+      },
+      "GEO_AIN_N": {
+        "samples": 221,
+        "over_ground_by_plane": {
+          "In2.Cu": 191,
+          "In5.Cu": 191
+        },
+        "signal_layers": [
+          "F.Cu",
+          "In4.Cu"
+        ]
+      }
+    },
+    "connectors": {
+      "J90": {
+        "courtyard_mm": [
+          7.280000000000001,
+          47.400000000000006,
+          21.099999999999994,
+          55.650000000000006
+        ],
+        "module_xy_separation_mm": 8.900000000000006,
+        "header_installed_height_mm": 9.2,
+        "plug_mpn": "1803581",
+        "plug_dimensions_mm": [
+          12.22,
+          16.1,
+          11.1
+        ],
+        "cable_service_envelope_verified": false
+      },
+      "J83": {
+        "courtyard_mm": [
+          1.8999999999999986,
+          8.96,
+          12.71,
+          20.129999999999995
+        ],
+        "module_xy_separation_mm": 17.29
+      },
+      "J84": {
+        "courtyard_mm": [
+          80.72999999999999,
+          17.230000000000004,
+          84.27000000000001,
+          33.47
+        ],
+        "module_xy_separation_mm": 0.7299999999999898
+      }
+    },
+    "local_ground_stitches": [
+      {
+        "reference": "C95",
+        "nearest_ground_via_mm": 0.0
+      },
+      {
+        "reference": "C96",
+        "nearest_ground_via_mm": 0.0
+      },
+      {
+        "reference": "D90",
+        "nearest_ground_via_mm": 0.910442
+      }
+    ],
+    "selected_assembly": {
+      "status": "Pi, heatsink, JTAG and plug envelope checks pass; flex routing conditional",
+      "pi": "Raspberry Pi 4 Model B",
+      "pi_supports_xy_mm": [
+        [
+          3.5,
+          3.5
+        ],
+        [
+          61.5,
+          3.5
+        ],
+        [
+          3.5,
+          52.5
+        ]
+      ],
+      "omitted_support_xy_mm": [
+        61.5,
+        52.5
+      ],
+      "pi_to_hat_underside_mm": 27.179,
+      "module_surface_gap_mm": 8,
+      "minimum_support_margin_mm": 0.3500000000000001,
+      "minimum_pi_port_margin_mm": 2.029,
+      "heatsink_margin_mm": 4.728999999999999,
+      "jtag_module_margin_mm": 0.75,
+      "geophone_plug_module_margin_mm": 9.2,
+      "geophone_tail_to_flex_margin_mm": 2.449999999999999,
+      "installation_allowance_mm": 1,
+      "flex_guide_allowance_mm": 0.5,
+      "flex_paths_mm": {
+        "J86": [
+          [
+            17,
+            19.4,
+            -2.6
+          ],
+          [
+            17,
+            13.399999999999999,
+            -2.6
+          ],
+          [
+            17,
+            12.943158327229819,
+            -2.629942985191663
+          ],
+          [
+            17,
+            12.494133342141176,
+            -2.7192596079882607
+          ],
+          [
+            17,
+            12.060607986722184,
+            -2.866421636210496
+          ],
+          [
+            17,
+            11.649999999999999,
+            -3.068911086754464
+          ],
+          [
+            17,
+            11.269334998469477,
+            -3.3232633089806765
+          ],
+          [
+            17,
+            10.925126265847084,
+            -3.6251262658470833
+          ],
+          [
+            17,
+            10.623263308980675,
+            -3.9693349984694772
+          ],
+          [
+            17,
+            10.368911086754464,
+            -4.35
+          ],
+          [
+            17,
+            10.166421636210496,
+            -4.760607986722185
+          ],
+          [
+            17,
+            10.01925960798826,
+            -5.194133342141177
+          ],
+          [
+            17,
+            9.929942985191662,
+            -5.643158327229819
+          ],
+          [
+            17,
+            9.899999999999999,
+            -6.1
+          ],
+          [
+            17,
+            9.929942985191662,
+            -6.55684167277018
+          ],
+          [
+            17,
+            10.01925960798826,
+            -7.005866657858822
+          ],
+          [
+            17,
+            10.166421636210494,
+            -7.439392013277812
+          ],
+          [
+            17,
+            10.368911086754462,
+            -7.849999999999999
+          ],
+          [
+            17,
+            10.623263308980675,
+            -8.230665001530522
+          ],
+          [
+            17,
+            10.925126265847082,
+            -8.574873734152916
+          ],
+          [
+            17,
+            11.269334998469475,
+            -8.876736691019323
+          ],
+          [
+            17,
+            11.649999999999999,
+            -9.131088913245534
+          ],
+          [
+            17,
+            12.060607986722184,
+            -9.333578363789503
+          ],
+          [
+            17,
+            12.494133342141176,
+            -9.48074039201174
+          ],
+          [
+            17,
+            12.943158327229817,
+            -9.570057014808336
+          ],
+          [
+            17,
+            13.399999999999999,
+            -9.6
+          ],
+          [
+            17,
+            75,
+            -9.6
+          ]
+        ],
+        "J87": [
+          [
+            17,
+            41.6,
+            -2.6
+          ],
+          [
+            17,
+            44.6,
+            -2.6
+          ],
+          [
+            17,
+            44.911582857782484,
+            -2.6162245187118884
+          ],
+          [
+            17,
+            45.219795527627376,
+            -2.6647225848426004
+          ],
+          [
+            17,
+            45.52130427471524,
+            -2.7449696265378494
+          ],
+          [
+            17,
+            45.812847876173464,
+            -2.856097664044597
+          ],
+          [
+            17,
+            46.09127289559059,
+            -2.996904698080214
+          ],
+          [
+            17,
+            46.35356779167502,
+            -3.1658677110723827
+          ],
+          [
+            17,
+            46.596895492127054,
+            -3.3611591406438306
+          ],
+          [
+            17,
+            46.818624080393946,
+            -3.580666647158989
+          ],
+          [
+            17,
+            47.016355263389514,
+            -3.822015961519954
+          ],
+          [
+            17,
+            47.18795031226145,
+            -4.082596566082092
+          ],
+          [
+            17,
+            47.33155319562224,
+            -4.359589930915621
+          ],
+          [
+            17,
+            47.44561065502644,
+            -4.6499999999999995
+          ],
+          [
+            17,
+            47.559668114430636,
+            -4.940410069084378
+          ],
+          [
+            17,
+            47.70327099779143,
+            -5.217403433917906
+          ],
+          [
+            17,
+            47.87486604666337,
+            -5.477984038480044
+          ],
+          [
+            17,
+            48.07259722965893,
+            -5.7193333528410095
+          ],
+          [
+            17,
+            48.29432581792583,
+            -5.938840859356168
+          ],
+          [
+            17,
+            48.537653518377866,
+            -6.134132288927616
+          ],
+          [
+            17,
+            48.79994841446229,
+            -6.303095301919785
+          ],
+          [
+            17,
+            49.07837343387941,
+            -6.443902335955402
+          ],
+          [
+            17,
+            49.36991703533764,
+            -6.55503037346215
+          ],
+          [
+            17,
+            49.67142578242551,
+            -6.6352774151573986
+          ],
+          [
+            17,
+            49.97963845227039,
+            -6.68377548128811
+          ],
+          [
+            17,
+            50.29122131005288,
+            -6.699999999999999
+          ],
+          [
+            17,
+            75,
+            -6.699999999999999
+          ]
+        ],
+        "J88": [
+          [
+            57,
+            17.4,
+            -2.6
+          ],
+          [
+            57,
+            11.399999999999999,
+            -2.6
+          ],
+          [
+            57,
+            10.943158327229819,
+            -2.629942985191663
+          ],
+          [
+            57,
+            10.494133342141176,
+            -2.7192596079882607
+          ],
+          [
+            57,
+            10.060607986722184,
+            -2.866421636210496
+          ],
+          [
+            57,
+            9.649999999999999,
+            -3.068911086754464
+          ],
+          [
+            57,
+            9.269334998469477,
+            -3.3232633089806765
+          ],
+          [
+            57,
+            8.925126265847084,
+            -3.6251262658470833
+          ],
+          [
+            57,
+            8.623263308980675,
+            -3.9693349984694772
+          ],
+          [
+            57,
+            8.368911086754464,
+            -4.35
+          ],
+          [
+            57,
+            8.166421636210496,
+            -4.760607986722185
+          ],
+          [
+            57,
+            8.01925960798826,
+            -5.194133342141177
+          ],
+          [
+            57,
+            7.929942985191662,
+            -5.643158327229819
+          ],
+          [
+            57,
+            7.899999999999999,
+            -6.1
+          ],
+          [
+            57,
+            7.929942985191662,
+            -6.55684167277018
+          ],
+          [
+            57,
+            8.01925960798826,
+            -7.005866657858822
+          ],
+          [
+            57,
+            8.166421636210494,
+            -7.439392013277812
+          ],
+          [
+            57,
+            8.368911086754462,
+            -7.849999999999999
+          ],
+          [
+            57,
+            8.623263308980675,
+            -8.230665001530522
+          ],
+          [
+            57,
+            8.925126265847082,
+            -8.574873734152916
+          ],
+          [
+            57,
+            9.269334998469475,
+            -8.876736691019323
+          ],
+          [
+            57,
+            9.649999999999999,
+            -9.131088913245534
+          ],
+          [
+            57,
+            10.060607986722184,
+            -9.333578363789503
+          ],
+          [
+            57,
+            10.494133342141176,
+            -9.48074039201174
+          ],
+          [
+            57,
+            10.943158327229817,
+            -9.570057014808336
+          ],
+          [
+            57,
+            11.399999999999999,
+            -9.6
+          ],
+          [
+            57,
+            75,
+            -9.6
+          ]
+        ],
+        "J89": [
+          [
+            57,
+            39.6,
+            -2.6
+          ],
+          [
+            57,
+            42.6,
+            -2.6
+          ],
+          [
+            57,
+            42.911582857782484,
+            -2.6162245187118884
+          ],
+          [
+            57,
+            43.219795527627376,
+            -2.6647225848426004
+          ],
+          [
+            57,
+            43.52130427471524,
+            -2.7449696265378494
+          ],
+          [
+            57,
+            43.812847876173464,
+            -2.856097664044597
+          ],
+          [
+            57,
+            44.09127289559059,
+            -2.996904698080214
+          ],
+          [
+            57,
+            44.35356779167502,
+            -3.1658677110723827
+          ],
+          [
+            57,
+            44.596895492127054,
+            -3.3611591406438306
+          ],
+          [
+            57,
+            44.818624080393946,
+            -3.580666647158989
+          ],
+          [
+            57,
+            45.016355263389514,
+            -3.822015961519954
+          ],
+          [
+            57,
+            45.18795031226145,
+            -4.082596566082092
+          ],
+          [
+            57,
+            45.33155319562224,
+            -4.359589930915621
+          ],
+          [
+            57,
+            45.44561065502644,
+            -4.6499999999999995
+          ],
+          [
+            57,
+            45.559668114430636,
+            -4.940410069084378
+          ],
+          [
+            57,
+            45.70327099779143,
+            -5.217403433917906
+          ],
+          [
+            57,
+            45.87486604666337,
+            -5.477984038480044
+          ],
+          [
+            57,
+            46.07259722965893,
+            -5.7193333528410095
+          ],
+          [
+            57,
+            46.29432581792583,
+            -5.938840859356168
+          ],
+          [
+            57,
+            46.537653518377866,
+            -6.134132288927616
+          ],
+          [
+            57,
+            46.79994841446229,
+            -6.303095301919785
+          ],
+          [
+            57,
+            47.07837343387941,
+            -6.443902335955402
+          ],
+          [
+            57,
+            47.36991703533764,
+            -6.55503037346215
+          ],
+          [
+            57,
+            47.67142578242551,
+            -6.6352774151573986
+          ],
+          [
+            57,
+            47.97963845227039,
+            -6.68377548128811
+          ],
+          [
+            57,
+            48.29122131005288,
+            -6.699999999999999
+          ],
+          [
+            57,
+            75,
+            -6.699999999999999
+          ]
+        ]
+      },
+      "findings": [
+        {
+          "code": "flex_local_clearance",
+          "connector": "J87",
+          "parts": [
+            "C95",
+            "C96"
+          ],
+          "disposition": "Straight cable exit crosses underside bypass capacitors; do not accept this conceptual path as interference-free. Use a measured downward exit/guide before fitting this optional expansion cable."
+        },
+        {
+          "code": "flex_tip_and_bend",
+          "disposition": "Exact mating height, stiffener length and bend capability require the selected cable drawing/sample; no fully qualified harness part number assigned."
+        }
+      ],
+      "limits": [
+        "Custom flex: vendor-compatible tips, 0.30 mm end thickness; see assembly drawing",
+        "Envelope calculations do not qualify cable fatigue, contact engagement or stack stiffness",
+        "Trim through-hole tails to at most 2.0 mm below HAT; inspect before seating",
+        "Three Pi supports required with all four flexes; fourth south-right post conflicts",
+        "Fan, enclosure and FPGA heatsink not included; thermal qualification pending"
+      ]
+    },
+    "module_xy_envelope_mm": [
+      30,
+      8,
+      80,
+      48
+    ],
+    "module_surface_gap_mm": 8,
+    "pi_to_hat_underside_mm": 27.179,
+    "pi_assumed_obstruction_mm": 16,
+    "underside_connector_plus_cable_plus_tolerance_mm": 4,
+    "remaining_pi_clearance_mm": 7.179,
+    "limits": [
+      "Copper path lengths omit pad interiors and via barrel length",
+      "Ground centerline samples are a screen for voids, not field-solver signoff",
+      "Plug dimensions are manufacturer data; no exact mated solid or cable bend model",
+      "Selected Pi/heatsink/JTAG/plug dimensions are checked in selected_assembly; optional flex routing remains conditional"
+    ]
+  }
+}

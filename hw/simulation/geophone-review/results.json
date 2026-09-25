@@ -1,0 +1,94 @@
+{
+  "cases": [
+    {
+      "rail_v": 3.135,
+      "bulk_cap_f": 8e-06,
+      "pulse_v": 0.002,
+      "baseline": -2.092309e-06,
+      "pulse": 0.001995496,
+      "recovered": -2.091994e-06,
+      "bias_start": 1.538729,
+      "bias_final": 1.539625,
+      "passed": true
+    },
+    {
+      "rail_v": 3.135,
+      "bulk_cap_f": 8e-06,
+      "pulse_v": 0.05,
+      "baseline": -2.092309e-06,
+      "pulse": 0.04993761,
+      "recovered": -2.089289e-06,
+      "bias_start": 1.538729,
+      "bias_final": 1.539625,
+      "passed": true
+    },
+    {
+      "rail_v": 3.135,
+      "bulk_cap_f": 1.2e-05,
+      "pulse_v": 0.002,
+      "baseline": -2.097813e-06,
+      "pulse": 0.001995493,
+      "recovered": -2.095116e-06,
+      "bias_start": 1.528811,
+      "bias_final": 1.539244,
+      "passed": true
+    },
+    {
+      "rail_v": 3.135,
+      "bulk_cap_f": 1.2e-05,
+      "pulse_v": 0.05,
+      "baseline": -2.097813e-06,
+      "pulse": 0.04993761,
+      "recovered": -2.092411e-06,
+      "bias_start": 1.528811,
+      "bias_final": 1.539244,
+      "passed": true
+    },
+    {
+      "rail_v": 3.465,
+      "bulk_cap_f": 8e-06,
+      "pulse_v": 0.002,
+      "baseline": -2.092345e-06,
+      "pulse": 0.001995496,
+      "recovered": -2.092009e-06,
+      "bias_start": 1.701804,
+      "bias_final": 1.702795,
+      "passed": true
+    },
+    {
+      "rail_v": 3.465,
+      "bulk_cap_f": 8e-06,
+      "pulse_v": 0.05,
+      "baseline": -2.092345e-06,
+      "pulse": 0.04993761,
+      "recovered": -2.089304e-06,
+      "bias_start": 1.701804,
+      "bias_final": 1.702795,
+      "passed": true
+    },
+    {
+      "rail_v": 3.465,
+      "bulk_cap_f": 1.2e-05,
+      "pulse_v": 0.002,
+      "baseline": -2.098429e-06,
+      "pulse": 0.001995492,
+      "recovered": -2.09546e-06,
+      "bias_start": 1.690843,
+      "bias_final": 1.702374,
+      "passed": true
+    },
+    {
+      "rail_v": 3.465,
+      "bulk_cap_f": 1.2e-05,
+      "pulse_v": 0.05,
+      "baseline": -2.098429e-06,
+      "pulse": 0.04993761,
+      "recovered": -2.092755e-06,
+      "bias_start": 1.690843,
+      "bias_final": 1.702374,
+      "passed": true
+    }
+  ],
+  "scope": "8 passive transient checks with asymmetric resistors/caps and leakage",
+  "limitations": "No ADC clipping dynamics, sensor mechanics, PCB coupling or ESD pulse model"
+}

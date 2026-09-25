@@ -86,6 +86,17 @@ class GeophoneTests(unittest.TestCase):
         self.assertEqual([s['sensor_id'] for s in defaults()],[1,2,3,4,5,9])
         self.assertEqual(defaults(legacy_gnss=True)[-1]['sensor_id'],6)
 
+    def test_duplicate_polls_cannot_hide_a_full_counter_rollover(self):
+        d,b,t=self.driver();d.read()
+        for at in (.1,.2,.3,.4,.5,.6):
+            t[0]=at
+            with self.assertRaises(NotReady):d.read()
+        # 257 conversions can look like a single increment after a stalled bus.
+        t[0]=.781;b.counter=1
+        with self.assertRaisesRegex(OSError,'ambiguous'):d.read()
+        t[0]=.785;b.counter=2
+        self.assertEqual(d.read().raw['conversion_counter'],2)
+
     def test_resonance_dc_and_low_frequency_attenuation(self):
         def peak(f):
             scenario=Scenario(dict(version=1,initial={'geophone_velocity_m_s':{'amplitude':.0001,'frequency_hz':f}}))
