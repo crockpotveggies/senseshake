@@ -73,7 +73,8 @@ check. The sensor software profile includes the controller tests. Update the
 workbench guide and review model provenance after changing board display assets.
 
 The T1-GEO analog path targets are enforced by prefab_review.py. Preserve local
-filter/protection routing and ground stitches. Optional flex-harness fit remains
-conditional; use docs/stack-assembly.md and do not portray the candidate four-flex
-route as a qualified assembly. ADC supply-pad through-vias need filled/capped
+filter/protection routing and ground stitches. The four-flex assembly uses short-tip custom FPCs and the windowed Pi spacer/guide.
+Preserve the collision regressions and actual-board obstacle checks in assembly_fit.py
+and prefab_review.py. See docs/stack-assembly.md; CAD clearance is not physical
+harness qualification. ADC supply-pad through-vias need filled/capped
 processing in the fabrication notes.

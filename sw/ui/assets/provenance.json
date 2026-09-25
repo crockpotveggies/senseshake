@@ -1,10 +1,10 @@
 {
   "kicad": "9.0.9",
   "sha256": {
-    "hw/boards/shakesense-trenz-hat/shakesense-trenz-hat.kicad_pcb": "1d27a63a74d2fb38a9e2f848bc817169576ba550a55c91fa82cbc6ac45a89558",
-    "hw/layout-trenz.json": "b8083de297255f6fb539e9599e743053ef3c0b8a214de53a1b101f8c018859cd",
+    "hw/boards/shakesense-trenz-hat/shakesense-trenz-hat.kicad_pcb": "fbcd197637ae1cb691441231a8b1f9304bda48d3985eb2daeca91d58a873cf1a",
+    "hw/layout-trenz.json": "73c4049e1796eef6ba7a31f2acdab2a4efc229a9d73d0bd065659f7b6a10d540",
     "hw/layout.json": "fe4a66fe29c0a9c6474ebf016875aa3a4faf05717ef60251079794c619eb7a5b",
-    "sw/ui/assets/t1.glb": "492b1922f69ca4ace9c71674f6fd695cce3d6fab5a190452e0b343182aa67ed0"
+    "sw/ui/assets/t1.glb": "47ac9219ffe015338ab291c0a6d386e9b5e85091752cfabf2f7594be96c4e629"
   },
-  "metadata_review": "Re-exported after C90/C95/C96/D90 placement and analog routing cleanup. Sensor XY positions unchanged; front/back KiCad renders inspected."
+  "metadata_review": "Re-exported after J87 and J83 ribbon-clearance relocation; sensor positions and geophone analog copper preserved. Updated KiCad service assembly includes guided flex paths and windowed spacer."
 }

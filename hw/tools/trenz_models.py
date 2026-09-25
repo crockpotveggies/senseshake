@@ -37,7 +37,7 @@ for n in (40,60):
     for i in range(n):body+=box((i-(n-1)/2)*.5,3,.15,.3,1,.3,'0.73 0.57 0.22')
     write(f'FFC_F32Q_{n}_envelope',body)
 b=p.LoadBoard(str(F/(NAME+'.kicad_pcb')))
-title=b.GetTitleBlock();title.SetRevision('T1-GEO HDI');title.SetDate('2026-09-24');b.SetTitleBlock(title)
+title=b.GetTitleBlock();title.SetRevision('T1-GEO HDI');title.SetDate('2026-09-25');b.SetTitleBlock(title)
 custom={'U20':'SCL3300','J1':'Pi_ESQ_120_23','J80':'LSHM_50_4mm','J81':'LSHM_50_4mm','J82':'LSHM_30_4mm','J86':'FFC_F32Q_40_envelope','J87':'FFC_F32Q_40_envelope','J88':'FFC_F32Q_60_envelope','J89':'FFC_F32Q_60_envelope'}
 for fp in b.GetFootprints():
     if fp.GetReference() in custom:model(fp,'${KIPRJMOD}/../../models/'+custom[fp.GetReference()]+'.wrl')
@@ -46,7 +46,7 @@ for fp in b.GetFootprints():
 # Mark each underside bank without covering the fine-pitch pads.
 for item in list(b.GetDrawings()):
     if isinstance(item,p.PCB_TEXT) and item.GetText().startswith('GPIO J8'):b.Delete(item)
-for ref,bank,x,y in [('J86',13,17,16),('J87',14,17,33),('J88',15,57,14),('J89',16,57,31)]:
+for ref,bank,x,y in [('J86',13,17,16),('J87',14,17,30),('J88',15,57,14),('J89',16,57,31)]:
     t=p.PCB_TEXT(b);t.SetText(f'GPIO {ref} B{bank} 3V3');t.SetLayer(p.B_SilkS);t.SetMirrored(True)
     t.SetPosition(p.VECTOR2I(p.FromMM(x+50),p.FromMM(y+50)));t.SetTextSize(p.VECTOR2I(p.FromMM(.8),p.FromMM(.8)));t.SetTextThickness(p.FromMM(.1));b.Add(t)
 save_board(str(F/(NAME+'.kicad_pcb')),b)
@@ -75,10 +75,11 @@ pi+=box(50,-31,z+.7,11,14,1.4,'0.055 0.06 0.07')
 # Approximate connector clearance envelopes, not certified vendor geometry.
 for x,y,w,d,h in [(76,-10.5,21,16,15.5),(76,-29,21,15,16),(76,-47,21,15,16),(11,-54,9,6,3.2),(26,-54,7,6,3),(39,-54,7,6,3)]:
     pi+=box(x,y,z+h/2,w,d,h,'0.6 0.64 0.67')
-for x,y in [(3.5,3.5),(61.5,3.5),(3.5,52.5),(61.5,52.5)]:
+for x,y in [(3.5,3.5),(61.5,3.5),(3.5,52.5)]:
     pi+=cylinder(x,-y,(z-1.6)/2,2.4,27.179,'0.69 0.7 0.72')
 for x,y in [(12,11),(20,42),(45,15),(57,43),(62,20)]:pi+=box(x,-y,z+.5,4,3,1,'0.12 0.13 0.14')
 write('Pi4_stack_concept',pi);add(b,'MODEL_PI4','${KIPRJMOD}/../../models/Pi4_stack_concept.wrl',(50,50))
+add(b,'MODEL_OFFSET_SPACER','${KIPRJMOD}/../../models/T1_offset-spacer.step',(50,50))
 save_board(str(F/'pi-trenz-stack-concept.kicad_pcb'),b)
 # Separate service-envelope view: bounding volumes, not exact mated solids.
 # The ordinary stack remains uncluttered and does not imply flex fit approval.
@@ -86,9 +87,26 @@ service=box(82.5,-25.35,2.54+7,2.5,15.44,14,'0.09 0.10 0.13')
 service+=box(14.19,-50.9,9.2+11.1/2,12.22,16.1,11.1,'0.12 0.5 0.23')
 write('T1_service_envelopes',service)
 add(b,'MODEL_SERVICE','${KIPRJMOD}/../../models/T1_service_envelopes.wrl',(50,50))
+from assembly_fit import EXPECTED,FFC_WIDTHS,cable_path
+ribbons=''
+for ref,(x,y,_) in EXPECTED.items():
+    path=cable_path(ref,x,y);w=FFC_WIDTHS[ref];vertices=[];faces=[]
+    for xx,yy,zz in path:
+        vertices.extend([(xx-w/2,-yy,zz-.075),(xx+w/2,-yy,zz-.075),
+                         (xx+w/2,-yy,zz+.075),(xx-w/2,-yy,zz+.075)])
+    faces.extend([(0,3,2,1),tuple(4*(len(path)-1)+i for i in range(4))])
+    for i in range(len(path)-1):
+        for j in range(4):faces.append((4*i+j,4*i+(j+1)%4,4*(i+1)+(j+1)%4,4*(i+1)+j))
+    points=', '.join(' '.join(str(v/2.54) for v in q) for q in vertices)
+    indices=', '.join(' '.join(map(str,q))+ ' -1' for q in faces)
+    color='0.70 0.79 0.86' if ref in ('J86','J88') else '0.24 0.55 0.76'
+    ribbons+=f'Shape {{ appearance Appearance {{ material Material {{ diffuseColor {color} }} }} geometry IndexedFaceSet {{ solid FALSE coord Coordinate {{ point [ {points} ] }} coordIndex [ {indices} ] }} }}\n'
+write('T1_ribbon_paths',ribbons)
+add(b,'MODEL_RIBBONS','${KIPRJMOD}/../../models/T1_ribbon_paths.wrl',(50,50))
+add(b,'MODEL_RIBBON_GUIDE','${KIPRJMOD}/../../models/T1_ribbon-guide.step',(50,50))
 save_board(str(F/'stack-service-envelopes.kicad_pcb'),b)
 for fp in list(b.GetFootprints()):
-    if fp.GetReference()=='MODEL_SERVICE':b.Delete(fp)
+    if fp.GetReference() in ('MODEL_SERVICE','MODEL_RIBBONS','MODEL_RIBBON_GUIDE','MODEL_OFFSET_SPACER'):b.Delete(fp)
 # Exploded view separates assemblies; spacer bodies are hidden intentionally.
 for fp in list(b.GetFootprints()):
     if fp.GetReference()=='MODEL_TE0712':model(fp,'${KIPRJMOD}/../../models/trenz/STP-TE0712-03-No Variations.step',(0,0,27.6099917))

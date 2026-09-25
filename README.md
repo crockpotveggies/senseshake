@@ -54,8 +54,10 @@ The active T1 has a [single Racotech geophone input](docs/geophone-input.md) and
 
 The [pre-fab review](docs/pre-fab-review.md) adds analog tolerance/transient checks
 and acquisition stress tests, fixes two loss-handling defects, and identifies
-the remaining optional harness-fit work. The geophone filter/protection layout
-now meets its path-length targets; see the [selected assembly notes](docs/stack-assembly.md).
+the remaining physical qualification work. The geophone filter/protection layout
+meets its path-length targets. Ribbon clearance uses a windowed fourth Pi spacer,
+an insulating guide and short-tip custom FPCs; see the [selected assembly notes](docs/stack-assembly.md)
+and [mechanical CAD](hw/mechanical/t1-ribbon-guide/README.md).
 
 ![T1 geophone HAT](hw/boards/shakesense-trenz-hat/3d.png)
 

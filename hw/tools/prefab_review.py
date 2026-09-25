@@ -147,19 +147,44 @@ def geometry_review(board):
                 disposition='shorten protection paths / put final filter at ADC before layout freeze'))
     assert not findings, findings
     from assembly_fit import review
-    assembly=review({ref:(*xy(fp.GetPosition()),fp.GetOrientationDegrees(),
-                         'back' if fp.IsFlipped() else 'front') for ref,fp in fps.items()})
+    from assembly_fit import default_obstacles, SPACER_BOXES, GUIDE_BOX, box_gap
+    placements={ref:(*xy(fp.GetPosition()),fp.GetOrientationDegrees(),
+                    'back' if fp.IsFlipped() else 'front') for ref,fp in fps.items()}
+    obstacles=default_obstacles(placements)
+    for ref,fp in fps.items():
+        if fp.IsFlipped():
+            height=2 if ref in ('J86','J87','J88','J89') else (1.1 if ref=='D90' else .9)
+            x0,y0,x1,y1=courtyard(ref)
+            obstacles[ref]=(x0,y0,-1.6-height,x1,y1,-1.6)
+        for q in fp.Pads():
+            if q.GetAttribute()!=p.PAD_ATTRIB_PTH or ref=='J1':continue
+            x,y=xy(q.GetPosition());size=q.GetSize();rx=p.ToMM(max(size.x,size.y))/2
+            # Entire plated pad area plus 0.2 mm tail/trim tolerance.
+            depth=2.2
+            obstacles[ref+'_tail_'+q.GetNumber()+'_'+str(round(x,3))+','+str(round(y,3))]=(x-rx,y-rx,-1.6-depth,x+rx,y+rx,-1.6)
+    for ref in ('H80','H81','H82','H83'):
+        x,y=xy(fps[ref].GetPosition())
+        obstacles[ref+'_screw_head']=(x-2.75,y-2.75,-3.6,x+2.75,y+2.75,-1.6)
+    assembly=review(placements,obstacles)
+    # Check the offset spacer/guide themselves against the actual board as well.
+    # Mating top/bottom bosses intentionally touch their mounting-hole surfaces.
+    solid_margins={}
+    for name,box in {**SPACER_BOXES,'guide':GUIDE_BOX}.items():
+        if name=='upper_arm':box=(*box[:5],box[5]+.1)  # Insulation film envelope.
+        solid_margins[name]=min(box_gap(box,other) for other in obstacles.values())
+        assert solid_margins[name]>0,(name,'board interference',solid_margins[name])
+    assembly['spacer_and_guide_to_board_margin_mm']=solid_margins
     return dict(paths=paths,findings=findings,analog_reference_plane_samples=coverage,connectors=fit,
         local_ground_stitches=ground_returns,
         selected_assembly=assembly,
         module_xy_envelope_mm=module,module_surface_gap_mm=8,
         pi_to_hat_underside_mm=27.179,pi_assumed_obstruction_mm=16,
-        underside_connector_plus_cable_plus_tolerance_mm=4,
-        remaining_pi_clearance_mm=7.179,
+        guide_below_hat_underside_mm=-1.6-GUIDE_BOX[2],
+        guide_to_pi_port_after_1mm_allowance_mm=assembly["guide_to_pi_port_margin_mm"],
         limits=['Copper path lengths omit pad interiors and via barrel length',
                 'Ground centerline samples are a screen for voids, not field-solver signoff',
-                'Plug dimensions are manufacturer data; no exact mated solid or cable bend model',
-                'Selected Pi/heatsink/JTAG/plug dimensions are checked in selected_assembly; optional flex routing remains conditional'])
+                'Plug dimensions are manufacturer data; connectors and flex are bounded envelopes, not supplier mated solids',
+                'Selected Pi/heatsink/JTAG/plug dimensions are checked in selected_assembly; selected flex/spacer envelopes pass; first-article fit remains unmeasured'])
 
 
 def main():
@@ -189,7 +214,7 @@ def main():
     for ref,(mpn,footprint) in packages.items():
         assert rows[ref]['MPN']==mpn and rows[ref]['Footprint']==footprint,(ref,rows[ref])
     report=dict(scope='pre-fab engineering review; no physical qualification',
-        disposition='analog path targets closed; optional flex harness and acquisition-throughput qualification remain open',
+        disposition='analog path and ribbon clearance CAD checks closed; physical harness and acquisition-throughput qualification remain open',
         board_sha256=before,physical_pin_checks=pin_checks,purchasing_package_checks=len(packages),
         analog=analog_review(),layout_and_fit=geometry_review(board))
     assert hashlib.sha256(path.read_bytes()).hexdigest()==before

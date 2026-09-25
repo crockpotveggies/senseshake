@@ -61,7 +61,7 @@ pad_ids=[q.m_Uuid.AsString() for f in board.GetFootprints() for q in f.Pads()]
 assert len(pad_ids)==len(set(pad_ids)),'Duplicate pad UUIDs corrupt KiCad report item references'
 for ref,xy in {'J80':(55,44),'J81':(55,12),'J82':(34,28),'H80':(33,11),'H81':(77,11),'H82':(33,45),'H83':(77,45),'H1':(3.5,3.5),'H2':(61.5,3.5),'H3':(3.5,52.5),'H4':(61.5,52.5)}.items():
     q=fps[ref].GetPosition();assert abs(p.ToMM(q.x)-50-xy[0])<.001 and abs(p.ToMM(q.y)-50-xy[1])<.001,ref
-for ref,xy,angle in [('J86',(17,22),0),('J87',(17,39),180),('J88',(57,20),0),('J89',(57,37),180)]:
+for ref,xy,angle in [('J86',(17,22),0),('J87',(17,36),180),('J88',(57,20),0),('J89',(57,37),180)]:
     f=fps[ref];q=f.GetPosition()
     assert f.IsFlipped() and f.GetLayer()==p.B_Cu,(ref,'must be underside')
     assert abs(p.ToMM(q.x)-50-xy[0])<.001 and abs(p.ToMM(q.y)-50-xy[1])<.001,ref

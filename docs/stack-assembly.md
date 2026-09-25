@@ -36,39 +36,40 @@ upper envelope, not an exact mating transform. It does not certify screwdriver
 access or cable pull forces. Leave at least 25 mm unobstructed above that box
 for service, and assemble/screw the geophone wires before plugging it in.
 
-## Expansion cables: explicit outstanding fit work
+## Expansion cable clearance
 
-J86/J87 have 40 contacts; J88/J89 have 60. The Amphenol F32Q connectors require
-0.50 mm pitch and **0.30 +/-0.03 mm mating thickness**, with contacts on the
-upper side of the connector. Because these connectors are on the underside,
-the exposed mating contacts face away from the HAT, toward the Pi. A cable's
-far-end contact side and pin order depend on the receiver. No receiver board
-has been selected, so no complete off-the-shelf harness is approved here.
+The revised PCB moves **J87 from (17,39) to (17,36) mm** and **J83 from
+(7,12) to (4.7,12) mm**. J87's downward cable exit now clears C95/C96; J83's
+power-terminal tails are outside the left ribbon corridor. Sensor and analog
+component placements remain fixed.
 
-The `assembly_fit.py` calculation includes a candidate 150 mm custom flex
-route: upper cables U-turn downward, lower cables S-drop, and all exit south.
-Widths are 20.5 and 30.5 mm; the calculation reserves 0.5 mm lateral guide
-allowance, 0.30 mm cable thickness and 1 mm vertical stack allowance. The
-candidate leaves **2.029 mm** above the Pi's conservative 16 mm port envelope.
-These are project routing assumptions, not supplier-certified bend limits.
+The south-right straight Pi spacer is replaced by the
+[windowed spacer and insulating guide](../hw/mechanical/t1-ribbon-guide/README.md).
+All four mounting points remain supported. The guide locates J86/J88 at
+Z=-10.2 mm and J87/J89 at Z=-7.2 mm. The carrier is still 85 x 56 mm; only
+the mechanical guide projects 2 mm beyond its south edge.
 
-Two findings prevent calling this a qualified four-cable assembly:
+This arrangement requires **short-tip custom FPC tails**, not generic long
+stiffener FFCs: <=0.15 mm flexible body, 0.30 +/-0.03 mm mating tips,
+0.50 mm pitch, 20.5/30.5 mm width. Reinforcement may extend at most 0.5 mm
+outside the latched housing. A 1 mm straight exit precedes 1.5 mm radius
+static bends. The linked mechanical contract specifies manufacture, screws,
+slot finishing, installation and the remaining receiver-end decisions.
 
-1. A straight J87 exit crosses the underside ADC bypass capacitors C95/C96.
-   Its actual slot height, cable stiffener length and controlled downward exit
-   must be checked together. The candidate path is deliberately reported as
-   conditional; it is not represented as a collision-free installed cable.
-2. The lower-right Pi spacer at (61.5,52.5) crosses the right cable corridor.
-   A three-spacer bench arrangement avoids that corridor, but its stiffness
-   needs a physical check. Keep all four spacers for the sensor-only prototype
-   with these optional cables absent. Do not casually thread a flex around or
-   clamp it under the fourth spacer.
+`assembly_fit.py` checks inflated cable volumes against actual back-side
+courtyards, all PTH tails, mounting screw heads and four Pi supports. It bounds
+the unknown exact slot height using the entire 2 mm F32Q housing and checks
+nine heights per connector. It also checks ribbon-to-ribbon separation and
+spacer/guide clearance to the board. Regression tests reproduce the former
+capacitor and straight-spacer collisions. The conservative clearance margins
+are recorded in [prefab-review.json](../hw/boards/shakesense-trenz-hat/prefab-review.json).
 
-Trim underside through-hole tails to at most 2 mm below the board. Insert
-the flexes and close their latches before mounting the HAT on the Pi. Do not
-fold a reinforced tip, force a cable against a capacitor, or connect an
-unverified far end. GPIO continuity is preserved for all 155 exposed signals;
-this does not establish loading or signal integrity for an arbitrary cable.
+The service render now includes the routed flex envelopes and actual spacer/
+guide CAD. This closes the identified CAD interferences for the specified
+assembly. Confirm the selected flex maker's tip and stackup drawing, then
+measure first-article fit, strain relief and stiffness. No physical fit or
+cable-fatigue test has been performed. These checks do not qualify arbitrary
+expansion cables or high-speed GPIO loading.
 
 ## Analog assembly details
 

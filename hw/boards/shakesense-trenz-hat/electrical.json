@@ -2062,12 +2062,12 @@
       "footprint": "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal",
       "local_fp": "TZ_TZ_POWER",
       "xy": [
-        7,
+        4.7,
         12
       ],
       "angle": 270,
       "section": "08-trenz-carrier-page-01",
-      "note": "REGULATED 3.3 V ONLY; external current-limited supply; 3 A initial operating budget",
+      "note": "REGULATED 3.3 V ONLY; external current-limited supply; 3 A initial operating budget Shifted left to keep power-terminal tails out of the J86 ribbon corridor.",
       "names": {},
       "dnp": false,
       "pins": {
@@ -2521,12 +2521,12 @@
       "local_fp": "TZ_FFC40",
       "xy": [
         17,
-        39
+        36
       ],
       "angle": 180,
       "side": "back",
       "section": "11-gpio-bank14-page-01",
-      "note": "3.3 V logic only; pin 2 VREF output; fit FFC before stacking; no hot plug",
+      "note": "3.3 V logic only; pin 2 VREF output; fit FFC before stacking; no hot plug North-shifted for short-tip custom FPC exit clear of C95/C96; use T1 ribbon guide.",
       "names": {
         "1": "GND",
         "2": "VREF_OUT",
@@ -2990,12 +2990,12 @@
       "note": "Connector ESD suppression only; not lightning protection.",
       "dnp": false,
       "local_fp": "Package_TO_SOT_SMD__SOT-323_SC-70",
+      "side": "back",
       "pins": {
         "1": "GEO_P",
         "2": "GEO_N",
         "3": "GND"
-      },
-      "side": "back"
+      }
     },
     {
       "ref": "R90",
@@ -3052,11 +3052,11 @@
       "note": "C0G differential filter; no piezoelectric X7R on signal path.",
       "dnp": false,
       "local_fp": "Capacitor_SMD__C_1206_3216Metric",
+      "side": "front",
       "pins": {
         "1": "GEO_AIN_P",
         "2": "GEO_AIN_N"
-      },
-      "side": "front"
+      }
     },
     {
       "ref": "C91",
@@ -3253,11 +3253,11 @@
       "note": "",
       "dnp": false,
       "local_fp": "Capacitor_SMD__C_0603_1608Metric",
+      "side": "back",
       "pins": {
         "1": "GEO_AVDD",
         "2": "GND"
-      },
-      "side": "back"
+      }
     },
     {
       "ref": "C96",
@@ -3274,11 +3274,11 @@
       "note": "",
       "dnp": false,
       "local_fp": "Capacitor_SMD__C_0603_1608Metric",
+      "side": "back",
       "pins": {
         "1": "SENS_3V3",
         "2": "GND"
-      },
-      "side": "back"
+      }
     },
     {
       "ref": "R97",

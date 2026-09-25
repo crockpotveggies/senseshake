@@ -142,19 +142,21 @@ The [selected assembly and cable-fit notes](stack-assembly.md) specify a Pi 4,
 after allowance; the geophone plug leaves 9.20 mm to the module. These
 calculated envelopes are checked alongside actual board placements.
 
-**The optional four-flex harness remains conditional.** Its candidate routes
-need measured mating height/stiffener information near J87's underside
-capacitors, and the south-right Pi spacer conflicts with a straight ribbon
-corridor. A three-spacer arrangement is documented for that candidate; the
-sensor-only prototype uses four spacers with optional flexes absent. The
-service-envelope render does not depict the candidate flexes as installed.
+The identified ribbon interferences have a concrete CAD fix: J87 moves north
+of the bypass capacitors, J83 moves left of the ribbon corridor, and a
+windowed fourth spacer plus insulating guide preserves all four Pi supports.
+The revised service view includes the flex paths. Use the specified short-tip
+custom FPCs and [mechanical parts](../hw/mechanical/t1-ribbon-guide/README.md);
+generic reinforced FFCs are not interchangeable. The geometry audit includes
+actual underside courtyards, PTH ends, screw heads and spacer solids, with
+regressions for the original collisions. First-article fit and the flex maker's
+construction confirmation remain physical/procurement checks.
 
 ## Disposition
 
 The software defects and six analog path-length findings are fixed. All 155
-FPGA GPIOs and four aligned XYZ accelerometers are retained. Optional expansion
-harness fit remains open as described above; this is not a complete assembly
-fit certificate. Dedicated DRDY acquisition is a software follow-up supported
+FPGA GPIOs and four aligned XYZ accelerometers are retained. Ribbon-clearance CAD checks cover the prescribed custom flex assembly;
+physical harness fit remains to be measured. Dedicated DRDY acquisition is a software follow-up supported
 by existing wiring. Physical transfer/noise, aliasing, power, thermal and timing
 tests belong to first-board bring-up; the [bench procedure](bench-procedure.md)
 retains those as pending.
@@ -170,6 +172,13 @@ routing replay. The [retained acquisition stress results](pre-fab-acquisition-st
 remain applicable to unchanged acquisition software. Layout changes do not
 constitute new physical signal measurements.
 
-Current run `20260925T065831Z-3ac9bf91`: 18 stages, 20 hardware regressions,
+Current run `20260925T161718Z-0cb993da`: 18 stages, 26 hardware regressions,
 152 software tests, 64 SPICE cases; ERC/DRC/opens all zero. Clean replay matches
-6,444 copper items including 38 microvias. Browser signal check: 10/10 passed.
+7,485 copper items including 46 microvias, with matching schematic links.
+All geophone signal copper and the physical pad/net map are preserved.
+Browser signal check: 10/10 passed across 3,672 samples.
+
+The four flex paths pass all 36 slot-height cases. Minimum residual obstacle
+margin is 0.234 mm after cable allowance; ribbon separation is 1.668 mm.
+The guide clears the Pi port envelope by 0.379 mm after the 1 mm stack allowance.
+These are CAD margins for the prescribed assembly, not physical measurements.

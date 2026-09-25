@@ -71,7 +71,7 @@ R66,100k,RC0603FR-07100KL,Resistor_SMD__R_0603_1608Metric,False,
 J80,LSHM-150-04.0-L-DV-A-S-K-TR,LSHM-150-04.0-L-DV-A-S-K-TR,TZ_TZ100,False,Mates JM1; opposite parity; 8 mm board surface gap
 J81,LSHM-150-04.0-L-DV-A-S-K-TR,LSHM-150-04.0-L-DV-A-S-K-TR,TZ_TZ100,False,Mates JM2; opposite parity; 8 mm board surface gap
 J82,LSHM-130-04.0-L-DV-A-S-K-TR,LSHM-130-04.0-L-DV-A-S-K-TR,TZ_TZ60,False,Mates JM3; opposite parity; 8 mm board surface gap
-J83,1715721,1715721,TZ_TZ_POWER,False,REGULATED 3.3 V ONLY; external current-limited supply; 3 A initial operating budget
+J83,1715721,1715721,TZ_TZ_POWER,False,REGULATED 3.3 V ONLY; external current-limited supply; 3 A initial operating budget Shifted left to keep power-terminal tails out of the J86 ribbon corridor.
 F80,0467005.NR,0467005.NR,TZ_TZ_FUSE,False,5 A fast fuse; not reverse-polarity or overvoltage protection
 J84,TSW-106-07-G-S,TSW-106-07-G-S,TZ_TZ_JTAG,False,"Digilent 6-pin JTAG signal order; reference is an output, not a power input"
 J85,TSW-103-07-G-D,TSW-103-07-G-D,TZ_TZ_AUX,False,3.3 V spare I/O at accessible lower edge
@@ -90,7 +90,7 @@ H81,M3 / 8 mm spacer,M3 / 8 mm spacer,TZ_TZ_HOLE,False,
 H82,M3 / 8 mm spacer,M3 / 8 mm spacer,TZ_TZ_HOLE,False,
 H83,M3 / 8 mm spacer,M3 / 8 mm spacer,TZ_TZ_HOLE,False,
 J86,BANK13 / 40p FFC,F32Q-1A7H1-11040,TZ_FFC40,False,3.3 V logic only; pin 2 VREF output; fit FFC before stacking; no hot plug
-J87,BANK14 / 40p FFC,F32Q-1A7H1-11040,TZ_FFC40,False,3.3 V logic only; pin 2 VREF output; fit FFC before stacking; no hot plug
+J87,BANK14 / 40p FFC,F32Q-1A7H1-11040,TZ_FFC40,False,3.3 V logic only; pin 2 VREF output; fit FFC before stacking; no hot plug North-shifted for short-tip custom FPC exit clear of C95/C96; use T1 ribbon guide.
 J88,BANK15 / 60p FFC,F32Q-1A7H1-11060,TZ_FFC60,False,3.3 V logic only; pin 2 VREF output; fit FFC before stacking; no hot plug
 J89,BANK16 / 60p FFC,F32Q-1A7H1-11060,TZ_FFC60,False,3.3 V logic only; pin 2 VREF output; fit FFC before stacking; no hot plug
 U22,ADS122C04,ADS122C04IPWR,Package_SO__TSSOP-16_4.4x5mm_P0.65mm,False,"I2C 0x40; internal 2.048V reference, gain 64, normal 330 SPS; unused analog/reference inputs open per TI."

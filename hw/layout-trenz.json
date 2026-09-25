@@ -1399,13 +1399,13 @@
         "footprint": "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal",
         "local_fp": "TZ_TZ_POWER",
         "xy": [
-          7,
+          4.7,
           12
         ],
         "angle": 270,
         "type": "TZ_POWER",
         "section": "08-trenz-carrier",
-        "note": "REGULATED 3.3 V ONLY; external current-limited supply; 3 A initial operating budget",
+        "note": "REGULATED 3.3 V ONLY; external current-limited supply; 3 A initial operating budget Shifted left to keep power-terminal tails out of the J86 ribbon corridor.",
         "names": {},
         "dnp": false
       },
@@ -1766,13 +1766,13 @@
         "local_fp": "TZ_FFC40",
         "xy": [
           17,
-          39
+          36
         ],
         "angle": 180,
         "side": "back",
         "type": "TZ_FFC40",
         "section": "11-gpio-bank14",
-        "note": "3.3 V logic only; pin 2 VREF output; fit FFC before stacking; no hot plug",
+        "note": "3.3 V logic only; pin 2 VREF output; fit FFC before stacking; no hot plug North-shifted for short-tip custom FPC exit clear of C95/C96; use T1 ribbon guide.",
         "names": {
           "1": "GND",
           "2": "VREF_OUT",
