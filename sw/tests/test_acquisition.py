@@ -246,7 +246,7 @@ class RuntimeTests(unittest.TestCase):
                 outputs.append(path.read_bytes())
                 self.assertEqual(replay(path), summaries[-1])
             self.assertEqual(outputs[0], outputs[1])
-            self.assertEqual(summaries[0]["samples"], 480)
+            self.assertEqual(summaries[0]["samples"], 1138)
             self.assertEqual(summaries[0]["missing"], 30)
             self.assertEqual(summaries[0]["saturated"], 2)
 

@@ -1,0 +1,32 @@
+Geophone nominal mechanical and passive electrical model
+Vmotion motion 0 DC 0 AC 0.0001
+Cm motion damp 0.0012508788103992319
+Rm damp hp 39.58406743523139
+Lm hp 0 1
+Egeo coilp coilm hp 0 23.4
+Rcoil coilp leadp 395
+R90 leadp ainp 1000
+R91 coilm ainm 1000
+R92 ainp vcm 1meg
+R93 ainm vcm 1meg
+C90 ainp ainm 1e-07
+C91 ainp 0 1n
+C92 ainm 0 1n
+Vsupply supply 0 3.3
+R96 supply avdd 22
+Iadc avdd 0 0.0005
+C94 avdd 0 10u
+C95 avdd 0 100n
+R94 avdd vcm 10k
+R95 vcm 0 10k
+C93 vcm 0 10u
+Eout out 0 ainp ainm 1
+.control
+op
+print v(avdd) v(vcm)
+ac lin 1 0.5 0.5
+let amplitude = mag(v(out))
+print amplitude
+quit
+.endc
+.end

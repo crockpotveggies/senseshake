@@ -1,5 +1,11 @@
 # Sensor acquisition and recovery
 
+**T1-GEO revision:** GNSS is removed; one external Racotech vertical geophone
+uses an ADS122C04 input. See [current circuit, acquisition and validation](geophone-input.md).
+GNSS/PPS/RF details below describe the preceding revision or legacy recordings.
+The current physical bench template is version 2, with geophone response/noise/timing
+checks replacing the GNSS UTC check.
+
 The runnable Pi application is in `sw/pi/senseshake/`; use
 `sw/tools/sensor.py` as its repository entry point. It has no FPGA, Coldfoot,
 network service or database dependency. Simulation and Linux device adapters

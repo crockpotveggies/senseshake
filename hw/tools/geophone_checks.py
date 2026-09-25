@@ -1,0 +1,40 @@
+"""Independent physical-pin and orientation fixture for T1-GEO.
+
+Pin maps: TI ADS122C04 SBAS751B PW package, TPD2E2U06 SLLSEG9C DCK.
+ADC analog inputs/reference pins 6..9 intentionally float per TI section 9.1.3.
+"""
+PINS = {
+    ('U22','1'):'GND', ('U22','2'):'GND', ('U22','3'):'SENS_3V3',
+    ('U22','4'):'GND', ('U22','5'):'GND', ('U22','10'):'GEO_AIN_N',
+    ('U22','11'):'GEO_AIN_P', ('U22','12'):'GEO_AVDD', ('U22','13'):'SENS_3V3',
+    ('U22','14'):'GEO_DRDY_N', ('U22','15'):'I2C_SDA', ('U22','16'):'I2C_SCL',
+    ('J90','1'):'GEO_P', ('J90','2'):'GEO_N', ('J90','3'):'GND',
+    ('D90','1'):'GEO_P', ('D90','2'):'GEO_N', ('D90','3'):'GND',
+    ('R90','1'):'GEO_P', ('R90','2'):'GEO_AIN_P',
+    ('R91','1'):'GEO_N', ('R91','2'):'GEO_AIN_N',
+    ('R92','1'):'GEO_AIN_P', ('R92','2'):'GEO_VCM',
+    ('R93','1'):'GEO_AIN_N', ('R93','2'):'GEO_VCM',
+    ('R94','1'):'GEO_AVDD', ('R94','2'):'GEO_VCM',
+    ('R95','1'):'GEO_VCM', ('R95','2'):'GND',
+    ('C90','1'):'GEO_AIN_P', ('C90','2'):'GEO_AIN_N',
+    ('C91','1'):'GEO_AIN_P', ('C91','2'):'GND',
+    ('C92','1'):'GEO_AIN_N', ('C92','2'):'GND',
+    ('C93','1'):'GEO_VCM', ('C93','2'):'GND',
+    ('R96','1'):'SENS_3V3', ('R96','2'):'GEO_AVDD',
+    ('C94','1'):'GEO_AVDD', ('C94','2'):'GND',
+    ('C95','1'):'GEO_AVDD', ('C95','2'):'GND',
+    ('C96','1'):'SENS_3V3', ('C96','2'):'GND',
+    ('R97','1'):'GEO_DRDY_N', ('R97','2'):'SENS_3V3',
+    ('U42','16'):'GEO_DRDY_N', ('U42','8'):'PI_GEO_DRDY_N', ('J1','7'):'PI_GEO_DRDY_N',
+}
+
+
+def verify(pins, orientations):
+    for key, net in PINS.items():
+        if pins.get(key) != net: raise ValueError(f'geophone physical pin mismatch: {key}')
+    if any('GNSS' in net for net in pins.values()) or any(ref in ('U21','J2') for ref,_ in pins):
+        raise ValueError('GNSS remains on current T1')
+    for ref in ('U11','U12','U13','U14'):
+        if orientations.get(ref) != (0,False):
+            raise ValueError(f'{ref}: package axes changed; explicit software remapping required')
+    return len(PINS)

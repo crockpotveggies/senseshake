@@ -5,15 +5,15 @@ from .stimulus import Scenario, reading
 
 class Simulated:
     def __init__(self, sensor, seed=1, faults=(), scenario=None, clock=None):
-        if type(sensor) is not int or not 1 <= sensor <= 8: raise ValueError("simulated sensor ID")
+        if type(sensor) is not int or not 1 <= sensor <= 9: raise ValueError("simulated sensor ID")
         if type(seed) is not int or not 0 <= seed < 1 << 64: raise ValueError("seed must be uint64")
         self.sensor, self.seed, self.index = sensor, seed, 0
         self.scenario, self.clock = scenario or Scenario(), clock
-        self.settings = next(c for c in defaults() + defaults(True) if c["sensor_id"] == sensor)
+        self.settings = next(c for c in defaults(legacy_gnss=True) + defaults(True) + defaults() if c["sensor_id"] == sensor)
         if len(faults) > 256: raise ValueError("fault fixture bound")
         self.faults = {}
         for f in faults:
-            if set(f) != {"sensor", "sample", "action"} or f["sensor"] not in range(1, 9) or type(f["sample"]) is not int or not 0 <= f["sample"] <= 1_000_000:
+            if set(f) != {"sensor", "sample", "action"} or f["sensor"] not in range(1, 10) or type(f["sample"]) is not int or not 0 <= f["sample"] <= 1_000_000:
                 raise ValueError("fault fixture fields")
             if f["action"] not in ("timeout", "nack", "disconnect", "not_ready", "saturation", "short_read"):
                 raise ValueError("unknown fault action")
@@ -40,6 +40,7 @@ class Simulated:
             if self.sensor <= 5:
                 result.raw["acceleration"] = (32767, *result.raw["acceleration"][1:])
                 if self.sensor == 5: result.raw["device_status"] |= 64
+            elif self.sensor == 9: result.raw["counts"] = 8388607
             elif self.sensor == 7: result.raw["counts"] = (8388607, *result.raw["counts"][1:])
             else: result.raw["response"] = b"\x3f\xff" + result.raw["response"][2:]
         return result
@@ -47,7 +48,7 @@ class Simulated:
     def close(self): pass
 
 
-def defaults(remote=False):
+def defaults(remote=False, legacy_gnss=False):
     entries = [dict(sensor_id=i, enabled=True, period_ns=38_461_538, acceleration_range_g=2, angular_rate_range_dps=250) for i in range(1, 5)]
     entries += [dict(sensor_id=5, enabled=True, period_ns=40_000_000, tilt_mode=1),
                 dict(sensor_id=6, enabled=True, period_ns=1_000_000_000)]
@@ -56,4 +57,7 @@ def defaults(remote=False):
                      cycle_count_y=200, cycle_count_z=200),
                 dict(sensor_id=8, enabled=True, period_ns=10_000_000, pressure_min_pa=-250,
                      pressure_max_pa=250, pressure_part_number="SIMULATED-DLVR")]
+    if not legacy_gnss:
+        from .geophone import SETTINGS
+        entries[-1] = dict(SETTINGS)
     return entries

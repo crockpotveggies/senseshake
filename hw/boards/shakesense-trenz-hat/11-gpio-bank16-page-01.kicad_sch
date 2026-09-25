@@ -1,4 +1,4 @@
-(kicad_sch (version 20230121) (generator eeschema) (uuid 1fa9dc0c-2a9e-50ef-9292-abeef45e1334) (paper "A3") (title_block (title "ShakeSense T1 / 11-gpio-bank16-page-01") (date "2026-09-24") (rev "T1-GPIO"))
+(kicad_sch (version 20230121) (generator eeschema) (uuid 1fa9dc0c-2a9e-50ef-9292-abeef45e1334) (paper "A3") (title_block (title "ShakeSense T1 / 11-gpio-bank16-page-01") (date "2026-09-24") (rev "T1-GEO"))
 (lib_symbols
 (symbol "ShakeSense:Part_J89" (pin_names (offset 0.6)) (in_bom yes) (on_board yes)
       (property "Reference" "J" (id 0) (at 0 43.18 0) (effects (font (size 1.27 1.27))))

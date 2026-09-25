@@ -1,4 +1,11 @@
-# A2 simulation scope
+# Hardware simulation scope
+
+The active T1-GEO adds 15 ngspice cases in `geophone/`, run with
+`python3 hw/tools/simulate_geophone.py`: Racotech mechanical response, coil
+loading, passive input filtering, bias and PGA common-mode headroom at nominal
+and tolerance corners. See [the circuit and limits](../../docs/geophone-input.md).
+These models omit ADC digital filtering, self-noise, parasitic coupling and
+physical mounting. The older A2 GNSS circuit below remains historical.
 
 The FPGA carrier has fourteen additional bounded checks in `trenz/`, run with
 `python3 hw/tools/simulate_trenz.py`. These cover DC input budgets, detection of

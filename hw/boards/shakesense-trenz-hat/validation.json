@@ -9,22 +9,22 @@
   "exposed_gpio": 155,
   "added_gpio": 152,
   "gpio_voltage_v": 3.3,
-  "compiled_pin_checks": 819,
+  "compiled_pin_checks": 845,
   "critical_module_pin_checks": 29,
   "drc_violations": 0,
   "unconnected_items": 0,
   "erc_violations": 0,
-  "tracks_and_vias": 5316,
+  "tracks_and_vias": 6452,
   "copper_layers": 8,
-  "microvias": 37,
+  "microvias": 38,
   "hdi_structure": "1+6+1",
   "limits": [
     "Fabrication process approval is owned by the project owner; calculations use the recorded provisional stack",
-    "GNSS microstrip calculates 49.98 ohms with continuous sampled return plane; mask, launches and actual dielectric require RF qualification",
+    "Single Racotech geophone input; analog noise, cable coupling and ADC timing require physical qualification",
     "J83 source: 3.35 V +/-0.5%, total hot loop resistance <=30 milliohms, <=3 A; verify startup and load waveform at module",
     "Pi4 conceptual stack uses SSQ-120-02-G-D riser; selected cooler, cables and mating need physical fit verification",
     "No FPGA bitstream or physical sensor/rail/thermal/EMI/high-speed GPIO tests performed",
-    "Pi FIFO/IRQ deployment is tested on modeled buses; PPS edges are not associated with UTC",
+    "Pi FIFO/IRQ and geophone polling are tested on modeled buses; no GNSS or absolute UTC source on T1-GEO",
     "Trenz rendering uses vendor generic revision-03 STEP"
   ]
 }

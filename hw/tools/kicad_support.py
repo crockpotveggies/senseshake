@@ -100,18 +100,20 @@ def schematic(name,spec,folder):
             lib='(symbol "ShakeSense:PWR_FLAG" (pin_names (offset 0)) (in_bom no) (on_board no) (property "Reference" "#FLG" (at 0 0 0) (effects (font (size 1 1)) hide)) (property "Value" "PWR_FLAG" (at 0 0 0) (effects (font (size 1 1)) hide)) (symbol "PWR_FLAG_0_1" (polyline (pts (xy 0 0) (xy 0 -2.54) (xy 1.27 -1.27) (xy 0 0)) (stroke (width 0.1524) (type default)) (fill (type none)))) (symbol "PWR_FLAG_1_1" (pin power_out line (at 0 0 90) (length 0) (name "pwr" (effects (font (size 1 1)))) (number "1" (effects (font (size 1 1)))))))'
             libs.append(lib)
             rails=['GND','PI_3V3','PI_5V','SENS_3V3','FPGA_3V3' if name=='shakesense-trenz-hat' else 'CF_3V3'] if name.endswith('-hat') else ['GND','USB_VBUS','USB_5V','V3','V3_SENSOR']
+            # GEO_AVDD is powered through R96; ERC cannot propagate power through a resistor.
+            if name=="shakesense-trenz-hat": rails.append("GEO_AVDD")
             for k,net in enumerate(rails):
                 xx=35.56+50.8*k; yy=274.32; reference=f'#FLG{k+1:02d}'
                 body.append(f'(symbol (lib_id "ShakeSense:PWR_FLAG") (at {xx} {yy} 0) (unit 1) (in_bom no) (on_board no) (uuid {uid(name+reference)}) (property "Reference" "{reference}" (at {xx} {yy} 0) (effects (font (size 1 1)) hide)) (property "Value" "PWR_FLAG" (at {xx} {yy} 0) (effects (font (size 1 1)) hide)) (instances (project {q(name)} (path "/{root}/{sid}" (reference "{reference}") (unit 1)))))')
                 body.append(f'(global_label {q(net)} (shape input) (at {xx} {yy} 0) {effects(1.0,"left")} (uuid {uid(name+reference+"label")}))')
         all_libs.extend(libs)
-        revision='T1-GPIO' if name=='shakesense-trenz-hat' else 'A2 PROTOTYPE'
+        revision='T1-GEO' if name=='shakesense-trenz-hat' else 'A2 PROTOTYPE'
         date='2026-09-24' if name=='shakesense-trenz-hat' else '2026-09-23'
         header=f'(kicad_sch (version 20230121) (generator eeschema) (uuid {sid}) (paper "A3") (title_block (title {q(("ShakeSense T1" if name=="shakesense-trenz-hat" else name)+" / "+section)}) (date {q(date)}) (rev {q(revision)}))'
         (folder/file).write_text(header+'\n(lib_symbols\n'+'\n'.join(libs)+')\n'+'\n'.join(body)+'\n)',encoding='utf-8')
     note='Atopile-derived review schematic - prototype, not released.\nThe Pi hosts acquisition and Coldfoot processing; the USB head has a local MCU.\nGlobal net labels connect functional sheets.'
     if name=='shakesense-trenz-hat':
-        note='Atopile-derived review schematic - T1 GPIO prototype, not released.\nPi sensor acquisition; 155 expansion GPIOs at 3.3 V; Coldfoot integration deferred.\nGlobal net labels connect functional sheets.'
+        note='Atopile-derived review schematic - T1 geophone / GPIO prototype, not released.\nPi sensor acquisition; 155 expansion GPIOs at 3.3 V; Coldfoot integration deferred.\nGlobal net labels connect functional sheets.'
     rootbody.append(f'(text {q(note)} (at 30 25 0) {effects(1.5,"left")} (uuid {uid(name+"note")}))')
     (folder/(name+'.kicad_sch')).write_text(f'(kicad_sch (version 20230121) (generator eeschema) (uuid {root}) (paper "A1") (lib_symbols)\n'+'\n'.join(rootbody)+f'\n(sheet_instances (path "/" (page "1"))))',encoding='utf-8')
 

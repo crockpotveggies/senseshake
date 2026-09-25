@@ -19,7 +19,7 @@ MAX_BYTES = 8 * 1024 * 1024
 MAX_SECONDS = 180
 POINTS = 400
 NAMES = {1: "IMU 1", 2: "IMU 2", 3: "IMU 3", 4: "IMU 4", 5: "Inclinometer",
-         6: "GNSS", 7: "Magnetometer", 8: "Infrasound"}
+         7: "Magnetometer", 8: "Infrasound", 9: "Geophone"}
 QUALITY = {1: "Valid", 2: "Missing", 3: "Saturated", 4: "Fault"}
 
 
@@ -40,6 +40,8 @@ def project_sample(sensor, sample):
         result.update(primary=vectors(raw, "acceleration"),
                       secondary=vectors(raw, "angular_rate" if sensor <= 4 else "angle"),
                       detail=f"Temperature register: {raw.temperature}" if raw.HasField("temperature") else "Temperature unknown")
+    elif sensor == 9:
+        result.update(primary=[raw.counts, None, None], detail=f"Racotech vertical • ADC counts • conversion {raw.conversion_counter}")
     elif sensor == 7:
         result.update(primary=vectors(raw, "counts"), detail="RM3100 • raw signed XYZ counts")
     elif sensor == 8:
@@ -99,8 +101,8 @@ class Workbench:
             self.writer = Writer(self.stream, dict(format="senseshake-acquisition-v1", source="simulation",
                 calibrations=[], timing="poll completion; uncertainty unknown", seed=seed, faults=[],
                 remote=True, stimulus_model="ideal-v1", scenario=scenario.export()), max_bytes=MAX_BYTES)
-            channels = [Channel("sim-pi" if cfg["sensor_id"] <= 6 else "sim-head",
-                1 if cfg["sensor_id"] <= 6 else 2, cfg,
+            channels = [Channel("sim-pi" if cfg["sensor_id"] not in (7, 8) else "sim-head",
+                1 if cfg["sensor_id"] not in (7, 8) else 2, cfg,
                 Simulated(cfg["sensor_id"], seed, scenario=scenario, clock=lambda: self.now))
                 for cfg in defaults() + defaults(True)]
             self.acquisition = Acquisition(TraceSink(self, self.writer), Sessions(), channels)
@@ -115,7 +117,7 @@ class Workbench:
                 point.update(t=arrived / 1e9, sequence=sample.sequence,
                              acquisition_ns=sample.time.acquisition_ns if sample.time.HasField("acquisition_ns") else None,
                              clock_domain=sample.time.domain)
-                self.traces[sid].append(point)
+                self.traces.setdefault(sid, deque(maxlen=POINTS)).append(point)
                 self.samples += 1
                 self.missing += sample.quality == 2
         elif kind == "status":

@@ -1,4 +1,4 @@
-(kicad_sch (version 20230121) (generator eeschema) (uuid 83ea8eea-5acf-519e-b3dd-c6e81bed9ff6) (paper "A3") (title_block (title "ShakeSense T1 / 06-supply-isolation-page-01") (date "2026-09-24") (rev "T1-GPIO"))
+(kicad_sch (version 20230121) (generator eeschema) (uuid 83ea8eea-5acf-519e-b3dd-c6e81bed9ff6) (paper "A3") (title_block (title "ShakeSense T1 / 06-supply-isolation-page-01") (date "2026-09-24") (rev "T1-GEO"))
 (lib_symbols
 (symbol "ShakeSense:Part_U40" (pin_names (offset 0.6)) (in_bom yes) (on_board yes)
       (property "Reference" "U" (id 0) (at 0 6.35 0) (effects (font (size 1.27 1.27))))
@@ -186,7 +186,7 @@
 (wire (pts (xy 228.6 83.82) (xy 223.52 83.82)) (stroke (width 0) (type default)) (uuid 4f6d6bf8-b0f5-5400-b4cd-b1858a100c87))
 (global_label "PI_IMU4_INT" (shape bidirectional) (at 223.52 83.82 180) (effects (font (size 0.9 0.9)) (justify right)) (uuid 780954db-4d61-5c6b-afe2-1a621e118768))
 (wire (pts (xy 228.6 86.36) (xy 223.52 86.36)) (stroke (width 0) (type default)) (uuid fa057e0f-11bc-50e1-a8c3-90acc8e48c87))
-(global_label "PI_GNSS_PPS" (shape bidirectional) (at 223.52 86.36 180) (effects (font (size 0.9 0.9)) (justify right)) (uuid 0fd14654-9aeb-50ea-8ba9-c6d1168ea3f4))
+(global_label "PI_GEO_DRDY_N" (shape bidirectional) (at 223.52 86.36 180) (effects (font (size 0.9 0.9)) (justify right)) (uuid 0fd14654-9aeb-50ea-8ba9-c6d1168ea3f4))
 (no_connect (at 228.6 88.9) (uuid a75b8859-f978-5bba-9aab-df85256ab6b8))
 (no_connect (at 228.6 91.44) (uuid bf8bfbee-9c0c-5b2a-82c9-82b4b0e0fc5f))
 (wire (pts (xy 228.6 93.98) (xy 223.52 93.98)) (stroke (width 0) (type default)) (uuid bd8bf1d0-d6ac-5cd0-aa84-70ac18bfd5b7))
@@ -200,7 +200,7 @@
 (wire (pts (xy 259.08 73.66) (xy 264.16 73.66)) (stroke (width 0) (type default)) (uuid d5486baa-1f95-57d2-8d4f-9ca987a61663))
 (global_label "GND" (shape bidirectional) (at 264.16 73.66 0) (effects (font (size 0.9 0.9)) (justify left)) (uuid d2545d4f-f41d-5f51-b859-fb8d03413e92))
 (wire (pts (xy 259.08 76.2) (xy 264.16 76.2)) (stroke (width 0) (type default)) (uuid f8eba1a9-00b9-59a5-8957-e2667f05e718))
-(global_label "GNSS_PPS" (shape bidirectional) (at 264.16 76.2 0) (effects (font (size 0.9 0.9)) (justify left)) (uuid c806a147-f890-56e6-8bb3-cfc61c3ae45b))
+(global_label "GEO_DRDY_N" (shape bidirectional) (at 264.16 76.2 0) (effects (font (size 0.9 0.9)) (justify left)) (uuid c806a147-f890-56e6-8bb3-cfc61c3ae45b))
 (wire (pts (xy 259.08 78.74) (xy 264.16 78.74)) (stroke (width 0) (type default)) (uuid 5c083c64-4482-52d2-ab83-b7735290d2d9))
 (global_label "IMU4_INT" (shape bidirectional) (at 264.16 78.74 0) (effects (font (size 0.9 0.9)) (justify left)) (uuid a3ed6094-87b3-5ad1-a28e-fcf3350f9764))
 (wire (pts (xy 259.08 81.28) (xy 264.16 81.28)) (stroke (width 0) (type default)) (uuid 84c0bda3-de56-5175-89fc-07c61fb060a0))

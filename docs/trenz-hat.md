@@ -1,5 +1,11 @@
 # ShakeSense T1 — Pi-outline Trenz carrier
 
+**T1-GEO revision:** GNSS is removed; one external Racotech vertical geophone
+uses an ADS122C04 input. See [current circuit, acquisition and validation](geophone-input.md).
+GNSS/PPS/RF details below describe the preceding revision or legacy recordings.
+The current physical bench template is version 2, with geophone response/noise/timing
+checks replacing the GNSS UTC check.
+
 T1 is an **85 × 56 mm, eight-layer HDI** alternative to the A2 Coldfoot ASIC HAT.
 Electrical source: [`hw/elec/hat_trenz.ato`](../hw/elec/hat_trenz.ato).
 CAD: [`shakesense-trenz-hat.kicad_pcb`](../hw/boards/shakesense-trenz-hat/shakesense-trenz-hat.kicad_pcb).

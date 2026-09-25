@@ -1,7 +1,6 @@
 # Sensor contract v1
 
-Status: implemented schema, Python reference checks and USB framing; no sensor
-drivers or MCU firmware yet. This document owns semantic rules. The
+Status: implemented schema, Python reference checks and USB framing; Pi drivers implemented; USB MCU firmware remains pending. This document owns semantic rules. The
 [Protobuf schema](../sw/interfaces/proto/senseshake/sensor/v1/sensor.proto) owns
 field numbers/types. Both apply. Coldfoot and a configured FPGA are unnecessary.
 
@@ -27,9 +26,16 @@ Breaking meaning/units requires a new package and envelope version.
 | --- | --- | --- |
 | 1–4 | T1 LSM6DSO U11–U14 | Signed 16-bit XYZ acceleration/gyro counts; optional signed temperature |
 | 5 | T1 SCL3300 U20 | Signed 16-bit XYZ acceleration and/or angle counts, optional temperature, required 16-bit device status |
-| 6 | T1 MAX-M10S U21 | Complete 92-byte UBX NAV-PVT payload, excluding UBX header/checksum |
+| 6 | Legacy T1 MAX-M10S U21 (absent on T1-GEO) | Complete 92-byte UBX NAV-PVT payload, excluding UBX header/checksum |
 | 7 | USB head RM3100 | Signed 24-bit XYZ counts, sign-extended into sint32 |
 | 8 | Optional USB head DLVR | Four original response bytes, preserving pressure, temperature and status bits |
+
+| 9 | T1-GEO ADS122C04 / Racotech vertical | Signed 24-bit ADC count in sint32; required uint8 conversion counter |
+
+ID 9 uses the Pi MONOTONIC_RAW clock, gain 64, reference 2.048 V and nominal
+period 3,030,303 ns (330 SPS). ADC input volts = count × reference / (gain × 2²³).
+Velocity requires frequency-response correction and calibration; none is implicit.
+The current T1 inventory is 1–5 and 9. ID 6 is retained for legacy compatibility.
 
 The model is fixed by v1 sensor ID. Another model requires explicit schema
 evolution, not relabeling. Identity advertises only physically fitted sensors;

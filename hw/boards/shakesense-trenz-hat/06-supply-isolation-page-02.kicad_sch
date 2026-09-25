@@ -1,4 +1,4 @@
-(kicad_sch (version 20230121) (generator eeschema) (uuid 4dc81435-2067-58f7-86bc-65c557b51849) (paper "A3") (title_block (title "ShakeSense T1 / 06-supply-isolation-page-02") (date "2026-09-24") (rev "T1-GPIO"))
+(kicad_sch (version 20230121) (generator eeschema) (uuid 4dc81435-2067-58f7-86bc-65c557b51849) (paper "A3") (title_block (title "ShakeSense T1 / 06-supply-isolation-page-02") (date "2026-09-24") (rev "T1-GEO"))
 (lib_symbols
 (symbol "ShakeSense:Part_R51" (pin_names (offset 0.6)) (in_bom yes) (on_board yes)
       (property "Reference" "R" (id 0) (at 0 5.08 0) (effects (font (size 1.27 1.27))))

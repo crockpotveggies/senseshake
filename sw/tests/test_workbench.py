@@ -51,12 +51,13 @@ class WorkbenchTests(unittest.TestCase):
         self.assertEqual(snap["latest"][2]["quality"], "Valid")
         self.assertGreater(snap["missing"], 0)
 
-    def test_no_fix_is_unavailable_not_zero(self):
-        engine = Workbench({"version": 1, "initial": {"gnss_fix": False}})
+    def test_current_hat_has_geophone_and_no_gnss(self):
+        engine = Workbench()
         advance(engine, 1)
-        point = engine.snapshot(6)["latest"][6]
-        self.assertEqual(point["primary"], [None] * 3)
-        self.assertIn("No GNSS fix", point["detail"])
+        point = engine.snapshot(9)["latest"][9]
+        self.assertEqual(point["primary"], [0, None, None])
+        self.assertNotIn(6, engine.snapshot(9)["latest"])
+        self.assertIn("Racotech", point["detail"])
 
     def test_raw_signed_magnetic_counts_and_pressure_status(self):
         engine = Workbench({"version": 1, "initial": {"magnetic_ut": [-10, 0, 20]}})

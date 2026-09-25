@@ -7,9 +7,9 @@ The Trenz GPIO expansion exposes 155 user I/Os on J85-J89 while retaining
 sensors, existing interfaces and the 85 x 56 mm outline. Preserve the vendor
 GPIO/ground fixtures and run their full module-contact audit when changing T1.
 T1 uses a provisional eight-layer 1+6+1 HDI stack and a complete native SES
-routing snapshot. Fabrication approval is owned by the user. Preserve the revised
-0.388 mm GNSS route and reference-plane checks, GPIO riser assembly, and explicit
-power envelope in docs/t1-engineering-closure.md. RF measurements, actual stack
+routing snapshot. Fabrication approval is owned by the user. T1-GEO removes GNSS and adds one Racotech/ADS122C04 input. Preserve its
+independent pin/axis checks, GPIO riser assembly, and explicit
+power envelope in docs/t1-engineering-closure.md. Geophone noise/response measurements, actual stack
 fit and GPIO signal integrity still need qualification. Ethernet is not exposed.
 Keep the A2 ASIC design deferred for this phase.
 
@@ -53,8 +53,8 @@ qualification and MCU firmware remain pending.
 
 The optional live FIFO path pairs IMU tags by slot counter, preserves buffered
 samples and rejects overrun/parity/timestamp faults. Retain unknown loss and timing
-uncertainty semantics. `--utc` captures acknowledged/read-back GNSS timing and PPS
-evidence. Offline correlation requires a recording-bound timing policy, never
+uncertainty semantics. `--utc` is rejected by current T1 live acquisition; legacy GNSS timing and PPS
+evidence remain supported for recorded-data correlation. Offline correlation requires a recording-bound timing policy, never
 extrapolates across invalid intervals, and preserves raw data. See docs/utc-timing.md
 and docs/bench-procedure.md; missing measurements/limits must never pass a bench
 report. Pi deployment and measurement tooling live under sw/pi/deploy and sw/tools.

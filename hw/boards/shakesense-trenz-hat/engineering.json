@@ -1,14 +1,9 @@
 {
-  "rf": {
-    "model": "Hammerstad-Jensen, uncoated microstrip",
-    "width_mm": 0.388,
-    "reference": "In2.Cu",
-    "reference_depth_mm": 0.215,
-    "impedance_ohm": 49.977804370733764,
-    "effective_er": 3.132562439687406,
-    "length_mm": 7.416295090390226,
-    "return_plane_points": 900,
-    "limitations": "Recorded provisional dielectric; solder mask and connector launches not modeled"
+  "geophone": {
+    "physical_pin_checks": 51,
+    "sensor": "Racotech RGI-4.5Hz vertical",
+    "adc": "ADS122C04",
+    "axes": "four aligned three-axis IMUs"
   },
   "power": {
     "interface_pin_checks": 31,

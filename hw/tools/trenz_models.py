@@ -37,8 +37,8 @@ for n in (40,60):
     for i in range(n):body+=box((i-(n-1)/2)*.5,3,.15,.3,1,.3,'0.73 0.57 0.22')
     write(f'FFC_F32Q_{n}_envelope',body)
 b=p.LoadBoard(str(F/(NAME+'.kicad_pcb')))
-title=b.GetTitleBlock();title.SetRevision('T1-GPIO HDI');title.SetDate('2026-09-24');b.SetTitleBlock(title)
-custom={'U20':'SCL3300','U21':'MAX_M10S','J1':'Pi_ESQ_120_23','J80':'LSHM_50_4mm','J81':'LSHM_50_4mm','J82':'LSHM_30_4mm','J86':'FFC_F32Q_40_envelope','J87':'FFC_F32Q_40_envelope','J88':'FFC_F32Q_60_envelope','J89':'FFC_F32Q_60_envelope'}
+title=b.GetTitleBlock();title.SetRevision('T1-GEO HDI');title.SetDate('2026-09-24');b.SetTitleBlock(title)
+custom={'U20':'SCL3300','J1':'Pi_ESQ_120_23','J80':'LSHM_50_4mm','J81':'LSHM_50_4mm','J82':'LSHM_30_4mm','J86':'FFC_F32Q_40_envelope','J87':'FFC_F32Q_40_envelope','J88':'FFC_F32Q_60_envelope','J89':'FFC_F32Q_60_envelope'}
 for fp in b.GetFootprints():
     if fp.GetReference() in custom:model(fp,'${KIPRJMOD}/../../models/'+custom[fp.GetReference()]+'.wrl')
     else:

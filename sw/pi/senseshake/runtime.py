@@ -58,7 +58,7 @@ class Acquisition:
             c.settings = c.adapter.configure(c.settings)
         for (device, boot), channels in groups.items():
             sensors = [c.settings["sensor_id"] for c in channels]
-            board = 1 if max(sensors) <= 6 else 2
+            board = 2 if set(sensors) <= {7, 8} else 1
             self.emit(messages.identity(device, boot, board, sensors), now)
             self.emit(messages.configuration(device, boot, [c.settings for c in channels]), now)
 

@@ -1,0 +1,126 @@
+{
+  "cases": [
+    {
+      "case": "ac_0.7_0.5",
+      "v(avdd)": 3.285386,
+      "v(vcm)": 1.642693,
+      "amplitude": 2.885925e-05,
+      "expected_v": 2.8859254451397106e-05,
+      "passed": true
+    },
+    {
+      "case": "ac_0.7_4.5",
+      "v(avdd)": 3.285386,
+      "v(vcm)": 1.642693,
+      "amplitude": 0.001669391,
+      "expected_v": 0.0016693908630797066,
+      "passed": true
+    },
+    {
+      "case": "ac_0.7_10",
+      "v(avdd)": 3.285386,
+      "v(vcm)": 1.642693,
+      "amplitude": 0.002299408,
+      "expected_v": 0.002299408364628036,
+      "passed": true
+    },
+    {
+      "case": "ac_0.7_27",
+      "v(avdd)": 3.285386,
+      "v(vcm)": 1.642693,
+      "amplitude": 0.002335656,
+      "expected_v": 0.0023356563173754213,
+      "passed": true
+    },
+    {
+      "case": "ac_0.7_1000",
+      "v(avdd)": 3.285386,
+      "v(vcm)": 1.642693,
+      "amplitude": 0.001290165,
+      "expected_v": 0.0012901647012895014,
+      "passed": true
+    },
+    {
+      "case": "ac_0.63_0.5",
+      "v(avdd)": 3.120567,
+      "v(vcm)": 1.560284,
+      "amplitude": 2.892613e-05,
+      "expected_v": 2.8926133781280088e-05,
+      "passed": true
+    },
+    {
+      "case": "ac_0.63_4.5",
+      "v(avdd)": 3.120567,
+      "v(vcm)": 1.560284,
+      "amplitude": 0.001854902,
+      "expected_v": 0.001854901824433871,
+      "passed": true
+    },
+    {
+      "case": "ac_0.63_10",
+      "v(avdd)": 3.120567,
+      "v(vcm)": 1.560284,
+      "amplitude": 0.002388296,
+      "expected_v": 0.002388295548553861,
+      "passed": true
+    },
+    {
+      "case": "ac_0.63_27",
+      "v(avdd)": 3.120567,
+      "v(vcm)": 1.560284,
+      "amplitude": 0.002348077,
+      "expected_v": 0.0023480767736674874,
+      "passed": true
+    },
+    {
+      "case": "ac_0.63_1000",
+      "v(avdd)": 3.120567,
+      "v(vcm)": 1.560284,
+      "amplitude": 0.001343474,
+      "expected_v": 0.0013434741704363986,
+      "passed": true
+    },
+    {
+      "case": "ac_0.77_0.5",
+      "v(avdd)": 3.450205,
+      "v(vcm)": 1.725102,
+      "amplitude": 2.87859e-05,
+      "expected_v": 2.87858990751115e-05,
+      "passed": true
+    },
+    {
+      "case": "ac_0.77_4.5",
+      "v(avdd)": 3.450205,
+      "v(vcm)": 1.725102,
+      "amplitude": 0.001517609,
+      "expected_v": 0.0015176088745890203,
+      "passed": true
+    },
+    {
+      "case": "ac_0.77_10",
+      "v(avdd)": 3.450205,
+      "v(vcm)": 1.725102,
+      "amplitude": 0.002211844,
+      "expected_v": 0.002211844362709348,
+      "passed": true
+    },
+    {
+      "case": "ac_0.77_27",
+      "v(avdd)": 3.450205,
+      "v(vcm)": 1.725102,
+      "amplitude": 0.002322158,
+      "expected_v": 0.0023221584427285742,
+      "passed": true
+    },
+    {
+      "case": "ac_0.77_1000",
+      "v(avdd)": 3.450205,
+      "v(vcm)": 1.725102,
+      "amplitude": 0.001239394,
+      "expected_v": 0.0012393936874884335,
+      "passed": true
+    }
+  ],
+  "scope": "15 AC/mechanical/tolerance cases and DC common-mode/PGA headroom checks",
+  "limitations": "Nominal passive model; ADC digital filter/noise, TVS leakage/ESD, package microphonics, cable EMI and physical installation need measurement."
+}

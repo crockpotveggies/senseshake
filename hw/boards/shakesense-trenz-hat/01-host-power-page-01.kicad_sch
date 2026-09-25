@@ -1,4 +1,4 @@
-(kicad_sch (version 20230121) (generator eeschema) (uuid 94e4fefa-b04f-5cb8-86ce-dd5f9a42bc5a) (paper "A3") (title_block (title "ShakeSense T1 / 01-host-power-page-01") (date "2026-09-24") (rev "T1-GPIO"))
+(kicad_sch (version 20230121) (generator eeschema) (uuid 94e4fefa-b04f-5cb8-86ce-dd5f9a42bc5a) (paper "A3") (title_block (title "ShakeSense T1 / 01-host-power-page-01") (date "2026-09-24") (rev "T1-GEO"))
 (lib_symbols
 (symbol "ShakeSense:Part_J1" (pin_names (offset 0.6)) (in_bom yes) (on_board yes)
       (property "Reference" "J" (id 0) (at 0 29.21 0) (effects (font (size 1.27 1.27))))
@@ -65,7 +65,7 @@
 (wire (pts (xy 35.56 50.8) (xy 30.48 50.8)) (stroke (width 0) (type default)) (uuid f377758d-228b-5b79-b83e-b261ea7cbc51))
 (global_label "GND" (shape bidirectional) (at 30.48 50.8 180) (effects (font (size 0.9 0.9)) (justify right)) (uuid 853502aa-c4df-5bcd-baa8-8903550e05fc))
 (wire (pts (xy 35.56 53.34) (xy 30.48 53.34)) (stroke (width 0) (type default)) (uuid e82a2781-3a58-5d07-9754-57e88e7a593e))
-(global_label "PI_GNSS_PPS" (shape bidirectional) (at 30.48 53.34 180) (effects (font (size 0.9 0.9)) (justify right)) (uuid 3b3308b1-67ab-5dce-b4da-8b9e8525d9d0))
+(global_label "PI_GEO_DRDY_N" (shape bidirectional) (at 30.48 53.34 180) (effects (font (size 0.9 0.9)) (justify right)) (uuid 3b3308b1-67ab-5dce-b4da-8b9e8525d9d0))
 (wire (pts (xy 35.56 55.88) (xy 30.48 55.88)) (stroke (width 0) (type default)) (uuid 4080be4f-6b42-5e0f-ab64-4e11690929c7))
 (global_label "PI_UART_TX" (shape bidirectional) (at 30.48 55.88 180) (effects (font (size 0.9 0.9)) (justify right)) (uuid 7add96c2-82c6-5b74-ab01-f06694b06866))
 (wire (pts (xy 35.56 58.42) (xy 30.48 58.42)) (stroke (width 0) (type default)) (uuid 2d3bf649-866e-54d7-81eb-ce6a7a74921e))
@@ -228,4 +228,6 @@
 (global_label "SENS_3V3" (shape input) (at 187.95999999999998 274.32 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid 149bde9f-fb72-5c41-9f0e-fa1ced7d335e))
 (symbol (lib_id "ShakeSense:PWR_FLAG") (at 238.76 274.32 0) (unit 1) (in_bom no) (on_board no) (uuid 96b3ddd8-ef63-56a9-b2e3-4140911a7839) (property "Reference" "#FLG05" (at 238.76 274.32 0) (effects (font (size 1 1)) hide)) (property "Value" "PWR_FLAG" (at 238.76 274.32 0) (effects (font (size 1 1)) hide)) (instances (project "shakesense-trenz-hat" (path "/4ffaaa5d-c728-540d-9f0f-f1cafbdbe36e/94e4fefa-b04f-5cb8-86ce-dd5f9a42bc5a" (reference "#FLG05") (unit 1)))))
 (global_label "FPGA_3V3" (shape input) (at 238.76 274.32 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid 68065b70-2471-5bfb-9813-5f42a2fdee40))
+(symbol (lib_id "ShakeSense:PWR_FLAG") (at 289.56 274.32 0) (unit 1) (in_bom no) (on_board no) (uuid 42ee4037-1677-5359-bea5-d6e717cadf64) (property "Reference" "#FLG06" (at 289.56 274.32 0) (effects (font (size 1 1)) hide)) (property "Value" "PWR_FLAG" (at 289.56 274.32 0) (effects (font (size 1 1)) hide)) (instances (project "shakesense-trenz-hat" (path "/4ffaaa5d-c728-540d-9f0f-f1cafbdbe36e/94e4fefa-b04f-5cb8-86ce-dd5f9a42bc5a" (reference "#FLG06") (unit 1)))))
+(global_label "GEO_AVDD" (shape input) (at 289.56 274.32 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid a6a47e28-339c-5165-9d51-9e37bd3bebf4))
 )

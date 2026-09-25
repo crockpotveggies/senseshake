@@ -13,7 +13,7 @@ DEFAULTS = {
     "acceleration_m_s2": [0, 0, 0], "magnetic_ut": [0, 20, -45],
     "pressure_pa": 0, "temperature_c": 25, "pressure_temperature_count": 768,
     "gnss_position": [49, -123, 0], "gnss_velocity_ned_m_s": [0, 0, 0],
-    "gnss_fix": True, "sensor_faults": {},
+    "geophone_velocity_m_s": 0, "gnss_fix": True, "sensor_faults": {},
 }
 VECTOR_SIGNALS = {"orientation_deg", "head_orientation_deg", "acceleration_m_s2", "magnetic_ut"}
 SCALAR_SIGNALS = {"pressure_pa", "temperature_c"}
@@ -44,6 +44,11 @@ def signal_spec(value, orientation=False):
 def validate_changes(changes):
     if not isinstance(changes, dict) or not set(changes) <= DEFAULTS.keys(): raise ValueError("unknown controls")
     for name, value in changes.items():
+        if name == "geophone_velocity_m_s":
+            signal_spec(value)
+            if isinstance(value, dict) and set(value) - {"amplitude", "frequency_hz", "phase_deg", "offset"}:
+                raise ValueError("geophone model supports stationary sine/constant velocity only")
+            continue
         if name in VECTOR_SIGNALS:
             if not isinstance(value, list) or len(value) != 3: raise ValueError("three-axis control required")
             for item in value: signal_spec(item, "orientation" in name)
@@ -52,8 +57,8 @@ def validate_changes(changes):
             if type(value) is not bool: raise ValueError("gnss_fix must be boolean")
         elif name == "sensor_faults":
             actions = {"none", "timeout", "nack", "disconnect", "not_ready", "saturation", "short_read"}
-            if not isinstance(value, dict) or not set(value) <= {str(i) for i in range(1, 9)}:
-                raise ValueError("fault controls require sensor IDs 1..8")
+            if not isinstance(value, dict) or not set(value) <= {str(i) for i in range(1, 10)}:
+                raise ValueError("fault controls require sensor IDs 1..9")
             if any(type(action) is not str or action not in actions for action in value.values()):
                 raise ValueError("unknown timed fault action")
         elif name == "pressure_temperature_count":
@@ -215,6 +220,18 @@ def reading(sensor, cfg, scenario, now, seed):
                        angle=tuple(quantize(a * 32768 / math.pi) for a in tilt), temperature=quantize((temp + 273) * 18.9))
             raw["device_status"] = 64 if clipped else 0
             if norm < 1e-12: return Reading(raw, 4)  # No gravity vector from which to infer tilt.
+    elif sensor == 9:
+        # Steady-state mechanical transfer, electrical loading and RC pole.
+        # DC velocity has zero output. Changes switch steady states, not transients.
+        wave = state["geophone_velocity_m_s"]
+        wave = wave if isinstance(wave, dict) else {"offset": wave}
+        f = wave.get("frequency_hz", 0)
+        s = complex(0, 2 * math.pi * f)
+        omega = 2 * math.pi * 4.5
+        load = 2_000_000 / (2_000_000 + 2395)
+        h = 23.4 * s*s / (s*s + 1.4*omega*s + omega*omega) * load / (1 + s*2395*100.5e-9*load)
+        value = wave.get("amplitude", 0) * (h * complex(math.cos(2*math.pi*f*now/1e9 + math.radians(wave.get("phase_deg", 0))), math.sin(2*math.pi*f*now/1e9 + math.radians(wave.get("phase_deg", 0))))).imag
+        raw = dict(counts=quantize(value * cfg["geophone_gain"] / cfg["geophone_reference_v"] * 8388608, -8388608, 8388607), conversion_counter=(now // cfg["period_ns"]) & 255)
     elif sensor == 6: return Reading(dict(nav_pvt=nav_pvt(now, state, displacement)))
     elif sensor == 7:
         # Nominal model gain at cycle count 200; not a fitted calibration.

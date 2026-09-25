@@ -1,5 +1,11 @@
 # Virtual sensor stimulus models
 
+**T1-GEO revision:** GNSS is removed; one external Racotech vertical geophone
+uses an ADS122C04 input. See [current circuit, acquisition and validation](geophone-input.md).
+GNSS/PPS/RF details below describe the preceding revision or legacy recordings.
+The current physical bench template is version 2, with geophone response/noise/timing
+checks replacing the GNSS UTC check.
+
 `ideal-v1` replaces the old fixed counter patterns with controllable, time-based
 signals. It runs through the same acquisition, validation, calibration and
 recording code as the live drivers. No browser UI is required yet; the scenario
@@ -61,6 +67,7 @@ application time are both retained. A sample sees the state at its own time.
 | `orientation_deg` | HAT roll, pitch, yaw; three numbers or smooth waveforms | `[0,0,0]` |
 | `head_orientation_deg` | Independent remote-head roll, pitch, yaw | `[0,0,0]` |
 | `acceleration_m_s2` | World east/north/up linear acceleration, excluding gravity; three signals | `[0,0,0]` |
+| `geophone_velocity_m_s` | External vertical velocity; constant or steady sinusoid, native 4.5 Hz mechanical response plus passive RC | `0` |
 | `magnetic_ut` | World east/north/up field, microtesla; three signals | `[0,20,-45]` |
 | `pressure_pa` | Differential pressure; scalar signal | `0` |
 | `temperature_c` | IMU/inclinometer temperature; scalar signal | `25` |
@@ -165,3 +172,9 @@ References: [ST conversion routines](https://github.com/STMicroelectronics/stm32
 [SCL3300 datasheet](https://www.murata.com/-/media/webrenewal/products/sensor/pdf/datasheet/datasheet_scl3300-d01.ashx),
 [DLVR transfer/data format](https://www.allsensors.com/hubfs/Product-Data-Sheets/DS-0300.pdf),
 [u-blox M10 NAV-PVT](https://content.u-blox.com/sites/default/files/u-blox-M10-SPG-5.10_InterfaceDescription_UBX-21035062.pdf).
+
+The geophone control accepts amplitude, frequency, phase and offset; noise, drift
+and pulse controls are rejected for this steady-state model. Constant velocity
+has zero steady output. Each tone applies the Racotech mechanical transfer and
+loaded input RC before ADC quantization. ADC digital filtering and settling are
+not modeled. See [current geophone scope](geophone-input.md).

@@ -56,7 +56,7 @@ def analyze(path):
                     sessions.disconnect(item['device'])
                 continue
             kind = sessions.accept(item)
-            if kind != 'batch' or item.batch.sensor_id > 5: continue
+            if kind != 'batch' or item.batch.sensor_id not in (1,2,3,4,5,9): continue
             sid = item.batch.sensor_id
             cfg = sessions.devices[item.device_id].settings[sid]
             digest = configuration_hash(cfg)
@@ -78,22 +78,26 @@ def analyze(path):
                 row[{1:'valid', 2:'missing', 3:'saturated', 4:'fault'}[sample.quality]] += 1
                 if sample.quality != 1: continue
                 seconds = (t - row['first']) / 1e9
-                raw = sample.imu if sid <= 4 else sample.tilt
-                scale = ({2:.061,4:.122,8:.244,16:.488}[cfg.acceleration_range_g] * .00980665
-                         if sid <= 4 else 9.80665 / {1:6000,2:3000,3:12000,4:12000}[cfg.tilt_mode])
-                vectors = {}
-                if raw.HasField('acceleration'):
-                    vectors['acceleration_m_s2'] = [getattr(raw.acceleration, a) * scale for a in 'xyz']
-                if sid <= 4:
-                    gyro = {125:4.375,250:8.75,500:17.5,1000:35,2000:70}[cfg.angular_rate_range_dps] * math.pi/180000
-                    vectors['angular_rate_rad_s'] = [getattr(raw.angular_rate, a) * gyro for a in 'xyz']
-                elif raw.HasField('angle'):
-                    vectors['angle_rad'] = [getattr(raw.angle, a) * math.pi/32768 for a in 'xyz']
-                values = {f'{name}.{axis}': value for name, vector in vectors.items() for axis, value in zip('xyz', vector)}
-                if 'acceleration_m_s2' in vectors:
-                    values['gravity_m_s2'] = math.sqrt(sum(v*v for v in vectors['acceleration_m_s2']))
-                if raw.HasField('temperature'):
-                    values['temperature_k'] = raw.temperature / (256 if sid <= 4 else 18.9) + (298.15 if sid <= 4 else .15)
+                if sid == 9:
+                    values = {'adc_counts': sample.geophone.counts,
+                              'input_voltage_v': sample.geophone.counts * cfg.geophone_reference_v / cfg.geophone_gain / 8388608}
+                else:
+                    raw = sample.imu if sid <= 4 else sample.tilt
+                    scale = ({2:.061,4:.122,8:.244,16:.488}[cfg.acceleration_range_g] * .00980665
+                             if sid <= 4 else 9.80665 / {1:6000,2:3000,3:12000,4:12000}[cfg.tilt_mode])
+                    vectors = {}
+                    if raw.HasField('acceleration'):
+                        vectors['acceleration_m_s2'] = [getattr(raw.acceleration, a) * scale for a in 'xyz']
+                    if sid <= 4:
+                        gyro = {125:4.375,250:8.75,500:17.5,1000:35,2000:70}[cfg.angular_rate_range_dps] * math.pi/180000
+                        vectors['angular_rate_rad_s'] = [getattr(raw.angular_rate, a) * gyro for a in 'xyz']
+                    elif raw.HasField('angle'):
+                        vectors['angle_rad'] = [getattr(raw.angle, a) * math.pi/32768 for a in 'xyz']
+                    values = {f'{name}.{axis}': value for name, vector in vectors.items() for axis, value in zip('xyz', vector)}
+                    if 'acceleration_m_s2' in vectors:
+                        values['gravity_m_s2'] = math.sqrt(sum(v*v for v in vectors['acceleration_m_s2']))
+                    if raw.HasField('temperature'):
+                        values['temperature_k'] = raw.temperature / (256 if sid <= 4 else 18.9) + (298.15 if sid <= 4 else .15)
                 for name, value in values.items(): row['fields'].setdefault(name, Moments()).add(seconds, value)
     result = {}
     for sid, row in stats.items():

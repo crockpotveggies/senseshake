@@ -10,7 +10,7 @@ bring-up procedure; no workstation boot configuration is changed by the lab.
    `[pi4]` section of `/boot/firmware/config.txt`. Ensure the following settings
    are not unintentionally restricted by that section.
 2. Remove conflicting SPI chip-select overlays. Do not enable `w1-gpio` or
-   `pps-gpio` on BCM4: the acquisition process owns PPS edge capture. Do not
+   `pps-gpio` on BCM4: it is now the geophone DRDY signal. Do not
    enable a kernel IMU driver on the same SPI devices.
 3. Reboot. Load `spidev` and `i2c-dev` with `sudo modprobe spidev` and
    `sudo modprobe i2c-dev`. Run `python3 bind_spi.py` to verify all five device
@@ -24,15 +24,13 @@ bring-up procedure; no workstation boot configuration is changed by the lab.
    Use a new output filename each time. Start with the FPGA supply off.
 
 Chip-select order is BCM8,7,5,6,13. IRQ order is BCM27,22,23,24. Sensor OE is
-BCM26; PPS is BCM4. IRQs are rising-edge hints, backed by a 20 ms periodic drain
+BCM26; geophone DRDY is BCM4 (currently polled over I2C). IRQs are rising-edge hints, backed by a 20 ms periodic drain
 so an event missed while servicing the FIFO does not strand data. The application
 requests GPIO inputs without a bias; the board drives them through U42.
 
-PPS events retain the kernel MONOTONIC timestamp and a bracketed estimate in
-MONOTONIC_RAW. Neither is UTC. NAV-PVT calendar time alone cannot unambiguously
-identify a particular pulse. Add `--utc` to configure/read back the timepulse and
-capture TIM-TP/TIMEUTC evidence. [Offline correlation](../../../docs/utc-timing.md)
-then creates a separate UTC-labelled recording using supplied timing bounds.
+T1-GEO uses the ADS122C04 at I2C address 0x40. Remove `pps` from old profiles.
+The active profile has no GNSS and rejects `--utc`. Geophone conversion counters
+report gaps, but polling timestamps do not establish exact sample times.
 Physical qualification follows the [bench procedure](../../../docs/bench-procedure.md).
 
 Build/merge checks run against a small controller fixture. They establish overlay

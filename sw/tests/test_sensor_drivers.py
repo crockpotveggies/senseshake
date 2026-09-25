@@ -71,9 +71,9 @@ class SensorTests(unittest.TestCase):
                 return b""
         bus = Bus()
         driver = MAXM10S(bus, sleep=lambda _: None)
-        self.assertEqual(driver.configure(defaults()[5]), defaults()[5])
+        self.assertEqual(driver.configure(defaults(legacy_gnss=True)[5]), defaults(legacy_gnss=True)[5])
         self.assertEqual(bus.writes[0][6:-2].hex(), "0001000001002130e8030200213001000600912001")
-        with self.assertRaises(OSError): MAXM10S(Bus(reject=True), sleep=lambda _: None).configure(defaults()[5])
+        with self.assertRaises(OSError): MAXM10S(Bus(reject=True), sleep=lambda _: None).configure(defaults(legacy_gnss=True)[5])
 
     def test_imu_configuration_and_signed_axis_order(self):
         bus = IMUBus()

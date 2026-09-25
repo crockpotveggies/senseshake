@@ -5,6 +5,48 @@
     56
   ],
   "copper_layers": 8,
+  "ground_layers": [
+    "In2.Cu",
+    "In5.Cu"
+  ],
+  "hdi": {
+    "structure": "1+6+1",
+    "microvia_diameter_mm": 0.3,
+    "microvia_drill_mm": 0.1,
+    "microvia_pairs": [
+      [
+        "F.Cu",
+        "In1.Cu"
+      ],
+      [
+        "In6.Cu",
+        "B.Cu"
+      ]
+    ],
+    "via_in_pad": "filled and planarized; manufacturer DFM required",
+    "stackup_status": "provisional; HDI materials and process approval pending",
+    "copper_thickness_mm": [
+      0.035,
+      0.035,
+      0.035,
+      0.035,
+      0.035,
+      0.035,
+      0.035,
+      0.035
+    ],
+    "dielectric_thickness_mm": [
+      0.08,
+      0.1,
+      0.18,
+      0.58,
+      0.18,
+      0.1,
+      0.08
+    ],
+    "mask_thickness_mm": 0.01,
+    "nominal_thickness_mm": 1.6
+  },
   "parts": [
     {
       "ref": "J1",
@@ -28,7 +70,7 @@
         "4": "PI_5V",
         "5": "PI_I2C_SCL",
         "6": "GND",
-        "7": "PI_GNSS_PPS",
+        "7": "PI_GEO_DRDY_N",
         "8": "PI_UART_TX",
         "9": "GND",
         "10": "PI_UART_RX",
@@ -811,141 +853,6 @@
       }
     },
     {
-      "ref": "U21",
-      "value": "MAX-M10S",
-      "footprint": "RF_GPS:ublox_MAX",
-      "names": {
-        "1": "GND",
-        "2": "TXD_NC",
-        "3": "RXD_NC",
-        "4": "TIMEPULSE",
-        "5": "EXTINT",
-        "6": "V_BCKP",
-        "7": "VCC_IO",
-        "8": "VCC",
-        "9": "RESET_N",
-        "10": "GND",
-        "11": "RF_IN",
-        "12": "GND",
-        "13": "LNA_EN",
-        "14": "VCC_RF",
-        "15": "VIO_SEL_OPEN_3V3",
-        "16": "SDA",
-        "17": "SCL",
-        "18": "SAFEBOOT_N"
-      },
-      "xy": [
-        14,
-        46
-      ],
-      "section": "03-level-position-page-01",
-      "angle": 0,
-      "mpn": "MAX-M10S-00B",
-      "note": "I2C 0x42. Passive external GNSS antenna; no DC bias at RF connector.",
-      "dnp": false,
-      "local_fp": "RF_GPS__ublox_MAX",
-      "pins": {
-        "1": "GND",
-        "2": null,
-        "3": null,
-        "4": "GNSS_PPS",
-        "5": "GND",
-        "6": null,
-        "7": "SENS_3V3",
-        "8": "SENS_3V3",
-        "9": null,
-        "10": "GND",
-        "11": "GNSS_RF",
-        "12": "GND",
-        "13": null,
-        "14": null,
-        "15": null,
-        "16": "I2C_SDA",
-        "17": "I2C_SCL",
-        "18": null
-      }
-    },
-    {
-      "ref": "C24",
-      "value": "100n",
-      "footprint": "Capacitor_SMD:C_0603_1608Metric",
-      "names": {},
-      "xy": [
-        5.0,
-        43.0
-      ],
-      "section": "03-level-position-page-01",
-      "angle": 0,
-      "mpn": "GRM188R71H104KA93D",
-      "note": "",
-      "dnp": false,
-      "local_fp": "Capacitor_SMD__C_0603_1608Metric",
-      "pins": {
-        "1": "SENS_3V3",
-        "2": "GND"
-      }
-    },
-    {
-      "ref": "C25",
-      "value": "4.7u",
-      "footprint": "Capacitor_SMD:C_0805_2012Metric",
-      "names": {},
-      "xy": [
-        5.0,
-        46.0
-      ],
-      "section": "03-level-position-page-01",
-      "angle": 0,
-      "mpn": "GRM21BR71A475KA73L",
-      "note": "",
-      "dnp": false,
-      "local_fp": "Capacitor_SMD__C_0805_2012Metric",
-      "pins": {
-        "1": "SENS_3V3",
-        "2": "GND"
-      }
-    },
-    {
-      "ref": "C26",
-      "value": "100n",
-      "footprint": "Capacitor_SMD:C_0603_1608Metric",
-      "names": {},
-      "xy": [
-        5.0,
-        48.5
-      ],
-      "section": "03-level-position-page-01",
-      "angle": 0,
-      "mpn": "GRM188R71H104KA93D",
-      "note": "",
-      "dnp": false,
-      "local_fp": "Capacitor_SMD__C_0603_1608Metric",
-      "pins": {
-        "1": "SENS_3V3",
-        "2": "GND"
-      }
-    },
-    {
-      "ref": "J2",
-      "value": "Passive GNSS antenna",
-      "footprint": "Connector_Coaxial:U.FL_Hirose_U.FL-R-SMT-1_Vertical",
-      "names": {},
-      "xy": [
-        25,
-        46
-      ],
-      "section": "03-level-position-page-01",
-      "angle": 0,
-      "mpn": "U.FL-R-SMT-1(10)",
-      "note": "50 ohm line; external passive antenna.",
-      "dnp": false,
-      "local_fp": "Connector_Coaxial__U.FL_Hirose_U.FL-R-SMT-1_Vertical",
-      "pins": {
-        "1": "GNSS_RF",
-        "2": "GND"
-      }
-    },
-    {
       "ref": "J4",
       "value": "FPGA test UART/reset",
       "footprint": "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical",
@@ -1255,7 +1162,7 @@
         "5": "PI_IMU2_INT",
         "6": "PI_IMU3_INT",
         "7": "PI_IMU4_INT",
-        "8": "PI_GNSS_PPS",
+        "8": "PI_GEO_DRDY_N",
         "9": null,
         "10": null,
         "11": "GND",
@@ -1263,7 +1170,7 @@
         "13": "GND",
         "14": "GND",
         "15": "GND",
-        "16": "GNSS_PPS",
+        "16": "GEO_DRDY_N",
         "17": "IMU4_INT",
         "18": "IMU3_INT",
         "19": "IMU2_INT",
@@ -1553,8 +1460,8 @@
       "footprint": "TestPoint:TestPoint_Pad_D1.5mm",
       "names": {},
       "xy": [
-        12.0,
-        53.0
+        36,
+        50
       ],
       "section": "06-supply-isolation-page-02",
       "angle": 0,
@@ -2991,48 +2898,403 @@
         "60": "GND",
         "61": "GND"
       }
-    }
-  ],
-  "ground_layers": [
-    "In2.Cu",
-    "In5.Cu"
-  ],
-  "hdi": {
-    "structure": "1+6+1",
-    "microvia_diameter_mm": 0.3,
-    "microvia_drill_mm": 0.1,
-    "microvia_pairs": [
-      [
-        "F.Cu",
-        "In1.Cu"
+    },
+    {
+      "ref": "U22",
+      "value": "ADS122C04",
+      "footprint": "Package_SO:TSSOP-16_4.4x5mm_P0.65mm",
+      "names": {
+        "1": "A0",
+        "2": "A1",
+        "3": "RESET_N",
+        "4": "DGND",
+        "5": "AVSS",
+        "6": "AIN3_NC",
+        "7": "AIN2_NC",
+        "8": "REFN_NC",
+        "9": "REFP_NC",
+        "10": "AIN1",
+        "11": "AIN0",
+        "12": "AVDD",
+        "13": "DVDD",
+        "14": "DRDY_N",
+        "15": "SDA",
+        "16": "SCL"
+      },
+      "xy": [
+        14,
+        44
       ],
-      [
-        "In6.Cu",
-        "B.Cu"
-      ]
-    ],
-    "via_in_pad": "filled and planarized; manufacturer DFM required",
-    "stackup_status": "provisional; RF impedance and material approval pending",
-    "copper_thickness_mm": [
-      0.035,
-      0.035,
-      0.035,
-      0.035,
-      0.035,
-      0.035,
-      0.035,
-      0.035
-    ],
-    "dielectric_thickness_mm": [
-      0.08,
-      0.1,
-      0.18,
-      0.58,
-      0.18,
-      0.1,
-      0.08
-    ],
-    "mask_thickness_mm": 0.01,
-    "nominal_thickness_mm": 1.6
-  }
+      "angle": 0,
+      "section": "03-geophone-page-01",
+      "mpn": "ADS122C04IPWR",
+      "note": "I2C 0x40; internal 2.048V reference, gain 64, normal 330 SPS; unused analog/reference inputs open per TI.",
+      "dnp": false,
+      "local_fp": "Package_SO__TSSOP-16_4.4x5mm_P0.65mm",
+      "pins": {
+        "1": "GND",
+        "2": "GND",
+        "3": "SENS_3V3",
+        "4": "GND",
+        "5": "GND",
+        "6": null,
+        "7": null,
+        "8": null,
+        "9": null,
+        "10": "GEO_AIN_N",
+        "11": "GEO_AIN_P",
+        "12": "GEO_AVDD",
+        "13": "SENS_3V3",
+        "14": "GEO_DRDY_N",
+        "15": "I2C_SDA",
+        "16": "I2C_SCL"
+      }
+    },
+    {
+      "ref": "J90",
+      "value": "GEO + / - / SHIELD",
+      "footprint": "Connector_Phoenix_MC:PhoenixContact_MCV_1,5_3-G-3.81_1x03_P3.81mm_Vertical",
+      "names": {
+        "1": "GEO_PLUS",
+        "2": "GEO_MINUS",
+        "3": "SHIELD_GND"
+      },
+      "xy": [
+        18,
+        50.9
+      ],
+      "angle": 180,
+      "section": "03-geophone-page-01",
+      "mpn": "1803439",
+      "note": "External passive sensor: 1 positive, 2 negative, 3 cable shield. Mate MC 1,5/3-ST-3,81. Never connect power.",
+      "dnp": false,
+      "local_fp": "Connector_Phoenix_MC__PhoenixContact_MCV_1,5_3-G-3.81_1x03_P3.81mm_Vertical",
+      "pins": {
+        "1": "GEO_P",
+        "2": "GEO_N",
+        "3": "GND"
+      }
+    },
+    {
+      "ref": "D90",
+      "value": "TPD2E2U06",
+      "footprint": "Package_TO_SOT_SMD:SOT-323_SC-70",
+      "names": {},
+      "xy": [
+        27,
+        47.8
+      ],
+      "angle": 0,
+      "section": "03-geophone-page-01",
+      "mpn": "TPD2E2U06DCKR",
+      "note": "Connector ESD suppression only; not lightning protection.",
+      "dnp": false,
+      "local_fp": "Package_TO_SOT_SMD__SOT-323_SC-70",
+      "pins": {
+        "1": "GEO_P",
+        "2": "GEO_N",
+        "3": "GND"
+      }
+    },
+    {
+      "ref": "R90",
+      "value": "1k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "names": {},
+      "xy": [
+        22,
+        45
+      ],
+      "angle": 0,
+      "section": "03-geophone-page-01",
+      "mpn": "RC0603FR-071KL",
+      "note": "Matched series input filter / current limiting.",
+      "dnp": false,
+      "local_fp": "Resistor_SMD__R_0603_1608Metric",
+      "pins": {
+        "1": "GEO_P",
+        "2": "GEO_AIN_P"
+      }
+    },
+    {
+      "ref": "R91",
+      "value": "1k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "names": {},
+      "xy": [
+        22,
+        42.5
+      ],
+      "angle": 0,
+      "section": "03-geophone-page-01",
+      "mpn": "RC0603FR-071KL",
+      "note": "",
+      "dnp": false,
+      "local_fp": "Resistor_SMD__R_0603_1608Metric",
+      "pins": {
+        "1": "GEO_N",
+        "2": "GEO_AIN_N"
+      }
+    },
+    {
+      "ref": "C90",
+      "value": "100n C0G",
+      "footprint": "Capacitor_SMD:C_1206_3216Metric",
+      "names": {},
+      "xy": [
+        25,
+        43.0
+      ],
+      "angle": 90,
+      "section": "03-geophone-page-01",
+      "mpn": "C1206C104J5GACTU",
+      "note": "C0G differential filter; no piezoelectric X7R on signal path.",
+      "dnp": false,
+      "local_fp": "Capacitor_SMD__C_1206_3216Metric",
+      "pins": {
+        "1": "GEO_AIN_P",
+        "2": "GEO_AIN_N"
+      }
+    },
+    {
+      "ref": "C91",
+      "value": "1n C0G",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "names": {},
+      "xy": [
+        28,
+        41.5
+      ],
+      "angle": 0,
+      "section": "03-geophone-page-01",
+      "mpn": "C0603C102J5GACTU",
+      "note": "",
+      "dnp": false,
+      "local_fp": "Capacitor_SMD__C_0603_1608Metric",
+      "pins": {
+        "1": "GEO_AIN_P",
+        "2": "GND"
+      }
+    },
+    {
+      "ref": "C92",
+      "value": "1n C0G",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "names": {},
+      "xy": [
+        28,
+        44.5
+      ],
+      "angle": 0,
+      "section": "03-geophone-page-01",
+      "mpn": "C0603C102J5GACTU",
+      "note": "",
+      "dnp": false,
+      "local_fp": "Capacitor_SMD__C_0603_1608Metric",
+      "pins": {
+        "1": "GEO_AIN_N",
+        "2": "GND"
+      }
+    },
+    {
+      "ref": "R92",
+      "value": "1M",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "names": {},
+      "xy": [
+        19,
+        39.7
+      ],
+      "angle": 0,
+      "section": "03-geophone-page-01",
+      "mpn": "RC0603FR-071ML",
+      "note": "",
+      "dnp": false,
+      "local_fp": "Resistor_SMD__R_0603_1608Metric",
+      "pins": {
+        "1": "GEO_AIN_P",
+        "2": "GEO_VCM"
+      }
+    },
+    {
+      "ref": "R93",
+      "value": "1M",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "names": {},
+      "xy": [
+        23,
+        39.5
+      ],
+      "angle": 0,
+      "section": "03-geophone-page-01",
+      "mpn": "RC0603FR-071ML",
+      "note": "",
+      "dnp": false,
+      "local_fp": "Resistor_SMD__R_0603_1608Metric",
+      "pins": {
+        "1": "GEO_AIN_N",
+        "2": "GEO_VCM"
+      }
+    },
+    {
+      "ref": "R94",
+      "value": "10k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "names": {},
+      "xy": [
+        6,
+        42
+      ],
+      "angle": 0,
+      "section": "03-geophone-page-01",
+      "mpn": "RC0603FR-0710KL",
+      "note": "",
+      "dnp": false,
+      "local_fp": "Resistor_SMD__R_0603_1608Metric",
+      "pins": {
+        "1": "GEO_AVDD",
+        "2": "GEO_VCM"
+      }
+    },
+    {
+      "ref": "R95",
+      "value": "10k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "names": {},
+      "xy": [
+        6,
+        44.5
+      ],
+      "angle": 0,
+      "section": "03-geophone-page-01",
+      "mpn": "RC0603FR-0710KL",
+      "note": "",
+      "dnp": false,
+      "local_fp": "Resistor_SMD__R_0603_1608Metric",
+      "pins": {
+        "1": "GEO_VCM",
+        "2": "GND"
+      }
+    },
+    {
+      "ref": "C93",
+      "value": "10u",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "names": {},
+      "xy": [
+        5,
+        47
+      ],
+      "angle": 0,
+      "section": "03-geophone-page-02",
+      "mpn": "GRM21BR61A106KE19L",
+      "note": "Filtered mid-supply; sensor has no excitation current source.",
+      "dnp": false,
+      "local_fp": "Capacitor_SMD__C_0805_2012Metric",
+      "pins": {
+        "1": "GEO_VCM",
+        "2": "GND"
+      }
+    },
+    {
+      "ref": "R96",
+      "value": "22",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "names": {},
+      "xy": [
+        10,
+        40
+      ],
+      "angle": 0,
+      "section": "03-geophone-page-02",
+      "mpn": "RC0603FR-0722RL",
+      "note": "",
+      "dnp": false,
+      "local_fp": "Resistor_SMD__R_0603_1608Metric",
+      "pins": {
+        "1": "SENS_3V3",
+        "2": "GEO_AVDD"
+      }
+    },
+    {
+      "ref": "C94",
+      "value": "10u",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "names": {},
+      "xy": [
+        6,
+        39.5
+      ],
+      "angle": 0,
+      "section": "03-geophone-page-02",
+      "mpn": "GRM21BR61A106KE19L",
+      "note": "",
+      "dnp": false,
+      "local_fp": "Capacitor_SMD__C_0805_2012Metric",
+      "pins": {
+        "1": "GEO_AVDD",
+        "2": "GND"
+      }
+    },
+    {
+      "ref": "C95",
+      "value": "100n",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "names": {},
+      "xy": [
+        18.9,
+        45.5
+      ],
+      "angle": 90,
+      "section": "03-geophone-page-02",
+      "mpn": "GRM188R71H104KA93D",
+      "note": "",
+      "dnp": false,
+      "local_fp": "Capacitor_SMD__C_0603_1608Metric",
+      "pins": {
+        "1": "GEO_AVDD",
+        "2": "GND"
+      }
+    },
+    {
+      "ref": "C96",
+      "value": "100n",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "names": {},
+      "xy": [
+        18.9,
+        42.2
+      ],
+      "angle": 90,
+      "section": "03-geophone-page-02",
+      "mpn": "GRM188R71H104KA93D",
+      "note": "",
+      "dnp": false,
+      "local_fp": "Capacitor_SMD__C_0603_1608Metric",
+      "pins": {
+        "1": "SENS_3V3",
+        "2": "GND"
+      }
+    },
+    {
+      "ref": "R97",
+      "value": "10k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "names": {},
+      "xy": [
+        10,
+        38.5
+      ],
+      "angle": 0,
+      "section": "03-geophone-page-02",
+      "mpn": "RC0603FR-0710KL",
+      "note": "Open-drain DRDY pullup; existing U42 return buffer to BCM4.",
+      "dnp": false,
+      "local_fp": "Resistor_SMD__R_0603_1608Metric",
+      "pins": {
+        "1": "GEO_DRDY_N",
+        "2": "SENS_3V3"
+      }
+    }
+  ]
 }

@@ -1,5 +1,11 @@
 # Portable test environment
 
+**T1-GEO revision:** GNSS is removed; one external Racotech vertical geophone
+uses an ADS122C04 input. See [current circuit, acquisition and validation](geophone-input.md).
+GNSS/PPS/RF details below describe the preceding revision or legacy recordings.
+The current physical bench template is version 2, with geophone response/noise/timing
+checks replacing the GNSS UTC check.
+
 The project now has one disposable Docker test environment. Keep authored files
 in their existing locations and use the root `lab.ps1` or `lab.sh` launcher for
 validation. Existing local virtual environments and historical reports are not
@@ -228,3 +234,14 @@ when there is executable code and an explicit acceptance test for it.
 
 References: [official KiCad container images](https://www.kicad.org/download/docker/),
 [Docker runtime options](https://docs.docker.com/reference/cli/docker/container/run).
+
+## Current T1-GEO validation
+
+Run `20260925T052808Z-f2a7e74a` passes all **16 portable stages**: three Atopile
+builds and numeric solves, the invalid-voltage fixture, **16 hardware regressions**,
+KiCad ERC/DRC/connectivity, **56 SPICE cases** (15 geophone), and **147 software
+tests without skips**, including contract compatibility. Clean route replay preserves
+all **6,452 tracks/vias**, with **38 microvias**, and zero DRC/open connections.
+The UI passes 10/10 modeled-driver checks across 3,672 samples.
+See [the current verification record](../hw/boards/shakesense-trenz-hat/verification.json).
+This does not replace physical noise, power, fit or timing measurements.

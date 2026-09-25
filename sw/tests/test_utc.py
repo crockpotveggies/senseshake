@@ -94,18 +94,18 @@ class UTCTests(unittest.TestCase):
     def test_configuration_wire_keys_ack_and_full_readback(self):
         bus = ConfigBus()
         driver = TimedGNSS(bus, sleep=lambda _:None, clock_ns=lambda:0)
-        self.assertEqual(driver.configure(defaults()[5]), defaults()[5])
+        self.assertEqual(driver.configure(defaults(legacy_gnss=True)[5]), defaults(legacy_gnss=True)[5])
         written = bus.writes[0]
         for independent_hex in ('7d01912001', '5b00912001', '0200054040420f00',
                                 '0c00052000', '0b00051001', '3000052001'):
             self.assertIn(bytes.fromhex(independent_hex), written)
-        with self.assertRaises(OSError): TimedGNSS(ConfigBus(True), sleep=lambda _:None).configure(defaults()[5])
-        with self.assertRaises(ValueError): driver.configure(dict(defaults()[5], period_ns=2*S))
+        with self.assertRaises(OSError): TimedGNSS(ConfigBus(True), sleep=lambda _:None).configure(defaults(legacy_gnss=True)[5])
+        with self.assertRaises(ValueError): driver.configure(dict(defaults(legacy_gnss=True)[5], period_ns=2*S))
 
     def test_driver_captures_fragmented_packets_and_corruption(self):
         bus = ConfigBus(); now = [0]
         driver = TimedGNSS(bus, sleep=lambda _:None, clock_ns=lambda:now[0])
-        driver.configure(defaults()[5]); driver.read()
+        driver.configure(defaults(legacy_gnss=True)[5]); driver.read()
         packet = ubx_packet(0x0d, 1, tp(BASE))
         now[0] = 100; bus.data = packet[:9]
         self.assertFalse(driver.read().events)
@@ -122,7 +122,7 @@ class UTCTests(unittest.TestCase):
         driver.buffered, driver.ready = True, lambda:False
         stream = io.BytesIO()
         app = Acquisition(Writer(stream, {'format':'senseshake-acquisition-v1'}), Sessions(),
-                          [Channel('pi',1,defaults()[5],driver)])
+                          [Channel('pi',1,defaults(legacy_gnss=True)[5],driver)])
         app.start(0); clock[0] = S
         payload = bytearray(92); payload[:4] = (1000).to_bytes(4,'little')
         bus.data = ubx_packet(1,7,payload) + ubx_packet(0x0d,1,tp(BASE)) + ubx_packet(1,0x21,nav(BASE-1))

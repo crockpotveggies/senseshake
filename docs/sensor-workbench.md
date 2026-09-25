@@ -1,5 +1,11 @@
 # Sensor workbench
 
+**T1-GEO revision:** GNSS is removed; one external Racotech vertical geophone
+uses an ADS122C04 input. See [current circuit, acquisition and validation](geophone-input.md).
+GNSS/PPS/RF details below describe the preceding revision or legacy recordings.
+The current physical bench template is version 2, with geophone response/noise/timing
+checks replacing the GNSS UTC check.
+
 This is a functioning local Python/NiceGUI workbench for virtual sensor
 experiments and validated recording replay. It defaults to dark mode and runs
 without a Pi, FPGA or Coldfoot chip. Live hardware acquisition remains available
@@ -41,8 +47,8 @@ to accumulate. Downloads go to the location selected by your browser.
    the camera. Selecting magnetometer/infrasound switches to the separate USB
    head view. The FPGA is not needed to run these models.
 3. Expand stimulus groups. Set pose, sinusoidal vertical acceleration, XYZ
-   magnetic field, sinusoidal pressure, GNSS position/fix/north velocity,
-   temperature, or per-sensor faults. Press the corresponding **Apply** button.
+   magnetic field, sinusoidal pressure, geophone velocity/frequency,
+   or per-sensor faults. Press the corresponding **Apply** button.
    Form values are proposed settings, not readbacks of a loaded waveform.
    Advanced noise, drift, pulse, multi-axis and timed controls remain available
    through [scenario JSON](stimulus-models.md), imported under
@@ -76,20 +82,20 @@ recording and its JSON report using the panel buttons; the report includes the
 recording's SHA-256. Seek backward and press Play to inspect the checked signals.
 
 Unlike ordinary simulation, this test feeds the models through register/packet
-buses into the production `LSM6DSO`, `SCL3300` and `MAXM10S` driver classes,
+buses into the production `LSM6DSO`, `SCL3300` and `ADS122C04` driver classes,
 then through the acquisition, session validation and recording code. It checks
-1,040 samples from the six HAT sensors. Remote-head sensors are outside this test.
+3,672 samples from the six HAT sensors. Remote-head sensors are outside this test.
 
 The fixed excitation is a 2 Hz, 0.300 m/s² X-axis acceleration sine wave, 0.5 Hz,
-5° roll, and GNSS motion at N/E/D = 1/2/−0.5 m/s. The independent recording
+5° roll, and a geophone input of 100 µm/s at 10 Hz. The independent recording
 analyzer checks inventory/quality, effective configuration, sample timing and
 continuity, tone frequency/gain/phase, gravity magnitude, prescribed roll,
 integrated gyro versus gravity-derived roll, agreement across four IMUs,
-inclinometer angle/acceleration consistency, and GNSS position/velocity units.
+inclinometer angle/acceleration consistency, and geophone gain/phase and conversion-counter rollover.
 Measurements and explicit tolerances are expandable in the UI. These are
 **ideal-model regression limits**, not manufacturing acceptance specifications.
-GNSS follows a separately commanded track; this test does not establish
-IMU/GNSS sensor-fusion consistency.
+Geophone excitation is commanded independently of HAT motion; the test does
+not establish a shared mechanical mounting model.
 
 ![HAT driver signal test passing in the workbench](images/hat-signal-test.png)
 
@@ -105,7 +111,7 @@ $env:SENSESHAKE_DESCRIPTOR = "$PWD/sw/build/ui-schema.binpb"
 Choose a new output filename for each manual run; existing recordings are never
 overwritten. The thirteen regression tests include negative controls which alter
 otherwise valid, CRC-correct records or excitation. Wrong frequency, gain,
-polarity, motion, stuck channels, gyro scale, tilt sign, GNSS units, timestamps
+polarity, motion, stuck channels, gyro scale, tilt sign, geophone polarity, timestamps
 and missing measurements must fail. Existing independent bus-vector tests remain
 the guard for wire constants/CRC logic shared by a driver and a modeled bus.
 This does not exercise Linux ioctls, physical SPI/I²C timing, or real HAT noise.
@@ -119,10 +125,9 @@ corresponding samples, and simulation steps are fixed at 1 ms. UI/wall-clock
 delays slow the experiment; they do not change its sample values or create
 invented timestamps. Camera movement never schedules stimulus changes.
 
-Charts show native **raw counts**, except GNSS's decoded N/E/D velocity in
-mm/s. Temperature registers are not silently converted to °C. Missing fields
+Charts show native **raw counts**. Temperature registers are not silently converted to °C. Missing fields
 are `null` chart gaps; valid zeros remain zeros. Saturation and fault labels are
-visible. A valid GNSS packet without a fix shows unavailable position/velocity.
+visible. The geophone shows its conversion counter and signed ADC counts.
 The pressure display preserves its raw status bits. This version does not plot
 optional calibrated outputs or spectral estimates.
 
@@ -186,7 +191,7 @@ software evidence, not a claim about physical sensor or FPGA behavior.
 
 The HAT-signal follow-up passed **107 software tests** in portable run
 `20260925T024114Z-68747905` (2026-09-25 UTC), including 13 new driver/signal
-regressions. Its ten quantitative checks passed on 1,040 samples. The UI button
+regressions. Its ten quantitative checks passed on 3,672 samples. The UI button
 was exercised in the browser; both downloaded artifacts matched an independent
 recheck, including the recording SHA-256. The HTTP/GLB smoke check, repository
 structure check and applicable cleanup tests also passed. No CAD source changed.

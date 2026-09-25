@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 def model(sensor, initial=None, now=0, events=(), seed=1, cfg=None):
     scenario = Scenario(dict(version=1, initial=initial or {}, events=list(events)))
-    configuration = cfg or next(c for c in defaults() + defaults(True) if c["sensor_id"] == sensor)
+    configuration = cfg or next(c for c in defaults() + defaults(True) + defaults(legacy_gnss=True) if c["sensor_id"] == sensor)
     return reading(sensor, configuration, scenario, now, seed)
 
 
@@ -165,7 +165,7 @@ class ScenarioTests(unittest.TestCase):
         self.assertEqual(adapter.read().quality, 3)
         now = 100
         self.assertEqual(adapter.read().quality, 1)
-        for controls in ({"9": "disconnect"}, {"1": "unknown"}, {"1": []}):
+        for controls in ({"10": "disconnect"}, {"1": "unknown"}, {"1": []}):
             with self.assertRaises(ValueError): Scenario({"version": 1, "initial": {"sensor_faults": controls}})
 
     def test_actual_application_records_events_and_reproduces_from_metadata(self):
@@ -185,7 +185,7 @@ class ScenarioTests(unittest.TestCase):
             self.assertEqual(json.loads(exported.stdout)["seed"], 7)
             run(scenario_file, second)
             self.assertEqual(first.read_bytes(), second.read_bytes())
-            self.assertEqual(replay(first)["samples"], 480)
+            self.assertEqual(replay(first)["samples"], 1138)
             self.assertEqual(replay(first)["saturated"], 50)
 
     def test_export_includes_interactive_events_absent_from_initial_metadata(self):

@@ -52,10 +52,10 @@ assert bp[('J83','1')]=='EXT_3V3' and bp[('F80','2')]=='FPGA_VIN'
 assert len({'PI_5V','PI_3V3','EXT_3V3','FPGA_VIN','FPGA_3V3'} & set(bp.values()))==5
 # Shared sensor circuitry must preserve A2 pad connectivity exactly.
 base=pins(p.LoadBoard(str(ROOT/'hw/boards/shakesense-hat/shakesense-hat.kicad_pcb')))
-sensor_refs={'U11','U12','U13','U14','U20','U21','U40','U41','U42','U43'}
+sensor_refs={'U11','U12','U13','U14','U20','U40','U41','U42','U43'}
 degrees=Counter(base.values())
 for k,n in base.items():
-    if k[0] in sensor_refs and degrees[n]>1:assert bp[k]==n,(k,n,bp[k])
+    if k[0] in sensor_refs and degrees[n]>1 and 'GNSS' not in n:assert bp[k]==n,(k,n,bp[k])
 fps={f.GetReference():f for f in board.GetFootprints()}
 pad_ids=[q.m_Uuid.AsString() for f in board.GetFootprints() for q in f.Pads()]
 assert len(pad_ids)==len(set(pad_ids)),'Duplicate pad UUIDs corrupt KiCad report item references'
@@ -88,11 +88,11 @@ er=[v for s in erc['sheets'] for v in s['violations']]
 report={'status':'T1 engineering prototype; not fabrication released','outline_mm':[85,56],**gpio_report,'compiled_pin_checks':len(cp),'critical_module_pin_checks':checks,'drc_violations':len(drc['violations']),'unconnected_items':len(drc['unconnected_items']),'erc_violations':len(er),'tracks_and_vias':len(board.GetTracks()),'copper_layers':8,'microvias':len(microvias),'hdi_structure':'1+6+1','limits':['Provisional HDI stack requires manufacturer DFM, filled/planarized via-in-pad and GNSS RF impedance review','No FPGA bitstream port or hardware test performed','External regulated 3.3 V supply required; confirm 3.201–3.399 V at module under startup/load','Copper resistance, heating, sensor thermal drift, EMI and physical mating remain unqualified','FFC cable routing, GPIO loading and high-speed signal integrity remain unqualified','Pi rendering is conceptual; Trenz rendering uses vendor generic revision-03 STEP']}
 report['limits'] = [
  'Fabrication process approval is owned by the project owner; calculations use the recorded provisional stack',
- 'GNSS microstrip calculates 49.98 ohms with continuous sampled return plane; mask, launches and actual dielectric require RF qualification',
+ 'Single Racotech geophone input; analog noise, cable coupling and ADC timing require physical qualification',
  'J83 source: 3.35 V +/-0.5%, total hot loop resistance <=30 milliohms, <=3 A; verify startup and load waveform at module',
  'Pi4 conceptual stack uses SSQ-120-02-G-D riser; selected cooler, cables and mating need physical fit verification',
  'No FPGA bitstream or physical sensor/rail/thermal/EMI/high-speed GPIO tests performed',
- 'Pi FIFO/IRQ deployment is tested on modeled buses; PPS edges are not associated with UTC',
+ 'Pi FIFO/IRQ and geophone polling are tested on modeled buses; no GNSS or absolute UTC source on T1-GEO',
  'Trenz rendering uses vendor generic revision-03 STEP']
 (F/'validation.json').write_text(json.dumps(report,indent=2));print(json.dumps(report,indent=2))
 assert not drc['violations'] and not drc['unconnected_items'] and not er

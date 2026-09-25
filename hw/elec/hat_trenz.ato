@@ -2,6 +2,14 @@
 #pragma experiment("TRAITS")
 import has_designator
 import ElectricPower
+from "geophone_parts.ato" import GEO_ADC
+from "geophone_parts.ato" import GEO_CONN
+from "geophone_parts.ato" import GEO_ESD
+from "geophone_parts.ato" import GEO_R1K
+from "geophone_parts.ato" import GEO_R1M
+from "geophone_parts.ato" import GEO_R22
+from "geophone_parts.ato" import GEO_C100N
+from "geophone_parts.ato" import GEO_C1N
 import has_net_name_suggestion
 from "parts.ato" import CF_C75
 from "parts.ato" import CF_C76
@@ -225,8 +233,13 @@ module TrenzHat:
     signal FPGA_UART_TX
     signal FPGA_VIN
     signal GND
-    signal GNSS_PPS
-    signal GNSS_RF
+    signal GEO_DRDY_N
+    signal GEO_P
+    signal GEO_N
+    signal GEO_AIN_P
+    signal GEO_AIN_N
+    signal GEO_VCM
+    signal GEO_AVDD
     signal I2C_SCL
     signal I2C_SDA
     signal ID_SCL
@@ -245,7 +258,7 @@ module TrenzHat:
     signal JTAG_TMS
     signal PI_3V3
     signal PI_5V
-    signal PI_GNSS_PPS
+    signal PI_GEO_DRDY_N
     signal PI_I2C_SCL
     signal PI_I2C_SDA
     signal PI_IMU1_CS
@@ -296,7 +309,7 @@ module TrenzHat:
     j1.p4 ~ PI_5V
     j1.p5 ~ PI_I2C_SCL
     j1.p6 ~ GND
-    j1.p7 ~ PI_GNSS_PPS
+    j1.p7 ~ PI_GEO_DRDY_N
     j1.p8 ~ PI_UART_TX
     j1.p9 ~ GND
     j1.p10 ~ PI_UART_RX
@@ -548,47 +561,92 @@ module TrenzHat:
     trait r20 has_designator<designator="R20">
     r20.p1 ~ TILT_CS
     r20.p2 ~ SENS_3V3
-    # MAX-M10S: MAX-M10S-00B
-    u21 = new P_12
-    trait u21 has_designator<designator="U21">
-    u21.p1 ~ GND
-    # U21.2: intentionally unconnected
-    # U21.3: intentionally unconnected
-    u21.p4 ~ GNSS_PPS
-    u21.p5 ~ GND
-    # U21.6: intentionally unconnected
-    u21.p7 ~ SENS_3V3
-    u21.p8 ~ SENS_3V3
-    # U21.9: intentionally unconnected
-    u21.p10 ~ GND
-    u21.p11 ~ GNSS_RF
-    u21.p12 ~ GND
-    # U21.13: intentionally unconnected
-    # U21.14: intentionally unconnected
-    # U21.15: intentionally unconnected
-    u21.p16 ~ I2C_SDA
-    u21.p17 ~ I2C_SCL
-    # U21.18: intentionally unconnected
-    # 100n: GRM188R71H104KA93D
-    c24 = new P_6
-    trait c24 has_designator<designator="C24">
-    c24.p1 ~ SENS_3V3
-    c24.p2 ~ GND
-    # 4.7u: GRM21BR71A475KA73L
-    c25 = new P_13
-    trait c25 has_designator<designator="C25">
-    c25.p1 ~ SENS_3V3
-    c25.p2 ~ GND
-    # 100n: GRM188R71H104KA93D
-    c26 = new P_6
-    trait c26 has_designator<designator="C26">
-    c26.p1 ~ SENS_3V3
-    c26.p2 ~ GND
-    # Passive GNSS antenna: U.FL-R-SMT-1(10)
-    j2 = new P_14
-    trait j2 has_designator<designator="J2">
-    j2.p1 ~ GNSS_RF
-    j2.p2 ~ GND
+    # 03-geophone: passive vertical Racotech RGI-4.5Hz, 395 ohm, 23.4 V/(m/s).
+    # Internal PGA/reference; no borrowed Raspberry Shake low-frequency extension.
+    u22 = new GEO_ADC
+    trait u22 has_designator<designator="U22">
+    u22.p1 ~ GND
+    u22.p2 ~ GND
+    u22.p3 ~ SENS_3V3
+    u22.p4 ~ GND
+    u22.p5 ~ GND
+    u22.p10 ~ GEO_AIN_N
+    u22.p11 ~ GEO_AIN_P
+    u22.p12 ~ GEO_AVDD
+    u22.p13 ~ SENS_3V3
+    u22.p14 ~ GEO_DRDY_N
+    u22.p15 ~ I2C_SDA
+    u22.p16 ~ I2C_SCL
+    j90 = new GEO_CONN
+    trait j90 has_designator<designator="J90">
+    j90.p1 ~ GEO_P
+    j90.p2 ~ GEO_N
+    j90.p3 ~ GND
+    d90 = new GEO_ESD
+    trait d90 has_designator<designator="D90">
+    d90.p1 ~ GEO_P
+    d90.p2 ~ GEO_N
+    d90.p3 ~ GND
+    r90 = new GEO_R1K
+    trait r90 has_designator<designator="R90">
+    r90.p1 ~ GEO_P
+    r90.p2 ~ GEO_AIN_P
+    r91 = new GEO_R1K
+    trait r91 has_designator<designator="R91">
+    r91.p1 ~ GEO_N
+    r91.p2 ~ GEO_AIN_N
+    c90 = new GEO_C100N
+    trait c90 has_designator<designator="C90">
+    c90.p1 ~ GEO_AIN_P
+    c90.p2 ~ GEO_AIN_N
+    c91 = new GEO_C1N
+    trait c91 has_designator<designator="C91">
+    c91.p1 ~ GEO_AIN_P
+    c91.p2 ~ GND
+    c92 = new GEO_C1N
+    trait c92 has_designator<designator="C92">
+    c92.p1 ~ GEO_AIN_N
+    c92.p2 ~ GND
+    r92 = new GEO_R1M
+    trait r92 has_designator<designator="R92">
+    r92.p1 ~ GEO_AIN_P
+    r92.p2 ~ GEO_VCM
+    r93 = new GEO_R1M
+    trait r93 has_designator<designator="R93">
+    r93.p1 ~ GEO_AIN_N
+    r93.p2 ~ GEO_VCM
+    r94 = new P_10
+    trait r94 has_designator<designator="R94">
+    r94.p1 ~ GEO_AVDD
+    r94.p2 ~ GEO_VCM
+    r95 = new P_10
+    trait r95 has_designator<designator="R95">
+    r95.p1 ~ GEO_VCM
+    r95.p2 ~ GND
+    c93 = new P_7
+    trait c93 has_designator<designator="C93">
+    c93.p1 ~ GEO_VCM
+    c93.p2 ~ GND
+    r96 = new GEO_R22
+    trait r96 has_designator<designator="R96">
+    r96.p1 ~ SENS_3V3
+    r96.p2 ~ GEO_AVDD
+    c94 = new P_7
+    trait c94 has_designator<designator="C94">
+    c94.p1 ~ GEO_AVDD
+    c94.p2 ~ GND
+    c95 = new P_6
+    trait c95 has_designator<designator="C95">
+    c95.p1 ~ GEO_AVDD
+    c95.p2 ~ GND
+    c96 = new P_6
+    trait c96 has_designator<designator="C96">
+    c96.p1 ~ SENS_3V3
+    c96.p2 ~ GND
+    r97 = new P_10
+    trait r97 has_designator<designator="R97">
+    r97.p1 ~ GEO_DRDY_N
+    r97.p2 ~ SENS_3V3
 
     # 04-remote-sensors
     # 100n: GRM188R71H104KA93D
@@ -686,8 +744,8 @@ module TrenzHat:
     u42.p18 ~ IMU3_INT
     u42.p7 ~ PI_IMU4_INT
     u42.p17 ~ IMU4_INT
-    u42.p8 ~ PI_GNSS_PPS
-    u42.p16 ~ GNSS_PPS
+    u42.p8 ~ PI_GEO_DRDY_N
+    u42.p16 ~ GEO_DRDY_N
     # U42.9: intentionally unconnected
     u42.p15 ~ GND
     # U42.10: intentionally unconnected
@@ -782,8 +840,8 @@ module TrenzHat:
     u14.io ~ sensor_supply
     u20.power ~ sensor_supply
     u20.io ~ sensor_supply
-    u21.power ~ sensor_supply
-    u21.io ~ sensor_supply
+    u22.digital ~ sensor_supply
+    u22.analog.voltage = 3.3V +/- 5%
     u40.input_power ~ input_supply
     u40.output_power ~ sensor_supply
     u41.host_power ~ pi_supply
@@ -1023,8 +1081,7 @@ module TrenzHat:
     trait FPGA_UART_TX has_net_name_suggestion<name="FPGA_UART_TX", level="EXPECTED">
     trait FPGA_VIN has_net_name_suggestion<name="FPGA_VIN", level="EXPECTED">
     trait GND has_net_name_suggestion<name="GND", level="EXPECTED">
-    trait GNSS_PPS has_net_name_suggestion<name="GNSS_PPS", level="EXPECTED">
-    trait GNSS_RF has_net_name_suggestion<name="GNSS_RF", level="EXPECTED">
+    trait GEO_DRDY_N has_net_name_suggestion<name="GEO_DRDY_N", level="EXPECTED">
     trait I2C_SCL has_net_name_suggestion<name="I2C_SCL", level="EXPECTED">
     trait I2C_SDA has_net_name_suggestion<name="I2C_SDA", level="EXPECTED">
     trait ID_SCL has_net_name_suggestion<name="ID_SCL", level="EXPECTED">
@@ -1043,7 +1100,7 @@ module TrenzHat:
     trait JTAG_TMS has_net_name_suggestion<name="JTAG_TMS", level="EXPECTED">
     trait PI_3V3 has_net_name_suggestion<name="PI_3V3", level="EXPECTED">
     trait PI_5V has_net_name_suggestion<name="PI_5V", level="EXPECTED">
-    trait PI_GNSS_PPS has_net_name_suggestion<name="PI_GNSS_PPS", level="EXPECTED">
+    trait PI_GEO_DRDY_N has_net_name_suggestion<name="PI_GEO_DRDY_N", level="EXPECTED">
     trait PI_I2C_SCL has_net_name_suggestion<name="PI_I2C_SCL", level="EXPECTED">
     trait PI_I2C_SDA has_net_name_suggestion<name="PI_I2C_SDA", level="EXPECTED">
     trait PI_IMU1_CS has_net_name_suggestion<name="PI_IMU1_CS", level="EXPECTED">
@@ -1636,3 +1693,10 @@ module TrenzHat:
     j89.p59 ~ FPGA_B16_L24_N
     j89.p60 ~ GND
     j89.p61 ~ GND
+
+    trait GEO_P has_net_name_suggestion<name="GEO_P", level="EXPECTED">
+    trait GEO_N has_net_name_suggestion<name="GEO_N", level="EXPECTED">
+    trait GEO_AIN_P has_net_name_suggestion<name="GEO_AIN_P", level="EXPECTED">
+    trait GEO_AIN_N has_net_name_suggestion<name="GEO_AIN_N", level="EXPECTED">
+    trait GEO_VCM has_net_name_suggestion<name="GEO_VCM", level="EXPECTED">
+    trait GEO_AVDD has_net_name_suggestion<name="GEO_AVDD", level="EXPECTED">

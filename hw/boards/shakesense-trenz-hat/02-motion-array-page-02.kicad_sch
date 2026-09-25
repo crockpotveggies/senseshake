@@ -1,4 +1,4 @@
-(kicad_sch (version 20230121) (generator eeschema) (uuid fa2b5122-49d2-5be0-853d-4a48b22c5fb3) (paper "A3") (title_block (title "ShakeSense T1 / 02-motion-array-page-02") (date "2026-09-24") (rev "T1-GPIO"))
+(kicad_sch (version 20230121) (generator eeschema) (uuid fa2b5122-49d2-5be0-853d-4a48b22c5fb3) (paper "A3") (title_block (title "ShakeSense T1 / 02-motion-array-page-02") (date "2026-09-24") (rev "T1-GEO"))
 (lib_symbols
 (symbol "ShakeSense:Part_U14" (pin_names (offset 0.6)) (in_bom yes) (on_board yes)
       (property "Reference" "U" (id 0) (at 0 12.7 0) (effects (font (size 1.27 1.27))))

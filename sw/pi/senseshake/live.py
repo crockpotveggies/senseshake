@@ -20,6 +20,9 @@ class Factory:
                 return LSM6DSOFIFO(SPI(self.path))
             return LSM6DSO(SPI(self.path))
         if self.sensor == 5: return SCL3300(SPI(self.path))
+        if self.sensor == 9:
+            from .geophone import ADS122C04
+            return ADS122C04(I2C(self.path))
         if self.sensor == 6:
             if self.utc:
                 from .gnss_timing import TimedGNSS

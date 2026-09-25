@@ -31,6 +31,7 @@ enum SensorId {
   SENSOR_ID_GNSS = 6;
   SENSOR_ID_MAGNETOMETER = 7;
   SENSOR_ID_PRESSURE = 8;
+  SENSOR_ID_GEOPHONE = 9;
 }
 
 enum ClockDomain {
@@ -84,6 +85,8 @@ message SensorConfiguration {
   optional double pressure_min_pa = 11;
   optional double pressure_max_pa = 12;
   string pressure_part_number = 13;
+  optional uint32 geophone_gain = 14;
+  optional double geophone_reference_v = 15;
 }
 
 message Timestamp {
@@ -135,6 +138,11 @@ message GnssRaw {
   bytes nav_pvt = 1;
 }
 
+message GeophoneRaw {
+  optional sint32 counts = 1;
+  optional uint32 conversion_counter = 2;
+}
+
 message Calibrated {
   Vector3d acceleration_m_s2 = 1;
   Vector3d angular_rate_rad_s = 2;
@@ -154,6 +162,7 @@ message Sample {
     MagneticRaw magnetic = 12;
     PressureRaw pressure = 13;
     GnssRaw gnss = 14;
+    GeophoneRaw geophone = 15;
   }
   Calibrated calibrated = 20;
 }

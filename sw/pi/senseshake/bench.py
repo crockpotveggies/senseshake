@@ -13,7 +13,9 @@ CHECKS = {
     'connector_cable_cooler_fit': ('boolean', True, True, None),
     'irq_fifo_fault_recovery': ('boolean', True, True, None),
     'unexpected_missing_samples': ('count', 0, 0, None),
-    'max_utc_error': ('ns', 0, None, 'max_utc_error_ns'),
+    'geophone_polarity_response': ('boolean', True, True, None),
+    'max_geophone_input_noise_rms': ('V', 0, None, 'max_geophone_input_noise_rms_v'),
+    'max_geophone_timing_error': ('ns', 0, None, 'max_geophone_timing_error_ns'),
     'max_inter_imu_skew': ('ns', 0, None, 'max_inter_imu_skew_ns'),
     'max_acceleration_noise_rms': ('m/s^2', 0, None, 'max_acceleration_noise_rms_m_s2'),
     'max_acceleration_bias_change': ('m/s^2', 0, None, 'max_acceleration_bias_change_m_s2'),
@@ -22,9 +24,9 @@ CHECKS = {
 
 
 def template():
-    return dict(version=1, scope='physical-bench', operator=None, date_utc=None,
+    return dict(version=2, scope='physical-bench', operator=None, date_utc=None,
                 hardware_revision=None, board_serial=None, software_commit=None,
-                pi_and_kernel=None, gnss_firmware=None, fpga_image=None,
+                pi_and_kernel=None, geophone_serial=None, fpga_image=None,
                 conditions=dict(temperature_range_c=None, noise_band_hz=None, sample_rates_hz=None,
                                 mounting=None, cooling=None, power_load_cases=None),
                 equipment=[], targets={v[3]:None for v in CHECKS.values() if v[3]},
@@ -43,10 +45,10 @@ def evidence(path, root):
 
 
 def evaluate(report, root):
-    if report.get('version') != 1 or report.get('scope') != 'physical-bench': raise ValueError('bench report version/scope')
+    if report.get('version') != 2 or report.get('scope') != 'physical-bench': raise ValueError('bench report version/scope')
     if set(report.get('checks', {})) != set(CHECKS): raise ValueError('bench check inventory')
     results, missing = {}, []
-    for key in ('operator','date_utc','hardware_revision','board_serial','software_commit','pi_and_kernel','gnss_firmware','fpga_image'):
+    for key in ('operator','date_utc','hardware_revision','board_serial','software_commit','pi_and_kernel','geophone_serial','fpga_image'):
         if not isinstance(report.get(key), str) or not report[key].strip(): missing.append(key)
     for key in template()['conditions']:
         if not report.get('conditions', {}).get(key): missing.append('conditions.' + key)

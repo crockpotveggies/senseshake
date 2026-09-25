@@ -75,6 +75,7 @@ def export_scenario(recording, output):
 def run(args):
     simulated = args.command == "simulate"
     utc = getattr(args, 'utc', False)
+    if utc: raise ValueError("Current T1 has no GNSS/PPS; use legacy recordings for UTC correlation")
     if utc and not args.fifo: raise ValueError('--utc requires --fifo and PPS profile')
     faults = load_json(args.faults) if getattr(args, "faults", None) else []
     records = load_json(args.calibrations) if args.calibrations else []
@@ -122,7 +123,7 @@ def run(args):
         metadata["profile"] = profile
         if utc: metadata['utc_capture'] = 'm10-tim-tp-v1'
         if args.fifo:
-            metadata.update(source='linux-fifo', timing='IMU device timestamp mapped to RAW; absolute uncertainty unknown; tilt/GNSS poll completion')
+            metadata.update(source='linux-fifo', timing='IMU device timestamp mapped to RAW; absolute uncertainty unknown; tilt/geophone poll completion')
     try:
         # Exclusive create prevents accidentally replacing a prior recording.
         with open(args.output, "xb") as stream:
@@ -130,6 +131,7 @@ def run(args):
             app = Acquisition(writer, sessions, channels, args.queue, ids)
             if not simulated:
                 enable = SensorEnable(**profile["sensor_enable"])
+                if profile.get("pps"): raise ValueError("BCM4 is now geophone DRDY, not PPS; update live profile")
                 if utc and not profile.get('pps'): raise ValueError('--utc requires PPS line')
                 if args.fifo:
                     irqs = profile.get('imu_irq')
@@ -198,7 +200,7 @@ def main(argv=None):
             p.add_argument("--profile", type=Path, required=True)
             p.add_argument("--usb")
             p.add_argument('--fifo', action='store_true', help='buffered IMUs with hardware timestamps and IRQ hints; explicit profile required')
-            p.add_argument('--utc', action='store_true', help='capture configured GNSS/PPS evidence for offline UTC correlation')
+            p.add_argument('--utc', action='store_true', help='legacy option; rejected by current T1-GEO hardware')
     p = commands.add_parser("replay")
     p.add_argument("recording", type=Path)
     p = commands.add_parser("export-scenario", help="recover controls for another deterministic simulation")

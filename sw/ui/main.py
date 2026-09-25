@@ -41,10 +41,10 @@ TEAL, MUTED = "#44d9c2", "#98aabd"
 COLORS = [TEAL, "#a7a3ff", "#f3bd64"]
 LABELS = {**{i: ("Acceleration · raw counts", "Angular rate · raw counts") for i in range(1, 5)},
           5: ("Acceleration · raw counts", "Inclination · raw counts"),
-          6: ("N / E / D velocity · mm/s", "GNSS position is shown above"),
+          9: ("Geophone ADC · raw counts", "Single vertical velocity-sensitive channel"),
           7: ("Magnetic field · raw counts", "XYZ samples • no calibration applied"),
           8: ("Differential pressure · raw counts", "Temperature · raw counts")}
-MODELS = {**{i: "LSM6DSO" for i in range(1, 5)}, 5: "SCL3300", 6: "MAX-M10S", 7: "RM3100", 8: "DLVR · optional"}
+MODELS = {**{i: "LSM6DSO" for i in range(1, 5)}, 5: "SCL3300", 9: "Racotech / ADS122C04", 7: "RM3100", 8: "DLVR · optional"}
 
 
 def chart_options(title):
@@ -73,15 +73,15 @@ def board_scene(scene, select):
                 scene.box(width, .8, .21).move((x-42.5)/10, (28-y)/10, -.11).material("#a79a81")
             # KiCad's GLB exporter omits these local VRML bodies. These are
             # intentionally simple visualization envelopes, not STEP substitutes.
-            custom = {"U20": (1.21, .76, .3), "U21": (.97, 1.01, .25),
+            custom = {"U20": (1.21, .76, .3),
                       "J80": (3.9, .65, .4), "J81": (3.9, .65, .4), "J82": (.65, 2.6, .4)}
             for part in layout["parts"]:
                 ref, (x, y) = part["ref"], part["xy"]
                 x, y = (x - 42.5) / 10, (28 - y) / 10
                 if ref in custom:
                     w, h, z = custom[ref]
-                    scene.box(w, h, z).move(x, y, .16 + z / 2).material("#b6b7bb" if ref == "U21" else "#252b34")
-                sid = {"U11": 1, "U12": 2, "U13": 3, "U14": 4, "U20": 5, "U21": 6}.get(ref)
+                    scene.box(w, h, z).move(x, y, .16 + z / 2).material("#252b34")
+                sid = {"U11": 1, "U12": 2, "U13": 3, "U14": 4, "U20": 5, "U22": 9}.get(ref)
                 if sid:
                     radius = .29 if sid <= 4 else .72
                     target = scene.cylinder(radius, radius, .07).rotate(math.pi / 2, 0, 0).move(x, y, .63).material(TEAL, .28).with_name(f"sensor-{sid}")
@@ -138,9 +138,9 @@ def page():
         nonlocal selected
         selected = sid
         heading.set_text(f"{NAMES[sid]}  /  {MODELS[sid]}")
-        board_label.set_text("T1 sensor HAT" if sid <= 6 else "Remote USB sensor head")
-        hat.visible(sid <= 6)
-        head.visible(sid >= 7)
+        board_label.set_text("T1 sensor HAT" if sid not in (7, 8) else "Remote USB sensor head")
+        hat.visible(sid not in (7, 8))
+        head.visible(sid in (7, 8))
         for sensor, ring in rings.items():
             ring.material(TEAL if sensor == sid else "#60788a", 1 if sensor == sid else .25)
         for sensor, button in sensor_buttons.items():
@@ -264,7 +264,8 @@ def page():
             ui.label("DEVICES").classes("eyebrow")
             ui.label("Select a sensor").classes("section-title")
             sensor_buttons, statuses = {}, {}
-            for sid, name in NAMES.items():
+            for sid in (1, 2, 3, 4, 5, 9, 7, 8):
+                name = NAMES[sid]
                 if sid in (1, 7):
                     ui.label("T1 HAT · PI / FPGA STACK" if sid == 1 else "REMOTE · USB-C HEAD").classes("group-label")
                 with ui.button(on_click=lambda sid=sid: choose(sid)).props("flat no-caps align=left").classes("sensor-button") as b:
@@ -333,12 +334,11 @@ def page():
                     pressure = ui.number("Pressure amplitude (Pa)", value=20, min=0, max=500).props("dense outlined").classes("w-full")
                     pressure_hz = ui.number("Pressure frequency (Hz)", value=1, min=0, max=20, step=.1).props("dense outlined").classes("w-full")
                     ui.button("Apply pressure", on_click=lambda: attempt(lambda: engine.controls({"pressure_pa": {"amplitude": pressure.value, "frequency_hz": pressure_hz.value}}))).props("flat no-caps")
-                with ui.expansion("GNSS & temperature", icon="satellite_alt").classes("w-full"):
-                    fix = ui.switch("GNSS fix", value=True)
-                    position = [ui.number(label, value=v).props("dense outlined").classes("w-full") for label, v in (("Latitude (°)",49),("Longitude (°)",-123),("Height (m)",0))]
-                    velocity = ui.number("North velocity (m/s)", value=0, min=-300, max=300).props("dense outlined").classes("w-full")
-                    temp = ui.number("Temperature (°C)", value=25, min=-40, max=85).props("dense outlined").classes("w-full")
-                    ui.button("Apply environment", on_click=lambda: attempt(lambda: engine.controls({"gnss_fix": fix.value, "gnss_position": [p.value for p in position], "gnss_velocity_ned_m_s": [velocity.value,0,0], "temperature_c": temp.value}))).props("flat no-caps")
+                with ui.expansion("Geophone stimulus", icon="waves").classes("w-full"):
+                    geo_amp = ui.number("Vertical velocity amplitude (um/s)", value=100, min=0, max=10000)
+                    geo_freq = ui.number("Frequency (Hz)", value=10, min=.1, max=100)
+                    ui.button("Apply geophone tone", on_click=lambda: attempt(lambda: engine.controls({"geophone_velocity_m_s": {"amplitude": geo_amp.value/1e6, "frequency_hz": geo_freq.value}}))).props("flat no-caps")
+                    ui.label("Steady-state response model; changes do not simulate settling.").classes("muted")
                 with ui.expansion("Fault injection", icon="bug_report").classes("w-full"):
                     fault_sensor = ui.select(NAMES, value=1, label="Sensor").props("dense outlined").classes("w-full")
                     fault = ui.select(["none", "timeout", "nack", "disconnect", "not_ready", "saturation", "short_read"], value="none", label="Fault").props("dense outlined").classes("w-full")
@@ -374,19 +374,20 @@ def page():
         snap = engine.snapshot(selected)
         for chart, field, label in ((primary, "primary", LABELS[selected][0]), (secondary, "secondary", LABELS[selected][1])):
             chart.options["title"]["text"] = label
-            names = ["N", "E", "D"] if selected == 6 else ["Counts", "", ""] if selected == 8 else list("XYZ")
-            chart.options["legend"]["show"] = selected != 8
+            names = ["Counts", "", ""] if selected in (8, 9) else list("XYZ")
+            chart.options["legend"]["show"] = selected not in (8, 9)
             for axis, series in enumerate(chart.options["series"]):
                 series["name"] = names[axis]
                 series["data"] = [[p["t"], p[field][axis]] for p in snap["points"]]
             chart.update()
-        secondary.set_visibility(selected not in (6, 7))
-        primary.style("grid-column:1 / -1" if selected in (6, 7) else "grid-column:auto")
+        secondary.set_visibility(selected not in (7, 9))
+        primary.style("grid-column:1 / -1" if selected in (7, 9) else "grid-column:auto")
         point = snap["latest"][selected]
         detail.set_text(f'{point["quality"]} · {point["detail"]}' if point else "Waiting for samples")
         heading.set_text(f"{NAMES[selected]}  /  {MODELS[selected]}")
         metrics.set_text(f'{snap["samples"]:,} samples · {snap["missing"]:,} missing')
         for sid, point in snap["latest"].items():
+            if sid not in statuses: continue  # Legacy GNSS is retained in recordings, not displayed on T1-GEO.
             status = point["quality"] if point else "waiting"
             if point and snap["seconds"] - point["t"] > 2.5:
                 status = "Stale"

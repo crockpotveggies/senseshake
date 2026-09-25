@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <export version="E">
   <design>
-    <source>/mnt/p/Personal/senseshake/hw/boards/shakesense-trenz-hat/shakesense-trenz-hat.kicad_sch</source>
-    <date>2026-09-24T10:58:33-0700</date>
-    <tool>Eeschema 9.0.9-9.0.9~ubuntu24.04.1</tool>
+    <source>/work/hw/boards/shakesense-trenz-hat/shakesense-trenz-hat.kicad_sch</source>
+    <date>2026-09-25T05:29:43+0000</date>
+    <tool>Eeschema 9.0.9</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
         <title/>
@@ -26,7 +26,7 @@
       <title_block>
         <title>ShakeSense T1 / 01-host-power-page-01</title>
         <company/>
-        <rev>T1-GPIO</rev>
+        <rev>T1-GEO</rev>
         <date>2026-09-24</date>
         <source>01-host-power-page-01.kicad_sch</source>
         <comment number="1" value=""/>
@@ -44,7 +44,7 @@
       <title_block>
         <title>ShakeSense T1 / 02-motion-array-page-01</title>
         <company/>
-        <rev>T1-GPIO</rev>
+        <rev>T1-GEO</rev>
         <date>2026-09-24</date>
         <source>02-motion-array-page-01.kicad_sch</source>
         <comment number="1" value=""/>
@@ -62,7 +62,7 @@
       <title_block>
         <title>ShakeSense T1 / 02-motion-array-page-02</title>
         <company/>
-        <rev>T1-GPIO</rev>
+        <rev>T1-GEO</rev>
         <date>2026-09-24</date>
         <source>02-motion-array-page-02.kicad_sch</source>
         <comment number="1" value=""/>
@@ -76,11 +76,47 @@
         <comment number="9" value=""/>
       </title_block>
     </sheet>
-    <sheet number="5" name="/03-level-position-page-01/" tstamps="/30b3f632-5bdc-5bfd-9387-e670932c7991/">
+    <sheet number="5" name="/03-geophone-page-01/" tstamps="/0c18b12e-d7e6-548b-b124-7cc01c20072f/">
+      <title_block>
+        <title>ShakeSense T1 / 03-geophone-page-01</title>
+        <company/>
+        <rev>T1-GEO</rev>
+        <date>2026-09-24</date>
+        <source>03-geophone-page-01.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="6" name="/03-geophone-page-02/" tstamps="/886829bb-d842-56cf-8e4d-8f2c4b80ff0f/">
+      <title_block>
+        <title>ShakeSense T1 / 03-geophone-page-02</title>
+        <company/>
+        <rev>T1-GEO</rev>
+        <date>2026-09-24</date>
+        <source>03-geophone-page-02.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="7" name="/03-level-position-page-01/" tstamps="/30b3f632-5bdc-5bfd-9387-e670932c7991/">
       <title_block>
         <title>ShakeSense T1 / 03-level-position-page-01</title>
         <company/>
-        <rev>T1-GPIO</rev>
+        <rev>T1-GEO</rev>
         <date>2026-09-24</date>
         <source>03-level-position-page-01.kicad_sch</source>
         <comment number="1" value=""/>
@@ -94,11 +130,11 @@
         <comment number="9" value=""/>
       </title_block>
     </sheet>
-    <sheet number="6" name="/05-coldfoot-interface-page-01/" tstamps="/a8fb55ae-e6bc-58ff-ab76-d63aa5198255/">
+    <sheet number="8" name="/05-coldfoot-interface-page-01/" tstamps="/a8fb55ae-e6bc-58ff-ab76-d63aa5198255/">
       <title_block>
         <title>ShakeSense T1 / 05-coldfoot-interface-page-01</title>
         <company/>
-        <rev>T1-GPIO</rev>
+        <rev>T1-GEO</rev>
         <date>2026-09-24</date>
         <source>05-coldfoot-interface-page-01.kicad_sch</source>
         <comment number="1" value=""/>
@@ -112,11 +148,11 @@
         <comment number="9" value=""/>
       </title_block>
     </sheet>
-    <sheet number="7" name="/06-supply-isolation-page-01/" tstamps="/83ea8eea-5acf-519e-b3dd-c6e81bed9ff6/">
+    <sheet number="9" name="/06-supply-isolation-page-01/" tstamps="/83ea8eea-5acf-519e-b3dd-c6e81bed9ff6/">
       <title_block>
         <title>ShakeSense T1 / 06-supply-isolation-page-01</title>
         <company/>
-        <rev>T1-GPIO</rev>
+        <rev>T1-GEO</rev>
         <date>2026-09-24</date>
         <source>06-supply-isolation-page-01.kicad_sch</source>
         <comment number="1" value=""/>
@@ -130,11 +166,11 @@
         <comment number="9" value=""/>
       </title_block>
     </sheet>
-    <sheet number="8" name="/06-supply-isolation-page-02/" tstamps="/4dc81435-2067-58f7-86bc-65c557b51849/">
+    <sheet number="10" name="/06-supply-isolation-page-02/" tstamps="/4dc81435-2067-58f7-86bc-65c557b51849/">
       <title_block>
         <title>ShakeSense T1 / 06-supply-isolation-page-02</title>
         <company/>
-        <rev>T1-GPIO</rev>
+        <rev>T1-GEO</rev>
         <date>2026-09-24</date>
         <source>06-supply-isolation-page-02.kicad_sch</source>
         <comment number="1" value=""/>
@@ -148,11 +184,11 @@
         <comment number="9" value=""/>
       </title_block>
     </sheet>
-    <sheet number="9" name="/07-fpga-host-isolation-page-01/" tstamps="/89e38af9-f7be-586c-81e3-b074de888243/">
+    <sheet number="11" name="/07-fpga-host-isolation-page-01/" tstamps="/89e38af9-f7be-586c-81e3-b074de888243/">
       <title_block>
         <title>ShakeSense T1 / 07-fpga-host-isolation-page-01</title>
         <company/>
-        <rev>T1-GPIO</rev>
+        <rev>T1-GEO</rev>
         <date>2026-09-24</date>
         <source>07-fpga-host-isolation-page-01.kicad_sch</source>
         <comment number="1" value=""/>
@@ -166,11 +202,11 @@
         <comment number="9" value=""/>
       </title_block>
     </sheet>
-    <sheet number="10" name="/08-trenz-JM1-page-01/" tstamps="/ba823ddc-bed9-58fe-8f46-6a34f5e93819/">
+    <sheet number="12" name="/08-trenz-JM1-page-01/" tstamps="/ba823ddc-bed9-58fe-8f46-6a34f5e93819/">
       <title_block>
         <title>ShakeSense T1 / 08-trenz-JM1-page-01</title>
         <company/>
-        <rev>T1-GPIO</rev>
+        <rev>T1-GEO</rev>
         <date>2026-09-24</date>
         <source>08-trenz-JM1-page-01.kicad_sch</source>
         <comment number="1" value=""/>
@@ -184,11 +220,11 @@
         <comment number="9" value=""/>
       </title_block>
     </sheet>
-    <sheet number="11" name="/08-trenz-JM2-page-01/" tstamps="/f3686f7a-1200-5d82-96f8-474710b3cb3e/">
+    <sheet number="13" name="/08-trenz-JM2-page-01/" tstamps="/f3686f7a-1200-5d82-96f8-474710b3cb3e/">
       <title_block>
         <title>ShakeSense T1 / 08-trenz-JM2-page-01</title>
         <company/>
-        <rev>T1-GPIO</rev>
+        <rev>T1-GEO</rev>
         <date>2026-09-24</date>
         <source>08-trenz-JM2-page-01.kicad_sch</source>
         <comment number="1" value=""/>
@@ -202,11 +238,11 @@
         <comment number="9" value=""/>
       </title_block>
     </sheet>
-    <sheet number="12" name="/08-trenz-JM3-page-01/" tstamps="/67714a77-f600-51cc-abba-303e92e2b0df/">
+    <sheet number="14" name="/08-trenz-JM3-page-01/" tstamps="/67714a77-f600-51cc-abba-303e92e2b0df/">
       <title_block>
         <title>ShakeSense T1 / 08-trenz-JM3-page-01</title>
         <company/>
-        <rev>T1-GPIO</rev>
+        <rev>T1-GEO</rev>
         <date>2026-09-24</date>
         <source>08-trenz-JM3-page-01.kicad_sch</source>
         <comment number="1" value=""/>
@@ -220,11 +256,11 @@
         <comment number="9" value=""/>
       </title_block>
     </sheet>
-    <sheet number="13" name="/08-trenz-carrier-page-01/" tstamps="/54e9a31c-9c4d-54b0-9a12-393601fa46bb/">
+    <sheet number="15" name="/08-trenz-carrier-page-01/" tstamps="/54e9a31c-9c4d-54b0-9a12-393601fa46bb/">
       <title_block>
         <title>ShakeSense T1 / 08-trenz-carrier-page-01</title>
         <company/>
-        <rev>T1-GPIO</rev>
+        <rev>T1-GEO</rev>
         <date>2026-09-24</date>
         <source>08-trenz-carrier-page-01.kicad_sch</source>
         <comment number="1" value=""/>
@@ -238,11 +274,11 @@
         <comment number="9" value=""/>
       </title_block>
     </sheet>
-    <sheet number="14" name="/09-fpga-power-page-01/" tstamps="/58728244-4824-519b-b11b-fd8c62cff40d/">
+    <sheet number="16" name="/09-fpga-power-page-01/" tstamps="/58728244-4824-519b-b11b-fd8c62cff40d/">
       <title_block>
         <title>ShakeSense T1 / 09-fpga-power-page-01</title>
         <company/>
-        <rev>T1-GPIO</rev>
+        <rev>T1-GEO</rev>
         <date>2026-09-24</date>
         <source>09-fpga-power-page-01.kicad_sch</source>
         <comment number="1" value=""/>
@@ -256,11 +292,11 @@
         <comment number="9" value=""/>
       </title_block>
     </sheet>
-    <sheet number="15" name="/11-gpio-bank13-page-01/" tstamps="/0a68b66e-46f9-566d-8fa0-82f08cfe212b/">
+    <sheet number="17" name="/11-gpio-bank13-page-01/" tstamps="/0a68b66e-46f9-566d-8fa0-82f08cfe212b/">
       <title_block>
         <title>ShakeSense T1 / 11-gpio-bank13-page-01</title>
         <company/>
-        <rev>T1-GPIO</rev>
+        <rev>T1-GEO</rev>
         <date>2026-09-24</date>
         <source>11-gpio-bank13-page-01.kicad_sch</source>
         <comment number="1" value=""/>
@@ -274,11 +310,11 @@
         <comment number="9" value=""/>
       </title_block>
     </sheet>
-    <sheet number="16" name="/11-gpio-bank14-page-01/" tstamps="/cd1a2a6e-223b-575c-aa50-3771ba06c09d/">
+    <sheet number="18" name="/11-gpio-bank14-page-01/" tstamps="/cd1a2a6e-223b-575c-aa50-3771ba06c09d/">
       <title_block>
         <title>ShakeSense T1 / 11-gpio-bank14-page-01</title>
         <company/>
-        <rev>T1-GPIO</rev>
+        <rev>T1-GEO</rev>
         <date>2026-09-24</date>
         <source>11-gpio-bank14-page-01.kicad_sch</source>
         <comment number="1" value=""/>
@@ -292,11 +328,11 @@
         <comment number="9" value=""/>
       </title_block>
     </sheet>
-    <sheet number="17" name="/11-gpio-bank15-page-01/" tstamps="/cc8377e1-4194-5465-9125-0712bf8981b8/">
+    <sheet number="19" name="/11-gpio-bank15-page-01/" tstamps="/cc8377e1-4194-5465-9125-0712bf8981b8/">
       <title_block>
         <title>ShakeSense T1 / 11-gpio-bank15-page-01</title>
         <company/>
-        <rev>T1-GPIO</rev>
+        <rev>T1-GEO</rev>
         <date>2026-09-24</date>
         <source>11-gpio-bank15-page-01.kicad_sch</source>
         <comment number="1" value=""/>
@@ -310,11 +346,11 @@
         <comment number="9" value=""/>
       </title_block>
     </sheet>
-    <sheet number="18" name="/11-gpio-bank16-page-01/" tstamps="/1fa9dc0c-2a9e-50ef-9292-abeef45e1334/">
+    <sheet number="20" name="/11-gpio-bank16-page-01/" tstamps="/1fa9dc0c-2a9e-50ef-9292-abeef45e1334/">
       <title_block>
         <title>ShakeSense T1 / 11-gpio-bank16-page-01</title>
         <company/>
-        <rev>T1-GPIO</rev>
+        <rev>T1-GEO</rev>
         <date>2026-09-24</date>
         <source>11-gpio-bank16-page-01.kicad_sch</source>
         <comment number="1" value=""/>
@@ -730,6 +766,294 @@
       <sheetpath names="/02-motion-array-page-02/" tstamps="/fa2b5122-49d2-5be0-853d-4a48b22c5fb3/"/>
       <tstamps>17c54fdd-f12a-5ae9-b8c5-7a9b2f7169eb</tstamps>
     </comp>
+    <comp ref="C90">
+      <value>100n C0G</value>
+      <footprint>ShakeSense:Capacitor_SMD__C_1206_3216Metric</footprint>
+      <fields>
+        <field name="MPN">C1206C104J5GACTU</field>
+        <field name="Footprint">ShakeSense:Capacitor_SMD__C_1206_3216Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="ShakeSense" part="Part_C90" description=""/>
+      <property name="MPN" value="C1206C104J5GACTU"/>
+      <property name="Sheetname" value="03-geophone-page-01"/>
+      <property name="Sheetfile" value="03-geophone-page-01.kicad_sch"/>
+      <sheetpath names="/03-geophone-page-01/" tstamps="/0c18b12e-d7e6-548b-b124-7cc01c20072f/"/>
+      <tstamps>8bbd09f3-654d-5caf-89de-e8145a0e0cf1</tstamps>
+    </comp>
+    <comp ref="C91">
+      <value>1n C0G</value>
+      <footprint>ShakeSense:Capacitor_SMD__C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">C0603C102J5GACTU</field>
+        <field name="Footprint">ShakeSense:Capacitor_SMD__C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="ShakeSense" part="Part_C91" description=""/>
+      <property name="MPN" value="C0603C102J5GACTU"/>
+      <property name="Sheetname" value="03-geophone-page-01"/>
+      <property name="Sheetfile" value="03-geophone-page-01.kicad_sch"/>
+      <sheetpath names="/03-geophone-page-01/" tstamps="/0c18b12e-d7e6-548b-b124-7cc01c20072f/"/>
+      <tstamps>21e42741-a53b-5ddc-9386-12e73af1b463</tstamps>
+    </comp>
+    <comp ref="C92">
+      <value>1n C0G</value>
+      <footprint>ShakeSense:Capacitor_SMD__C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">C0603C102J5GACTU</field>
+        <field name="Footprint">ShakeSense:Capacitor_SMD__C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="ShakeSense" part="Part_C92" description=""/>
+      <property name="MPN" value="C0603C102J5GACTU"/>
+      <property name="Sheetname" value="03-geophone-page-01"/>
+      <property name="Sheetfile" value="03-geophone-page-01.kicad_sch"/>
+      <sheetpath names="/03-geophone-page-01/" tstamps="/0c18b12e-d7e6-548b-b124-7cc01c20072f/"/>
+      <tstamps>8c7e810e-b74f-5c8c-9310-a2e37b78cf83</tstamps>
+    </comp>
+    <comp ref="D90">
+      <value>TPD2E2U06</value>
+      <footprint>ShakeSense:Package_TO_SOT_SMD__SOT-323_SC-70</footprint>
+      <fields>
+        <field name="MPN">TPD2E2U06DCKR</field>
+        <field name="Footprint">ShakeSense:Package_TO_SOT_SMD__SOT-323_SC-70</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="ShakeSense" part="Part_D90" description=""/>
+      <property name="MPN" value="TPD2E2U06DCKR"/>
+      <property name="Sheetname" value="03-geophone-page-01"/>
+      <property name="Sheetfile" value="03-geophone-page-01.kicad_sch"/>
+      <sheetpath names="/03-geophone-page-01/" tstamps="/0c18b12e-d7e6-548b-b124-7cc01c20072f/"/>
+      <tstamps>3aea23b3-0ea4-5dad-b602-6adb6ede515c</tstamps>
+    </comp>
+    <comp ref="J90">
+      <value>GEO + / - / SHIELD</value>
+      <footprint>ShakeSense:Connector_Phoenix_MC__PhoenixContact_MCV_1,5_3-G-3.81_1x03_P3.81mm_Vertical</footprint>
+      <fields>
+        <field name="MPN">1803439</field>
+        <field name="Footprint">ShakeSense:Connector_Phoenix_MC__PhoenixContact_MCV_1,5_3-G-3.81_1x03_P3.81mm_Vertical</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="ShakeSense" part="Part_J90" description=""/>
+      <property name="MPN" value="1803439"/>
+      <property name="Sheetname" value="03-geophone-page-01"/>
+      <property name="Sheetfile" value="03-geophone-page-01.kicad_sch"/>
+      <sheetpath names="/03-geophone-page-01/" tstamps="/0c18b12e-d7e6-548b-b124-7cc01c20072f/"/>
+      <tstamps>18d27a59-eb9a-5052-942a-024bacb92cdc</tstamps>
+    </comp>
+    <comp ref="R90">
+      <value>1k</value>
+      <footprint>ShakeSense:Resistor_SMD__R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-071KL</field>
+        <field name="Footprint">ShakeSense:Resistor_SMD__R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="ShakeSense" part="Part_R90" description=""/>
+      <property name="MPN" value="RC0603FR-071KL"/>
+      <property name="Sheetname" value="03-geophone-page-01"/>
+      <property name="Sheetfile" value="03-geophone-page-01.kicad_sch"/>
+      <sheetpath names="/03-geophone-page-01/" tstamps="/0c18b12e-d7e6-548b-b124-7cc01c20072f/"/>
+      <tstamps>cdbb8c0a-c17f-5e4a-817c-f5e3386cad50</tstamps>
+    </comp>
+    <comp ref="R91">
+      <value>1k</value>
+      <footprint>ShakeSense:Resistor_SMD__R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-071KL</field>
+        <field name="Footprint">ShakeSense:Resistor_SMD__R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="ShakeSense" part="Part_R91" description=""/>
+      <property name="MPN" value="RC0603FR-071KL"/>
+      <property name="Sheetname" value="03-geophone-page-01"/>
+      <property name="Sheetfile" value="03-geophone-page-01.kicad_sch"/>
+      <sheetpath names="/03-geophone-page-01/" tstamps="/0c18b12e-d7e6-548b-b124-7cc01c20072f/"/>
+      <tstamps>89c0cf47-97e3-5203-a357-ae6512460cac</tstamps>
+    </comp>
+    <comp ref="R92">
+      <value>1M</value>
+      <footprint>ShakeSense:Resistor_SMD__R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-071ML</field>
+        <field name="Footprint">ShakeSense:Resistor_SMD__R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="ShakeSense" part="Part_R92" description=""/>
+      <property name="MPN" value="RC0603FR-071ML"/>
+      <property name="Sheetname" value="03-geophone-page-01"/>
+      <property name="Sheetfile" value="03-geophone-page-01.kicad_sch"/>
+      <sheetpath names="/03-geophone-page-01/" tstamps="/0c18b12e-d7e6-548b-b124-7cc01c20072f/"/>
+      <tstamps>4c2d3afd-b3b2-5803-8689-2f5c42a4f6c8</tstamps>
+    </comp>
+    <comp ref="R93">
+      <value>1M</value>
+      <footprint>ShakeSense:Resistor_SMD__R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-071ML</field>
+        <field name="Footprint">ShakeSense:Resistor_SMD__R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="ShakeSense" part="Part_R93" description=""/>
+      <property name="MPN" value="RC0603FR-071ML"/>
+      <property name="Sheetname" value="03-geophone-page-01"/>
+      <property name="Sheetfile" value="03-geophone-page-01.kicad_sch"/>
+      <sheetpath names="/03-geophone-page-01/" tstamps="/0c18b12e-d7e6-548b-b124-7cc01c20072f/"/>
+      <tstamps>45edbbdb-f0be-5543-9418-c67c5f6b6d1d</tstamps>
+    </comp>
+    <comp ref="R94">
+      <value>10k</value>
+      <footprint>ShakeSense:Resistor_SMD__R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-0710KL</field>
+        <field name="Footprint">ShakeSense:Resistor_SMD__R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="ShakeSense" part="Part_R94" description=""/>
+      <property name="MPN" value="RC0603FR-0710KL"/>
+      <property name="Sheetname" value="03-geophone-page-01"/>
+      <property name="Sheetfile" value="03-geophone-page-01.kicad_sch"/>
+      <sheetpath names="/03-geophone-page-01/" tstamps="/0c18b12e-d7e6-548b-b124-7cc01c20072f/"/>
+      <tstamps>954680fd-169f-54b9-955b-5cf576b8f9fe</tstamps>
+    </comp>
+    <comp ref="R95">
+      <value>10k</value>
+      <footprint>ShakeSense:Resistor_SMD__R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-0710KL</field>
+        <field name="Footprint">ShakeSense:Resistor_SMD__R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="ShakeSense" part="Part_R95" description=""/>
+      <property name="MPN" value="RC0603FR-0710KL"/>
+      <property name="Sheetname" value="03-geophone-page-01"/>
+      <property name="Sheetfile" value="03-geophone-page-01.kicad_sch"/>
+      <sheetpath names="/03-geophone-page-01/" tstamps="/0c18b12e-d7e6-548b-b124-7cc01c20072f/"/>
+      <tstamps>a295af38-7eff-53da-9aa4-ecfeb76ab64b</tstamps>
+    </comp>
+    <comp ref="U22">
+      <value>ADS122C04</value>
+      <footprint>ShakeSense:Package_SO__TSSOP-16_4.4x5mm_P0.65mm</footprint>
+      <fields>
+        <field name="MPN">ADS122C04IPWR</field>
+        <field name="Footprint">ShakeSense:Package_SO__TSSOP-16_4.4x5mm_P0.65mm</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="ShakeSense" part="Part_U22" description=""/>
+      <property name="MPN" value="ADS122C04IPWR"/>
+      <property name="Sheetname" value="03-geophone-page-01"/>
+      <property name="Sheetfile" value="03-geophone-page-01.kicad_sch"/>
+      <sheetpath names="/03-geophone-page-01/" tstamps="/0c18b12e-d7e6-548b-b124-7cc01c20072f/"/>
+      <tstamps>6e0f4d8e-5c14-502e-a86f-129afeb1f87b</tstamps>
+    </comp>
+    <comp ref="C93">
+      <value>10u</value>
+      <footprint>ShakeSense:Capacitor_SMD__C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN">GRM21BR61A106KE19L</field>
+        <field name="Footprint">ShakeSense:Capacitor_SMD__C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="ShakeSense" part="Part_C93" description=""/>
+      <property name="MPN" value="GRM21BR61A106KE19L"/>
+      <property name="Sheetname" value="03-geophone-page-02"/>
+      <property name="Sheetfile" value="03-geophone-page-02.kicad_sch"/>
+      <sheetpath names="/03-geophone-page-02/" tstamps="/886829bb-d842-56cf-8e4d-8f2c4b80ff0f/"/>
+      <tstamps>b8033527-ea7c-5fe0-9912-90ebe17d1550</tstamps>
+    </comp>
+    <comp ref="C94">
+      <value>10u</value>
+      <footprint>ShakeSense:Capacitor_SMD__C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN">GRM21BR61A106KE19L</field>
+        <field name="Footprint">ShakeSense:Capacitor_SMD__C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="ShakeSense" part="Part_C94" description=""/>
+      <property name="MPN" value="GRM21BR61A106KE19L"/>
+      <property name="Sheetname" value="03-geophone-page-02"/>
+      <property name="Sheetfile" value="03-geophone-page-02.kicad_sch"/>
+      <sheetpath names="/03-geophone-page-02/" tstamps="/886829bb-d842-56cf-8e4d-8f2c4b80ff0f/"/>
+      <tstamps>c95a6b99-9296-52a5-93ac-154f25f22a5f</tstamps>
+    </comp>
+    <comp ref="C95">
+      <value>100n</value>
+      <footprint>ShakeSense:Capacitor_SMD__C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71H104KA93D</field>
+        <field name="Footprint">ShakeSense:Capacitor_SMD__C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="ShakeSense" part="Part_C95" description=""/>
+      <property name="MPN" value="GRM188R71H104KA93D"/>
+      <property name="Sheetname" value="03-geophone-page-02"/>
+      <property name="Sheetfile" value="03-geophone-page-02.kicad_sch"/>
+      <sheetpath names="/03-geophone-page-02/" tstamps="/886829bb-d842-56cf-8e4d-8f2c4b80ff0f/"/>
+      <tstamps>33398240-59f9-5803-8c3b-02a2b0d40296</tstamps>
+    </comp>
+    <comp ref="C96">
+      <value>100n</value>
+      <footprint>ShakeSense:Capacitor_SMD__C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71H104KA93D</field>
+        <field name="Footprint">ShakeSense:Capacitor_SMD__C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="ShakeSense" part="Part_C96" description=""/>
+      <property name="MPN" value="GRM188R71H104KA93D"/>
+      <property name="Sheetname" value="03-geophone-page-02"/>
+      <property name="Sheetfile" value="03-geophone-page-02.kicad_sch"/>
+      <sheetpath names="/03-geophone-page-02/" tstamps="/886829bb-d842-56cf-8e4d-8f2c4b80ff0f/"/>
+      <tstamps>cf0506a4-71ea-56d4-839a-ab78a61564be</tstamps>
+    </comp>
+    <comp ref="R96">
+      <value>22</value>
+      <footprint>ShakeSense:Resistor_SMD__R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-0722RL</field>
+        <field name="Footprint">ShakeSense:Resistor_SMD__R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="ShakeSense" part="Part_R96" description=""/>
+      <property name="MPN" value="RC0603FR-0722RL"/>
+      <property name="Sheetname" value="03-geophone-page-02"/>
+      <property name="Sheetfile" value="03-geophone-page-02.kicad_sch"/>
+      <sheetpath names="/03-geophone-page-02/" tstamps="/886829bb-d842-56cf-8e4d-8f2c4b80ff0f/"/>
+      <tstamps>9423b022-5ba7-5247-9e5f-ebdf17b59a20</tstamps>
+    </comp>
+    <comp ref="R97">
+      <value>10k</value>
+      <footprint>ShakeSense:Resistor_SMD__R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-0710KL</field>
+        <field name="Footprint">ShakeSense:Resistor_SMD__R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="ShakeSense" part="Part_R97" description=""/>
+      <property name="MPN" value="RC0603FR-0710KL"/>
+      <property name="Sheetname" value="03-geophone-page-02"/>
+      <property name="Sheetfile" value="03-geophone-page-02.kicad_sch"/>
+      <sheetpath names="/03-geophone-page-02/" tstamps="/886829bb-d842-56cf-8e4d-8f2c4b80ff0f/"/>
+      <tstamps>1b1d24f1-e198-5f66-b6be-a004a5eaef88</tstamps>
+    </comp>
     <comp ref="C20">
       <value>100n</value>
       <footprint>ShakeSense:Capacitor_SMD__C_0402_1005Metric</footprint>
@@ -794,70 +1118,6 @@
       <sheetpath names="/03-level-position-page-01/" tstamps="/30b3f632-5bdc-5bfd-9387-e670932c7991/"/>
       <tstamps>3c88fe0f-f925-5781-a94e-35844798dad5</tstamps>
     </comp>
-    <comp ref="C24">
-      <value>100n</value>
-      <footprint>ShakeSense:Capacitor_SMD__C_0603_1608Metric</footprint>
-      <fields>
-        <field name="MPN">GRM188R71H104KA93D</field>
-        <field name="Footprint">ShakeSense:Capacitor_SMD__C_0603_1608Metric</field>
-        <field name="Datasheet"/>
-        <field name="Description"/>
-      </fields>
-      <libsource lib="ShakeSense" part="Part_C24" description=""/>
-      <property name="MPN" value="GRM188R71H104KA93D"/>
-      <property name="Sheetname" value="03-level-position-page-01"/>
-      <property name="Sheetfile" value="03-level-position-page-01.kicad_sch"/>
-      <sheetpath names="/03-level-position-page-01/" tstamps="/30b3f632-5bdc-5bfd-9387-e670932c7991/"/>
-      <tstamps>f4f5ec46-9353-59a2-aa55-18673c45693e</tstamps>
-    </comp>
-    <comp ref="C25">
-      <value>4.7u</value>
-      <footprint>ShakeSense:Capacitor_SMD__C_0805_2012Metric</footprint>
-      <fields>
-        <field name="MPN">GRM21BR71A475KA73L</field>
-        <field name="Footprint">ShakeSense:Capacitor_SMD__C_0805_2012Metric</field>
-        <field name="Datasheet"/>
-        <field name="Description"/>
-      </fields>
-      <libsource lib="ShakeSense" part="Part_C25" description=""/>
-      <property name="MPN" value="GRM21BR71A475KA73L"/>
-      <property name="Sheetname" value="03-level-position-page-01"/>
-      <property name="Sheetfile" value="03-level-position-page-01.kicad_sch"/>
-      <sheetpath names="/03-level-position-page-01/" tstamps="/30b3f632-5bdc-5bfd-9387-e670932c7991/"/>
-      <tstamps>4b8a69ac-961d-5660-999e-567e9ece741e</tstamps>
-    </comp>
-    <comp ref="C26">
-      <value>100n</value>
-      <footprint>ShakeSense:Capacitor_SMD__C_0603_1608Metric</footprint>
-      <fields>
-        <field name="MPN">GRM188R71H104KA93D</field>
-        <field name="Footprint">ShakeSense:Capacitor_SMD__C_0603_1608Metric</field>
-        <field name="Datasheet"/>
-        <field name="Description"/>
-      </fields>
-      <libsource lib="ShakeSense" part="Part_C26" description=""/>
-      <property name="MPN" value="GRM188R71H104KA93D"/>
-      <property name="Sheetname" value="03-level-position-page-01"/>
-      <property name="Sheetfile" value="03-level-position-page-01.kicad_sch"/>
-      <sheetpath names="/03-level-position-page-01/" tstamps="/30b3f632-5bdc-5bfd-9387-e670932c7991/"/>
-      <tstamps>a0dc5291-6f70-5c00-a1ac-e35dc34dd435</tstamps>
-    </comp>
-    <comp ref="J2">
-      <value>Passive GNSS antenna</value>
-      <footprint>ShakeSense:Connector_Coaxial__U.FL_Hirose_U.FL-R-SMT-1_Vertical</footprint>
-      <fields>
-        <field name="MPN">U.FL-R-SMT-1(10)</field>
-        <field name="Footprint">ShakeSense:Connector_Coaxial__U.FL_Hirose_U.FL-R-SMT-1_Vertical</field>
-        <field name="Datasheet"/>
-        <field name="Description"/>
-      </fields>
-      <libsource lib="ShakeSense" part="Part_J2" description=""/>
-      <property name="MPN" value="U.FL-R-SMT-1(10)"/>
-      <property name="Sheetname" value="03-level-position-page-01"/>
-      <property name="Sheetfile" value="03-level-position-page-01.kicad_sch"/>
-      <sheetpath names="/03-level-position-page-01/" tstamps="/30b3f632-5bdc-5bfd-9387-e670932c7991/"/>
-      <tstamps>4c2b367c-6b2a-58ce-9f48-317a9fcf2079</tstamps>
-    </comp>
     <comp ref="R20">
       <value>10k</value>
       <footprint>ShakeSense:Resistor_SMD__R_0603_1608Metric</footprint>
@@ -889,22 +1149,6 @@
       <property name="Sheetfile" value="03-level-position-page-01.kicad_sch"/>
       <sheetpath names="/03-level-position-page-01/" tstamps="/30b3f632-5bdc-5bfd-9387-e670932c7991/"/>
       <tstamps>6a55eb06-edf7-53cc-8404-0f81de2a1d0f</tstamps>
-    </comp>
-    <comp ref="U21">
-      <value>MAX-M10S</value>
-      <footprint>ShakeSense:RF_GPS__ublox_MAX</footprint>
-      <fields>
-        <field name="MPN">MAX-M10S-00B</field>
-        <field name="Footprint">ShakeSense:RF_GPS__ublox_MAX</field>
-        <field name="Datasheet"/>
-        <field name="Description"/>
-      </fields>
-      <libsource lib="ShakeSense" part="Part_U21" description=""/>
-      <property name="MPN" value="MAX-M10S-00B"/>
-      <property name="Sheetname" value="03-level-position-page-01"/>
-      <property name="Sheetfile" value="03-level-position-page-01.kicad_sch"/>
-      <sheetpath names="/03-level-position-page-01/" tstamps="/30b3f632-5bdc-5bfd-9387-e670932c7991/"/>
-      <tstamps>555c9338-8cec-5d06-a34f-2b90375e45d4</tstamps>
     </comp>
     <comp ref="J4">
       <value>FPGA test UART/reset</value>
@@ -1970,45 +2214,6 @@
         <pin num="2" name="2" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="ShakeSense" part="Part_C24">
-      <fields>
-        <field name="Reference">C</field>
-        <field name="Value">100n</field>
-        <field name="Footprint"/>
-        <field name="Datasheet"/>
-        <field name="Description"/>
-      </fields>
-      <pins>
-        <pin num="1" name="1" type="passive"/>
-        <pin num="2" name="2" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="ShakeSense" part="Part_C25">
-      <fields>
-        <field name="Reference">C</field>
-        <field name="Value">4.7u</field>
-        <field name="Footprint"/>
-        <field name="Datasheet"/>
-        <field name="Description"/>
-      </fields>
-      <pins>
-        <pin num="1" name="1" type="passive"/>
-        <pin num="2" name="2" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="ShakeSense" part="Part_C26">
-      <fields>
-        <field name="Reference">C</field>
-        <field name="Value">100n</field>
-        <field name="Footprint"/>
-        <field name="Datasheet"/>
-        <field name="Description"/>
-      </fields>
-      <pins>
-        <pin num="1" name="1" type="passive"/>
-        <pin num="2" name="2" type="passive"/>
-      </pins>
-    </libpart>
     <libpart lib="ShakeSense" part="Part_C3">
       <fields>
         <field name="Reference">C</field>
@@ -2269,6 +2474,111 @@
         <pin num="2" name="2" type="passive"/>
       </pins>
     </libpart>
+    <libpart lib="ShakeSense" part="Part_C90">
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">100n C0G</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="ShakeSense" part="Part_C91">
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">1n C0G</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="ShakeSense" part="Part_C92">
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">1n C0G</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="ShakeSense" part="Part_C93">
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">10u</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="ShakeSense" part="Part_C94">
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">10u</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="ShakeSense" part="Part_C95">
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">100n</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="ShakeSense" part="Part_C96">
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">100n</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="ShakeSense" part="Part_D90">
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">TPD2E2U06</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+        <pin num="3" name="3" type="passive"/>
+      </pins>
+    </libpart>
     <libpart lib="ShakeSense" part="Part_F80">
       <fields>
         <field name="Reference">F</field>
@@ -2331,19 +2641,6 @@
         <pin num="38" name="38" type="passive"/>
         <pin num="39" name="39" type="passive"/>
         <pin num="40" name="40" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="ShakeSense" part="Part_J2">
-      <fields>
-        <field name="Reference">J</field>
-        <field name="Value">Passive GNSS antenna</field>
-        <field name="Footprint"/>
-        <field name="Datasheet"/>
-        <field name="Description"/>
-      </fields>
-      <pins>
-        <pin num="1" name="1" type="passive"/>
-        <pin num="2" name="2" type="passive"/>
       </pins>
     </libpart>
     <libpart lib="ShakeSense" part="Part_J4">
@@ -2952,6 +3249,20 @@
         <pin num="61" name="GND" type="power_in"/>
       </pins>
     </libpart>
+    <libpart lib="ShakeSense" part="Part_J90">
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">GEO + / - / SHIELD</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="GEO_PLUS" type="passive"/>
+        <pin num="2" name="GEO_MINUS" type="passive"/>
+        <pin num="3" name="SHIELD_GND" type="passive"/>
+      </pins>
+    </libpart>
     <libpart lib="ShakeSense" part="Part_JP1">
       <fields>
         <field name="Reference">J</field>
@@ -3265,6 +3576,110 @@
         <pin num="2" name="2" type="passive"/>
       </pins>
     </libpart>
+    <libpart lib="ShakeSense" part="Part_R90">
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">1k</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="ShakeSense" part="Part_R91">
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">1k</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="ShakeSense" part="Part_R92">
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">1M</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="ShakeSense" part="Part_R93">
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">1M</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="ShakeSense" part="Part_R94">
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">10k</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="ShakeSense" part="Part_R95">
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">10k</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="ShakeSense" part="Part_R96">
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">22</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="ShakeSense" part="Part_R97">
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">10k</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
     <libpart lib="ShakeSense" part="Part_TP1">
       <fields>
         <field name="Reference">T</field>
@@ -3443,33 +3858,31 @@
         <pin num="12" name="EMC_GND" type="power_in"/>
       </pins>
     </libpart>
-    <libpart lib="ShakeSense" part="Part_U21">
+    <libpart lib="ShakeSense" part="Part_U22">
       <fields>
         <field name="Reference">U</field>
-        <field name="Value">MAX-M10S</field>
+        <field name="Value">ADS122C04</field>
         <field name="Footprint"/>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <pins>
-        <pin num="1" name="GND" type="power_in"/>
-        <pin num="2" name="TXD_NC" type="passive"/>
-        <pin num="3" name="RXD_NC" type="passive"/>
-        <pin num="4" name="TIMEPULSE" type="output"/>
-        <pin num="5" name="EXTINT" type="passive"/>
-        <pin num="6" name="V_BCKP" type="power_in"/>
-        <pin num="7" name="VCC_IO" type="power_in"/>
-        <pin num="8" name="VCC" type="power_in"/>
-        <pin num="9" name="RESET_N" type="passive"/>
-        <pin num="10" name="GND" type="power_in"/>
-        <pin num="11" name="RF_IN" type="passive"/>
-        <pin num="12" name="GND" type="power_in"/>
-        <pin num="13" name="LNA_EN" type="passive"/>
-        <pin num="14" name="VCC_RF" type="passive"/>
-        <pin num="15" name="VIO_SEL_OPEN_3V3" type="passive"/>
-        <pin num="16" name="SDA" type="passive"/>
-        <pin num="17" name="SCL" type="passive"/>
-        <pin num="18" name="SAFEBOOT_N" type="passive"/>
+        <pin num="1" name="A0" type="passive"/>
+        <pin num="2" name="A1" type="passive"/>
+        <pin num="3" name="RESET_N" type="passive"/>
+        <pin num="4" name="DGND" type="passive"/>
+        <pin num="5" name="AVSS" type="power_in"/>
+        <pin num="6" name="AIN3_NC" type="passive"/>
+        <pin num="7" name="AIN2_NC" type="passive"/>
+        <pin num="8" name="REFN_NC" type="passive"/>
+        <pin num="9" name="REFP_NC" type="passive"/>
+        <pin num="10" name="AIN1" type="passive"/>
+        <pin num="11" name="AIN0" type="passive"/>
+        <pin num="12" name="AVDD" type="power_in"/>
+        <pin num="13" name="DVDD" type="power_in"/>
+        <pin num="14" name="DRDY_N" type="passive"/>
+        <pin num="15" name="SDA" type="passive"/>
+        <pin num="16" name="SCL" type="passive"/>
       </pins>
     </libpart>
     <libpart lib="ShakeSense" part="Part_U40">
@@ -3611,7 +4024,7 @@
   </libparts>
   <libraries>
     <library logical="ShakeSense">
-      <uri>/mnt/p/Personal/senseshake/hw/boards/shakesense-trenz-hat/ShakeSense.kicad_sym</uri>
+      <uri>/work/hw/boards/shakesense-trenz-hat/ShakeSense.kicad_sym</uri>
     </library>
   </libraries>
   <nets>
@@ -4337,7 +4750,50 @@
       <node ref="J81" pin="5" pinfunction="5" pintype="passive"/>
       <node ref="J81" pin="7" pinfunction="7" pintype="passive"/>
     </net>
-    <net code="171" name="GND" class="Default">
+    <net code="171" name="GEO_AIN_N" class="Default">
+      <node ref="C90" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="C92" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="R91" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="R93" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U22" pin="10" pinfunction="AIN1" pintype="passive"/>
+    </net>
+    <net code="172" name="GEO_AIN_P" class="Default">
+      <node ref="C90" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="C91" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="R90" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="R92" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U22" pin="11" pinfunction="AIN0" pintype="passive"/>
+    </net>
+    <net code="173" name="GEO_AVDD" class="Default">
+      <node ref="C94" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="C95" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="R94" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="R96" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="U22" pin="12" pinfunction="AVDD" pintype="power_in"/>
+    </net>
+    <net code="174" name="GEO_DRDY_N" class="Default">
+      <node ref="R97" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U22" pin="14" pinfunction="DRDY_N" pintype="passive"/>
+      <node ref="U42" pin="16" pinfunction="B6" pintype="passive"/>
+    </net>
+    <net code="175" name="GEO_N" class="Default">
+      <node ref="D90" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="J90" pin="2" pinfunction="GEO_MINUS" pintype="passive"/>
+      <node ref="R91" pin="1" pinfunction="1" pintype="passive"/>
+    </net>
+    <net code="176" name="GEO_P" class="Default">
+      <node ref="D90" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="J90" pin="1" pinfunction="GEO_PLUS" pintype="passive"/>
+      <node ref="R90" pin="1" pinfunction="1" pintype="passive"/>
+    </net>
+    <net code="177" name="GEO_VCM" class="Default">
+      <node ref="C93" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="R92" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="R93" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="R94" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="R95" pin="1" pinfunction="1" pintype="passive"/>
+    </net>
+    <net code="178" name="GND" class="Default">
       <node ref="C1" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="C12" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="C13" pin="2" pinfunction="2" pintype="passive"/>
@@ -4352,9 +4808,6 @@
       <node ref="C21" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="C22" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="C23" pin="2" pinfunction="2" pintype="passive"/>
-      <node ref="C24" pin="2" pinfunction="2" pintype="passive"/>
-      <node ref="C25" pin="2" pinfunction="2" pintype="passive"/>
-      <node ref="C26" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="C3" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="C40" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="C41" pin="2" pinfunction="2" pintype="passive"/>
@@ -4375,6 +4828,13 @@
       <node ref="C83" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="C84" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="C85" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="C91" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="C92" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="C93" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="C94" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="C95" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="C96" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="D90" pin="3" pinfunction="3" pintype="passive"/>
       <node ref="J1" pin="14" pinfunction="14" pintype="passive"/>
       <node ref="J1" pin="20" pinfunction="20" pintype="passive"/>
       <node ref="J1" pin="25" pinfunction="25" pintype="passive"/>
@@ -4383,7 +4843,6 @@
       <node ref="J1" pin="39" pinfunction="39" pintype="passive"/>
       <node ref="J1" pin="6" pinfunction="6" pintype="passive"/>
       <node ref="J1" pin="9" pinfunction="9" pintype="passive"/>
-      <node ref="J2" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="J4" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="J80" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="J80" pin="101" pinfunction="101" pintype="passive"/>
@@ -4482,6 +4941,7 @@
       <node ref="J89" pin="55" pinfunction="GND" pintype="power_in"/>
       <node ref="J89" pin="60" pinfunction="GND" pintype="power_in"/>
       <node ref="J89" pin="61" pinfunction="GND" pintype="power_in"/>
+      <node ref="J90" pin="3" pinfunction="SHIELD_GND" pintype="passive"/>
       <node ref="JP1" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="JP80" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="JP81" pin="2" pinfunction="2" pintype="passive"/>
@@ -4491,6 +4951,7 @@
       <node ref="R66" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="R80" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="R81" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="R95" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="TP2" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="U1" pin="1" pinfunction="A0" pintype="passive"/>
       <node ref="U1" pin="2" pinfunction="A1" pintype="passive"/>
@@ -4516,10 +4977,10 @@
       <node ref="U20" pin="11" pinfunction="DVSS" pintype="power_in"/>
       <node ref="U20" pin="12" pinfunction="EMC_GND" pintype="power_in"/>
       <node ref="U20" pin="3" pinfunction="RESERVED_GND" pintype="passive"/>
-      <node ref="U21" pin="1" pinfunction="GND" pintype="power_in"/>
-      <node ref="U21" pin="10" pinfunction="GND" pintype="power_in"/>
-      <node ref="U21" pin="12" pinfunction="GND" pintype="power_in"/>
-      <node ref="U21" pin="5" pinfunction="EXTINT" pintype="passive"/>
+      <node ref="U22" pin="1" pinfunction="A0" pintype="passive"/>
+      <node ref="U22" pin="2" pinfunction="A1" pintype="passive"/>
+      <node ref="U22" pin="4" pinfunction="DGND" pintype="passive"/>
+      <node ref="U22" pin="5" pinfunction="AVSS" pintype="power_in"/>
       <node ref="U40" pin="1" pinfunction="GND" pintype="power_in"/>
       <node ref="U41" pin="10" pinfunction="A8" pintype="passive"/>
       <node ref="U41" pin="11" pinfunction="GND" pintype="power_in"/>
@@ -4536,87 +4997,79 @@
       <node ref="U51" pin="2" pinfunction="GND" pintype="power_in"/>
       <node ref="U52" pin="1" pinfunction="GND" pintype="power_in"/>
     </net>
-    <net code="172" name="GNSS_PPS" class="Default">
-      <node ref="U21" pin="4" pinfunction="TIMEPULSE" pintype="output"/>
-      <node ref="U42" pin="16" pinfunction="B6" pintype="passive"/>
-    </net>
-    <net code="173" name="GNSS_RF" class="Default">
-      <node ref="J2" pin="1" pinfunction="1" pintype="passive"/>
-      <node ref="U21" pin="11" pinfunction="RF_IN" pintype="passive"/>
-    </net>
-    <net code="174" name="I2C_SCL" class="Default">
+    <net code="179" name="I2C_SCL" class="Default">
       <node ref="R53" pin="1" pinfunction="1" pintype="passive"/>
-      <node ref="U21" pin="17" pinfunction="SCL" pintype="passive"/>
+      <node ref="U22" pin="16" pinfunction="SCL" pintype="passive"/>
       <node ref="U43" pin="6" pinfunction="SCL2" pintype="passive"/>
     </net>
-    <net code="175" name="I2C_SDA" class="Default">
+    <net code="180" name="I2C_SDA" class="Default">
       <node ref="R52" pin="1" pinfunction="1" pintype="passive"/>
-      <node ref="U21" pin="16" pinfunction="SDA" pintype="passive"/>
+      <node ref="U22" pin="15" pinfunction="SDA" pintype="passive"/>
       <node ref="U43" pin="7" pinfunction="SDA2" pintype="passive"/>
     </net>
-    <net code="176" name="ID_SCL" class="Default">
+    <net code="181" name="ID_SCL" class="Default">
       <node ref="J1" pin="28" pinfunction="28" pintype="passive"/>
       <node ref="R2" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="U1" pin="6" pinfunction="SCL" pintype="passive"/>
     </net>
-    <net code="177" name="ID_SDA" class="Default">
+    <net code="182" name="ID_SDA" class="Default">
       <node ref="J1" pin="27" pinfunction="27" pintype="passive"/>
       <node ref="R1" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="U1" pin="5" pinfunction="SDA" pintype="passive"/>
     </net>
-    <net code="178" name="IMU1_CS" class="Default">
+    <net code="183" name="IMU1_CS" class="Default">
       <node ref="R11" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="U11" pin="12" pinfunction="CS" pintype="input"/>
       <node ref="U41" pin="19" pinfunction="B3" pintype="passive"/>
     </net>
-    <net code="179" name="IMU1_INT" class="Default">
+    <net code="184" name="IMU1_INT" class="Default">
       <node ref="U11" pin="4" pinfunction="INT1" pintype="output"/>
       <node ref="U42" pin="20" pinfunction="B2" pintype="passive"/>
     </net>
-    <net code="180" name="IMU2_CS" class="Default">
+    <net code="185" name="IMU2_CS" class="Default">
       <node ref="R12" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="U12" pin="12" pinfunction="CS" pintype="input"/>
       <node ref="U41" pin="18" pinfunction="B4" pintype="passive"/>
     </net>
-    <net code="181" name="IMU2_INT" class="Default">
+    <net code="186" name="IMU2_INT" class="Default">
       <node ref="U12" pin="4" pinfunction="INT1" pintype="output"/>
       <node ref="U42" pin="19" pinfunction="B3" pintype="passive"/>
     </net>
-    <net code="182" name="IMU3_CS" class="Default">
+    <net code="187" name="IMU3_CS" class="Default">
       <node ref="R13" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="U13" pin="12" pinfunction="CS" pintype="input"/>
       <node ref="U41" pin="17" pinfunction="B5" pintype="passive"/>
     </net>
-    <net code="183" name="IMU3_INT" class="Default">
+    <net code="188" name="IMU3_INT" class="Default">
       <node ref="U13" pin="4" pinfunction="INT1" pintype="output"/>
       <node ref="U42" pin="18" pinfunction="B4" pintype="passive"/>
     </net>
-    <net code="184" name="IMU4_CS" class="Default">
+    <net code="189" name="IMU4_CS" class="Default">
       <node ref="R14" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="U14" pin="12" pinfunction="CS" pintype="input"/>
       <node ref="U41" pin="16" pinfunction="B6" pintype="passive"/>
     </net>
-    <net code="185" name="IMU4_INT" class="Default">
+    <net code="190" name="IMU4_INT" class="Default">
       <node ref="U14" pin="4" pinfunction="INT1" pintype="output"/>
       <node ref="U42" pin="17" pinfunction="B5" pintype="passive"/>
     </net>
-    <net code="186" name="JTAG_TCK" class="Default">
+    <net code="191" name="JTAG_TCK" class="Default">
       <node ref="J81" pin="100" pinfunction="100" pintype="passive"/>
       <node ref="J84" pin="4" pinfunction="4" pintype="passive"/>
     </net>
-    <net code="187" name="JTAG_TDI" class="Default">
+    <net code="192" name="JTAG_TDI" class="Default">
       <node ref="J81" pin="96" pinfunction="96" pintype="passive"/>
       <node ref="J84" pin="2" pinfunction="2" pintype="passive"/>
     </net>
-    <net code="188" name="JTAG_TDO" class="Default">
+    <net code="193" name="JTAG_TDO" class="Default">
       <node ref="J81" pin="98" pinfunction="98" pintype="passive"/>
       <node ref="J84" pin="3" pinfunction="3" pintype="passive"/>
     </net>
-    <net code="189" name="JTAG_TMS" class="Default">
+    <net code="194" name="JTAG_TMS" class="Default">
       <node ref="J81" pin="94" pinfunction="94" pintype="passive"/>
       <node ref="J84" pin="1" pinfunction="1" pintype="passive"/>
     </net>
-    <net code="190" name="PI_3V3" class="Default">
+    <net code="195" name="PI_3V3" class="Default">
       <node ref="C1" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="C2" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="C44" pin="1" pinfunction="1" pintype="passive"/>
@@ -4636,7 +5089,7 @@
       <node ref="U43" pin="1" pinfunction="VCC1" pintype="passive"/>
       <node ref="U51" pin="3" pinfunction="VCCA" pintype="passive"/>
     </net>
-    <net code="191" name="PI_5V" class="Default">
+    <net code="196" name="PI_5V" class="Default">
       <node ref="C3" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="C40" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="C41" pin="1" pinfunction="1" pintype="passive"/>
@@ -4644,82 +5097,82 @@
       <node ref="J1" pin="4" pinfunction="4" pintype="passive"/>
       <node ref="U40" pin="3" pinfunction="IN" pintype="passive"/>
     </net>
-    <net code="192" name="PI_GNSS_PPS" class="Default">
+    <net code="197" name="PI_GEO_DRDY_N" class="Default">
       <node ref="J1" pin="7" pinfunction="7" pintype="passive"/>
       <node ref="U42" pin="8" pinfunction="A6" pintype="passive"/>
     </net>
-    <net code="193" name="PI_I2C_SCL" class="Default">
+    <net code="198" name="PI_I2C_SCL" class="Default">
       <node ref="J1" pin="5" pinfunction="5" pintype="passive"/>
       <node ref="U43" pin="3" pinfunction="SCL1" pintype="passive"/>
     </net>
-    <net code="194" name="PI_I2C_SDA" class="Default">
+    <net code="199" name="PI_I2C_SDA" class="Default">
       <node ref="J1" pin="3" pinfunction="3" pintype="passive"/>
       <node ref="U43" pin="2" pinfunction="SDA1" pintype="passive"/>
     </net>
-    <net code="195" name="PI_IMU1_CS" class="Default">
+    <net code="200" name="PI_IMU1_CS" class="Default">
       <node ref="J1" pin="24" pinfunction="24" pintype="passive"/>
       <node ref="U41" pin="5" pinfunction="A3" pintype="passive"/>
     </net>
-    <net code="196" name="PI_IMU1_INT" class="Default">
+    <net code="201" name="PI_IMU1_INT" class="Default">
       <node ref="J1" pin="13" pinfunction="13" pintype="passive"/>
       <node ref="U42" pin="4" pinfunction="A2" pintype="passive"/>
     </net>
-    <net code="197" name="PI_IMU2_CS" class="Default">
+    <net code="202" name="PI_IMU2_CS" class="Default">
       <node ref="J1" pin="26" pinfunction="26" pintype="passive"/>
       <node ref="U41" pin="6" pinfunction="A4" pintype="passive"/>
     </net>
-    <net code="198" name="PI_IMU2_INT" class="Default">
+    <net code="203" name="PI_IMU2_INT" class="Default">
       <node ref="J1" pin="15" pinfunction="15" pintype="passive"/>
       <node ref="U42" pin="5" pinfunction="A3" pintype="passive"/>
     </net>
-    <net code="199" name="PI_IMU3_CS" class="Default">
+    <net code="204" name="PI_IMU3_CS" class="Default">
       <node ref="J1" pin="29" pinfunction="29" pintype="passive"/>
       <node ref="U41" pin="7" pinfunction="A5" pintype="passive"/>
     </net>
-    <net code="200" name="PI_IMU3_INT" class="Default">
+    <net code="205" name="PI_IMU3_INT" class="Default">
       <node ref="J1" pin="16" pinfunction="16" pintype="passive"/>
       <node ref="U42" pin="6" pinfunction="A4" pintype="passive"/>
     </net>
-    <net code="201" name="PI_IMU4_CS" class="Default">
+    <net code="206" name="PI_IMU4_CS" class="Default">
       <node ref="J1" pin="31" pinfunction="31" pintype="passive"/>
       <node ref="U41" pin="8" pinfunction="A6" pintype="passive"/>
     </net>
-    <net code="202" name="PI_IMU4_INT" class="Default">
+    <net code="207" name="PI_IMU4_INT" class="Default">
       <node ref="J1" pin="18" pinfunction="18" pintype="passive"/>
       <node ref="U42" pin="7" pinfunction="A5" pintype="passive"/>
     </net>
-    <net code="203" name="PI_SPI_MISO" class="Default">
+    <net code="208" name="PI_SPI_MISO" class="Default">
       <node ref="J1" pin="21" pinfunction="21" pintype="passive"/>
       <node ref="U42" pin="3" pinfunction="A1" pintype="passive"/>
     </net>
-    <net code="204" name="PI_SPI_MOSI" class="Default">
+    <net code="209" name="PI_SPI_MOSI" class="Default">
       <node ref="J1" pin="19" pinfunction="19" pintype="passive"/>
       <node ref="U41" pin="3" pinfunction="A1" pintype="passive"/>
     </net>
-    <net code="205" name="PI_SPI_SCLK" class="Default">
+    <net code="210" name="PI_SPI_SCLK" class="Default">
       <node ref="J1" pin="23" pinfunction="23" pintype="passive"/>
       <node ref="U41" pin="4" pinfunction="A2" pintype="passive"/>
     </net>
-    <net code="206" name="PI_TILT_CS" class="Default">
+    <net code="211" name="PI_TILT_CS" class="Default">
       <node ref="J1" pin="33" pinfunction="33" pintype="passive"/>
       <node ref="U41" pin="9" pinfunction="A7" pintype="passive"/>
     </net>
-    <net code="207" name="PI_UART_RX" class="Default">
+    <net code="212" name="PI_UART_RX" class="Default">
       <node ref="J1" pin="10" pinfunction="10" pintype="passive"/>
       <node ref="U51" pin="4" pinfunction="A2Y_OUT" pintype="passive"/>
     </net>
-    <net code="208" name="PI_UART_TX" class="Default">
+    <net code="213" name="PI_UART_TX" class="Default">
       <node ref="J1" pin="8" pinfunction="8" pintype="passive"/>
       <node ref="U51" pin="5" pinfunction="A1_IN" pintype="passive"/>
     </net>
-    <net code="209" name="SENSOR_OE_N" class="Default">
+    <net code="214" name="SENSOR_OE_N" class="Default">
       <node ref="J1" pin="37" pinfunction="37" pintype="passive"/>
       <node ref="R50" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="TP4" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="U41" pin="22" pinfunction="OE_N" pintype="passive"/>
       <node ref="U42" pin="22" pinfunction="OE_N" pintype="passive"/>
     </net>
-    <net code="210" name="SENS_3V3" class="Default">
+    <net code="215" name="SENS_3V3" class="Default">
       <node ref="C12" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="C13" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="C14" pin="1" pinfunction="1" pintype="passive"/>
@@ -4730,14 +5183,12 @@
       <node ref="C19" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="C20" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="C22" pin="1" pinfunction="1" pintype="passive"/>
-      <node ref="C24" pin="1" pinfunction="1" pintype="passive"/>
-      <node ref="C25" pin="1" pinfunction="1" pintype="passive"/>
-      <node ref="C26" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="C42" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="C43" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="C45" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="C47" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="C49" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="C96" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="R11" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="R12" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="R13" pin="2" pinfunction="2" pintype="passive"/>
@@ -4745,6 +5196,8 @@
       <node ref="R20" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="R52" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="R53" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="R96" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="R97" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="TP1" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="U11" pin="5" pinfunction="VDDIO" pintype="power_in"/>
       <node ref="U11" pin="8" pinfunction="VDD" pintype="power_in"/>
@@ -4756,8 +5209,8 @@
       <node ref="U14" pin="8" pinfunction="VDD" pintype="power_in"/>
       <node ref="U20" pin="4" pinfunction="VDD" pintype="power_in"/>
       <node ref="U20" pin="9" pinfunction="DVIO" pintype="power_in"/>
-      <node ref="U21" pin="7" pinfunction="VCC_IO" pintype="power_in"/>
-      <node ref="U21" pin="8" pinfunction="VCC" pintype="power_in"/>
+      <node ref="U22" pin="13" pinfunction="DVDD" pintype="power_in"/>
+      <node ref="U22" pin="3" pinfunction="RESET_N" pintype="passive"/>
       <node ref="U40" pin="2" pinfunction="OUT" pintype="passive"/>
       <node ref="U41" pin="23" pinfunction="VCCB" pintype="passive"/>
       <node ref="U41" pin="24" pinfunction="VCCB" pintype="passive"/>
@@ -4765,7 +5218,7 @@
       <node ref="U42" pin="24" pinfunction="VCCB" pintype="passive"/>
       <node ref="U43" pin="8" pinfunction="VCC2" pintype="passive"/>
     </net>
-    <net code="211" name="SPI_MISO" class="Default">
+    <net code="216" name="SPI_MISO" class="Default">
       <node ref="R51" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="U11" pin="1" pinfunction="SDO" pintype="tri_state"/>
       <node ref="U12" pin="1" pinfunction="SDO" pintype="tri_state"/>
@@ -4774,7 +5227,7 @@
       <node ref="U20" pin="6" pinfunction="MISO" pintype="tri_state"/>
       <node ref="U42" pin="21" pinfunction="B1" pintype="passive"/>
     </net>
-    <net code="212" name="SPI_MOSI" class="Default">
+    <net code="217" name="SPI_MOSI" class="Default">
       <node ref="U11" pin="14" pinfunction="SDI" pintype="input"/>
       <node ref="U12" pin="14" pinfunction="SDI" pintype="input"/>
       <node ref="U13" pin="14" pinfunction="SDI" pintype="input"/>
@@ -4782,7 +5235,7 @@
       <node ref="U20" pin="7" pinfunction="MOSI" pintype="input"/>
       <node ref="U41" pin="21" pinfunction="B1" pintype="passive"/>
     </net>
-    <net code="213" name="SPI_SCLK" class="Default">
+    <net code="218" name="SPI_SCLK" class="Default">
       <node ref="U11" pin="13" pinfunction="SCLK" pintype="input"/>
       <node ref="U12" pin="13" pinfunction="SCLK" pintype="input"/>
       <node ref="U13" pin="13" pinfunction="SCLK" pintype="input"/>
@@ -4790,206 +5243,194 @@
       <node ref="U20" pin="8" pinfunction="SCK" pintype="input"/>
       <node ref="U41" pin="20" pinfunction="B2" pintype="passive"/>
     </net>
-    <net code="214" name="TILT_AEXT" class="Default">
+    <net code="219" name="TILT_AEXT" class="Default">
       <node ref="C21" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="U20" pin="2" pinfunction="A_EXTC" pintype="passive"/>
     </net>
-    <net code="215" name="TILT_CS" class="Default">
+    <net code="220" name="TILT_CS" class="Default">
       <node ref="R20" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="U20" pin="5" pinfunction="CSB" pintype="input"/>
       <node ref="U41" pin="15" pinfunction="B7" pintype="passive"/>
     </net>
-    <net code="216" name="TILT_DEXT" class="Default">
+    <net code="221" name="TILT_DEXT" class="Default">
       <node ref="C23" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="U20" pin="10" pinfunction="D_EXTC" pintype="passive"/>
     </net>
-    <net code="217" name="unconnected-(J1-Pad12)" class="Default">
+    <net code="222" name="unconnected-(J1-Pad12)" class="Default">
       <node ref="J1" pin="12" pinfunction="12" pintype="passive+no_connect"/>
     </net>
-    <net code="218" name="unconnected-(J1-Pad32)" class="Default">
+    <net code="223" name="unconnected-(J1-Pad32)" class="Default">
       <node ref="J1" pin="32" pinfunction="32" pintype="passive+no_connect"/>
     </net>
-    <net code="219" name="unconnected-(J1-Pad35)" class="Default">
+    <net code="224" name="unconnected-(J1-Pad35)" class="Default">
       <node ref="J1" pin="35" pinfunction="35" pintype="passive+no_connect"/>
     </net>
-    <net code="220" name="unconnected-(J1-Pad36)" class="Default">
+    <net code="225" name="unconnected-(J1-Pad36)" class="Default">
       <node ref="J1" pin="36" pinfunction="36" pintype="passive+no_connect"/>
     </net>
-    <net code="221" name="unconnected-(J1-Pad38)" class="Default">
+    <net code="226" name="unconnected-(J1-Pad38)" class="Default">
       <node ref="J1" pin="38" pinfunction="38" pintype="passive+no_connect"/>
     </net>
-    <net code="222" name="unconnected-(J1-Pad40)" class="Default">
+    <net code="227" name="unconnected-(J1-Pad40)" class="Default">
       <node ref="J1" pin="40" pinfunction="40" pintype="passive+no_connect"/>
     </net>
-    <net code="223" name="unconnected-(J80-Pad3)" class="Default">
+    <net code="228" name="unconnected-(J80-Pad3)" class="Default">
       <node ref="J80" pin="3" pinfunction="3" pintype="passive+no_connect"/>
     </net>
-    <net code="224" name="unconnected-(J80-Pad5)" class="Default">
+    <net code="229" name="unconnected-(J80-Pad5)" class="Default">
       <node ref="J80" pin="5" pinfunction="5" pintype="passive+no_connect"/>
     </net>
-    <net code="225" name="unconnected-(J80-Pad9)" class="Default">
+    <net code="230" name="unconnected-(J80-Pad9)" class="Default">
       <node ref="J80" pin="9" pinfunction="9" pintype="passive+no_connect"/>
     </net>
-    <net code="226" name="unconnected-(J80-Pad11)" class="Default">
+    <net code="231" name="unconnected-(J80-Pad11)" class="Default">
       <node ref="J80" pin="11" pinfunction="11" pintype="passive+no_connect"/>
     </net>
-    <net code="227" name="unconnected-(J80-Pad29)" class="Default">
+    <net code="232" name="unconnected-(J80-Pad29)" class="Default">
       <node ref="J80" pin="29" pinfunction="29" pintype="passive+no_connect"/>
     </net>
-    <net code="228" name="unconnected-(J80-Pad31)" class="Default">
+    <net code="233" name="unconnected-(J80-Pad31)" class="Default">
       <node ref="J80" pin="31" pinfunction="31" pintype="passive+no_connect"/>
     </net>
-    <net code="229" name="unconnected-(J80-Pad40)" class="Default">
+    <net code="234" name="unconnected-(J80-Pad40)" class="Default">
       <node ref="J80" pin="40" pinfunction="40" pintype="passive+no_connect"/>
     </net>
-    <net code="230" name="unconnected-(J80-Pad80)" class="Default">
+    <net code="235" name="unconnected-(J80-Pad80)" class="Default">
       <node ref="J80" pin="80" pinfunction="80" pintype="passive+no_connect"/>
     </net>
-    <net code="231" name="unconnected-(J81-Pad6)" class="Default">
+    <net code="236" name="unconnected-(J81-Pad6)" class="Default">
       <node ref="J81" pin="6" pinfunction="6" pintype="passive+no_connect"/>
     </net>
-    <net code="232" name="unconnected-(J81-Pad20)" class="Default">
+    <net code="237" name="unconnected-(J81-Pad20)" class="Default">
       <node ref="J81" pin="20" pinfunction="20" pintype="passive+no_connect"/>
     </net>
-    <net code="233" name="unconnected-(J81-Pad29)" class="Default">
+    <net code="238" name="unconnected-(J81-Pad29)" class="Default">
       <node ref="J81" pin="29" pinfunction="29" pintype="passive+no_connect"/>
     </net>
-    <net code="234" name="unconnected-(J81-Pad30)" class="Default">
+    <net code="239" name="unconnected-(J81-Pad30)" class="Default">
       <node ref="J81" pin="30" pinfunction="30" pintype="passive+no_connect"/>
     </net>
-    <net code="235" name="unconnected-(J82-Pad7)" class="Default">
+    <net code="240" name="unconnected-(J82-Pad7)" class="Default">
       <node ref="J82" pin="7" pinfunction="7" pintype="passive+no_connect"/>
     </net>
-    <net code="236" name="unconnected-(J82-Pad8)" class="Default">
+    <net code="241" name="unconnected-(J82-Pad8)" class="Default">
       <node ref="J82" pin="8" pinfunction="8" pintype="passive+no_connect"/>
     </net>
-    <net code="237" name="unconnected-(J82-Pad9)" class="Default">
+    <net code="242" name="unconnected-(J82-Pad9)" class="Default">
       <node ref="J82" pin="9" pinfunction="9" pintype="passive+no_connect"/>
     </net>
-    <net code="238" name="unconnected-(J82-Pad10)" class="Default">
+    <net code="243" name="unconnected-(J82-Pad10)" class="Default">
       <node ref="J82" pin="10" pinfunction="10" pintype="passive+no_connect"/>
     </net>
-    <net code="239" name="unconnected-(J82-Pad13)" class="Default">
+    <net code="244" name="unconnected-(J82-Pad13)" class="Default">
       <node ref="J82" pin="13" pinfunction="13" pintype="passive+no_connect"/>
     </net>
-    <net code="240" name="unconnected-(J82-Pad14)" class="Default">
+    <net code="245" name="unconnected-(J82-Pad14)" class="Default">
       <node ref="J82" pin="14" pinfunction="14" pintype="passive+no_connect"/>
     </net>
-    <net code="241" name="unconnected-(J82-Pad15)" class="Default">
+    <net code="246" name="unconnected-(J82-Pad15)" class="Default">
       <node ref="J82" pin="15" pinfunction="15" pintype="passive+no_connect"/>
     </net>
-    <net code="242" name="unconnected-(J82-Pad16)" class="Default">
+    <net code="247" name="unconnected-(J82-Pad16)" class="Default">
       <node ref="J82" pin="16" pinfunction="16" pintype="passive+no_connect"/>
     </net>
-    <net code="243" name="unconnected-(J82-Pad19)" class="Default">
+    <net code="248" name="unconnected-(J82-Pad19)" class="Default">
       <node ref="J82" pin="19" pinfunction="19" pintype="passive+no_connect"/>
     </net>
-    <net code="244" name="unconnected-(J82-Pad20)" class="Default">
+    <net code="249" name="unconnected-(J82-Pad20)" class="Default">
       <node ref="J82" pin="20" pinfunction="20" pintype="passive+no_connect"/>
     </net>
-    <net code="245" name="unconnected-(J82-Pad21)" class="Default">
+    <net code="250" name="unconnected-(J82-Pad21)" class="Default">
       <node ref="J82" pin="21" pinfunction="21" pintype="passive+no_connect"/>
     </net>
-    <net code="246" name="unconnected-(J82-Pad22)" class="Default">
+    <net code="251" name="unconnected-(J82-Pad22)" class="Default">
       <node ref="J82" pin="22" pinfunction="22" pintype="passive+no_connect"/>
     </net>
-    <net code="247" name="unconnected-(J82-Pad25)" class="Default">
+    <net code="252" name="unconnected-(J82-Pad25)" class="Default">
       <node ref="J82" pin="25" pinfunction="25" pintype="passive+no_connect"/>
     </net>
-    <net code="248" name="unconnected-(J82-Pad26)" class="Default">
+    <net code="253" name="unconnected-(J82-Pad26)" class="Default">
       <node ref="J82" pin="26" pinfunction="26" pintype="passive+no_connect"/>
     </net>
-    <net code="249" name="unconnected-(J82-Pad27)" class="Default">
+    <net code="254" name="unconnected-(J82-Pad27)" class="Default">
       <node ref="J82" pin="27" pinfunction="27" pintype="passive+no_connect"/>
     </net>
-    <net code="250" name="unconnected-(J82-Pad28)" class="Default">
+    <net code="255" name="unconnected-(J82-Pad28)" class="Default">
       <node ref="J82" pin="28" pinfunction="28" pintype="passive+no_connect"/>
     </net>
-    <net code="251" name="unconnected-(J82-Pad31)" class="Default">
+    <net code="256" name="unconnected-(J82-Pad31)" class="Default">
       <node ref="J82" pin="31" pinfunction="31" pintype="passive+no_connect"/>
     </net>
-    <net code="252" name="unconnected-(J82-Pad32)" class="Default">
+    <net code="257" name="unconnected-(J82-Pad32)" class="Default">
       <node ref="J82" pin="32" pinfunction="32" pintype="passive+no_connect"/>
     </net>
-    <net code="253" name="unconnected-(J82-Pad33)" class="Default">
+    <net code="258" name="unconnected-(J82-Pad33)" class="Default">
       <node ref="J82" pin="33" pinfunction="33" pintype="passive+no_connect"/>
     </net>
-    <net code="254" name="unconnected-(J82-Pad34)" class="Default">
+    <net code="259" name="unconnected-(J82-Pad34)" class="Default">
       <node ref="J82" pin="34" pinfunction="34" pintype="passive+no_connect"/>
     </net>
-    <net code="255" name="unconnected-(J82-Pad55)" class="Default">
+    <net code="260" name="unconnected-(J82-Pad55)" class="Default">
       <node ref="J82" pin="55" pinfunction="55" pintype="passive+no_connect"/>
     </net>
-    <net code="256" name="unconnected-(J82-Pad56)" class="Default">
+    <net code="261" name="unconnected-(J82-Pad56)" class="Default">
       <node ref="J82" pin="56" pinfunction="56" pintype="passive+no_connect"/>
     </net>
-    <net code="257" name="unconnected-(U11-INT2-Pad9)" class="Default">
+    <net code="262" name="unconnected-(U11-INT2-Pad9)" class="Default">
       <node ref="U11" pin="9" pinfunction="INT2" pintype="passive+no_connect"/>
     </net>
-    <net code="258" name="unconnected-(U11-OCS_AUX-Pad10)" class="Default">
+    <net code="263" name="unconnected-(U11-OCS_AUX-Pad10)" class="Default">
       <node ref="U11" pin="10" pinfunction="OCS_AUX" pintype="passive+no_connect"/>
     </net>
-    <net code="259" name="unconnected-(U11-SDO_AUX-Pad11)" class="Default">
+    <net code="264" name="unconnected-(U11-SDO_AUX-Pad11)" class="Default">
       <node ref="U11" pin="11" pinfunction="SDO_AUX" pintype="passive+no_connect"/>
     </net>
-    <net code="260" name="unconnected-(U12-INT2-Pad9)" class="Default">
+    <net code="265" name="unconnected-(U12-INT2-Pad9)" class="Default">
       <node ref="U12" pin="9" pinfunction="INT2" pintype="passive+no_connect"/>
     </net>
-    <net code="261" name="unconnected-(U12-OCS_AUX-Pad10)" class="Default">
+    <net code="266" name="unconnected-(U12-OCS_AUX-Pad10)" class="Default">
       <node ref="U12" pin="10" pinfunction="OCS_AUX" pintype="passive+no_connect"/>
     </net>
-    <net code="262" name="unconnected-(U12-SDO_AUX-Pad11)" class="Default">
+    <net code="267" name="unconnected-(U12-SDO_AUX-Pad11)" class="Default">
       <node ref="U12" pin="11" pinfunction="SDO_AUX" pintype="passive+no_connect"/>
     </net>
-    <net code="263" name="unconnected-(U13-INT2-Pad9)" class="Default">
+    <net code="268" name="unconnected-(U13-INT2-Pad9)" class="Default">
       <node ref="U13" pin="9" pinfunction="INT2" pintype="passive+no_connect"/>
     </net>
-    <net code="264" name="unconnected-(U13-OCS_AUX-Pad10)" class="Default">
+    <net code="269" name="unconnected-(U13-OCS_AUX-Pad10)" class="Default">
       <node ref="U13" pin="10" pinfunction="OCS_AUX" pintype="passive+no_connect"/>
     </net>
-    <net code="265" name="unconnected-(U13-SDO_AUX-Pad11)" class="Default">
+    <net code="270" name="unconnected-(U13-SDO_AUX-Pad11)" class="Default">
       <node ref="U13" pin="11" pinfunction="SDO_AUX" pintype="passive+no_connect"/>
     </net>
-    <net code="266" name="unconnected-(U14-INT2-Pad9)" class="Default">
+    <net code="271" name="unconnected-(U14-INT2-Pad9)" class="Default">
       <node ref="U14" pin="9" pinfunction="INT2" pintype="passive+no_connect"/>
     </net>
-    <net code="267" name="unconnected-(U14-OCS_AUX-Pad10)" class="Default">
+    <net code="272" name="unconnected-(U14-OCS_AUX-Pad10)" class="Default">
       <node ref="U14" pin="10" pinfunction="OCS_AUX" pintype="passive+no_connect"/>
     </net>
-    <net code="268" name="unconnected-(U14-SDO_AUX-Pad11)" class="Default">
+    <net code="273" name="unconnected-(U14-SDO_AUX-Pad11)" class="Default">
       <node ref="U14" pin="11" pinfunction="SDO_AUX" pintype="passive+no_connect"/>
     </net>
-    <net code="269" name="unconnected-(U21-LNA_EN-Pad13)" class="Default">
-      <node ref="U21" pin="13" pinfunction="LNA_EN" pintype="passive+no_connect"/>
+    <net code="274" name="unconnected-(U22-AIN2_NC-Pad7)" class="Default">
+      <node ref="U22" pin="7" pinfunction="AIN2_NC" pintype="passive+no_connect"/>
     </net>
-    <net code="270" name="unconnected-(U21-RESET_N-Pad9)" class="Default">
-      <node ref="U21" pin="9" pinfunction="RESET_N" pintype="passive+no_connect"/>
+    <net code="275" name="unconnected-(U22-AIN3_NC-Pad6)" class="Default">
+      <node ref="U22" pin="6" pinfunction="AIN3_NC" pintype="passive+no_connect"/>
     </net>
-    <net code="271" name="unconnected-(U21-RXD_NC-Pad3)" class="Default">
-      <node ref="U21" pin="3" pinfunction="RXD_NC" pintype="passive+no_connect"/>
+    <net code="276" name="unconnected-(U22-REFN_NC-Pad8)" class="Default">
+      <node ref="U22" pin="8" pinfunction="REFN_NC" pintype="passive+no_connect"/>
     </net>
-    <net code="272" name="unconnected-(U21-SAFEBOOT_N-Pad18)" class="Default">
-      <node ref="U21" pin="18" pinfunction="SAFEBOOT_N" pintype="passive+no_connect"/>
+    <net code="277" name="unconnected-(U22-REFP_NC-Pad9)" class="Default">
+      <node ref="U22" pin="9" pinfunction="REFP_NC" pintype="passive+no_connect"/>
     </net>
-    <net code="273" name="unconnected-(U21-TXD_NC-Pad2)" class="Default">
-      <node ref="U21" pin="2" pinfunction="TXD_NC" pintype="passive+no_connect"/>
-    </net>
-    <net code="274" name="unconnected-(U21-VCC_RF-Pad14)" class="Default">
-      <node ref="U21" pin="14" pinfunction="VCC_RF" pintype="passive+no_connect"/>
-    </net>
-    <net code="275" name="unconnected-(U21-VIO_SEL_OPEN_3V3-Pad15)" class="Default">
-      <node ref="U21" pin="15" pinfunction="VIO_SEL_OPEN_3V3" pintype="passive+no_connect"/>
-    </net>
-    <net code="276" name="unconnected-(U21-V_BCKP-Pad6)" class="Default">
-      <node ref="U21" pin="6" pinfunction="V_BCKP" pintype="power_in+no_connect"/>
-    </net>
-    <net code="277" name="unconnected-(U41-B8-Pad14)" class="Default">
+    <net code="278" name="unconnected-(U41-B8-Pad14)" class="Default">
       <node ref="U41" pin="14" pinfunction="B8" pintype="passive+no_connect"/>
     </net>
-    <net code="278" name="unconnected-(U42-A7-Pad9)" class="Default">
+    <net code="279" name="unconnected-(U42-A7-Pad9)" class="Default">
       <node ref="U42" pin="9" pinfunction="A7" pintype="passive+no_connect"/>
     </net>
-    <net code="279" name="unconnected-(U42-A8-Pad10)" class="Default">
+    <net code="280" name="unconnected-(U42-A8-Pad10)" class="Default">
       <node ref="U42" pin="10" pinfunction="A8" pintype="passive+no_connect"/>
     </net>
   </nets>

@@ -1,4 +1,4 @@
-(kicad_sch (version 20230121) (generator eeschema) (uuid a8fb55ae-e6bc-58ff-ab76-d63aa5198255) (paper "A3") (title_block (title "ShakeSense T1 / 05-coldfoot-interface-page-01") (date "2026-09-24") (rev "T1-GPIO"))
+(kicad_sch (version 20230121) (generator eeschema) (uuid a8fb55ae-e6bc-58ff-ab76-d63aa5198255) (paper "A3") (title_block (title "ShakeSense T1 / 05-coldfoot-interface-page-01") (date "2026-09-24") (rev "T1-GEO"))
 (lib_symbols
 (symbol "ShakeSense:Part_J4" (pin_names (offset 0.6)) (in_bom yes) (on_board yes)
       (property "Reference" "J" (id 0) (at 0 6.35 0) (effects (font (size 1.27 1.27))))

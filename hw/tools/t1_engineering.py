@@ -82,36 +82,14 @@ def main():
     board = p.LoadBoard(str(BOARD / (BOARD.name + ".kicad_pcb")))
     pins = {(f.GetReference(), pad.GetNumber()):pad.GetNetname() for f in board.GetFootprints() for pad in f.Pads()}
     power_checks = power_interfaces(pins)
-    for pin, net in {7:'PI_GNSS_PPS',13:'PI_IMU1_INT',15:'PI_IMU2_INT',16:'PI_IMU3_INT',18:'PI_IMU4_INT'}.items():
-        assert pins[('J1',str(pin))] == net, ('Pi IRQ/PPS mapping', pin)
-    rf = [t for t in board.GetTracks() if t.GetNetname() == "GNSS_RF"]
-    assert len(rf) == 3 and all(not isinstance(t, p.PCB_VIA) and t.GetLayer() == p.F_Cu for t in rf)
-    widths = sorted({round(p.ToMM(t.GetWidth()), 6) for t in rf})
-    assert widths == [spec["rf"]["width_mm"]], widths
-    ground = next(z.GetFilledPolysList(p.In2_Cu) for z in board.Zones()
-                  if not z.GetIsRuleArea() and z.GetLayer() == p.In2_Cu and z.GetNetname() == "GND")
-    # Sample directly underneath the complete RF copper width, including bends.
-    # This is a return-plane continuity guard, not an electromagnetic solver.
-    samples = 0
-    for trace in rf:
-        a, b = trace.GetStart(), trace.GetEnd()
-        dx, dy = b.x - a.x, b.y - a.y
-        length = math.hypot(dx, dy)
-        for i in range(math.ceil(p.ToMM(length) / .025) + 1):
-            f = min(1, i * p.FromMM(.025) / length)
-            for offset in (-trace.GetWidth() / 2, 0, trace.GetWidth() / 2):
-                point = p.VECTOR2I(round(a.x + f * dx - offset * dy / length),
-                                   round(a.y + f * dy + offset * dx / length))
-                assert ground.Contains(point), ('RF reference-plane gap', p.ToMM(point.x), p.ToMM(point.y))
-                samples += 1
-    z, ee = microstrip(widths[0], h, hdi["copper_thickness_mm"][0], spec["rf"]["epsilon_r"])
+    for pin, net in {7:'PI_GEO_DRDY_N',13:'PI_IMU1_INT',15:'PI_IMU2_INT',16:'PI_IMU3_INT',18:'PI_IMU4_INT'}.items():
+        assert pins[('J1',str(pin))] == net, ('Pi acquisition IRQ mapping', pin)
+    from geophone_checks import verify
+    geo_checks = verify(pins, {f.GetReference():(f.GetOrientationDegrees(), f.IsFlipped()) for f in board.GetFootprints()})
     low, high = supply_range(3.35, .005, .030, 3)
     gap = 16.129 + 2.54 + 8.51
     report = dict(
-        rf=dict(model="Hammerstad-Jensen, uncoated microstrip", width_mm=widths[0],
-                reference="In2.Cu", reference_depth_mm=h, impedance_ohm=z,
-                effective_er=ee, length_mm=sum(p.ToMM(t.GetLength()) for t in rf), return_plane_points=samples,
-                limitations="Recorded provisional dielectric; solder mask and connector launches not modeled"),
+        geophone=dict(physical_pin_checks=geo_checks, sensor="Racotech RGI-4.5Hz vertical", adc="ADS122C04", axes="four aligned three-axis IMUs"),
         power=dict(interface_pin_checks=power_checks, input_setpoint_v=3.35, input_tolerance=.005,
                    total_hot_loop_resistance_limit_ohm=.030, current_limit_a=3,
                    dc_module_min_v=low, dc_module_max_v=high,
@@ -119,7 +97,6 @@ def main():
         mechanical=dict(pi_to_hat_underside_mm=gap, riser="Samtec SSQ-120-02-G-D",
                         conservative_clearance_mm=clearance(gap),
                         limitations="1 mm stack tolerance plus 1 mm cable envelope; actual cooler/harness not modeled"))
-    assert 49 <= z <= 51
     assert 3.201 < low < high < 3.399
     assert clearance(gap) >= 3
     (BOARD / "engineering.json").write_text(json.dumps(report, indent=2) + "\n")

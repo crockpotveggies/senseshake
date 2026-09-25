@@ -6,7 +6,7 @@ stock component models. It is not a manufacturing deliverable.
 
 KiCad's exporter cannot convert the local VRML bodies. The Python scene adds
 simplified envelopes for the Pi socket, Trenz connectors, underside FFCs,
-SCL3300 and MAX-M10S. Selection rings use `hw/layout-trenz.json` XY values.
+SCL3300. Selection rings use `hw/layout-trenz.json` XY values.
 The remote head is a separate placement-based schematic 3D view; its optional
 pressure sensor is shown even though the default assembly is DNP.
 

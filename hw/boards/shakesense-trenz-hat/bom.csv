@@ -30,11 +30,6 @@ C21,100n,GRM155R71C104KA88D,Capacitor_SMD__C_0402_1005Metric,False,
 C22,100n,GRM155R71C104KA88D,Capacitor_SMD__C_0402_1005Metric,False,
 C23,100n,GRM155R71C104KA88D,Capacitor_SMD__C_0402_1005Metric,False,
 R20,10k,RC0603FR-0710KL,Resistor_SMD__R_0603_1608Metric,False,
-U21,MAX-M10S,MAX-M10S-00B,RF_GPS__ublox_MAX,False,I2C 0x42. Passive external GNSS antenna; no DC bias at RF connector.
-C24,100n,GRM188R71H104KA93D,Capacitor_SMD__C_0603_1608Metric,False,
-C25,4.7u,GRM21BR71A475KA73L,Capacitor_SMD__C_0805_2012Metric,False,
-C26,100n,GRM188R71H104KA93D,Capacitor_SMD__C_0603_1608Metric,False,
-J2,Passive GNSS antenna,U.FL-R-SMT-1(10),Connector_Coaxial__U.FL_Hirose_U.FL-R-SMT-1_Vertical,False,50 ohm line; external passive antenna.
 J4,FPGA test UART/reset,Coldfoot UART service ONLY,Connector_PinHeader_2.54mm__PinHeader_1x04_P2.54mm_Vertical,False,Test points for assembled module UART and active-low reset; do not connect a second driving host.
 H1,M2.5 NPTH,M2.5 NPTH,MountingHole__MountingHole_2.7mm_M2.5,False,Nonmagnetic standoffs.
 H2,M2.5 NPTH,M2.5 NPTH,MountingHole__MountingHole_2.7mm_M2.5,False,Nonmagnetic standoffs.
@@ -98,3 +93,21 @@ J86,BANK13 / 40p FFC,F32Q-1A7H1-11040,TZ_FFC40,False,3.3 V logic only; pin 2 VRE
 J87,BANK14 / 40p FFC,F32Q-1A7H1-11040,TZ_FFC40,False,3.3 V logic only; pin 2 VREF output; fit FFC before stacking; no hot plug
 J88,BANK15 / 60p FFC,F32Q-1A7H1-11060,TZ_FFC60,False,3.3 V logic only; pin 2 VREF output; fit FFC before stacking; no hot plug
 J89,BANK16 / 60p FFC,F32Q-1A7H1-11060,TZ_FFC60,False,3.3 V logic only; pin 2 VREF output; fit FFC before stacking; no hot plug
+U22,ADS122C04,ADS122C04IPWR,Package_SO__TSSOP-16_4.4x5mm_P0.65mm,False,"I2C 0x40; internal 2.048V reference, gain 64, normal 330 SPS; unused analog/reference inputs open per TI."
+J90,GEO + / - / SHIELD,1803439,"Connector_Phoenix_MC__PhoenixContact_MCV_1,5_3-G-3.81_1x03_P3.81mm_Vertical",False,"External passive sensor: 1 positive, 2 negative, 3 cable shield. Mate MC 1,5/3-ST-3,81. Never connect power."
+D90,TPD2E2U06,TPD2E2U06DCKR,Package_TO_SOT_SMD__SOT-323_SC-70,False,Connector ESD suppression only; not lightning protection.
+R90,1k,RC0603FR-071KL,Resistor_SMD__R_0603_1608Metric,False,Matched series input filter / current limiting.
+R91,1k,RC0603FR-071KL,Resistor_SMD__R_0603_1608Metric,False,
+C90,100n C0G,C1206C104J5GACTU,Capacitor_SMD__C_1206_3216Metric,False,C0G differential filter; no piezoelectric X7R on signal path.
+C91,1n C0G,C0603C102J5GACTU,Capacitor_SMD__C_0603_1608Metric,False,
+C92,1n C0G,C0603C102J5GACTU,Capacitor_SMD__C_0603_1608Metric,False,
+R92,1M,RC0603FR-071ML,Resistor_SMD__R_0603_1608Metric,False,
+R93,1M,RC0603FR-071ML,Resistor_SMD__R_0603_1608Metric,False,
+R94,10k,RC0603FR-0710KL,Resistor_SMD__R_0603_1608Metric,False,
+R95,10k,RC0603FR-0710KL,Resistor_SMD__R_0603_1608Metric,False,
+C93,10u,GRM21BR61A106KE19L,Capacitor_SMD__C_0805_2012Metric,False,Filtered mid-supply; sensor has no excitation current source.
+R96,22,RC0603FR-0722RL,Resistor_SMD__R_0603_1608Metric,False,
+C94,10u,GRM21BR61A106KE19L,Capacitor_SMD__C_0805_2012Metric,False,
+C95,100n,GRM188R71H104KA93D,Capacitor_SMD__C_0603_1608Metric,False,
+C96,100n,GRM188R71H104KA93D,Capacitor_SMD__C_0603_1608Metric,False,
+R97,10k,RC0603FR-0710KL,Resistor_SMD__R_0603_1608Metric,False,Open-drain DRDY pullup; existing U42 return buffer to BCM4.

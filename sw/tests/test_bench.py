@@ -26,7 +26,7 @@ class BenchTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory); trace=root/'trace.txt';trace.write_text('synthetic evidence for validator test')
             report=template()
-            for key in ('operator','date_utc','hardware_revision','board_serial','software_commit','pi_and_kernel','gnss_firmware','fpga_image'):
+            for key in ('operator','date_utc','hardware_revision','board_serial','software_commit','pi_and_kernel','geophone_serial','fpga_image'):
                 report[key]='test fixture'
             report['conditions']={key:'fixture' for key in report['conditions']}
             report['equipment']=['test fixture; no physical measurement']
@@ -40,7 +40,7 @@ class BenchTests(unittest.TestCase):
             for key,value in [('module_min_v',3.19),('module_max_v',3.4),('hot_loop_resistance',.031),('power_sequence',False)]:
                 bad=deepcopy(report);bad['checks'][key]['value']=value
                 self.assertEqual(evaluate(bad,root)['status'],'fail')
-            bad=deepcopy(report);bad['targets']['max_utc_error_ns']=None
+            bad=deepcopy(report);bad['targets']['max_geophone_timing_error_ns']=None
             self.assertEqual(evaluate(bad,root)['status'],'incomplete')
             trace.write_text('changed')
             self.assertEqual(evaluate(report,root)['status'],'fail')

@@ -1,5 +1,11 @@
 # T1 physical bench procedure and report
 
+**T1-GEO revision:** GNSS is removed; one external Racotech vertical geophone
+uses an ADS122C04 input. See [current circuit, acquisition and validation](geophone-input.md).
+GNSS/PPS/RF details below describe the preceding revision or legacy recordings.
+The current physical bench template is version 2, with geophone response/noise/timing
+checks replacing the GNSS UTC check.
+
 This procedure qualifies the assembled Pi/T1/Trenz stack. It is separate from
 preparing a prototype fabrication submission. Physical tests run when an assembly
 exists; missing physical evidence is recorded as incomplete, not fabricated by a
@@ -18,18 +24,17 @@ python sw/tools/bench.py check sw/build/bench-001/report.json
 ```
 
 The initial check intentionally returns **incomplete**, exit code 2. Record the
-operator, UTC date, board serial/revision, software commit, Pi/kernel, GNSS firmware,
+operator, UTC date, board serial/revision, software commit, Pi/kernel, geophone serial and calibration,
 FPGA bitstream or explicit unconfigured state, instruments/calibration references,
 mounting, cooling, temperature range, sample/filter settings and power cases.
-Enter application targets for UTC error, inter-IMU skew, acceleration noise,
+Enter application targets for geophone timing error and input noise, inter-IMU skew, acceleration noise,
 thermal bias change and FPGA noise ratio before evaluating those tests.
 
 Use a current-limited adjustable supply, DMM, oscilloscope with suitable differential
 voltage/current measurements, electronic load, logic analyzer, temperature probes,
-calipers and an independent UTC/PPS reference. Timing qualification needs a shared
-instrument timebase of known accuracy. Comparing the GNSS PPS only to itself cannot
-establish absolute UTC accuracy. Motion tests also need known orientations and a
-reference accelerometer/shaker for frequency/phase characterization.
+calipers and a low-noise differential signal source. Timing qualification needs a
+shared instrument timebase of known accuracy. Motion tests also need known
+orientations and a reference accelerometer/shaker for frequency/phase characterization.
 
 Store scope exports, logic traces, `.ssrec` recordings, analyzer JSON and fit photos
 inside the report folder. Generate each evidence entry with:
@@ -81,37 +86,32 @@ closest gaps and record photos. The nominal Pi-to-HAT gap is 27.179 mm; fit depe
 on actual socket seating/cooler/cables. A dimensioned mock-up can precede assembly.
 Set `connector_cable_cooler_fit=true` only after the intended configuration fits.
 
-## 3. UTC, IRQ and acquisition timing
+## 3. Geophone, IRQ and acquisition timing
 
-1. Follow [Pi deployment](../sw/pi/deploy/README.md), then capture with `--fifo --utc`
-   using [the timing workflow](utc-timing.md). GNSS lock must be established; all
-   configuration keys must acknowledge/read back. Keep raw evidence even when
-   correlation rejects an interval.
-2. Capture DUT PPS and an independent UTC-labelled reference on the same scope.
-   Decode the actual I²C TIM-TP/TIMEUTC stream alongside PPS. Establish the correct
-   integer-second relationship and bound receiver queuing plus complete-read age
-   across cold start, reacquisition and the qualified stress envelope. A bus
-   transaction duration alone does not bound generation-to-read age. If that bound
-   cannot be established, leave UTC qualification incomplete.
-3. Record IRQ and SPI activity while stressing CPU, storage and network, with FPGA
-   off, idle and active. Compare recorded hardware timestamp intervals against
-   instrument time. Determine kernel PPS timestamp error, clock-rate drift,
-   sample/filter latency, inter-IMU skew and per-sensor acquisition error bounds.
-   Independent sensor oscillators and filter delays are not removed by PPS.
-4. Stop/resume the acquisition process deliberately to delay service. Confirm
-   buffered data survive within the configured capacity, and overflow emits a
-   fault/missing marker with unknown physical loss. Capture GNSS disconnect/reset,
-   loss of lock and reacquisition. No UTC may bridge rejected intervals. Saturated,
-   missing and raw data must retain their existing meanings.
-5. Fill a copy of the timing-policy template with measured bounds, margin, report
-   reference and input-recording SHA-256. Correlate to a new recording. Replay it;
-   compare UTC residuals to the independent reference and retain the correlation
-   JSON. Populate maximum error/skew and recovery/loss checks in the report.
+1. Follow [Pi deployment](../sw/pi/deploy/README.md) and capture with `--fifo`.
+   The T1-GEO has no GNSS and rejects `--utc`. Read back ADC configuration;
+   retain raw counts, conversion counters and host monotonic timestamps.
+2. Capture ADC DRDY, I²C transactions, IMU IRQ and SPI activity on a common
+   logic-analyzer timebase. Measure conversion-to-read delay, delivered rate,
+   latency variation, inter-IMU skew and drift under CPU/storage/network load,
+   with the FPGA off, idle and active. The current ADC driver polls; it does
+   not turn DRDY into a hardware timestamp.
+3. Stop/resume acquisition deliberately. Confirm IMU FIFO behavior and that
+   ADC overwrites, integrity faults and ambiguous counter wraps produce faults
+   with unknown physical loss. The ADC has no FIFO. Confirm recovery without
+   relabeling invalid or saturated samples as valid.
+4. Apply calibrated differential inputs within the ADC common-mode and input
+   limits, including a 10 Hz sine and a frequency sweep. Measure polarity,
+   gain, clipping and recovery. Independently move the vertical geophone with
+   a known reference to establish its mechanical response and polarity. An
+   electrical signal-generator test alone does not calibrate the geophone.
+5. Populate `geophone_polarity_response`, measured maximum geophone timing
+   error, inter-IMU skew and recovery checks with the retained traces. Choose
+   timing limits from the research use case before evaluating acceptance.
 
-A reasonable starting experiment is 10 minutes per load state plus repeated cold
-starts; extend it until thermal settling, operating extremes and required uptime
-are covered. This is a proposed characterization duration, not proof of rare-event
-failure rate. Choose timing targets from the research use case before acceptance.
+Start with 10 minutes per load state and repeated cold starts, then extend
+through thermal settling and the intended operating envelope. No absolute UTC
+qualification is implied by this board or a passing relative timing test.
 
 ## 4. Noise, thermal drift and FPGA coupling
 
@@ -156,3 +156,9 @@ Retain hashes and a release manifest. Fabrication data has not been exported or
 submitted by this software task. Keep the physical bench report pending until
 boards arrive, rather than requiring completed-board measurements before making
 the first prototype.
+
+For geophone noise, record both a shorted differential input and the connected,
+stationary sensor. Convert counts to input volts using the recorded gain and
+reference. Measure the defined bandwidth with FPGA off/idle/active and record
+`max_geophone_input_noise_rms` against the application target. Separate ambient
+ground motion from electronic noise; do not use the synthetic stimulus as evidence.

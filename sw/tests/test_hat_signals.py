@@ -6,7 +6,8 @@ import unittest
 
 from senseshake.hat_signals import PROFILE, run_bench, check_recording
 from senseshake.recording import Reader, Writer
-from senseshake.sensors import LSM6DSO, SCL3300, MAXM10S
+from senseshake.sensors import LSM6DSO, SCL3300
+from senseshake.geophone import ADS122C04
 
 
 def altered(data, edit):
@@ -36,7 +37,7 @@ class HatSignalsTests(unittest.TestCase):
 
     def test_known_signal_runs_through_all_production_hat_drivers(self):
         # Spy on real methods rather than replacing them with model adapters.
-        counts = dict(imu=0, tilt=0, gnss=0)
+        counts = dict(imu=0, tilt=0, geophone=0)
         def spy(original, key):
             def read(driver):
                 counts[key] += 1
@@ -44,10 +45,10 @@ class HatSignalsTests(unittest.TestCase):
             return read
         with patch.object(LSM6DSO, "read", spy(LSM6DSO.read, "imu")), \
              patch.object(SCL3300, "read", spy(SCL3300.read, "tilt")), \
-             patch.object(MAXM10S, "read", spy(MAXM10S.read, "gnss")):
+             patch.object(ADS122C04, "read", spy(ADS122C04.read, "geophone")):
             data, report = run_bench()
         self.assertTrue(report["passed"], report)
-        self.assertEqual(counts, dict(imu=832, tilt=200, gnss=8))
+        self.assertEqual(counts, dict(imu=832, tilt=200, geophone=2640))
         self.assertEqual(data, self.data)
         self.assertEqual(len(report["checks"]), 10)
 
@@ -107,15 +108,11 @@ class HatSignalsTests(unittest.TestCase):
                     s.tilt.angle.y *= -1
         self.assert_check_fails(altered(self.data, edit), "Inclinometer consistency")
 
-    def test_gnss_velocity_unit_error_fails(self):
-        import struct
+    def test_geophone_gain_error_fails(self):
         def edit(m):
-            if m.WhichOneof("body") == "batch" and m.batch.sensor_id == 6:
-                for s in m.batch.samples:
-                    data = bytearray(s.gnss.nav_pvt)
-                    struct.pack_into("<iii", data, 48, 1, 2, 0)
-                    s.gnss.nav_pvt = bytes(data)
-        self.assert_check_fails(altered(self.data, edit), "GNSS motion & units")
+            if m.WhichOneof("body") == "batch" and m.batch.sensor_id == 9:
+                for sample in m.batch.samples: sample.geophone.counts *= -1
+        self.assert_check_fails(altered(self.data, edit), "Geophone gain, phase & counter")
 
     def test_zero_tilt_vector_fails_without_crashing(self):
         def edit(m):

@@ -1,5 +1,11 @@
 # Sensor development on the FPGA stack
 
+**T1-GEO revision:** GNSS is removed; one external Racotech vertical geophone
+uses an ADS122C04 input. See [current circuit, acquisition and validation](geophone-input.md).
+GNSS/PPS/RF details below describe the preceding revision or legacy recordings.
+The current physical bench template is version 2, with geophone response/noise/timing
+checks replacing the GNSS UTC check.
+
 ## Active scope
 
 Develop and validate sensor acquisition using the Raspberry Pi → T1 sensor HAT

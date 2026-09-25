@@ -71,9 +71,42 @@ class GNSSBus:
         return result
 
 
+class GeophoneBus:
+    """Register-level ADC model, including reset, readback and inverted output.
+
+    Conversion values come from the mechanical stimulus, not the driver decoder.
+    Timing is ideal; scheduler loss is exercised separately by driver fault tests.
+    """
+    def __init__(self, model):
+        self.model, self.regs, self.started = model, [0]*4, False
+
+    def exchange(self, address, write, count):
+        if address != 0x40: raise OSError('wrong modeled geophone address')
+        op = write[0]
+        if op == 6: self.regs, self.started = [0]*4, False; return b''
+        if op == 8: self.started = True; return b''
+        if op & 0xf0 == 0x40:
+            self.regs[(op >> 2) & 3] = write[1]; return b''
+        if op & 0xf0 == 0x20:
+            i = (op >> 2) & 3
+            data = bytes([self.regs[i] | (0x80 if i == 2 and self.started else 0)])
+        elif op == 0x10 and self.started:
+            raw = self.model.read().raw
+            data = bytes([raw['conversion_counter']]) + raw['counts'].to_bytes(3, 'big', signed=True)
+        else: raise OSError('unexpected ADC command')
+        return data + bytes(b ^ 255 for b in data) if self.regs[2] & 0x30 == 0x10 else data
+
+    def close(self): pass
+
+
 class VirtualDriver:
     def __init__(self, sensor, scenario, clock):
         self.model = Simulated(sensor, seed=1, scenario=scenario, clock=clock)
+        if sensor == 9:
+            from .geophone import ADS122C04
+            self.driver = ADS122C04(GeophoneBus(self.model), sleep=lambda _: None, clock=lambda: clock()/1e9)
+            self.loss_unknown = True
+            return
         bus_type, driver_type = (IMUBus, LSM6DSO) if sensor <= 4 else (TiltBus, SCL3300) if sensor == 5 else (GNSSBus, MAXM10S)
         bus = bus_type(self.model, clock) if sensor == 6 else bus_type(self.model)
         self.driver = driver_type(bus, sleep=lambda _: None)

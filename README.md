@@ -14,7 +14,7 @@ recording/replay and recovery tests. It saves an eight-sensor demo recording.
 See [running the sensor software](docs/sensor-software.md). Rebuild the image
 once if it predates the pinned Buf tool.
 
-**Virtual sensors:** drive motion, tilt, magnetic fields, pressure and GNSS with
+**Virtual sensors:** drive motion, tilt, magnetic fields, pressure and geophone signals with
 [saved stimulus scenarios](docs/stimulus-models.md), including timed faults.
 
 **Sensor workbench:** run `./ui.ps1` (Windows) or `./ui.sh` (Linux/macOS), then
@@ -50,16 +50,20 @@ It is an alternative to the ASIC HAT below and requires external regulated 3.3 V
 FPGA power. J85-J89 expose 155 GPIOs at 3.3 V, including four underside ribbon
 connectors; see the [pin contract](docs/trenz-gpio-breakout.csv). Its FPGA
 bitstream port, cable/stack fit and physical qualification remain pending.
-The complete breakout uses an eight-layer HDI stack. The revised GNSS route,
+The active T1 has a [single Racotech geophone input](docs/geophone-input.md) and no GNSS.
+
+![T1 geophone HAT](hw/boards/shakesense-trenz-hat/3d.png)
+
+The complete breakout uses an eight-layer HDI stack. The geophone input,
 power envelope, GPIO riser and buffered acquisition are tracked in
 [engineering closure](docs/t1-engineering-closure.md); physical qualification
 remains open. Fabrication approval belongs to the project owner. Ethernet is not exposed.
 
-[UTC timing capture/correlation](docs/utc-timing.md) and an
+[Legacy GNSS timing capture/correlation](docs/utc-timing.md) and an
 [executable physical bench checklist](docs/bench-procedure.md) are available.
 UTC estimates require explicit timing bounds; physical measurements remain pending.
 
-An engineering prototype with four LSM6DSO IMUs, an SCL3300 inclinometer,
+The historical **A2** is an engineering prototype with four LSM6DSO IMUs, an SCL3300 inclinometer,
 MAX-M10S GNSS, a remote RM3100 XYZ magnetometer and optional DLVR differential
 pressure. No geophone. The Pi acquires/preprocesses samples and submits compatible
 workloads to Coldfoot through its host UART.

@@ -20,7 +20,7 @@ from .virtual_hat import VirtualDriver
 PROFILE = {"version": 1, "initial": {
     "orientation_deg": [{"amplitude": 5, "frequency_hz": .5}, 0, 0],
     "acceleration_m_s2": [{"amplitude": .3, "frequency_hz": 2}, 0, 0],
-    "gnss_position": [0, 0, 10], "gnss_velocity_ned_m_s": [1, 2, -.5]}}
+    "geophone_velocity_m_s": {"amplitude": .0001, "frequency_hz": 10}, "gnss_position": [0, 0, 10], "gnss_velocity_ned_m_s": [1, 2, -.5]}}
 SECONDS = 8
 # Independent nominal conversions from the effective bench configuration.
 ACCEL_M_S2_PER_COUNT = .00059820565
@@ -61,7 +61,7 @@ def check_recording(data):
         raise ValueError("HAT bench recording exceeds 2 MiB")
     reader = Reader(BytesIO(data))
     sessions = Sessions()
-    samples = {sid: [] for sid in range(1, 7)}
+    samples = {sid: [] for sid in (1, 2, 3, 4, 5, 9)}
     checks, configs, completed = [], {}, False
     def check(name, passed, detail):
         checks.append(dict(name=name, passed=bool(passed), detail=detail))
@@ -77,22 +77,22 @@ def check_recording(data):
             if sid not in samples:
                 raise ValueError("HAT bench expects only sensors 1–6")
             samples[sid].extend(message.batch.samples)
-            if len(samples[sid]) > 1000:
+            if len(samples[sid]) > 4000:
                 raise ValueError("HAT bench sample bound")
     inventory = all(samples.values()) and set(configs) == set(samples)
     check("Inventory & quality", inventory and completed and all(s.quality == 1 for rows in samples.values() for s in rows),
           f"{sum(map(len, samples.values()))} samples; six HAT sensors; completion={completed}")
-    settings_ok = inventory and all(configs[i].period_ns == defaults()[i-1]["period_ns"] for i in samples)
+    settings_ok = inventory and all(configs[i].period_ns == next(c["period_ns"] for c in defaults() if c["sensor_id"] == i) for i in samples)
     if settings_ok:
         settings_ok = all(configs[i].acceleration_range_g == 2 and configs[i].angular_rate_range_dps == 250 for i in range(1, 5)) and configs[5].tilt_mode == 1
-    check("Effective configuration", settings_ok, "26 Hz / ±2 g / ±250 °/s IMUs; 25 Hz inclinometer; 1 Hz GNSS")
+    check("Effective configuration", settings_ok, "26 Hz / ±2 g / ±250 °/s IMUs; 25 Hz inclinometer; 330 SPS vertical geophone")
     if not inventory or not settings_ok or any(s.quality != 1 for rows in samples.values() for s in rows):
         return dict(passed=False, checks=checks, samples=sum(map(len, samples.values())), recording_sha256=hashlib.sha256(data).hexdigest(), scope="modeled buses / actual Pi drivers")
     timing_errors = []
     continuity = True
     for sid, rows in samples.items():
         period = configs[sid].period_ns
-        continuity &= len(rows) == SECONDS * (26 if sid <= 4 else 25 if sid == 5 else 1)
+        continuity &= len(rows) == SECONDS * (26 if sid <= 4 else 25 if sid == 5 else 330)
         for index, sample in enumerate(rows):
             continuity &= sample.sequence == index and sample.time.domain == 1 and sample.time.HasField("acquisition_ns")
             timing_errors.append(abs(sample.time.acquisition_ns - index * period))
@@ -139,17 +139,14 @@ def check_recording(data):
             tilt_errors.append(abs(math.degrees(math.asin(value / norm)) - angle * 180 / 32768) if norm else 180.)
     check("Inclinometer consistency", max(tilt_errors) <= .015 and max(tilt_gravity) <= .0002 and max(tilt_roll) <= .01,
           f"Angle error {max(tilt_errors):.4f}° (≤0.015°); gravity error {max(tilt_gravity):.6f} g (≤0.0002 g); prescribed-roll error {max(tilt_roll):.4f}° (≤0.01°)")
-    position_errors, valid_gnss = [], True
-    for sample in samples[6]:
-        raw = sample.gnss.nav_pvt
-        t = sample.time.acquisition_ns / 1e9
-        lon, lat, height = struct.unpack_from("<iii", raw, 24)
-        position_errors.extend((abs(lat / 1e7 * 111319.490793 - t), abs(lon / 1e7 * 111319.490793 - 2*t), abs(height / 1000 - (10 + .5*t))))
-        valid_gnss &= raw[20] == 3 and bool(raw[21] & 1) and struct.unpack_from("<iii", raw, 48) == (1000, 2000, -500)
-        valid_gnss &= struct.unpack_from("<I", raw)[0] == round(t * 1000)
-        valid_gnss &= not raw[78] & 1
-    check("GNSS motion & units", valid_gnss and max(position_errors) <= .02,
-          f"Position error {max(position_errors):.4f} m (≤0.02 m); N/E/D velocity 1000/2000/−500 mm/s")
+    # Independent fixture: Racotech mechanical response + loaded input RC at 10 Hz.
+    # 100 um/s produces 2.299408 mV peak and +37.44222 degrees (nominal).
+    rows = samples[9]
+    gain, phase = 602776.1, math.radians(37.44222)
+    errors = [abs(sample.geophone.counts - gain*math.sin(20*math.pi*sample.time.acquisition_ns/1e9 + phase)) for sample in rows]
+    counters_ok = all(s.geophone.conversion_counter == i % 256 for i,s in enumerate(rows))
+    check("Geophone gain, phase & counter", max(errors) < 150 and counters_ok,
+          f"10 Hz / 100 um/s reference; maximum count error {max(errors):.2f}; limit 150; counter wrap checked")
     return dict(passed=all(c["passed"] for c in checks), checks=checks, samples=sum(map(len, samples.values())),
                 recording_sha256=hashlib.sha256(data).hexdigest(), scope="modeled buses / actual Pi drivers")
 
