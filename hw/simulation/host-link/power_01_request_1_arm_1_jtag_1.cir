@@ -1,0 +1,18 @@
+T1 internal link: power_01_request_1_arm_1_jtag_1
+Vpi pi 0 0.0
+Vfpga fpga 0 3.3
+Vrequest request 0 0.0
+Varm arm 0 0.0
+Vselect select 0 0.0
+Vsignal signal 0 3.3
+Bapp appctrl 0 V=(v(pi)>3 && v(fpga)>3 && v(request)>2 && v(arm)>2 && v(select)<1) ? 1 : 0
+Bjtag jtagctrl 0 V=(v(pi)>3 && v(fpga)>3 && v(request)>2 && v(arm)>2 && v(select)>2) ? 1 : 0
+Sapp signal app appctrl 0 LINK
+Sjtag signal jtag jtagctrl 0 LINK
+.model LINK SW(Ron=10 Roff=1e12 Vt=.5 Vh=0)
+Rapp app 0 100k
+Rjtag jtag 0 100k
+.tran 1u 10u
+.measure tran app FIND v(app) AT=9u
+.measure tran jtag FIND v(jtag) AT=9u
+.end

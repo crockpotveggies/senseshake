@@ -1,7 +1,7 @@
 {
     "$schema": "https://schemas.kicad.org/erc.v1.json",
     "coordinate_units": "mm",
-    "date": "2026-09-25T16:18:40+0000",
+    "date": "2026-09-25T20:51:49+0000",
     "included_severities": [
         "error",
         "warning"
@@ -64,6 +64,21 @@
             "violations": []
         },
         {
+            "path": "/07-internal-link-page-01/",
+            "uuid_path": "/4ffaaa5d-c728-540d-9f0f-f1cafbdbe36e/f55d0f3b-26d4-538a-8ccf-75ecccdcccc0",
+            "violations": []
+        },
+        {
+            "path": "/07-internal-link-page-02/",
+            "uuid_path": "/4ffaaa5d-c728-540d-9f0f-f1cafbdbe36e/65de580d-7dc4-5932-bbdc-6b8ac6bc612b",
+            "violations": []
+        },
+        {
+            "path": "/07-internal-link-page-03/",
+            "uuid_path": "/4ffaaa5d-c728-540d-9f0f-f1cafbdbe36e/f82f33b6-c8aa-562f-9ebb-296d0f03a8b3",
+            "violations": []
+        },
+        {
             "path": "/08-trenz-JM1-page-01/",
             "uuid_path": "/4ffaaa5d-c728-540d-9f0f-f1cafbdbe36e/ba823ddc-bed9-58fe-8f46-6a34f5e93819",
             "violations": []
@@ -86,26 +101,6 @@
         {
             "path": "/09-fpga-power-page-01/",
             "uuid_path": "/4ffaaa5d-c728-540d-9f0f-f1cafbdbe36e/58728244-4824-519b-b11b-fd8c62cff40d",
-            "violations": []
-        },
-        {
-            "path": "/11-gpio-bank13-page-01/",
-            "uuid_path": "/4ffaaa5d-c728-540d-9f0f-f1cafbdbe36e/0a68b66e-46f9-566d-8fa0-82f08cfe212b",
-            "violations": []
-        },
-        {
-            "path": "/11-gpio-bank14-page-01/",
-            "uuid_path": "/4ffaaa5d-c728-540d-9f0f-f1cafbdbe36e/cd1a2a6e-223b-575c-aa50-3771ba06c09d",
-            "violations": []
-        },
-        {
-            "path": "/11-gpio-bank15-page-01/",
-            "uuid_path": "/4ffaaa5d-c728-540d-9f0f-f1cafbdbe36e/cc8377e1-4194-5465-9125-0712bf8981b8",
-            "violations": []
-        },
-        {
-            "path": "/11-gpio-bank16-page-01/",
-            "uuid_path": "/4ffaaa5d-c728-540d-9f0f-f1cafbdbe36e/1fa9dc0c-2a9e-50ef-9292-abeef45e1334",
             "violations": []
         }
     ],

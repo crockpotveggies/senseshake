@@ -18,7 +18,7 @@
   "mechanical": {
     "pi_to_hat_underside_mm": 27.179000000000002,
     "riser": "Samtec SSQ-120-02-G-D",
-    "conservative_clearance_mm": 7.179000000000002,
-    "limitations": "1 mm stack tolerance plus 1 mm cable envelope; actual cooler/harness not modeled"
+    "conservative_clearance_mm": 7.979000000000003,
+    "limitations": "1 mm seating tolerance plus 2.2 mm trimmed tail envelope; detailed selected cooler/support checks are in prefab-review.json"
   }
 }

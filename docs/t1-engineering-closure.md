@@ -1,3 +1,7 @@
+> T1-LINK supersedes the GPIO/ribbon and external JTAG assembly described below.
+> Power and geophone targets remain; see [current link](fpga-host-link.md) and
+> [stack assembly](stack-assembly.md). Historical counts are not current evidence.
+
 # T1 engineering closure
 
 **T1-GEO revision:** GNSS is removed; one external Racotech vertical geophone

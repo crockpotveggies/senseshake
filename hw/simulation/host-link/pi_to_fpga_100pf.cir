@@ -1,0 +1,10 @@
+T1 internal link: pi_to_fpga_100pf
+Vdrive source 0 PULSE(0 3.201 100n 5n 5n 500n 1u)
+Rdriver source damp 25
+Rseries damp sw 22
+Rswitch sw receiver 10
+Cload receiver 0 100p
+.tran .5n 900n
+.measure tran rise TRIG v(receiver) VAL=.9603 RISE=1 TARG v(receiver) VAL=2.2407 RISE=1
+.measure tran sample FIND v(receiver) AT=350n
+.end

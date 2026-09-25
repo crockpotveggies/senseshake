@@ -1,0 +1,309 @@
+{
+  "cases": [
+    {
+      "case": "power_00_request_0_arm_0_jtag_0",
+      "measured": {
+        "app": 3.3e-07,
+        "jtag": 3.3e-07
+      },
+      "passed": true
+    },
+    {
+      "case": "power_00_request_0_arm_0_jtag_1",
+      "measured": {
+        "app": 3.3e-07,
+        "jtag": 3.3e-07
+      },
+      "passed": true
+    },
+    {
+      "case": "power_00_request_0_arm_1_jtag_0",
+      "measured": {
+        "app": 3.3e-07,
+        "jtag": 3.3e-07
+      },
+      "passed": true
+    },
+    {
+      "case": "power_00_request_0_arm_1_jtag_1",
+      "measured": {
+        "app": 3.3e-07,
+        "jtag": 3.3e-07
+      },
+      "passed": true
+    },
+    {
+      "case": "power_00_request_1_arm_0_jtag_0",
+      "measured": {
+        "app": 3.3e-07,
+        "jtag": 3.3e-07
+      },
+      "passed": true
+    },
+    {
+      "case": "power_00_request_1_arm_0_jtag_1",
+      "measured": {
+        "app": 3.3e-07,
+        "jtag": 3.3e-07
+      },
+      "passed": true
+    },
+    {
+      "case": "power_00_request_1_arm_1_jtag_0",
+      "measured": {
+        "app": 3.3e-07,
+        "jtag": 3.3e-07
+      },
+      "passed": true
+    },
+    {
+      "case": "power_00_request_1_arm_1_jtag_1",
+      "measured": {
+        "app": 3.3e-07,
+        "jtag": 3.3e-07
+      },
+      "passed": true
+    },
+    {
+      "case": "power_01_request_0_arm_0_jtag_0",
+      "measured": {
+        "app": 3.3e-07,
+        "jtag": 3.3e-07
+      },
+      "passed": true
+    },
+    {
+      "case": "power_01_request_0_arm_0_jtag_1",
+      "measured": {
+        "app": 3.3e-07,
+        "jtag": 3.3e-07
+      },
+      "passed": true
+    },
+    {
+      "case": "power_01_request_0_arm_1_jtag_0",
+      "measured": {
+        "app": 3.3e-07,
+        "jtag": 3.3e-07
+      },
+      "passed": true
+    },
+    {
+      "case": "power_01_request_0_arm_1_jtag_1",
+      "measured": {
+        "app": 3.3e-07,
+        "jtag": 3.3e-07
+      },
+      "passed": true
+    },
+    {
+      "case": "power_01_request_1_arm_0_jtag_0",
+      "measured": {
+        "app": 3.3e-07,
+        "jtag": 3.3e-07
+      },
+      "passed": true
+    },
+    {
+      "case": "power_01_request_1_arm_0_jtag_1",
+      "measured": {
+        "app": 3.3e-07,
+        "jtag": 3.3e-07
+      },
+      "passed": true
+    },
+    {
+      "case": "power_01_request_1_arm_1_jtag_0",
+      "measured": {
+        "app": 3.3e-07,
+        "jtag": 3.3e-07
+      },
+      "passed": true
+    },
+    {
+      "case": "power_01_request_1_arm_1_jtag_1",
+      "measured": {
+        "app": 3.3e-07,
+        "jtag": 3.3e-07
+      },
+      "passed": true
+    },
+    {
+      "case": "power_10_request_0_arm_0_jtag_0",
+      "measured": {
+        "app": 3.3e-07,
+        "jtag": 3.3e-07
+      },
+      "passed": true
+    },
+    {
+      "case": "power_10_request_0_arm_0_jtag_1",
+      "measured": {
+        "app": 3.3e-07,
+        "jtag": 3.3e-07
+      },
+      "passed": true
+    },
+    {
+      "case": "power_10_request_0_arm_1_jtag_0",
+      "measured": {
+        "app": 3.3e-07,
+        "jtag": 3.3e-07
+      },
+      "passed": true
+    },
+    {
+      "case": "power_10_request_0_arm_1_jtag_1",
+      "measured": {
+        "app": 3.3e-07,
+        "jtag": 3.3e-07
+      },
+      "passed": true
+    },
+    {
+      "case": "power_10_request_1_arm_0_jtag_0",
+      "measured": {
+        "app": 3.3e-07,
+        "jtag": 3.3e-07
+      },
+      "passed": true
+    },
+    {
+      "case": "power_10_request_1_arm_0_jtag_1",
+      "measured": {
+        "app": 3.3e-07,
+        "jtag": 3.3e-07
+      },
+      "passed": true
+    },
+    {
+      "case": "power_10_request_1_arm_1_jtag_0",
+      "measured": {
+        "app": 3.3e-07,
+        "jtag": 3.3e-07
+      },
+      "passed": true
+    },
+    {
+      "case": "power_10_request_1_arm_1_jtag_1",
+      "measured": {
+        "app": 3.3e-07,
+        "jtag": 3.3e-07
+      },
+      "passed": true
+    },
+    {
+      "case": "power_11_request_0_arm_0_jtag_0",
+      "measured": {
+        "app": 3.3e-07,
+        "jtag": 3.3e-07
+      },
+      "passed": true
+    },
+    {
+      "case": "power_11_request_0_arm_0_jtag_1",
+      "measured": {
+        "app": 3.3e-07,
+        "jtag": 3.3e-07
+      },
+      "passed": true
+    },
+    {
+      "case": "power_11_request_0_arm_1_jtag_0",
+      "measured": {
+        "app": 3.3e-07,
+        "jtag": 3.3e-07
+      },
+      "passed": true
+    },
+    {
+      "case": "power_11_request_0_arm_1_jtag_1",
+      "measured": {
+        "app": 3.3e-07,
+        "jtag": 3.3e-07
+      },
+      "passed": true
+    },
+    {
+      "case": "power_11_request_1_arm_0_jtag_0",
+      "measured": {
+        "app": 3.3e-07,
+        "jtag": 3.3e-07
+      },
+      "passed": true
+    },
+    {
+      "case": "power_11_request_1_arm_0_jtag_1",
+      "measured": {
+        "app": 3.3e-07,
+        "jtag": 3.3e-07
+      },
+      "passed": true
+    },
+    {
+      "case": "power_11_request_1_arm_1_jtag_0",
+      "measured": {
+        "app": 3.29967,
+        "jtag": 3.3e-07
+      },
+      "passed": true
+    },
+    {
+      "case": "power_11_request_1_arm_1_jtag_1",
+      "measured": {
+        "app": 3.3e-07,
+        "jtag": 3.29967
+      },
+      "passed": true
+    },
+    {
+      "case": "pi_to_fpga_25pf",
+      "measured": {
+        "rise": 2.166964e-09,
+        "sample": 3.201
+      },
+      "passed": true
+    },
+    {
+      "case": "pi_to_fpga_100pf",
+      "measured": {
+        "rise": 4.849594e-09,
+        "sample": 3.201
+      },
+      "passed": true
+    },
+    {
+      "case": "pi_to_fpga_200pf",
+      "measured": {
+        "rise": 9.657282e-09,
+        "sample": 3.201
+      },
+      "passed": true
+    },
+    {
+      "case": "fpga_to_pi_25pf",
+      "measured": {
+        "rise": 2.265217e-09,
+        "sample": 3.201
+      },
+      "passed": true
+    },
+    {
+      "case": "fpga_to_pi_100pf",
+      "measured": {
+        "rise": 6.099502e-09,
+        "sample": 3.201
+      },
+      "passed": true
+    },
+    {
+      "case": "fpga_to_pi_200pf",
+      "measured": {
+        "rise": 1.220111e-08,
+        "sample": 3.201
+      },
+      "passed": true
+    }
+  ],
+  "scope": "32 settled rail/arm/request/mode cases and six lumped RC cases. Ideal behavioral switch logic, conservative 10-ohm on resistance, 22-ohm damping, 25/40-ohm drivers and 25-200 pF load. No transistor-level power-ramp, supervisor delay tolerance, PCB extraction, ringing, crosstalk or clock-rate qualification."
+}

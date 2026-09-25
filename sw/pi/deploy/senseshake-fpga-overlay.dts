@@ -1,0 +1,33 @@
+/dts-v1/;
+/plugin/;
+/* Optional Pi 4 T1-LINK interface. SPI0 remains owned by sensor acquisition.
+ * Do not combine with spi1/spi6 overlays. GPIO27 remains IMU1 INT.
+ * fpga.py selects spidev explicitly; this is not a kernel device binding.
+ */
+/ {
+    compatible = "brcm,bcm2711";
+    fragment@0 {
+        target = <&spi6_cs_pins>;
+        __overlay__ { brcm,pins = <18>; brcm,function = <1>; brcm,pull = <2>; };
+    };
+    fragment@1 {
+        target = <&spi6>;
+        __overlay__ {
+            #address-cells = <1>;
+            #size-cells = <0>;
+            num-cs = <1>;
+            cs-gpios = <&gpio 18 1>;
+            status = "okay";
+            spidev@0 {
+                compatible = "senseshake,fpga-userspace";
+                reg = <0>;
+                spi-max-frequency = <1000000>;
+                spi-cs-setup-delay-ns = <1000>;
+                spi-cs-hold-delay-ns = <1000>;
+                spi-cs-inactive-delay-ns = <1000>;
+                status = "okay";
+            };
+            spidev@1 { reg = <1>; status = "disabled"; };
+        };
+    };
+};

@@ -47,7 +47,7 @@ def supply_range(setpoint, tolerance, resistance, current):
     return setpoint * (1 - tolerance) - resistance * current, setpoint * (1 + tolerance)
 
 
-def clearance(gap, port_height=16, connector_height=2, cable_allowance=1,
+def clearance(gap, port_height=16, connector_height=2.2, cable_allowance=0,
               stack_tolerance=1):
     return gap - port_height - connector_height - cable_allowance - stack_tolerance
 
@@ -96,7 +96,7 @@ def main():
                    limitations="30 milliohms includes positive AND ground paths, fuse and contacts; must be measured"),
         mechanical=dict(pi_to_hat_underside_mm=gap, riser="Samtec SSQ-120-02-G-D",
                         conservative_clearance_mm=clearance(gap),
-                        limitations="1 mm stack tolerance plus 1 mm cable envelope; actual cooler/harness not modeled"))
+                        limitations="1 mm seating tolerance plus 2.2 mm trimmed tail envelope; detailed selected cooler/support checks are in prefab-review.json"))
     assert 3.201 < low < high < 3.399
     assert clearance(gap) >= 3
     (BOARD / "engineering.json").write_text(json.dumps(report, indent=2) + "\n")

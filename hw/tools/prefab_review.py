@@ -130,7 +130,7 @@ def geometry_review(board):
                 for name,plane in planes.items():hits[name]+=plane.Contains(q)
         coverage[net]=dict(samples=samples,over_ground_by_plane=hits,signal_layers=sorted(layers))
     module=[30,8,80,48]
-    fit={ref:dict(courtyard_mm=courtyard(ref),module_xy_separation_mm=separation(courtyard(ref),module)) for ref in ('J90','J83','J84')}
+    fit={ref:dict(courtyard_mm=courtyard(ref),module_xy_separation_mm=separation(courtyard(ref),module)) for ref in ('J90','J83')}
     fit['J90'].update(header_installed_height_mm=9.2,plug_mpn='1803581',
                       plug_dimensions_mm=[12.22,16.1,11.1],
                       cable_service_envelope_verified=False)
@@ -147,13 +147,13 @@ def geometry_review(board):
                 disposition='shorten protection paths / put final filter at ADC before layout freeze'))
     assert not findings, findings
     from assembly_fit import review
-    from assembly_fit import default_obstacles, SPACER_BOXES, GUIDE_BOX, box_gap
+    from assembly_fit import default_obstacles
     placements={ref:(*xy(fp.GetPosition()),fp.GetOrientationDegrees(),
                     'back' if fp.IsFlipped() else 'front') for ref,fp in fps.items()}
     obstacles=default_obstacles(placements)
     for ref,fp in fps.items():
         if fp.IsFlipped():
-            height=2 if ref in ('J86','J87','J88','J89') else (1.1 if ref=='D90' else .9)
+            height=1.2 if ref.startswith('U10') else (1.1 if ref=='D90' else .9)
             x0,y0,x1,y1=courtyard(ref)
             obstacles[ref]=(x0,y0,-1.6-height,x1,y1,-1.6)
         for q in fp.Pads():
@@ -166,25 +166,15 @@ def geometry_review(board):
         x,y=xy(fps[ref].GetPosition())
         obstacles[ref+'_screw_head']=(x-2.75,y-2.75,-3.6,x+2.75,y+2.75,-1.6)
     assembly=review(placements,obstacles)
-    # Check the offset spacer/guide themselves against the actual board as well.
-    # Mating top/bottom bosses intentionally touch their mounting-hole surfaces.
-    solid_margins={}
-    for name,box in {**SPACER_BOXES,'guide':GUIDE_BOX}.items():
-        if name=='upper_arm':box=(*box[:5],box[5]+.1)  # Insulation film envelope.
-        solid_margins[name]=min(box_gap(box,other) for other in obstacles.values())
-        assert solid_margins[name]>0,(name,'board interference',solid_margins[name])
-    assembly['spacer_and_guide_to_board_margin_mm']=solid_margins
     return dict(paths=paths,findings=findings,analog_reference_plane_samples=coverage,connectors=fit,
         local_ground_stitches=ground_returns,
         selected_assembly=assembly,
         module_xy_envelope_mm=module,module_surface_gap_mm=8,
         pi_to_hat_underside_mm=27.179,pi_assumed_obstruction_mm=16,
-        guide_below_hat_underside_mm=-1.6-GUIDE_BOX[2],
-        guide_to_pi_port_after_1mm_allowance_mm=assembly["guide_to_pi_port_margin_mm"],
         limits=['Copper path lengths omit pad interiors and via barrel length',
                 'Ground centerline samples are a screen for voids, not field-solver signoff',
-                'Plug dimensions are manufacturer data; connectors and flex are bounded envelopes, not supplier mated solids',
-                'Selected Pi/heatsink/JTAG/plug dimensions are checked in selected_assembly; selected flex/spacer envelopes pass; first-article fit remains unmeasured'])
+                'Plug dimensions are manufacturer data; connectors are bounded envelopes, not supplier mated solids',
+                'Selected Pi/heatsink/plug and four straight supports checked; first-article fit remains unmeasured'])
 
 
 def main():
@@ -214,7 +204,7 @@ def main():
     for ref,(mpn,footprint) in packages.items():
         assert rows[ref]['MPN']==mpn and rows[ref]['Footprint']==footprint,(ref,rows[ref])
     report=dict(scope='pre-fab engineering review; no physical qualification',
-        disposition='analog path and ribbon clearance CAD checks closed; physical harness and acquisition-throughput qualification remain open',
+        disposition='analog and internal-link stack reviewed; physical power/noise/fit and link throughput remain unqualified',
         board_sha256=before,physical_pin_checks=pin_checks,purchasing_package_checks=len(packages),
         analog=analog_review(),layout_and_fit=geometry_review(board))
     assert hashlib.sha256(path.read_bytes()).hexdigest()==before

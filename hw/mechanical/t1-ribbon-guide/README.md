@@ -1,3 +1,9 @@
+# Retired mechanical design
+
+This guide and offset spacer belong to revision `64d4190`. T1-LINK removes
+the external connectors and uses four straight supports. These archived assets
+are not part of the current assembly or fabrication package.
+
 # T1 ribbon spacer and guide
 
 This assembly replaces the **south-right straight Pi spacer** when fitting

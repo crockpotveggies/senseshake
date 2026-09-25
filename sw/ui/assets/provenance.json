@@ -1,10 +1,10 @@
 {
   "kicad": "9.0.9",
   "sha256": {
-    "hw/boards/shakesense-trenz-hat/shakesense-trenz-hat.kicad_pcb": "fbcd197637ae1cb691441231a8b1f9304bda48d3985eb2daeca91d58a873cf1a",
-    "hw/layout-trenz.json": "73c4049e1796eef6ba7a31f2acdab2a4efc229a9d73d0bd065659f7b6a10d540",
+    "hw/boards/shakesense-trenz-hat/shakesense-trenz-hat.kicad_pcb": "e3791aad302061b795620a096a441c869c697034ebc23d58bd2f693ed1763b79",
+    "hw/layout-trenz.json": "a87906b5cd4d4d42d7168be087767626e46b431e71441f83b6f81c53aee49e66",
     "hw/layout.json": "fe4a66fe29c0a9c6474ebf016875aa3a4faf05717ef60251079794c619eb7a5b",
-    "sw/ui/assets/t1.glb": "47ac9219ffe015338ab291c0a6d386e9b5e85091752cfabf2f7594be96c4e629"
+    "sw/ui/assets/t1.glb": "62ee83adb880cda320b2331238402fb75efd86f48bd5cb5116adcb93d01955ca"
   },
-  "metadata_review": "Re-exported after J87 and J83 ribbon-clearance relocation; sensor positions and geophone analog copper preserved. Updated KiCad service assembly includes guided flex paths and windowed spacer."
+  "metadata_review": "T1-LINK: actual KiCad board re-exported after internal SPI/UART/JTAG routing; J84-J89 and FFC visualization envelopes removed; geophone analog copper preserved; four straight Pi supports."
 }

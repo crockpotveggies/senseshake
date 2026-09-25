@@ -3,11 +3,10 @@
 Current priority is the [sensor development plan](docs/sensor-development-plan.md)
 on the Pi/T1/Trenz stack. Defer Coldfoot ASIC/runtime/RTL integration. Keep sensor
 software independent of a configured FPGA; preserve the existing FPGA interfaces.
-The next T1 revision follows docs/fpga-host-link-plan.md: reserve six internal
-QSPI signals, retain UART, share four pins with isolated Pi-driven JTAG, and
-remove external expansion J85-J89 and its ribbons/guide. This supersedes the
-155-breakout requirement. The routed CAD still represents the prior revision;
-do not describe the planned link as implemented. Preserve vendor GPIO/ground
+The T1-LINK revision follows docs/fpga-host-link-plan.md: six internal
+QSPI signals, retained UART and four shared pins for isolated Pi-driven JTAG.
+External J84-J89 and their ribbons/guide are removed. This supersedes the
+155-breakout requirement. Keep the circuit, routed CAD, model and validation evidence synchronized. Preserve vendor GPIO/ground
 fixtures and audit all module contacts, including deliberate no-connects, when
 implementing the revision. Keep sensors and the 85 x 56 mm outline.
 T1 uses a provisional eight-layer 1+6+1 HDI stack and a complete native SES
@@ -31,8 +30,9 @@ authoring inputs. Do not silently reroute or rewrite checked CAD during tests.
 The accelerometer HAT uses Pi drivers/runtime software; it has no separate
 microcontroller firmware. Firmware belongs to the remote USB sensor head.
 The Trenz variant needs an FPGA bitstream. Pi acquisition/simulation and bounded
-recovery are implemented; USB-head firmware, FPGA bitstreams and physical
-qualification remain pending. Do not claim emulation or
+recovery are implemented; USB-head firmware and physical qualification remain pending. A T1-LINK
+SPI echo bitstream is implemented and simulated; accelerated models and native
+quad remain future work. Do not claim emulation or
 fabrication readiness from CAD/SPICE checks.
 
 After moving paths or changing circuits, run `python environment/check_project.py`,
@@ -77,10 +77,6 @@ check. The sensor software profile includes the controller tests. Update the
 workbench guide and review model provenance after changing board display assets.
 
 The T1-GEO analog path targets are enforced by prefab_review.py. Preserve local
-filter/protection routing and ground stitches. The current CAD's four-flex
-assembly is superseded by the planned internal link. Remove its cable/guide
-checks with the corresponding hardware, and check four straight Pi supports
-against the actual board in assembly_fit.py and prefab_review.py. Until the
-revision is implemented, retain the baseline checks and label its renders as
-the previous design. ADC supply-pad through-vias need filled/capped
+filter/protection routing and ground stitches. Four straight Pi supports replace the previous flex-cable assembly;
+check the actual board in assembly_fit.py and prefab_review.py. ADC supply-pad through-vias need filled/capped
 processing in the fabrication notes.

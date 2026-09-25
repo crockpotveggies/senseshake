@@ -113,7 +113,7 @@ def schematic(name,spec,folder):
         (folder/file).write_text(header+'\n(lib_symbols\n'+'\n'.join(libs)+')\n'+'\n'.join(body)+'\n)',encoding='utf-8')
     note='Atopile-derived review schematic - prototype, not released.\nThe Pi hosts acquisition and Coldfoot processing; the USB head has a local MCU.\nGlobal net labels connect functional sheets.'
     if name=='shakesense-trenz-hat':
-        note='Atopile-derived review schematic - T1 geophone / GPIO prototype, not released.\nPi sensor acquisition; 155 expansion GPIOs at 3.3 V; Coldfoot integration deferred.\nGlobal net labels connect functional sheets.'
+        note='Atopile-derived review schematic - T1 geophone / internal-link prototype, not released.\nPi sensor acquisition; SPI6 / quad wiring, UART and switched Pi JTAG; Coldfoot integration deferred.\nGlobal net labels connect functional sheets.'
     rootbody.append(f'(text {q(note)} (at 30 25 0) {effects(1.5,"left")} (uuid {uid(name+"note")}))')
     (folder/(name+'.kicad_sch')).write_text(f'(kicad_sch (version 20230121) (generator eeschema) (uuid {root}) (paper "A1") (lib_symbols)\n'+'\n'.join(rootbody)+f'\n(sheet_instances (path "/" (page "1"))))',encoding='utf-8')
 

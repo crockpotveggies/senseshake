@@ -1,51 +1,51 @@
 {
-  "date_utc": "2026-09-25T16:19:04.812356+00:00",
-  "revision": "T1-GEO ribbon clearance",
+  "date_utc": "2026-09-25T20:52:49.608146+00:00",
+  "revision": "T1-LINK internal SPI/QSPI reservation, UART and Pi JTAG",
   "portable_lab": {
     "owner": "senseshake-lab-v1",
-    "id": "20260925T161718Z-0cb993da",
+    "id": "20260925T205022Z-ba3afc04",
     "profile": "full",
     "status": "passed",
     "steps": [
       {
         "name": "build-hat",
         "exit_code": 0,
-        "seconds": 12.59
+        "seconds": 12.6
       },
       {
         "name": "constraints-hat",
         "exit_code": 0,
-        "seconds": 14.05
+        "seconds": 14.06
       },
       {
         "name": "build-field_head",
         "exit_code": 0,
-        "seconds": 6.78
+        "seconds": 7.34
       },
       {
         "name": "constraints-field_head",
         "exit_code": 0,
-        "seconds": 5.23
+        "seconds": 5.33
       },
       {
         "name": "build-trenz_hat",
         "exit_code": 0,
-        "seconds": 16.19
+        "seconds": 15.27
       },
       {
         "name": "constraints-trenz_hat",
         "exit_code": 0,
-        "seconds": 16.84
+        "seconds": 21.55
       },
       {
         "name": "reject-overvoltage",
         "exit_code": 0,
-        "seconds": 3.92
+        "seconds": 4.03
       },
       {
         "name": "hardware-regressions",
         "exit_code": 0,
-        "seconds": 0.31
+        "seconds": 0.26
       },
       {
         "name": "check_circuit",
@@ -55,32 +55,32 @@
       {
         "name": "check_design",
         "exit_code": 0,
-        "seconds": 2.22
+        "seconds": 2.35
       },
       {
         "name": "check_trenz",
         "exit_code": 0,
-        "seconds": 2.06
+        "seconds": 2.23
       },
       {
         "name": "t1_engineering",
         "exit_code": 0,
-        "seconds": 0.36
+        "seconds": 0.42
       },
       {
         "name": "prefab_review",
         "exit_code": 0,
-        "seconds": 0.72
+        "seconds": 0.62
       },
       {
         "name": "simulate",
         "exit_code": 0,
-        "seconds": 4.52
+        "seconds": 4.87
       },
       {
         "name": "simulate_trenz",
         "exit_code": 0,
-        "seconds": 0.36
+        "seconds": 0.41
       },
       {
         "name": "simulate_geophone",
@@ -90,18 +90,28 @@
       {
         "name": "simulate_geophone_review",
         "exit_code": 0,
-        "seconds": 0.47
+        "seconds": 0.46
+      },
+      {
+        "name": "simulate_host_link",
+        "exit_code": 0,
+        "seconds": 0.21
+      },
+      {
+        "name": "fpga-loopback-rtl",
+        "exit_code": 0,
+        "seconds": 1.17
       },
       {
         "name": "sensor-contracts",
         "exit_code": 0,
-        "seconds": 9.39
+        "seconds": 10.13
       }
     ],
-    "seconds": 96.65
+    "seconds": 103.98
   },
   "toolchain": {
-    "image_id": "sha256:a7a6b65daed9ec5694207caf00b9f11094941a41a3e554a1a37b0046e1fd48a4",
+    "image_id": "sha256:995a1acd50ed2dc7c38540c825dcc05acc5bef35571dd3bdf81329f1347e50a2",
     "kicad": "9.0.9",
     "ngspice": "******\n** ngspice-39 : Circuit level simulation program\n** The U. C. Berkeley CAD Group\n** Copyright 1985-1994, Regents of the University of California.\n** Copyright 2001-2022, The ngspice team.\n** Please get your ngspice manual from http://ngspice.sourceforge.net/docs.html\n** Please file your bug-reports at http://ngspice.sourceforge.net/bugrep.html\n** Creation Date: Sun Feb  5 13:44:35 UTC 2023\n******",
     "system_python": "3.11.2 (main, Apr 28 2025, 14:11:48) [GCC 12.2.0]",
@@ -110,59 +120,48 @@
     "buf": "1.73.0",
     "protobuf": "5.29.6"
   },
+  "hardware_regressions": 28,
+  "software_regressions": 169,
+  "host_link_spice_cases": 38,
+  "fpga_rtl_checked_transactions": 23,
   "route_replay": {
-    "tracks_and_vias": 7485,
+    "tracks_and_vias": 7522,
     "copper_identical": true,
     "drc_violations": 0,
-    "unconnected_items": 0,
-    "geophone_signal_copper_preserved": true,
-    "physical_pad_net_map_unchanged": true,
-    "changed_component_positions": [
-      "J83",
-      "J87"
-    ],
-    "microvias": 46,
-    "schematic_links_match_replay": true
+    "unconnected_items": 0
   },
-  "software_tests": 152,
-  "hardware_regressions": 26,
-  "spice_cases": 64,
-  "geophone_spice_cases": 23,
-  "ui_modeled_hat_checks": {
-    "passed": 10,
-    "total": 10,
+  "fpga_implementation": {
+    "tool": "Vivado 2025.2",
+    "part": "xc7a200tfbg484-1",
+    "clock_mhz": 50,
+    "setup_slack_ns": 10.431,
+    "hold_slack_ns": 0.105,
+    "bitstream_generated": true,
+    "bitstream_sha256": "0a47ff6958b69e76ea49ea15465a27f047ace8fff0297b600da1fea2296a0c6a",
+    "source_sha256": {
+      "sw/fpga/rtl/t1_link.sv": "2f12c75805f0d65b0d7a7479affc5a60ee61dae43e5111629e89d66ee3a9245f",
+      "sw/fpga/t1.xdc": "0c94f70c0455228b94400c13edca6500d695ba4a7f8a7c79b468310fe09dcd85",
+      "sw/fpga/build.tcl": "bbc123d2d5191a55928aaca2d5847411ae6b8e0eb107a5044ff143ed9a12107e"
+    },
+    "limits": [
+      "External SPI pins are asynchronous and oversampled; false paths apply only to first synchronizer stages and asynchronous reset",
+      "DQ2/DQ3 are unconnected and optimized out; UNUSEDPIN PULLNONE leaves reserved package pins undriven",
+      "Not programmed onto hardware; Pi/Linux ownership and signal timing require physical bring-up"
+    ]
+  },
+  "workbench": {
+    "http_glb_pass": true,
+    "browser_signal_checks": 10,
     "samples": 3672,
-    "browser_review": "Updated GLB, geophone selection/highlight and chart inspected; browser signal test passed 10/10",
-    "http_smoke": "passed"
+    "physical_hardware_connected": false
   },
-  "scope": "CAD and modeled-bus evidence for the selected short-tip custom FPC, spacer and guide assembly. First-article harness fit, noise/power/timing, FPGA bitstream and absolute UTC qualification remain pending.",
-  "sha256": {
-    "hw/boards/shakesense-trenz-hat/shakesense-trenz-hat.kicad_pcb": "fbcd197637ae1cb691441231a8b1f9304bda48d3985eb2daeca91d58a873cf1a",
-    "hw/boards/shakesense-trenz-hat/shakesense-trenz-hat.ses": "9531107ad413d3837e5a648a117c0ffe6071be7cec146fd82259143b2065ee4e",
-    "hw/elec/TZ_TZ_POWER.kicad_mod": "72eb4d3461b3c05dfbaabdf3c6dea45646555214629748b9860591d27e49a953",
-    "hw/elec/geophone_parts.ato": "3785ecc66488d3f8b1753a9d2863e83fd9b3bcf2730ab72c1b48044b1768a156",
-    "hw/elec/hat_trenz.ato": "330e2476fa31ca0e00c4e7e965e9dd12559728337474f914329e0b0611cee2a8",
-    "hw/layout-trenz.json": "73c4049e1796eef6ba7a31f2acdab2a4efc229a9d73d0bd065659f7b6a10d540",
-    "hw/mechanical/t1-ribbon-guide/README.md": "a5bcafa4b5c74e7fa809fc9f7dec8d48e833eac595eb04151ae8d51558b6a58b",
-    "hw/mechanical/t1-ribbon-guide/assembly-layout.png": "e1336223275bf17a637a647bca86c4c7e1f3a123683f2ad2a8604d15b4d5a89a",
-    "hw/mechanical/t1-ribbon-guide/assembly-layout.svg": "42b7b3929f412b7e95df56522123efce1493ee71e8043e65f823b9df22fdafd7",
-    "hw/mechanical/t1-ribbon-guide/cad-provenance.json": "fc9ebd590759c2f5dc0a79441e70022cebaee6d6001c5725220e357fcc10c984",
-    "hw/mechanical/t1-ribbon-guide/offset-spacer.step": "442730848acd1db173284252090762b4ce4d25958d219cf978917d300d18b807",
-    "hw/mechanical/t1-ribbon-guide/offset-spacer.stl": "e7b06a624caf17ba2aaf06fc10bac2d8736307a7a9032e50704bab8d4da3fcb3",
-    "hw/mechanical/t1-ribbon-guide/ribbon-guide.step": "65b9d31651bdff8273c223eb7cb2b0adca75d1f510584ce8d8f63c79148a512a",
-    "hw/mechanical/t1-ribbon-guide/ribbon-guide.stl": "351d5cc3d84b4ec5364a8de43de85d76e25fe8fda46fbeef9157529e39d9a23c",
-    "hw/tests/test_prefab_review.py": "816c0e67bb94840922205b7e9f7cac99d5b212ac408d1d062aee8a21f23a0730",
-    "hw/tools/assembly_fit.py": "83ca501e9a1218427face6d3d358fd7183f6117b174632b43da045decdf37dcf",
-    "hw/tools/prefab_review.py": "baf27b20b080565cb3791c5a698795be100afa19fa3340ab4a30891fe0839507",
-    "hw/tools/ribbon_drawing.py": "269a416cea0d55a228bae6e3682359211a5953452fff982adcfbe288c1a2338c",
-    "hw/tools/ribbon_mechanics.py": "496ee6ed9155ed62595854ec1d1fe72be96b843469c0bf4d2baf30375335f011",
-    "sw/ui/assets/t1.glb": "47ac9219ffe015338ab291c0a6d386e9b5e85091752cfabf2f7594be96c4e629"
-  },
-  "lab_input_manifest": {
+  "sensor_analog_copper_preserved": true,
+  "physical_qualification": false,
+  "input_sha256": {
     "docs/coldfoot-run1-map.csv": "10938d80eca6bcbcbb6f5e25946a09673b2fc57e7474604de226fd90d6972b7e",
     "docs/run1-module-pin-audit.csv": "0fe947719439d13539994147ae17845ee8a907730e03e6b40b22c3db0eade9c4",
     "docs/run2-module-pin-audit.csv": "43a621fa107cbc391b02f3d561cedd0a025c69478f5e534cb6b3e70cfc0c5d98",
-    "docs/trenz-gpio-breakout.csv": "e7c9be9b42e760036b92a776c42636300b5086f4f722aae55ac24009c641597f",
+    "docs/trenz-gpio-breakout.csv": "b72e76564aba58665938896676d2452200e7d91f565b7a9b59223b1f5e1d7e3b",
     "docs/trenz-gpio-module.csv": "06edf865a7137677dd498760151a15707787668860f3985e5eed24d8143f60f9",
     "docs/trenz-ground-module.csv": "3e32572a202d810b8146a7e07001d414fbe79fa5f6172654a67dd88d29b8443d",
     "hw/ato.yaml": "bc780e2aff9911646fe5612ffd6624b3d85d32cfc20de2ca9c36857194adc461",
@@ -200,7 +199,7 @@
     "hw/boards/shakesense-hat/shakesense-hat.kicad_pro": "ec66962e85b9a518a3bb804946185ce676b3d78d00c3adb6b1527d181260d2e6",
     "hw/boards/shakesense-hat/shakesense-hat.kicad_sch": "0da15dcd0bc0c6c5f6f41d26139d0126f025491f61b374a568162e0629eef680",
     "hw/boards/shakesense-hat/sym-lib-table": "73261d1ebdc99e14a430d8e30cde51c0378c89994042a4e9e0bd20ca362f9187",
-    "hw/boards/shakesense-trenz-hat/01-host-power-page-01.kicad_sch": "3642c94a8baedb5db0589f74944be6f50132fad8b3d272fefa48feda5a8e165c",
+    "hw/boards/shakesense-trenz-hat/01-host-power-page-01.kicad_sch": "1c34b144e500f124633381b9442efeff463db6ea23dcc6e3ee80ab2892a659dd",
     "hw/boards/shakesense-trenz-hat/02-motion-array-page-01.kicad_sch": "d2cf0f6cee0b0cca2c85859ed5b7bafe890431697d2ca8d8f87c4a5252b7d15c",
     "hw/boards/shakesense-trenz-hat/02-motion-array-page-02.kicad_sch": "8463453c62bf583f29b4306519a63b191f7ca447d366a3fd8f511ea2b96e33d9",
     "hw/boards/shakesense-trenz-hat/03-geophone-page-01.kicad_sch": "8714e726346f8ec1c05866a015140e160df87e3d79f8cc9fe1a3355b4ac131c4",
@@ -210,22 +209,21 @@
     "hw/boards/shakesense-trenz-hat/06-supply-isolation-page-01.kicad_sch": "5b9a6418aed89fa1cb57e0d5eeeeb9dfaa25e44c333d2524944dad24b6a294c3",
     "hw/boards/shakesense-trenz-hat/06-supply-isolation-page-02.kicad_sch": "a7b25a90052305000138791a51a58237bdbc60c1a396be63f79c4587c64c5020",
     "hw/boards/shakesense-trenz-hat/07-fpga-host-isolation-page-01.kicad_sch": "f53a5bf968b8ef390d7c4a9769436fedbe54fb810fc4f1635eb56ad12d02a904",
-    "hw/boards/shakesense-trenz-hat/08-trenz-JM1-page-01.kicad_sch": "3d2e89851054211f9d0a178672aa618632cf5be252abfc0f1b61e0d866c6164c",
-    "hw/boards/shakesense-trenz-hat/08-trenz-JM2-page-01.kicad_sch": "29ca34e6eefd01b745b0403836c4551961b710a5262d8fd325732b972db18a4e",
-    "hw/boards/shakesense-trenz-hat/08-trenz-JM3-page-01.kicad_sch": "2cff528c37d02b3e3c491157a898cb27289978ce99bc897cc2c4f08f8fffff09",
-    "hw/boards/shakesense-trenz-hat/08-trenz-carrier-page-01.kicad_sch": "d358f8beb437014bd6ef40525d7ff435f3777c1af5ce27d861827460ef2965e8",
+    "hw/boards/shakesense-trenz-hat/07-internal-link-page-01.kicad_sch": "7e8e1f80b39b08e2eefbe203af5e80fffab21953b31f21e141c0c30330aed608",
+    "hw/boards/shakesense-trenz-hat/07-internal-link-page-02.kicad_sch": "3123371dbd5e02092e7aab5995571df8d0c94718240ae22b60b196212d32a339",
+    "hw/boards/shakesense-trenz-hat/07-internal-link-page-03.kicad_sch": "9a69dfb234e53409aa411882c80c0f788456eeda8d887b2445573639b54ac937",
+    "hw/boards/shakesense-trenz-hat/08-trenz-JM1-page-01.kicad_sch": "9f5faf40e4cc7e7e3f06b3f17411ce6d87dc476131e0b175a9dae59547801703",
+    "hw/boards/shakesense-trenz-hat/08-trenz-JM2-page-01.kicad_sch": "e1b62a7c6888ffb5273f76deadc275c5947e42dbd19a739bd43b61fa15e5a91b",
+    "hw/boards/shakesense-trenz-hat/08-trenz-JM3-page-01.kicad_sch": "39249fa66dc4931ab5b141c92701ca1ce83f11247342d499d9b671c0b83d1100",
+    "hw/boards/shakesense-trenz-hat/08-trenz-carrier-page-01.kicad_sch": "d2d330e68dd69b83ff0d20b46bc863ec7a917e9ccd06deb3546c5b044ec0f96f",
     "hw/boards/shakesense-trenz-hat/09-fpga-power-page-01.kicad_sch": "67b6938dd291bf8a43d3cceeacd2b5cde70d4bf2037173522918a11232f4159a",
-    "hw/boards/shakesense-trenz-hat/11-gpio-bank13-page-01.kicad_sch": "5edc1d44cb1135b93fb1379e17a00330ee2d802559c1c0ad06b9576597bf7e9a",
-    "hw/boards/shakesense-trenz-hat/11-gpio-bank14-page-01.kicad_sch": "578e2e1052e2a3b98e8476ef266d1de6a56c1272726821cd76ff04b0baa81f2c",
-    "hw/boards/shakesense-trenz-hat/11-gpio-bank15-page-01.kicad_sch": "4a76af3d7971f928472302bd6ed020815b4b4c4b518dd7d25a39217fa983a797",
-    "hw/boards/shakesense-trenz-hat/11-gpio-bank16-page-01.kicad_sch": "55ff284825c101c4d41dda7577c6c525e5ef290b504d924336cc5a86993ed728",
-    "hw/boards/shakesense-trenz-hat/ShakeSense.kicad_sym": "53554c1c9ecb3962c53feda1f0fe937fc4e939847c35e4d47e3dfd24fe08b292",
-    "hw/boards/shakesense-trenz-hat/bom.csv": "aae96a1d22028447737a161fa195939587a6a16b725c4642a4db3134e161f680",
-    "hw/boards/shakesense-trenz-hat/electrical.json": "eaabf57e8911f651bef5ba36b77ac991f01203ee46192528f80880bafa9f030f",
+    "hw/boards/shakesense-trenz-hat/ShakeSense.kicad_sym": "50db5bd37cf7fa408132ebdb49c7d9bbd47205e95050fdd1878d23be3a70d1c7",
+    "hw/boards/shakesense-trenz-hat/bom.csv": "26f1cba291f2adbfec346ef117e57f5a7d65dfee44d49380e1e36db40ee485cb",
+    "hw/boards/shakesense-trenz-hat/electrical.json": "4f227aef430387e965cc3a4d4aab3f5673c904943239d015d8517149387c6cd5",
     "hw/boards/shakesense-trenz-hat/fp-lib-table": "bb7c59bbb74f047466d87a84a216e678fe77d5cd12552564803ff4e3b42d63ed",
-    "hw/boards/shakesense-trenz-hat/shakesense-trenz-hat.kicad_pcb": "fbcd197637ae1cb691441231a8b1f9304bda48d3985eb2daeca91d58a873cf1a",
+    "hw/boards/shakesense-trenz-hat/shakesense-trenz-hat.kicad_pcb": "e3791aad302061b795620a096a441c869c697034ebc23d58bd2f693ed1763b79",
     "hw/boards/shakesense-trenz-hat/shakesense-trenz-hat.kicad_pro": "3eb0a2cc76cf134bc5f6dfb7c4baa9c3f3e21e9faefefe1b49924835fec68e70",
-    "hw/boards/shakesense-trenz-hat/shakesense-trenz-hat.kicad_sch": "c9ddc13b2b6c0d37ec8b6a4c8bda83cb0e12e6922d735050865e0e56fb983758",
+    "hw/boards/shakesense-trenz-hat/shakesense-trenz-hat.kicad_sch": "ca9a2370ad774fbc44ebaeb19a3b7d018e373d49a9ec14c3a45ec51816dbdbdd",
     "hw/boards/shakesense-trenz-hat/sym-lib-table": "73261d1ebdc99e14a430d8e30cde51c0378c89994042a4e9e0bd20ca362f9187",
     "hw/elec/Capacitor_SMD__C_0402_1005Metric.kicad_mod": "175ecc7fd401554c6f5d160e85603e58544be5b93f7de8c18d63e09b73ff4c45",
     "hw/elec/Capacitor_SMD__C_0603_1608Metric.kicad_mod": "fdb53e4ae0a5030d2863a19d27fe145470374583a6b28bd9d4f3e08bd6776054",
@@ -256,6 +254,7 @@
     "hw/elec/Package_TO_SOT_SMD__SOT-23-6.kicad_mod": "1fe0d498d37775ac58dde3a7575dd3c57f540123cdba4986a287ad88d51ea817",
     "hw/elec/Package_TO_SOT_SMD__SOT-23.kicad_mod": "ac310d5cc55c4b3a0c0521df85ab314c20d88db89b0da62bb99d93d2ca43c445",
     "hw/elec/Package_TO_SOT_SMD__SOT-323_SC-70.kicad_mod": "5a7256f9d77b480f92cf9cf4c5704930469b6657ad6418622c93f14af9eff2f6",
+    "hw/elec/Package_TO_SOT_SMD__SOT-353_SC-70-5.kicad_mod": "380e60c242344d0b0ebd8ebedf37550e4177a56561a7d3605ad47478544db031",
     "hw/elec/Package_TO_SOT_SMD__SOT-363_SC-70-6.kicad_mod": "55dbb6311c9d8502fa0bfc82dc701b56babaab7661333ea43f8a7acf9e8ac67b",
     "hw/elec/Package_TO_SOT_SMD__TSOT-23-6.kicad_mod": "7f3484f28ceb5242885404185b71b5b57c16cc63c6f0b73adf6f32fbc4afed1a",
     "hw/elec/RF_GPS__ublox_MAX.kicad_mod": "b94ef740c1c501e8ed54f327d0ba7f04c3791a52af652c220c57a7fc34e7b113",
@@ -278,7 +277,8 @@
     "hw/elec/field_head.ato": "c8bc4aa4fc69016cdb682f4040c3a033f333e5654b05a43de1a8ca07e8588d72",
     "hw/elec/geophone_parts.ato": "3785ecc66488d3f8b1753a9d2863e83fd9b3bcf2730ab72c1b48044b1768a156",
     "hw/elec/hat.ato": "53833951970f385c5b5e89cbc7be92281222cc035e86675435ff87b0f344e9a1",
-    "hw/elec/hat_trenz.ato": "330e2476fa31ca0e00c4e7e965e9dd12559728337474f914329e0b0611cee2a8",
+    "hw/elec/hat_trenz.ato": "5b7de99ad57fb24a4b4ec42d4ea852449943f9362a196b29ad6adfd6bf0996ba",
+    "hw/elec/host_link_parts.ato": "da0f3dace9ca82e8b56f9cb7a179d791146a3550824c5f3f21cd0f8ac0b43b7f",
     "hw/elec/parts.ato": "b6f7e0d0c7cea1e41c02b4dd0d83f91d0b2fa2710ef590d519cb9c46a24022f5",
     "hw/elec/symbols/CF_C60.kicad_sym": "15cd3b7d2b4d6faeae0bfde97e69892c3e0d567dc92a997980fdd779978f69dc",
     "hw/elec/symbols/CF_C61.kicad_sym": "e61d1f89ef8e19c204f951e564a8c2c9c2d730cd6cff3105489b689826ebb2d8",
@@ -373,6 +373,11 @@
     "hw/elec/symbols/GEO_R1K.kicad_sym": "148cbd10aabe69fcafc2b65f89cc3edfa3a31c80f5a4ac3c9c0b72c8dfa9d946",
     "hw/elec/symbols/GEO_R1M.kicad_sym": "b4ec5289d3b2a25009df75a0d86e748133349354642433e6c5734e742633c072",
     "hw/elec/symbols/GEO_R22.kicad_sym": "ce1e32802e0ebbcff613b65bb917455c824e3233aa42eb5f51dea138b63870cc",
+    "hw/elec/symbols/LINK_AND.kicad_sym": "d77cc4579da7034e35a4fa44e882c8d7b0569c1d47ea939765a05e95caea2abb",
+    "hw/elec/symbols/LINK_IO.kicad_sym": "4379c31e15cc4fd2a44cbb99022ce3b6a1b6b961ea6c145ffb68a5d42f20f25f",
+    "hw/elec/symbols/LINK_MUX.kicad_sym": "8589a93f577013eaeb5951b643d157fc31b1c3a6e5777439f295023528a817d4",
+    "hw/elec/symbols/LINK_NAND.kicad_sym": "3618ab10e9727449a8d9a9755245b4c8bd0c1ccc13a5f6c3536d331094e7e9eb",
+    "hw/elec/symbols/LINK_SUP.kicad_sym": "d2ed06f4d61844bbc10334db29cde2b7f83054535f5bce0baac3e7755bff7095",
     "hw/elec/symbols/P_1.kicad_sym": "73ab50401e7fb2b9321fc6b97374437e07a9dad601551c0acda84bd0bec6664d",
     "hw/elec/symbols/P_10.kicad_sym": "aa534acfb4597bfabc44f522d74187a10d1e1588fbbd30777a30b68212424c04",
     "hw/elec/symbols/P_11.kicad_sym": "41536acdadc98ffc7242485fa603250d249b78bfaa6100a0a7bd690132cb6666",
@@ -431,8 +436,8 @@
     "hw/layout/hat/fp-lib-table": "034055fb210537c7da525a5ec8240602aad32803d23837b2437da44901a7037a",
     "hw/layout/hat/hat.kicad_pcb": "34ae9294546cbcdc0b0b960e2c0f04353c109e735dd44f5444b8d4fd445517fe",
     "hw/layout/trenz_hat/fp-lib-table": "a4ea6133803e52c2afd159fc3ef26b3b7c3eb22147e3d285dcff5b49fb6754d4",
-    "hw/layout/trenz_hat/trenz_hat.kicad_pcb": "93dd7509d3f8536df770b62414b07dffd6a15285ed9e88dcf1e7d04a674bfaa0",
-    "hw/layout-trenz.json": "73c4049e1796eef6ba7a31f2acdab2a4efc229a9d73d0bd065659f7b6a10d540",
+    "hw/layout/trenz_hat/trenz_hat.kicad_pcb": "6ccf895dbb46faf0cfdac11c0393bebaa98ae720bd28b78da6edaf789aa6919d",
+    "hw/layout-trenz.json": "a87906b5cd4d4d42d7168be087767626e46b431e71441f83b6f81c53aee49e66",
     "hw/layout.json": "fe4a66fe29c0a9c6474ebf016875aa3a4faf05717ef60251079794c619eb7a5b",
     "hw/libraries/ShakeSense.pretty/Capacitor_SMD__C_0402_1005Metric.kicad_mod": "175ecc7fd401554c6f5d160e85603e58544be5b93f7de8c18d63e09b73ff4c45",
     "hw/libraries/ShakeSense.pretty/Capacitor_SMD__C_0603_1608Metric.kicad_mod": "fdb53e4ae0a5030d2863a19d27fe145470374583a6b28bd9d4f3e08bd6776054",
@@ -466,6 +471,7 @@
     "hw/libraries/ShakeSense.pretty/Package_TO_SOT_SMD__SOT-23-6.kicad_mod": "1fe0d498d37775ac58dde3a7575dd3c57f540123cdba4986a287ad88d51ea817",
     "hw/libraries/ShakeSense.pretty/Package_TO_SOT_SMD__SOT-23.kicad_mod": "ac310d5cc55c4b3a0c0521df85ab314c20d88db89b0da62bb99d93d2ca43c445",
     "hw/libraries/ShakeSense.pretty/Package_TO_SOT_SMD__SOT-323_SC-70.kicad_mod": "5a7256f9d77b480f92cf9cf4c5704930469b6657ad6418622c93f14af9eff2f6",
+    "hw/libraries/ShakeSense.pretty/Package_TO_SOT_SMD__SOT-353_SC-70-5.kicad_mod": "380e60c242344d0b0ebd8ebedf37550e4177a56561a7d3605ad47478544db031",
     "hw/libraries/ShakeSense.pretty/Package_TO_SOT_SMD__SOT-363_SC-70-6.kicad_mod": "55dbb6311c9d8502fa0bfc82dc701b56babaab7661333ea43f8a7acf9e8ac67b",
     "hw/libraries/ShakeSense.pretty/Package_TO_SOT_SMD__TSOT-23-6.kicad_mod": "7f3484f28ceb5242885404185b71b5b57c16cc63c6f0b73adf6f32fbc4afed1a",
     "hw/libraries/ShakeSense.pretty/RF_GPS__ublox_MAX.kicad_mod": "b94ef740c1c501e8ed54f327d0ba7f04c3791a52af652c220c57a7fc34e7b113",
@@ -487,51 +493,59 @@
     "hw/libraries/ShakeSense.pretty/TZ_TZ_POWER.kicad_mod": "72eb4d3461b3c05dfbaabdf3c6dea45646555214629748b9860591d27e49a953",
     "hw/libraries/ShakeSense.pretty/TestPoint__TestPoint_Pad_D1.5mm.kicad_mod": "74f3339500982f1f7ee40b97b8edebeda683a5eaa830e80802a0dd83f16ae256",
     "hw/tests/overvoltage.ato": "c58f37a3130afbfaf267a9f0b2e3d3067c6a3987a683b127a7fec57b61feca70",
-    "hw/tests/test_engineering.py": "973b0e4bbd34c28080a17ea725c7157979d357f8590573b72ad4b6dd95573b45",
+    "hw/tests/test_engineering.py": "1fa44b822d39dc1166c470e08375555e1d05da109054f28376b410438eebc8d8",
     "hw/tests/test_geophone.py": "fbfd8842e160f3b2e6fc31193f0017404adfb9912c76eb251a5722f6b1327af6",
-    "hw/tests/test_gpio_audit.py": "592fdd8b073d3bbe7635177fd4086127159355291fc7b84b6d1eaf0c66be760b",
-    "hw/tests/test_prefab_review.py": "816c0e67bb94840922205b7e9f7cac99d5b212ac408d1d062aee8a21f23a0730",
-    "hw/tools/assemble_pcb.py": "452d3c424753c1c9fad34b4007f3149b27f609f8141315c1071e68870cef0f16",
-    "hw/tools/assembly_fit.py": "83ca501e9a1218427face6d3d358fd7183f6117b174632b43da045decdf37dcf",
+    "hw/tests/test_gpio_audit.py": "3cb8cb5b3fd895edff3760d18c25cbab96d08b15b7f2ec207eed787c486af41e",
+    "hw/tests/test_prefab_review.py": "8e0c6b382db68b934c36d34b7caa52c19717dd42518435da5c6db6fc00912649",
+    "hw/tools/assemble_pcb.py": "72ff1e0b7de75c6194bf8b749dfc2b5a5e57fea01e85f98ea12633895d05e161",
+    "hw/tools/assembly_fit.py": "a8407f2e3a071a9050b522877ed0ea5232fd546f6e56cfe748325bcf82e450f4",
     "hw/tools/audit_module.py": "fa62bc89836759dbc056b40b82d168135924f3e7f7635277c02c6c73373719ba",
     "hw/tools/audit_run1.py": "37cad561c131c64ee5f27bc02c8e74e27dcecd25da5accf15795f900a89144a7",
     "hw/tools/bootstrap_trenz.py": "e514d5f9b1bf0055227751bf009d3e1f500ea4bfdb89f265b4d14f7065303d22",
     "hw/tools/check_circuit.py": "c031349aa0931a2612d2ec521b321038ef906f21f6ef46376b93933cb18bef33",
     "hw/tools/check_design.py": "3b22574d7de35ad2e05e32773c9a741c87392e7fe7f7092b303b5081652f38cd",
-    "hw/tools/check_trenz.py": "5d3a2d0af7502adf4ddc01dc8e5546a9fd0ceb23730f5a5695a94610339fa834",
+    "hw/tools/check_trenz.py": "305a86f8b35ea3bf20e2d9ac896c00578150c7f82dfdfba1ef9dfb07818b25e8",
     "hw/tools/clean_route_objects.py": "158be6882cdd21a45bdac3365670e5c42d852ed18dc54c9d7bb58ad31be0ea2e",
     "hw/tools/export_previews.py": "af13a94c2874bdace4687b3d55a622ca2abfc6f15a1f804788b46c0c4adf6f25",
     "hw/tools/export_routes.py": "faa1e3e777a1709d89afaa2a4506ce7824889b05b8a2348c5a109146c33435d9",
     "hw/tools/export_session.py": "b5797b9e0a31b3d9a772a56da07ca0cf9c83eee772b460f27388f0ef08fb6707",
     "hw/tools/fixed_routes.py": "127cb78e97b23690db9df79d1c1f521394eb599c66f6dff9d1f5c7ae761b4a30",
     "hw/tools/geophone_checks.py": "a6190aead1ec09c42bccd2bafff588c5142ef0f7ac38e14385bb214ec9619b9d",
-    "hw/tools/gpio_audit.py": "09c6fc13b9655f748235f7be69a1ea2474fb777805ef6914053a11dc2fc422f5",
+    "hw/tools/gpio_audit.py": "026c8a1c0cd2c0a3f0f8f0f09b3db17f815bcfef4dfbfd191f8b4d5136c5bf9d",
+    "hw/tools/host_link_checks.py": "72969345e7dc727640b3510f672f2f3d58e7863fd8ccec4b057aa8123d31a45c",
     "hw/tools/import_routes.py": "34860295f9389f9df7de8bfbf300a27dbaa4888beec3d6af01395c84c8c0e7f8",
     "hw/tools/inspect_references.py": "bc1fdfa52f256b16aa4a6e1d71ca0a295a2a3d92ec520e6ef1df46f3372fbfdb",
     "hw/tools/inspect_trenz_step.py": "a0ab1c6f508e4a880058f0c3713de627907188e11fff1214c436e68ca26dba59",
-    "hw/tools/kicad_support.py": "fb10b8db1b1a851490ba14b3ccbb7839f464d1457a1b56d95a5b3d973c303af6",
+    "hw/tools/kicad_support.py": "4801369d469fffdf9ba1ff78b150b0d3d2f6464b4dbf16f73c445aa73e86c519",
     "hw/tools/models.py": "dc1689834466afcb192d978555f1c4e99a3fe5d5529c962cd2cac703e8d9c2cd",
     "hw/tools/pack_trenz.py": "60d5c25c57bf5700bb523ff5274097466786ff761591a59e4768adb26de40bc6",
-    "hw/tools/prefab_review.py": "baf27b20b080565cb3791c5a698795be100afa19fa3340ab4a30891fe0839507",
-    "hw/tools/record_trenz.py": "6e61d45d17f85613da38f97b27f2ddcd83a19df7a02141b3ae0d1a70a65654ae",
+    "hw/tools/prefab_review.py": "256f583ca77751cb0de435c871caca50f6992c047098cb2521035b69f370be1e",
+    "hw/tools/record_trenz.py": "cf4d06af84e474e3b87c12d29cce317853837319af73ad1c33132684ca69ed27",
     "hw/tools/render_option.py": "56d53844c483e7fb019587978d53f2684601b863150769360e99f21caddb6a71",
     "hw/tools/render_trenz.py": "a0e06f2aa1cdac027d991584dae7d4fdd4ffd70b6e491985cb315f3a3892ab03",
+    "hw/tools/replay_trenz.py": "f94fc8dc9f069cedc8d178d504ed06d95ef8214464606bfe545e21c5896f778f",
     "hw/tools/report_validation.py": "49908986ff05cf2fce9d718992281e516a92a9ec818abf281d931dddb175774c",
     "hw/tools/restore_keepouts.py": "41e6af0ffbf854dd7cb3e91344f207cc9fb487fbcaefe76340665684a9227e57",
     "hw/tools/review_schematic.py": "e76eb98fc4eab0c5b9fe8e70cea480aef2107cec50abd9d3781cee081c8b3613",
-    "hw/tools/ribbon_drawing.py": "269a416cea0d55a228bae6e3682359211a5953452fff982adcfbe288c1a2338c",
-    "hw/tools/ribbon_mechanics.py": "496ee6ed9155ed62595854ec1d1fe72be96b843469c0bf4d2baf30375335f011",
+    "hw/tools/ribbon_drawing.py": "2b04973c06af05f38b3797225553b6b16d928264f8341cee4d617c58f9255514",
+    "hw/tools/ribbon_mechanics.py": "2b04973c06af05f38b3797225553b6b16d928264f8341cee4d617c58f9255514",
     "hw/tools/simulate.py": "2ccc543cdcc596896c8e2868dfb626f908ab1cea0ce3425e2a660c8f6981d93a",
     "hw/tools/simulate_geophone.py": "70b37c38bda9749ebea0a7981c9eb3d61d8f49a677a3d8fbe0181a782e1fe684",
     "hw/tools/simulate_geophone_review.py": "c0f4ae993b15a2eb80ff4416d4d58fae352311350c47d49c1087575ada3bb290",
+    "hw/tools/simulate_host_link.py": "2d96a12d1fae43dcebfd14fbb993063f00b7489d01f3ab6d02525692122ef428",
     "hw/tools/simulate_trenz.py": "860a50e129a039a27ef6bc59cf9d9d0c5f584849181e5762e205fc475b567b31",
     "hw/tools/solve_constraints.py": "92a00c28288b3f3d8b87141244669018645db283ed6437bb9b8a295b353c2f8a",
     "hw/tools/stackup.py": "6857bc84b1fbc568c3cd2783fa9e5339f8093e974de10a414bb0688e71ac927c",
-    "hw/tools/t1_engineering.py": "2946560077fa353b9a0db4921fd370dccfa5e666f49c0e0c4476fbb97c43c5d3",
-    "hw/tools/trenz_models.py": "74176a3156446103aba2e1e976a46ebaea0ed80e9f7948b37412ac46a4742996",
+    "hw/tools/t1_engineering.py": "2dc8fae2f4d05d3076c3821408f5eee654e3c961aa4c21068aebbe31923746de",
+    "hw/tools/trenz_models.py": "cdfb23e6a066b73a9cb46dcccea7b0e5490de1c2260422914f66f7de135462ed",
     "hw/tools/trenz_power.py": "aff4ae591265d61010715cebd82e11c360c853ff2329742ded9205c377ae7789",
     "hw/tools/trim_dangling.py": "39333efd4b250defba50320b5a9e1951973990b937ed02497f6bd68901056d75",
     "hw/tools/widen_power.py": "738e94208c277088adbc8f0ec91c6b02bce3d2a67681d1fed0179e3e6cffd8af",
+    "sw/fpga/build.tcl": "bbc123d2d5191a55928aaca2d5847411ae6b8e0eb107a5044ff143ed9a12107e",
+    "sw/fpga/rtl/t1_link.sv": "2f12c75805f0d65b0d7a7479affc5a60ee61dae43e5111629e89d66ee3a9245f",
+    "sw/fpga/t1.xdc": "0c94f70c0455228b94400c13edca6500d695ba4a7f8a7c79b468310fe09dcd85",
+    "sw/fpga/test.py": "6d3d3587f7ec0ffa4b73e6884c0bd2751e5998de28e9a4169e9151941805d47d",
+    "sw/fpga/tests/tb_link.sv": "8e3abd88333112d229b86ec14bd407423792c29da9677380e671e051644ebd4e",
     "sw/interfaces/baseline.binpb": "7177780d921a4962fbbd7fa7035a745578a802c7d3e2272ca31c4f6f602e359b",
     "sw/interfaces/buf.yaml": "bda68586bbdf808b33c348d4c11029efaedf23a94b5e078208337606e24cd1ce",
     "sw/interfaces/proto/senseshake/sensor/v1/sensor.options": "87956c8565f7739b5b0bee94e3a8ce43666fc701f8e602299f6196ed45ad328f",
@@ -541,7 +555,9 @@
     "sw/interfaces/python/senseshake_contract/schema.py": "bff4fe5fd39be1cad701a7a246eec71b0ba48308f6f99b1ddd8f8f813f8e1514",
     "sw/interfaces/python/senseshake_contract/validation.py": "0f6c89fd91d47ef50b23d95087d85dfb7c019dcebfdba45f0ff7d2ec925154ef",
     "sw/pi/deploy/bind_spi.py": "06aa702612c5cde5066c46850ab408644561aa4008bef9ec172926a48ca32503",
+    "sw/pi/deploy/senseshake-fpga-overlay.dts": "c45b3fdc25e4c41151b77f00e0a6ca4b5c4b57e6b1e9dceaa2164bbb4cc43827",
     "sw/pi/deploy/senseshake-t1-overlay.dts": "0fe7da7089a6fe4dc16986f03e28ea0abb1074bf954a9677e772698a068479b0",
+    "sw/pi/deploy/t1-jtag.cfg": "f6ae9ac0400d55f6c4dd0c6b4a743e0bdbcf899e011c49408c3a5377cddba1cb",
     "sw/pi/profiles/stimulus-demo.json": "1a179d6086f3d7dab2f267eb54760ec00ee8c0d14c7fc6d3ae1758ef4748883c",
     "sw/pi/profiles/t1.example.json": "cce8fc26544a8fb16b77f3cb378a421a0f489b39935b474a32eecc60202f24e7",
     "sw/pi/profiles/utc-policy.template.json": "1f95ea883e56f316cb85fe388ee16d1a07f3ea7e5ccc6df1af084a440cb9d5f4",
@@ -551,6 +567,8 @@
     "sw/pi/senseshake/calibration.py": "4e511c6355b4c3885d08ca0e4650222c10437502f89924411bf6bdeff29b8c18",
     "sw/pi/senseshake/cli.py": "f7b987324e387cfa7a8357cf973cb9688b4090c736fc7d90193ff2451a4d519e",
     "sw/pi/senseshake/fifo.py": "92d5f244e0e9782e5eb621b897ee961ab2fc770834026b17b23579b0114dd589",
+    "sw/pi/senseshake/fpga_link.py": "51dbd9dcb3fc7ece44ead4fa8e2b955911f1110be803e3c9d45e8d0dadd0cbde",
+    "sw/pi/senseshake/fpga_linux.py": "92815fd2b91cc5fe18c166f2d021b4bfa8ee3acf3669c3f6b715e8079361ab81",
     "sw/pi/senseshake/geophone.py": "7bbe8c3d8b4fb4d51056c68ea6f6b431f661e9b8671a39c924c77579b46ccb85",
     "sw/pi/senseshake/gnss_timing.py": "1e32c015b6dabcd3f5905f87c2b5b0e714feb21b702c9d2351bbd57b1d53b28f",
     "sw/pi/senseshake/hat_signals.py": "cd92017ba1928ce7046263e13c4acda6680bc507befa2b8106f15e43e22996e3",
@@ -574,8 +592,9 @@
     "sw/tests/test_acquisition.py": "205be697ed1c0b5f3df521ded30f04265e4c89afbfbbd8ff3876174d2e85e160",
     "sw/tests/test_bench.py": "13190670588d94e6411f7868b098d49133c6ba62a130ffef7cc7492f62756879",
     "sw/tests/test_contract.py": "2b7353c4fa7e3bd72972c6006e7eac01cb047d9247c4fbb795f762b320e8b311",
-    "sw/tests/test_deployment.py": "cc9041748cd9586ae068827bf3b1fd09f663c0c328ba2437f98c2271b530c26a",
+    "sw/tests/test_deployment.py": "0e347a277e549d5a7ca805cf4018d186ea254cc9cb85fad10eac0727aa6f0b0d",
     "sw/tests/test_fifo.py": "a547be0d7c7ae3c98abd825c49f6f2142e7e437da5333a102fd60b73edf92a21",
+    "sw/tests/test_fpga_link.py": "cbacd4d84e9775ea9e7f8c23fb5afa76507daa5893dd9d774790dd1e3bcc1f49",
     "sw/tests/test_geophone.py": "73b8fb55a1d49c1edf3a875729f6403d3aa146027aaaab928834589cbabf2a7d",
     "sw/tests/test_geophone_timing.py": "3ab55f37b2181bac8fb5dc5f70de49f20793a0631207ec45199746e0b8d5e233",
     "sw/tests/test_hat_signals.py": "a9b575e18a62f82cb5aeddf33a6dd47d7e95124b5842ec18fa674515d4b5241a",
@@ -589,24 +608,18 @@
     "sw/tools/check_hat_signals.py": "5b3c42d8418ae94060004fa70a068db0ffb8dcb6382572f73a49ac8f636585d3",
     "sw/tools/check_interfaces.py": "e6fac9912a248981673bedba601f28aededbb1d1c231f179aedbce1359096a7d",
     "sw/tools/correlate_utc.py": "a73f9e0399ef84bff6ec5c4b53fb8132461337d1e02e8e1416d9ee14e50aa47c",
+    "sw/tools/fpga.py": "96dd0d78d7bd10a3016d639f038588d45cc7fcc36f87a0e42e81e4765f3f404e",
     "sw/tools/measure_hat.py": "a65c5ec760990ff828533f8002db8320a705253767d3c16c91d74e9119c3f2d3",
     "sw/tools/sensor.py": "1986c573a15087e51bc9d6c9d258d368dad7ac6cd29c436af4f9042affdf7f4a",
     "environment/.dockerignore": "e544fdfa5c93e6c639008aafeff79415070ab5db1f7ce390ea0b259038605663",
-    "environment/Dockerfile": "24096732d2f2f608f20debe42b22d2fc63b7873a035517fc0bdeabdb65c8682b",
+    "environment/Dockerfile": "f22b68b29730d10f3bc72d6185829df6548dc17f02574f5ae5ae8e1457f6fc8e",
     "environment/check_project.py": "5564a8204de66c90cf7171d1e8783a56e4ae2d8aca43368f4b1c09d236276fae",
     "environment/host.py": "bbdeea8a6ca861cc1805c461c9b625d80552f7c16d728c1b29c415cdaeca7207",
     "environment/install_buf.py": "841e38a11af99ab4ee2aee42cf0f305489e2ffa72fad260fe4816d69035adba1",
     "environment/installed-constraints.txt": "1d605c32ea4f7f5c560586b5f54590bf821cf35a8782e66e5addd1bcd512919f",
-    "environment/lab.py": "f10f66f83dc5efa9a16ae89a6ba8abbb1ed940d5edd41b0344a66abcc6cfec8f",
+    "environment/lab.py": "9b3655906034cae94347a7ffa219ec076a4b96062928d9a6941c184a7bea6fff",
     "environment/requirements.in": "de39e673de9fce6df52ff37bfaeee133f8302fe175acb5f428f728ab1eff502f",
     "environment/requirements.lock": "d7b47cd3000c67fc356d59b84ce104a3be244f565eb60c593a7ae002ec06933d",
     "environment/test_lab.py": "5332ccbf778562023756b711f22188665328ab5a8f03113fe03f260e1095b11f"
-  },
-  "ribbon_clearance": {
-    "slot_height_cases": 36,
-    "minimum_obstacle_margin_mm": 0.23399999999999999,
-    "ribbon_to_ribbon_margin_mm": 1.6679999999999993,
-    "guide_to_pi_port_margin_mm": 0.37899999999999956,
-    "physical_fit_measured": false
   }
 }

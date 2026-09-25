@@ -16,13 +16,15 @@ class GPIOFaultTests(unittest.TestCase):
         self.pins = self.original.copy()
 
     def test_valid_compiled_circuit(self):
-        self.assertEqual(audit.check(self.pins)['exposed_gpio'],155)
+        report=audit.check(self.pins)
+        self.assertEqual(report['exposed_gpio'],0)
+        self.assertEqual(report['unused_user_gpio'],149)
 
     def test_atomic_footprint_uuid_repair(self):
         from kicad_support import unique_ids
         b=pcbnew.BOARD()
-        original=pcbnew.FootprintLoad(str(audit.ROOT/'hw/elec'),'TZ_FFC40')
-        for ref in ('J86','J87'):
+        original=pcbnew.FootprintLoad(str(audit.ROOT/'hw/elec'),'Package_SO__TSSOP-16_4.4x5mm_P0.65mm')
+        for ref in ('U100','U101'):
             f=pcbnew.FOOTPRINT(original)
             f.SetReference(ref);b.Add(f)
         ids=lambda:[q.m_Uuid.AsString() for f in b.GetFootprints() for q in f.Pads()]
@@ -53,19 +55,35 @@ class GPIOFaultTests(unittest.TestCase):
         with self.assertRaises(AssertionError): audit.check(self.pins)
 
     def test_reversed_mating_parity(self):
-        self.pins['J80','16'],self.pins['J80','17'] = self.pins['J80','17'],self.pins['J80','16']
+        self.pins['J81','21'],self.pins['J81','22'] = self.pins['J81','22'],self.pins['J81','21']
         with self.assertRaises(AssertionError): audit.check(self.pins)
 
-    def test_missing_breakout(self):
-        self.pins['J88','4'] = 'UNCONNECTED'
+    def test_missing_quad_connection(self):
+        self.pins['U101','5'] = 'UNCONNECTED'
         with self.assertRaises(AssertionError): audit.check(self.pins)
 
     def test_wrong_reference_voltage(self):
-        self.pins['J89','2'] = 'PI_5V'
+        self.pins['U100','16'] = 'PI_5V'
         with self.assertRaises(AssertionError): audit.check(self.pins)
 
     def test_unintended_shared_gpio(self):
-        self.pins['EXTRA','1'] = self.pins['J88','4']
+        self.pins['EXTRA','1'] = self.pins['J80','32']
+        with self.assertRaises(AssertionError): audit.check(self.pins)
+
+    def test_switch_bypass_is_rejected(self):
+        self.pins['J84','1'] = 'JTAG_TCK'
+        with self.assertRaises(AssertionError): audit.check(self.pins)
+
+    def test_wrong_gate_pinout_is_rejected(self):
+        self.pins['U103','2'],self.pins['U103','3'] = self.pins['U103','3'],self.pins['U103','2']
+        with self.assertRaises(AssertionError): audit.check(self.pins)
+
+    def test_missing_safe_start_bias_is_rejected(self):
+        self.pins['R107','2'] = 'PI_3V3'
+        with self.assertRaises(AssertionError): audit.check(self.pins)
+
+    def test_parking_path_must_not_ground_pi_output(self):
+        self.pins['U101','3'] = 'GND'
         with self.assertRaises(AssertionError): audit.check(self.pins)
 
 if __name__ == '__main__': unittest.main()

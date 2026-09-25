@@ -1,0 +1,36 @@
+# Exact TE0712-03-81I36-A schematic, U1 banks 14 and 34.
+# R4 CLK50M2 is shifted to 1.5 V on revision 03 (schematic, not generic TRM table).
+set_property PACKAGE_PIN R4 [get_ports clk50]
+set_property IOSTANDARD LVCMOS15 [get_ports clk50]
+create_clock -name fabric -period 20.000 [get_ports clk50]
+set_property PACKAGE_PIN W19 [get_ports sclk]
+set_property IOSTANDARD LVCMOS33 [get_ports sclk]
+set_property PACKAGE_PIN W20 [get_ports cs_n]
+set_property IOSTANDARD LVCMOS33 [get_ports cs_n]
+set_property PACKAGE_PIN V18 [get_ports dq0]
+set_property IOSTANDARD LVCMOS33 [get_ports dq0]
+set_property PACKAGE_PIN V19 [get_ports dq1]
+set_property IOSTANDARD LVCMOS33 [get_ports dq1]
+set_property PACKAGE_PIN AA21 [get_ports uart_rx]
+set_property IOSTANDARD LVCMOS33 [get_ports uart_rx]
+set_property PACKAGE_PIN AA20 [get_ports uart_tx]
+set_property IOSTANDARD LVCMOS33 [get_ports uart_tx]
+set_property PACKAGE_PIN AB22 [get_ports reset_n]
+set_property IOSTANDARD LVCMOS33 [get_ports reset_n]
+set_property DRIVE 4 [get_ports {dq1 uart_tx}]
+set_property SLEW SLOW [get_ports {dq1 uart_tx}]
+set_property PULLUP true [get_ports {cs_n uart_rx reset_n}]
+# Only asynchronous input-to-first-stage paths are excluded. All remaining
+# synchronizer stages and mailbox logic are timed at 50 MHz.
+set_false_path -from [get_ports sclk] -to [get_pins {ck_reg[0]/D}]
+set_false_path -from [get_ports cs_n] -to [get_pins {cs_reg[0]/D}]
+set_false_path -from [get_ports dq0] -to [get_pins {di_reg[0]/D}]
+set_false_path -from [get_ports reset_n]
+# Bound pad propagation, including immediate CS output-disable. These limits
+# do not replace measurement of Pi setup/hold or board/switch flight time.
+set_max_delay -datapath_only 100 -from [get_clocks fabric] -to [get_ports dq1]
+set_max_delay -datapath_only 100 -from [get_ports cs_n] -to [get_ports dq1]
+set_max_delay -datapath_only 20 -from [get_ports uart_rx] -to [get_ports uart_tx]
+set_property BITSTREAM.CONFIG.UNUSEDPIN PULLNONE [current_design]
+set_property CONFIG_VOLTAGE 3.3 [current_design]
+set_property CFGBVS VCCO [current_design]

@@ -1,0 +1,19 @@
+{
+  "tool": "Vivado 2025.2",
+  "part": "xc7a200tfbg484-1",
+  "clock_mhz": 50,
+  "setup_slack_ns": 10.431,
+  "hold_slack_ns": 0.105,
+  "bitstream_generated": true,
+  "bitstream_sha256": "0a47ff6958b69e76ea49ea15465a27f047ace8fff0297b600da1fea2296a0c6a",
+  "source_sha256": {
+    "sw/fpga/rtl/t1_link.sv": "2f12c75805f0d65b0d7a7479affc5a60ee61dae43e5111629e89d66ee3a9245f",
+    "sw/fpga/t1.xdc": "0c94f70c0455228b94400c13edca6500d695ba4a7f8a7c79b468310fe09dcd85",
+    "sw/fpga/build.tcl": "bbc123d2d5191a55928aaca2d5847411ae6b8e0eb107a5044ff143ed9a12107e"
+  },
+  "limits": [
+    "External SPI pins are asynchronous and oversampled; false paths apply only to first synchronizer stages and asynchronous reset",
+    "DQ2/DQ3 are unconnected and optimized out; UNUSEDPIN PULLNONE leaves reserved package pins undriven",
+    "Not programmed onto hardware; Pi/Linux ownership and signal timing require physical bring-up"
+  ]
+}

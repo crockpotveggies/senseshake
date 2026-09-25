@@ -44,7 +44,6 @@ for ref,m in fixture.items():
     for modulepin,net in m.items():
         carrierpin=modulepin+1 if modulepin%2 else modulepin-1
         assert bp[(ref,str(carrierpin))]==net,(ref,modulepin,net);checks+=1
-for pin,net in {1:'JTAG_TMS',2:'JTAG_TDI',3:'JTAG_TDO',4:'JTAG_TCK',5:'GND',6:'FPGA_3V3'}.items():assert bp[('J84',str(pin))]==net
 for pin,net in {1:'PI_3V3',2:'PI_5V',4:'PI_5V',8:'PI_UART_TX',10:'PI_UART_RX',11:'FPGA_RESET_GPIO',22:'FPGA_IO_ENABLE'}.items():assert bp[('J1',str(pin))]==net
 assert bp[('U51','3')]=='PI_3V3' and bp[('U51','7')]=='FPGA_3V3'
 assert bp[('R62','1')]=='FPGA_IO_ENABLE' and bp[('R62','2')]=='GND'
@@ -61,12 +60,14 @@ pad_ids=[q.m_Uuid.AsString() for f in board.GetFootprints() for q in f.Pads()]
 assert len(pad_ids)==len(set(pad_ids)),'Duplicate pad UUIDs corrupt KiCad report item references'
 for ref,xy in {'J80':(55,44),'J81':(55,12),'J82':(34,28),'H80':(33,11),'H81':(77,11),'H82':(33,45),'H83':(77,45),'H1':(3.5,3.5),'H2':(61.5,3.5),'H3':(3.5,52.5),'H4':(61.5,52.5)}.items():
     q=fps[ref].GetPosition();assert abs(p.ToMM(q.x)-50-xy[0])<.001 and abs(p.ToMM(q.y)-50-xy[1])<.001,ref
-for ref,xy,angle in [('J86',(17,22),0),('J87',(17,36),180),('J88',(57,20),0),('J89',(57,37),180)]:
+for ref in [f'U{i}' for i in range(100,107)]:
+    meta=next(item for item in spec['parts'] if item['ref']==ref)
+    xy,angle=meta['xy'],meta['angle']
     f=fps[ref];q=f.GetPosition()
     assert f.IsFlipped() and f.GetLayer()==p.B_Cu,(ref,'must be underside')
     assert abs(p.ToMM(q.x)-50-xy[0])<.001 and abs(p.ToMM(q.y)-50-xy[1])<.001,ref
     assert (f.GetOrientationDegrees()-angle)%360<.001,ref
-    # Component courtyard must stay inside the outline; DRC checks pairwise overlap.
+    # Internal link components stay inside the outline; DRC checks overlap.
     box=f.GetBoundingBox(False,False)
     assert box.GetLeft()>p.FromMM(50) and box.GetRight()<p.FromMM(135),ref
     assert box.GetTop()>p.FromMM(50) and box.GetBottom()<p.FromMM(106),ref
@@ -85,13 +86,13 @@ for kind,extension,check in [('pcb','kicad_pcb','drc'),('sch','kicad_sch','erc')
     subprocess.run(['kicad-cli',kind,check,'--format','json','-o',str(F/(check+'.json')),str(F/(N+'.'+extension))],check=True,stdout=subprocess.DEVNULL)
 drc=json.loads((F/'drc.json').read_text());erc=json.loads((F/'erc.json').read_text())
 er=[v for s in erc['sheets'] for v in s['violations']]
-report={'status':'T1 engineering prototype; not fabrication released','outline_mm':[85,56],**gpio_report,'compiled_pin_checks':len(cp),'critical_module_pin_checks':checks,'drc_violations':len(drc['violations']),'unconnected_items':len(drc['unconnected_items']),'erc_violations':len(er),'tracks_and_vias':len(board.GetTracks()),'copper_layers':8,'microvias':len(microvias),'hdi_structure':'1+6+1','limits':['HDI stack includes filled/planarized via-in-pad; include ADC supply pad through-vias in fabrication notes','No FPGA bitstream port or hardware test performed','External regulated 3.3 V supply required; confirm 3.201–3.399 V at module under startup/load','Copper resistance, heating, sensor thermal drift, EMI and physical mating remain unqualified','FFC cable routing, GPIO loading and high-speed signal integrity remain unqualified; see stack-assembly.md','Pi rendering is conceptual; Trenz rendering uses vendor generic revision-03 STEP']}
+report={'status':'T1 engineering prototype; not fabrication released','outline_mm':[85,56],**gpio_report,'compiled_pin_checks':len(cp),'critical_module_pin_checks':checks,'drc_violations':len(drc['violations']),'unconnected_items':len(drc['unconnected_items']),'erc_violations':len(er),'tracks_and_vias':len(board.GetTracks()),'copper_layers':8,'microvias':len(microvias),'hdi_structure':'1+6+1','limits':['HDI stack includes filled/planarized via-in-pad; include ADC supply pad through-vias in fabrication notes','No FPGA bitstream port or hardware test performed','External regulated 3.3 V supply required; confirm 3.201–3.399 V at module under startup/load','Copper resistance, heating, sensor thermal drift, EMI and physical mating remain unqualified','Internal-link timing and signal integrity remain unqualified; see fpga-host-link.md','Pi rendering is conceptual; Trenz rendering uses vendor generic revision-03 STEP']}
 report['limits'] = [
  'Fabrication process approval is owned by the project owner; calculations use the recorded provisional stack',
  'Single Racotech geophone input; analog noise, cable coupling and ADC timing require physical qualification',
  'J83 source: 3.35 V +/-0.5%, total hot loop resistance <=30 milliohms, <=3 A; verify startup and load waveform at module',
  'Pi4 conceptual stack uses SSQ-120-02-G-D riser; selected cooler, cables and mating need physical fit verification',
- 'No FPGA bitstream or physical sensor/rail/thermal/EMI/high-speed GPIO tests performed',
+ 'Loopback bitstream built separately; no physical sensor/rail/thermal/EMI/high-speed GPIO tests performed',
  'Pi FIFO/IRQ and geophone polling are tested on modeled buses; no GNSS or absolute UTC source on T1-GEO',
  'Trenz rendering uses vendor generic revision-03 STEP']
 (F/'validation.json').write_text(json.dumps(report,indent=2));print(json.dumps(report,indent=2))

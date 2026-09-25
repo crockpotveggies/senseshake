@@ -235,22 +235,24 @@ when there is executable code and an explicit acceptance test for it.
 References: [official KiCad container images](https://www.kicad.org/download/docker/),
 [Docker runtime options](https://docs.docker.com/reference/cli/docker/container/run).
 
-## Current T1-GEO validation
+## Current T1-LINK validation
 
-Run `20260925T161718Z-0cb993da` passes all **18 portable stages**: three Atopile
-builds and numeric solves, the invalid-voltage fixture, **26 hardware regressions**,
-KiCad ERC/DRC/connectivity, **64 SPICE cases** (23 geophone), and **152 software
-tests without skips**, including contract compatibility. Clean route replay preserves
-all **7,485 tracks/vias**, with **46 microvias**, and zero DRC/open connections.
-Geophone signal copper and the physical pad/net map are preserved; only J83/J87
-move. All 36 flex slot-height cases pass with the specified spacer and guide.
-The UI passes 10/10 modeled-driver checks across 3,672 samples; its refreshed
-board model and geophone chart were inspected in the browser.
-See [the current verification record](../hw/boards/shakesense-trenz-hat/verification.json).
-This does not replace physical noise, power, fit or timing measurements.
+Run `20260925T205022Z-ba3afc04` passes all **20 portable stages**, including
+three Atopile builds/solves, the invalid-voltage fixture, **28 hardware regressions**,
+native ERC/DRC/connectivity, existing analog/sensor checks, **38 new switch/RC cases**,
+FPGA loopback RTL simulation and **169 software tests without skips**.
+A separate clean route replay reproduces all **7,522 copper objects**, including
+**11 microvias**, with zero DRC/unrouted findings. The geophone signal copper is
+unchanged. Four straight supports and the selected cooler/connector envelopes pass.
+The updated UI passes 10/10 modeled-driver signal checks over 3,672 samples.
+See [the verification record](../hw/boards/shakesense-trenz-hat/verification.json).
 
-The read-only pre-fab review retains 256 analog corners, layout/fit measurements,
-and explicit open findings; see [the assessment](pre-fab-review.md) and
-[specified flex-harness assembly](stack-assembly.md). The software profile
-retains `acquisition-stress.json`; passing loss-handling tests does not imply
-lossless capture.
+Icarus Verilog 11.0 is pinned in the image; rebuild once after this revision.
+Vivado implementation is separate, using `sw/fpga/build.tcl` from an ignored
+`.local/` output directory. The reference bitstream passed its recorded 50 MHz
+implementation constraints; physical SPI/JTAG timing remains unmeasured.
+
+The pre-fab analog review and acquisition stress tests remain available.
+Passing simulations and CAD envelopes do not replace physical power, fit, noise,
+thermal or signal measurements. The Pi/Trenz programming path still needs a
+hardware bring-up. See [the host-link guide](fpga-host-link.md).

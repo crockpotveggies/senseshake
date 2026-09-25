@@ -28,7 +28,7 @@ class EngineeringTests(unittest.TestCase):
         self.assertLess(hi, 3.399)
         self.assertLess(supply_range(3.35, .005, .05, 3)[0], 3.201)
 
-    def test_old_stack_fails_cable_tolerance_margin(self):
+    def test_old_stack_fails_component_tolerance_margin(self):
         self.assertLess(clearance(18.669), 0)
         self.assertGreater(clearance(27.179), 3)
 

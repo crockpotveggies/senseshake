@@ -144,10 +144,9 @@ def main():
             if target=='trenz_hat':
                 add_text(b,'ShakeSense T1 / 200T',84,104.8,.8)
                 add_text(b,'3V3 ONLY',57,57,.8)
-                add_text(b,'JTAG',132,67,.8)
         else:
             add_text(b,'ShakeSense FIELD A2',97,91,.8);add_text(b,'RM3100 / XYZ',68,54,.8)
-        title=p.TITLE_BLOCK();title.SetTitle(name+' / atopile prototype');title.SetRevision('T1-GPIO HDI' if target=='trenz_hat' else 'A2');title.SetDate('2026-09-24' if target=='trenz_hat' else '2026-09-23');b.SetTitleBlock(title)
+        title=p.TITLE_BLOCK();title.SetTitle(name+' / atopile prototype');title.SetRevision('T1-LINK HDI' if target=='trenz_hat' else 'A2');title.SetDate('2026-09-24' if target=='trenz_hat' else '2026-09-23');b.SetTitleBlock(title)
         restore(b)
         if target=='trenz_hat':
             for fp in b.GetFootprints():

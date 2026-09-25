@@ -128,7 +128,8 @@ def source_files(source):
         "hw/libraries": ("*.kicad_mod", "*.kicad_sym"),
         "sw/interfaces": ("*.proto", "*.yaml", "*.binpb", "*.py", "*.options"),
         "sw/tools": ("*.py",), "sw/tests": ("*.py", "*.json"),
-        "sw/pi": ("*.py", "*.json", "*.dts"),
+        "sw/pi": ("*.py", "*.json", "*.dts", "*.cfg"),
+        "sw/fpga": ("*.py", "*.sv", "*.xdc", "*.tcl"),
     }.items():
         for pattern in patterns:
             files.extend((source / folder).rglob(pattern))
@@ -194,8 +195,9 @@ def commands(profile):
         steps += [("hardware-regressions", ["python3", "-m", "unittest", "discover", "-s", "hw/tests", "-p", "test_*.py"])]
         steps += [(name, ["python3", f"hw/tools/{name}.py"]) for name in ("check_circuit", "check_design", "check_trenz", "t1_engineering", "prefab_review")]
     if profile != "software":
-        steps += [(name, ["python3", f"hw/tools/{name}.py"]) for name in ("simulate", "simulate_trenz", "simulate_geophone", "simulate_geophone_review")]
+        steps += [(name, ["python3", f"hw/tools/{name}.py"]) for name in ("simulate", "simulate_trenz", "simulate_geophone", "simulate_geophone_review", "simulate_host_link")]
     if profile in ("full", "quick", "software"):
+        steps.append(("fpga-loopback-rtl", ["python3", "sw/fpga/test.py"]))
         steps.append(("sensor-contracts", ["/opt/atopile/bin/python", "sw/tools/check_interfaces.py"]))
     return steps
 

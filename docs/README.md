@@ -7,9 +7,9 @@
 - [A2 design](design-a0.md), [Coldfoot module integration](coldfoot-integration.md),
   and [validation limits](validation.md).
 - [T1 Pi-size Trenz carrier](trenz-hat.md) and [FPGA selection](fpga-options.md).
-- [Next T1 revision: QSPI pin reservation, retained UART, Pi JTAG and ribbon removal](fpga-host-link-plan.md).
+- [T1-LINK: internal SPI/QSPI reservation, UART, Pi JTAG and bring-up](fpga-host-link.md).
 - [Current T1-GEO circuit, Racotech input and accelerometer axes](geophone-input.md).
-- [Selected Pi, cooling, JTAG and geophone assembly; optional flex fit](stack-assembly.md).
+- [Pi/Trenz stack, cooling, geophone plug and four straight supports](stack-assembly.md).
 - [Pre-fab review: analog, timing, components/layout and stack fit](pre-fab-review.md).
 - [T1 electrical, mechanical and acquisition closure](t1-engineering-closure.md).
 - [Legacy UTC capture and pulse association](utc-timing.md) and [physical bench procedure/report](bench-procedure.md).

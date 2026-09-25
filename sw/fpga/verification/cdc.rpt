@@ -1,0 +1,28 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
+| Date         : Fri Sep 25 13:52:05 2026
+| Host         : jTower running 64-bit major release  (build 9200)
+| Command      : report_cdc -details -file cdc.rpt
+| Design       : t1_link
+| Device       : 7a200t-fbg484
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+| Design State : Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+CDC Report
+
+ID     Severity  Count  Description
+-----  --------  -----  -------------------------------------------------------
+CDC-3  Info          1  1-bit synchronized with ASYNC_REG property
+CDC-9  Info          1  Asynchronous reset synchronized with ASYNC_REG property
+
+Source Clock: input port clock
+Destination Clock: fabric
+CDC Type: No Common Primary Clock
+
+Row  ID     Severity  Description                                              Depth  Exception   Source (From)  Destination (To)
+---  -----  --------  -------------------------------------------------------  -----  ----------  -------------  -------------------
+  1  CDC-3  Info      1-bit synchronized with ASYNC_REG property                   3  False Path  cs_n           cs_reg[0]/D
+  2  CDC-9  Info      Asynchronous reset synchronized with ASYNC_REG property      3  False Path  reset_n        rst_sync_reg[0]/CLR
+

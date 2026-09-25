@@ -73,8 +73,6 @@ J81,LSHM-150-04.0-L-DV-A-S-K-TR,LSHM-150-04.0-L-DV-A-S-K-TR,TZ_TZ100,False,Mates
 J82,LSHM-130-04.0-L-DV-A-S-K-TR,LSHM-130-04.0-L-DV-A-S-K-TR,TZ_TZ60,False,Mates JM3; opposite parity; 8 mm board surface gap
 J83,1715721,1715721,TZ_TZ_POWER,False,REGULATED 3.3 V ONLY; external current-limited supply; 3 A initial operating budget Shifted left to keep power-terminal tails out of the J86 ribbon corridor.
 F80,0467005.NR,0467005.NR,TZ_TZ_FUSE,False,5 A fast fuse; not reverse-polarity or overvoltage protection
-J84,TSW-106-07-G-S,TSW-106-07-G-S,TZ_TZ_JTAG,False,"Digilent 6-pin JTAG signal order; reference is an output, not a power input"
-J85,TSW-103-07-G-D,TSW-103-07-G-D,TZ_TZ_AUX,False,3.3 V spare I/O at accessible lower edge
 JP80,TSW-102-07-G-S,TSW-102-07-G-S,TZ_TZ_JP,False,Fit shunt to DISABLE module; open enables on-board sequence
 JP81,TSW-102-07-G-S,TSW-102-07-G-S,TZ_TZ_JP,False,Fit shunt to request module configuration reset
 R80,10k,RC0603FR-0710KL,Resistor_SMD__R_0603_1608Metric,False,FPGA JTAG selection / spare CPLD control idle pull-down
@@ -89,10 +87,6 @@ H80,M3 / 8 mm spacer,M3 / 8 mm spacer,TZ_TZ_HOLE,False,
 H81,M3 / 8 mm spacer,M3 / 8 mm spacer,TZ_TZ_HOLE,False,
 H82,M3 / 8 mm spacer,M3 / 8 mm spacer,TZ_TZ_HOLE,False,
 H83,M3 / 8 mm spacer,M3 / 8 mm spacer,TZ_TZ_HOLE,False,
-J86,BANK13 / 40p FFC,F32Q-1A7H1-11040,TZ_FFC40,False,3.3 V logic only; pin 2 VREF output; fit FFC before stacking; no hot plug
-J87,BANK14 / 40p FFC,F32Q-1A7H1-11040,TZ_FFC40,False,3.3 V logic only; pin 2 VREF output; fit FFC before stacking; no hot plug North-shifted for short-tip custom FPC exit clear of C95/C96; use T1 ribbon guide.
-J88,BANK15 / 60p FFC,F32Q-1A7H1-11060,TZ_FFC60,False,3.3 V logic only; pin 2 VREF output; fit FFC before stacking; no hot plug
-J89,BANK16 / 60p FFC,F32Q-1A7H1-11060,TZ_FFC60,False,3.3 V logic only; pin 2 VREF output; fit FFC before stacking; no hot plug
 U22,ADS122C04,ADS122C04IPWR,Package_SO__TSSOP-16_4.4x5mm_P0.65mm,False,"I2C 0x40; internal 2.048V reference, gain 64, normal 330 SPS; unused analog/reference inputs open per TI."
 J90,GEO + / - / SHIELD,1803439,"Connector_Phoenix_MC__PhoenixContact_MCV_1,5_3-G-3.81_1x03_P3.81mm_Vertical",False,"External passive sensor: 1 positive, 2 negative, 3 cable shield. Mate MC 1,5/3-ST-3,81. Never connect power."
 D90,TPD2E2U06,TPD2E2U06DCKR,Package_TO_SOT_SMD__SOT-323_SC-70,False,Connector ESD suppression only; not lightning protection.
@@ -111,3 +105,35 @@ C94,10u,GRM21BR61A106KE19L,Capacitor_SMD__C_0805_2012Metric,False,
 C95,100n,GRM188R71H104KA93D,Capacitor_SMD__C_0603_1608Metric,False,
 C96,100n,GRM188R71H104KA93D,Capacitor_SMD__C_0603_1608Metric,False,
 R97,10k,RC0603FR-0710KL,Resistor_SMD__R_0603_1608Metric,False,Open-drain DRDY pullup; existing U42 return buffer to BCM4.
+U100,TMUX1574PWR,TMUX1574PWR,Package_SO__TSSOP-16_4.4x5mm_P0.65mm,False,"SEL=0 application, SEL=1 native JTAG; EN high isolates; FPGA-powered with power-off protection."
+U101,TMUX1574PWR,TMUX1574PWR,Package_SO__TSSOP-16_4.4x5mm_P0.65mm,False,S1B/S2B deliberately open parking paths: isolate CS/DQ3 in JTAG. Unused complete channels grounded.
+U102,TCA9534PWR,TCA9534PWR,Package_SO__TSSOP-16_4.4x5mm_P0.65mm,False,I2C 0x20. Write output 0 before config 0xFC. P2-P7 remain grounded inputs; INT unused. Pi header supplies I2C pullups.
+U103,SN74LVC1G10DCKR,SN74LVC1G10DCKR,Package_TO_SOT_SMD__SOT-363_SC-70-6,False,Disable unless request AND both independent rail supervisors are high; inputs tolerate an unpowered gate.
+U104,TLV809EA30DBZR,TLV809EA30DBZR,Package_TO_SOT_SMD__SOT-23,False,"3.0 V threshold, 200 ms nominal release, push-pull. Separate from application reset."
+U105,TLV809EA30DBZR,TLV809EA30DBZR,Package_TO_SOT_SMD__SOT-23,False,"3.0 V threshold, 200 ms nominal release, push-pull. Separate from application reset."
+C100,100n,GRM188R71H104KA93D,Capacitor_SMD__C_0603_1608Metric,False,
+C101,100n,GRM188R71H104KA93D,Capacitor_SMD__C_0603_1608Metric,False,
+C102,100n,GRM188R71H104KA93D,Capacitor_SMD__C_0603_1608Metric,False,
+C103,100n,GRM188R71H104KA93D,Capacitor_SMD__C_0603_1608Metric,False,
+C104,100n,GRM188R71H104KA93D,Capacitor_SMD__C_0603_1608Metric,False,
+C105,100n,GRM188R71H104KA93D,Capacitor_SMD__C_0603_1608Metric,False,
+R100,22,RC0603FR-0722RL,Resistor_SMD__R_0603_1608Metric,False,22 ohm series damping; quad data paths are bidirectional. Qualify maximum clock on hardware.
+R101,22,RC0603FR-0722RL,Resistor_SMD__R_0603_1608Metric,False,22 ohm series damping; quad data paths are bidirectional. Qualify maximum clock on hardware.
+R102,22,RC0603FR-0722RL,Resistor_SMD__R_0603_1608Metric,False,22 ohm series damping; quad data paths are bidirectional. Qualify maximum clock on hardware.
+R103,22,RC0603FR-0722RL,Resistor_SMD__R_0603_1608Metric,False,22 ohm series damping; quad data paths are bidirectional. Qualify maximum clock on hardware.
+R104,22,RC0603FR-0722RL,Resistor_SMD__R_0603_1608Metric,False,22 ohm series damping; quad data paths are bidirectional. Qualify maximum clock on hardware.
+R105,22,RC0603FR-0722RL,Resistor_SMD__R_0603_1608Metric,False,22 ohm series damping; quad data paths are bidirectional. Qualify maximum clock on hardware.
+R106,10k,RC0603FR-0710KL,Resistor_SMD__R_0603_1608Metric,False,
+R107,10k,RC0603FR-0710KL,Resistor_SMD__R_0603_1608Metric,False,
+R108,10k,RC0603FR-0710KL,Resistor_SMD__R_0603_1608Metric,False,
+R109,10k,RC0603FR-0710KL,Resistor_SMD__R_0603_1608Metric,False,
+R110,10k,RC0603FR-0710KL,Resistor_SMD__R_0603_1608Metric,False,
+R111,10k,RC0603FR-0710KL,Resistor_SMD__R_0603_1608Metric,False,
+R112,100k,RC0603FR-07100KL,Resistor_SMD__R_0603_1608Metric,False,
+R113,10k,RC0603FR-0710KL,Resistor_SMD__R_0603_1608Metric,False,
+R114,100k,RC0603FR-07100KL,Resistor_SMD__R_0603_1608Metric,False,
+R115,10k,RC0603FR-0710KL,Resistor_SMD__R_0603_1608Metric,False,
+R116,100k,RC0603FR-07100KL,Resistor_SMD__R_0603_1608Metric,False,
+R117,100k,RC0603FR-07100KL,Resistor_SMD__R_0603_1608Metric,False,
+U106,SN74LVC1G08DCKR,SN74LVC1G08DCKR,Package_TO_SOT_SMD__SOT-353_SC-70-5,False,Existing BCM25 FPGA_IO_ENABLE is also a hardware disarm independent of I2C. Default-low R62 retained.
+C106,100n,GRM188R71H104KA93D,Capacitor_SMD__C_0603_1608Metric,False,

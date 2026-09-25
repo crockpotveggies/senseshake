@@ -1,3 +1,8 @@
+> Historical T1-GEO review. Analog/software findings below remain useful, but
+> external GPIO/ribbon and JTAG-cable details were superseded by T1-LINK.
+> Use [current circuit](fpga-host-link.md), [assembly](stack-assembly.md) and
+> current generated validation reports. Earlier pass counts do not certify T1-LINK.
+
 # T1-GEO pre-fab engineering review
 
 **Revision scope:** these results cover the existing expansion board, not the

@@ -1,8 +1,12 @@
 # T1 internal FPGA link: QSPI pin reservation and ribbon removal
 
-Status: **planned revision, 2026-09-25; not yet implemented in Atopile or KiCad**.
-The routed T1-GEO board and its renders still describe the previous expansion
-revision, commit `64d4190`. Its validation does not cover this proposed circuit.
+Status: **T1-LINK implemented, 2026-09-25**. See the
+[current circuit and bring-up guide](fpga-host-link.md). The original plan below
+records the design decisions; current CAD replaces revision `64d4190`.
+Circuit, PCB, host control and a conservative SPI loopback bitstream are implemented.
+The initial RTL uses a single 50 MHz oversampling domain and one-frame backpressure
+instead of an asynchronous FIFO. Quad is reserved, not enabled. Physical
+power/fit/timing/noise measurements and Pi/Trenz programming trials remain open.
 
 ## Decision
 

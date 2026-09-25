@@ -9,7 +9,7 @@ RUN uv python install 3.14.7 && uv venv --python 3.14.7 /opt/atopile \
     && uv pip sync --python /opt/atopile/bin/python --require-hashes /opt/requirements.lock
 COPY install_buf.py /opt/install_buf.py
 RUN python3 /opt/install_buf.py
-RUN apt-get update && apt-get install -y --no-install-recommends device-tree-compiler=1.6.1-4+b1 \
+RUN apt-get update && apt-get install -y --no-install-recommends device-tree-compiler=1.6.1-4+b1 iverilog=11.0-1.1+b1 \
     && rm -rf /var/lib/apt/lists/*
 ENV HOME=/tmp/home XDG_CACHE_HOME=/tmp/cache XDG_CONFIG_HOME=/tmp/config \
     PYTHONDONTWRITEBYTECODE=1 CI=1 QT_QPA_PLATFORM=offscreen

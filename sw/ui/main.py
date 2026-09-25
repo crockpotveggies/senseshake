@@ -66,11 +66,8 @@ def board_scene(scene, select):
     with scene:
         with scene.group() as hat:
             scene.gltf("/board-assets/t1.glb").scale(100).rotate(math.pi / 2, 0, 0).move(-9.25, 7.8, 0)
-            # The tall Pi socket sits below the carrier; the four FFC connectors
-            # are also underside parts and do not cover top-side IMUs.
+            # Tall Pi socket envelope; the internal-link HAT has no FFC sockets.
             scene.box(5.08, .51, 1.61).move(-.999, 2.45, -.967).material("#252b34")
-            for x, y, width in ((17,22,2.35),(17,39,2.35),(57,20,3.35),(57,37,3.35)):
-                scene.box(width, .8, .21).move((x-42.5)/10, (28-y)/10, -.11).material("#a79a81")
             # KiCad's GLB exporter omits these local VRML bodies. These are
             # intentionally simple visualization envelopes, not STEP substitutes.
             custom = {"U20": (1.21, .76, .3),

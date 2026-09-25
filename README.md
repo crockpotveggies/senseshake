@@ -5,11 +5,10 @@ Coldfoot ASIC/runtime integration is deferred. Preserve the required FPGA
 connections while building sensor acquisition and tests; see the
 [four-step sensor plan](docs/sensor-development-plan.md).
 
-**Next hardware revision:** [internal FPGA link plan](docs/fpga-host-link-plan.md)
+**T1-LINK hardware:** [internal FPGA link](docs/fpga-host-link.md)
 reserves six QSPI wires, keeps UART, adds switched Pi-driven JTAG, and removes
 the external GPIO ribbons/connectors and cable guide. Pi 4 initially uses SPI6;
-native quad transfers need a separate host solution. This is a checked pin plan;
-the PCB and renders below still show the preceding expansion revision.
+native quad transfers need a separate host solution. The circuit, routed PCB and renders use this internal connection.
 
 **Portable tests:** run `./lab.ps1 build` once, then `./lab.ps1 test` from
 PowerShell. See the [portable lab guide](docs/portable-lab.md) for profiles,
@@ -53,21 +52,21 @@ The infrasound sensor is optional and is not fitted in the default render.
 with [carrier 3D](hw/boards/shakesense-trenz-hat/3d.png) and
 [three-board stack concept](hw/boards/shakesense-trenz-hat/pi-trenz-stack-concept.png).
 It is an alternative to the ASIC HAT below and requires external regulated 3.3 V
-FPGA power. The preceding CAD revision exposes 155 GPIOs at 3.3 V on J85-J89, including four underside ribbon
-connectors; see the [pin contract](docs/trenz-gpio-breakout.csv). Its FPGA
-bitstream port, cable/stack fit and physical qualification remain pending.
+FPGA power. Six internal data wires plus UART/reset connect the Pi to the
+module, with Pi-driven JTAG sharing the data-link pins. No external FPGA cables
+are needed; see the [pin contract](docs/trenz-gpio-breakout.csv).
+Physical qualification remains pending.
 The active T1 has a [single Racotech geophone input](docs/geophone-input.md) and no GNSS.
 
 The [pre-fab review](docs/pre-fab-review.md) adds analog tolerance/transient checks
 and acquisition stress tests, fixes two loss-handling defects, and identifies
 the remaining physical qualification work. The geophone filter/protection layout
-meets its path-length targets. Ribbon clearance uses a windowed fourth Pi spacer,
-an insulating guide and short-tip custom FPCs; see the [selected assembly notes](docs/stack-assembly.md)
-and [mechanical CAD](hw/mechanical/t1-ribbon-guide/README.md).
+meets its path-length targets. Four straight Pi supports replace the previous
+ribbon guide and offset spacer; see the [assembly notes](docs/stack-assembly.md).
 
 ![T1 geophone HAT](hw/boards/shakesense-trenz-hat/3d.png)
 
-The complete breakout uses an eight-layer HDI stack. The geophone input,
+The internal-link HAT retains an eight-layer HDI stack. The geophone input,
 power envelope, GPIO riser and buffered acquisition are tracked in
 [engineering closure](docs/t1-engineering-closure.md); physical qualification
 remains open. Fabrication approval belongs to the project owner. Ethernet is not exposed.

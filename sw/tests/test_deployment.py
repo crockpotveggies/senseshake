@@ -57,6 +57,33 @@ class DeploymentTests(unittest.TestCase):
                 self.assertEqual(run('fdtget',merged,f'/spi/spidev@{i}','compatible'),
                                  'senseshake,' + ('lsm6dso-userspace' if i < 4 else 'scl3300-userspace'))
 
+    @unittest.skipUnless(shutil.which('dtc') and shutil.which('fdtoverlay'), 'device-tree tools in portable lab')
+    def test_fpga_overlay_preserves_interrupt_and_requests_cs_timing(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            folder=Path(tmp)
+            base=folder/'base.dts'
+            base.write_text('''/dts-v1/;
+/ { compatible="brcm,bcm2711";
+ gpio: gpio { gpio-controller; #gpio-cells=<2>;
+   spi6_cs_pins: spi6_cs_pins { brcm,pins=<18 27>; brcm,function=<1>; }; };
+ spi6: spi { #address-cells=<1>; #size-cells=<0>; cs-gpios=<&gpio 18 1>,<&gpio 27 1>; status="disabled";
+   spidev@0 { compatible="spidev"; reg=<0>; };
+   spidev@1 { compatible="spidev"; reg=<1>; status="okay"; }; };
+};''')
+            def run(*args):return subprocess.check_output(args,text=True).strip()
+            run('dtc','-@','-I','dts','-O','dtb','-o',str(folder/'base.dtb'),str(base))
+            run('dtc','-@','-I','dts','-O','dtb','-o',str(folder/'link.dtbo'),str(ROOT/'sw/pi/deploy/senseshake-fpga-overlay.dts'))
+            run('fdtoverlay','-i',str(folder/'base.dtb'),'-o',str(folder/'merged.dtb'),str(folder/'link.dtbo'))
+            merged=str(folder/'merged.dtb')
+            self.assertEqual(run('fdtget','-t','u',merged,'/gpio/spi6_cs_pins','brcm,pins'),'18')
+            self.assertEqual(run('fdtget',merged,'/spi/spidev@1','status'),'disabled')
+            cs=[int(v) for v in run('fdtget','-t','u',merged,'/spi','cs-gpios').split()]
+            self.assertEqual(cs[1::3],[18])
+            self.assertEqual(run('fdtget',merged,'/spi/spidev@0','compatible'),'senseshake,fpga-userspace')
+            for prop in ('setup','hold','inactive'):
+                self.assertEqual(run('fdtget','-t','u',merged,'/spi/spidev@0',f'spi-cs-{prop}-delay-ns'),'1000')
+            self.assertEqual(run('fdtget','-t','u',merged,'/spi/spidev@0','spi-max-frequency'),'1000000')
+
     def test_gpio_edge_records_and_bounds(self):
         edges = RisingEdges.__new__(RisingEdges); edges.fd = 9
         with patch('senseshake.linux_io.os.read', return_value=struct.pack('=QI4x',123456789,1)) as read:
