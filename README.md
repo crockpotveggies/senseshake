@@ -5,6 +5,12 @@ Coldfoot ASIC/runtime integration is deferred. Preserve the required FPGA
 connections while building sensor acquisition and tests; see the
 [four-step sensor plan](docs/sensor-development-plan.md).
 
+**Next hardware revision:** [internal FPGA link plan](docs/fpga-host-link-plan.md)
+reserves six QSPI wires, keeps UART, adds switched Pi-driven JTAG, and removes
+the external GPIO ribbons/connectors and cable guide. Pi 4 initially uses SPI6;
+native quad transfers need a separate host solution. This is a checked pin plan;
+the PCB and renders below still show the preceding expansion revision.
+
 **Portable tests:** run `./lab.ps1 build` once, then `./lab.ps1 test` from
 PowerShell. See the [portable lab guide](docs/portable-lab.md) for profiles,
 bounded scratch storage, automatic five-run retention, and cleanup previews.
@@ -47,7 +53,7 @@ The infrasound sensor is optional and is not fitted in the default render.
 with [carrier 3D](hw/boards/shakesense-trenz-hat/3d.png) and
 [three-board stack concept](hw/boards/shakesense-trenz-hat/pi-trenz-stack-concept.png).
 It is an alternative to the ASIC HAT below and requires external regulated 3.3 V
-FPGA power. J85-J89 expose 155 GPIOs at 3.3 V, including four underside ribbon
+FPGA power. The preceding CAD revision exposes 155 GPIOs at 3.3 V on J85-J89, including four underside ribbon
 connectors; see the [pin contract](docs/trenz-gpio-breakout.csv). Its FPGA
 bitstream port, cable/stack fit and physical qualification remain pending.
 The active T1 has a [single Racotech geophone input](docs/geophone-input.md) and no GNSS.

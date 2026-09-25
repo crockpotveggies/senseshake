@@ -1,5 +1,10 @@
 # ShakeSense T1 — Pi-outline Trenz carrier
 
+**Revision in planning:** the [internal FPGA link plan](fpga-host-link-plan.md)
+replaces external GPIO ribbons with six QSPI-reserved wires, retained UART and
+switched Pi-driven JTAG. The CAD and expansion details below remain the preceding
+revision; these new connections are not yet implemented.
+
 **T1-GEO revision:** GNSS is removed; one external Racotech vertical geophone
 uses an ADS122C04 input. See [current circuit, acquisition and validation](geophone-input.md).
 GNSS/PPS/RF details below describe the preceding revision or legacy recordings.
@@ -15,7 +20,7 @@ The original ASIC HAT and remote USB sensor head remain separate builds.
 
 From bottom to top: Raspberry Pi, ShakeSense T1, **TE0712-03-81I36-A**.
 The FPGA stays on top for heatsink access. The HAT keeps the four LSM6DSO IMUs,
-SCL3300 inclinometer and MAX-M10S GNSS. The magnetometer and optional infrasound
+SCL3300 inclinometer and ADS122C04 geophone input. The magnetometer and optional infrasound
 sensor stay on the separate USB head; they consume no HAT area.
 
 The Trenz outline occupies HAT coordinates x=30–80, y=8–48 mm, measured from

@@ -1,5 +1,9 @@
 # T1-GEO pre-fab engineering review
 
+**Revision scope:** these results cover the existing expansion board, not the
+[planned internal QSPI/UART/JTAG revision](fpga-host-link-plan.md). Ribbon removal
+and the new switched interface require fresh circuit, layout and assembly checks.
+
 Review performed 2026-09-25 UTC. **The four reviews are completed, with open
 findings. This is not a layout freeze or physical qualification.** The carrier
 remains 85 Ã— 56 mm; all 155 FPGA GPIOs and the four aligned XYZ IMUs are retained.

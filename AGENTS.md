@@ -3,9 +3,13 @@
 Current priority is the [sensor development plan](docs/sensor-development-plan.md)
 on the Pi/T1/Trenz stack. Defer Coldfoot ASIC/runtime/RTL integration. Keep sensor
 software independent of a configured FPGA; preserve the existing FPGA interfaces.
-The Trenz GPIO expansion exposes 155 user I/Os on J85-J89 while retaining
-sensors, existing interfaces and the 85 x 56 mm outline. Preserve the vendor
-GPIO/ground fixtures and run their full module-contact audit when changing T1.
+The next T1 revision follows docs/fpga-host-link-plan.md: reserve six internal
+QSPI signals, retain UART, share four pins with isolated Pi-driven JTAG, and
+remove external expansion J85-J89 and its ribbons/guide. This supersedes the
+155-breakout requirement. The routed CAD still represents the prior revision;
+do not describe the planned link as implemented. Preserve vendor GPIO/ground
+fixtures and audit all module contacts, including deliberate no-connects, when
+implementing the revision. Keep sensors and the 85 x 56 mm outline.
 T1 uses a provisional eight-layer 1+6+1 HDI stack and a complete native SES
 routing snapshot. Fabrication approval is owned by the user. T1-GEO removes GNSS and adds one Racotech/ADS122C04 input. Preserve its
 independent pin/axis checks, GPIO riser assembly, and explicit
@@ -73,8 +77,10 @@ check. The sensor software profile includes the controller tests. Update the
 workbench guide and review model provenance after changing board display assets.
 
 The T1-GEO analog path targets are enforced by prefab_review.py. Preserve local
-filter/protection routing and ground stitches. The four-flex assembly uses short-tip custom FPCs and the windowed Pi spacer/guide.
-Preserve the collision regressions and actual-board obstacle checks in assembly_fit.py
-and prefab_review.py. See docs/stack-assembly.md; CAD clearance is not physical
-harness qualification. ADC supply-pad through-vias need filled/capped
+filter/protection routing and ground stitches. The current CAD's four-flex
+assembly is superseded by the planned internal link. Remove its cable/guide
+checks with the corresponding hardware, and check four straight Pi supports
+against the actual board in assembly_fit.py and prefab_review.py. Until the
+revision is implemented, retain the baseline checks and label its renders as
+the previous design. ADC supply-pad through-vias need filled/capped
 processing in the fabrication notes.

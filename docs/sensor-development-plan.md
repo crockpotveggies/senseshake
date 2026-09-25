@@ -14,15 +14,18 @@ The application must also work with simulated sensors and with the FPGA absent
 or unconfigured. No Coldfoot chip, runtime integration, or Coldfoot RTL port is
 required for these milestones. Preserve the A2 ASIC design as deferred work.
 
-On-HAT sensors are the four LSM6DSO IMUs, SCL3300 inclinometer, and MAX-M10S GNSS.
+On-HAT sensors are the four LSM6DSO IMUs, SCL3300 inclinometer, and ADS122C04
+input for the external Racotech geophone. GNSS has been removed.
 The RM3100 magnetometer and optional DLVR infrasound input remain on the separate
 USB-C sensor head. Its MCU needs firmware; the accelerometer HAT does not.
 
 Maintain the 85 × 56 mm T1 outline and the Pi/HAT/Trenz stacking arrangement.
-Preserve the FPGA power, programming, reset and existing host/GPIO connections,
-with 155 available Trenz GPIOs exposed on J85-J89. See the
-[hardware pin contract](trenz-gpio-breakout.csv) and [carrier limits](trenz-hat.md).
-This is a connectivity requirement, not an accelerator software dependency.
+The [next hardware revision plan](fpga-host-link-plan.md) reserves six internal
+QSPI signals, retains UART, adds switched Pi-driven JTAG, and removes external
+GPIO expansion J85-J89 and its ribbons. Preserve FPGA power/reset and sensor
+independence. This replaces the earlier 155-GPIO breakout requirement; the
+routed CAD and its pin contract still describe that preceding revision until
+the new circuit/layout is implemented and checked.
 
 ## Implementation checkpoint (2026-09-24)
 

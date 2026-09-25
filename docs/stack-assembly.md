@@ -1,5 +1,10 @@
 # T1-GEO bench assembly and cable fit
 
+**Previous revision:** this document describes the currently routed expansion
+board. The [next revision plan](fpga-host-link-plan.md) removes the four flex
+cables, J85-J89, cable guide and windowed spacer, restoring straight supports
+after a new fit check. Current CAD/renderings have not yet been revised.
+
 This defines the sensor-prototype assembly. The PCB is 85 x 56 mm. The Trenz
 module stays above the HAT; the Pi stays below. CAD dimensions do not replace
 first-article seating, cable strain or thermal measurements.
