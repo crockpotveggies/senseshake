@@ -1,8 +1,8 @@
 # Artix-7 200T module selection
 
 Research date: 2026-09-23. This shortlist led to the separate
-[T1 Trenz carrier prototype](trenz-hat.md). The original A2 circuit and boards
-remain separate. See T1's report for its current layout and validation limits.
+[DAQHAT-01 Trenz carrier prototype](trenz-hat.md). The original A2 circuit and boards
+remain separate. See DAQHAT-01's report for its current layout and validation limits.
 
 ## Recommendation
 
@@ -33,7 +33,7 @@ Sources: [Trenz exact SKU](https://shop.trenz-electronic.de/en/TE0712-03-81I36-A
 
 These are core modules needing a carrier, not standalone development boards
 with every external socket. GPIO can implement UART, application reset and
-future SPI links in FPGA logic. For the present ShakeSense architecture, HDMI,
+future SPI links in FPGA logic. For the present Groundlark architecture, HDMI,
 Ethernet and microSD sockets are not required. This is an interface feasibility
 assessment; no candidate has been wired to or tested with this HAT.
 
@@ -73,8 +73,8 @@ then synthesis, implementation, timing checks and host-protocol tests. A matchin
 
 Smaller core-module candidates are available for investigation, so adapting the
 HAT to the linked 35T marketplace board is not the recommended fallback.
-The subsequent T1 revision implements the selected module's carrier in atopile
-and KiCad. Its verification is recorded separately in the T1 report; existing A2
+The subsequent DAQHAT-01 revision implements the selected module's carrier in atopile
+and KiCad. Its verification is recorded separately in the DAQHAT-01 report; existing A2
 validation does not certify an FPGA variant.
 
 Additional source: [Microphase A7-Lite manual](https://fpga-docs.microphase.cn/en/latest/DEV_BOARD/A7-LITE/A7-Lite_Reference_Manual.html).

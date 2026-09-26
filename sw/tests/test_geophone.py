@@ -1,12 +1,12 @@
 """Independent wire fixtures, loss faults, contract limits and response checks."""
 import math
 import unittest
-from senseshake.geophone import ADS122C04, SETTINGS
-from senseshake.sensors import NotReady
-from senseshake import messages
-from senseshake.simulation import defaults, Simulated
-from senseshake.stimulus import Scenario
-from senseshake_contract.validation import validate
+from groundlark.geophone import ADS122C04, SETTINGS
+from groundlark.sensors import NotReady
+from groundlark import messages
+from groundlark.simulation import defaults, Simulated
+from groundlark.stimulus import Scenario
+from groundlark_contract.validation import validate
 
 
 class WireBus:
@@ -77,7 +77,7 @@ class GeophoneTests(unittest.TestCase):
         with self.assertRaisesRegex(OSError,'ambiguous'):d.read()
 
     def test_contract_cannot_relabel_adc_as_gnss_or_remote_clock(self):
-        m=messages.batch('t1',1,9,0,1,dict(counts=0,conversion_counter=0),dropped=None)
+        m=messages.batch('daqhat-01',1,9,0,1,dict(counts=0,conversion_counter=0),dropped=None)
         self.assertEqual(m.batch.samples[0].time.domain,1)
         m.batch.samples[0].time.domain=2
         with self.assertRaises(ValueError):validate(m)

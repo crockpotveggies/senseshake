@@ -11,11 +11,11 @@ def seal(out):
     manifest = json.loads((out / 'manifest.json').read_text())
     for source, expected in manifest['source_sha256'].items():
         if sha(ROOT / source) != expected: raise ValueError(f'Stale source: {source}')
-    for required in ['README.md', 'T1-LINK-assembly-review.pdf', 'review/independent-check.json']:
+    for required in ['README.md', 'DAQHAT-01-assembly-review.pdf', 'review/independent-check.json']:
         if not (out / required).is_file(): raise ValueError(f'Missing review file: {required}')
     manifest['exporter_sha256'] = {p.relative_to(ROOT).as_posix(): sha(p) for p in sorted((ROOT / 'hw/tools').glob('jlcpcb_*.py'))}
     write_json(out / 'manifest.json', manifest)
-    bundle = out / 'T1-LINK-JLCPCB-REVIEW.zip'
+    bundle = out / 'DAQHAT-01-JLCPCB-REVIEW.zip'
     checksum = out / 'SHA256SUMS.txt'
     bundle_hash = out / (bundle.name + '.sha256')
     files = sorted(p for p in out.rglob('*') if p.is_file() and p not in [bundle, checksum, bundle_hash])

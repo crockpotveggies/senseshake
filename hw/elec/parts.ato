@@ -160,7 +160,7 @@ component P_11:
     io.hv ~ p9
     io.lv ~ p11
     assert io.voltage within 1.7V to 3.6V
-    trait is_atomic_part<manufacturer="Murata", partnumber="SCL3300-D01-10", footprint="ShakeSense__SCL3300_D01.kicad_mod", symbol="symbols/P_11.kicad_sym">
+    trait is_atomic_part<manufacturer="Murata", partnumber="SCL3300-D01-10", footprint="Groundlark__SCL3300_D01.kicad_mod", symbol="symbols/P_11.kicad_sym">
     trait has_designator_prefix<prefix="U">
     signal p1 ~ pin 1  # AVSS
     signal p2 ~ pin 2  # A_EXTC
@@ -451,7 +451,7 @@ component P_34:
     io.hv ~ p12
     io.lv ~ p14
     assert io.voltage within 1.62V to 3.6V
-    trait is_atomic_part<manufacturer="See datasheet", partnumber="PNI 14190", footprint="ShakeSense__PNI_14190_Module.kicad_mod", symbol="symbols/P_34.kicad_sym">
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="PNI 14190", footprint="Groundlark__PNI_14190_Module.kicad_mod", symbol="symbols/P_34.kicad_sym">
     trait has_designator_prefix<prefix="U">
     signal p1 ~ pin 1  # SCL
     signal p2 ~ pin 2  # SA1
@@ -473,7 +473,7 @@ component P_35:
     power.hv ~ p2
     power.lv ~ p1
     assert power.voltage within 2.97V to 3.63V
-    trait is_atomic_part<manufacturer="See datasheet", partnumber="DLVR-F50D-E1BS-I-NI3F", footprint="ShakeSense__DLVR_E1BS.kicad_mod", symbol="symbols/P_35.kicad_sym">
+    trait is_atomic_part<manufacturer="See datasheet", partnumber="DLVR-F50D-E1BS-I-NI3F", footprint="Groundlark__DLVR_E1BS.kicad_mod", symbol="symbols/P_35.kicad_sym">
     trait has_designator_prefix<prefix="U">
     signal p1 ~ pin 1  # GND
     signal p2 ~ pin 2  # VS_3V3

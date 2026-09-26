@@ -4,7 +4,7 @@ from pathlib import Path
 import sys
 import unittest
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tools'))
-from t1_engineering import microstrip, width_for, supply_range, clearance, power_interfaces, POWER_PINS
+from daqhat_01_engineering import microstrip, width_for, supply_range, clearance, power_interfaces, POWER_PINS
 
 
 class EngineeringTests(unittest.TestCase):

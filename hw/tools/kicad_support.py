@@ -53,7 +53,7 @@ def libsym(part):
         coords[num]=(x,-y,side)
         label=part.names.get(num,num)
         pins.append(f'(pin {pin_type(num,part)} line (at {x} {y} {angle}) (length 2.54) (name {q(label)} (effects (font (size 1.0 1.0)))) (number {q(num)} (effects (font (size 1.0 1.0)))))')
-    s=f'''(symbol "ShakeSense:{name}" (pin_names (offset 0.6)) (in_bom yes) (on_board yes)
+    s=f'''(symbol "Groundlark:{name}" (pin_names (offset 0.6)) (in_bom yes) (on_board yes)
       (property "Reference" "{part.ref[0]}" (id 0) (at 0 {height/2+2.54} 0) (effects (font (size 1.27 1.27))))
       (property "Value" {q(part.value)} (id 1) (at 0 {-height/2-2.54} 0) (effects (font (size 1.27 1.27))))
       (symbol "{name}_0_1" (rectangle (start -12.7 {height/2}) (end 12.7 {-height/2}) (stroke (width 0.254) (type default)) (fill (type background))))
@@ -74,17 +74,17 @@ def schematic(name,spec,folder):
           (property "Sheetname" {q(section)} (at {30+(i-1)%2*110} {43+(i-1)//2*50} 0) {effects(1.27,'left')})
           (property "Sheetfile" {q(file)} (at {30+(i-1)%2*110} {77+(i-1)//2*50} 0) {effects(1.27,'left')})
           (instances (project {q(name)} (path "/{root}" (page "{i+1}")))))''')
-        start_x=50.8 if name=='shakesense-trenz-hat' else 45.72
+        start_x=50.8 if name=='groundlark-daqhat-01' else 45.72
         libs=[];body=[];x=start_x;y=35.56;row_height=0
         for idx,part in enumerate(parts):
             lib,coords,height=libsym(part);libs.append(lib)
             if idx and idx%4==0: x=start_x;y+=row_height+22.86;row_height=0
             row_height=max(row_height,height)
             cy=y+height/2; puid=uid(name+'/'+part.ref)
-            body.append(f'''(symbol (lib_id "ShakeSense:Part_{part.ref}") (at {x} {cy} 0) (unit 1) (in_bom yes) (on_board yes) (dnp {'yes' if part.dnp else 'no'}) (uuid {puid})
+            body.append(f'''(symbol (lib_id "Groundlark:Part_{part.ref}") (at {x} {cy} 0) (unit 1) (in_bom yes) (on_board yes) (dnp {'yes' if part.dnp else 'no'}) (uuid {puid})
               (property "Reference" {q(part.ref)} (at {x} {y-4} 0) {effects(1.27)})
               (property "Value" {q(part.value)} (at {x} {y-1.5} 0) {effects(1.0)})
-              (property "Footprint" {q('ShakeSense:'+part.local_fp)} (at {x} {cy} 0) (effects (font (size 1 1)) hide))
+              (property "Footprint" {q('Groundlark:'+part.local_fp)} (at {x} {cy} 0) (effects (font (size 1 1)) hide))
               (property "MPN" {q(part.mpn)} (at {x} {cy} 0) (effects (font (size 1 1)) hide))
               (instances (project {q(name)} (path "/{root}/{sid}" (reference {q(part.ref)}) (unit 1)))))''')
             for num,(px,py,side) in coords.items():
@@ -97,26 +97,26 @@ def schematic(name,spec,folder):
                 body.append(f'(global_label {q(net)} (shape bidirectional) (at {end} {yy} {0 if side else 180}) {effects(.9,"left" if side else "right")} (uuid {uid(name+part.ref+num+"l")}))')
             x+=96.52
         if i==1:
-            lib='(symbol "ShakeSense:PWR_FLAG" (pin_names (offset 0)) (in_bom no) (on_board no) (property "Reference" "#FLG" (at 0 0 0) (effects (font (size 1 1)) hide)) (property "Value" "PWR_FLAG" (at 0 0 0) (effects (font (size 1 1)) hide)) (symbol "PWR_FLAG_0_1" (polyline (pts (xy 0 0) (xy 0 -2.54) (xy 1.27 -1.27) (xy 0 0)) (stroke (width 0.1524) (type default)) (fill (type none)))) (symbol "PWR_FLAG_1_1" (pin power_out line (at 0 0 90) (length 0) (name "pwr" (effects (font (size 1 1)))) (number "1" (effects (font (size 1 1)))))))'
+            lib='(symbol "Groundlark:PWR_FLAG" (pin_names (offset 0)) (in_bom no) (on_board no) (property "Reference" "#FLG" (at 0 0 0) (effects (font (size 1 1)) hide)) (property "Value" "PWR_FLAG" (at 0 0 0) (effects (font (size 1 1)) hide)) (symbol "PWR_FLAG_0_1" (polyline (pts (xy 0 0) (xy 0 -2.54) (xy 1.27 -1.27) (xy 0 0)) (stroke (width 0.1524) (type default)) (fill (type none)))) (symbol "PWR_FLAG_1_1" (pin power_out line (at 0 0 90) (length 0) (name "pwr" (effects (font (size 1 1)))) (number "1" (effects (font (size 1 1)))))))'
             libs.append(lib)
-            rails=['GND','PI_3V3','PI_5V','SENS_3V3','FPGA_3V3' if name=='shakesense-trenz-hat' else 'CF_3V3'] if name.endswith('-hat') else ['GND','USB_VBUS','USB_5V','V3','V3_SENSOR']
+            rails=['GND','PI_3V3','PI_5V','SENS_3V3','FPGA_3V3' if name=='groundlark-daqhat-01' else 'CF_3V3'] if name.endswith('-hat') else ['GND','USB_VBUS','USB_5V','V3','V3_SENSOR']
             # GEO_AVDD is powered through R96; ERC cannot propagate power through a resistor.
-            if name=="shakesense-trenz-hat": rails.append("GEO_AVDD")
+            if name=="groundlark-daqhat-01": rails.append("GEO_AVDD")
             for k,net in enumerate(rails):
                 xx=35.56+50.8*k; yy=274.32; reference=f'#FLG{k+1:02d}'
-                body.append(f'(symbol (lib_id "ShakeSense:PWR_FLAG") (at {xx} {yy} 0) (unit 1) (in_bom no) (on_board no) (uuid {uid(name+reference)}) (property "Reference" "{reference}" (at {xx} {yy} 0) (effects (font (size 1 1)) hide)) (property "Value" "PWR_FLAG" (at {xx} {yy} 0) (effects (font (size 1 1)) hide)) (instances (project {q(name)} (path "/{root}/{sid}" (reference "{reference}") (unit 1)))))')
+                body.append(f'(symbol (lib_id "Groundlark:PWR_FLAG") (at {xx} {yy} 0) (unit 1) (in_bom no) (on_board no) (uuid {uid(name+reference)}) (property "Reference" "{reference}" (at {xx} {yy} 0) (effects (font (size 1 1)) hide)) (property "Value" "PWR_FLAG" (at {xx} {yy} 0) (effects (font (size 1 1)) hide)) (instances (project {q(name)} (path "/{root}/{sid}" (reference "{reference}") (unit 1)))))')
                 body.append(f'(global_label {q(net)} (shape input) (at {xx} {yy} 0) {effects(1.0,"left")} (uuid {uid(name+reference+"label")}))')
         all_libs.extend(libs)
-        revision='T1-GEO' if name=='shakesense-trenz-hat' else 'A2 PROTOTYPE'
-        date='2026-09-24' if name=='shakesense-trenz-hat' else '2026-09-23'
-        header=f'(kicad_sch (version 20230121) (generator eeschema) (uuid {sid}) (paper "A3") (title_block (title {q(("ShakeSense T1" if name=="shakesense-trenz-hat" else name)+" / "+section)}) (date {q(date)}) (rev {q(revision)}))'
+        revision='DAQHAT-01' if name=='groundlark-daqhat-01' else 'A2 PROTOTYPE'
+        date='2026-09-24' if name=='groundlark-daqhat-01' else '2026-09-23'
+        header=f'(kicad_sch (version 20230121) (generator eeschema) (uuid {sid}) (paper "A3") (title_block (title {q(("Groundlark DAQHAT-01" if name=="groundlark-daqhat-01" else name)+" / "+section)}) (date {q(date)}) (rev {q(revision)}))'
         (folder/file).write_text(header+'\n(lib_symbols\n'+'\n'.join(libs)+')\n'+'\n'.join(body)+'\n)',encoding='utf-8')
     note='Atopile-derived review schematic - prototype, not released.\nThe Pi hosts acquisition and Coldfoot processing; the USB head has a local MCU.\nGlobal net labels connect functional sheets.'
-    if name=='shakesense-trenz-hat':
-        note='Atopile-derived review schematic - T1 geophone / internal-link prototype, not released.\nPi sensor acquisition; SPI6 / quad wiring, UART and switched Pi JTAG; Coldfoot integration deferred.\nGlobal net labels connect functional sheets.'
+    if name=='groundlark-daqhat-01':
+        note='Atopile-derived review schematic - DAQHAT-01 geophone / internal-link prototype, not released.\nPi sensor acquisition; SPI6 / quad wiring, UART and switched Pi JTAG; Coldfoot integration deferred.\nGlobal net labels connect functional sheets.'
     rootbody.append(f'(text {q(note)} (at 30 25 0) {effects(1.5,"left")} (uuid {uid(name+"note")}))')
     (folder/(name+'.kicad_sch')).write_text(f'(kicad_sch (version 20230121) (generator eeschema) (uuid {root}) (paper "A1") (lib_symbols)\n'+'\n'.join(rootbody)+f'\n(sheet_instances (path "/" (page "1"))))',encoding='utf-8')
 
-    external=[symbol.replace('"ShakeSense:Part_', '"Part_').replace('"ShakeSense:PWR_FLAG"','"PWR_FLAG"') for symbol in all_libs]
-    (folder/'ShakeSense.kicad_sym').write_text('(kicad_symbol_lib (version 20231120) (generator "ShakeSense")\n'+'\n'.join(external)+'\n)')
-    (folder/'sym-lib-table').write_text('(sym_lib_table (version 7) (lib (name "ShakeSense") (type "KiCad") (uri "${KIPRJMOD}/ShakeSense.kicad_sym") (options "") (descr "Atopile-derived physical pin maps")))')
+    external=[symbol.replace('"Groundlark:Part_', '"Part_').replace('"Groundlark:PWR_FLAG"','"PWR_FLAG"') for symbol in all_libs]
+    (folder/'Groundlark.kicad_sym').write_text('(kicad_symbol_lib (version 20231120) (generator "Groundlark")\n'+'\n'.join(external)+'\n)')
+    (folder/'sym-lib-table').write_text('(sym_lib_table (version 7) (lib (name "Groundlark") (type "KiCad") (uri "${KIPRJMOD}/Groundlark.kicad_sym") (options "") (descr "Atopile-derived physical pin maps")))')

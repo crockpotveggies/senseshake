@@ -24,7 +24,7 @@ for i in range(20):
         socket+=box(x,-i*2.54,-9.55,1.25,1.25,.15,'0.01 0.01 0.012')
         socket+=box(x,-i*2.54,.5,.64,.64,2,'0.65 0.52 0.22')
 write('Pi_bottom_socket',socket)
-for name in ['shakesense-hat','shakesense-field-head']:
+for name in ['groundlark-hat','groundlark-field-head']:
     path=ROOT/'hw/boards'/name/(name+'.kicad_pcb');b=p.LoadBoard(str(path))
     custom={'U20':'SCL3300','U21':'MAX_M10S','F1':'PTC1812','J5':'Coldfoot_Run1','J1':'Pi_bottom_socket'} if name.endswith('-hat') else {'U2':'PNI14190','U3':'DLVR_option','F1':'PTC1812'}
     missing=[]

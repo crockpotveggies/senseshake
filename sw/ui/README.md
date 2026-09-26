@@ -8,10 +8,10 @@ Run the root `ui.ps1` / `ui.sh` launcher. See the
 - `pyproject.toml`, `uv.lock`: isolated, reproducible optional UI environment.
 - `check.py`: page-construction/asset-delivery smoke check.
 - `assets/`: checked display assets and provenance, separate from editable CAD.
-- [workbench.py](../pi/senseshake/workbench.py): bounded framework-independent
+- [workbench.py](../pi/groundlark/workbench.py): bounded framework-independent
   simulation/recording/replay controller.
 - [test_workbench.py](../tests/test_workbench.py): controller regression tests.
-- [hat_signals.py](../pi/senseshake/hat_signals.py): measured HAT signal regression
+- [hat_signals.py](../pi/groundlark/hat_signals.py): measured HAT signal regression
   behind the **Test HAT signals** button, using production drivers on modeled buses.
 
 The UI is authored in Python. NiceGUI supplies bundled browser components based

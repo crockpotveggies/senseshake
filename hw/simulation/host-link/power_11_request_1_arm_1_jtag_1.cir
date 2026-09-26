@@ -1,4 +1,4 @@
-T1 internal link: power_11_request_1_arm_1_jtag_1
+DAQHAT-01 internal link: power_11_request_1_arm_1_jtag_1
 Vpi pi 0 3.3
 Vfpga fpga 0 3.3
 Vrequest request 0 3.3

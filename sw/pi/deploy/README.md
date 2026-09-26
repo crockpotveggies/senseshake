@@ -4,9 +4,9 @@ The supplied overlay targets the current Pi 4 / BCM2711 design. Do not assume
 the same GPIO chip or controller configuration on a Pi 5. This is an explicit
 bring-up procedure; no workstation boot configuration is changed by the lab.
 
-1. Build `senseshake-t1.dtbo` with `dtc -@ -I dts -O dtb -o
-   senseshake-t1.dtbo senseshake-t1-overlay.dts` on the Pi. Install the result
-   under `/boot/firmware/overlays/` and add `dtoverlay=senseshake-t1` to the
+1. Build `groundlark-daqhat-01.dtbo` with `dtc -@ -I dts -O dtb -o
+   groundlark-daqhat-01.dtbo groundlark-daqhat-01-overlay.dts` on the Pi. Install the result
+   under `/boot/firmware/overlays/` and add `dtoverlay=groundlark-daqhat-01` to the
    `[pi4]` section of `/boot/firmware/config.txt`. Ensure the following settings
    are not unintentionally restricted by that section.
 2. Remove conflicting SPI chip-select overlays. Do not enable `w1-gpio` or
@@ -20,7 +20,7 @@ bring-up procedure; no workstation boot configuration is changed by the lab.
    with `gpioinfo`. Grant the acquisition user access using the Pi's spi/i2c/gpio
    groups. Check the example JSON against the actual chip before using it.
 5. From the repository, run `python sw/tools/sensor.py live --fifo --profile
-   sw/pi/profiles/t1.example.json --seconds 60 --output sw/build/bench-001.ssrec`.
+   sw/pi/profiles/daqhat-01.example.json --seconds 60 --output sw/build/bench-001.ssrec`.
    Use a new output filename each time. Start with the FPGA supply off.
 
 Chip-select order is BCM8,7,5,6,13. IRQ order is BCM27,22,23,24. Sensor OE is
@@ -28,7 +28,7 @@ BCM26; geophone DRDY is BCM4 (currently polled over I2C). IRQs are rising-edge h
 so an event missed while servicing the FIFO does not strand data. The application
 requests GPIO inputs without a bias; the board drives them through U42.
 
-T1-GEO uses the ADS122C04 at I2C address 0x40. Remove `pps` from old profiles.
+DAQHAT-01 uses the ADS122C04 at I2C address 0x40. Remove `pps` from old profiles.
 The active profile has no GNSS and rejects `--utc`. Geophone conversion counters
 report gaps, but polling timestamps do not establish exact sample times.
 Conversion gaps do not reset a healthy ADC; real bus faults still trigger bounded

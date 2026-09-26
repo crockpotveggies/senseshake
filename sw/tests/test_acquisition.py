@@ -8,16 +8,16 @@ import sys
 import tempfile
 import time
 import unittest
-from senseshake_contract.framing import encode
-from senseshake import messages as m
-from senseshake.calibration import Calibrations, configuration_hash
-from senseshake.cli import replay
-from senseshake.recording import Reader, Writer, RecordingError
-from senseshake.runtime import Acquisition, Channel
-from senseshake.session import Sessions
-from senseshake.simulation import Simulated, defaults
-from senseshake.transport import Outbox, Receiver
-from senseshake.worker import Worker
+from groundlark_contract.framing import encode
+from groundlark import messages as m
+from groundlark.calibration import Calibrations, configuration_hash
+from groundlark.cli import replay
+from groundlark.recording import Reader, Writer, RecordingError
+from groundlark.runtime import Acquisition, Channel
+from groundlark.session import Sessions
+from groundlark.simulation import Simulated, defaults
+from groundlark.transport import Outbox, Receiver
+from groundlark.worker import Worker
 
 ROOT = Path(__file__).resolve().parents[2]
 RAW = dict(acceleration=(-32768, 0, 32767), angular_rate=(1, 2, 3), temperature=-100)
@@ -155,7 +155,7 @@ class RecordingTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "unidentified.ssrec"
             with path.open("wb") as stream:
-                writer = Writer(stream, {"format": "senseshake-acquisition-v1"})
+                writer = Writer(stream, {"format": "groundlark-acquisition-v1"})
                 writer.message(m.identity("pi", 1, 1, [1]), 0)
                 writer.message(m.configuration("pi", 1, defaults()[:1]), 0)
                 writer.event("usb_disconnected", "before identity", 1, device=None)
@@ -166,7 +166,7 @@ class RecordingTests(unittest.TestCase):
 
     def make(self):
         stream = io.BytesIO()
-        writer = Writer(stream, {"format": "senseshake-acquisition-v1"})
+        writer = Writer(stream, {"format": "groundlark-acquisition-v1"})
         writer.message(m.identity("pi", 1, 1, [1]), 0)
         writer.message(m.configuration("pi", 1, defaults()[:1]), 0)
         writer.message(sample(), 1)
@@ -271,13 +271,13 @@ class HangingDevice:
 class GappedDevice:
     def configure(self, settings): return settings
     def read(self):
-        from senseshake.sensors import DataGap
+        from groundlark.sensors import DataGap
         raise DataGap('conversion gap; loss unknown')
 
 
 class WorkerTests(unittest.TestCase):
     def test_conversion_gap_type_survives_real_worker_ipc(self):
-        from senseshake.sensors import DataGap
+        from groundlark.sensors import DataGap
         worker = Worker(GappedDevice, {}, startup_timeout=5)
         try:
             worker.configure()

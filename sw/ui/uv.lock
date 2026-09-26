@@ -593,7 +593,7 @@ wheels = [
 ]
 
 [[package]]
-name = "senseshake-workbench"
+name = "groundlark-workbench"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [

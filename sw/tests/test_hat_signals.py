@@ -4,10 +4,10 @@ from io import BytesIO
 from unittest.mock import patch
 import unittest
 
-from senseshake.hat_signals import PROFILE, run_bench, check_recording
-from senseshake.recording import Reader, Writer
-from senseshake.sensors import LSM6DSO, SCL3300
-from senseshake.geophone import ADS122C04
+from groundlark.hat_signals import PROFILE, run_bench, check_recording
+from groundlark.recording import Reader, Writer
+from groundlark.sensors import LSM6DSO, SCL3300
+from groundlark.geophone import ADS122C04
 
 
 def altered(data, edit):
@@ -55,7 +55,7 @@ class HatSignalsTests(unittest.TestCase):
     def test_consistent_but_wrong_rocking_motion_is_rejected(self):
         profile = deepcopy(PROFILE)
         profile["initial"]["orientation_deg"] = [0, 0, 0]
-        with patch("senseshake.hat_signals.PROFILE", profile):
+        with patch("groundlark.hat_signals.PROFILE", profile):
             data, _ = run_bench()
         self.assert_check_fails(data, "Known roll waveform")
 
@@ -69,7 +69,7 @@ class HatSignalsTests(unittest.TestCase):
     def test_wrong_frequency_fails(self):
         profile = deepcopy(PROFILE)
         profile["initial"]["acceleration_m_s2"][0]["frequency_hz"] = 3
-        with patch("senseshake.hat_signals.PROFILE", profile):
+        with patch("groundlark.hat_signals.PROFILE", profile):
             data, _ = run_bench()
         self.assert_check_fails(data, "IMU frequency, gain & phase")
 

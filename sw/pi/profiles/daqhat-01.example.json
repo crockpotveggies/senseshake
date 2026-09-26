@@ -1,0 +1,33 @@
+{
+  "device_id": "daqhat-01-pi",
+  "spi": [
+    "/dev/spidev0.0",
+    "/dev/spidev0.1",
+    "/dev/spidev0.2",
+    "/dev/spidev0.3",
+    "/dev/spidev0.4"
+  ],
+  "i2c": "/dev/i2c-1",
+  "sensor_enable": {
+    "chip": "/dev/gpiochip0",
+    "line": 26
+  },
+  "imu_irq": [
+    {
+      "chip": "/dev/gpiochip0",
+      "line": 27
+    },
+    {
+      "chip": "/dev/gpiochip0",
+      "line": 22
+    },
+    {
+      "chip": "/dev/gpiochip0",
+      "line": 23
+    },
+    {
+      "chip": "/dev/gpiochip0",
+      "line": 24
+    }
+  ]
+}

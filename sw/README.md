@@ -2,7 +2,7 @@
 
 The sensor HAT is driven by Pi software; it does not need separate MCU firmware.
 The [active plan](../docs/sensor-development-plan.md) focuses on sensors using the
-T1 FPGA stack; acquisition must run without Coldfoot or a configured FPGA.
+DAQHAT-01 FPGA stack; acquisition must run without Coldfoot or a configured FPGA.
 The sensor contracts and Pi acquisition application are executable:
 
 - [interfaces/](interfaces/README.md): Protobuf schemas, semantic validation and bounded USB framing.

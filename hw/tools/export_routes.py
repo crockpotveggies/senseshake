@@ -10,7 +10,7 @@ if __name__=='__main__':
     # Pours are regenerated after routing; keep all authored rule areas.
     for zone in list(board.Zones()):
         if not zone.GetIsRuleArea():board.Delete(zone)
-    layout='layout-trenz.json' if name=='shakesense-trenz-hat' else 'layout.json'
+    layout='layout-trenz.json' if name=='groundlark-daqhat-01' else 'layout.json'
     spec=json.loads((ROOT/'hw'/layout).read_text())[name]
     export_dsn(board,folder/(name+'.dsn'),spec.get('signal_via_mm',[.6,.3]),spec.get('ground_layers'))
     print('Exported existing copper for continued routing:',name)

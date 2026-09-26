@@ -1,18 +1,18 @@
-# ShakeSense repository guidance
+# Groundlark repository guidance
 
 Current priority is the [sensor development plan](docs/sensor-development-plan.md)
-on the Pi/T1/Trenz stack. Defer Coldfoot ASIC/runtime/RTL integration. Keep sensor
+on the Pi/DAQHAT-01/Trenz stack. Defer Coldfoot ASIC/runtime/RTL integration. Keep sensor
 software independent of a configured FPGA; preserve the existing FPGA interfaces.
-The T1-LINK revision follows docs/fpga-host-link-plan.md: six internal
+The DAQHAT-01 revision follows docs/fpga-host-link-plan.md: six internal
 QSPI signals, retained UART and four shared pins for isolated Pi-driven JTAG.
 External J84-J89 and their ribbons/guide are removed. This supersedes the
 155-breakout requirement. Keep the circuit, routed CAD, model and validation evidence synchronized. Preserve vendor GPIO/ground
 fixtures and audit all module contacts, including deliberate no-connects, when
 implementing the revision. Keep sensors and the 85 x 56 mm outline.
-T1 uses a provisional eight-layer 1+6+1 HDI stack and a complete native SES
-routing snapshot. Fabrication approval is owned by the user. T1-GEO removes GNSS and adds one Racotech/ADS122C04 input. Preserve its
+DAQHAT-01 uses a provisional eight-layer 1+6+1 HDI stack and a complete native SES
+routing snapshot. Fabrication approval is owned by the user. DAQHAT-01 removes GNSS and adds one Racotech/ADS122C04 input. Preserve its
 independent pin/axis checks, GPIO riser assembly, and explicit
-power envelope in docs/t1-engineering-closure.md. Geophone noise/response measurements, actual stack
+power envelope in docs/daqhat-01-engineering-closure.md. Geophone noise/response measurements, actual stack
 fit and GPIO signal integrity still need qualification. Ethernet is not exposed.
 Keep the A2 ASIC design deferred for this phase.
 
@@ -33,7 +33,7 @@ authoring inputs. Do not silently reroute or rewrite checked CAD during tests.
 The accelerometer HAT uses Pi drivers/runtime software; it has no separate
 microcontroller firmware. Firmware belongs to the remote USB sensor head.
 The Trenz variant needs an FPGA bitstream. Pi acquisition/simulation and bounded
-recovery are implemented; USB-head firmware and physical qualification remain pending. A T1-LINK
+recovery are implemented; USB-head firmware and physical qualification remain pending. A DAQHAT-01
 SPI echo bitstream is implemented and simulated; accelerated models and native
 quad remain future work. Do not claim emulation or
 fabrication readiness from CAD/SPICE checks.
@@ -64,14 +64,14 @@ qualification and MCU firmware remain pending.
 
 The optional live FIFO path pairs IMU tags by slot counter, preserves buffered
 samples and rejects overrun/parity/timestamp faults. Retain unknown loss and timing
-uncertainty semantics. `--utc` is rejected by current T1 live acquisition; legacy GNSS timing and PPS
+uncertainty semantics. `--utc` is rejected by current DAQHAT-01 live acquisition; legacy GNSS timing and PPS
 evidence remain supported for recorded-data correlation. Offline correlation requires a recording-bound timing policy, never
 extrapolates across invalid intervals, and preserves raw data. See docs/utc-timing.md
 and docs/bench-procedure.md; missing measurements/limits must never pass a bench
 report. Pi deployment and measurement tooling live under sw/pi/deploy and sw/tools.
 
 The local workbench is Python/NiceGUI in `sw/ui/`; its framework-independent
-controller is `sw/pi/senseshake/workbench.py`. Preserve raw count/gap semantics,
+controller is `sw/pi/groundlark/workbench.py`. Preserve raw count/gap semantics,
 per-tab sessions, bounded recording/display buffers and separation of camera
 motion from stimulus controls. Keep `sw/ui/uv.lock` synchronized with its optional
 project dependencies; do not add UI packages to atopile's environment. For UI
@@ -79,7 +79,7 @@ changes run its HTTP smoke check, controller tests and a browser interaction
 check. The sensor software profile includes the controller tests. Update the
 workbench guide and review model provenance after changing board display assets.
 
-The T1-GEO analog path targets are enforced by prefab_review.py. Preserve local
+The DAQHAT-01 analog path targets are enforced by prefab_review.py. Preserve local
 filter/protection routing and ground stitches. Four straight Pi supports replace the previous flex-cable assembly;
 check the actual board in assembly_fit.py and prefab_review.py. ADC supply-pad through-vias need filled/capped
 processing in the fabrication notes.

@@ -33,10 +33,10 @@ def main():
                         log.seek(0)
                         raise RuntimeError(log.read().decode(errors="replace"))
                     time.sleep(.1)
-            for text in ("ShakeSense", "STIMULUS LAB", "Finish &amp; save", "Pose &amp; vibration"):
+            for text in ("Groundlark", "STIMULUS LAB", "Finish &amp; save", "Pose &amp; vibration"):
                 # NiceGUI encodes element text as JSON instead of HTML entities.
                 assert text.replace("&amp;", "&") in page, text
-            with urlopen(f"http://127.0.0.1:{port}/board-assets/t1.glb", timeout=10) as response:
+            with urlopen(f"http://127.0.0.1:{port}/board-assets/daqhat-01.glb", timeout=10) as response:
                 assert response.read(4) == b"glTF"
             print("PASS workbench HTTP page and KiCad GLB delivery")
         finally:

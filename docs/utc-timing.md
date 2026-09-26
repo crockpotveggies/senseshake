@@ -1,6 +1,6 @@
 # GNSS pulse association and UTC recordings
 
-**T1-GEO revision:** GNSS is removed; one external Racotech vertical geophone
+**DAQHAT-01 revision:** GNSS is removed; one external Racotech vertical geophone
 uses an ADS122C04 input. See [current circuit, acquisition and validation](geophone-input.md).
 GNSS/PPS/RF details below describe the preceding revision or legacy recordings.
 The current physical bench template is version 2, with geophone response/noise/timing
@@ -20,7 +20,7 @@ Choose new filenames; these tools refuse to overwrite existing recordings.
 
 ```sh
 python sw/tools/sensor.py live --fifo --utc \
-  --profile sw/pi/profiles/t1.example.json --seconds 600 \
+  --profile sw/pi/profiles/daqhat-01.example.json --seconds 600 \
   --output sw/build/timing-001.ssrec
 python sw/tools/sensor.py replay sw/build/timing-001.ssrec
 python sw/tools/correlate_utc.py sw/build/timing-001.ssrec \

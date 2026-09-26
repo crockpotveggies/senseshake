@@ -7,13 +7,13 @@ import io
 import json
 from pathlib import Path
 import unittest
-from senseshake.geophone import ADS122C04
-from senseshake.recording import Writer, Reader
-from senseshake.runtime import Acquisition, Channel
-from senseshake.session import Sessions
-from senseshake.simulation import defaults
-from senseshake.stimulus import Scenario
-from senseshake.virtual_hat import VirtualDriver
+from groundlark.geophone import ADS122C04
+from groundlark.recording import Writer, Reader
+from groundlark.runtime import Acquisition, Channel
+from groundlark.session import Sessions
+from groundlark.simulation import defaults
+from groundlark.stimulus import Scenario
+from groundlark.virtual_hat import VirtualDriver
 
 
 class Clock:

@@ -10,15 +10,15 @@ import subprocess
 import sys
 import tempfile
 import unittest
-from senseshake.utc import intervals, correlate, tim_tp, timeutc, policy_check
-from senseshake.gnss_timing import TimedGNSS, configuration_evidence
-from senseshake.sensors import ubx_packet
-from senseshake.simulation import defaults
-from senseshake.recording import Reader, Writer
-from senseshake.runtime import Acquisition, Channel
-from senseshake.session import Sessions
-from senseshake import messages
-from senseshake.cli import replay
+from groundlark.utc import intervals, correlate, tim_tp, timeutc, policy_check
+from groundlark.gnss_timing import TimedGNSS, configuration_evidence
+from groundlark.sensors import ubx_packet
+from groundlark.simulation import defaults
+from groundlark.recording import Reader, Writer
+from groundlark.runtime import Acquisition, Channel
+from groundlark.session import Sessions
+from groundlark import messages
+from groundlark.cli import replay
 
 S = 1_000_000_000
 BASE = int(datetime(2026, 9, 24, 12, tzinfo=timezone.utc).timestamp())
@@ -121,7 +121,7 @@ class UTCTests(unittest.TestCase):
         driver = TimedGNSS(bus, sleep=lambda _:None, clock_ns=lambda:clock[0])
         driver.buffered, driver.ready = True, lambda:False
         stream = io.BytesIO()
-        app = Acquisition(Writer(stream, {'format':'senseshake-acquisition-v1'}), Sessions(),
+        app = Acquisition(Writer(stream, {'format':'groundlark-acquisition-v1'}), Sessions(),
                           [Channel('pi',1,defaults(legacy_gnss=True)[5],driver)])
         app.start(0); clock[0] = S
         payload = bytearray(92); payload[:4] = (1000).to_bytes(4,'little')
@@ -219,7 +219,7 @@ class UTCTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory);source=root/'source.ssrec';output=root/'utc.ssrec'
             with source.open('wb') as stream:
-                writer=Writer(stream,dict(format='senseshake-acquisition-v1',source='modeled-timing',utc_capture='m10-tim-tp-v1'))
+                writer=Writer(stream,dict(format='groundlark-acquisition-v1',source='modeled-timing',utc_capture='m10-tim-tp-v1'))
                 writer.message(messages.identity('pi',1,1,[1]),0)
                 writer.message(messages.configuration('pi',1,defaults()[:1]),0)
                 raw=dict(acceleration=(1,2,3),angular_rate=(4,5,6))

@@ -1,6 +1,6 @@
-# T1-GEO: one Racotech geophone
+# DAQHAT-01: one Racotech geophone
 
-The active 85 × 56 mm T1 carrier replaces MAX-M10S U21, U.FL J2 and the
+The active 85 × 56 mm DAQHAT-01 carrier replaces MAX-M10S U21, U.FL J2 and the
 GNSS support capacitors with one external passive vertical geophone input.
 Historical A2 and the remote USB magnetometer/infrasound board are unchanged.
 All 155 Trenz GPIO assignments remain required and independently checked.
@@ -77,7 +77,7 @@ completion timestamps have unknown absolute uncertainty, and overwritten
 conversion loss is unknown. Scheduler/IPC throughput must be measured on the
 target Pi; 330 SPS conversion rate does not guarantee 330 delivered samples/s.
 ADC data validity does not prove coil continuity; automatic open-coil detection
-is not implemented. The current T1 rejects `--utc`; it contains neither GNSS nor a UTC/PPS source.
+is not implemented. The current DAQHAT-01 rejects `--utc`; it contains neither GNSS nor a UTC/PPS source.
 
 Duplicate reads do not extend the counter ambiguity window. Conversion gaps emit
 missing records with unknown loss, without resetting an otherwise healthy ADC.
@@ -108,7 +108,7 @@ sequence and physical cable/stack fit. Blank physical evidence never passes.
 
 ## Recorded validation
 
-The [T1-GEO verification record](../hw/boards/shakesense-trenz-hat/verification.json)
+The [DAQHAT-01 verification record](../hw/boards/groundlark-daqhat-01/verification.json)
 records all 18 portable stages passing, 152 software tests without skips, 20
 hardware regressions and 64 total SPICE cases. Native KiCad ERC/DRC and
 connectivity report zero findings. Clean SES replay reproduces all 6,444 copper

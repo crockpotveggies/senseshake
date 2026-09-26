@@ -3,7 +3,7 @@ from pathlib import Path
 import json,hashlib,datetime
 ROOT=Path(__file__).resolve().parents[2]
 rows=[]
-for name in ['shakesense-hat','shakesense-field-head']:
+for name in ['groundlark-hat','groundlark-field-head']:
     r=json.loads((ROOT/'hw/boards'/name/'validation.json').read_text())
     assert not r['connectivity_errors'] and not r['drc_errors'] and not r['erc_findings'] and not r['unconnected_items'],r
     warnings=sum(r['drc_findings_by_type'].values())
@@ -16,7 +16,7 @@ assert 'PASS: upstream solver rejected 5V' in neg
 files=list((ROOT/'hw/elec').glob('*.ato'))+[ROOT/'hw/ato.yaml',ROOT/'hw/layout.json',ROOT/'hw/layout-fixed-routes.json']
 files.extend((ROOT/'hw/tools').glob('*.py'))
 files.extend((ROOT/'hw/simulation').glob('*.cir'))
-for name in ['shakesense-hat','shakesense-field-head']:
+for name in ['groundlark-hat','groundlark-field-head']:
     folder=ROOT/'hw/boards'/name
     files.extend([folder/(name+'.kicad_pcb'),folder/(name+'.kicad_pro'),folder/(name+'.ses'),*folder.glob('*.kicad_sch'),folder/'drc.json',folder/'erc.json',folder/'validation.json',folder/'bom.csv'])
 files.extend([ROOT/'hw/simulation/results.json',ROOT/'hw/simulation/circuit-checks.json'])

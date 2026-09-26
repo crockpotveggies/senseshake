@@ -1,5 +1,5 @@
 [project]
-name = "senseshake-workbench"
+name = "groundlark-workbench"
 version = "0.1.0"
 description = "Python-authored sensor workbench"
 requires-python = ">=3.12,<3.13"

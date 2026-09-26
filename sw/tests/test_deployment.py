@@ -8,7 +8,7 @@ import sys
 import tempfile
 import unittest
 from unittest.mock import patch
-from senseshake.linux_io import RisingEdges, GPIOEventRequest
+from groundlark.linux_io import RisingEdges, GPIOEventRequest
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -22,7 +22,7 @@ class DeploymentTests(unittest.TestCase):
             for i in range(5):
                 folder = root/'devices'/f'spi0.{i}'/'of_node'
                 folder.mkdir(parents=True)
-                (folder/'compatible').write_bytes(b'senseshake,' + (b'lsm6dso-userspace' if i < 4 else b'scl3300-userspace') + b'\0')
+                (folder/'compatible').write_bytes(b'groundlark,' + (b'lsm6dso-userspace' if i < 4 else b'scl3300-userspace') + b'\0')
             self.assertEqual(len(module.inventory(root)), 5)
             (root/'devices/spi0.3/of_node/compatible').write_bytes(b'unrelated\0')
             with self.assertRaises(ValueError): module.inventory(root)
@@ -43,7 +43,7 @@ class DeploymentTests(unittest.TestCase):
 };''')
             def run(*args): return subprocess.check_output(args, text=True).strip()
             run('dtc', '-@', '-I', 'dts', '-O', 'dtb', '-o', str(folder/'base.dtb'), str(base))
-            run('dtc', '-@', '-I', 'dts', '-O', 'dtb', '-o', str(folder/'overlay.dtbo'), str(ROOT/'sw/pi/deploy/senseshake-t1-overlay.dts'))
+            run('dtc', '-@', '-I', 'dts', '-O', 'dtb', '-o', str(folder/'overlay.dtbo'), str(ROOT/'sw/pi/deploy/groundlark-daqhat-01-overlay.dts'))
             run('fdtoverlay', '-i', str(folder/'base.dtb'), '-o', str(folder/'merged.dtb'), str(folder/'overlay.dtbo'))
             merged = str(folder/'merged.dtb')
             self.assertEqual(set(run('fdtget','-l',merged,'/spi').split()), {f'spidev@{i}' for i in range(5)})
@@ -55,7 +55,7 @@ class DeploymentTests(unittest.TestCase):
             for i in range(5):
                 self.assertEqual(run('fdtget','-t','u',merged,f'/spi/spidev@{i}','reg'), str(i))
                 self.assertEqual(run('fdtget',merged,f'/spi/spidev@{i}','compatible'),
-                                 'senseshake,' + ('lsm6dso-userspace' if i < 4 else 'scl3300-userspace'))
+                                 'groundlark,' + ('lsm6dso-userspace' if i < 4 else 'scl3300-userspace'))
 
     @unittest.skipUnless(shutil.which('dtc') and shutil.which('fdtoverlay'), 'device-tree tools in portable lab')
     def test_fpga_overlay_preserves_interrupt_and_requests_cs_timing(self):
@@ -72,26 +72,26 @@ class DeploymentTests(unittest.TestCase):
 };''')
             def run(*args):return subprocess.check_output(args,text=True).strip()
             run('dtc','-@','-I','dts','-O','dtb','-o',str(folder/'base.dtb'),str(base))
-            run('dtc','-@','-I','dts','-O','dtb','-o',str(folder/'link.dtbo'),str(ROOT/'sw/pi/deploy/senseshake-fpga-overlay.dts'))
+            run('dtc','-@','-I','dts','-O','dtb','-o',str(folder/'link.dtbo'),str(ROOT/'sw/pi/deploy/groundlark-fpga-overlay.dts'))
             run('fdtoverlay','-i',str(folder/'base.dtb'),'-o',str(folder/'merged.dtb'),str(folder/'link.dtbo'))
             merged=str(folder/'merged.dtb')
             self.assertEqual(run('fdtget','-t','u',merged,'/gpio/spi6_cs_pins','brcm,pins'),'18')
             self.assertEqual(run('fdtget',merged,'/spi/spidev@1','status'),'disabled')
             cs=[int(v) for v in run('fdtget','-t','u',merged,'/spi','cs-gpios').split()]
             self.assertEqual(cs[1::3],[18])
-            self.assertEqual(run('fdtget',merged,'/spi/spidev@0','compatible'),'senseshake,fpga-userspace')
+            self.assertEqual(run('fdtget',merged,'/spi/spidev@0','compatible'),'groundlark,fpga-userspace')
             for prop in ('setup','hold','inactive'):
                 self.assertEqual(run('fdtget','-t','u',merged,'/spi/spidev@0',f'spi-cs-{prop}-delay-ns'),'1000')
             self.assertEqual(run('fdtget','-t','u',merged,'/spi/spidev@0','spi-max-frequency'),'1000000')
 
     def test_gpio_edge_records_and_bounds(self):
         edges = RisingEdges.__new__(RisingEdges); edges.fd = 9
-        with patch('senseshake.linux_io.os.read', return_value=struct.pack('=QI4x',123456789,1)) as read:
+        with patch('groundlark.linux_io.os.read', return_value=struct.pack('=QI4x',123456789,1)) as read:
             self.assertEqual(edges.read(), [123456789])
             read.assert_called_once_with(9, 1024)
-        with patch('senseshake.linux_io.os.read', side_effect=BlockingIOError): self.assertFalse(edges.poll())
+        with patch('groundlark.linux_io.os.read', side_effect=BlockingIOError): self.assertFalse(edges.poll())
         for data in (b'x', b'', struct.pack('=QI4x',1,2)):
-            with patch('senseshake.linux_io.os.read', return_value=data):
+            with patch('groundlark.linux_io.os.read', return_value=data):
                 with self.assertRaises(OSError): edges.read()
 
     @unittest.skipUnless(sys.platform.startswith('linux'), 'Linux GPIO request ABI')
@@ -102,8 +102,8 @@ class DeploymentTests(unittest.TestCase):
             request = GPIOEventRequest.from_buffer_copy(data)
             self.assertEqual((request.offset, request.handleflags, request.eventflags),(27,1,1))
             request.fd=18; data[:]=bytes(request)
-        with patch('senseshake.linux_io.os.open',return_value=17), patch('senseshake.linux_io.ioctl',fake), \
-             patch('senseshake.linux_io.os.close') as close, patch('fcntl.fcntl'):
+        with patch('groundlark.linux_io.os.open',return_value=17), patch('groundlark.linux_io.ioctl',fake), \
+             patch('groundlark.linux_io.os.close') as close, patch('fcntl.fcntl'):
             edge=RisingEdges('/dev/gpiochip0',27)
             close.assert_called_once_with(17)
             edge.close()

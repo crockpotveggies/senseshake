@@ -18,8 +18,8 @@ def make(out):
     manifest = json.loads((out / 'manifest.json').read_text())
     geometry = json.loads((out / 'review/placement-geometry.json').read_text())
     check = json.loads((out / 'review/independent-check.json').read_text())
-    c = Canvas(str(out / 'T1-LINK-assembly-review.pdf'), pagesize=(W, H), invariant=1)
-    c.setTitle('ShakeSense T1-LINK | JLCPCB engineering review | one assembled HAT')
+    c = Canvas(str(out / 'DAQHAT-01-assembly-review.pdf'), pagesize=(W, H), invariant=1)
+    c.setTitle('Groundlark DAQHAT-01 | JLCPCB engineering review | one assembled HAT')
     style = ParagraphStyle('body', fontName='Helvetica', fontSize=10, leading=15, textColor=INK)
 
     def paragraph(text, y, width=499):
@@ -29,7 +29,7 @@ def make(out):
     def page(title, index):
         c.setFillColor(ACCENT); c.rect(0, H-13, W, 13, fill=1, stroke=0)
         c.setFillColor(INK); c.setFont('Helvetica', 10)
-        c.drawString(48, H-48, 'SHAKESENSE / T1-LINK / JLCPCB')
+        c.drawString(48, H-48, 'GROUNDLARK / DAQHAT-01 / JLCPCB')
         c.setFont('Helvetica-Bold', 22); c.drawString(48, H-83, title)
         c.setFillColor(WARN); c.setFont('Helvetica-Bold', 9)
         c.drawString(48, H-108, 'ENGINEERING REVIEW ONLY - NOT RELEASED FOR MANUFACTURE')
@@ -40,7 +40,7 @@ def make(out):
     page('Assembly request', 1)
     y = H-139
     for text in [
-        '<b>Requested deliverable:</b> one populated 85 x 56 mm T1-LINK carrier. Standard PCBA, double-sided SMT plus through-hole assembly. Pi, Trenz module, geophone, riser, power supply and mounting hardware are separate purchases.',
+        '<b>Requested deliverable:</b> one populated 85 x 56 mm DAQHAT-01 carrier. Standard PCBA, double-sided SMT plus through-hole assembly. Pi, Trenz module, geophone, riser, power supply and mounting hardware are separate purchases.',
         '<b>Quantity hold:</b> JLCPCB publishes a two-piece Standard PCBA minimum. Keep this request at one; obtain an exception or the owner\'s agreement to two before ordering. Bare-board lot size and component attrition are separate quote items.',
         '<b>Handling hold:</b> the 56 mm board dimension is below the 70 mm Standard minimum. Manufacturer to propose an assembly frame, edge rails and fiducials; return panel data for review without altering the HAT outline or hole positions.',
         '<b>Sourcing hold:</b> 127 placements, 40 grouped BOM lines. JP1 and J4 still have descriptive placeholders, and Q1 lacks a manufacturer-specific ordering code. Only two exact catalog matches have been recorded; the rest need sourcing review. No stock is reserved and no substitutions are approved.',

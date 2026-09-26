@@ -1,5 +1,5 @@
 {
-  "shakesense-trenz-hat": {
+  "groundlark-daqhat-01": {
     "target": "trenz_hat",
     "size": [
       85,
@@ -503,7 +503,7 @@
       {
         "ref": "U20",
         "value": "SCL3300-D01",
-        "footprint": "ShakeSense:SCL3300_D01",
+        "footprint": "Groundlark:SCL3300_D01",
         "names": {
           "1": "AVSS",
           "2": "A_EXTC",
@@ -527,7 +527,7 @@
         "mpn": "SCL3300-D01-10",
         "note": "",
         "dnp": false,
-        "local_fp": "ShakeSense__SCL3300_D01",
+        "local_fp": "Groundlark__SCL3300_D01",
         "type": "P_11"
       },
       {

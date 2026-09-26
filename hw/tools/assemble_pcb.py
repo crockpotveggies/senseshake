@@ -109,7 +109,7 @@ def main():
             fp.Value().SetVisible(False)
             # Set native schematic linkage for the derived review schematic.
             fp.SetPath(p.KIID_PATH('/'+uid(name)+'/'+uid(name+'/'+meta['section'])+'/'+uid(name+'/'+ref)))
-            fp.SetFPID(p.LIB_ID('ShakeSense',meta['local_fp']))
+            fp.SetFPID(p.LIB_ID('Groundlark',meta['local_fp']))
             pads={pad.GetNumber():pad.GetNetname() or None for pad in fp.Pads() if pad.GetNumber()}
             # Atopile creates unique singleton nets for intentionally open pins.
             meta['pins']=pads
@@ -133,7 +133,7 @@ def main():
                 for a,c in zip(pts,pts[1:]):
                     t=p.PCB_TRACK(b);t.SetStart(v(*a));t.SetEnd(v(*c));t.SetWidth(p.FromMM(spec.get('rf',{}).get('width_mm',.3)));t.SetLayer(p.F_Cu);t.SetNet(nets['GNSS_RF']);t.SetLocked(True);b.Add(t)
             if target=='hat':
-                add_text(b,'ShakeSense A2 | atopile',87,104.5,.85)
+                add_text(b,'Groundlark A2 | atopile',87,104.5,.85)
                 add_text(b,'COLDFOOT / RUN-1',145,53,.8)
                 add_text(b,'XYZ MOTION',70,61,.8)
                 add_text(b,'NO GEOPHONE',83,87,.8)
@@ -142,11 +142,11 @@ def main():
             outline=[(30,8),(80,8),(80,48),(30,48)] if target=='trenz_hat' else [(90,19),(104,19),(104,35),(90,35)]
             for a,c in zip(outline,outline[1:]+outline[:1]):add_shape(b,50+a[0],50+a[1],50+c[0],50+c[1],p.Dwgs_User,.12)
             if target=='trenz_hat':
-                add_text(b,'ShakeSense T1 / 200T',84,104.8,.8)
+                add_text(b,'Groundlark DAQHAT-01 / 200T',88,104.8,.8)
                 add_text(b,'3V3 ONLY',57,57,.8)
         else:
-            add_text(b,'ShakeSense FIELD A2',97,91,.8);add_text(b,'RM3100 / XYZ',68,54,.8)
-        title=p.TITLE_BLOCK();title.SetTitle(name+' / atopile prototype');title.SetRevision('T1-LINK HDI' if target=='trenz_hat' else 'A2');title.SetDate('2026-09-24' if target=='trenz_hat' else '2026-09-23');b.SetTitleBlock(title)
+            add_text(b,'Groundlark FIELD A2',97,91,.8);add_text(b,'RM3100 / XYZ',68,54,.8)
+        title=p.TITLE_BLOCK();title.SetTitle(name+' / atopile prototype');title.SetRevision('DAQHAT-01 HDI' if target=='trenz_hat' else 'A2');title.SetDate('2026-09-24' if target=='trenz_hat' else '2026-09-23');b.SetTitleBlock(title)
         restore(b)
         if target=='trenz_hat':
             for fp in b.GetFootprints():
@@ -155,7 +155,7 @@ def main():
         # Stock models are resolved by KiCad 9. Portable custom models are added
         # by hw/tools/models.py after routing, without changing connectivity.
         path=folder/(name+'.kicad_pcb');unique_ids(b);save_board(str(path),b)
-        lib=ROOT/'hw/libraries'/'ShakeSense.pretty';lib.mkdir(exist_ok=True)
+        lib=ROOT/'hw/libraries'/'Groundlark.pretty';lib.mkdir(exist_ok=True)
         for fpfile in (ROOT/'hw/elec').glob('*.kicad_mod'):shutil.copyfile(fpfile,lib/fpfile.name)
         derived={'size':spec['size'],'parts':parts};schematic(name,derived,folder)
         for sch in folder.glob('*.kicad_sch'):
@@ -165,7 +165,7 @@ def main():
         with open(folder/'bom.csv','w',newline='') as f:
             writer=csv.writer(f);writer.writerow(['Reference','Value','MPN','Footprint','DNP','Note'])
             for x in parts:writer.writerow([x.ref,x.value,x.mpn,x.local_fp,x.dnp,x.note])
-        (folder/'fp-lib-table').write_text('(fp_lib_table (version 7) (lib (name "ShakeSense") (type "KiCad") (uri "${KIPRJMOD}/../../libraries/ShakeSense.pretty") (options "") (descr "Atopile atomic parts")))')
+        (folder/'fp-lib-table').write_text('(fp_lib_table (version 7) (lib (name "Groundlark") (type "KiCad") (uri "${KIPRJMOD}/../../libraries/Groundlark.pretty") (options "") (descr "Atopile atomic parts")))')
         project={'meta':{'filename':name+'.kicad_pro','version':1},'board':{'design_settings':{'rules':{'min_clearance':.15,'min_track_width':.15,'min_via_diameter':signal_via[0],'min_through_hole_diameter':signal_via[1],'min_copper_edge_clearance':.3,'min_microvia_diameter':.3,'min_microvia_drill':.1}}},'net_settings':{'classes':[{'name':'Default','clearance':.15,'track_width':.15,'via_diameter':signal_via[0],'via_drill':signal_via[1],'microvia_diameter':.3,'microvia_drill':.1,'diff_pair_width':.2,'diff_pair_gap':.2,'diff_pair_via_gap':.25}],'meta':{'version':3}}}
         (folder/(name+'.kicad_pro')).write_text(json.dumps(project,indent=2))
         from stackup import apply_stackup

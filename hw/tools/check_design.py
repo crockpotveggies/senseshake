@@ -10,7 +10,7 @@ import pcbnew as pcb
 ROOT=Path(__file__).resolve().parents[2]
 def main():
     board_failures=[]
-    for folder in [ROOT/'hw/boards/shakesense-hat',ROOT/'hw/boards/shakesense-field-head']:
+    for folder in [ROOT/'hw/boards/groundlark-hat',ROOT/'hw/boards/groundlark-field-head']:
         name=folder.name
         subprocess.run(['kicad-cli','sch','export','netlist','--format','kicadxml','-o',str(folder/'schematic-netlist.xml'),str(folder/(name+'.kicad_sch'))],check=True)
         tree=ET.parse(folder/'schematic-netlist.xml')
@@ -34,7 +34,7 @@ def main():
                     if actual.get(key)!=net: failures.append(f'PCB {key}: {actual.get(key)} != {net}')
                     if sch.get(key)!=net: failures.append(f'SCH {key}: {sch.get(key)} != {net}')
                 elif degree[actual.get(key,'')]>1: failures.append(f'NC connected {key}')
-        if name=='shakesense-hat':
+        if name=='groundlark-hat':
             f=next(f for f in board.GetFootprints() if f.GetReference()=='J1')
             pos={pad.GetNumber():(round(pcb.ToMM(pad.GetPosition().x)-50,3),round(pcb.ToMM(pad.GetPosition().y)-50,3)) for pad in f.Pads()}
             for pin,xy in {'1':(8.38,4.77),'2':(8.38,2.23),'39':(56.64,4.77),'40':(56.64,2.23)}.items():

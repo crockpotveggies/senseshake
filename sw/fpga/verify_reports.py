@@ -12,7 +12,7 @@ import re
 
 ROOT=Path(__file__).resolve().parents[2]
 FOLDER=ROOT/'sw/fpga/verification'
-SOURCES=('sw/fpga/rtl/t1_link.sv','sw/fpga/t1.xdc','sw/fpga/build.tcl')
+SOURCES=('sw/fpga/rtl/daqhat_01_link.sv','sw/fpga/daqhat-01.xdc','sw/fpga/build.tcl')
 REPORTS=('timing.rpt','cdc.rpt','drc.rpt','utilization.rpt')
 
 
@@ -46,7 +46,7 @@ def main():
     directory=args.record or FOLDER
     metrics=validate(*( (directory/name).read_text() for name in REPORTS[:3]))
     if args.record:
-        bit=directory/'t1-link.bit'
+        bit=directory/'daqhat-01-link.bit'
         if bit.stat().st_size<1_000_000:raise ValueError('Missing/truncated 200T bitstream')
         tool=re.search(r'Tool Version : (.+)',(directory/'timing.rpt').read_text())
         for name in REPORTS:

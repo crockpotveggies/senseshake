@@ -3,8 +3,8 @@ import math
 from pathlib import Path
 import tempfile
 import unittest
-from senseshake.measurements import Moments, analyze, compare
-from senseshake.hat_signals import run_bench
+from groundlark.measurements import Moments, analyze, compare
+from groundlark.hat_signals import run_bench
 
 
 class MeasurementTests(unittest.TestCase):

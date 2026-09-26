@@ -15740,7 +15740,7 @@
 			)
 		)
 	)
-	(footprint "elec:ShakeSense__SCL3300_D01"
+	(footprint "elec:Groundlark__SCL3300_D01"
 		(layer "F.Cu")
 		(uuid "ba2635c0-c9c2-42fe-881e-9ffa4642524b")
 		(at 250 0)

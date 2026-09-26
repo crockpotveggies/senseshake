@@ -1,7 +1,7 @@
 # Raspberry Pi software
 
 Executable acquisition, calibration, bounded recording/replay, Linux adapters
-and deterministic simulation are in `senseshake/`. No configured FPGA is needed.
+and deterministic simulation are in `groundlark/`. No configured FPGA is needed.
 See the [run guide and recovery policy](../../docs/sensor-software.md).
 Use the [stimulus guide](../../docs/stimulus-models.md) for motion/field/pressure
 waveforms, GNSS trajectories and timed faults. Example: add
@@ -9,7 +9,7 @@ waveforms, GNSS trajectories and timed faults. Example: add
 
 Separate pure processing/protocol logic from Linux I2C/SPI/UART/USB adapters so
 the same application can run against recorded samples and fault-injecting fakes.
-Use the [T1 sensor/carrier design](../../docs/trenz-hat.md) and
+Use the [DAQHAT-01 sensor/carrier design](../../docs/trenz-hat.md) and
 [USB interface contract](../../docs/usb-sensor-head.md). Coldfoot integration is
 deferred; if resumed, its host semantics remain owned by the current
 `docs/runtime_contract.md` in the separate Coldfoot SoC repository.

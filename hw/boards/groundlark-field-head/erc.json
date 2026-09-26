@@ -1,0 +1,33 @@
+{
+    "$schema": "https://schemas.kicad.org/erc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-09-26T01:34:22+0000",
+    "included_severities": [
+        "error",
+        "warning"
+    ],
+    "kicad_version": "9.0.9",
+    "sheets": [
+        {
+            "path": "/",
+            "uuid_path": "/3e18d740-4de4-5e4c-8150-31b96f65f152",
+            "violations": []
+        },
+        {
+            "path": "/01-usb-power-page-01/",
+            "uuid_path": "/3e18d740-4de4-5e4c-8150-31b96f65f152/afcd2cab-ea33-531e-8aa3-b4956a224de3",
+            "violations": []
+        },
+        {
+            "path": "/02-controller-page-01/",
+            "uuid_path": "/3e18d740-4de4-5e4c-8150-31b96f65f152/e231ccbc-5d19-533a-9a39-02eb5ecbd109",
+            "violations": []
+        },
+        {
+            "path": "/03-sensors-page-01/",
+            "uuid_path": "/3e18d740-4de4-5e4c-8150-31b96f65f152/7bec89a2-520f-51ab-8226-ae13c36b967f",
+            "violations": []
+        }
+    ],
+    "source": "groundlark-field-head.kicad_sch"
+}

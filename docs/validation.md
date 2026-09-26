@@ -1,7 +1,7 @@
 # A2 validation and release gates
 
-The separate FPGA T1 variant has its own [validation report](trenz-hat.md#verification-and-release-limits).
-The A2 results below do not certify T1.
+The separate FPGA DAQHAT-01 variant has its own [validation report](trenz-hat.md#verification-and-release-limits).
+The A2 results below do not certify DAQHAT-01.
 
 **Engineering prototype — not released for fabrication or assembly.** The
 circuit is authored in atopile; the native KiCad layout and review schematic
@@ -23,8 +23,8 @@ These rules are not a selected manufacturer's stackup or acceptance criteria.
 
 | Board | Atopile pins compared | ERC findings | DRC errors | DRC warnings | Unconnected | Tracks/vias |
 |---|---:|---:|---:|---:|---:|---:|
-| shakesense-hat | 538 | 0 | 0 | 0 | 0 | 2197 |
-| shakesense-field-head | 131 | 0 | 0 | 0 | 0 | 348 |
+| groundlark-hat | 538 | 0 | 0 | 0 | 0 | 2197 |
+| groundlark-field-head | 131 | 0 | 0 | 0 | 0 | 348 |
 
 Evidence: each board's `validation.json`, `drc.json`, `erc.json` and exported
 `schematic-netlist.xml` under `hw/boards/`. `hw/tools/check_design.py` checks source,

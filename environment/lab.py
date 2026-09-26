@@ -18,9 +18,10 @@ else:
     import fcntl
     import resource
 
-MARKER = "senseshake-lab-v1"
+MARKER = "groundlark-lab-v1"
+LEGACY_MARKER = "senseshake-lab-v1"  # Ownership of pre-rename runs is immutable.
 RUN_RE = re.compile(r"\d{8}T\d{6}Z-[0-9a-f]{8}")
-BOARDS = ("shakesense-hat", "shakesense-field-head", "shakesense-trenz-hat")
+BOARDS = ("groundlark-hat", "groundlark-field-head", "groundlark-daqhat-01")
 TARGETS = ("hat", "field_head", "trenz_hat")
 MiB = 1024 * 1024
 
@@ -52,7 +53,11 @@ def tree_bytes(path):
 def lab_lock(root):
     no_links(root)
     root.mkdir(parents=True, exist_ok=True)
-    marker = root / ".senseshake-lab"
+    marker = root / ".groundlark-lab"
+    legacy = root / ".senseshake-lab"
+    no_links(legacy)
+    if not marker.exists() and legacy.exists():
+        marker = legacy
     no_links(marker)
     # O_EXCL avoids racing initialization. Never adopt a nonempty directory.
     if not marker.exists():
@@ -60,7 +65,7 @@ def lab_lock(root):
             raise RuntimeError("Unmarked .lab is not empty; refusing to adopt it")
         with marker.open("x") as stream:
             stream.write(MARKER)
-    if marker.read_text() != MARKER:
+    if marker.read_text() not in (MARKER, LEGACY_MARKER):
         raise RuntimeError("Invalid lab ownership marker")
     no_links(root / ".lock")
     with (root / ".lock").open("a") as lock:
@@ -97,7 +102,7 @@ def managed_runs(root):
         if not marker.is_file():
             raise RuntimeError(f"Missing run marker: {path}")
         data = json.loads(marker.read_text())
-        if data.get("owner") != MARKER or data.get("id") != path.name:
+        if data.get("owner") not in (MARKER, LEGACY_MARKER) or data.get("id") != path.name:
             raise RuntimeError(f"Invalid run marker: {path}")
         runs.append(path)
     return sorted(runs, key=lambda p: p.name, reverse=True)
@@ -134,7 +139,7 @@ def source_files(source):
         for pattern in patterns:
             files.extend((source / folder).rglob(pattern))
     files.append(source / "hw/tests/overvoltage.ato")
-    files.append(source / "hw/boards/shakesense-trenz-hat/shakesense-trenz-hat.ses")
+    files.append(source / "hw/boards/groundlark-daqhat-01/groundlark-daqhat-01.ses")
     for target in TARGETS:
         folder = source / "hw/layout" / target
         files.append(folder / f"{target}.kicad_pcb")
@@ -174,7 +179,7 @@ def versions():
     def output(args):
         return subprocess.check_output(args, text=True, stderr=subprocess.STDOUT).strip()
     return {
-        "image_id": os.environ.get("SENSESHAKE_IMAGE_ID", "unknown"),
+        "image_id": os.environ.get("GROUNDLARK_IMAGE_ID", "unknown"),
         "kicad": output(["kicad-cli", "version"]),
         "ngspice": output(["ngspice", "--version"]),
         "system_python": sys.version,
@@ -197,7 +202,7 @@ def commands(profile):
         steps.append(("reject-overvoltage", ["/opt/atopile/bin/python", "hw/tools/solve_constraints.py", "--negative"]))
     if profile in ("full", "quick"):
         steps += [("hardware-regressions", ["python3", "-m", "unittest", "discover", "-s", "hw/tests", "-p", "test_*.py"])]
-        steps += [(name, ["python3", f"hw/tools/{name}.py"]) for name in ("check_circuit", "check_design", "check_trenz", "t1_engineering", "prefab_review")]
+        steps += [(name, ["python3", f"hw/tools/{name}.py"]) for name in ("check_circuit", "check_design", "check_trenz", "daqhat_01_engineering", "prefab_review")]
         steps.append(("routing-replay", ["python3", "hw/tools/replay_trenz.py"]))
     if profile != "software":
         steps += [(name, ["python3", f"hw/tools/{name}.py"]) for name in ("simulate", "simulate_trenz", "simulate_geophone", "simulate_geophone_review", "simulate_host_link")]

@@ -3930,7 +3930,7 @@
 			)
 		)
 	)
-	(footprint "elec:ShakeSense__PNI_14190_Module"
+	(footprint "elec:Groundlark__PNI_14190_Module"
 		(layer "F.Cu")
 		(uuid "40358a1d-a0d2-4341-9b43-cad84642524b")
 		(at 230 0 0)
@@ -4245,7 +4245,7 @@
 			)
 		)
 	)
-	(footprint "elec:ShakeSense__DLVR_E1BS"
+	(footprint "elec:Groundlark__DLVR_E1BS"
 		(layer "F.Cu")
 		(uuid "ef0109ae-5b3c-44bf-bfcd-08694642524b")
 		(at 250 0 0)

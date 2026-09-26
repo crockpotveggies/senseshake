@@ -6,7 +6,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path[:0] = [str(ROOT / "sw/pi"), str(ROOT / "sw/interfaces/python")]
-from senseshake.hat_signals import run_bench
+from groundlark.hat_signals import run_bench
 
 
 def main():

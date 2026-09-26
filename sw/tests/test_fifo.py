@@ -2,12 +2,12 @@ import io
 import struct
 import unittest
 from collections import deque
-from senseshake.fifo import Slots, LSM6DSOFIFO, FifoFault, Drain
-from senseshake.sensors import Reading
-from senseshake.simulation import defaults
-from senseshake.runtime import Acquisition, Channel
-from senseshake.recording import Writer, Reader
-from senseshake.session import Sessions
+from groundlark.fifo import Slots, LSM6DSOFIFO, FifoFault, Drain
+from groundlark.sensors import Reading
+from groundlark.simulation import defaults
+from groundlark.runtime import Acquisition, Channel
+from groundlark.recording import Writer, Reader
+from groundlark.session import Sessions
 
 
 def word(kind, counter, payload):
@@ -114,7 +114,7 @@ class FifoTests(unittest.TestCase):
         driver.buffered = True
         driver.ready = lambda: False
         stream = io.BytesIO()
-        app = Acquisition(Writer(stream, {'format':'senseshake-acquisition-v1'}), Sessions(),
+        app = Acquisition(Writer(stream, {'format':'groundlark-acquisition-v1'}), Sessions(),
                           [Channel('pi', 1, defaults()[0], driver)])
         app.start(0)
         bus.words.extend(slot(0, 1000) + slot(1, 2538))
@@ -139,7 +139,7 @@ class FifoTests(unittest.TestCase):
             failed = False
         stream, adapter = io.BytesIO(), Adapter()
         channel = Channel('pi', 1, defaults()[0], adapter)
-        app = Acquisition(Writer(stream, {'format':'senseshake-acquisition-v1'}), Sessions(), [channel])
+        app = Acquisition(Writer(stream, {'format':'groundlark-acquisition-v1'}), Sessions(), [channel])
         app.start(0)
         app.tick(lambda: 1000)
         adapter.failed = True

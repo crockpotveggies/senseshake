@@ -5,13 +5,13 @@ import struct
 import sys
 import unittest
 from unittest.mock import patch
-from senseshake import messages as m
-from senseshake.linux_io import SPI, I2C, I2CTransfer
-from senseshake.live import USB
-from senseshake.session import Sessions
-from senseshake.simulation import defaults
-from senseshake.transport import Receiver
-from senseshake_contract.framing import encode
+from groundlark import messages as m
+from groundlark.linux_io import SPI, I2C, I2CTransfer
+from groundlark.live import USB
+from groundlark.session import Sessions
+from groundlark.simulation import defaults
+from groundlark.transport import Receiver
+from groundlark_contract.framing import encode
 
 
 class BusABITests(unittest.TestCase):
@@ -26,8 +26,8 @@ class BusABITests(unittest.TestCase):
             self.assertEqual(hz, 1_000_000)
             c.memmove(rx, b"\0\x6c", 2)
             return size
-        with patch("senseshake.linux_io.ioctl", fake): self.assertEqual(bus.transfer(b"\x8f\0"), b"\0\x6c")
-        with patch("senseshake.linux_io.ioctl", return_value=1):
+        with patch("groundlark.linux_io.ioctl", fake): self.assertEqual(bus.transfer(b"\x8f\0"), b"\0\x6c")
+        with patch("groundlark.linux_io.ioctl", return_value=1):
             with self.assertRaises(OSError): bus.transfer(b"\x8f\0")
 
     def test_i2c_layout_repeated_start_and_short_transaction(self):
@@ -42,8 +42,8 @@ class BusABITests(unittest.TestCase):
             self.assertEqual(request.messages[1].flags, 1)
             c.memmove(request.messages[1].buffer, b"\0\x64", 2)
             return 2
-        with patch("senseshake.linux_io.ioctl", fake): self.assertEqual(bus.exchange(0x42, b"\xfd", 2), b"\0\x64")
-        with patch("senseshake.linux_io.ioctl", return_value=1):
+        with patch("groundlark.linux_io.ioctl", fake): self.assertEqual(bus.exchange(0x42, b"\xfd", 2), b"\0\x64")
+        with patch("groundlark.linux_io.ioctl", return_value=1):
             with self.assertRaises(OSError): bus.exchange(0x42, b"\xfd", 2)
 
 
@@ -58,7 +58,7 @@ class USBTests(unittest.TestCase):
         def receive(message, now): messages.append(message)
         try:
             os.set_blocking(slave, False)
-            with patch("senseshake.live.os.open", return_value=os.dup(slave)):
+            with patch("groundlark.live.os.open", return_value=os.dup(slave)):
                 usb.poll(0, receive, event)
             wire = b"".join(encode(v.SerializeToString()) for v in (
                 m.identity("head", 2, 2, [7]), m.configuration("head", 2, defaults(True)[:1]),
@@ -78,7 +78,7 @@ class USBTests(unittest.TestCase):
             master = None
             usb.poll(1000, receive, event)
             self.assertIn("usb_disconnected", events)
-            with patch("senseshake.live.os.open", side_effect=OSError("absent")) as opening:
+            with patch("groundlark.live.os.open", side_effect=OSError("absent")) as opening:
                 for i in range(1, 10): usb.poll(i * 1_000_000_000, receive, event)
                 self.assertEqual(opening.call_count, 1)
         finally:

@@ -1,6 +1,6 @@
 import struct
 import unittest
-from senseshake.fpga_link import ModeControl,Packets,encode,decode,MAX_FRAME
+from groundlark.fpga_link import ModeControl,Packets,encode,decode,MAX_FRAME
 
 
 class Arm:
@@ -159,7 +159,7 @@ class LinkTests(unittest.TestCase):
         self.assertEqual(bus.r[1]&2,0)
 
     def test_linux_owner_rebinds_after_partial_gpio_failure(self):
-        from senseshake.fpga_linux import Owner
+        from groundlark.fpga_linux import Owner
         from unittest.mock import patch,Mock
         import tempfile
         from pathlib import Path
@@ -169,7 +169,7 @@ class LinkTests(unittest.TestCase):
             owner.driver=Path(tmp)/'driver';owner.driver.mkdir()
             owner.detached=False;owner.handles=[]
             first=Mock()
-            with patch('senseshake.fpga_linux.Lines',side_effect=[first,OSError('busy')]):
+            with patch('groundlark.fpga_linux.Lines',side_effect=[first,OSError('busy')]):
                 with self.assertRaises(OSError):owner.acquire('jtag')
             first.close.assert_called_once()
             self.assertEqual((owner.driver/'bind').read_text(),'spi6')
@@ -181,14 +181,14 @@ class LinkTests(unittest.TestCase):
         with self.assertRaises(OSError):Packets(Invalid()).status()
 
     def test_binding_rejects_missing_cs_timing_before_driver_change(self):
-        from senseshake.fpga_linux import Owner
+        from groundlark.fpga_linux import Owner
         import tempfile
         from pathlib import Path
         with tempfile.TemporaryDirectory() as tmp:
             owner=Owner.__new__(Owner);owner.controller=Path(tmp)
             device=owner.controller/'spi_master/spi6/spi6.0'
             node=device/'of_node';node.mkdir(parents=True)
-            (node/'compatible').write_bytes(b'senseshake,fpga-userspace\0')
+            (node/'compatible').write_bytes(b'groundlark,fpga-userspace\0')
             for prop in ('setup','hold','inactive'):
                 (node/f'spi-cs-{prop}-delay-ns').write_bytes((0).to_bytes(4,'big'))
             with self.assertRaisesRegex(RuntimeError,'timing'):owner.spi_path()

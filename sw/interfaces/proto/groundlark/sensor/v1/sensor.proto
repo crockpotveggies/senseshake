@@ -1,0 +1,184 @@
+syntax = "proto3";
+
+package groundlark.sensor.v1;
+
+// Wire layout only. docs/sensor-contract.md owns units, bounds and semantics.
+message Envelope {
+  uint32 version = 1;
+  string device_id = 2;
+  fixed64 boot_id = 3;
+  oneof body {
+    Identity identity = 10;
+    Configuration configuration = 11;
+    SampleBatch batch = 12;
+    DeviceStatus status = 13;
+  }
+}
+
+enum Board {
+  BOARD_UNSPECIFIED = 0;
+  BOARD_DAQHAT_01 = 1;
+  BOARD_USB_HEAD = 2;
+}
+
+enum SensorId {
+  SENSOR_ID_UNSPECIFIED = 0;
+  SENSOR_ID_IMU_1 = 1;
+  SENSOR_ID_IMU_2 = 2;
+  SENSOR_ID_IMU_3 = 3;
+  SENSOR_ID_IMU_4 = 4;
+  SENSOR_ID_INCLINOMETER = 5;
+  SENSOR_ID_GNSS = 6;
+  SENSOR_ID_MAGNETOMETER = 7;
+  SENSOR_ID_PRESSURE = 8;
+  SENSOR_ID_GEOPHONE = 9;
+}
+
+enum ClockDomain {
+  CLOCK_DOMAIN_UNSPECIFIED = 0;
+  CLOCK_DOMAIN_PI_MONOTONIC_RAW = 1;
+  CLOCK_DOMAIN_MCU_MONOTONIC = 2;
+}
+
+enum Quality {
+  QUALITY_UNSPECIFIED = 0;
+  QUALITY_VALID = 1;
+  QUALITY_MISSING = 2;
+  QUALITY_SATURATED = 3;
+  QUALITY_FAULT = 4;
+}
+
+enum StatusCode {
+  STATUS_CODE_UNSPECIFIED = 0;
+  STATUS_CODE_READY = 1;
+  STATUS_CODE_DISCONNECTED = 2;
+  STATUS_CODE_IO_ERROR = 3;
+  STATUS_CODE_BUFFER_OVERFLOW = 4;
+  STATUS_CODE_BAD_CONFIGURATION = 5;
+  STATUS_CODE_RESET = 6;
+}
+
+message Identity {
+  Board board = 1;
+  string firmware_version = 2;
+  repeated SensorId sensors = 3;
+}
+
+// Effective configuration advertisement; not an unacknowledged command.
+message Configuration {
+  uint32 revision = 1;
+  repeated SensorConfiguration sensors = 2;
+}
+
+message SensorConfiguration {
+  SensorId sensor_id = 1;
+  bool enabled = 2;
+  uint64 period_ns = 3;
+  // Optional sorted 8-bit address/value pairs for LSM6DSO/RM3100 only.
+  bytes register_config = 4;
+  optional uint32 tilt_mode = 5;
+  optional uint32 acceleration_range_g = 6;
+  optional uint32 angular_rate_range_dps = 7;
+  optional uint32 cycle_count_x = 8;
+  optional uint32 cycle_count_y = 9;
+  optional uint32 cycle_count_z = 10;
+  optional double pressure_min_pa = 11;
+  optional double pressure_max_pa = 12;
+  string pressure_part_number = 13;
+  optional uint32 geophone_gain = 14;
+  optional double geophone_reference_v = 15;
+}
+
+message Timestamp {
+  ClockDomain domain = 1;
+  optional uint64 acquisition_ns = 2;
+  // Absent means unknown, including when acquisition is estimated from polling.
+  optional uint64 uncertainty_ns = 3;
+  // Optional correlated UTC estimate, never a replacement for acquisition_ns.
+  optional int64 utc_unix_ns = 4;
+  optional uint64 utc_uncertainty_ns = 5;
+}
+
+message Vector3i {
+  optional sint32 x = 1;
+  optional sint32 y = 2;
+  optional sint32 z = 3;
+}
+
+message Vector3d {
+  optional double x = 1;
+  optional double y = 2;
+  optional double z = 3;
+}
+
+message ImuRaw {
+  Vector3i acceleration = 1;
+  Vector3i angular_rate = 2;
+  optional sint32 temperature = 3;
+}
+
+message TiltRaw {
+  Vector3i acceleration = 1;
+  Vector3i angle = 2;
+  optional sint32 temperature = 3;
+  optional uint32 device_status = 4;
+}
+
+message MagneticRaw {
+  Vector3i counts = 1;
+}
+
+message PressureRaw {
+  // Exactly four sensor response bytes, including status and temperature bits.
+  bytes response = 1;
+}
+
+message GnssRaw {
+  // Exactly the 92-byte UBX NAV-PVT payload; validated UBX checksum upstream.
+  bytes nav_pvt = 1;
+}
+
+message GeophoneRaw {
+  optional sint32 counts = 1;
+  optional uint32 conversion_counter = 2;
+}
+
+message Calibrated {
+  Vector3d acceleration_m_s2 = 1;
+  Vector3d angular_rate_rad_s = 2;
+  Vector3d angle_rad = 3;
+  Vector3d magnetic_t = 4;
+  optional double pressure_pa = 5;
+  optional double temperature_k = 6;
+}
+
+message Sample {
+  optional uint64 sequence = 1;
+  Timestamp time = 2;
+  Quality quality = 3;
+  oneof raw {
+    ImuRaw imu = 10;
+    TiltRaw tilt = 11;
+    MagneticRaw magnetic = 12;
+    PressureRaw pressure = 13;
+    GnssRaw gnss = 14;
+    GeophoneRaw geophone = 15;
+  }
+  Calibrated calibrated = 20;
+}
+
+message SampleBatch {
+  SensorId sensor_id = 1;
+  uint32 configuration_revision = 2;
+  repeated Sample samples = 3;
+  optional uint64 dropped_before = 4;
+  string calibration_id = 5;
+}
+
+message DeviceStatus {
+  // Zero identifies the whole producer, rather than a particular sensor.
+  SensorId sensor_id = 1;
+  StatusCode code = 2;
+  optional uint64 dropped_total = 3;
+  string detail = 4;
+}

@@ -1,6 +1,6 @@
 # Sensor development on the FPGA stack
 
-**T1-GEO revision:** GNSS is removed; one external Racotech vertical geophone
+**DAQHAT-01 revision:** GNSS is removed; one external Racotech vertical geophone
 uses an ADS122C04 input. See [current circuit, acquisition and validation](geophone-input.md).
 GNSS/PPS/RF details below describe the preceding revision or legacy recordings.
 The current physical bench template is version 2, with geophone response/noise/timing
@@ -8,7 +8,7 @@ checks replacing the GNSS UTC check.
 
 ## Active scope
 
-Develop and validate sensor acquisition using the Raspberry Pi → T1 sensor HAT
+Develop and validate sensor acquisition using the Raspberry Pi → DAQHAT-01 sensor HAT
 → Trenz TE0712 stack. The Pi owns acquisition and processing for this phase.
 The application must also work with simulated sensors and with the FPGA absent
 or unconfigured. No Coldfoot chip, runtime integration, or Coldfoot RTL port is
@@ -19,7 +19,7 @@ input for the external Racotech geophone. GNSS has been removed.
 The RM3100 magnetometer and optional DLVR infrasound input remain on the separate
 USB-C sensor head. Its MCU needs firmware; the accelerometer HAT does not.
 
-Maintain the 85 × 56 mm T1 outline and the Pi/HAT/Trenz stacking arrangement.
+Maintain the 85 × 56 mm DAQHAT-01 outline and the Pi/HAT/Trenz stacking arrangement.
 The [next hardware revision plan](fpga-host-link-plan.md) reserves six internal
 QSPI signals, retains UART, adds switched Pi-driven JTAG, and removes external
 GPIO expansion J85-J89 and its ribbons. Preserve FPGA power/reset and sensor
@@ -96,7 +96,7 @@ This is application testing with modeled devices, not full Pi/MCU emulation.
 - Implement the USB-head MCU firmware and check sensor acquisition, USB framing,
   enumeration, suspend/resume and reconnect behavior on actual hardware.
 - Verify Pi-to-sensor access, sampling configuration, calibration and timing on
-  the assembled T1 carrier. Measure sensor noise/drift with the FPGA unpowered,
+  the assembled DAQHAT-01 carrier. Measure sensor noise/drift with the FPGA unpowered,
   idle and active, including cooling-induced vibration.
 - Audit each required FPGA connection from the Pi/header endpoint through the
   carrier connector to the module pin, including voltage domain, direction,

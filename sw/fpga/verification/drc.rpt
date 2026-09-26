@@ -1,10 +1,10 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
-| Date         : Fri Sep 25 14:38:36 2026
+| Date         : Fri Sep 25 18:28:32 2026
 | Host         : jTower running 64-bit major release  (build 9200)
 | Command      : report_drc -file drc.rpt
-| Design       : t1_link
+| Design       : daqhat_01_link
 | Device       : xc7a200tfbg484-1
 | Speed File   : -1
 | Design State : Fully Routed
@@ -19,7 +19,7 @@ Table of Contents
 
 1. REPORT SUMMARY
 -----------------
-            Netlist: t1_link
+            Netlist: daqhat_01_link
           Floorplan: design_1
       Design limits: <entire design considered>
            Ruledeck: default

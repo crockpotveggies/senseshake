@@ -1,4 +1,4 @@
-"""Explicit provisional T1 HDI stack; manufacturer approval is still required."""
+"""Explicit provisional DAQHAT-01 HDI stack; manufacturer approval is still required."""
 from pathlib import Path
 
 def block_span(text, token):

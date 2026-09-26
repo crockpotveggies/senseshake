@@ -7,10 +7,10 @@ import subprocess
 import sys
 import tempfile
 import unittest
-from senseshake.simulation import Simulated, defaults
-from senseshake.stimulus import Scenario, reading, signal, G
-from senseshake.recording import Reader, Writer
-from senseshake.cli import replay, export_scenario
+from groundlark.simulation import Simulated, defaults
+from groundlark.stimulus import Scenario, reading, signal, G
+from groundlark.recording import Reader, Writer
+from groundlark.cli import replay, export_scenario
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -192,7 +192,7 @@ class ScenarioTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             recording, output = Path(directory) / "live.ssrec", Path(directory) / "controls.json"
             with recording.open("wb") as stream:
-                writer = Writer(stream, dict(format="senseshake-acquisition-v1", stimulus_model="ideal-v1",
+                writer = Writer(stream, dict(format="groundlark-acquisition-v1", stimulus_model="ideal-v1",
                     scenario={"version": 1}, seed=1, remote=False))
                 writer.event("stimulus_change", "UI control", 100, at_ns=100, set={"pressure_pa": 10})
                 writer.event("acquisition_summary", "stopped", 200)

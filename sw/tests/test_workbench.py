@@ -5,9 +5,9 @@ import tempfile
 from pathlib import Path
 import unittest
 
-from senseshake.cli import export_scenario, replay
-from senseshake.recording import Reader, Writer
-from senseshake.workbench import MAX_BYTES, POINTS, Workbench
+from groundlark.cli import export_scenario, replay
+from groundlark.recording import Reader, Writer
+from groundlark.workbench import MAX_BYTES, POINTS, Workbench
 
 
 def advance(engine, milliseconds):

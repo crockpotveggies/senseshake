@@ -5,7 +5,7 @@ from pathlib import Path
 import sys
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT/'sw/pi'))
-from senseshake.bench import template, evaluate, evidence
+from groundlark.bench import template, evaluate, evidence
 
 
 def main():

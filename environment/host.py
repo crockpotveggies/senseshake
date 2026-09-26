@@ -13,7 +13,7 @@ from lab import MARKER, MiB, clean, lab_lock, no_links, source_files, tree_bytes
 
 ROOT = Path(__file__).resolve().parents[1]
 LAB = ROOT / ".lab"
-IMAGE = "senseshake/lab:1"
+IMAGE = "groundlark/lab:1"
 
 
 def call(args, **kwargs):
@@ -68,7 +68,7 @@ def receive_reports(name, ident, report):
 def execute(action, profile):
     image_id = call(["image", "inspect", "--format", "{{.Id}}", IMAGE], capture_output=True, text=True).stdout.strip()
     ident = time.strftime("%Y%m%dT%H%M%SZ", time.gmtime()) + "-" + uuid.uuid4().hex[:8]
-    name = "senseshake-lab-" + ident.lower()
+    name = "groundlark-lab-" + ident.lower()
     report = LAB / "runs" / ident
     if action == "test":
         clean(LAB, keep=4, apply=True)
@@ -80,7 +80,7 @@ def execute(action, profile):
     try:
         bundle, hashes = package_inputs()
         call(["run", "-d", "--rm", "--init", "--name", name,
-              "--label", "org.senseshake.lab=1", "--platform", "linux/amd64",
+              "--label", "org.groundlark.lab=1", "--platform", "linux/amd64",
               "--network", "none", "--read-only", "--cap-drop", "ALL",
               "--security-opt", "no-new-privileges", "--memory", "8g", "--cpus", "4",
               "--pids-limit", "256", "--log-driver", "none",
@@ -88,7 +88,7 @@ def execute(action, profile):
               "--tmpfs", "/work:rw,exec,nosuid,size=2g,mode=1777",
               "--tmpfs", "/lab:rw,nosuid,size=256m,mode=1777",
               "--tmpfs", "/tmp:rw,exec,nosuid,size=512m,mode=1777",
-              "--env", f"SENSESHAKE_IMAGE_ID={image_id}",
+              "--env", f"GROUNDLARK_IMAGE_ID={image_id}",
               "--entrypoint", "python3", IMAGE, "-c", "import time; time.sleep(3600)"], stdout=subprocess.DEVNULL)
         running = True
         call(["exec", "-i", name, "tar", "--no-same-owner", "--no-same-permissions", "-xf", "-", "-C", "/source"], input=bundle)

@@ -4,7 +4,7 @@ import subprocess,re,json,itertools
 ROOT=Path(__file__).resolve().parents[2];OUT=ROOT/'hw/simulation/trenz';OUT.mkdir(exist_ok=True)
 results=[]
 def run(name,body):
-    path=OUT/(name+'.cir');path.write_text('ShakeSense Trenz support check: '+name+'\n'+body+'\n.end\n')
+    path=OUT/(name+'.cir');path.write_text('Groundlark Trenz support check: '+name+'\n'+body+'\n.end\n')
     r=subprocess.run(['ngspice','-b',str(path)],capture_output=True,text=True);log=r.stdout+r.stderr;(OUT/(name+'.log')).write_text(log)
     assert r.returncode==0,log
     return {k:float(v) for k,v in re.findall(r'^([a-z][a-z0-9_]*)\s*=\s*([-+0-9.eE]+)',log,re.M)}

@@ -5,9 +5,9 @@ import unittest
 import zlib
 
 from google.protobuf.message import DecodeError
-from senseshake_contract import framing as f
-from senseshake_contract.schema import envelope_type
-from senseshake_contract.validation import validate
+from groundlark_contract import framing as f
+from groundlark_contract.schema import envelope_type
+from groundlark_contract.validation import validate
 
 Envelope = envelope_type()
 FIXTURE = json.loads((Path(__file__).parent / "fixtures/magnetic_boundary.json").read_text())

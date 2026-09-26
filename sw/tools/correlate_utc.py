@@ -5,8 +5,8 @@ from pathlib import Path
 import sys
 ROOT = Path(__file__).resolve().parents[2]
 sys.path[:0] = [str(ROOT/'sw/pi'), str(ROOT/'sw/interfaces/python')]
-from senseshake.cli import load_json
-from senseshake.utc import correlate
+from groundlark.cli import load_json
+from groundlark.utc import correlate
 
 
 def main():

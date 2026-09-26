@@ -17,7 +17,7 @@ body=body.replace('CF_','FPGA_')
 body=body.replace('05-coldfoot-interface','05-fpga-interface').replace('Coldfoot UART','FPGA UART')
 # Atomic definitions stay shared with A2.
 body=re.sub(r'new FPGA_', 'new CF_',body)
-parts=json.loads((ROOT/'hw/layout.json').read_text())['shakesense-hat']['parts']
+parts=json.loads((ROOT/'hw/layout.json').read_text())['groundlark-hat']['parts']
 keep={'U51','C75','C76','R61','R62','R63','U52','C77','R64','Q1','R65','R66'}
 parts=[copy.deepcopy(x) for x in parts if not (x['type'] or '').startswith('CF_') or x['ref'] in keep]
 for x in parts:
@@ -39,7 +39,7 @@ def part(ref,typ,mpn,lib,fpname,xy,pins,section='08-trenz-carrier',angle=0,note=
     maxpin=max([int(q.GetNumber()) for q in fp.Pads() if q.GetNumber().isdigit()] or [0])
     for pad in fp.Pads():
         if pad.GetNumber()=='SH':pad.SetNumber(str(maxpin+1))
-    fp.SetFPID(p.LIB_ID('ShakeSense',local))
+    fp.SetFPID(p.LIB_ID('Groundlark',local))
     p.FootprintSave(str(E),fp)
     nums=sorted({q.GetNumber() for q in fp.Pads() if q.GetNumber()},key=int)
     meta=dict(ref=ref,value=mpn,mpn=mpn,footprint=lib+':'+fpname,local_fp=local,xy=xy,
@@ -47,7 +47,7 @@ def part(ref,typ,mpn,lib,fpname,xy,pins,section='08-trenz-carrier',angle=0,note=
     parts.append(meta)
     if typ not in newtypes:
         symbol=types.SimpleNamespace(**{**meta,'ref':typ,'pins':dict.fromkeys(nums)})
-        s=libsym(symbol)[0].replace('ShakeSense:Part_'+typ,typ).replace('Part_'+typ,typ)
+        s=libsym(symbol)[0].replace('Groundlark:Part_'+typ,typ).replace('Part_'+typ,typ)
         (E/'symbols'/f'{typ}.kicad_sym').write_text('(kicad_symbol_lib (version 20231120) (generator kicad_symbol_editor) '+s+')')
         desc=f'component {typ}:\n    trait is_atomic_part<manufacturer="See BOM source", partnumber="{mpn}", footprint="{local}.kicad_mod", symbol="symbols/{typ}.kicad_sym">\n    trait has_designator_prefix<prefix="{ref[0]}">\n'
         desc+=''.join(f'    signal p{n} ~ pin {n}\n' for n in nums)
@@ -112,6 +112,6 @@ for meta in parts:
     if meta['ref'] in fixed:meta['xy'],meta['angle']=fixed[meta['ref']]
     if meta['ref']=='J85':meta['note']='3.3 V spare I/O at accessible lower edge'
     if meta['ref']=='J83':meta['note']='REGULATED 3.3 V ONLY; external current-limited supply; 3 A initial operating budget'
-(ROOT/'hw/layout-trenz.json').write_text(json.dumps({'shakesense-trenz-hat':{'target':'trenz_hat','size':[85,56],'parts':parts}},indent=2))
+(ROOT/'hw/layout-trenz.json').write_text(json.dumps({'groundlark-daqhat-01':{'target':'trenz_hat','size':[85,56],'parts':parts}},indent=2))
 (ROOT/'docs/trenz-pin-map.json').write_text(json.dumps(audit,indent=2))
 print('Authored',len(parts),'parts;',len(audit),'mapped module connections')

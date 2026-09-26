@@ -1,6 +1,6 @@
 # Portable test environment
 
-**T1-GEO revision:** GNSS is removed; one external Racotech vertical geophone
+**DAQHAT-01 revision:** GNSS is removed; one external Racotech vertical geophone
 uses an ADS122C04 input. See [current circuit, acquisition and validation](geophone-input.md).
 GNSS/PPS/RF details below describe the preceding revision or legacy recordings.
 The current physical bench template is version 3, with geophone and internal
@@ -45,7 +45,7 @@ drive-sharing configuration. No host directory is mounted into the container.
 
 | Profile | Checks |
 | --- | --- |
-| `full` (default) | Fresh atopile builds for A2, USB field head, and T1; numeric constraint solves; unsafe 5 V IMU rejection; independent hardware regressions; native KiCad ERC/DRC/connectivity; T1 power/clearance and pre-fab review; clean routing replay; SPICE; the software profile (22 stages). |
+| `full` (default) | Fresh atopile builds for A2, USB field head, and DAQHAT-01; numeric constraint solves; unsafe 5 V IMU rejection; independent hardware regressions; native KiCad ERC/DRC/connectivity; DAQHAT-01 power/clearance and pre-fab review; clean routing replay; SPICE; the software profile (22 stages). |
 | `quick` | Same GPIO/component fault, circuit/PCB consistency, routing replay, SPICE and software checks using saved compiled layouts. Does **not** prove `.ato` changes were rebuilt. |
 | `spice` | 27 A2/field, 14 Trenz, 15 geophone response, 8 geophone transient and 38 host-link switch/RC cases, including expected fault detection. |
 | `software` | RTL and Python-to-RTL co-simulation; recorded Vivado evidence/hash gate; Buf format/lint/build and compatibility; acquisition/replay, modeled driver and Linux TTY/worker fault tests; retained eight-sensor demo. No physical hardware execution. |
@@ -63,7 +63,7 @@ thermal performance, physical mating, or fabrication readiness.
 ## Where files go
 
 ```text
-senseshake/
+groundlark/
   hw/                circuits, routed CAD, models and hardware checks
   sw/                Pi software, USB firmware and FPGA integration scopes
   docs/              shared design and interface documentation
@@ -71,7 +71,7 @@ senseshake/
   lab.ps1 / lab.sh   entrypoints
   .local/            ignored local tools and preserved legacy caches
   .lab/
-    .senseshake-lab   ownership marker
+    .groundlark-lab   ownership marker
     .lock            prevents simultaneous run/cleanup
     runs/<run-id>/   status, input hashes, tool versions, logs, result files
 ```
@@ -123,7 +123,7 @@ The reusable Docker image and Docker build cache live in Docker Desktop's disk,
 outside `.lab`. The installed image reports about 2.92 GB, including 2.25 GB
 shared with its KiCad base. Normal test runs do not rebuild or grow this image.
 Use `docker system df` to inspect storage. To remove this
-project's image, use `docker image rm senseshake/lab:1` after tests have stopped.
+project's image, use `docker image rm groundlark/lab:1` after tests have stopped.
 Do not use global `docker system prune` or `docker volume prune` as project
 cleanup: other projects, including Coldfoot, share this Docker installation.
 
@@ -141,9 +141,9 @@ ngspice 42. The reports explicitly record this difference.
 For an offline transfer, optionally save a **single image archive**:
 
 ```powershell
-docker save -o senseshake-lab-image.tar senseshake/lab:1
+docker save -o groundlark-lab-image.tar groundlark/lab:1
 # On the receiving machine:
-docker load -i senseshake-lab-image.tar
+docker load -i groundlark-lab-image.tar
 ```
 
 Keep that archive on transfer storage, not in the source repository or `.lab`.
@@ -169,10 +169,10 @@ The UTC/bench update passed the software profile in
 `20260925T040959Z-8ae6ce16`: **140 tests** without skips, including 15 UTC/timed-GNSS
 tests and four bench-report tests, plus existing contract compatibility and demos.
 Ten containment tests passed; the Windows junction case was skipped inside Linux.
-CAD is unchanged from the T1 engineering checkpoint below. See
+CAD is unchanged from the DAQHAT-01 engineering checkpoint below. See
 [UTC timing](utc-timing.md) and [physical bench procedure](bench-procedure.md).
 
-The T1 engineering update passed all **15 stages** in
+The DAQHAT-01 engineering update passed all **15 stages** in
 `20260925T033256Z-8be95398`: fresh atopile builds, native ERC/DRC/connectivity,
 14 hardware regressions, RF/power/clearance checks, **41 bounded SPICE cases**,
 and **121 software tests** without skips. The software suite includes real
@@ -180,7 +180,7 @@ device-tree compile/merge and modeled FIFO integration. Ten lab containment
 tests passed; the Windows junction case was skipped inside Linux. Browser
 verification passed **10/10 modeled HAT signal checks**, 1,040 samples.
 Current toolchain and board hashes are retained in the
-[verification record](../hw/boards/shakesense-trenz-hat/verification.json).
+[verification record](../hw/boards/groundlark-daqhat-01/verification.json).
 The records below describe earlier checkpoints, not the current test count.
 
 The stimulus-model update passed the software profile as
@@ -205,8 +205,8 @@ was skipped. Staging includes Pi sources/profiles and excludes generated output.
 
 Image ID: `sha256:cea708e4071d62e115358fa08176554f81d4e61c7503e6469e6fcd0879c2c3a3`. Toolchain: KiCad 9.0.9,
 atopile 0.15.9, Buf 1.73.0 and Protobuf 5.29.6.
-The source CAD was unchanged. The earlier T1 hardware checkpoint and its copper
-replay evidence remain in the [hardware verification record](../hw/boards/shakesense-trenz-hat/verification.json).
+The source CAD was unchanged. The earlier DAQHAT-01 hardware checkpoint and its copper
+replay evidence remain in the [hardware verification record](../hw/boards/groundlark-daqhat-01/verification.json).
 
 ## Next simulation layers
 
@@ -235,7 +235,7 @@ when there is executable code and an explicit acceptance test for it.
 References: [official KiCad container images](https://www.kicad.org/download/docker/),
 [Docker runtime options](https://docs.docker.com/reference/cli/docker/container/run).
 
-## Current T1-LINK validation
+## Current DAQHAT-01 validation
 
 Run `20260925T214440Z-e4e115ce` passes all **22 portable stages**: three Atopile
 builds/solves, invalid-voltage rejection, **33 hardware regressions**, native
@@ -248,8 +248,8 @@ checks over 3,672 samples. The UI HTTP/model check also passes.
 The Python client talks to real simulated RTL pins across all 193 payload sizes,
 sequence wrap, 20 clock phases and 491 fault/reset cases. Independent fixtures
 check all 32 link components and all 260 module contacts. See the
-[verification record](../hw/boards/shakesense-trenz-hat/verification.json) and
-[hardening review](t1-link-hardening.md).
+[verification record](../hw/boards/groundlark-daqhat-01/verification.json) and
+[hardening review](daqhat-01-link-hardening.md).
 
 Rebuild the image after this revision: Icarus 11.0 and hash-pinned sexpdata 1.0.2
 for the native KiCad Python interpreter are required. Vivado implementation is

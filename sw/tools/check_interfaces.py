@@ -6,11 +6,13 @@ import shutil
 import subprocess
 import sys
 import tempfile
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'interfaces/python'))
+from groundlark_contract.compatibility import renamed_baseline
 
 ROOT = Path(__file__).resolve().parents[2]
 INTERFACES = ROOT / "sw/interfaces"
 BUILD = ROOT / "sw/build"
-BUF = os.environ.get("SENSESHAKE_BUF", "buf")
+BUF = os.environ.get("GROUNDLARK_BUF", "buf")
 
 
 def run(*args, **kwargs):
@@ -22,19 +24,23 @@ def main():
     run(BUF, "format", "--diff", "--exit-code")
     run(BUF, "lint")
     run(BUF, "build", "--exclude-source-info", "-o", str(BUILD / "schema.binpb"))
-    run(BUF, "breaking", "--against", "baseline.binpb")
+    # Preserve the historical baseline; project only the authorized namespace
+    # rename into ignored output. Do not re-baseline changed fields or tags.
+    baseline = BUILD / 'renamed-baseline.binpb'
+    baseline.write_bytes(renamed_baseline((INTERFACES / 'baseline.binpb').read_bytes()))
+    run(BUF, "breaking", "--against", str(baseline))
     # Prove that the compatibility gate catches a real incompatible wire change.
     with tempfile.TemporaryDirectory(dir=BUILD) as tmp:
         folder = Path(tmp)
         shutil.copytree(INTERFACES / "proto", folder / "proto")
         shutil.copy2(INTERFACES / "buf.yaml", folder / "buf.yaml")
-        path = folder / "proto/senseshake/sensor/v1/sensor.proto"
+        path = folder / "proto/groundlark/sensor/v1/sensor.proto"
         path.write_text(path.read_text().replace("fixed64 boot_id = 3;", "string boot_id = 3;"))
-        rejected = subprocess.run([BUF, "breaking", str(folder), "--against", str(INTERFACES / "baseline.binpb")],
+        rejected = subprocess.run([BUF, "breaking", str(folder), "--against", str(baseline)],
                                   capture_output=True, text=True)
         assert rejected.returncode != 0 and "boot_id" in rejected.stdout + rejected.stderr, rejected
     env = dict(os.environ, PYTHONPATH=os.pathsep.join([str(INTERFACES / "python"), str(ROOT / "sw/pi")]),
-               SENSESHAKE_DESCRIPTOR=str(BUILD / "schema.binpb"))
+               GROUNDLARK_DESCRIPTOR=str(BUILD / "schema.binpb"))
     run(sys.executable, "-m", "unittest", "discover", "-s", str(ROOT / "sw/tests"), "-p", "test_*.py", "-v", env=env)
     # Run the public application entry point and retain one bounded review artifact.
     demo = BUILD / "demo.ssrec"

@@ -1,4 +1,4 @@
-"""Read-only KiCad 9 export for a T1-LINK JLCPCB engineering-review package.
+"""Read-only KiCad 9 export for a DAQHAT-01 JLCPCB engineering-review package.
 
 Run with a Python that can import pcbnew (the portable lab or WSL). Never
 rewrites the routed board, fills zones, substitutes components, or releases an
@@ -15,8 +15,8 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-BOARD_DIR = ROOT / 'hw/boards/shakesense-trenz-hat'
-BOARD = BOARD_DIR / 'shakesense-trenz-hat.kicad_pcb'
+BOARD_DIR = ROOT / 'hw/boards/groundlark-daqhat-01'
+BOARD = BOARD_DIR / 'groundlark-daqhat-01.kicad_pcb'
 LAYERS = ['F.Cu', *[f'In{i}.Cu' for i in range(1, 7)], 'B.Cu',
           'F.Paste', 'B.Paste', 'F.SilkS', 'B.SilkS', 'F.Mask', 'B.Mask', 'Edge.Cuts']
 EXTENSIONS = {'gtl', 'g1', 'g2', 'g3', 'g4', 'g5', 'g6', 'gbl',
@@ -213,7 +213,7 @@ def export(out, quantity):
     write_json(evidence / 'placement-geometry.json', geometry)
     if before != {str(f.relative_to(ROOT)): sha(f) for f in source_paths}:
         raise ValueError('Source changed during export')
-    with zipfile.ZipFile(out / 'T1-LINK-Gerbers-REVIEW.zip', 'w', zipfile.ZIP_DEFLATED) as archive:
+    with zipfile.ZipFile(out / 'DAQHAT-01-Gerbers-REVIEW.zip', 'w', zipfile.ZIP_DEFLATED) as archive:
         for path in sorted(plots.iterdir()):
             if path.suffix[1:] in EXTENSIONS | {'drl', 'gbrjob'}:
                 archive.write(path, path.name)

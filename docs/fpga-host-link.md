@@ -1,4 +1,4 @@
-# T1-LINK: internal Pi / Trenz transport
+# DAQHAT-01: internal Pi / Trenz transport
 
 The 85 × 56 mm HAT now connects the Pi directly to the TE0712-03-81I36-A.
 Six wires reserve SPI/QSPI, UART is retained, and a switch shares four wires
@@ -51,7 +51,7 @@ its Linux SPI controller does not perform native quad transfers. The reference
 bitstream advertises no quad capability. JTAG runs at a requested 100 kHz;
 measure the actual clock before changing the native GPIO adapter calibration.
 
-The [reference RTL](../sw/fpga/rtl/t1_link.sv) is an echo/mailbox bring-up design.
+The [reference RTL](../sw/fpga/rtl/daqhat_01_link.sv) is an echo/mailbox bring-up design.
 It uses the module's default 50 MHz CLK50M2 at R4; the exact revision-03 schematic
 shows its 1.5 V level translation and bank supply, so its XDC uses LVCMOS15.
 Application bank 14 uses LVCMOS33. The bitstream does not configure DDR, Ethernet,
@@ -101,9 +101,9 @@ MISO is undriven during reset, and the next complete transaction starts cleanly.
 ## Bring-up
 
 Install the sensor overlay first. Compile the optional
-[`senseshake-fpga-overlay.dts`](../sw/pi/deploy/senseshake-fpga-overlay.dts)
+[`groundlark-fpga-overlay.dts`](../sw/pi/deploy/groundlark-fpga-overlay.dts)
 with `dtc -@ -I dts -O dtb`, install it in the Pi's overlays directory and add
-`dtoverlay=senseshake-fpga` to the active boot configuration. Enable I2C1.
+`dtoverlay=groundlark-fpga` to the active boot configuration. Enable I2C1.
 Do not combine with other SPI1/SPI6 or GPIO18–21/12/16 consumers. CE1 remains
 disabled because BCM27 belongs to IMU1. Ensure the `spidev` module is loaded.
 
@@ -112,7 +112,7 @@ which gpiochip represents BCM2711. OpenOCD 0.12.0 with bcm2835gpio is required.
 
 ```sh
 sudo python3 sw/tools/fpga.py scan --gpiochip /dev/gpiochip0
-sudo python3 sw/tools/fpga.py program --gpiochip /dev/gpiochip0 --bitstream /path/to/t1-link.bit
+sudo python3 sw/tools/fpga.py program --gpiochip /dev/gpiochip0 --bitstream /path/to/daqhat-01-link.bit
 sudo python3 sw/tools/fpga.py status --gpiochip /dev/gpiochip0
 sudo python3 sw/tools/fpga.py loopback --gpiochip /dev/gpiochip0
 ```
@@ -133,7 +133,7 @@ Programming loads volatile FPGA configuration only; it does not write flash.
 Build the bitstream from an ignored output directory using Vivado:
 
 ```text
-vivado -mode batch -source /absolute/path/to/senseshake/sw/fpga/build.tcl
+vivado -mode batch -source /absolute/path/to/groundlark/sw/fpga/build.tcl
 ```
 
 ## Verification and remaining measurements
@@ -151,7 +151,7 @@ Still measure first-article rail ramps/current, actual stack seating, SPI/JTAG
 edges and switching, and sensor noise with the FPGA idle and active. Linux driver
 handoff and JTAG programming have not been exercised on a physical Pi/Trenz stack.
 Quad throughput and accelerated processing remain future work.
-See the [hardening and prototype preparation review](t1-link-hardening.md) for
+See the [hardening and prototype preparation review](daqhat-01-link-hardening.md) for
 test coverage, fixes and the remaining release/first-article steps.
 
 Sources: [exact module schematic](vendor/trenz/SCH-TE0712-03-81I36-A.PDF),

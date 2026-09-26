@@ -1,6 +1,6 @@
-# T1-LINK bench assembly
+# DAQHAT-01 bench assembly
 
-Bottom to top: Pi 4, 85 x 56 mm T1 sensor HAT, TE0712-03-81I36-A.
+Bottom to top: Pi 4, 85 x 56 mm DAQHAT-01 sensor HAT, TE0712-03-81I36-A.
 Four straight Pi supports replace the previous ribbon guide and offset spacer.
 J84-J89 and all external FPGA ribbon cables are removed. Programming and data
 travel through J1 and the Trenz mezzanine connectors; see the
@@ -27,7 +27,7 @@ The geophone remains external, vertical and mechanically coupled to the ground.
 `assembly_fit.py` checks four support envelopes against the actual underside
 components, socket, modeled Pi ports and selected heatsink. It reserves 0.5 mm
 for support clearance and 1 mm for component/port seating uncertainty.
-The [generated report](../hw/boards/shakesense-trenz-hat/prefab-review.json)
+The [generated report](../hw/boards/groundlark-daqhat-01/prefab-review.json)
 records margins. Use supports at (3.5,3.5), (61.5,3.5), (3.5,52.5), (61.5,52.5)
 mm. Trim through-hole tails to <=2 mm below the HAT; the model allows 0.2 mm extra.
 

@@ -4,7 +4,7 @@ import tempfile
 import subprocess
 import sys
 import unittest
-from senseshake.bench import template, evaluate, evidence, CHECKS
+from groundlark.bench import template, evaluate, evidence, CHECKS
 
 
 class BenchTests(unittest.TestCase):

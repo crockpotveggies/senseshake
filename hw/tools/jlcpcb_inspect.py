@@ -44,7 +44,7 @@ def inspect(out):
         expected[kind][drill_key(x, -y, p.ToMM(via.GetDrillValue()))] += 1
     result = {'parser': 'gerbonara 1.5.0', 'drill_coordinate_tolerance_mm': 0.001, 'drills': {}, 'layers': {}}
     for kind, want in expected.items():
-        drill = ExcellonFile.open(plots / f'shakesense-trenz-hat-{kind}.drl')
+        drill = ExcellonFile.open(plots / f'groundlark-daqhat-01-{kind}.drl')
         got = Counter(drill_key(o.x, o.y, o.tool.diameter) for o in drill.objects)
         check_drills(list(want.elements()), list(got.elements()))
         result['drills'][kind] = sum(got.values())

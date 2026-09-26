@@ -1,7 +1,7 @@
 # Sensor contract v1
 
 Status: implemented schema, Python reference checks and USB framing; Pi drivers implemented; USB MCU firmware remains pending. This document owns semantic rules. The
-[Protobuf schema](../sw/interfaces/proto/senseshake/sensor/v1/sensor.proto) owns
+[Protobuf schema](../sw/interfaces/proto/groundlark/sensor/v1/sensor.proto) owns
 field numbers/types. Both apply. Coldfoot and a configured FPGA are unnecessary.
 
 ## Identity and versioning
@@ -24,18 +24,18 @@ Breaking meaning/units requires a new package and envelope version.
 
 | Sensor ID | Board and model | Raw representation |
 | --- | --- | --- |
-| 1–4 | T1 LSM6DSO U11–U14 | Signed 16-bit XYZ acceleration/gyro counts; optional signed temperature |
-| 5 | T1 SCL3300 U20 | Signed 16-bit XYZ acceleration and/or angle counts, optional temperature, required 16-bit device status |
-| 6 | Legacy T1 MAX-M10S U21 (absent on T1-GEO) | Complete 92-byte UBX NAV-PVT payload, excluding UBX header/checksum |
+| 1–4 | DAQHAT-01 LSM6DSO U11–U14 | Signed 16-bit XYZ acceleration/gyro counts; optional signed temperature |
+| 5 | DAQHAT-01 SCL3300 U20 | Signed 16-bit XYZ acceleration and/or angle counts, optional temperature, required 16-bit device status |
+| 6 | Legacy DAQHAT-01 MAX-M10S U21 (absent on DAQHAT-01) | Complete 92-byte UBX NAV-PVT payload, excluding UBX header/checksum |
 | 7 | USB head RM3100 | Signed 24-bit XYZ counts, sign-extended into sint32 |
 | 8 | Optional USB head DLVR | Four original response bytes, preserving pressure, temperature and status bits |
 
-| 9 | T1-GEO ADS122C04 / Racotech vertical | Signed 24-bit ADC count in sint32; required uint8 conversion counter |
+| 9 | DAQHAT-01 ADS122C04 / Racotech vertical | Signed 24-bit ADC count in sint32; required uint8 conversion counter |
 
 ID 9 uses the Pi MONOTONIC_RAW clock, gain 64, reference 2.048 V and nominal
 period 3,030,303 ns (330 SPS). ADC input volts = count × reference / (gain × 2²³).
 Velocity requires frequency-response correction and calibration; none is implicit.
-The current T1 inventory is 1–5 and 9. ID 6 is retained for legacy compatibility.
+The current DAQHAT-01 inventory is 1–5 and 9. ID 6 is retained for legacy compatibility.
 
 The model is fixed by v1 sensor ID. Another model requires explicit schema
 evolution, not relabeling. Identity advertises only physically fitted sensors;
@@ -154,7 +154,7 @@ dispatch queue. CRC detects accidental corruption; it is not authentication.
 
 The STM32F042K6 has **6 KiB SRAM and 32 KiB flash**. Nanopb is the candidate C
 codec because bounded fields can use static allocations; proposed bounds are in
-[sensor.options](../sw/interfaces/proto/senseshake/sensor/v1/sensor.options).
+[sensor.options](../sw/interfaces/proto/groundlark/sensor/v1/sensor.options).
 One RX encoded buffer (1033 bytes), one TX buffer (1034 bytes), and a provisional
 2048-byte cap for decoded messages total **4115 bytes**, leaving **2029 bytes**
 for USB state, sensor queues, stack and other globals. This is a tight budget,

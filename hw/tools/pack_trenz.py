@@ -6,7 +6,7 @@ This modifies placement only, never electrical connectivity.
 from pathlib import Path
 import json,math
 import pcbnew as p
-ROOT=Path(__file__).resolve().parents[2];path=ROOT/'hw/layout-trenz.json';data=json.loads(path.read_text());spec=data['shakesense-trenz-hat']
+ROOT=Path(__file__).resolve().parents[2];path=ROOT/'hw/layout-trenz.json';data=json.loads(path.read_text());spec=data['groundlark-daqhat-01']
 parts=spec['parts'];by={m['ref']:m for m in parts}
 by['JP1'].update(xy=[23,53],angle=90)
 by['F80'].update(xy=[17,8.5],angle=0)

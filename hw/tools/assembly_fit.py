@@ -1,4 +1,4 @@
-"""T1 internal-link stack envelopes, board-top XY/Z millimetres.
+"""DAQHAT-01 internal-link stack envelopes, board-top XY/Z millimetres.
 
 Conservative support/port/cooler checks; no ribbons or custom guide remain.
 """

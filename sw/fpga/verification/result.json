@@ -6,17 +6,17 @@
   "hold_slack_ns": 0.109,
   "pulse_width_slack_ns": 9.5,
   "bitstream_generated": true,
-  "bitstream_sha256": "31aae221f5ffec5be239b9cca922b7d7d11f198c8a9b0aa898be52add5974777",
+  "bitstream_sha256": "07fa94591a4fd81c47303b1ccce0d615a92b83d90a28e93d58ae0665c817ca7a",
   "source_sha256": {
-    "sw/fpga/rtl/t1_link.sv": "ffb3ca9b90b85c65a5e8796554db25755449a6be36295d3d5e5fc22b80033b7b",
-    "sw/fpga/t1.xdc": "0c94f70c0455228b94400c13edca6500d695ba4a7f8a7c79b468310fe09dcd85",
-    "sw/fpga/build.tcl": "460aa5ef031a665956a35cd8a1e198a26677db1720aaa4de15bdc29210b24f6d"
+    "sw/fpga/rtl/daqhat_01_link.sv": "0d4723817e210fe23df363ce7527d601a231873d0e6d3f7832c2267466fbdff8",
+    "sw/fpga/daqhat-01.xdc": "0c94f70c0455228b94400c13edca6500d695ba4a7f8a7c79b468310fe09dcd85",
+    "sw/fpga/build.tcl": "f903484544046ad27da4d6e07f5f431828c07c196389d5263f5bd1b85b271376"
   },
   "report_sha256": {
-    "timing.rpt": "95774666593916ad1177aff550d2e72156e1f1e3781c012671bb68dd7092cc94",
-    "cdc.rpt": "73b73995691313166f9fab809bfab7637c1d5a3bce6377c6c32e337f4a4d926a",
-    "drc.rpt": "7c1096427a73b15107ff5e4ee743a973bfdabc2f367026fd8c004dd65244d3d3",
-    "utilization.rpt": "b22852ebffd6b7ffdf9444e742c95ac3f7616f99e2da037c5fc9d6716b113725"
+    "timing.rpt": "1c2a0b52d94439be5acb33972d0cb1a90c2f868b19a92f70c780139948eb8b5f",
+    "cdc.rpt": "263877e68365ae4850f24e9b22cda01e01798ab3808eabca1203cedebb54c003",
+    "drc.rpt": "e27fe69ff4d07e0631f308f0347d24bfae3883a9b12dff8e138a6658d6e7406b",
+    "utilization.rpt": "97c6cc509b34111d16a651c030f8c2336d0c59168a7a22fd7c6e74cd44351e2d"
   },
   "limits": [
     "Asynchronous input-to-first-stage and reset exceptions are intentional; board timing is not measured",

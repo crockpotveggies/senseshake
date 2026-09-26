@@ -2,7 +2,7 @@
 module tb_link;
     reg clk=0,rst=0,sck=0,cs=1,mosi=0,uart=1;
     wire miso,dq2,dq3,utx;
-    t1_link dut(clk,rst,sck,cs,mosi,miso,dq2,dq3,uart,utx);
+    daqhat_01_link dut(clk,rst,sck,cs,mosi,miso,dq2,dq3,uart,utx);
     always #10 clk=~clk;
     reg [7:0] frame[0:205], result[0:205], rx;
     integer length,i,k,checks=0;

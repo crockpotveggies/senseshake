@@ -12,7 +12,7 @@ import tempfile
 
 ROOT=Path(__file__).resolve().parent
 sys.path.insert(0,str(ROOT.parent/'pi'))
-from senseshake.fpga_link import Packets,encode,MAX_FRAME
+from groundlark.fpga_link import Packets,encode,MAX_FRAME
 
 
 class RTL:
@@ -49,10 +49,10 @@ class RTL:
 
 
 def main():
-    with tempfile.TemporaryDirectory(prefix='senseshake-cosim-') as tmp:
+    with tempfile.TemporaryDirectory(prefix='groundlark-cosim-') as tmp:
         executable=Path(tmp)/'host.vvp'
         subprocess.run(['iverilog','-g2012','-Wall','-s','tb_host','-o',str(executable),
-                        str(ROOT/'rtl/t1_link.sv'),str(ROOT/'tests/tb_host.sv')],check=True,timeout=30)
+                        str(ROOT/'rtl/daqhat_01_link.sv'),str(ROOT/'tests/tb_host.sv')],check=True,timeout=30)
         peer=RTL(executable)
         try:
             client=Packets(peer,sleep=lambda _:None,clock=lambda:0)

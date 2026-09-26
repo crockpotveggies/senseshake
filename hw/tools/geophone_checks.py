@@ -1,4 +1,4 @@
-"""Independent physical-pin and orientation fixture for T1-GEO.
+"""Independent physical-pin and orientation fixture for DAQHAT-01.
 
 Pin maps: TI ADS122C04 SBAS751B PW package, TPD2E2U06 SLLSEG9C DCK.
 ADC analog inputs/reference pins 6..9 intentionally float per TI section 9.1.3.
@@ -33,7 +33,7 @@ def verify(pins, orientations):
     for key, net in PINS.items():
         if pins.get(key) != net: raise ValueError(f'geophone physical pin mismatch: {key}')
     if any('GNSS' in net for net in pins.values()) or any(ref in ('U21','J2') for ref,_ in pins):
-        raise ValueError('GNSS remains on current T1')
+        raise ValueError('GNSS remains on current DAQHAT-01')
     for ref in ('U11','U12','U13','U14'):
         if orientations.get(ref) != (0,False):
             raise ValueError(f'{ref}: package axes changed; explicit software remapping required')

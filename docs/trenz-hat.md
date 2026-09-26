@@ -1,24 +1,24 @@
-# ShakeSense T1 — Pi-outline Trenz carrier
+# Groundlark DAQHAT-01 — Pi-outline Trenz carrier
 
-**T1-LINK revision:** six internal QSPI-reserved wires, retained UART and
+**DAQHAT-01 revision:** six internal QSPI-reserved wires, retained UART and
 switched Pi-driven JTAG replace external expansion connectors and ribbons.
 See the [host-link circuit and bring-up guide](fpga-host-link.md). Pi 4 initially
 uses SPI6; native quad transfers are not supported by its controller.
 
-**T1-GEO revision:** GNSS is removed; one external Racotech vertical geophone
+**DAQHAT-01 revision:** GNSS is removed; one external Racotech vertical geophone
 uses an ADS122C04 input. See [current circuit, acquisition and validation](geophone-input.md).
 GNSS/PPS/RF details below describe the preceding revision or legacy recordings.
 The current physical bench template is version 2, with geophone response/noise/timing
 checks replacing the GNSS UTC check.
 
-T1 is an **85 × 56 mm, eight-layer HDI** alternative to the A2 Coldfoot ASIC HAT.
+DAQHAT-01 is an **85 × 56 mm, eight-layer HDI** alternative to the A2 Coldfoot ASIC HAT.
 Electrical source: [`hw/elec/hat_trenz.ato`](../hw/elec/hat_trenz.ato).
-CAD: [`shakesense-trenz-hat.kicad_pcb`](../hw/boards/shakesense-trenz-hat/shakesense-trenz-hat.kicad_pcb).
+CAD: [`groundlark-daqhat-01.kicad_pcb`](../hw/boards/groundlark-daqhat-01/groundlark-daqhat-01.kicad_pcb).
 The original ASIC HAT and remote USB sensor head remain separate builds.
 
 ## Stack and sensor placement
 
-From bottom to top: Raspberry Pi, ShakeSense T1, **TE0712-03-81I36-A**.
+From bottom to top: Raspberry Pi, Groundlark DAQHAT-01, **TE0712-03-81I36-A**.
 The FPGA stays on top for heatsink access. The HAT keeps the four LSM6DSO IMUs,
 SCL3300 inclinometer and ADS122C04 geophone input. The magnetometer and optional infrasound
 sensor stay on the separate USB head; they consume no HAT area.
@@ -109,11 +109,11 @@ The fabricator must approve the complete stack, drill separation, fill/cap proce
 and materials; fabrication approval is the project owner's responsibility.
 ## Verification and release limits
 
-Current results are recorded in [validation.json](../hw/boards/shakesense-trenz-hat/validation.json),
-[engineering.json](../hw/boards/shakesense-trenz-hat/engineering.json), and
-[prefab-review.json](../hw/boards/shakesense-trenz-hat/prefab-review.json).
+Current results are recorded in [validation.json](../hw/boards/groundlark-daqhat-01/validation.json),
+[engineering.json](../hw/boards/groundlark-daqhat-01/engineering.json), and
+[prefab-review.json](../hw/boards/groundlark-daqhat-01/prefab-review.json).
 The portable lab checks circuit compilation, independent pin fixtures, ERC/DRC,
 route connectivity, sensor regressions, power/geophone models and stack envelopes.
 These checks do not establish physical power, timing, noise or thermal performance.
-See [engineering limits](t1-engineering-closure.md) and the
+See [engineering limits](daqhat-01-engineering-closure.md) and the
 [bench procedure](bench-procedure.md) before first-article qualification.

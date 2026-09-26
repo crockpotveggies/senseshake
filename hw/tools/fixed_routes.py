@@ -14,7 +14,7 @@ def add(b):
 if __name__=='__main__':
     # Export only already-authored, locked connector fanout. GNSS RF is held
     # separately by assemble_pcb.py. This does not invent electrical nets.
-    b=p.LoadBoard(str(ROOT/'hw/boards/shakesense-hat/shakesense-hat.kicad_pcb'));rows=[]
+    b=p.LoadBoard(str(ROOT/'hw/boards/groundlark-hat/groundlark-hat.kicad_pcb'));rows=[]
     for t in b.GetTracks():
         if not t.IsLocked() or t.GetNetname()=='GNSS_RF':continue
         row={'net':t.GetNetname()}

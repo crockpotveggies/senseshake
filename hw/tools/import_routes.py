@@ -26,7 +26,7 @@ def main(name):
     fps={f.GetReference():f for f in b.GetFootprints()}
     for c in children(child(s,'placement'),'component'):
         for pl in children(c,'place'):
-            if name=='shakesense-hat' and str(pl[1]) in REMOVED_HAT_REFS:continue
+            if name=='groundlark-hat' and str(pl[1]) in REMOVED_HAT_REFS:continue
             fp=fps[str(pl[1])]; xy=fp.GetPosition()
             assert abs(xy.x-float(pl[2])*factor)<101 and abs(xy.y+float(pl[3])*factor)<101, pl
             assert str(pl[4])==('back' if fp.IsFlipped() else 'front'),pl
@@ -43,7 +43,7 @@ def main(name):
         zone=b.GetArea(i)
         if not zone.GetIsRuleArea(): b.Delete(zone)
     for net in children(child(routes,'network_out'),'net'):
-        if name=='shakesense-hat' and str(net[1]) in REMOVED_HAT_NETS:continue
+        if name=='groundlark-hat' and str(net[1]) in REMOVED_HAT_NETS:continue
         ni=nets[str(net[1])]
         for obj in net[2:]:
             typ=str(obj[0])
@@ -76,4 +76,4 @@ def main(name):
     print(name,len(b.GetTracks()),'tracks/vias; inner GND planes filled')
 
 if __name__=='__main__':
-    for name in sys.argv[1:] or ['shakesense-hat','shakesense-field-head']: main(name)
+    for name in sys.argv[1:] or ['groundlark-hat','groundlark-field-head']: main(name)

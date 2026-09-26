@@ -7,6 +7,11 @@ descriptor, intentionally tracked as a compatibility fixture. Do not regenerate
 it just to make a breaking check pass. Change it only for an explicitly reviewed
 new contract version, with migration fixtures.
 
+For the Groundlark/DAQHAT-01 rename, the runner projects only the authorized
+namespace and board enum spelling into ignored build output before comparison.
+The original baseline bytes, wire values and field checks stay fixed. See the
+[migration notes](../../docs/groundlark-rename.md).
+
 From the repository root, build the updated portable image once with
 `./lab.ps1 build`, then run `./lab.ps1 test -Profile software`.
 The full and quick profiles also run these checks. On Linux use

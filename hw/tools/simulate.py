@@ -8,7 +8,7 @@ import subprocess,json,re,itertools,math
 ROOT=Path(__file__).resolve().parents[2]; OUT=ROOT/'hw/simulation';OUT.mkdir(exist_ok=True)
 results=[]
 def run(name,body,checks):
-    deck='ShakeSense A2 supporting circuit: '+name+'\n'+body+'\n.end\n'
+    deck='Groundlark A2 supporting circuit: '+name+'\n'+body+'\n.end\n'
     (OUT/(name+'.cir')).write_text(deck)
     proc=subprocess.run(['ngspice','-b',str(OUT/(name+'.cir'))],capture_output=True,text=True)
     log=proc.stdout+proc.stderr;(OUT/(name+'.log')).write_text(log)

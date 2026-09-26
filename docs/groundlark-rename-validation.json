@@ -1,0 +1,24 @@
+{
+  "compared_to_commit": "d3863e74192a63ada844575555f3c7b5d5d1403b",
+  "boards": {
+    "groundlark-hat": {
+      "copper_identical": true,
+      "components_and_pad_nets_identical": true,
+      "tracks_and_vias": 2197,
+      "normalized_source_identical": true
+    },
+    "groundlark-field-head": {
+      "copper_identical": true,
+      "components_and_pad_nets_identical": true,
+      "tracks_and_vias": 348,
+      "normalized_source_identical": true
+    },
+    "groundlark-daqhat-01": {
+      "copper_identical": true,
+      "components_and_pad_nets_identical": true,
+      "tracks_and_vias": 7522,
+      "normalized_source_identical": true
+    }
+  },
+  "allowed_visual_change": "Project/model/library labels renamed; DAQHAT-01 front title moved 4 mm right to avoid JP1 silkscreen overlap."
+}

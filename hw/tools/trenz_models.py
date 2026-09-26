@@ -7,7 +7,7 @@ from pathlib import Path
 from kicad_support import save_board
 import pcbnew as p
 ROOT=Path(__file__).resolve().parents[2];M=ROOT/'hw/models'
-F=ROOT/'hw/boards/shakesense-trenz-hat';NAME='shakesense-trenz-hat'
+F=ROOT/'hw/boards/groundlark-daqhat-01';NAME='groundlark-daqhat-01'
 def box(x,y,z,w,d,h,color):
     return f'Transform {{ translation {x/2.54} {y/2.54} {z/2.54} children [ Shape {{ appearance Appearance {{ material Material {{ diffuseColor {color} }} }} geometry Box {{ size {w/2.54} {d/2.54} {h/2.54} }} }} ] }}\n'
 def cylinder(x,y,z,r,h,color):
@@ -29,7 +29,7 @@ for n in [50,30]:
         for y in [-1.85,1.85]:s+=box((i-(n-1)/2)*.5,y,.3,.2,1.1,.6,'0.72 0.58 0.25')
     write(f'LSHM_{n}_4mm',s)
 b=p.LoadBoard(str(F/(NAME+'.kicad_pcb')))
-title=b.GetTitleBlock();title.SetRevision('T1-LINK HDI');title.SetDate('2026-09-25');b.SetTitleBlock(title)
+title=b.GetTitleBlock();title.SetRevision('DAQHAT-01 HDI');title.SetDate('2026-09-25');b.SetTitleBlock(title)
 custom={'U20':'SCL3300','J1':'Pi_ESQ_120_23','J80':'LSHM_50_4mm','J81':'LSHM_50_4mm','J82':'LSHM_30_4mm'}
 for fp in b.GetFootprints():
     if fp.GetReference() in custom:model(fp,'${KIPRJMOD}/../../models/'+custom[fp.GetReference()]+'.wrl')
@@ -72,8 +72,8 @@ save_board(str(F/'pi-trenz-stack-concept.kicad_pcb'),b)
 # Separate service-envelope view: bounding volumes, not exact mated solids.
 # The ordinary stack remains uncluttered and does not imply flex fit approval.
 service=box(14.19,-50.9,9.2+11.1/2,12.22,16.1,11.1,'0.12 0.5 0.23')
-write('T1_service_envelopes',service)
-add(b,'MODEL_SERVICE','${KIPRJMOD}/../../models/T1_service_envelopes.wrl',(50,50))
+write('DAQHAT_01_service_envelopes',service)
+add(b,'MODEL_SERVICE','${KIPRJMOD}/../../models/DAQHAT_01_service_envelopes.wrl',(50,50))
 save_board(str(F/'stack-service-envelopes.kicad_pcb'),b)
 for fp in list(b.GetFootprints()):
     if fp.GetReference() in ('MODEL_SERVICE',):b.Delete(fp)

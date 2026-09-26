@@ -42,7 +42,7 @@ The Coldfoot references are the user's existing sibling `coldfoot_soc` workspace
 See [USB circuit and manufacturer references](usb-sensor-head.md). The former PCA9615 cable has been removed from both boards.
 
 
-## T1 GPIO expansion
+## DAQHAT-01 GPIO expansion
 
 - Trenz exact-SKU revision-03 schematic, page 6, archived under `docs/vendor/trenz`:
   source for `trenz-gpio-module.csv` and `trenz-ground-module.csv`.
@@ -54,4 +54,4 @@ See [USB circuit and manufacturer references](usb-sensor-head.md). The former PC
   geometry is retained. The separate FFC 3D bodies are simplified envelopes,
   not manufacturer STEP models or cable-clearance certification.
 
-HDI fabrication reference: [JLCPCB HDI capabilities](https://jlcpcb.com/help/article/hdi-pcb-capabilities-faq). T1 uses a provisional 1+6+1 stack; manufacturer DFM, material selection and RF impedance approval remain open.
+HDI fabrication reference: [JLCPCB HDI capabilities](https://jlcpcb.com/help/article/hdi-pcb-capabilities-faq). DAQHAT-01 uses a provisional 1+6+1 stack; manufacturer DFM, material selection and RF impedance approval remain open.

@@ -1,11 +1,11 @@
 """Render actual KiCad geometry and explicitly conceptual assembly models."""
 from pathlib import Path
 import subprocess,sys
-ROOT=Path(__file__).resolve().parents[2];F=ROOT/'hw/boards/shakesense-trenz-hat'
+ROOT=Path(__file__).resolve().parents[2];F=ROOT/'hw/boards/groundlark-daqhat-01'
 (ROOT/'hw/logs').mkdir(parents=True,exist_ok=True)
 for pcb,png,angle,zoom in [
- ('shakesense-trenz-hat','3d-bottom','145,0,205','.9'),
- ('shakesense-trenz-hat','3d','325,0,25','.9'),
+ ('groundlark-daqhat-01','3d-bottom','145,0,205','.9'),
+ ('groundlark-daqhat-01','3d','325,0,25','.9'),
  ('trenz-mounted','trenz-mounted','315,0,30','.8'),
  ('pi-trenz-stack-concept','pi-trenz-stack-concept','300,0,30','.78'),
  ('stack-service-envelopes','stack-service-envelopes','300,0,30','.68'),

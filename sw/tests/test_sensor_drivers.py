@@ -1,8 +1,8 @@
 """Fake bus fixtures check manufacturer wire constants and error behavior."""
 import struct
 import unittest
-from senseshake.sensors import LSM6DSO, SCL3300, UBXParser, MAXM10S, NotReady, scl_command, ubx_packet
-from senseshake.simulation import defaults
+from groundlark.sensors import LSM6DSO, SCL3300, UBXParser, MAXM10S, NotReady, scl_command, ubx_packet
+from groundlark.simulation import defaults
 
 
 class IMUBus:

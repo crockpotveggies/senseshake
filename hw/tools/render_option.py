@@ -1,8 +1,8 @@
 """Render optional pressure-sensor population without changing the delivered PCB."""
 from pathlib import Path
 import pcbnew as p,subprocess
-R=Path(__file__).resolve().parents[2];folder=R/'hw/boards/shakesense-field-head'
-b=p.LoadBoard(str(folder/'shakesense-field-head.kicad_pcb'))
+R=Path(__file__).resolve().parents[2];folder=R/'hw/boards/groundlark-field-head'
+b=p.LoadBoard(str(folder/'groundlark-field-head.kicad_pcb'))
 next(f for f in b.GetFootprints() if f.GetReference()=='U3').SetDNP(False)
 temp=folder/'.render-infrasound-option.kicad_pcb'
 try:

@@ -1,4 +1,4 @@
-# ShakeSense A2 design
+# Groundlark A2 design
 
 **Atopile engineering prototype, 2026-09-23.** This document replaces the earlier
 A0 description in place. Electrical source is in `hw/elec/`; native KiCad boards,

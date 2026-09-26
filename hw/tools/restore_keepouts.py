@@ -12,5 +12,5 @@ def restore(b):
             fp.Add(copy)
         print('Restored',fp.GetReference(),'library keepouts')
 if __name__=='__main__':
-    path=ROOT/'hw/boards/shakesense-hat/shakesense-hat.kicad_pcb'
+    path=ROOT/'hw/boards/groundlark-hat/groundlark-hat.kicad_pcb'
     b=p.LoadBoard(str(path));restore(b);p.ZONE_FILLER(b).Fill(b.Zones());p.SaveBoard(str(path),b)

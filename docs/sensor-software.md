@@ -1,12 +1,12 @@
 # Sensor acquisition and recovery
 
-**T1-GEO revision:** GNSS is removed; one external Racotech vertical geophone
+**DAQHAT-01 revision:** GNSS is removed; one external Racotech vertical geophone
 uses an ADS122C04 input. See [current circuit, acquisition and validation](geophone-input.md).
 GNSS/PPS/RF details below describe the preceding revision or legacy recordings.
 The current physical bench template is version 2, with geophone response/noise/timing
 checks replacing the GNSS UTC check.
 
-The runnable Pi application is in `sw/pi/senseshake/`; use
+The runnable Pi application is in `sw/pi/groundlark/`; use
 `sw/tools/sensor.py` as its repository entry point. It has no FPGA, Coldfoot,
 network service or database dependency. Simulation and Linux device adapters
 use the same scheduler, calibration, session validation and recording path.
@@ -36,7 +36,7 @@ python sw/tools/sensor.py replay sw/build/my-run.ssrec
 
 Outputs use exclusive creation: choose a new filename for each direct run.
 The lab manages its own copy and does not delete direct developer recordings.
-`SENSESHAKE_DESCRIPTOR` can select a descriptor outside the default build
+`GROUNDLARK_DESCRIPTOR` can select a descriptor outside the default build
 directory. Do not use the frozen compatibility baseline as the generated schema.
 
 The scenario is deterministic for a given seed, configuration and fault file,
@@ -65,7 +65,7 @@ and a nonblocking USB CDC TTY. The initial profile is:
 | MAX-M10S | I²C 0x42; RAM-only UBX CFG-VALSET/ACK/VALGET; NAV-PVT every second; retain its complete 92-byte payload. |
 | USB head | Receive v1 identity/configuration/batches/status over framed CDC; real firmware is still required. |
 
-Copy [the example profile](../sw/pi/profiles/t1.example.json) and verify paths
+Copy [the example profile](../sw/pi/profiles/daqhat-01.example.json) and verify paths
 on the actual Pi. `gpiochip0` is an example, not an assertion about Pi 5 GPIO
 numbering. `line` is the character-device offset corresponding to BCM26 on that
 chip. The application owns active-low sensor output enable and disables it on
@@ -86,7 +86,7 @@ selected physical Pi/kernel must still be boot-tested. No overlay is installed
 automatically and no unrelated kernel device is detached.
 
 ```sh
-python sw/tools/sensor.py live --profile sw/pi/profiles/t1.example.json \
+python sw/tools/sensor.py live --profile sw/pi/profiles/daqhat-01.example.json \
   --seconds 60 --output sw/build/bench-001.ssrec
 # Add --usb /dev/serial/by-id/<actual-head-id> when head firmware is ready.
 ```
@@ -109,7 +109,7 @@ register reads are sequential, not an atomic six-axis snapshot.
 
 ## Buffered IMUs and PPS capture
 
-Add `--fifo` to the live command with the updated T1 profile. Four rising-edge
+Add `--fifo` to the live command with the updated DAQHAT-01 profile. Four rising-edge
 GPIO requests use BCM27/22/23/24. FIFO watermark/overrun interrupts are hints;
 a 20 ms periodic service interval also checks each FIFO. SPI transfer work is
 limited to 96 seven-byte records (32 complete IMU slots) per call. A larger
@@ -244,8 +244,8 @@ firmware within measured RAM/flash/stack budgets, then test enumeration and
 sensors on assembled boards. Physical FPGA pin, power, clearance, thermal and
 noise qualification remains in step 4.
 
-The T1 correction adds FIFO/IRQ acquisition, deployment and stationary measurement
-tools. See [engineering closure](t1-engineering-closure.md) for measured versus
+The DAQHAT-01 correction adds FIFO/IRQ acquisition, deployment and stationary measurement
+tools. See [engineering closure](daqhat-01-engineering-closure.md) for measured versus
 modeled evidence. [UTC association](utc-timing.md) is implemented; the
 [physical bench procedure](bench-procedure.md) covers its remaining qualification.
 

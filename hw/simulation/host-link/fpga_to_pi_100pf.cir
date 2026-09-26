@@ -1,4 +1,4 @@
-T1 internal link: fpga_to_pi_100pf
+DAQHAT-01 internal link: fpga_to_pi_100pf
 Vdrive source 0 PULSE(0 3.201 100n 5n 5n 500n 1u)
 Rdriver source damp 40
 Rseries damp sw 22

@@ -1,21 +1,24 @@
-# ShakeSense — sensors, Raspberry Pi HATs and Coldfoot integration
+# Groundlark — sensors, Raspberry Pi HATs and Coldfoot integration
 
-**Current focus:** sensor development on the Pi → T1 HAT → Trenz FPGA stack.
+Formerly ShakeSense / SenseShake. See the [naming migration](docs/groundlark-rename.md)
+for updated commands and compatibility with existing recordings.
+
+**Current focus:** sensor development on the Pi → DAQHAT-01 HAT → Trenz FPGA stack.
 Coldfoot ASIC/runtime integration is deferred. Preserve the required FPGA
 connections while building sensor acquisition and tests; see the
 [four-step sensor plan](docs/sensor-development-plan.md).
 
-**T1-LINK hardware:** [internal FPGA link](docs/fpga-host-link.md)
+**DAQHAT-01 hardware:** [internal FPGA link](docs/fpga-host-link.md)
 reserves six QSPI wires, keeps UART, adds switched Pi-driven JTAG, and removes
 the external GPIO ribbons/connectors and cable guide. Pi 4 initially uses SPI6;
 native quad transfers need a separate host solution. The circuit, routed PCB and renders use this internal connection.
 
-**Latest validation:** the [T1-LINK hardening review](docs/t1-link-hardening.md)
+**Latest validation:** the [DAQHAT-01 hardening review](docs/daqhat-01-link-hardening.md)
 records the expanded tests, fixes, prototype fabrication preparation steps and
 physical qualification still required on first articles.
 
 **Assembly preparation:** the [JLCPCB review package](docs/jlcpcb-assembly.md)
-targets one assembled T1-LINK HAT. Quantity minimum, HDI stack, sourcing and
+targets one assembled DAQHAT-01 HAT. Quantity minimum, HDI stack, sourcing and
 placement review remain open; the package is not released for manufacture.
 
 **Portable tests:** run `./lab.ps1 build` once, then `./lab.ps1 test` from
@@ -49,22 +52,22 @@ See the [project map](docs/project-layout.md) for ownership and generated-file r
 
 **Non-FPGA boards** — KiCad renders of the A2 sensor HAT and remote USB-C sensor head.
 
-![A2 sensor HAT with run-1 Coldfoot module interface](hw/boards/shakesense-hat/3d.png)
+![A2 sensor HAT with run-1 Coldfoot module interface](hw/boards/groundlark-hat/3d.png)
 
-![USB-C magnetometer and optional infrasound sensor head](hw/boards/shakesense-field-head/3d.png)
+![USB-C magnetometer and optional infrasound sensor head](hw/boards/groundlark-field-head/3d.png)
 
 The infrasound sensor is optional and is not fitted in the default render.
-[View the infrasound option fitted](hw/boards/shakesense-field-head/3d-infrasound-option.png).
+[View the infrasound option fitted](hw/boards/groundlark-field-head/3d-infrasound-option.png).
 
-**T1 FPGA variant:** [Pi-size 85 × 56 mm Trenz 200T carrier](docs/trenz-hat.md),
-with [carrier 3D](hw/boards/shakesense-trenz-hat/3d.png) and
-[three-board stack concept](hw/boards/shakesense-trenz-hat/pi-trenz-stack-concept.png).
+**DAQHAT-01 FPGA variant:** [Pi-size 85 × 56 mm Trenz 200T carrier](docs/trenz-hat.md),
+with [carrier 3D](hw/boards/groundlark-daqhat-01/3d.png) and
+[three-board stack concept](hw/boards/groundlark-daqhat-01/pi-trenz-stack-concept.png).
 It is an alternative to the ASIC HAT below and requires external regulated 3.3 V
 FPGA power. Six internal data wires plus UART/reset connect the Pi to the
 module, with Pi-driven JTAG sharing the data-link pins. No external FPGA cables
 are needed; see the [pin contract](docs/trenz-gpio-breakout.csv).
 Physical qualification remains pending.
-The active T1 has a [single Racotech geophone input](docs/geophone-input.md) and no GNSS.
+The active DAQHAT-01 has a [single Racotech geophone input](docs/geophone-input.md) and no GNSS.
 
 The [pre-fab review](docs/pre-fab-review.md) adds analog tolerance/transient checks
 and acquisition stress tests, fixes two loss-handling defects, and identifies
@@ -72,11 +75,11 @@ the remaining physical qualification work. The geophone filter/protection layout
 meets its path-length targets. Four straight Pi supports replace the previous
 ribbon guide and offset spacer; see the [assembly notes](docs/stack-assembly.md).
 
-![T1 geophone HAT](hw/boards/shakesense-trenz-hat/3d.png)
+![DAQHAT-01 geophone HAT](hw/boards/groundlark-daqhat-01/3d.png)
 
 The internal-link HAT retains an eight-layer HDI stack. The geophone input,
 power envelope, GPIO riser and buffered acquisition are tracked in
-[engineering closure](docs/t1-engineering-closure.md); physical qualification
+[engineering closure](docs/daqhat-01-engineering-closure.md); physical qualification
 remains open. Fabrication approval belongs to the project owner. Ethernet is not exposed.
 
 [Legacy GNSS timing capture/correlation](docs/utc-timing.md) and an
@@ -102,10 +105,10 @@ See the [USB interface and firmware contract](docs/usb-sensor-head.md).
 USB firmware still needs implementation before the head can enumerate.
 
 - [Atopile project](hw/ato.yaml), [HAT circuit](hw/elec/hat.ato), [field circuit](hw/elec/field_head.ato), [parts](hw/elec/parts.ato).
-- [KiCad HAT PCB](hw/boards/shakesense-hat/shakesense-hat.kicad_pcb) and [review schematic](hw/boards/shakesense-hat/shakesense-hat.kicad_sch).
-- [KiCad field PCB](hw/boards/shakesense-field-head/shakesense-field-head.kicad_pcb).
-- [HAT 3D](hw/boards/shakesense-hat/3d.png), [field-head 3D](hw/boards/shakesense-field-head/3d.png), [infrasound option fitted](hw/boards/shakesense-field-head/3d-infrasound-option.png).
-- [HAT BOM](hw/boards/shakesense-hat/bom.csv), [field BOM](hw/boards/shakesense-field-head/bom.csv).
+- [KiCad HAT PCB](hw/boards/groundlark-hat/groundlark-hat.kicad_pcb) and [review schematic](hw/boards/groundlark-hat/groundlark-hat.kicad_sch).
+- [KiCad field PCB](hw/boards/groundlark-field-head/groundlark-field-head.kicad_pcb).
+- [HAT 3D](hw/boards/groundlark-hat/3d.png), [field-head 3D](hw/boards/groundlark-field-head/3d.png), [infrasound option fitted](hw/boards/groundlark-field-head/3d-infrasound-option.png).
+- [HAT BOM](hw/boards/groundlark-hat/bom.csv), [field BOM](hw/boards/groundlark-field-head/bom.csv).
 - [Design](docs/design-a0.md), [Coldfoot mapping](docs/coldfoot-integration.md), [sources](docs/sources.md), [upstream sensors](docs/sensor-inventory.md).
 - [Simulation scope](hw/simulation/README.md), [rebuilding](docs/build.md).
 - [Artix-7 200T module shortlist and FPGA carrier requirements](docs/fpga-options.md).

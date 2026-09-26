@@ -1,12 +1,14 @@
-# JLCPCB assembled T1-LINK HAT
+# JLCPCB assembled DAQHAT-01 HAT
 
 The requested quantity is **one assembled HAT**. No order has been placed.
 The package is for quotation and engineering review, **not manufacturing release**.
-It preserves the tested circuit and routed PCB from commit `f4b84e4`.
+The historical export preserves the circuit and routed PCB from commit `f4b84e4`.
+It predates the Groundlark / DAQHAT-01 rename and is superseded: do not submit it.
+Generate a fresh package from the renamed, validated source before quotation.
 
 ## Files and scope
 
-The local review package at `hw/releases/t1-link-jlcpcb-review-20260925/`
+The historical local review package at `hw/releases/t1-link-jlcpcb-review-20260925/`
 contains Gerbers, separate PTH/NPTH/blind drill files, an assembly BOM, candidate
 CPL, procurement quantities, via-processing coordinates, a four-page review PDF,
 native Fab SVGs, independent Gerber views and validation evidence. One bounded
@@ -91,7 +93,7 @@ reuse old upload files after a CAD, BOM, assembly-side or process change.
 
 ## Suggested quote request (draft only; not sent)
 
-Please quote one assembled ShakeSense T1-LINK HAT, or confirm whether an exception
+Please quote one assembled Groundlark DAQHAT-01 HAT, or confirm whether an exception
 to the two-piece Standard PCBA minimum is available. The board is 85 x 56 mm,
 eight-layer 1+6+1 HDI, nominal 1.6 mm, ENIG, double-sided SMT plus THT. Please
 review the provisional stack and via-fill/capping proposal; provide a supported

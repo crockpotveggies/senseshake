@@ -8,6 +8,19 @@ from lab import MARKER, clean, lab_lock, managed_runs, source_files, write_json,
 
 
 class LabSafetyTests(unittest.TestCase):
+    def test_legacy_lab_and_runs_keep_their_ownership(self):
+        marker = self.root / '.senseshake-lab'
+        marker.write_text('senseshake-lab-v1')
+        path = self.run_folder(0)
+        data = json.loads((path / 'run.json').read_text())
+        data['owner'] = 'senseshake-lab-v1'
+        write_json(path / 'run.json', data)
+        with lab_lock(self.root):
+            self.assertEqual(managed_runs(self.root), [path])
+            clean(self.root, keep=5, apply=True)
+        self.assertEqual(marker.read_text(), 'senseshake-lab-v1')
+        self.assertTrue(path.exists())
+
     def symlink(self, link, target, directory=False):
         try:
             link.symlink_to(target, target_is_directory=directory)
@@ -95,7 +108,7 @@ class LabSafetyTests(unittest.TestCase):
             self.run_folder(0)
             clean(self.root, keep=0, apply=True)
             self.assertEqual(managed_runs(self.root), [])
-            self.assertEqual((self.root / ".senseshake-lab").read_text(), MARKER)
+            self.assertEqual((self.root / ".groundlark-lab").read_text(), MARKER)
             self.assertTrue((self.root / ".lock").exists())
 
     def test_input_allowlist_excludes_generated_trees(self):
@@ -111,10 +124,10 @@ class LabSafetyTests(unittest.TestCase):
     def test_software_contract_inputs_are_staged(self):
         source = Path(self.temp.name) / "source"
         expected = ["sw/interfaces/buf.yaml", "sw/interfaces/baseline.binpb",
-                    "sw/interfaces/proto/senseshake/sensor/v1/sensor.proto",
-                    "sw/interfaces/python/senseshake_contract/framing.py",
+                    "sw/interfaces/proto/groundlark/sensor/v1/sensor.proto",
+                    "sw/interfaces/python/groundlark_contract/framing.py",
                     "sw/tests/fixtures/magnetic_boundary.json", "sw/tools/check_interfaces.py",
-                    "sw/pi/senseshake/runtime.py", "sw/pi/profiles/t1.example.json"]
+                    "sw/pi/groundlark/runtime.py", "sw/pi/profiles/daqhat-01.example.json"]
         for rel in expected:
             path = source / rel
             path.parent.mkdir(parents=True, exist_ok=True)
@@ -125,7 +138,7 @@ class LabSafetyTests(unittest.TestCase):
         for profile in ('full','quick'):
             self.assertIn('routing-replay',dict(commands(profile)))
         root=Path(self.temp.name)
-        self.assertIn(root/'hw/boards/shakesense-trenz-hat/shakesense-trenz-hat.ses',source_files(root))
+        self.assertIn(root/'hw/boards/groundlark-daqhat-01/groundlark-daqhat-01.ses',source_files(root))
 
 
 if __name__ == "__main__":

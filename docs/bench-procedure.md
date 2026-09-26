@@ -1,14 +1,14 @@
-# T1 physical bench procedure and report
+# DAQHAT-01 physical bench procedure and report
 
-**T1-GEO revision:** GNSS is removed; one external Racotech vertical geophone
+**DAQHAT-01 revision:** GNSS is removed; one external Racotech vertical geophone
 uses an ADS122C04 input. See [current circuit, acquisition and validation](geophone-input.md).
 GNSS/PPS/RF details below describe the preceding revision or legacy recordings.
-The current T1-LINK physical bench template is version 3, with geophone
+The current DAQHAT-01 physical bench template is version 3, with geophone
 response/noise/timing and internal FPGA programming/transport checks. Version 2
 reports cannot qualify this revision; create a new report and retain old evidence
 with its original hardware revision.
 
-This procedure qualifies the assembled Pi/T1/Trenz stack. It is separate from
+This procedure qualifies the assembled Pi/DAQHAT-01/Trenz stack. It is separate from
 preparing a prototype fabrication submission. Physical tests run when an assembly
 exists; missing physical evidence is recorded as incomplete, not fabricated by a
 simulation. The user owns fabrication approval.
@@ -80,7 +80,7 @@ they are evaluated against the actual component ratings, not invented thresholds
 
 ## 2. Mechanical fit
 
-Assemble the intended Pi, SSQ riser, T1, Trenz, cooler and four straight supports.
+Assemble the intended Pi, SSQ riser, DAQHAT-01, Trenz, cooler and four straight supports.
 Check full socket engagement and pin orientation, spacer seating without board
 bow, fastener clearance, geophone/power-plug withdrawal and cooling access. The
 internal FPGA link needs no ribbon cables or external JTAG connector. Measure
@@ -118,7 +118,7 @@ Set `connector_cable_cooler_fit=true` only after the intended configuration fits
 ## 3. Geophone, IRQ and acquisition timing
 
 1. Follow [Pi deployment](../sw/pi/deploy/README.md) and capture with `--fifo`.
-   The T1-GEO has no GNSS and rejects `--utc`. Read back ADC configuration;
+   The DAQHAT-01 has no GNSS and rejects `--utc`. Read back ADC configuration;
    retain raw counts, conversion counters and host monotonic timestamps.
 2. Capture ADC DRDY, I²C transactions, IMU IRQ and SPI activity on a common
    logic-analyzer timebase. Measure conversion-to-read delay, delivered rate,
@@ -176,9 +176,9 @@ exit 2 means incomplete or failed checks; exit 1 means malformed input. Missing
 measurements, targets, context or evidence never become a pass. Correct failed
 items and repeat the affected tests with traceable revisions.
 
-For the next **prototype fab submission**, freeze the intended T1 revision and
+For the next **prototype fab submission**, freeze the intended DAQHAT-01 revision and
 actual stack/copper/dielectric values; use the current
-[hardening review](t1-link-hardening.md) and internal-link assembly;
+[hardening review](daqhat-01-link-hardening.md) and internal-link assembly;
 run the full CAD/build checks; review footprint pin numbering, BOM availability,
 DNPs, drill/microvia instructions and mechanical fit; then export and independently
 inspect Gerbers/drills, assembly drawings and placements from that same revision.

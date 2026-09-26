@@ -1,4 +1,4 @@
-"""Rebuild native T1 copper from authored placement + complete SES in a temp tree."""
+"""Rebuild native DAQHAT-01 copper from authored placement + complete SES in a temp tree."""
 from pathlib import Path
 import collections
 import json
@@ -9,7 +9,7 @@ import tempfile
 import pcbnew as p
 
 ROOT=Path(__file__).resolve().parents[2]
-NAME='shakesense-trenz-hat'
+NAME='groundlark-daqhat-01'
 FOLDER=ROOT/'hw/boards'/NAME
 
 def copper(board):
@@ -26,7 +26,7 @@ def copper(board):
     return collections.Counter(records)
 
 def main():
-    with tempfile.TemporaryDirectory(prefix='senseshake-replay-') as tmp:
+    with tempfile.TemporaryDirectory(prefix='groundlark-replay-') as tmp:
         dst=Path(tmp)
         for folder in ['hw/tools','hw/elec','hw/libraries','hw/layout/trenz_hat']:
             shutil.copytree(ROOT/folder,dst/folder)

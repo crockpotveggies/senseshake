@@ -1,4 +1,4 @@
-ShakeSense Trenz support check: reject_long_power_lead
+Groundlark Trenz support check: reject_long_power_lead
 Vsource src 0 3.267
 Rpath src module 0.10
 Iload module 0 3

@@ -21,16 +21,16 @@ def build_descriptor():
     target.parent.mkdir(parents=True, exist_ok=True)
     source = ROOT / "sw/interfaces/proto"
     result = protoc.main(["protoc", f"-I{source}", "--include_imports",
-                          f"--descriptor_set_out={target}", str(source / "senseshake/sensor/v1/sensor.proto")])
+                          f"--descriptor_set_out={target}", str(source / "groundlark/sensor/v1/sensor.proto")])
     if result:
         raise RuntimeError("Could not build sensor descriptor")
-    os.environ["SENSESHAKE_DESCRIPTOR"] = str(target)
+    os.environ["GROUNDLARK_DESCRIPTOR"] = str(target)
 
 
 build_descriptor()
 from nicegui import app, run, ui  # noqa: E402
-from senseshake.workbench import MAX_BYTES, NAMES, Workbench  # noqa: E402
-from senseshake.hat_signals import run_bench  # noqa: E402
+from groundlark.workbench import MAX_BYTES, NAMES, Workbench  # noqa: E402
+from groundlark.hat_signals import run_bench  # noqa: E402
 
 ASSETS = Path(__file__).parent / "assets"
 for relative, expected in json.loads((ASSETS / "provenance.json").read_text())["sha256"].items():
@@ -59,13 +59,13 @@ def chart_options(title):
 
 
 def board_scene(scene, select):
-    """Real KiCad T1 geometry plus pick targets/custom envelopes at authored XY."""
-    layout = json.loads((ROOT / "hw/layout-trenz.json").read_text())["shakesense-trenz-hat"]
-    remote = json.loads((ROOT / "hw/layout.json").read_text())["shakesense-field-head"]
+    """Real KiCad DAQHAT-01 geometry plus pick targets/custom envelopes at authored XY."""
+    layout = json.loads((ROOT / "hw/layout-trenz.json").read_text())["groundlark-daqhat-01"]
+    remote = json.loads((ROOT / "hw/layout.json").read_text())["groundlark-field-head"]
     targets, rings = {}, {}
     with scene:
         with scene.group() as hat:
-            scene.gltf("/board-assets/t1.glb").scale(100).rotate(math.pi / 2, 0, 0).move(-9.25, 7.8, 0)
+            scene.gltf("/board-assets/daqhat-01.glb").scale(100).rotate(math.pi / 2, 0, 0).move(-9.25, 7.8, 0)
             # Tall Pi socket envelope; the internal-link HAT has no FFC sockets.
             scene.box(5.08, .51, 1.61).move(-.999, 2.45, -.967).material("#252b34")
             # KiCad's GLB exporter omits these local VRML bodies. These are
@@ -86,7 +86,7 @@ def board_scene(scene, select):
                     rings[sid] = scene.ring(radius, radius + .06, 48).move(x, y, .68).material(TEAL).with_name(f"sensor-{sid}")
                     targets[rings[sid].id] = sid
                     scene.text(NAMES[sid], "color:#e8f5ff;font-size:11px;background:#172534dc;padding:2px 5px;border-radius:4px;pointer-events:none").move(x, y, 1.12)
-            scene.text("T1 SENSOR HAT  /  85 × 56 mm", "color:#a6bfcc;font-size:11px;pointer-events:none").move(0, -3.2, .1)
+            scene.text("DAQHAT-01 SENSOR HAT  /  85 × 56 mm", "color:#a6bfcc;font-size:11px;pointer-events:none").move(0, -3.2, .1)
         with scene.group() as head:
             scene.box(7, 4.5, .16).material("#165b51")
             for part in remote["parts"]:
@@ -135,7 +135,7 @@ def page():
         nonlocal selected
         selected = sid
         heading.set_text(f"{NAMES[sid]}  /  {MODELS[sid]}")
-        board_label.set_text("T1 sensor HAT" if sid not in (7, 8) else "Remote USB sensor head")
+        board_label.set_text("DAQHAT-01 sensor HAT" if sid not in (7, 8) else "Remote USB sensor head")
         hat.visible(sid not in (7, 8))
         head.visible(sid in (7, 8))
         for sensor, ring in rings.items():
@@ -158,10 +158,10 @@ def page():
     def save_recording():
         if engine.mode != "Simulate":
             raise ValueError("This is an imported recording")
-        ui.download.content(engine.finish(), "senseshake-run.ssrec", "application/octet-stream")
+        ui.download.content(engine.finish(), "groundlark-run.ssrec", "application/octet-stream")
 
     def save_scenario():
-        ui.download.content(json.dumps(engine.scenario_json(), indent=2) + "\n", "senseshake-scenario.json", "application/json")
+        ui.download.content(json.dumps(engine.scenario_json(), indent=2) + "\n", "groundlark-scenario.json", "application/json")
 
     async def upload_recording(event):
         nonlocal busy, verified_capture, signal_report
@@ -234,7 +234,7 @@ def page():
     with ui.row().classes("topbar"):
         ui.icon("graphic_eq", size="30px").style(f"color:{TEAL}")
         with ui.column().classes("gap-0"):
-            ui.label("ShakeSense").classes("brand")
+            ui.label("Groundlark").classes("brand")
             ui.label("SENSOR WORKBENCH").classes("eyebrow")
         ui.space()
         mode = ui.badge("SIMULATION", color="primary").props("outline")
@@ -264,7 +264,7 @@ def page():
             for sid in (1, 2, 3, 4, 5, 9, 7, 8):
                 name = NAMES[sid]
                 if sid in (1, 7):
-                    ui.label("T1 HAT · PI / FPGA STACK" if sid == 1 else "REMOTE · USB-C HEAD").classes("group-label")
+                    ui.label("DAQHAT-01 HAT · PI / FPGA STACK" if sid == 1 else "REMOTE · USB-C HEAD").classes("group-label")
                 with ui.button(on_click=lambda sid=sid: choose(sid)).props("flat no-caps align=left").classes("sensor-button") as b:
                     with ui.column().classes("gap-0 items-start"):
                         ui.label(name).classes("sensor-name")
@@ -287,7 +287,7 @@ def page():
                 with ui.row().classes("w-full items-center"):
                     with ui.column().classes("gap-0"):
                         ui.label("BOARD EXPLORER").classes("eyebrow")
-                        board_label = ui.label("T1 sensor HAT").classes("section-title")
+                        board_label = ui.label("DAQHAT-01 sensor HAT").classes("section-title")
                     ui.space()
                     ui.button("Orbit", on_click=lambda: camera()).props("flat dense no-caps")
                     ui.button("Top", on_click=lambda: camera(True)).props("flat dense no-caps")
@@ -295,7 +295,7 @@ def page():
                 hat, head, rings = board_scene(scene, choose)
                 camera()
                 ui.label("Click a sensor to inspect · drag to orbit · scroll to zoom").classes("small muted")
-                ui.label("T1: KiCad geometry + simplified custom bodies. Remote head: placement-based envelopes. Camera motion does not stimulate sensors.").classes("fine-print")
+                ui.label("DAQHAT-01: KiCad geometry + simplified custom bodies. Remote head: placement-based envelopes. Camera motion does not stimulate sensors.").classes("fine-print")
             with ui.column().classes("panel chart-panel"):
                 heading = ui.label("IMU 1 / LSM6DSO").classes("section-title")
                 detail = ui.label("Waiting for samples").classes("small muted")
@@ -384,7 +384,7 @@ def page():
         heading.set_text(f"{NAMES[selected]}  /  {MODELS[selected]}")
         metrics.set_text(f'{snap["samples"]:,} samples · {snap["missing"]:,} missing')
         for sid, point in snap["latest"].items():
-            if sid not in statuses: continue  # Legacy GNSS is retained in recordings, not displayed on T1-GEO.
+            if sid not in statuses: continue  # Legacy GNSS is retained in recordings, not displayed on DAQHAT-01.
             status = point["quality"] if point else "waiting"
             if point and snap["seconds"] - point["t"] > 2.5:
                 status = "Stale"
@@ -424,8 +424,8 @@ def page():
 
 
 if __name__ in {"__main__", "__mp_main__"}:
-    parser = argparse.ArgumentParser(description="Local ShakeSense sensor workbench")
+    parser = argparse.ArgumentParser(description="Local Groundlark sensor workbench")
     parser.add_argument("--port", type=int, default=8080)
     args = parser.parse_args()
-    ui.run(host="127.0.0.1", port=args.port, title="ShakeSense · Sensor Workbench",
+    ui.run(host="127.0.0.1", port=args.port, title="Groundlark · Sensor Workbench",
            dark=True, reload=False, show=False, favicon="〰", reconnect_timeout=30)

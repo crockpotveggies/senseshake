@@ -9,10 +9,10 @@ from kicad_support import save_board
 import pcbnew as p
 ROOT=Path(__file__).resolve().parents[2]
 power={'PI_5V','PI_3V3','SENS_3V3','USB_VBUS','USB_5V','V3_SENSOR','V3','CF_REG_3V3','CF_3V3','CF_SW','FPGA_VIN','FPGA_3V3','EXT_3V3'}
-for name in sys.argv[1:] or ['shakesense-hat','shakesense-field-head']:
+for name in sys.argv[1:] or ['groundlark-hat','groundlark-field-head']:
     folder=ROOT/'hw/boards'/name;path=folder/(name+'.kicad_pcb')
     b=p.LoadBoard(str(path));trials={}
-    for width in ([1.2,.8,.6,.4,.3,.25,.2] if name=='shakesense-trenz-hat' else [.4,.3,.25,.2]):
+    for width in ([1.2,.8,.6,.4,.3,.25,.2] if name=='groundlark-daqhat-01' else [.4,.3,.25,.2]):
         changed={}
         for t in b.GetTracks():
             if t.GetClass()=='PCB_TRACK' and t.GetNetname() in power and t.GetWidth()<p.FromMM(width):

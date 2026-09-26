@@ -2,7 +2,7 @@
 from pathlib import Path
 import subprocess
 ROOT=Path(__file__).resolve().parents[2]
-for name in ['shakesense-hat','shakesense-field-head']:
+for name in ['groundlark-hat','groundlark-field-head']:
     folder=ROOT/'hw/boards'/name; preview=folder/'preview';preview.mkdir(exist_ok=True)
     # Clear only this tool's generated previews before exporting current sheets.
     for suffix in ('*.svg','*.png'):

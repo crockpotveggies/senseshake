@@ -1,6 +1,6 @@
 # Sensor workbench
 
-**T1-GEO revision:** GNSS is removed; one external Racotech vertical geophone
+**DAQHAT-01 revision:** GNSS is removed; one external Racotech vertical geophone
 uses an ADS122C04 input. See [current circuit, acquisition and validation](geophone-input.md).
 GNSS/PPS/RF details below describe the preceding revision or legacy recordings.
 The current physical bench template is version 2, with geophone response/noise/timing
@@ -12,14 +12,14 @@ without a Pi, FPGA or Coldfoot chip. Live hardware acquisition remains available
 through the [existing Linux CLI](sensor-software.md); this UI does not yet attach
 to physical devices.
 
-![Actual dark-mode workbench with the T1 board and sensor traces](images/sensor-workbench.png)
+![Actual dark-mode workbench with the DAQHAT-01 board and sensor traces](images/sensor-workbench.png)
 
 ## Start
 
 Install [uv](https://docs.astral.sh/uv/getting-started/installation/) once, then:
 
 ```powershell
-cd P:\Personal\senseshake
+cd P:\Personal\groundlark
 ./ui.ps1
 ```
 
@@ -104,7 +104,7 @@ and `hat-signals.json` in its retained run. After starting the UI once, the
 same check can be run from the Windows UI environment:
 
 ```powershell
-$env:SENSESHAKE_DESCRIPTOR = "$PWD/sw/build/ui-schema.binpb"
+$env:GROUNDLARK_DESCRIPTOR = "$PWD/sw/build/ui-schema.binpb"
 ./.local/ui-venv/Scripts/python.exe sw/tools/check_hat_signals.py --output .local/hat-check.ssrec
 ```
 
@@ -140,7 +140,7 @@ events are retained for display. The acquisition record itself is bounded at
 8 MiB. Existing scenario limits (256 events / 8192 normalized bytes) apply to
 interactive controls as well as imported scenarios.
 
-The T1 3D asset comes from checked KiCad geometry, with simplified custom bodies
+The DAQHAT-01 3D asset comes from checked KiCad geometry, with simplified custom bodies
 added in Python. The remote head is an approximate placement-based visualization
 and shows the optional pressure sensor. See [asset provenance](../sw/ui/assets/README.md).
 These views and ideal sensor models do not establish mechanical fit, magnetic
@@ -150,8 +150,8 @@ noise performance, electrical timing or fabrication readiness.
 
 The page is in [main.py](../sw/ui/main.py), with appearance in
 [style.css](../sw/ui/style.css). Research logic belongs in the independent
-[workbench controller](../sw/pi/senseshake/workbench.py) or
-[stimulus models](../sw/pi/senseshake/stimulus.py), not in browser callbacks.
+[workbench controller](../sw/pi/groundlark/workbench.py) or
+[stimulus models](../sw/pi/groundlark/stimulus.py), not in browser callbacks.
 NiceGUI supplies the browser engine; all authored UI behavior is Python.
 
 ```powershell

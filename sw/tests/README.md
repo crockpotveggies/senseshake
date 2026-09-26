@@ -55,4 +55,4 @@ stage, late responses, stale results, dropped ACKs, readback faults, ownership
 restoration and SIGTERM isolation. `test_fpga_evidence.py` injects timing and
 report-coverage failures. The FPGA stage additionally runs the real Python client
 against RTL pins, rather than relying only on a byte-level mock peer. See the
-[hardening review](../../docs/t1-link-hardening.md).
+[hardening review](../../docs/daqhat-01-link-hardening.md).

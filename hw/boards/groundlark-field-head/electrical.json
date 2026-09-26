@@ -1,0 +1,761 @@
+{
+  "source": "atopile compiled PCB; do not edit",
+  "size_mm": [
+    70,
+    45
+  ],
+  "copper_layers": 4,
+  "parts": [
+    {
+      "ref": "J1",
+      "value": "USB-C DEVICE",
+      "xy": [
+        67,
+        14
+      ],
+      "angle": 90,
+      "section": "01-usb-power-page-01",
+      "dnp": false,
+      "note": "",
+      "mpn": "USB4105-GF-A",
+      "footprint": "Connector_USB:USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal",
+      "local_fp": "Connector_USB__USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal",
+      "names": {},
+      "pins": {
+        "A1": "GND",
+        "A4": "USB_VBUS",
+        "A5": "USB_CC1",
+        "A6": "USB_DP",
+        "A7": "USB_DM",
+        "A8": null,
+        "A9": "USB_VBUS",
+        "A12": "GND",
+        "B1": "GND",
+        "B4": "USB_VBUS",
+        "B5": "USB_CC2",
+        "B6": "USB_DP",
+        "B7": "USB_DM",
+        "B8": null,
+        "B9": "USB_VBUS",
+        "B12": "GND",
+        "S1": "GND"
+      }
+    },
+    {
+      "ref": "R1",
+      "value": "5.1k",
+      "xy": [
+        61,
+        6
+      ],
+      "angle": 0,
+      "section": "01-usb-power-page-01",
+      "dnp": false,
+      "note": "",
+      "mpn": "RC0603FR-075K1L",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "local_fp": "Resistor_SMD__R_0603_1608Metric",
+      "names": {},
+      "pins": {
+        "1": "USB_CC1",
+        "2": "GND"
+      }
+    },
+    {
+      "ref": "R2",
+      "value": "5.1k",
+      "xy": [
+        60,
+        20
+      ],
+      "angle": 0,
+      "section": "01-usb-power-page-01",
+      "dnp": false,
+      "note": "",
+      "mpn": "RC0603FR-075K1L",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "local_fp": "Resistor_SMD__R_0603_1608Metric",
+      "names": {},
+      "pins": {
+        "1": "USB_CC2",
+        "2": "GND"
+      }
+    },
+    {
+      "ref": "D1",
+      "value": "USBLC6-2SC6",
+      "xy": [
+        60,
+        14
+      ],
+      "angle": 0,
+      "section": "01-usb-power-page-01",
+      "dnp": false,
+      "note": "",
+      "mpn": "USBLC6-2SC6",
+      "footprint": "Package_TO_SOT_SMD:SOT-23-6",
+      "local_fp": "Package_TO_SOT_SMD__SOT-23-6",
+      "names": {},
+      "pins": {
+        "1": "USB_DP",
+        "2": "GND",
+        "3": "USB_DM",
+        "4": "USB_DM",
+        "5": "USB_VBUS",
+        "6": "USB_DP"
+      }
+    },
+    {
+      "ref": "D2",
+      "value": "USBLC6-2SC6",
+      "xy": [
+        57,
+        5
+      ],
+      "angle": 0,
+      "section": "01-usb-power-page-01",
+      "dnp": false,
+      "note": "",
+      "mpn": "USBLC6-2SC6",
+      "footprint": "Package_TO_SOT_SMD:SOT-23-6",
+      "local_fp": "Package_TO_SOT_SMD__SOT-23-6",
+      "names": {},
+      "pins": {
+        "1": "USB_CC1",
+        "2": "GND",
+        "3": "USB_CC2",
+        "4": "USB_CC2",
+        "5": "USB_VBUS",
+        "6": "USB_CC1"
+      }
+    },
+    {
+      "ref": "F1",
+      "value": "500mA PTC",
+      "xy": [
+        66,
+        26
+      ],
+      "angle": 0,
+      "section": "01-usb-power-page-01",
+      "dnp": false,
+      "note": "",
+      "mpn": "MF-MSMF050-2",
+      "footprint": "Fuse:Fuse_1812_4532Metric",
+      "local_fp": "Fuse__Fuse_1812_4532Metric",
+      "names": {},
+      "pins": {
+        "1": "USB_VBUS",
+        "2": "USB_5V"
+      }
+    },
+    {
+      "ref": "U4",
+      "value": "AP2112K-3.3",
+      "xy": [
+        58,
+        24
+      ],
+      "angle": 0,
+      "section": "01-usb-power-page-01",
+      "dnp": false,
+      "note": "",
+      "mpn": "AP2112K-3.3TRG1",
+      "footprint": "Package_TO_SOT_SMD:SOT-23-5",
+      "local_fp": "Package_TO_SOT_SMD__SOT-23-5",
+      "names": {
+        "1": "VIN",
+        "2": "GND",
+        "3": "EN",
+        "4": "NC",
+        "5": "VOUT"
+      },
+      "pins": {
+        "1": "USB_5V",
+        "2": "GND",
+        "3": "USB_5V",
+        "4": null,
+        "5": "V3"
+      }
+    },
+    {
+      "ref": "C1",
+      "value": "2.2u",
+      "xy": [
+        61,
+        28
+      ],
+      "angle": 0,
+      "section": "01-usb-power-page-01",
+      "dnp": false,
+      "note": "",
+      "mpn": "GRM21BR71E225KA73L",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "local_fp": "Capacitor_SMD__C_0805_2012Metric",
+      "names": {},
+      "pins": {
+        "1": "USB_5V",
+        "2": "GND"
+      }
+    },
+    {
+      "ref": "C2",
+      "value": "4.7u",
+      "xy": [
+        53,
+        24
+      ],
+      "angle": 0,
+      "section": "01-usb-power-page-01",
+      "dnp": false,
+      "note": "",
+      "mpn": "GRM21BR71A475KA73L",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "local_fp": "Capacitor_SMD__C_0805_2012Metric",
+      "names": {},
+      "pins": {
+        "1": "V3",
+        "2": "GND"
+      }
+    },
+    {
+      "ref": "U1",
+      "value": "STM32F042K6T6",
+      "xy": [
+        51,
+        14
+      ],
+      "angle": 0,
+      "section": "02-controller-page-01",
+      "dnp": false,
+      "note": "",
+      "mpn": "STM32F042K6T6",
+      "footprint": "Package_QFP:LQFP-32_7x7mm_P0.8mm",
+      "local_fp": "Package_QFP__LQFP-32_7x7mm_P0.8mm",
+      "names": {
+        "1": "VDD",
+        "2": "PF0",
+        "3": "PF1",
+        "4": "NRST",
+        "5": "VDDA",
+        "6": "PA0",
+        "7": "PA1",
+        "8": "PA2",
+        "9": "PA3",
+        "10": "PA4",
+        "11": "PA5",
+        "12": "PA6",
+        "13": "PA7",
+        "14": "PB0",
+        "15": "PB1",
+        "16": "VSS",
+        "17": "VDDIO2",
+        "18": "PA8",
+        "19": "PA9",
+        "20": "PA10",
+        "21": "USB_DM",
+        "22": "USB_DP",
+        "23": "SWDIO",
+        "24": "SWCLK",
+        "25": "PA15",
+        "26": "PB3",
+        "27": "PB4",
+        "28": "PB5",
+        "29": "I2C_SCL",
+        "30": "I2C_SDA",
+        "31": "BOOT0",
+        "32": "VSS"
+      },
+      "pins": {
+        "1": "V3",
+        "2": null,
+        "3": null,
+        "4": "NRST",
+        "5": "V3",
+        "6": "SENSOR_EN",
+        "7": null,
+        "8": null,
+        "9": null,
+        "10": null,
+        "11": null,
+        "12": null,
+        "13": null,
+        "14": "MAG_DRDY",
+        "15": null,
+        "16": "GND",
+        "17": "V3",
+        "18": null,
+        "19": null,
+        "20": null,
+        "21": "USB_DM",
+        "22": "USB_DP",
+        "23": "SWDIO",
+        "24": "SWCLK",
+        "25": null,
+        "26": null,
+        "27": null,
+        "28": null,
+        "29": "SCL",
+        "30": "SDA",
+        "31": "BOOT0",
+        "32": "GND"
+      }
+    },
+    {
+      "ref": "C3",
+      "value": "100n",
+      "xy": [
+        46,
+        8
+      ],
+      "angle": 0,
+      "section": "02-controller-page-01",
+      "dnp": false,
+      "note": "",
+      "mpn": "GRM188R71H104KA93D",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "local_fp": "Capacitor_SMD__C_0603_1608Metric",
+      "names": {},
+      "pins": {
+        "1": "V3",
+        "2": "GND"
+      }
+    },
+    {
+      "ref": "C6",
+      "value": "100n",
+      "xy": [
+        56,
+        19
+      ],
+      "angle": 0,
+      "section": "02-controller-page-01",
+      "dnp": false,
+      "note": "",
+      "mpn": "GRM188R71H104KA93D",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "local_fp": "Capacitor_SMD__C_0603_1608Metric",
+      "names": {},
+      "pins": {
+        "1": "V3",
+        "2": "GND"
+      }
+    },
+    {
+      "ref": "C7",
+      "value": "100n",
+      "xy": [
+        44,
+        16
+      ],
+      "angle": 0,
+      "section": "02-controller-page-01",
+      "dnp": false,
+      "note": "",
+      "mpn": "GRM188R71H104KA93D",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "local_fp": "Capacitor_SMD__C_0603_1608Metric",
+      "names": {},
+      "pins": {
+        "1": "V3",
+        "2": "GND"
+      }
+    },
+    {
+      "ref": "C8",
+      "value": "100n",
+      "xy": [
+        44,
+        12
+      ],
+      "angle": 0,
+      "section": "02-controller-page-01",
+      "dnp": false,
+      "note": "",
+      "mpn": "GRM188R71H104KA93D",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "local_fp": "Capacitor_SMD__C_0603_1608Metric",
+      "names": {},
+      "pins": {
+        "1": "NRST",
+        "2": "GND"
+      }
+    },
+    {
+      "ref": "R3",
+      "value": "10k",
+      "xy": [
+        44,
+        5
+      ],
+      "angle": 0,
+      "section": "02-controller-page-01",
+      "dnp": false,
+      "note": "",
+      "mpn": "RC0603FR-0710KL",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "local_fp": "Resistor_SMD__R_0603_1608Metric",
+      "names": {},
+      "pins": {
+        "1": "V3",
+        "2": "NRST"
+      }
+    },
+    {
+      "ref": "R4",
+      "value": "10k",
+      "xy": [
+        51,
+        5
+      ],
+      "angle": 0,
+      "section": "02-controller-page-01",
+      "dnp": false,
+      "note": "",
+      "mpn": "RC0603FR-0710KL",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "local_fp": "Resistor_SMD__R_0603_1608Metric",
+      "names": {},
+      "pins": {
+        "1": "BOOT0",
+        "2": "GND"
+      }
+    },
+    {
+      "ref": "J2",
+      "value": "SWD / 3V3 SENSE",
+      "xy": [
+        61,
+        32
+      ],
+      "angle": 0,
+      "section": "02-controller-page-01",
+      "dnp": false,
+      "note": "Pin 1 is target voltage sense; do not externally power the rail",
+      "mpn": "M20-9990545",
+      "footprint": "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical",
+      "local_fp": "Connector_PinHeader_2.54mm__PinHeader_1x05_P2.54mm_Vertical",
+      "names": {},
+      "pins": {
+        "1": "V3",
+        "2": "SWDIO",
+        "3": "GND",
+        "4": "SWCLK",
+        "5": "NRST"
+      }
+    },
+    {
+      "ref": "J3",
+      "value": "BOOT0 jumper",
+      "xy": [
+        36,
+        32
+      ],
+      "angle": 0,
+      "section": "02-controller-page-01",
+      "dnp": false,
+      "note": "",
+      "mpn": "EEPROM write enable",
+      "footprint": "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical",
+      "local_fp": "Connector_PinHeader_2.54mm__PinHeader_1x02_P2.54mm_Vertical",
+      "names": {},
+      "pins": {
+        "1": "V3",
+        "2": "BOOT0"
+      }
+    },
+    {
+      "ref": "U5",
+      "value": "TPS22919",
+      "xy": [
+        39,
+        25
+      ],
+      "angle": 0,
+      "section": "03-sensors-page-01",
+      "dnp": false,
+      "note": "",
+      "mpn": "TPS22919DCKR",
+      "footprint": "Package_TO_SOT_SMD:SOT-363_SC-70-6",
+      "local_fp": "Package_TO_SOT_SMD__SOT-363_SC-70-6",
+      "names": {
+        "1": "IN",
+        "2": "GND",
+        "3": "ON",
+        "4": "NC",
+        "5": "QOD",
+        "6": "OUT"
+      },
+      "pins": {
+        "1": "V3",
+        "2": "GND",
+        "3": "SENSOR_EN",
+        "4": null,
+        "5": "V3_SENSOR",
+        "6": "V3_SENSOR"
+      }
+    },
+    {
+      "ref": "R5",
+      "value": "100k",
+      "xy": [
+        39,
+        21
+      ],
+      "angle": 0,
+      "section": "03-sensors-page-01",
+      "dnp": false,
+      "note": "",
+      "mpn": "RC0603FR-07100KL",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "local_fp": "Resistor_SMD__R_0603_1608Metric",
+      "names": {},
+      "pins": {
+        "1": "SENSOR_EN",
+        "2": "GND"
+      }
+    },
+    {
+      "ref": "C9",
+      "value": "100n",
+      "xy": [
+        35,
+        25
+      ],
+      "angle": 0,
+      "section": "03-sensors-page-01",
+      "dnp": false,
+      "note": "",
+      "mpn": "GRM188R71H104KA93D",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "local_fp": "Capacitor_SMD__C_0603_1608Metric",
+      "names": {},
+      "pins": {
+        "1": "V3",
+        "2": "GND"
+      }
+    },
+    {
+      "ref": "R7",
+      "value": "4.7k",
+      "xy": [
+        36,
+        8
+      ],
+      "angle": 0,
+      "section": "03-sensors-page-01",
+      "dnp": false,
+      "note": "",
+      "mpn": "RC0603FR-074K7L",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "local_fp": "Resistor_SMD__R_0603_1608Metric",
+      "names": {},
+      "pins": {
+        "1": "SDA",
+        "2": "V3_SENSOR"
+      }
+    },
+    {
+      "ref": "R8",
+      "value": "4.7k",
+      "xy": [
+        40,
+        8
+      ],
+      "angle": 0,
+      "section": "03-sensors-page-01",
+      "dnp": false,
+      "note": "",
+      "mpn": "RC0603FR-074K7L",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "local_fp": "Resistor_SMD__R_0603_1608Metric",
+      "names": {},
+      "pins": {
+        "1": "SCL",
+        "2": "V3_SENSOR"
+      }
+    },
+    {
+      "ref": "U2",
+      "value": "RM3100 XYZ",
+      "xy": [
+        18,
+        20
+      ],
+      "angle": 0,
+      "section": "03-sensors-page-01",
+      "dnp": false,
+      "note": "",
+      "mpn": "PNI 14190",
+      "footprint": "Groundlark:PNI_14190_Module",
+      "local_fp": "Groundlark__PNI_14190_Module",
+      "names": {
+        "1": "SCL",
+        "2": "SA1",
+        "3": "SDA",
+        "4": "SA0",
+        "5": "DRDY",
+        "6": "NC",
+        "7": "AVSS",
+        "8": "NC",
+        "9": "NC",
+        "10": "I2CEN",
+        "11": "NC",
+        "12": "DVDD",
+        "13": "AVDD",
+        "14": "DVSS"
+      },
+      "pins": {
+        "1": "SCL",
+        "2": "GND",
+        "3": "SDA",
+        "4": "GND",
+        "5": "MAG_DRDY",
+        "6": null,
+        "7": "GND",
+        "8": null,
+        "9": null,
+        "10": "V3_SENSOR",
+        "11": null,
+        "12": "V3_SENSOR",
+        "13": "V3_SENSOR",
+        "14": "GND"
+      }
+    },
+    {
+      "ref": "C4",
+      "value": "100n",
+      "xy": [
+        33,
+        15
+      ],
+      "angle": 0,
+      "section": "03-sensors-page-01",
+      "dnp": false,
+      "note": "",
+      "mpn": "GRM188R71H104KA93D",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "local_fp": "Capacitor_SMD__C_0603_1608Metric",
+      "names": {},
+      "pins": {
+        "1": "V3_SENSOR",
+        "2": "GND"
+      }
+    },
+    {
+      "ref": "U3",
+      "value": "DLVR-F50D option",
+      "xy": [
+        46,
+        33
+      ],
+      "angle": 0,
+      "section": "03-sensors-page-01",
+      "dnp": true,
+      "note": "",
+      "mpn": "DLVR-F50D-E1BS-I-NI3F",
+      "footprint": "Groundlark:DLVR_E1BS",
+      "local_fp": "Groundlark__DLVR_E1BS",
+      "names": {
+        "1": "GND",
+        "2": "VS_3V3",
+        "3": "SDA",
+        "4": "SCL"
+      },
+      "pins": {
+        "1": "GND",
+        "2": "V3_SENSOR",
+        "3": "SDA",
+        "4": "SCL"
+      }
+    },
+    {
+      "ref": "C5",
+      "value": "100n",
+      "xy": [
+        43,
+        34
+      ],
+      "angle": 0,
+      "section": "03-sensors-page-01",
+      "dnp": false,
+      "note": "",
+      "mpn": "GRM188R71H104KA93D",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "local_fp": "Capacitor_SMD__C_0603_1608Metric",
+      "names": {},
+      "pins": {
+        "1": "V3_SENSOR",
+        "2": "GND"
+      }
+    },
+    {
+      "ref": "H1",
+      "value": "M2.5 NPTH",
+      "footprint": "MountingHole:MountingHole_2.7mm_M2.5",
+      "names": {},
+      "xy": [
+        3,
+        3
+      ],
+      "section": "01-remote-link",
+      "angle": 0,
+      "mpn": "M2.5 NPTH",
+      "note": "",
+      "dnp": false,
+      "local_fp": "MountingHole__MountingHole_2.7mm_M2.5",
+      "pins": {}
+    },
+    {
+      "ref": "H2",
+      "value": "M2.5 NPTH",
+      "footprint": "MountingHole:MountingHole_2.7mm_M2.5",
+      "names": {},
+      "xy": [
+        67,
+        3
+      ],
+      "section": "01-remote-link",
+      "angle": 0,
+      "mpn": "M2.5 NPTH",
+      "note": "",
+      "dnp": false,
+      "local_fp": "MountingHole__MountingHole_2.7mm_M2.5",
+      "pins": {}
+    },
+    {
+      "ref": "H3",
+      "value": "M2.5 NPTH",
+      "footprint": "MountingHole:MountingHole_2.7mm_M2.5",
+      "names": {},
+      "xy": [
+        3,
+        42
+      ],
+      "section": "01-remote-link",
+      "angle": 0,
+      "mpn": "M2.5 NPTH",
+      "note": "",
+      "dnp": false,
+      "local_fp": "MountingHole__MountingHole_2.7mm_M2.5",
+      "pins": {}
+    },
+    {
+      "ref": "H4",
+      "value": "M2.5 NPTH",
+      "footprint": "MountingHole:MountingHole_2.7mm_M2.5",
+      "names": {},
+      "xy": [
+        67,
+        42
+      ],
+      "section": "01-remote-link",
+      "angle": 0,
+      "mpn": "M2.5 NPTH",
+      "note": "",
+      "dnp": false,
+      "local_fp": "MountingHole__MountingHole_2.7mm_M2.5",
+      "pins": {}
+    }
+  ]
+}

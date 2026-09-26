@@ -1,5 +1,5 @@
 {
-  "simulator": "******\n** ngspice-42 : Circuit level simulation program\n** Compiled with KLU Direct Linear Solver\n** The U. C. Berkeley CAD Group\n** Copyright 1985-1994, Regents of the University of California.\n** Copyright 2001-2023, The ngspice team.\n** Please get your ngspice manual from https://ngspice.sourceforge.io/docs.html\n** Please file your bug-reports at http://ngspice.sourceforge.net/bugrep.html\n** Creation Date: Sun Mar 31 20:15:14 UTC 2024\n******\n",
+  "simulator": "******\n** ngspice-39 : Circuit level simulation program\n** The U. C. Berkeley CAD Group\n** Copyright 1985-1994, Regents of the University of California.\n** Copyright 2001-2022, The ngspice team.\n** Please get your ngspice manual from http://ngspice.sourceforge.net/docs.html\n** Please file your bug-reports at http://ngspice.sourceforge.net/bugrep.html\n** Creation Date: Sun Feb  5 13:44:35 UTC 2023\n******\n",
   "cases": [
     {
       "case": "power_3p18_0p4_0p05",
@@ -318,9 +318,9 @@
     {
       "case": "cf_buck_4p75_0p05_0p8",
       "measured": {
-        "vmin": 3.290539,
-        "vmax": 3.291141,
-        "ripple": 0.0006012972,
+        "vmin": 3.290929,
+        "vmax": 3.291148,
+        "ripple": 0.0002186869,
         "peak_current": 0.171145
       },
       "acceptance": {
@@ -346,9 +346,9 @@
     {
       "case": "cf_buck_4p75_0p05_1p2",
       "measured": {
-        "vmin": 3.290658,
-        "vmax": 3.291106,
-        "ripple": 0.0004485232,
+        "vmin": 3.290965,
+        "vmax": 3.291113,
+        "ripple": 0.0001474811,
         "peak_current": 0.1308371
       },
       "acceptance": {
@@ -374,9 +374,9 @@
     {
       "case": "cf_buck_4p75_0p6_0p8",
       "measured": {
-        "vmin": 3.134418,
-        "vmax": 3.135015,
-        "ripple": 0.0005973267,
+        "vmin": 3.134805,
+        "vmax": 3.135022,
+        "ripple": 0.0002172449,
         "peak_current": 0.720345
       },
       "acceptance": {
@@ -402,9 +402,9 @@
     {
       "case": "cf_buck_4p75_0p6_1p2",
       "measured": {
-        "vmin": 3.134536,
-        "vmax": 3.134984,
-        "ripple": 0.0004485404,
+        "vmin": 3.134839,
+        "vmax": 3.134988,
+        "ripple": 0.0001483992,
         "peak_current": 0.6803037
       },
       "acceptance": {
@@ -430,10 +430,10 @@
     {
       "case": "cf_buck_5p25_0p05_0p8",
       "measured": {
-        "vmin": 3.291139,
-        "vmax": 3.291945,
-        "ripple": 0.0008062591,
-        "peak_current": 0.1975935
+        "vmin": 3.291639,
+        "vmax": 3.291908,
+        "ripple": 0.0002685571,
+        "peak_current": 0.19765
       },
       "acceptance": {
         "vmin": [
@@ -458,10 +458,10 @@
     {
       "case": "cf_buck_5p25_0p05_1p2",
       "measured": {
-        "vmin": 3.291299,
-        "vmax": 3.291935,
-        "ripple": 0.000636348,
-        "peak_current": 0.148493
+        "vmin": 3.291685,
+        "vmax": 3.291866,
+        "ripple": 0.00018145,
+        "peak_current": 0.1484972
       },
       "acceptance": {
         "vmin": [
@@ -486,10 +486,10 @@
     {
       "case": "cf_buck_5p25_0p6_0p8",
       "measured": {
-        "vmin": 3.137092,
-        "vmax": 3.137894,
-        "ripple": 0.0008014481,
-        "peak_current": 0.7467117
+        "vmin": 3.13759,
+        "vmax": 3.137857,
+        "ripple": 0.0002669552,
+        "peak_current": 0.7467679
       },
       "acceptance": {
         "vmin": [
@@ -514,10 +514,10 @@
     {
       "case": "cf_buck_5p25_0p6_1p2",
       "measured": {
-        "vmin": 3.137252,
-        "vmax": 3.137888,
-        "ripple": 0.0006367476,
-        "peak_current": 0.697905
+        "vmin": 3.137633,
+        "vmax": 3.137816,
+        "ripple": 0.0001826836,
+        "peak_current": 0.6979092
       },
       "acceptance": {
         "vmin": [

@@ -1,9 +1,9 @@
-> Historical T1-GEO review. Analog/software findings below remain useful, but
-> external GPIO/ribbon and JTAG-cable details were superseded by T1-LINK.
+> Historical DAQHAT-01 review. Analog/software findings below remain useful, but
+> external GPIO/ribbon and JTAG-cable details were superseded by DAQHAT-01.
 > Use [current circuit](fpga-host-link.md), [assembly](stack-assembly.md) and
-> current generated validation reports. Earlier pass counts do not certify T1-LINK.
+> current generated validation reports. Earlier pass counts do not certify DAQHAT-01.
 
-# T1-GEO pre-fab engineering review
+# DAQHAT-01 pre-fab engineering review
 
 **Revision scope:** these results cover the existing expansion board, not the
 [planned internal QSPI/UART/JTAG revision](fpga-host-link-plan.md). Ribbon removal
@@ -13,7 +13,7 @@ Review performed 2026-09-25 UTC. **The four reviews are completed, with open
 findings. This is not a layout freeze or physical qualification.** The carrier
 remains 85 Ã— 56 mm; all 155 FPGA GPIOs and the four aligned XYZ IMUs are retained.
 
-The reproducible [calculation and geometry report](../hw/boards/shakesense-trenz-hat/prefab-review.json)
+The reproducible [calculation and geometry report](../hw/boards/groundlark-daqhat-01/prefab-review.json)
 is generated read-only from the routed board. Run the full portable lab to repeat
 the checks. A successful test run means the asserted checks passed; it does not
 erase the open engineering findings below.
@@ -155,7 +155,7 @@ The identified ribbon interferences have a concrete CAD fix: J87 moves north
 of the bypass capacitors, J83 moves left of the ribbon corridor, and a
 windowed fourth spacer plus insulating guide preserves all four Pi supports.
 The revised service view includes the flex paths. Use the specified short-tip
-custom FPCs and [mechanical parts](../hw/mechanical/t1-ribbon-guide/README.md);
+custom FPCs and [mechanical parts](../hw/mechanical/daqhat-01-ribbon-guide/README.md);
 generic reinforced FFCs are not interchangeable. The geometry audit includes
 actual underside courtyards, PTH ends, screw heads and spacer solids, with
 regressions for the original collisions. First-article fit and the flex maker's
@@ -175,7 +175,7 @@ the final verification run. Fabrication process decisions remain with the owner.
 
 ## Validation record
 
-See the [current verification record](../hw/boards/shakesense-trenz-hat/verification.json)
+See the [current verification record](../hw/boards/groundlark-daqhat-01/verification.json)
 for the exact tested source hashes, full portable run, native ERC/DRC and clean
 routing replay. The [retained acquisition stress results](pre-fab-acquisition-stress.json)
 remain applicable to unchanged acquisition software. Layout changes do not

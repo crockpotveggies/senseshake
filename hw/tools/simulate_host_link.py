@@ -11,7 +11,7 @@ results=[]
 
 def run(name,body):
     path=OUT/(name+'.cir')
-    path.write_text('T1 internal link: '+name+'\n'+body+'\n.end\n')
+    path.write_text('DAQHAT-01 internal link: '+name+'\n'+body+'\n.end\n')
     r=subprocess.run(['ngspice','-b',str(path)],capture_output=True,text=True,timeout=30)
     log=r.stdout+r.stderr
     (OUT/(name+'.log')).write_text(log)

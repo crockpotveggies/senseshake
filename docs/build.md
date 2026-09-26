@@ -3,7 +3,7 @@
 For validation in an isolated, portable environment, use the
 [portable lab](portable-lab.md). It does not depend on the migrated local venvs.
 
-The separate Pi-outline T1 build and rendering commands are in
+The separate Pi-outline DAQHAT-01 build and rendering commands are in
 [Trenz carrier documentation](trenz-hat.md#rebuild).
 
 Used environment: WSL Ubuntu 24.04, atopile 0.15.9 with Python 3.14.7,
@@ -66,9 +66,9 @@ For a changed placement/circuit, reroute each board and repeat the checks:
 
 ```sh
 xvfb-run -a java -jar hw/tools/freerouting-1.9.0.jar \
-  -de hw/boards/shakesense-hat/shakesense-hat.dsn \
-  -do hw/boards/shakesense-hat/shakesense-hat.ses -mp 25 -mt 1 -da
-# Repeat for shakesense-field-head.
+  -de hw/boards/groundlark-hat/groundlark-hat.dsn \
+  -do hw/boards/groundlark-hat/groundlark-hat.ses -mp 25 -mt 1 -da
+# Repeat for groundlark-field-head.
 python3 hw/tools/import_routes.py
 python3 hw/tools/trim_dangling.py
 python3 hw/tools/widen_power.py
@@ -93,8 +93,8 @@ Render the actual PCB with KiCad (repeat for the field head):
 ```sh
 xvfb-run -a kicad-cli pcb render --width 1800 --height 1000 \
   --quality high --background opaque --rotate 325,0,25 --zoom 0.9 \
-  -o hw/boards/shakesense-hat/3d.png \
-  hw/boards/shakesense-hat/shakesense-hat.kicad_pcb
+  -o hw/boards/groundlark-hat/3d.png \
+  hw/boards/groundlark-hat/groundlark-hat.kicad_pcb
 ```
 
 The KiCad project opens directly in PCB Editor; use Alt+3 for its interactive 3D

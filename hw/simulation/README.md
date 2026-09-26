@@ -1,6 +1,6 @@
 # Hardware simulation scope
 
-The active T1-GEO adds 15 ngspice cases in `geophone/`, run with
+The active DAQHAT-01 adds 15 ngspice cases in `geophone/`, run with
 `python3 hw/tools/simulate_geophone.py`: Racotech mechanical response, coil
 loading, passive input filtering, bias and PGA common-mode headroom at nominal
 and tolerance corners. See [the circuit and limits](../../docs/geophone-input.md).
@@ -16,7 +16,7 @@ read-only layout/fit measurements. See the [pre-fab findings](../../docs/pre-fab
 The FPGA carrier has fourteen additional bounded checks in `trenz/`, run with
 `python3 hw/tools/simulate_trenz.py`. These cover DC input budgets, detection of
 excessive supply-lead resistance and lumped UART RC loads. They do not simulate
-the Trenz regulators or FPGA logic; see [T1 scope](../../docs/trenz-hat.md).
+the Trenz regulators or FPGA logic; see [DAQHAT-01 scope](../../docs/trenz-hat.md).
 The updated source envelope is 3.35 V ±0.5% at J83 with a 30 mΩ total hot loop
 resistance limit. Four load-step cases add 50/200 nH, 20 mΩ capacitor ESR and
 26.4 μF effective capacitance for 0.1↔3 A ramps lasting 100 μs. They do not

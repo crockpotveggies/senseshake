@@ -5,7 +5,7 @@ from pathlib import Path
 import sys
 ROOT = Path(__file__).resolve().parents[2]
 sys.path[:0] = [str(ROOT/'sw/pi'), str(ROOT/'sw/interfaces/python')]
-from senseshake.measurements import analyze, compare
+from groundlark.measurements import analyze, compare
 
 
 def main():

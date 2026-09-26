@@ -1,0 +1,171 @@
+"""Quantitative oracle for a fixed, eight-second modeled HAT bench experiment.
+
+Measures the recorded output, not private simulator state. Tests deliberately
+distort otherwise valid recordings to establish that wrong signals fail.
+This is not a general-purpose accept/reject test for unknown physical motion.
+"""
+from copy import deepcopy
+from io import BytesIO
+import hashlib
+import math
+import struct
+
+from .recording import Reader, Writer
+from .runtime import Acquisition, Channel
+from .session import Sessions
+from .simulation import defaults
+from .stimulus import Scenario
+from .virtual_hat import VirtualDriver
+
+PROFILE = {"version": 1, "initial": {
+    "orientation_deg": [{"amplitude": 5, "frequency_hz": .5}, 0, 0],
+    "acceleration_m_s2": [{"amplitude": .3, "frequency_hz": 2}, 0, 0],
+    "geophone_velocity_m_s": {"amplitude": .0001, "frequency_hz": 10}, "gnss_position": [0, 0, 10], "gnss_velocity_ned_m_s": [1, 2, -.5]}}
+SECONDS = 8
+# Independent nominal conversions from the effective bench configuration.
+ACCEL_M_S2_PER_COUNT = .00059820565
+GYRO_DEG_S_PER_COUNT = .00875
+G = 9.80665
+
+
+def xyz(vector):
+    return tuple(getattr(vector, axis) for axis in "xyz")
+
+
+def tone_metrics(points):
+    """Frequency from interpolated positive zero crossings; amplitude via LS fit."""
+    crossings = []
+    for (t0, y0), (t1, y1) in zip(points, points[1:]):
+        if y0 <= 0 < y1:
+            crossings.append(t0 - y0 * (t1 - t0) / (y1 - y0))
+    if len(crossings) < 3:
+        return 0., 0., 0.
+    frequency = (len(crossings) - 1) / (crossings[-1] - crossings[0])
+    sine = [math.sin(2 * math.pi * frequency * t) for t, _ in points]
+    cosine = [math.cos(2 * math.pi * frequency * t) for t, _ in points]
+    ss = sum(s*s for s in sine)
+    cc = sum(c*c for c in cosine)
+    sc = sum(s*c for s, c in zip(sine, cosine))
+    ys = sum(y*s for (_, y), s in zip(points, sine))
+    yc = sum(y*c for (_, y), c in zip(points, cosine))
+    determinant = ss * cc - sc * sc
+    if determinant <= 1e-12:
+        return frequency, 0., 0.
+    a, b = (ys*cc-yc*sc)/determinant, (yc*ss-ys*sc)/determinant
+    return frequency, math.hypot(a, b), math.degrees(math.atan2(b, a))
+
+
+def check_recording(data):
+    """Accept only the fixed-profile capture, with explicit quantitative tolerances."""
+    if len(data) > 2 * 1024 * 1024:
+        raise ValueError("HAT bench recording exceeds 2 MiB")
+    reader = Reader(BytesIO(data))
+    sessions = Sessions()
+    samples = {sid: [] for sid in (1, 2, 3, 4, 5, 9)}
+    checks, configs, completed = [], {}, False
+    def check(name, passed, detail):
+        checks.append(dict(name=name, passed=bool(passed), detail=detail))
+    for arrived, message in reader:
+        completed = isinstance(message, dict) and message.get("code") == "acquisition_summary"
+        if isinstance(message, dict):
+            continue
+        kind = sessions.accept(message)
+        if kind == "configuration":
+            configs.update({cfg.sensor_id: cfg for cfg in message.configuration.sensors})
+        elif kind == "batch":
+            sid = message.batch.sensor_id
+            if sid not in samples:
+                raise ValueError("HAT bench expects only sensors 1–6")
+            samples[sid].extend(message.batch.samples)
+            if len(samples[sid]) > 4000:
+                raise ValueError("HAT bench sample bound")
+    inventory = all(samples.values()) and set(configs) == set(samples)
+    check("Inventory & quality", inventory and completed and all(s.quality == 1 for rows in samples.values() for s in rows),
+          f"{sum(map(len, samples.values()))} samples; six HAT sensors; completion={completed}")
+    settings_ok = inventory and all(configs[i].period_ns == next(c["period_ns"] for c in defaults() if c["sensor_id"] == i) for i in samples)
+    if settings_ok:
+        settings_ok = all(configs[i].acceleration_range_g == 2 and configs[i].angular_rate_range_dps == 250 for i in range(1, 5)) and configs[5].tilt_mode == 1
+    check("Effective configuration", settings_ok, "26 Hz / ±2 g / ±250 °/s IMUs; 25 Hz inclinometer; 330 SPS vertical geophone")
+    if not inventory or not settings_ok or any(s.quality != 1 for rows in samples.values() for s in rows):
+        return dict(passed=False, checks=checks, samples=sum(map(len, samples.values())), recording_sha256=hashlib.sha256(data).hexdigest(), scope="modeled buses / actual Pi drivers")
+    timing_errors = []
+    continuity = True
+    for sid, rows in samples.items():
+        period = configs[sid].period_ns
+        continuity &= len(rows) == SECONDS * (26 if sid <= 4 else 25 if sid == 5 else 330)
+        for index, sample in enumerate(rows):
+            continuity &= sample.sequence == index and sample.time.domain == 1 and sample.time.HasField("acquisition_ns")
+            timing_errors.append(abs(sample.time.acquisition_ns - index * period))
+    worst_timing = max(timing_errors)
+    check("Timing & continuity", continuity and worst_timing <= 1_000_000, f"Maximum polling offset {worst_timing / 1e6:.3f} ms; limit 1 ms; no missing sequences")
+    tones, rocking, gravity_errors, gyro_errors = [], [], [], []
+    for sid in range(1, 5):
+        rows = samples[sid]
+        times = [s.time.acquisition_ns / 1e9 for s in rows]
+        accel = [tuple(v * ACCEL_M_S2_PER_COUNT for v in xyz(s.imu.acceleration)) for s in rows]
+        tones.append(tone_metrics([(t, a[0]) for t, a in zip(times, accel)]))
+        gravity_errors.extend(abs(math.hypot(a[1], a[2]) - G) for a in accel)
+        # Independent kinematic identity: integrated gyro equals roll inferred
+        # from gravity. This does not call the stimulus rotation/derivative code.
+        roll = [math.degrees(math.atan2(a[1], a[2])) for a in accel]
+        rocking.append(tone_metrics(list(zip(times, roll))))
+        integrated = roll[0]
+        for index in range(1, len(rows)):
+            rates = (rows[index-1].imu.angular_rate.x, rows[index].imu.angular_rate.x)
+            integrated += sum(rates) * .5 * GYRO_DEG_S_PER_COUNT * (times[index] - times[index-1])
+            gyro_errors.append(abs(integrated - roll[index]))
+            gyro_errors.extend(abs(getattr(rows[index].imu.angular_rate, axis) * GYRO_DEG_S_PER_COUNT) for axis in "yz")
+    check("IMU frequency, gain & phase", all(abs(f - 2) <= .01 and abs(a - .3) <= .003 and abs(p) <= 2 for f, a, p in tones),
+          f"IMU 1: {tones[0][0]:.4f} Hz, {tones[0][1]:.4f} m/s², {tones[0][2]:.3f}°; limits 2 ±0.01 Hz, 0.300 ±0.003 m/s², phase ±2° (all four checked)")
+    check("Gravity magnitude", max(gravity_errors) <= .001,
+          f"Maximum YZ gravity error {max(gravity_errors):.6f} m/s²; limit 0.001")
+    check("Known roll waveform", all(abs(f-.5) <= .005 and abs(a-5) <= .02 and abs(p) <= 2 for f, a, p in rocking),
+          f"Gravity-derived roll: {rocking[0][0]:.4f} Hz, {rocking[0][1]:.4f}°; expected 0.5 ±0.005 Hz, 5 ±0.02°, phase ±2°")
+    check("Gyro / gravity consistency", max(gyro_errors) <= .02,
+          f"Maximum integrated roll error {max(gyro_errors):.4f}°; limit 0.02°")
+    coherent = all(len(samples[i]) == len(samples[1]) and all(
+        a.imu.SerializeToString() == b.imu.SerializeToString() for a, b in zip(samples[1], samples[i])) for i in (2, 3, 4))
+    check("Four-IMU coherence", coherent, "All four raw IMU streams agree for identical noiseless excitation")
+    tilt_errors, tilt_gravity, tilt_roll = [], [], []
+    for sample in samples[5]:
+        acc = xyz(sample.tilt.acceleration)
+        norm = math.sqrt(sum(v*v for v in acc))
+        tilt_gravity.append(abs(math.hypot(acc[1], acc[2]) / 6000 - 1))
+        t = sample.time.acquisition_ns / 1e9
+        tilt_roll.append(abs(math.degrees(math.atan2(acc[1], acc[2])) - 5 * math.sin(math.pi * t)))
+        for value, angle in zip(acc, xyz(sample.tilt.angle)):
+            # A stuck zero vector has no defined inclination. Fail explicitly,
+            # without dividing by zero or treating the angle as a level reading.
+            tilt_errors.append(abs(math.degrees(math.asin(value / norm)) - angle * 180 / 32768) if norm else 180.)
+    check("Inclinometer consistency", max(tilt_errors) <= .015 and max(tilt_gravity) <= .0002 and max(tilt_roll) <= .01,
+          f"Angle error {max(tilt_errors):.4f}° (≤0.015°); gravity error {max(tilt_gravity):.6f} g (≤0.0002 g); prescribed-roll error {max(tilt_roll):.4f}° (≤0.01°)")
+    # Independent fixture: Racotech mechanical response + loaded input RC at 10 Hz.
+    # 100 um/s produces 2.299408 mV peak and +37.44222 degrees (nominal).
+    rows = samples[9]
+    gain, phase = 602776.1, math.radians(37.44222)
+    errors = [abs(sample.geophone.counts - gain*math.sin(20*math.pi*sample.time.acquisition_ns/1e9 + phase)) for sample in rows]
+    counters_ok = all(s.geophone.conversion_counter == i % 256 for i,s in enumerate(rows))
+    check("Geophone gain, phase & counter", max(errors) < 150 and counters_ok,
+          f"10 Hz / 100 um/s reference; maximum count error {max(errors):.2f}; limit 150; counter wrap checked")
+    return dict(passed=all(c["passed"] for c in checks), checks=checks, samples=sum(map(len, samples.values())),
+                recording_sha256=hashlib.sha256(data).hexdigest(), scope="modeled buses / actual Pi drivers")
+
+
+def run_bench():
+    scenario, stream, now = Scenario(deepcopy(PROFILE)), BytesIO(), 0
+    clock = lambda: now
+    channels = [Channel("bench-pi", 1, cfg, VirtualDriver(cfg["sensor_id"], scenario, clock)) for cfg in defaults()]
+    writer = Writer(stream, dict(format="groundlark-acquisition-v1", source="modeled-hat-buses",
+        calibrations=[], bench="hat-signals-v1", scenario=deepcopy(PROFILE), timing="modeled 1 ms polling clock"), max_bytes=2 * 1024 * 1024)
+    acquisition = Acquisition(writer, Sessions(), channels)
+    try:
+        acquisition.start(0)
+        while now < SECONDS * 1_000_000_000:
+            acquisition.tick(clock)
+            acquisition.drain()
+            now += 1_000_000
+        acquisition.finish(now)
+    finally:
+        acquisition.close()
+    data = stream.getvalue()
+    return data, check_recording(data)

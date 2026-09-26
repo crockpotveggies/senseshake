@@ -1,10 +1,10 @@
 {
   "kicad": "9.0.9",
   "sha256": {
-    "hw/boards/shakesense-trenz-hat/shakesense-trenz-hat.kicad_pcb": "4b1ef20c3139f9ffbaf5b5fdafb200333814483a46685d0b3f10d84685dd40db",
-    "hw/layout-trenz.json": "a87906b5cd4d4d42d7168be087767626e46b431e71441f83b6f81c53aee49e66",
-    "hw/layout.json": "fe4a66fe29c0a9c6474ebf016875aa3a4faf05717ef60251079794c619eb7a5b",
-    "sw/ui/assets/t1.glb": "62ee83adb880cda320b2331238402fb75efd86f48bd5cb5116adcb93d01955ca"
+    "hw/boards/groundlark-daqhat-01/groundlark-daqhat-01.kicad_pcb": "4bcffcda451d27b287392f85c253aa793cc391018e583ba701add15131d20f6f",
+    "hw/layout-trenz.json": "1ece420c9eda3df5c4769f4ab24799699ed0661645abad41638fd90bd6d59eef",
+    "hw/layout.json": "a5f15c47ad1f85f4eacae98adf1adf89b0aba2c788657f630eb1633db892ff7d",
+    "sw/ui/assets/daqhat-01.glb": "2f0b17362d48a9ebbdc5460f8dbb249bf8ad8a2c7c8d998b941bc9f9d68a7b53"
   },
-  "metadata_review": "T1-LINK: actual KiCad board re-exported after internal SPI/UART/JTAG routing; J84-J89 and FFC visualization envelopes removed; geophone analog copper preserved; four straight Pi supports. Re-export 2026-09-25 after U106/C106 hidden value corrections: all scene nodes and binary geometry byte-identical; only export metadata differs, so original display asset retained."
+  "metadata_review": "Groundlark DAQHAT-01 re-exported from the renamed PCB with KiCad 9.0.9. New model-name silkscreen; unchanged electrical copper and placements. Exactly five known custom VRML bodies are represented by the existing UI envelopes. Native GLB structure and browser alignment reviewed."
 }

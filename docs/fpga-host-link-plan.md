@@ -1,6 +1,6 @@
-# T1 internal FPGA link: QSPI pin reservation and ribbon removal
+# DAQHAT-01 internal FPGA link: QSPI pin reservation and ribbon removal
 
-Status: **T1-LINK implemented, 2026-09-25**. See the
+Status: **DAQHAT-01 implemented, 2026-09-25**. See the
 [current circuit and bring-up guide](fpga-host-link.md). The original plan below
 records the design decisions; current CAD replaces revision `64d4190`.
 Circuit, PCB, host control and a conservative SPI loopback bitstream are implemented.

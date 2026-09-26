@@ -1,5 +1,5 @@
 {
-  "shakesense-hat": {
+  "groundlark-hat": {
     "size": [
       120,
       56
@@ -502,7 +502,7 @@
       {
         "ref": "U20",
         "value": "SCL3300-D01",
-        "footprint": "ShakeSense:SCL3300_D01",
+        "footprint": "Groundlark:SCL3300_D01",
         "names": {
           "1": "AVSS",
           "2": "A_EXTC",
@@ -526,7 +526,7 @@
         "mpn": "SCL3300-D01-10",
         "note": "",
         "dnp": false,
-        "local_fp": "ShakeSense__SCL3300_D01",
+        "local_fp": "Groundlark__SCL3300_D01",
         "type": "P_11"
       },
       {
@@ -2776,7 +2776,7 @@
       }
     ]
   },
-  "shakesense-field-head": {
+  "groundlark-field-head": {
     "size": [
       70,
       45
@@ -3232,8 +3232,8 @@
         "dnp": false,
         "note": "",
         "mpn": "PNI 14190",
-        "footprint": "ShakeSense:PNI_14190_Module",
-        "local_fp": "ShakeSense__PNI_14190_Module",
+        "footprint": "Groundlark:PNI_14190_Module",
+        "local_fp": "Groundlark__PNI_14190_Module",
         "names": {
           "1": "SCL",
           "2": "SA1",
@@ -3281,8 +3281,8 @@
         "dnp": true,
         "note": "",
         "mpn": "DLVR-F50D-E1BS-I-NI3F",
-        "footprint": "ShakeSense:DLVR_E1BS",
-        "local_fp": "ShakeSense__DLVR_E1BS",
+        "footprint": "Groundlark:DLVR_E1BS",
+        "local_fp": "Groundlark__DLVR_E1BS",
         "names": {
           "1": "GND",
           "2": "VS_3V3",

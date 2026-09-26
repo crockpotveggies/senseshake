@@ -1,4 +1,4 @@
-ShakeSense Trenz support check: uart_100pf
+Groundlark Trenz support check: uart_100pf
 Vdrive src 0 PULSE(0 3.201 100n 5n 5n 500n 1u)
 Rdriver src driver 25
 Rseries driver rx 47
