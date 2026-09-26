@@ -4,6 +4,8 @@ Run the root `ui.ps1` / `ui.sh` launcher. See the
 [user and developer guide](../../docs/sensor-workbench.md).
 
 - `main.py`: Python page construction, charts, board scene and user callbacks.
+- `geophone_scene.py`: selectable external geophone and illustrative leads.
+- `test_geophone_scene.py`: geometry and shared ADC/can selection regression.
 - `style.css`: visual styling and responsive layout; dark by default.
 - `pyproject.toml`, `uv.lock`: isolated, reproducible optional UI environment.
 - `check.py`: page-construction/asset-delivery smoke check.

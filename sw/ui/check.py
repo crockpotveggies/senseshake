@@ -38,6 +38,7 @@ def main():
                 assert text.replace("&amp;", "&") in page, text
             assert "IMU 3" in page and "IMU 4" not in page, "Current workbench must expose exactly three IMUs"
             assert 'SCL3300' not in page and 'Inclinometer' not in page, 'Removed sensor must not be advertised'
+            assert 'nominal 25.4' in page, 'Missing geophone visualization description'
             with urlopen(f"http://127.0.0.1:{port}/board-assets/daqhat-01.glb", timeout=10) as response:
                 assert response.read(4) == b"glTF"
             assert 'href="/favicon.ico"' in page

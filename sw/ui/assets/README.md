@@ -14,6 +14,12 @@ simplified envelopes for the Pi socket, Trenz connectors. Selection rings use `h
 The remote head is a separate placement-based schematic 3D view; its optional
 pressure sensor is shown even though the default assembly is DNP.
 
+The external geophone is authored in Python in `../geophone_scene.py`, with a
+25.4 mm diameter / 33 mm high Racotech body. Terminals and leads to J90 are
+illustrative. Its selectable can and the ADC both map to sensor 9, and both
+highlights follow the same selection. It adds no synthetic data stream or
+mechanical motion to the acquisition models. Scene source is also hash-pinned.
+
 Regenerate from the repository root on the Linux lab toolchain:
 
 ```sh

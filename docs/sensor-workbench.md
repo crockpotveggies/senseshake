@@ -142,7 +142,10 @@ interactive controls as well as imported scenarios.
 
 The DAQHAT-01 3D asset comes from checked KiCad geometry, with simplified custom bodies
 added in Python. The remote head is an approximate placement-based visualization
-and shows the optional pressure sensor. See [asset provenance](../sw/ui/assets/README.md).
+and the external geophone uses a nominal 25.4 mm diameter, 33 mm tall can with
+illustrative terminals/leads. Selecting the can or HAT input highlights both
+and selects the same geophone stream (sensor 9). The remote head
+shows the optional pressure sensor. See [asset provenance](../sw/ui/assets/README.md).
 These views and ideal sensor models do not establish mechanical fit, magnetic
 noise performance, electrical timing or fabrication readiness.
 

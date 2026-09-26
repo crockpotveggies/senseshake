@@ -31,6 +31,7 @@ build_descriptor()
 from nicegui import app, run, ui  # noqa: E402
 from groundlark.workbench import MAX_BYTES, NAMES, Workbench  # noqa: E402
 from groundlark.hat_signals import run_bench  # noqa: E402
+from geophone_scene import add_geophone  # noqa: E402
 
 ASSETS = Path(__file__).parent / "assets"
 for relative, expected in json.loads((ASSETS / "provenance.json").read_text())["sha256"].items():
@@ -82,10 +83,13 @@ def board_scene(scene, select):
                     radius = .29 if sid <= 4 else .72
                     target = scene.cylinder(radius, radius, .07).rotate(math.pi / 2, 0, 0).move(x, y, .63).material(TEAL, .28).with_name(f"sensor-{sid}")
                     targets[target.id] = sid
-                    rings[sid] = scene.ring(radius, radius + .06, 48).move(x, y, .68).material(TEAL).with_name(f"sensor-{sid}")
-                    targets[rings[sid].id] = sid
+                    ring = scene.ring(radius, radius + .06, 48).move(x, y, .68).material(TEAL).with_name(f"sensor-{sid}")
+                    rings.setdefault(sid, []).append(ring)
+                    targets[ring.id] = sid
                     scene.text(NAMES[sid], "color:#e8f5ff;font-size:11px;background:#172534dc;padding:2px 5px;border-radius:4px;pointer-events:none").move(x, y, 1.12)
             scene.text("DAQHAT-01 SENSOR HAT  /  85 × 56 mm", "color:#a6bfcc;font-size:11px;pointer-events:none").move(0, -3.2, .1)
+            connector = next(part for part in layout['parts'] if part['ref'] == 'J90')['xy']
+            add_geophone(scene, ((connector[0]-42.5)/10, (28-connector[1])/10), targets, rings, TEAL)
         with scene.group() as head:
             scene.box(7, 4.5, .16).material("#165b51")
             for part in remote["parts"]:
@@ -97,8 +101,9 @@ def board_scene(scene, select):
                 box = scene.box(1.6 if sid else .6, 1.5 if sid else .6, .5 if sid else .3).move(x, y, .35).material("#293544")
                 if sid:
                     targets[box.id] = sid
-                    rings[sid] = scene.ring(1, 1.08, 48).move(x, y, .64).material(TEAL)
-                    targets[rings[sid].id] = sid
+                    ring = scene.ring(1, 1.08, 48).move(x, y, .64).material(TEAL)
+                    rings.setdefault(sid, []).append(ring)
+                    targets[ring.id] = sid
                     scene.text(NAMES[sid] + (" · optional" if sid == 8 else ""), "color:white;font-size:12px;pointer-events:none").move(x, y, 1)
             scene.text("REMOTE USB HEAD  /  70 × 45 mm", "color:#a6bfcc;font-size:11px;pointer-events:none").move(0, -2.8, .1)
         head.visible(False)
@@ -137,15 +142,16 @@ def page():
         board_label.set_text("DAQHAT-01 sensor HAT" if sid not in (7, 8) else "Remote USB sensor head")
         hat.visible(sid not in (7, 8))
         head.visible(sid in (7, 8))
-        for sensor, ring in rings.items():
-            ring.material(TEAL if sensor == sid else "#60788a", 1 if sensor == sid else .25)
+        for sensor, highlights in rings.items():
+            for ring in highlights:
+                ring.material(TEAL if sensor == sid else "#60788a", 1 if sensor == sid else .25)
         for sensor, button in sensor_buttons.items():
             button.classes(replace="sensor-button selected" if sensor == sid else "sensor-button")
         update_charts()
 
     def camera(top=False):
-        scene.move_camera(x=0 if top else 4, y=-.01 if top else -5, z=9 if top else 7,
-                          look_at_x=0, look_at_y=0, look_at_z=0, up_x=0, up_y=0, up_z=1)
+        scene.move_camera(x=-1.4 if top else 4, y=-.01 if top else -8, z=14 if top else 10,
+                          look_at_x=-1.4, look_at_y=0, look_at_z=.2, up_x=0, up_y=0, up_z=1)
 
     def fresh(document=None):
         nonlocal verified_capture, signal_report
@@ -294,7 +300,7 @@ def page():
                 hat, head, rings = board_scene(scene, choose)
                 camera()
                 ui.label("Click a sensor to inspect · drag to orbit · scroll to zoom").classes("small muted")
-                ui.label("DAQHAT-01: KiCad geometry + simplified custom bodies. Remote head: placement-based envelopes. Camera motion does not stimulate sensors.").classes("fine-print")
+                ui.label("HAT: KiCad geometry. Geophone: nominal 25.4 × 33 mm body; illustrative terminals/leads. Remote head: simplified geometry. Camera motion does not stimulate sensors.").classes("fine-print")
             with ui.column().classes("panel chart-panel"):
                 heading = ui.label("IMU 1 / LSM6DSO").classes("section-title")
                 detail = ui.label("Waiting for samples").classes("small muted")

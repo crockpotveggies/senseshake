@@ -1,4 +1,4 @@
-# Groundlark — sensors, Raspberry Pi HATs and Coldfoot integration
+# Groundlark — an open source seismic acquisition platform with support for FPGAs and BISCUT AI chips
 
 Groundlark is an open hardware seismic acquisition platform combining a
 Raspberry Pi, a three-IMU DAQHAT-01 sensor HAT, a Trenz Artix-7 200T FPGA module,
@@ -67,6 +67,11 @@ recording/replay. Requires `uv`; dependencies install into the project's ignored
 `.local/` folder. See the [workbench guide](docs/sensor-workbench.md).
 Press **Test HAT signals** for a measured eight-second capture through the actual
 Pi drivers on modeled buses, with signal tolerances, replay and downloadable results.
+
+![Groundlark sensor workbench showing the external geophone and a simulated 2 Hz signal](docs/images/sensor-workbench.png)
+
+Actual browser screenshot with simulated data; selecting the geophone can or its
+HAT input highlights both and displays the same ADC stream.
 
 | Directory | Contents |
 | --- | --- |
