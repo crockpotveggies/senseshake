@@ -296,7 +296,7 @@ def main():
     resource.setrlimit(resource.RLIMIT_FSIZE, (32 * MiB, 32 * MiB))
     Path(os.environ["HOME"]).mkdir(parents=True, exist_ok=True)
     if args.action == "unit":
-        return subprocess.call(["python3", "-m", "unittest", "discover", "-s", "/source/environment", "-p", "test_lab.py", "-v"])
+        return subprocess.call(["python3", "-m", "unittest", "discover", "-s", "/source/environment", "-p", "test_*.py", "-v"])
     if args.action == "doctor":
         print(json.dumps(versions(), indent=2))
         return 0

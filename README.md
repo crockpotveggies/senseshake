@@ -60,11 +60,13 @@ once if it predates the pinned Buf tool.
 **Virtual sensors:** drive motion, tilt, magnetic fields, pressure and geophone signals with
 [saved stimulus scenarios](docs/stimulus-models.md), including timed faults.
 
-**Sensor workbench:** run `./ui.ps1` (Windows) or `./ui.sh` (Linux/macOS), then
+**Sensor workbench:** first run `./setup-ui.ps1 -Check` (Windows) or
+`sh ./setup-ui.sh --check` (Linux/macOS). Then run `./ui.ps1` or `sh ./ui.sh` and
 open `http://127.0.0.1:8080`. The dark-mode, Python-authored UI offers a selectable
 3D HAT, six virtual sensors, raw-data charts, stimulus/fault controls and
-recording/replay. Requires `uv`; dependencies install into the project's ignored
-`.local/` folder. See the [workbench guide](docs/sensor-workbench.md).
+recording/replay. Setup installs the tools into the project's ignored `.local/`
+folder. No hardware or Docker required. Follow the
+[beginner walkthrough](docs/sensor-workbench.md) to create your first signal.
 Press **Test HAT signals** for a measured eight-second capture through the actual
 Pi drivers on modeled buses, with signal tolerances, replay and downloadable results.
 

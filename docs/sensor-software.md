@@ -1,10 +1,9 @@
 # Sensor acquisition and recovery
 
-**DAQHAT-01 revision:** GNSS is removed; one external Racotech vertical geophone
-uses an ADS122C04 input. See [current circuit, acquisition and validation](geophone-input.md).
-GNSS/PPS/RF details below describe the preceding revision or legacy recordings.
-The current physical bench template is version 2, with geophone response/noise/timing
-checks replacing the GNSS UTC check.
+**New to the simulator?** Start with the [browser workbench walkthrough](sensor-workbench.md).
+This page covers command-line development and real Linux acquisition.
+The current HAT has three IMUs and a Racotech geophone input; GNSS and the
+inclinometer are removed. Legacy drivers remain for older recordings/tests.
 
 The runnable Pi application is in `sw/pi/groundlark/`; use
 `sw/tools/sensor.py` as its repository entry point. It has no FPGA, Coldfoot,
@@ -17,7 +16,7 @@ This implements the development milestone in steps 1–3 of the
 
 Run `./lab.ps1 test -Profile software` (or `sh ./lab.sh test --profile software`).
 The portable environment contains the pinned Python/Protobuf and Buf tools.
-It builds the descriptor, runs tests, executes a two-second eight-sensor fault
+It builds the descriptor, runs tests, executes a two-second six-sensor fault
 scenario and replays it. Retained outputs are under
 `.lab/runs/<run-id>/results/sw/build/`: `demo.ssrec`, `demo-summary.json` and
 `verification.json`. Five-run retention and existing cleanup cover these files.
@@ -47,11 +46,11 @@ in fragments through a Linux pseudo-terminal. `--queue 1 --drain-every 100`
 exercises a slow consumer. Simulated time starts at zero; Pi and remote clocks
 retain distinct domains even when numerically equal.
 
-Virtual sensors now use controllable motion, magnetic, pressure and GNSS
+Virtual sensors use controllable motion, magnetic, pressure and geophone
 [stimulus models](stimulus-models.md). Pass `--scenario` for saved waveforms and
 timed controls; `export-scenario` recovers controls from a recording. Without a
 scenario, sensors start stationary and level, with a constant magnetic field,
-zero differential pressure and a fixed GNSS position.
+zero differential pressure and zero geophone velocity.
 
 ## Linux device adapters
 
@@ -60,10 +59,12 @@ and a nonblocking USB CDC TTY. The initial profile is:
 
 | Sensor | Configuration and reading |
 | --- | --- |
-| Four LSM6DSO | 26 Hz, ±2 g, ±250 dps; identity/reset/readback; BDU/address increment; signed temperature, gyro and acceleration. |
-| SCL3300 (legacy driver only) | Mode 1, angle outputs enabled; startup/identity/mode readback; off-frame response/CRC checks; 25 Hz polling. |
-| MAX-M10S | I²C 0x42; RAM-only UBX CFG-VALSET/ACK/VALGET; NAV-PVT every second; retain its complete 92-byte payload. |
+| Three LSM6DSO | 26 Hz, ±2 g, ±250 dps; identity/reset/readback; BDU/address increment; signed temperature, gyro and acceleration. |
+| ADS122C04 geophone input | I²C 0x40; 330 SPS, PGA64, internal 2.048 V reference; signed 24-bit counts, conversion counter and inverted-data integrity checks. |
 | USB head | Receive v1 identity/configuration/batches/status over framed CDC; real firmware is still required. |
+
+SCL3300 and MAX-M10S code is retained for legacy use and is not part of the
+current HAT profile. GNSS/PPS references later in this guide concern that legacy path.
 
 Copy [the example profile](../sw/pi/profiles/daqhat-01.example.json) and verify paths
 on the actual Pi. `gpiochip0` is an example, not an assertion about Pi 5 GPIO

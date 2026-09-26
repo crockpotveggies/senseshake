@@ -1,7 +1,13 @@
 # Python sensor workbench
 
-Run the root `ui.ps1` / `ui.sh` launcher. See the
-[user and developer guide](../../docs/sensor-workbench.md).
+From the repository root, run `./setup-ui.ps1 -Check`, then `./ui.ps1`.
+On Linux/macOS, use `sh ./setup-ui.sh --check`, then `sh ./ui.sh`.
+Open `http://127.0.0.1:8080`; Ctrl+C in the terminal stops the server.
+See the [beginner walkthrough](../../docs/sensor-workbench.md) and
+[developer notes](../../docs/workbench-development.md).
+
+Rerun `./ui.ps1 -Check` / `sh ./ui.sh --check` for the HTTP and scene tests.
+The full acquisition/controller tests use the portable software profile.
 
 - `main.py`: Python page construction, charts, board scene and user callbacks.
 - `geophone_scene.py`: selectable external geophone and illustrative leads.

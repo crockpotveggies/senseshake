@@ -23,6 +23,7 @@ def call(args, **kwargs):
 def package_inputs():
     # Build an allowlisted tar in memory. No host staging tree or virtualenv copy.
     files = source_files(ROOT) + list((ROOT / "environment").glob("*"))
+    files += [ROOT / "ui.ps1", ROOT / "ui.sh"]  # Unit-test launcher boundaries without installing UI tools.
     bundle = io.BytesIO()
     hashes = {}
     with tarfile.open(fileobj=bundle, mode="w") as archive:

@@ -1,21 +1,21 @@
 # Virtual sensor stimulus models
 
-**DAQHAT-01 revision:** GNSS is removed; one external Racotech vertical geophone
-uses an ADS122C04 input. See [current circuit, acquisition and validation](geophone-input.md).
-GNSS/PPS/RF details below describe the preceding revision or legacy recordings.
-The current physical bench template is version 2, with geophone response/noise/timing
-checks replacing the GNSS UTC check.
+For a first experiment, use the [browser workbench walkthrough](sensor-workbench.md).
+This page describes advanced JSON inputs and model limits. The current HAT has
+three IMUs and one geophone input; GNSS/inclinometer controls below are legacy only.
 
 `ideal-v1` replaces the old fixed counter patterns with controllable, time-based
 signals. It runs through the same acquisition, validation, calibration and
-recording code as the live drivers. No browser UI is required yet; the scenario
-API is ready for a UI controller to schedule changes.
+recording code as the live drivers. The browser workbench uses this scenario
+API, and saved scenarios can also run from the command line.
 
 ## Try the example
 
 The [demo scenario](../sw/pi/profiles/stimulus-demo.json) combines rocking and
 vibration, magnetic drift/a pulse, a separately rotated remote head, a pressure
-wave/overrange step and GNSS movement/fix loss.
+wave/overrange step. It also retains GNSS movement/fix-loss inputs for legacy
+experiments; those do not produce a GNSS stream on the current HAT. To excite
+the geophone, use its browser controls or add `geophone_velocity_m_s` to the JSON.
 
 ```sh
 python sw/tools/sensor.py simulate --remote --seconds 2 --seed 7 \
@@ -75,7 +75,7 @@ application time are both retained. A sample sees the state at its own time.
 | `gnss_position` | Origin latitude degrees, longitude degrees, height metres; numbers only | `[49,-123,0]` |
 | `gnss_velocity_ned_m_s` | Constant north/east/down velocity until changed | `[0,0,0]` |
 | `gnss_fix` | Boolean 3D fix / no fix | `true` |
-| `sensor_faults` | Map of sensor ID strings `"1"`…`"8"` to held fault actions | `{}` |
+| `sensor_faults` | Map of ID strings to held faults: current IDs `"1"`, `"2"`, `"3"`, `"7"`, `"8"`, `"9"`; IDs 4–6 are legacy | `{}` |
 
 Signals accept a constant number or these optional waveform fields:
 
