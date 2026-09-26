@@ -237,10 +237,9 @@ def page():
             test_button.set_text("Test HAT signals")
 
     with ui.row().classes("topbar"):
-        ui.icon("graphic_eq", size="30px").style(f"color:{TEAL}")
         with ui.column().classes("gap-0"):
-            ui.label("Groundlark").classes("brand")
-            ui.label("SENSOR WORKBENCH").classes("eyebrow")
+            ui.element("img").props('src=/board-assets/groundlark-wordmark.svg alt=Groundlark').classes("brand-wordmark")
+            ui.label("SENSOR WORKBENCH").classes("eyebrow brand-subtitle")
         ui.space()
         mode = ui.badge("SIMULATION", color="primary").props("outline")
         state_label = ui.label("Ready").classes("muted")

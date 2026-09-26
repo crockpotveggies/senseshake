@@ -16,6 +16,8 @@ The full acquisition/controller tests use the portable software profile.
 - `pyproject.toml`, `uv.lock`: isolated, reproducible optional UI environment.
 - `check.py`: page-construction/asset-delivery smoke check.
 - `assets/`: checked display assets and provenance, separate from editable CAD.
+- `build_wordmark.py`: compose the original favicon and outlined UI lettering
+  for the shared README/header asset; see `assets/README.md` for regeneration.
 - [workbench.py](../pi/groundlark/workbench.py): bounded framework-independent
   simulation/recording/replay controller.
 - [test_workbench.py](../tests/test_workbench.py): controller regression tests.

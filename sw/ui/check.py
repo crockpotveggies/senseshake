@@ -4,12 +4,14 @@ Run in the locked UI environment. Browser interaction checks are documented
 separately; this check deliberately does not claim to exercise WebGL.
 """
 from pathlib import Path
+import base64
 import html
 import socket
 import subprocess
 import sys
 import tempfile
 import time
+import xml.etree.ElementTree as ET
 from urllib.error import URLError
 from urllib.request import urlopen
 
@@ -47,7 +49,15 @@ def main():
                 assert response.headers.get_content_type().startswith("image/")
             assert icon[:4] == b"\x00\x00\x01\x00", "Expected a browser ICO asset"
             assert icon == (Path(__file__).parent / "assets/groundlark-favicon.ico").read_bytes()
-            print("PASS workbench HTTP page, KiCad GLB and Groundlark favicon delivery")
+            assert '/board-assets/groundlark-wordmark.svg' in page, 'Missing shared header wordmark'
+            with urlopen(f"http://127.0.0.1:{port}/board-assets/groundlark-wordmark.svg", timeout=3) as response:
+                assert response.headers.get_content_type() == 'image/svg+xml'
+                wordmark = response.read()
+                assert wordmark == (Path(__file__).parent / 'assets/groundlark-wordmark.svg').read_bytes()
+            mark = ET.fromstring(wordmark).find('{http://www.w3.org/2000/svg}image')
+            source = mark.attrib['{http://www.w3.org/1999/xlink}href']
+            assert base64.b64decode(source.split(',', 1)[1]) == (Path(__file__).parent / 'assets/groundlark-icon.png').read_bytes()
+            print("PASS workbench HTTP page, KiCad GLB, shared wordmark and favicon delivery")
         finally:
             process.terminate()
             try:

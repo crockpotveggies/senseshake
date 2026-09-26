@@ -3,6 +3,7 @@
 The sensor workbench is a local browser app for trying virtual sensors and
 replaying recordings. Click the 3D HAT or geophone, change an input, and watch
 its signal. **No Raspberry Pi or sensor hardware is required.**
+The header uses the same lark-and-waveform wordmark as the project README.
 
 You need internet access for setup, a modern browser with WebGL, and Windows
 PowerShell or a Linux/macOS terminal. The scripts install the needed Python

@@ -1,3 +1,5 @@
+<img src="sw/ui/assets/groundlark-wordmark.svg" alt="Groundlark — lark and seismic waveform" width="440">
+
 # Groundlark — an open source seismic acquisition platform with support for FPGAs and BISCUT AI chips
 
 Groundlark is an open hardware seismic acquisition platform combining a

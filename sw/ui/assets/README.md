@@ -5,6 +5,15 @@ navy. `groundlark-icon.png` is the generated master; `groundlark-favicon.ico`
 contains browser sizes from 16 to 256 pixels. See the
 [generation prompt and export command](groundlark-icon-prompt.md).
 
+`groundlark-wordmark.svg` combines the existing favicon's master PNG
+(unchanged) with the name in Segoe UI Bold, matching the Windows system font
+previously used in the workbench header. Text is stored as vector outlines so
+the README and UI render identically without downloading or installing a font.
+Both use this same self-contained image on a navy background. The PCB artwork
+and browser favicon remain unchanged.
+Regenerate with `python sw/ui/build_wordmark.py --font C:/Windows/Fonts/segoeuib.ttf`
+using build-only `fonttools` (verified with 4.63.0). No font binary is distributed.
+
 `daqhat-01.glb` is a display asset exported with KiCad 9.0.9 from the checked DAQHAT-01 PCB.
 It includes the routed board's outline, holes, pads, mask, silkscreen and available
 stock component models. It is not a manufacturing deliverable.
