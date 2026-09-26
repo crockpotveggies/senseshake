@@ -19,7 +19,6 @@ else:
     import resource
 
 MARKER = "groundlark-lab-v1"
-LEGACY_MARKER = "senseshake-lab-v1"  # Ownership of pre-rename runs is immutable.
 RUN_RE = re.compile(r"\d{8}T\d{6}Z-[0-9a-f]{8}")
 BOARDS = ("groundlark-hat", "groundlark-field-head", "groundlark-daqhat-01")
 TARGETS = ("hat", "field_head", "trenz_hat")
@@ -54,10 +53,6 @@ def lab_lock(root):
     no_links(root)
     root.mkdir(parents=True, exist_ok=True)
     marker = root / ".groundlark-lab"
-    legacy = root / ".senseshake-lab"
-    no_links(legacy)
-    if not marker.exists() and legacy.exists():
-        marker = legacy
     no_links(marker)
     # O_EXCL avoids racing initialization. Never adopt a nonempty directory.
     if not marker.exists():
@@ -65,7 +60,7 @@ def lab_lock(root):
             raise RuntimeError("Unmarked .lab is not empty; refusing to adopt it")
         with marker.open("x") as stream:
             stream.write(MARKER)
-    if marker.read_text() not in (MARKER, LEGACY_MARKER):
+    if marker.read_text() != MARKER:
         raise RuntimeError("Invalid lab ownership marker")
     no_links(root / ".lock")
     with (root / ".lock").open("a") as lock:
@@ -102,7 +97,7 @@ def managed_runs(root):
         if not marker.is_file():
             raise RuntimeError(f"Missing run marker: {path}")
         data = json.loads(marker.read_text())
-        if data.get("owner") not in (MARKER, LEGACY_MARKER) or data.get("id") != path.name:
+        if data.get("owner") != MARKER or data.get("id") != path.name:
             raise RuntimeError(f"Invalid run marker: {path}")
         runs.append(path)
     return sorted(runs, key=lambda p: p.name, reverse=True)

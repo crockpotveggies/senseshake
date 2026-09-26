@@ -1,7 +1,5 @@
 # Documentation
 
-- [Groundlark naming migration and recording compatibility](groundlark-rename.md).
-
 - **Active work:** [four-step sensor development plan](sensor-development-plan.md)
   on the Pi/DAQHAT-01/Trenz stack; Coldfoot integration is deferred.
 

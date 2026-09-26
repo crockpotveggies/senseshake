@@ -15,17 +15,17 @@ class LabSafetyTests(unittest.TestCase):
         rule.write_text('(version 1)')
         self.assertIn(rule,source_files(self.root))
 
-    def test_legacy_lab_and_runs_keep_their_ownership(self):
-        marker = self.root / '.senseshake-lab'
-        marker.write_text('senseshake-lab-v1')
+    def test_foreign_run_owner_is_rejected(self):
+        marker = self.root / '.groundlark-lab'
+        marker.write_text(MARKER)
         path = self.run_folder(0)
         data = json.loads((path / 'run.json').read_text())
-        data['owner'] = 'senseshake-lab-v1'
+        data['owner'] = 'unrecognized-project-v1'
         write_json(path / 'run.json', data)
         with lab_lock(self.root):
-            self.assertEqual(managed_runs(self.root), [path])
-            clean(self.root, keep=5, apply=True)
-        self.assertEqual(marker.read_text(), 'senseshake-lab-v1')
+            with self.assertRaises(RuntimeError):
+                clean(self.root, keep=0, apply=True)
+        self.assertEqual(marker.read_text(), MARKER)
         self.assertTrue(path.exists())
 
     def symlink(self, link, target, directory=False):

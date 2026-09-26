@@ -721,7 +721,6 @@
       ]
     }
   },
-  "rename_comparison": "docs/groundlark-rename-validation.json",
   "silkscreen_update": {
     "width_mm": 7,
     "center_mm": [

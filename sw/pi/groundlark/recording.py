@@ -8,12 +8,11 @@ from .messages import Envelope
 from google.protobuf.message import DecodeError
 
 MAGIC = b"SSREC01\0"
-# Keep the binary magic and accept old metadata so existing captures replay.
-ACQUISITION_FORMATS = ('groundlark-acquisition-v1', 'senseshake-acquisition-v1')
+ACQUISITION_FORMAT = 'groundlark-acquisition-v1'
 
 
 def is_acquisition_metadata(metadata):
-    return isinstance(metadata, dict) and metadata.get('format') in ACQUISITION_FORMATS
+    return isinstance(metadata, dict) and metadata.get('format') == ACQUISITION_FORMAT
 
 
 HEADER_LIMIT = 16384

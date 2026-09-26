@@ -12,9 +12,6 @@ Current HAT CAD and vendor Trenz model; Pi, baseline socket and Racotech geophon
 are conceptual geometry. Lead dressing is illustrative; stack fit remains under
 review. [Render sources and reproduction](docs/readme-render.md).
 
-Formerly ShakeSense / SenseShake. See the [naming migration](docs/groundlark-rename.md)
-for updated commands and compatibility with existing recordings.
-
 **Current focus:** sensor development on the Pi → DAQHAT-01 HAT → Trenz FPGA stack.
 Coldfoot ASIC/runtime integration is deferred. Preserve the required FPGA
 connections while building sensor acquisition and tests; see the

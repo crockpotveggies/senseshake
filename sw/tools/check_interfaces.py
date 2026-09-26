@@ -6,8 +6,6 @@ import shutil
 import subprocess
 import sys
 import tempfile
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'interfaces/python'))
-from groundlark_contract.compatibility import renamed_baseline
 
 ROOT = Path(__file__).resolve().parents[2]
 INTERFACES = ROOT / "sw/interfaces"
@@ -24,10 +22,7 @@ def main():
     run(BUF, "format", "--diff", "--exit-code")
     run(BUF, "lint")
     run(BUF, "build", "--exclude-source-info", "-o", str(BUILD / "schema.binpb"))
-    # Preserve the historical baseline; project only the authorized namespace
-    # rename into ignored output. Do not re-baseline changed fields or tags.
-    baseline = BUILD / 'renamed-baseline.binpb'
-    baseline.write_bytes(renamed_baseline((INTERFACES / 'baseline.binpb').read_bytes()))
+    baseline = INTERFACES / 'baseline.binpb'
     run(BUF, "breaking", "--against", str(baseline))
     # Prove that the compatibility gate catches a real incompatible wire change.
     with tempfile.TemporaryDirectory(dir=BUILD) as tmp:
