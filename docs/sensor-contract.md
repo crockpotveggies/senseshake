@@ -24,8 +24,8 @@ Breaking meaning/units requires a new package and envelope version.
 
 | Sensor ID | Board and model | Raw representation |
 | --- | --- | --- |
-| 1–4 | DAQHAT-01 LSM6DSO U11–U14 | Signed 16-bit XYZ acceleration/gyro counts; optional signed temperature |
-| 5 | DAQHAT-01 SCL3300 U20 | Signed 16-bit XYZ acceleration and/or angle counts, optional temperature, required 16-bit device status |
+| 1–3 | DAQHAT-01 LSM6DSO U11–U13 | Signed 16-bit XYZ acceleration/gyro counts; optional signed temperature |
+| 5 | Legacy SCL3300 U20 (removed from current DAQHAT-01) | Signed 16-bit XYZ acceleration and/or angle counts, optional temperature, required 16-bit device status |
 | 6 | Legacy DAQHAT-01 MAX-M10S U21 (absent on DAQHAT-01) | Complete 92-byte UBX NAV-PVT payload, excluding UBX header/checksum |
 | 7 | USB head RM3100 | Signed 24-bit XYZ counts, sign-extended into sint32 |
 | 8 | Optional USB head DLVR | Four original response bytes, preserving pressure, temperature and status bits |
@@ -35,14 +35,15 @@ Breaking meaning/units requires a new package and envelope version.
 ID 9 uses the Pi MONOTONIC_RAW clock, gain 64, reference 2.048 V and nominal
 period 3,030,303 ns (330 SPS). ADC input volts = count × reference / (gain × 2²³).
 Velocity requires frequency-response correction and calibration; none is implicit.
-The current DAQHAT-01 inventory is 1–5 and 9. ID 6 is retained for legacy compatibility.
+The current DAQHAT-01 inventory is 1–3 and 9. IDs 4, 5 and 6 retain their
+legacy IMU, inclinometer and GNSS semantics. None is advertised by current acquisition.
 
 The model is fixed by v1 sensor ID. Another model requires explicit schema
 evolution, not relabeling. Identity advertises only physically fitted sensors;
 the DNP pressure sensor is absent by default. Identity.firmware_version is the
 producer software build ID, including for the Pi. Raw axes are each package's
-documented axes, without inferred board alignment. The four IMUs remain separate.
-Tilt angles retain the manufacturer's per-axis convention; they are not Euler
+documented axes, without inferred board alignment. The three IMUs remain separate. Sensor ID 4 retains its IMU wire semantics for legacy recordings; the current HAT does not advertise it.
+Legacy tilt angles retain the manufacturer's per-axis convention; they are not Euler
 angles. The acquisition adapter must check SPI/UBX integrity before publishing.
 
 ## Configuration and interpretation
@@ -60,7 +61,7 @@ supports the rate; the real adapter must reject unsupported hardware settings.
 It must report readback/effective settings before data, never silently round.
 
 Enabled IMUs require acceleration_range_g (2, 4, 8 or 16) and
-angular_rate_range_dps (125, 250, 500, 1000 or 2000). SCL3300 requires tilt_mode
+angular_rate_range_dps (125, 250, 500, 1000 or 2000). Legacy SCL3300 requires tilt_mode
 1–4. RM3100 requires each XYZ cycle count in 1–65535; timing limits still apply.
 Pressure requires the actual part number and finite pressure_min_pa <
 pressure_max_pa from that part's transfer function. MAX-M10S uses the period

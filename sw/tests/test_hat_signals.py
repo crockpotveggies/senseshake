@@ -48,9 +48,9 @@ class HatSignalsTests(unittest.TestCase):
              patch.object(ADS122C04, "read", spy(ADS122C04.read, "geophone")):
             data, report = run_bench()
         self.assertTrue(report["passed"], report)
-        self.assertEqual(counts, dict(imu=832, tilt=200, geophone=2640))
+        self.assertEqual(counts, dict(imu=624, tilt=0, geophone=2640))
         self.assertEqual(data, self.data)
-        self.assertEqual(len(report["checks"]), 10)
+        self.assertEqual(len(report["checks"]), 9)
 
     def test_consistent_but_wrong_rocking_motion_is_rejected(self):
         profile = deepcopy(PROFILE)
@@ -85,7 +85,7 @@ class HatSignalsTests(unittest.TestCase):
             if m.WhichOneof("body") == "batch" and m.batch.sensor_id == 3:
                 for s in m.batch.samples:
                     s.imu.acceleration.x = 0
-        self.assert_check_fails(altered(self.data, edit), "Four-IMU coherence")
+        self.assert_check_fails(altered(self.data, edit), "Three-IMU coherence")
 
     def test_gyro_scale_error_breaks_integrated_roll(self):
         def edit(m):
@@ -101,25 +101,11 @@ class HatSignalsTests(unittest.TestCase):
                     s.imu.acceleration.z = round(s.imu.acceleration.z * .99)
         self.assert_check_fails(altered(self.data, edit), "Gravity magnitude")
 
-    def test_tilt_sign_error_fails(self):
-        def edit(m):
-            if m.WhichOneof("body") == "batch" and m.batch.sensor_id == 5:
-                for s in m.batch.samples:
-                    s.tilt.angle.y *= -1
-        self.assert_check_fails(altered(self.data, edit), "Inclinometer consistency")
-
     def test_geophone_gain_error_fails(self):
         def edit(m):
             if m.WhichOneof("body") == "batch" and m.batch.sensor_id == 9:
                 for sample in m.batch.samples: sample.geophone.counts *= -1
         self.assert_check_fails(altered(self.data, edit), "Geophone gain, phase & counter")
-
-    def test_zero_tilt_vector_fails_without_crashing(self):
-        def edit(m):
-            if m.WhichOneof("body") == "batch" and m.batch.sensor_id == 5:
-                for s in m.batch.samples:
-                    s.tilt.acceleration.x = s.tilt.acceleration.y = s.tilt.acceleration.z = 0
-        self.assert_check_fails(altered(self.data, edit), "Inclinometer consistency")
 
     def test_timestamp_shift_fails(self):
         def edit(m):

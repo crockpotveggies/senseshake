@@ -1,10 +1,10 @@
 {
   "kicad": "9.0.9",
   "sha256": {
-    "hw/boards/groundlark-daqhat-01/groundlark-daqhat-01.kicad_pcb": "4bcffcda451d27b287392f85c253aa793cc391018e583ba701add15131d20f6f",
-    "hw/layout-trenz.json": "1ece420c9eda3df5c4769f4ab24799699ed0661645abad41638fd90bd6d59eef",
+    "hw/boards/groundlark-daqhat-01/groundlark-daqhat-01.kicad_pcb": "3952c7d0cf4d95ebcdd851cdab9f00aabde3fcb983c0ea10d56c12514a60ed54",
+    "hw/layout-trenz.json": "7be790e7ca0322325bc99663af03292d861b324382fa00be39e86332fbb9aa57",
     "hw/layout.json": "a5f15c47ad1f85f4eacae98adf1adf89b0aba2c788657f630eb1633db892ff7d",
-    "sw/ui/assets/daqhat-01.glb": "2f0b17362d48a9ebbdc5460f8dbb249bf8ad8a2c7c8d998b941bc9f9d68a7b53"
+    "sw/ui/assets/daqhat-01.glb": "047620c190b57e1713c2b97440a78074aa180a91bfc64c563a4a3adad127b4f4"
   },
-  "metadata_review": "Groundlark DAQHAT-01 re-exported from the renamed PCB with KiCad 9.0.9. New model-name silkscreen; unchanged electrical copper and placements. Exactly five known custom VRML bodies are represented by the existing UI envelopes. Native GLB structure and browser alignment reviewed."
+  "metadata_review": "Three-IMU/no-inclinometer DAQHAT-01; C12/C13/C16 repositioned and bypass/ground paths shortened. Sensor positions and axes retained. Native renders visually reviewed; GLB uses existing UI connector envelopes for unsupported VRML bodies. Physical qualification pending."
 }

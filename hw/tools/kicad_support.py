@@ -99,7 +99,7 @@ def schematic(name,spec,folder):
         if i==1:
             lib='(symbol "Groundlark:PWR_FLAG" (pin_names (offset 0)) (in_bom no) (on_board no) (property "Reference" "#FLG" (at 0 0 0) (effects (font (size 1 1)) hide)) (property "Value" "PWR_FLAG" (at 0 0 0) (effects (font (size 1 1)) hide)) (symbol "PWR_FLAG_0_1" (polyline (pts (xy 0 0) (xy 0 -2.54) (xy 1.27 -1.27) (xy 0 0)) (stroke (width 0.1524) (type default)) (fill (type none)))) (symbol "PWR_FLAG_1_1" (pin power_out line (at 0 0 90) (length 0) (name "pwr" (effects (font (size 1 1)))) (number "1" (effects (font (size 1 1)))))))'
             libs.append(lib)
-            rails=['GND','PI_3V3','PI_5V','SENS_3V3','FPGA_3V3' if name=='groundlark-daqhat-01' else 'CF_3V3'] if name.endswith('-hat') else ['GND','USB_VBUS','USB_5V','V3','V3_SENSOR']
+            rails=['GND','PI_3V3','PI_5V','SENS_3V3','FPGA_3V3' if name=='groundlark-daqhat-01' else 'CF_3V3'] if name.endswith('-hat') or name=='groundlark-daqhat-01' else ['GND','USB_VBUS','USB_5V','V3','V3_SENSOR']
             # GEO_AVDD is powered through R96; ERC cannot propagate power through a resistor.
             if name=="groundlark-daqhat-01": rails.append("GEO_AVDD")
             for k,net in enumerate(rails):

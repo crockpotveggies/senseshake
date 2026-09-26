@@ -79,7 +79,7 @@ class Workbench:
         self.reset(document, seed)
 
     def clear_traces(self):
-        self.traces = {i: deque(maxlen=POINTS) for i in NAMES}
+        self.traces = {i: deque(maxlen=POINTS) for i in NAMES if i not in (4, 5)}
         self.events = deque(maxlen=20)
         self.samples = self.missing = 0
 

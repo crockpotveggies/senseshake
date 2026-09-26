@@ -104,16 +104,16 @@ def run(args):
         from .worker import Worker
         from .transport import Receiver
         profile = load_json(args.profile)
-        if set(profile) - {"device_id", "spi", "i2c", "sensor_enable", "imu_irq", "pps"} or len(profile["spi"]) != 5:
-            raise ValueError("live profile requires five explicit SPI paths and sensor OE")
-        if len(set(profile["spi"])) != 5: raise ValueError("each sensor needs a separate chip select")
+        if set(profile) - {"device_id", "spi", "i2c", "sensor_enable", "imu_irq", "pps"} or len(profile["spi"]) != 3:
+            raise ValueError("live profile requires three explicit SPI paths and sensor OE")
+        if len(set(profile["spi"])) != 3: raise ValueError("each sensor needs a separate chip select")
         boot = secrets.randbits(64) or 1
         # Validate all identity/configuration fields before opening devices.
         configuration(profile["device_id"], boot, settings)
         for cfg in settings:
             sid = cfg["sensor_id"]
-            path = profile["spi"][sid - 1] if sid <= 5 else profile["i2c"]
-            channels.append(Channel(profile["device_id"], boot, cfg, Worker(Factory(sid, path, args.fifo and sid <= 4, utc and sid == 6), cfg)))
+            path = profile["spi"][(1, 2, 3).index(sid)] if sid in (1, 2, 3) else profile["i2c"]
+            channels.append(Channel(profile["device_id"], boot, cfg, Worker(Factory(sid, path, args.fifo and sid in (1, 2, 3), utc and sid == 6), cfg)))
         clock = lambda: time.clock_gettime_ns(time.CLOCK_MONOTONIC_RAW)
     sessions = Sessions(calibrations)
     metadata = dict(format="groundlark-acquisition-v1", source="simulation" if simulated else "linux-polling",
@@ -123,7 +123,7 @@ def run(args):
         metadata["profile"] = profile
         if utc: metadata['utc_capture'] = 'm10-tim-tp-v1'
         if args.fifo:
-            metadata.update(source='linux-fifo', timing='IMU device timestamp mapped to RAW; absolute uncertainty unknown; tilt/geophone poll completion')
+            metadata.update(source='linux-fifo', timing='IMU device timestamp mapped to RAW; absolute uncertainty unknown; geophone poll completion')
     try:
         # Exclusive create prevents accidentally replacing a prior recording.
         with open(args.output, "xb") as stream:
@@ -135,11 +135,11 @@ def run(args):
                 if utc and not profile.get('pps'): raise ValueError('--utc requires PPS line')
                 if args.fifo:
                     irqs = profile.get('imu_irq')
-                    if irqs is None or len(irqs) != 4: raise ValueError('FIFO profile needs four IMU IRQ lines')
+                    if irqs is None or len(irqs) != 3: raise ValueError('FIFO profile needs three IMU IRQ lines')
                     pins = [(x['chip'], x['line']) for x in irqs] + [(profile['sensor_enable']['chip'], profile['sensor_enable']['line'])]
                     if profile.get('pps'): pins.append((profile['pps']['chip'], profile['pps']['line']))
                     if len(set(pins)) != len(pins): raise ValueError('duplicate GPIO role')
-                    for channel, mapping in zip(channels[:4], irqs): channel.adapter.irq = RisingEdges(**mapping)
+                    for channel, mapping in zip(channels[:3], irqs): channel.adapter.irq = RisingEdges(**mapping)
                     if profile.get('pps'): pps = RisingEdges(**profile['pps'])
                 enable.enabled(True)
                 if args.usb:

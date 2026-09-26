@@ -1,0 +1,784 @@
+{
+  "schema_version": 1,
+  "policy": "Exact manufacturer and MPN only. Catalog identity is not stock reservation, process approval or permission to substitute.",
+  "supplier_snapshot": {
+    "filename": "BOM-review-JLCPCB Assembly Order.xls",
+    "sha256": "dd89fbfff4fdcbd1bc6f89ae9e8220bbee67b3c1b24d670f1381ab9cc230f994",
+    "sheet": "JLCPCB BOM Tool - BOM Matching",
+    "source_quantity": 5
+  },
+  "parts": [
+    {
+      "source_mpn": "0467005.NR",
+      "source_value": "0467005.NR",
+      "source_footprint": "TZ_TZ_FUSE",
+      "designators": [
+        "F80"
+      ],
+      "mpn": "0466005.NRHF",
+      "assembly_description": "5A fast-acting fuse, 32V, 1206",
+      "manufacturer": "Littelfuse",
+      "package": "1206",
+      "lcsc": "C57525",
+      "evidence_url": "https://jlcpcb.com/partdetail/Littelfuse-0466005NRHF/C57525",
+      "evidence_basis": "JLCPCB live catalog; reviewed alternate",
+      "checked_on": "2026-09-26",
+      "resolution": "Corrected source-MPN/package mismatch: old 0467005.NR is 0603 but routed TZ_TZ_FUSE uses 1206 pads. Select 0466005.NRHF: 1206, 5A fast-acting, 32V, 50A interrupt, nominal 11mOhm cold resistance and 1.6 A2s melting I2t per manufacturer June 2023 datasheet. Preserve current-limited external supply and 3A initial budget. No footprint or routing change.",
+      "sourcing_note": "Live JLCPCB available order quantity 37992 on 2026-09-26; not reserved. Datasheet overrides catalog I2t value. Nominal 11mOhm is not a worst-case hot resistance; total measured hot supply/return loop must remain <=30mOhm. Confirm inrush/fault behavior on first article; never bridge fuse.",
+      "manufacturer_evidence": "https://www.littelfuse.com/assetdocs/fuse-466-datasheet?assetguid=dbe9bcd7-6072-4adf-bf5b-d33e52a6b90f"
+    },
+    {
+      "source_mpn": "1715721",
+      "source_value": "1715721",
+      "source_footprint": "TZ_TZ_POWER",
+      "designators": [
+        "J83"
+      ],
+      "mpn": "1715721",
+      "manufacturer": "Phoenix Contact",
+      "package": "THT 1x2 P5.08mm",
+      "lcsc": "C480516",
+      "evidence_url": "https://jlcpcb.com/partdetail/PhoenixContact-1715721/C480516",
+      "evidence_basis": "supplier-workbook",
+      "checked_on": "2026-09-26",
+      "resolution": "",
+      "sourcing_note": "row J83",
+      "evidence_row": 16
+    },
+    {
+      "source_mpn": "1803439",
+      "source_value": "GEO + / - / SHIELD",
+      "source_footprint": "Connector_Phoenix_MC__PhoenixContact_MCV_1,5_3-G-3.81_1x03_P3.81mm_Vertical",
+      "designators": [
+        "J90"
+      ],
+      "mpn": "1803439",
+      "manufacturer": "Phoenix Contact",
+      "package": "THT 1x3 P3.81mm",
+      "lcsc": "C480525",
+      "evidence_url": "https://jlcpcb.com/partdetail/1803439/C480525",
+      "evidence_basis": "JLCPCB catalog",
+      "checked_on": "2026-09-26",
+      "resolution": "",
+      "sourcing_note": ""
+    },
+    {
+      "source_mpn": "24LC32A-I/SN",
+      "source_value": "24LC32A",
+      "source_footprint": "Package_SO__SOIC-8_3.9x4.9mm_P1.27mm",
+      "designators": [
+        "U1"
+      ],
+      "mpn": "24LC32A-I/SN",
+      "manufacturer": "Microchip Tech",
+      "package": "SOIC-8",
+      "lcsc": "C511262",
+      "evidence_url": "https://jlcpcb.com/partdetail/24LC32A-I/SN/C511262",
+      "evidence_basis": "JLCPCB catalog",
+      "checked_on": "2026-09-26",
+      "resolution": "",
+      "sourcing_note": ""
+    },
+    {
+      "source_mpn": "2N7002",
+      "source_value": "2N7002",
+      "source_footprint": "Package_TO_SOT_SMD__SOT-23",
+      "designators": [
+        "Q1"
+      ],
+      "mpn": "2N7002,215",
+      "manufacturer": "Nexperia",
+      "package": "SOT-23",
+      "lcsc": "C65189",
+      "evidence_url": "https://jlcpcb.com/partdetail/2N7002%2C215/C65189",
+      "evidence_basis": "JLCPCB catalog",
+      "checked_on": "2026-09-26",
+      "resolution": "Q1: specify Nexperia SOT-23 2N7002; pin 1 gate, 2 source, 3 drain. FPGA_RESET_N open-drain pull-down, 10k pull-up to 3.3V.",
+      "sourcing_note": "",
+      "manufacturer_evidence": "https://assets.nexperia.com/documents/data-sheet/2N7002.pdf"
+    },
+    {
+      "source_mpn": "ADS122C04IPWR",
+      "source_value": "ADS122C04",
+      "source_footprint": "Package_SO__TSSOP-16_4.4x5mm_P0.65mm",
+      "designators": [
+        "U22"
+      ],
+      "mpn": "ADS122C04IPWR",
+      "manufacturer": "Texas Instruments",
+      "package": "TSSOP-16",
+      "lcsc": "C2872338",
+      "evidence_url": "https://jlcpcb.com/partdetail/TexasInstruments-ADS122C04IPWR/C2872338",
+      "evidence_basis": "supplier-workbook",
+      "checked_on": "2026-09-26",
+      "resolution": "",
+      "sourcing_note": "row U22",
+      "evidence_row": 28
+    },
+    {
+      "source_mpn": "C0603C102J5GACTU",
+      "source_value": "1n C0G",
+      "source_footprint": "Capacitor_SMD__C_0603_1608Metric",
+      "designators": [
+        "C91",
+        "C92"
+      ],
+      "mpn": "C0603C102J5GAC7867",
+      "manufacturer": "KEMET",
+      "package": "0603",
+      "lcsc": "C140950",
+      "evidence_url": "https://jlcpcb.com/partdetail/KEMET-C0603C102J5GAC7867/C140950",
+      "evidence_basis": "Live JLCPCB assembly listing and stock; exact EasyEDA footprint available",
+      "manufacturer_evidence": "https://search.kemet.com/component-documentation/download/specsheet/C0603C102J5GACTU",
+      "jlc_match_status": "catalog_listed",
+      "assembly_description": "1nF 50V C0G +/-5% 0603 nonpolar MLCC",
+      "checked_on": "2026-09-26",
+      "resolution": "Use C140950 / C0603C102J5GAC7867 instead of C2181873 / C0603C102J5GACTU so the exact assembly selection has a usable supplier footprint. KEMET's C0603C102J5GACTU specsheet explicitly lists C0603C102J5GAC7867 as an alias: same 1000pF, +/-5%, 50V, C0G, 0603/1608, 1.6 x 0.8mm body. Preserve geophone filter capacitance, dielectric and tolerance. No electrical, land-pattern or routing change.",
+      "sourcing_note": "JLCPCB live listing checked 2026-09-26: In Stock 999, Available Order Qty 616, minimum 1, USD 0.0212 each at quantity 1+, Extended SMT part. Two fitted per HAT; supplier attrition/fees are separate. Stock is a snapshot, not reserved. Exact public footprint is C0603, two pads; programmatic registration required."
+    },
+    {
+      "source_mpn": "C3216C0G1H104J160AA",
+      "source_value": "100n C0G",
+      "source_footprint": "Capacitor_SMD__C_1206_3216Metric",
+      "designators": [
+        "C90"
+      ],
+      "mpn": "GRM31C5C1H104JA01L",
+      "manufacturer": "Murata Electronics",
+      "package": "1206",
+      "lcsc": "C97946",
+      "evidence_url": "https://jlcpcb.com/partdetail/MurataElectronics-GRM31C5C1H104JA01L/C97946",
+      "evidence_basis": "JLCPCB live catalog; reviewed alternate",
+      "checked_on": "2026-09-26",
+      "resolution": "Reviewed shortage substitution: 100nF +/-5%, C0G, 50V and 1206 retained. Differential geophone filter value and dielectric unchanged; do not use X7R/X5R.",
+      "sourcing_note": "Live JLCPCB available order quantity 88382 on 2026-09-26; not reserved. Maintains non-ferroelectric C0G signal capacitor.",
+      "manufacturer_evidence": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8588884831371059200-C97946.pdf"
+    },
+    {
+      "source_mpn": "Coldfoot UART service ONLY",
+      "source_value": "FPGA test UART/reset",
+      "source_footprint": "Connector_PinHeader_2.54mm__PinHeader_1x04_P2.54mm_Vertical",
+      "designators": [
+        "J4"
+      ],
+      "mpn": "TSW-104-07-G-S",
+      "manufacturer": "Samtec",
+      "package": "THT 1x4 P2.54mm",
+      "lcsc": "C3335156",
+      "evidence_url": "https://jlcpcb.com/partdetail/TSW-104-07-G-S/C3335156",
+      "evidence_basis": "JLCPCB catalog",
+      "checked_on": "2026-09-26",
+      "resolution": "J4: 1x4 2.54mm straight THT header. Samtec -07 post 5.84mm, tail 2.54mm; trim below board per stack assembly.",
+      "sourcing_note": "",
+      "manufacturer_evidence": "https://www.samtec.com/products/tsw-104-07-g-s"
+    },
+    {
+      "source_mpn": "EEPROM write enable",
+      "source_value": "EEPROM write enable",
+      "source_footprint": "Connector_PinHeader_2.54mm__PinHeader_1x02_P2.54mm_Vertical",
+      "designators": [
+        "JP1"
+      ],
+      "mpn": "TSW-102-07-G-S",
+      "manufacturer": "Samtec",
+      "package": "THT 1x2 P2.54mm",
+      "lcsc": "C7402729",
+      "evidence_url": "https://jlcpcb.com/partdetail/Samtec-TSW_102_07_GS/C7402729",
+      "evidence_basis": "supplier-workbook",
+      "checked_on": "2026-09-26",
+      "resolution": "JP1: 1x2 2.54mm straight THT header, same ordering code as JP80/JP81; no shunt fitted.",
+      "sourcing_note": "row JP80,JP81",
+      "evidence_row": 17,
+      "manufacturer_evidence": "https://www.samtec.com/products/tsw-102-07-g-s"
+    },
+    {
+      "source_mpn": "ESQ-120-23-G-D",
+      "source_value": "Raspberry Pi 40-pin",
+      "source_footprint": "Connector_PinHeader_2.54mm__PinHeader_2x20_P2.54mm_Vertical",
+      "designators": [
+        "J1"
+      ],
+      "mpn": "ZX-PM2.54-2-20PY",
+      "manufacturer": "Megastar",
+      "package": "THT socket 2x20 P2.54mm",
+      "lcsc": "C7499354",
+      "evidence_url": "https://jlcpcb.com/partdetail/ZX-PM2.54-2-20PY/C7499354",
+      "evidence_basis": "JLCPCB assembly catalog listing; not an order allocation",
+      "manufacturer_evidence": "https://datasheet.lcsc.com/lcsc/2410121623_Megastar-ZX-PM2-54-2-20PY_C7499354.pdf",
+      "jlc_match_status": "catalog_listed",
+      "assembly_description": "40-pin female Pi socket, 2x20 P2.54mm, bottom mounted; 8.5mm body; stack-height and placement review required",
+      "mechanical_review": "required",
+      "checked_on": "2026-09-26",
+      "resolution": "User requested the previously identified selectable JLCPCB replacement be carried into the BOM. Replace the unmatchable Samtec ESQ-120-23-G-D / C21390538 selection with Megastar ZX-PM2.54-2-20PY / C7499354. Both are 40-position 2x20 sockets on a 2.54mm grid. This is an explicit assembly procurement override, not a mechanically qualified drop-in: Megastar has an 8.5mm body and 3.2mm tails. Original CAD and tall-stack model remain the baseline; revised riser/spacers and bottom-side pin-1 orientation need verification before assembly release.",
+      "sourcing_note": "JLCPCB assembly catalog lists C7499354 as Megastar ZX-PM2.54-2-20PY, wave soldering, Economic/Standard PCBA. Select that exact code; stock and order allocation are not reserved. Bottom-mounted 8.5mm female socket is shorter than the original Samtec; stack/riser height and bottom-side placement remain open. Do not treat old Samtec 3D/fit evidence as qualification of this replacement."
+    },
+    {
+      "source_mpn": "GRM155R71C104KA88D",
+      "source_value": "100n",
+      "source_footprint": "Capacitor_SMD__C_0402_1005Metric",
+      "designators": [
+        "C12",
+        "C13",
+        "C14",
+        "C15",
+        "C16",
+        "C17"
+      ],
+      "mpn": "GRM155R71C104KA88D",
+      "manufacturer": "Murata Electronics",
+      "package": "0402",
+      "lcsc": "C71629",
+      "evidence_url": "https://jlcpcb.com/partdetail/GRM155R71C104KA88D/C71629",
+      "evidence_basis": "JLCPCB catalog",
+      "checked_on": "2026-09-26",
+      "resolution": "",
+      "sourcing_note": ""
+    },
+    {
+      "source_mpn": "GRM188R71H104KA93D",
+      "source_value": "100n",
+      "source_footprint": "Capacitor_SMD__C_0603_1608Metric",
+      "designators": [
+        "C1",
+        "C41",
+        "C43",
+        "C44",
+        "C45",
+        "C46",
+        "C47",
+        "C48",
+        "C49",
+        "C75",
+        "C76",
+        "C77",
+        "C83",
+        "C95",
+        "C96",
+        "C100",
+        "C101",
+        "C102",
+        "C103",
+        "C104",
+        "C105",
+        "C106"
+      ],
+      "mpn": "GRM188R71H104KA93D",
+      "manufacturer": "Murata Electronics",
+      "package": "0603",
+      "lcsc": "C77055",
+      "evidence_url": "https://jlcpcb.com/partdetail/GRM188R71H104KA93D/C77055",
+      "evidence_basis": "JLCPCB catalog",
+      "checked_on": "2026-09-26",
+      "resolution": "",
+      "sourcing_note": ""
+    },
+    {
+      "source_mpn": "GRM21BR61A106KE19L",
+      "source_value": "10u",
+      "source_footprint": "Capacitor_SMD__C_0805_2012Metric",
+      "designators": [
+        "C2",
+        "C3",
+        "C40",
+        "C93",
+        "C94"
+      ],
+      "mpn": "GRM21BR61A106KE19L",
+      "manufacturer": "Murata Electronics",
+      "package": "0805",
+      "lcsc": "C77073",
+      "evidence_url": "https://www.lcsc.com/product-detail/C77073.html",
+      "evidence_basis": "LCSC catalog",
+      "checked_on": "2026-09-26",
+      "resolution": "",
+      "sourcing_note": ""
+    },
+    {
+      "source_mpn": "GRM21BR71A475KA73L",
+      "source_value": "4.7u",
+      "source_footprint": "Capacitor_SMD__C_0805_2012Metric",
+      "designators": [
+        "C84",
+        "C85"
+      ],
+      "mpn": "GRM21BR71C475KE51L",
+      "manufacturer": "Murata Electronics",
+      "package": "0805",
+      "lcsc": "C408144",
+      "evidence_url": "https://jlcpcb.com/partdetail/GRM21BR71C475KE51L/C408144",
+      "evidence_basis": "JLCPCB live catalog; reviewed alternate",
+      "checked_on": "2026-09-26",
+      "resolution": "Reviewed shortage substitution: 4.7uF +/-10% X7R, 0805 retained; voltage increased from 10V to 16V. FPGA 3.3V decoupling; no routing or connectivity change.",
+      "sourcing_note": "Live JLCPCB available order quantity 13051 on 2026-09-26; not reserved. No X5R or reduced-capacitance substitution approved.",
+      "manufacturer_evidence": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8588935626560819200-C408144.pdf"
+    },
+    {
+      "source_mpn": "GRM31CR61A226KE19L",
+      "source_value": "22u",
+      "source_footprint": "Capacitor_SMD__C_1206_3216Metric",
+      "designators": [
+        "C42",
+        "C80",
+        "C81",
+        "C82"
+      ],
+      "mpn": "CL31A226KAHNNNE",
+      "manufacturer": "Samsung Electro-Mechanics",
+      "package": "1206",
+      "lcsc": "C12891",
+      "evidence_url": "https://jlcpcb.com/partdetail/CL31A226KAHNNNE/C12891",
+      "evidence_basis": "JLCPCB live catalog; reviewed alternate",
+      "checked_on": "2026-09-26",
+      "resolution": "Reviewed shortage substitution: 22uF +/-10% X5R, 1206 retained; voltage increased from 10V to 25V. 3.2x1.6mm body, 1.8mm maximum height. Bulk/decoupling on 3.3V rails; no routing or connectivity change.",
+      "sourcing_note": "JLCPCB Basic part; live available order quantity 560114 on 2026-09-26. Stock is not reserved. DC-bias capacitance and regulator transient response remain first-article measurements.",
+      "manufacturer_evidence": "https://www.farnell.com/datasheets/3630670.pdf"
+    },
+    {
+      "source_mpn": "ISO1640BDR",
+      "source_value": "ISO1640BDR",
+      "source_footprint": "Package_SO__SOIC-8_3.9x4.9mm_P1.27mm",
+      "designators": [
+        "U43"
+      ],
+      "mpn": "ISO1640BDR",
+      "manufacturer": "Texas Instruments",
+      "package": "SOIC-8",
+      "lcsc": "C5122339",
+      "evidence_url": "https://jlcpcb.com/partdetail/TexasInstruments-ISO1640BDR/C5122339",
+      "evidence_basis": "supplier-workbook",
+      "checked_on": "2026-09-26",
+      "resolution": "",
+      "sourcing_note": "row U43",
+      "evidence_row": 31
+    },
+    {
+      "source_mpn": "LSHM-130-04.0-L-DV-A-S-K-TR",
+      "source_value": "LSHM-130-04.0-L-DV-A-S-K-TR",
+      "source_footprint": "TZ_TZ60",
+      "designators": [
+        "J82"
+      ],
+      "mpn": "LSHM-130-04.0-L-DV-A-S-K-TR",
+      "manufacturer": "Samtec",
+      "package": "SMD 60P P0.5mm",
+      "lcsc": "C3645597",
+      "evidence_url": "https://jlcpcb.com/partdetail/Samtec-LSHM_130_04_0_L_DV_A_S_KTR/C3645597",
+      "evidence_basis": "supplier-workbook",
+      "checked_on": "2026-09-26",
+      "resolution": "",
+      "sourcing_note": "row J82",
+      "evidence_row": 15
+    },
+    {
+      "source_mpn": "LSHM-150-04.0-L-DV-A-S-K-TR",
+      "source_value": "LSHM-150-04.0-L-DV-A-S-K-TR",
+      "source_footprint": "TZ_TZ100",
+      "designators": [
+        "J80",
+        "J81"
+      ],
+      "mpn": "LSHM-150-04.0-L-DV-A-S-K-TR",
+      "manufacturer": "Samtec",
+      "package": "SMD 100P P0.5mm",
+      "lcsc": "C5367357",
+      "evidence_url": "https://jlcpcb.com/partdetail/Samtec-LSHM_150_04_0_L_DV_A_S_KTR/C5367357",
+      "evidence_basis": "supplier-workbook",
+      "checked_on": "2026-09-26",
+      "resolution": "",
+      "sourcing_note": "row J80,J81",
+      "evidence_row": 14
+    },
+    {
+      "source_mpn": "LSM6DSOTR",
+      "source_value": "LSM6DSOTR",
+      "source_footprint": "Package_LGA__LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y",
+      "designators": [
+        "U11",
+        "U12",
+        "U13"
+      ],
+      "mpn": "LSM6DSOTR",
+      "manufacturer": "STMicroelectronics",
+      "package": "LGA-14 2.5x3mm",
+      "lcsc": "C2655100",
+      "evidence_url": "https://jlcpcb.com/partdetail/STMicroelectronics-LSM6DSOTR/C2655100",
+      "evidence_basis": "supplier-workbook",
+      "checked_on": "2026-09-26",
+      "resolution": "",
+      "sourcing_note": "row U11,U12,U13",
+      "evidence_row": 27
+    },
+    {
+      "source_mpn": "RC0603FR-07100KL",
+      "source_value": "100k",
+      "source_footprint": "Resistor_SMD__R_0603_1608Metric",
+      "designators": [
+        "R51",
+        "R62",
+        "R66",
+        "R112",
+        "R114",
+        "R116",
+        "R117"
+      ],
+      "mpn": "RC0603FR-07100KL",
+      "manufacturer": "YAGEO",
+      "package": "0603",
+      "lcsc": "C14675",
+      "evidence_url": "https://jlcpcb.com/partdetail/RC0603FR-07100KL/C14675",
+      "evidence_basis": "JLCPCB catalog",
+      "checked_on": "2026-09-26",
+      "resolution": "",
+      "sourcing_note": ""
+    },
+    {
+      "source_mpn": "RC0603FR-0710KL",
+      "source_value": "10k",
+      "source_footprint": "Resistor_SMD__R_0603_1608Metric",
+      "designators": [
+        "R11",
+        "R12",
+        "R13",
+        "R50",
+        "R63",
+        "R64",
+        "R80",
+        "R81",
+        "R94",
+        "R95",
+        "R97",
+        "R106",
+        "R107",
+        "R108",
+        "R109",
+        "R110",
+        "R111",
+        "R113",
+        "R115"
+      ],
+      "mpn": "RC0603FR-0710KL",
+      "manufacturer": "YAGEO",
+      "package": "0603",
+      "lcsc": "C98220",
+      "evidence_url": "https://jlcpcb.com/partdetail/RC0603FR-0710KL/C98220",
+      "evidence_basis": "JLCPCB catalog",
+      "checked_on": "2026-09-26",
+      "resolution": "",
+      "sourcing_note": ""
+    },
+    {
+      "source_mpn": "RC0603FR-071KL",
+      "source_value": "1k",
+      "source_footprint": "Resistor_SMD__R_0603_1608Metric",
+      "designators": [
+        "R3",
+        "R65",
+        "R90",
+        "R91"
+      ],
+      "mpn": "RC0603FR-071KL",
+      "manufacturer": "YAGEO",
+      "package": "0603",
+      "lcsc": "C22548",
+      "evidence_url": "https://jlcpcb.com/partdetail/RC0603FR-071KL/C22548",
+      "evidence_basis": "JLCPCB catalog",
+      "checked_on": "2026-09-26",
+      "resolution": "",
+      "sourcing_note": ""
+    },
+    {
+      "source_mpn": "RC0603FR-071ML",
+      "source_value": "1M",
+      "source_footprint": "Resistor_SMD__R_0603_1608Metric",
+      "designators": [
+        "R92",
+        "R93"
+      ],
+      "mpn": "RC0603FR-071ML",
+      "manufacturer": "YAGEO",
+      "package": "0603",
+      "lcsc": "C105578",
+      "evidence_url": "https://jlcpcb.com/partdetail/RC0603FR-071ML/C105578",
+      "evidence_basis": "JLCPCB catalog",
+      "checked_on": "2026-09-26",
+      "resolution": "",
+      "sourcing_note": ""
+    },
+    {
+      "source_mpn": "RC0603FR-0722RL",
+      "source_value": "22",
+      "source_footprint": "Resistor_SMD__R_0603_1608Metric",
+      "designators": [
+        "R96",
+        "R100",
+        "R101",
+        "R102",
+        "R103",
+        "R104",
+        "R105"
+      ],
+      "mpn": "RC0603FR-0722RL",
+      "manufacturer": "YAGEO",
+      "package": "0603",
+      "lcsc": "C107701",
+      "evidence_url": "https://www.lcsc.com/product-detail/C107701.html",
+      "evidence_basis": "LCSC catalog",
+      "checked_on": "2026-09-26",
+      "resolution": "",
+      "sourcing_note": ""
+    },
+    {
+      "source_mpn": "RC0603FR-073K9L",
+      "source_value": "3.9k",
+      "source_footprint": "Resistor_SMD__R_0603_1608Metric",
+      "designators": [
+        "R1",
+        "R2"
+      ],
+      "mpn": "RC0603FR-073K9L",
+      "manufacturer": "YAGEO",
+      "package": "0603",
+      "lcsc": "C114616",
+      "evidence_url": "https://jlcpcb.com/partdetail/RC0603FR-073K9L/C114616",
+      "evidence_basis": "JLCPCB catalog",
+      "checked_on": "2026-09-26",
+      "resolution": "",
+      "sourcing_note": ""
+    },
+    {
+      "source_mpn": "RC0603FR-0747RL",
+      "source_value": "47",
+      "source_footprint": "Resistor_SMD__R_0603_1608Metric",
+      "designators": [
+        "R61"
+      ],
+      "mpn": "RC0603FR-0747RL",
+      "manufacturer": "YAGEO",
+      "package": "0603",
+      "lcsc": "C114623",
+      "evidence_url": "https://www.lcsc.com/product-detail/C114623.html",
+      "evidence_basis": "LCSC catalog",
+      "checked_on": "2026-09-26",
+      "resolution": "",
+      "sourcing_note": ""
+    },
+    {
+      "source_mpn": "RC0603FR-074K7L",
+      "source_value": "4.7k",
+      "source_footprint": "Resistor_SMD__R_0603_1608Metric",
+      "designators": [
+        "R52",
+        "R53"
+      ],
+      "mpn": "RC0603FR-074K7L",
+      "manufacturer": "YAGEO",
+      "package": "0603",
+      "lcsc": "C99782",
+      "evidence_url": "https://jlcpcb.com/partdetail/RC0603FR-074K7L/C99782",
+      "evidence_basis": "JLCPCB catalog",
+      "checked_on": "2026-09-26",
+      "resolution": "",
+      "sourcing_note": ""
+    },
+    {
+      "source_mpn": "SN74LVC1G08DCKR",
+      "source_value": "SN74LVC1G08DCKR",
+      "source_footprint": "Package_TO_SOT_SMD__SOT-353_SC-70-5",
+      "designators": [
+        "U106"
+      ],
+      "mpn": "SN74LVC1G08DCKR",
+      "manufacturer": "Texas Instruments",
+      "package": "SC-70-5",
+      "lcsc": "C7832",
+      "evidence_url": "https://jlcpcb.com/partdetail/TexasInstruments-SN74LVC1G08DCKR/C7832",
+      "evidence_basis": "supplier-workbook",
+      "checked_on": "2026-09-26",
+      "resolution": "",
+      "sourcing_note": "row U106",
+      "evidence_row": 38
+    },
+    {
+      "source_mpn": "SN74LVC1G10DCKR",
+      "source_value": "SN74LVC1G10DCKR",
+      "source_footprint": "Package_TO_SOT_SMD__SOT-363_SC-70-6",
+      "designators": [
+        "U103"
+      ],
+      "mpn": "SN74LVC1G10DCKR",
+      "manufacturer": "Texas Instruments",
+      "package": "SC-70-6",
+      "lcsc": "C485078",
+      "evidence_url": "https://jlcpcb.com/partdetail/TexasInstruments-SN74LVC1G10DCKR/C485078",
+      "evidence_basis": "supplier-workbook",
+      "checked_on": "2026-09-26",
+      "resolution": "",
+      "sourcing_note": "row U103",
+      "evidence_row": 36
+    },
+    {
+      "source_mpn": "SN74LVC8T245PWR",
+      "source_value": "SN74LVC8T245PWR",
+      "source_footprint": "Package_SO__TSSOP-24_4.4x7.8mm_P0.65mm",
+      "designators": [
+        "U41",
+        "U42"
+      ],
+      "mpn": "SN74LVC8T245PWR",
+      "manufacturer": "Texas Instruments",
+      "package": "TSSOP-24",
+      "lcsc": "C27643",
+      "evidence_url": "https://jlcpcb.com/partdetail/TexasInstruments-SN74LVC8T245PWR/C27643",
+      "evidence_basis": "supplier-workbook",
+      "checked_on": "2026-09-26",
+      "resolution": "",
+      "sourcing_note": "row U41,U42",
+      "evidence_row": 30
+    },
+    {
+      "source_mpn": "TCA9534PWR",
+      "source_value": "TCA9534PWR",
+      "source_footprint": "Package_SO__TSSOP-16_4.4x5mm_P0.65mm",
+      "designators": [
+        "U102"
+      ],
+      "mpn": "TCA9534PWR",
+      "manufacturer": "Texas Instruments",
+      "package": "TSSOP-16",
+      "lcsc": "C783615",
+      "evidence_url": "https://jlcpcb.com/partdetail/TexasInstruments-TCA9534PWR/C783615",
+      "evidence_basis": "supplier-workbook",
+      "checked_on": "2026-09-26",
+      "resolution": "",
+      "sourcing_note": "row U102",
+      "evidence_row": 35
+    },
+    {
+      "source_mpn": "TLV1117LV33DCYR",
+      "source_value": "TLV1117LV33DCYR",
+      "source_footprint": "Package_TO_SOT_SMD__SOT-223-3_TabPin2",
+      "designators": [
+        "U40"
+      ],
+      "mpn": "TLV1117LV33DCYR",
+      "manufacturer": "Texas Instruments",
+      "package": "SOT-223",
+      "lcsc": "C15578",
+      "evidence_url": "https://jlcpcb.com/partdetail/TLV1117LV33DCYR/C15578",
+      "evidence_basis": "JLCPCB catalog",
+      "checked_on": "2026-09-26",
+      "resolution": "",
+      "sourcing_note": ""
+    },
+    {
+      "source_mpn": "TLV803EA30DBZR",
+      "source_value": "TLV803EA30DBZR",
+      "source_footprint": "Package_TO_SOT_SMD__SOT-23",
+      "designators": [
+        "U52"
+      ],
+      "mpn": "TLV803EA30DBZR",
+      "manufacturer": "Texas Instruments",
+      "package": "SOT-23",
+      "lcsc": "C5218924",
+      "evidence_url": "https://jlcpcb.com/partdetail/TexasInstruments-TLV803EA30DBZR/C5218924",
+      "evidence_basis": "supplier-workbook",
+      "checked_on": "2026-09-26",
+      "resolution": "",
+      "sourcing_note": "row U52",
+      "evidence_row": 33
+    },
+    {
+      "source_mpn": "TLV809EA30DBZR",
+      "source_value": "TLV809EA30DBZR",
+      "source_footprint": "Package_TO_SOT_SMD__SOT-23",
+      "designators": [
+        "U104",
+        "U105"
+      ],
+      "mpn": "TLV809EA30DBZR",
+      "manufacturer": "Texas Instruments",
+      "package": "SOT-23",
+      "lcsc": "C2860914",
+      "evidence_url": "https://jlcpcb.com/partdetail/TexasInstruments-TLV809EA30DBZR/C2860914",
+      "evidence_basis": "supplier-workbook",
+      "checked_on": "2026-09-26",
+      "resolution": "",
+      "sourcing_note": "row U104,U105",
+      "evidence_row": 37
+    },
+    {
+      "source_mpn": "TMUX1574PWR",
+      "source_value": "TMUX1574PWR",
+      "source_footprint": "Package_SO__TSSOP-16_4.4x5mm_P0.65mm",
+      "designators": [
+        "U100",
+        "U101"
+      ],
+      "mpn": "TMUX1574PWR",
+      "manufacturer": "Texas Instruments",
+      "package": "TSSOP-16",
+      "lcsc": "C2673443",
+      "evidence_url": "https://jlcpcb.com/partdetail/TexasInstruments-TMUX1574PWR/C2673443",
+      "evidence_basis": "supplier-workbook",
+      "checked_on": "2026-09-26",
+      "resolution": "",
+      "sourcing_note": "row U100,U101",
+      "evidence_row": 34
+    },
+    {
+      "source_mpn": "TPD2E2U06DCKR",
+      "source_value": "TPD2E2U06",
+      "source_footprint": "Package_TO_SOT_SMD__SOT-323_SC-70",
+      "designators": [
+        "D90"
+      ],
+      "mpn": "TPD2E2U06DCKR",
+      "manufacturer": "Texas Instruments",
+      "package": "SC-70-3",
+      "lcsc": "C1855726",
+      "evidence_url": "https://jlcpcb.com/partdetail/TPD2E2U06DCKR/C1855726",
+      "evidence_basis": "JLCPCB catalog",
+      "checked_on": "2026-09-26",
+      "resolution": "",
+      "sourcing_note": ""
+    },
+    {
+      "source_mpn": "TSW-102-07-G-S",
+      "source_value": "TSW-102-07-G-S",
+      "source_footprint": "TZ_TZ_JP",
+      "designators": [
+        "JP80",
+        "JP81"
+      ],
+      "mpn": "TSW-102-07-G-S",
+      "manufacturer": "Samtec",
+      "package": "THT 1x2 P2.54mm",
+      "lcsc": "C7402729",
+      "evidence_url": "https://jlcpcb.com/partdetail/Samtec-TSW_102_07_GS/C7402729",
+      "evidence_basis": "supplier-workbook",
+      "checked_on": "2026-09-26",
+      "resolution": "",
+      "sourcing_note": "row JP80,JP81",
+      "evidence_row": 17
+    },
+    {
+      "source_mpn": "TXU0202DCUR",
+      "source_value": "TXU0202DCUR",
+      "source_footprint": "Package_SO__VSSOP-8_2.3x2mm_P0.5mm",
+      "designators": [
+        "U51"
+      ],
+      "mpn": "TXU0202DCUR",
+      "manufacturer": "Texas Instruments",
+      "package": "VSSOP-8",
+      "lcsc": "C5186957",
+      "evidence_url": "https://jlcpcb.com/partdetail/TexasInstruments-TXU0202DCUR/C5186957",
+      "evidence_basis": "supplier-workbook",
+      "checked_on": "2026-09-26",
+      "resolution": "",
+      "sourcing_note": "row U51",
+      "evidence_row": 32
+    }
+  ]
+}

@@ -42,7 +42,7 @@ acceptance criteria exist; do not substitute placeholder passes for integration.
 
 See the [simulation roadmap](../../docs/portable-lab.md#next-simulation-layers).
 
-`test_geophone_timing.py` advances the ADC clock independently of the six-channel
+`test_geophone_timing.py` advances the ADC clock independently of the four-channel
 polling loop, with I2C wire delays, clock tolerance and long scheduling stalls.
 It checks raw-frame provenance, honest missing/timing fields and continuity
 recovery without hardware reset storms. `acquisition-stress.json` retains the

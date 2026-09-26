@@ -29,7 +29,9 @@ The render shows the PCB header, not the cable plug or external geophone.
 - D90: TPD2E2U06DCKR at the connector; R90/R91 are 1 kΩ series input resistors.
   Protection is intended for handling ESD, not outdoor lightning or arbitrary
   sustained applied voltage. Qualification of the protection remains physical.
-- C90: TDK C3216C0G1H104J160AA, 100 nF C0G across the differential input;
+- C90: 100 nF C0G across the differential input. Baseline CAD names TDK
+  C3216C0G1H104J160AA; the reviewed assembly selection is Murata GRM31C5C1H104JA01L
+  (C97946), retaining 50 V, +/-5% and 1206; see [shortage review](assembly-shortages.md);
   C91/C92: 1 nF C0G to ground.
   C0G avoids using piezoelectric high-k ceramics on the measurement input.
 - R92/R93: 1 MΩ bias returns to filtered mid-supply. R94/R95: 10 kΩ divider;
@@ -53,9 +55,9 @@ Preserve raw counts and characterize the assembled response before correction.
 
 ## Accelerometer axes
 
-U11–U14 are four **three-axis** LSM6DSO IMUs, all on the front at rotation 0°.
+U11–U13 are three **three-axis** LSM6DSO IMUs, all on the front at rotation 0°.
 Each measures X, Y and Z; rotating the chips is unnecessary to obtain three
-axes. Four sensors provide four independent readings per axis. Raw values
+axes. Three sensors provide three independent readings per axis. Raw values
 retain the ST package-axis convention. No geographic orientation or automatic
 averaging is implied. Hardware tests reject a rotated/flipped placement until
 an explicit software axis mapping is provided. The external geophone adds a
@@ -65,7 +67,7 @@ single vertical velocity-sensitive channel.
 
 Sensor ID **9** carries signed 24-bit ADC counts and the 8-bit conversion
 counter. ID 6 remains reserved for legacy GNSS recordings. The active inventory
-is 1–5 and 9; remote IDs remain 7 and 8. Configuration carries gain and reference.
+is 1–3 and 9 (IDs 4/5/6 are reserved for legacy recordings); remote IDs remain 7 and 8. Configuration carries gain and reference.
 Nominal input volts = counts × 2.048 / (64 × 2²³); velocity requires the sensor
 transfer function and calibration, not simple division across all frequencies.
 
@@ -86,9 +88,9 @@ Actual communication faults retain bounded hardware recovery. The nominal
 interpret the configured nominal period as a calibrated device timestamp.
 See the [pre-fab review](pre-fab-review.md) for measured geometry, noise estimates,
 2,816 analytical corner evaluations, eight added passive SPICE transients and
-six-channel timing stress. The six analog path targets are now closed; optional flex-harness fit remains open.
+four-channel timing stress. The six analog path targets are now closed; optional flex-harness fit remains open.
 
-Tests include independent pin maps, four-IMU orientation, ADC wire faults,
+Tests include independent pin maps, three-IMU orientation, ADC wire faults,
 counter rollover, signed precision, saturation, contract clock/ID validation,
 and a known 10 Hz / 100 µm/s waveform through the actual driver on a modeled bus.
 SPICE checks cover 15 frequency/tolerance cases plus bias and PGA headroom.

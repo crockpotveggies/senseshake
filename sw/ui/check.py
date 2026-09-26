@@ -36,9 +36,17 @@ def main():
             for text in ("Groundlark", "STIMULUS LAB", "Finish &amp; save", "Pose &amp; vibration"):
                 # NiceGUI encodes element text as JSON instead of HTML entities.
                 assert text.replace("&amp;", "&") in page, text
+            assert "IMU 3" in page and "IMU 4" not in page, "Current workbench must expose exactly three IMUs"
+            assert 'SCL3300' not in page and 'Inclinometer' not in page, 'Removed sensor must not be advertised'
             with urlopen(f"http://127.0.0.1:{port}/board-assets/daqhat-01.glb", timeout=10) as response:
                 assert response.read(4) == b"glTF"
-            print("PASS workbench HTTP page and KiCad GLB delivery")
+            assert 'href="/favicon.ico"' in page
+            with urlopen(f"http://127.0.0.1:{port}/favicon.ico", timeout=3) as response:
+                icon = response.read()
+                assert response.headers.get_content_type().startswith("image/")
+            assert icon[:4] == b"\x00\x00\x01\x00", "Expected a browser ICO asset"
+            assert icon == (Path(__file__).parent / "assets/groundlark-favicon.ico").read_bytes()
+            print("PASS workbench HTTP page, KiCad GLB and Groundlark favicon delivery")
         finally:
             process.terminate()
             try:

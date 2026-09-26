@@ -49,7 +49,7 @@ class Simulated:
 
 
 def defaults(remote=False, legacy_gnss=False):
-    entries = [dict(sensor_id=i, enabled=True, period_ns=38_461_538, acceleration_range_g=2, angular_rate_range_dps=250) for i in range(1, 5)]
+    entries = [dict(sensor_id=i, enabled=True, period_ns=38_461_538, acceleration_range_g=2, angular_rate_range_dps=250) for i in range(1, 5 if legacy_gnss else 4)]
     entries += [dict(sensor_id=5, enabled=True, period_ns=40_000_000, tilt_mode=1),
                 dict(sensor_id=6, enabled=True, period_ns=1_000_000_000)]
     if remote:
@@ -59,5 +59,5 @@ def defaults(remote=False, legacy_gnss=False):
                      pressure_max_pa=250, pressure_part_number="SIMULATED-DLVR")]
     if not legacy_gnss:
         from .geophone import SETTINGS
-        entries[-1] = dict(SETTINGS)
+        entries = entries[:3] + [dict(SETTINGS)]
     return entries

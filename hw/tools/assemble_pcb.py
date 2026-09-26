@@ -11,9 +11,10 @@ import pcbnew as p
 from kicad_support import add_shape,add_text,schematic,uid,v,unique_ids
 from restore_keepouts import restore
 from fixed_routes import add as add_fixed_fanout
+from silkscreen import add_logo, MODEL_CENTER
 ROOT=Path(__file__).resolve().parents[2];HW=ROOT/'hw/boards'
 
-def export_dsn(b,path,signal_via_mm=(.6,.3),ground_layers=None):
+def export_dsn(b,path,signal_via_mm=(.6,.3),ground_layers=None,track_mm=.15,clearance_mm=.15):
     layers=b.GetCopperLayerCount()
     ground_layers=ground_layers or ['In1.Cu',f'In{layers-2}.Cu']
     # Model the same GND planes that import_routes fills in the native board.
@@ -33,8 +34,9 @@ def export_dsn(b,path,signal_via_mm=(.6,.3),ground_layers=None):
     for layer in ground_layers:
         data=data.replace(f'(layer {layer}\n      (type signal)',f'(layer {layer}\n      (type power)')
         data=re.sub(r'    \(wire_keepout "" \(polygon '+re.escape(layer)+r'[^)]*\)\)\n','',data)
-    data=data.replace('(width 200)','(width 150)').replace('(clearance 200.1','(clearance 150.1')
-    data=data.replace('(clearance 200)', '(clearance 150)')
+    width=round(track_mm*1000);clearance=round(clearance_mm*1000)
+    data=data.replace('(width 200)',f'(width {width})').replace('(clearance 200.1',f'(clearance {clearance+.1}')
+    data=data.replace('(clearance 200)', f'(clearance {clearance})')
     # Specctra treats brackets as part of bare names; sexpdata treats them
     # as list delimiters. Preserve these tokens losslessly while editing.
     tree=sx.loads(data.replace('(string_quote ")','(string_quote quote)').replace('[','__LB__').replace(']','__RB__'))
@@ -44,11 +46,11 @@ def export_dsn(b,path,signal_via_mm=(.6,.3),ground_layers=None):
     default[:]=[x for x in default if isinstance(x,list) or x not in power]
     # Fine escapes route first; widen_power.py subsequently retains wider
     # power copper wherever actual KiCad DRC allows it.
-    network.append([sx.Symbol('class'),'Power',*power,[sx.Symbol('circuit'),[sx.Symbol('use_via'),f'Via[0-{layers-1}]_600:300_um']],[sx.Symbol('rule'),[sx.Symbol('width'),150],[sx.Symbol('clearance'),150]]])
+    network.append([sx.Symbol('class'),'Power',*power,[sx.Symbol('circuit'),[sx.Symbol('use_via'),f'Via[0-{layers-1}]_600:300_um']],[sx.Symbol('rule'),[sx.Symbol('width'),width],[sx.Symbol('clearance'),clearance]]])
     if tuple(signal_via_mm)!=(.6,.3):
         import copy
         diameter,drill=[round(x*1000) for x in signal_via_mm]
-        assert diameter>=450 and drill>=200 and diameter-drill>=200
+        assert diameter>=450 and drill>=200 and diameter-drill>=150
         library=next(x for x in tree if isinstance(x,list) and str(x[0])=='library')
         name=f'Via__LB__0-{layers-1}__RB___{diameter}:{drill}_um'
         if not any(isinstance(x,list) and str(x[0])=='padstack' and str(x[1])==name for x in library):
@@ -77,7 +79,9 @@ def main():
         assert layers in (4,6,8),layers
         b.SetCopperLayerCount(layers)
         signal_via=spec.get('signal_via_mm',[.6,.3])
+        fab=spec.get('fabrication',{});track_mm=fab.get('min_track_mm',.15);clearance_mm=fab.get('min_clearance_mm',.15)
         ds=b.GetDesignSettings();ds.m_CopperEdgeClearance=p.FromMM(.3);ds.m_MinClearance=p.FromMM(.15);ds.m_TrackMinWidth=p.FromMM(.15);ds.m_ViasMinSize=p.FromMM(signal_via[0]);ds.m_MinThroughDrill=p.FromMM(signal_via[1])
+        ds.m_MinClearance=p.FromMM(clearance_mm);ds.m_TrackMinWidth=p.FromMM(track_mm)
         for obj in list(b.GetTracks()):b.Delete(obj)
         for obj in list(b.GetDrawings()):b.Delete(obj)
         for i in range(b.GetAreaCount()-1,-1,-1):b.Delete(b.GetArea(i))
@@ -124,7 +128,7 @@ def main():
             z=p.ZONE(b);z.SetLayer(p.F_Cu);z.SetIsRuleArea(True);z.SetDoNotAllowTracks(True);z.SetDoNotAllowVias(True);z.SetDoNotAllowCopperPour(True);z.SetDoNotAllowPads(False);z.SetDoNotAllowFootprints(False);z.Outline().NewOutline()
             tiltbox=[(92.2,73.7),(97.8,73.7),(97.8,82.3),(92.2,82.3)] if target=='trenz_hat' else [(88.2,74.7),(93.8,74.7),(93.8,83.3),(88.2,83.3)]
             for x,y in tiltbox:z.Outline().Append(v(x,y))
-            b.Add(z)
+            if any(part.ref == "U20" for part in parts): b.Add(z)
             # Short RF connection uses retained reviewed coordinates; impedance
             # remains subject to the selected fabrication stackup.
             if target=='hat':
@@ -142,11 +146,12 @@ def main():
             outline=[(30,8),(80,8),(80,48),(30,48)] if target=='trenz_hat' else [(90,19),(104,19),(104,35),(90,35)]
             for a,c in zip(outline,outline[1:]+outline[:1]):add_shape(b,50+a[0],50+a[1],50+c[0],50+c[1],p.Dwgs_User,.12)
             if target=='trenz_hat':
-                add_text(b,'Groundlark DAQHAT-01 / 200T',88,104.8,.8)
+                add_text(b,'Groundlark DAQHAT-01 / 200T',*MODEL_CENTER,.8)
+                add_logo(b)
                 add_text(b,'3V3 ONLY',57,57,.8)
         else:
             add_text(b,'Groundlark FIELD A2',97,91,.8);add_text(b,'RM3100 / XYZ',68,54,.8)
-        title=p.TITLE_BLOCK();title.SetTitle(name+' / atopile prototype');title.SetRevision('DAQHAT-01 HDI' if target=='trenz_hat' else 'A2');title.SetDate('2026-09-24' if target=='trenz_hat' else '2026-09-23');b.SetTitleBlock(title)
+        title=p.TITLE_BLOCK();title.SetTitle(name+' / atopile prototype');title.SetRevision('DAQHAT-01 6L' if target=='trenz_hat' else 'A2');title.SetDate('2026-09-25' if target=='trenz_hat' else '2026-09-23');b.SetTitleBlock(title)
         restore(b)
         if target=='trenz_hat':
             for fp in b.GetFootprints():
@@ -161,16 +166,20 @@ def main():
         for sch in folder.glob('*.kicad_sch'):
             s=sch.read_text().replace('A0 DRAFT','A2 PROTOTYPE').replace('Engineering draft - module interface and fabrication release on hold.','Atopile-derived circuit review schematic - prototype, not released.')
             sch.write_text(s)
-        (folder/'electrical.json').write_text(json.dumps({'source':'atopile compiled PCB; do not edit','size_mm':spec['size'],'copper_layers':layers,'ground_layers':ground_layers,'hdi':spec.get('hdi'),'parts':[vars(x) for x in parts]},indent=2))
+        (folder/'electrical.json').write_text(json.dumps({'source':'atopile compiled PCB; do not edit','size_mm':spec['size'],'copper_layers':layers,'ground_layers':ground_layers,'stackup':spec.get('stackup'),'fabrication':fab,'parts':[vars(x) for x in parts]},indent=2))
         with open(folder/'bom.csv','w',newline='') as f:
             writer=csv.writer(f);writer.writerow(['Reference','Value','MPN','Footprint','DNP','Note'])
             for x in parts:writer.writerow([x.ref,x.value,x.mpn,x.local_fp,x.dnp,x.note])
         (folder/'fp-lib-table').write_text('(fp_lib_table (version 7) (lib (name "Groundlark") (type "KiCad") (uri "${KIPRJMOD}/../../libraries/Groundlark.pretty") (options "") (descr "Atopile atomic parts")))')
         project={'meta':{'filename':name+'.kicad_pro','version':1},'board':{'design_settings':{'rules':{'min_clearance':.15,'min_track_width':.15,'min_via_diameter':signal_via[0],'min_through_hole_diameter':signal_via[1],'min_copper_edge_clearance':.3,'min_microvia_diameter':.3,'min_microvia_drill':.1}}},'net_settings':{'classes':[{'name':'Default','clearance':.15,'track_width':.15,'via_diameter':signal_via[0],'via_drill':signal_via[1],'microvia_diameter':.3,'microvia_drill':.1,'diff_pair_width':.2,'diff_pair_gap':.2,'diff_pair_via_gap':.25}],'meta':{'version':3}}}
+        project['board']['design_settings']['rules'].update(fab.get('rules',{}))
+        project['net_settings']['classes'][0].update(clearance=clearance_mm,track_width=track_mm)
         (folder/(name+'.kicad_pro')).write_text(json.dumps(project,indent=2))
+        if fab.get('custom_rules'):
+            (folder/(name+'.kicad_dru')).write_text(fab['custom_rules'],encoding='utf8')
         from stackup import apply_stackup
         apply_stackup(path,spec)
-        export_dsn(b,folder/(name+'.dsn'),signal_via,ground_layers)
+        export_dsn(b,folder/(name+'.dsn'),signal_via,ground_layers,track_mm,clearance_mm)
         print(name,len(parts),'placed compiled parts')
 
 if __name__=='__main__':main()

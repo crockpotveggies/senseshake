@@ -1,4 +1,4 @@
-"""Bind only DAQHAT-01's five explicitly identified userspace SPI nodes; no unbinding."""
+"""Bind only DAQHAT-01's three explicitly identified userspace SPI nodes; no unbinding."""
 from pathlib import Path
 import argparse
 import json
@@ -6,9 +6,9 @@ import json
 
 def inventory(root=Path('/sys/bus/spi')):
     devices = []
-    for i in range(5):
+    for i in range(3):
         device = root / 'devices' / f'spi0.{i}'
-        expected = b'groundlark,' + (b'lsm6dso-userspace' if i < 4 else b'scl3300-userspace')
+        expected = b'groundlark,lsm6dso-userspace'
         if (device / 'of_node/compatible').read_bytes().rstrip(b'\0') != expected:
             raise ValueError(f'{device.name}: not the DAQHAT-01 userspace device')
         driver = (device / 'driver').resolve().name if (device / 'driver').exists() else None

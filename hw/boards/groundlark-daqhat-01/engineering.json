@@ -3,7 +3,7 @@
     "physical_pin_checks": 51,
     "sensor": "Racotech RGI-4.5Hz vertical",
     "adc": "ADS122C04",
-    "axes": "four aligned three-axis IMUs"
+    "axes": "three aligned three-axis IMUs"
   },
   "power": {
     "interface_pin_checks": 31,

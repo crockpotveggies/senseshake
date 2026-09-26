@@ -16,5 +16,5 @@ for p in files:j['sha256'][p.relative_to(ROOT).as_posix()]=sha(p)
 j['trenz_update_utc']=datetime.datetime.now(datetime.timezone.utc).isoformat()
 validation=json.loads((ROOT/'hw/boards/groundlark-daqhat-01/validation.json').read_text())
 assert all(validation[k]==0 for k in ['drc_violations','unconnected_items','erc_violations']), 'Cannot record a passing board before native checks close'
-j['trenz_status']='DAQHAT-01 Pi-outline 8-layer HDI prototype; internal SPI6/QSPI reservation, UART and switched JTAG; native CAD, loopback RTL and portable checks; physical qualification pending'
+j['trenz_status']='DAQHAT-01 Pi-outline 6-layer through-via prototype; internal SPI6/QSPI reservation, UART and switched JTAG; native CAD, loopback RTL and portable checks; physical qualification pending'
 path.write_text(json.dumps(j,indent=2)+'\n',encoding='utf-8',newline='\n');print('DAQHAT-01 artifacts recorded; original A2 circuit/layout hashes preserved')

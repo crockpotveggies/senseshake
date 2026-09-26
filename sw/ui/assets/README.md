@@ -1,12 +1,16 @@
 # Board visualization provenance
 
+The workbench favicon uses a teal lark with a seismic waveform tail on dark
+navy. `groundlark-icon.png` is the generated master; `groundlark-favicon.ico`
+contains browser sizes from 16 to 256 pixels. See the
+[generation prompt and export command](groundlark-icon-prompt.md).
+
 `daqhat-01.glb` is a display asset exported with KiCad 9.0.9 from the checked DAQHAT-01 PCB.
 It includes the routed board's outline, holes, pads, mask, silkscreen and available
 stock component models. It is not a manufacturing deliverable.
 
 KiCad's exporter cannot convert the local VRML bodies. The Python scene adds
-simplified envelopes for the Pi socket, Trenz connectors,
-SCL3300. Selection rings use `hw/layout-trenz.json` XY values.
+simplified envelopes for the Pi socket, Trenz connectors. Selection rings use `hw/layout-trenz.json` XY values.
 The remote head is a separate placement-based schematic 3D view; its optional
 pressure sensor is shown even though the default assembly is DNP.
 
@@ -21,7 +25,7 @@ kicad-cli pcb export glb --force --no-dnp --include-pads --include-silkscreen \
 The exporter reports missing local VRML models and may return nonzero despite creating
 the GLB. Inspect the result and missing-model inventory before accepting it.
 Do not ignore other export failures. The scene converts GLB metres/Y-up to
-centimetres/Z-up, subtracts the CAD origin (50, 50 mm), then centres the 85Ã—56 mm
+centimetres/Z-up, subtracts the CAD origin (50, 50 mm), then centres the 85 x 56 mm
 board. The placement coordinates themselves are unchanged.
 
 `provenance.json` pins the PCB, placements and display asset. Update its SHA-256

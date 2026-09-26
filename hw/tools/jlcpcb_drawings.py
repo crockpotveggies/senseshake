@@ -18,6 +18,8 @@ def make(out):
     manifest = json.loads((out / 'manifest.json').read_text())
     geometry = json.loads((out / 'review/placement-geometry.json').read_text())
     check = json.loads((out / 'review/independent-check.json').read_text())
+    layer_count=len(check['layers']); drill_count=sum(check['drills'].values())
+    via_count=manifest['counts']['vias']['through']
     c = Canvas(str(out / 'DAQHAT-01-assembly-review.pdf'), pagesize=(W, H), invariant=1)
     c.setTitle('Groundlark DAQHAT-01 | JLCPCB engineering review | one assembled HAT')
     style = ParagraphStyle('body', fontName='Helvetica', fontSize=10, leading=15, textColor=INK)
@@ -34,30 +36,31 @@ def make(out):
         c.setFillColor(WARN); c.setFont('Helvetica-Bold', 9)
         c.drawString(48, H-108, 'ENGINEERING REVIEW ONLY - NOT RELEASED FOR MANUFACTURE')
         c.setFillColor(INK); c.setFont('Helvetica', 8)
-        c.drawString(48, 27, f"Source {manifest['source_commit'][:12]} | Requested assembly: {manifest['requested_assembled_HATs']} HAT")
+        source_label = manifest.get('source_label', f"Source {manifest['source_commit'][:12]}")
+        c.drawString(48, 27, f"{source_label} | Requested assembly: {manifest['requested_assembled_HATs']} HAT")
         c.drawRightString(W-48, 27, f'{index} / 4')
 
     page('Assembly request', 1)
     y = H-139
     for text in [
         '<b>Requested deliverable:</b> one populated 85 x 56 mm DAQHAT-01 carrier. Standard PCBA, double-sided SMT plus through-hole assembly. Pi, Trenz module, geophone, riser, power supply and mounting hardware are separate purchases.',
-        '<b>Quantity hold:</b> JLCPCB publishes a two-piece Standard PCBA minimum. Keep this request at one; obtain an exception or the owner\'s agreement to two before ordering. Bare-board lot size and component attrition are separate quote items.',
+        '<b>Quantity: ONE SINGLE HAT.</b> Fabricate one PCB and assemble that one PCB. No increase to two or five boards is authorized. Set both website quantities to 1; supplier must confirm acceptance. Gerbers contain one board, without panel repeats. Component purchase minima and attrition are separate quote items.',
         '<b>Handling hold:</b> the 56 mm board dimension is below the 70 mm Standard minimum. Manufacturer to propose an assembly frame, edge rails and fiducials; return panel data for review without altering the HAT outline or hole positions.',
-        '<b>Sourcing hold:</b> 127 placements, 40 grouped BOM lines. JP1 and J4 still have descriptive placeholders, and Q1 lacks a manufacturer-specific ordering code. Only two exact catalog matches have been recorded; the rest need sourcing review. No stock is reserved and no substitutions are approved.',
+        f"<b>Sourcing hold:</b> {manifest['counts']['physical_placements']} placements, {manifest['counts']['BOM_lines']} grouped BOM lines. {manifest['counts'].get('catalog_mapped_BOM_lines', 0)} lines have exact catalog identities. J1 is LCSC C21390538; JLC matching remains unconfirmed. Source the exact MPN if unavailable. Confirm all allocations, especially C90 and F80. No substitutions are approved.",
         '<b>Placement hold:</b> CPL is a review candidate, not feeder-approved data. Validate every centroid, rotation and pin 1 against the selected JLC component. J1 is explicitly bottom-mounted despite the front-side CAD land pattern.',
         '<b>Assembly instructions:</b> populate required SMT and THT parts. Keep JP1, JP80 and JP81 shunts OPEN. Do not fit a Trenz module or Raspberry Pi during PCB assembly. Confirm sensor reflow limits, cleaning and handling with current manufacturer instructions.',
-        '<b>Validation:</b> fresh native DRC has zero findings and zero unconnected items. Independent Gerbonara parsing reads all 15 plot layers and matches all 456 drill hits to CAD within 1 micrometre. This does not replace manufacturer DFM or first-article power, fit, timing and noise measurements.',
+        f'<b>Validation:</b> fresh native DRC has zero findings and zero unconnected items. Independent Gerbonara parsing reads all {layer_count} plot layers and matches all {drill_count} drill hits to CAD within 1 micrometre. This does not replace manufacturer DFM or first-article power, fit, timing and noise measurements.',
     ]: y = paragraph(text, y)
     c.showPage()
 
     page('Fabrication specification', 2)
-    y = paragraph('<b>Provisional 8-layer 1+6+1 HDI.</b> 1.60 mm nominal including 0.01 mm masks on both sides; ENIG; green mask; white legend. Manufacturer must approve the actual laminate, layer thicknesses, finished copper and tolerances. Do not substitute an ordinary through-via eight-layer process.', H-139)
+    y = paragraph('<b>Standard six-layer FR-4, through-vias only.</b> Order 1.60 mm nominal (+/-10%), TG135, 1 oz outer / 0.5 oz inner, ENIG, green mask and white legend. JLC06161H-3313 stock reference below; no custom lamination or controlled impedance. Published copper/dielectric total is 1.5384 mm; CAD mask thickness is illustrative, not a manufacturing requirement.', H-139)
     x = 48; rowh = 19
     rows = [('Layer / material', 'Thickness (mm)', 'Purpose / processing')]
     names = manifest['copper_layers']
     for i, name in enumerate(names):
-        rows.append((f'L{i+1} - {name}', '0.035', 'GND plane' if name in ('In2.Cu','In5.Cu') else 'Copper'))
-        if i < 7: rows.append((f'Dielectric {i+1}', f"{manifest['dielectric_thickness_mm'][i]:.3f}", 'Provisional FR4'))
+        rows.append((f'L{i+1} - {name}', f"{manifest['copper_thickness_mm'][i]:.4f}", 'GND plane' if name in ('In1.Cu','In4.Cu') else 'Copper'))
+        if i < len(names)-1: rows.append((f'Dielectric {i+1}', f"{manifest['dielectric_thickness_mm'][i]:.4f}", 'Stock FR4'))
     for i, row in enumerate(rows):
         c.setFillColor(HexColor('#e5f1f2') if i == 0 else HexColor('#f1f4f6') if i%2 else HexColor('#ffffff'))
         c.rect(x, y-rowh, 499, rowh, fill=1, stroke=0)
@@ -66,10 +69,10 @@ def make(out):
         y -= rowh
     y -= 15
     for text in [
-        '<b>Laser microvias:</b> four L1-L2 and seven L7-L8; 0.10 mm holes, 0.30 mm pads. Copper-fill and planarize all 11. Outer dielectric/hole ratio is 0.8; nominal annular ring is 0.10 mm.',
-        '<b>Through-via fill proposal:</b> resin-fill and copper-cap all 370 through-vias listed in via-processing.csv, including the analog supply via-in-pad sites. This conservative quote option avoids omitted overlapping sites; confirm process/cost. Do not fill the 61 component PTH holes or 14 NPTH holes.',
+        '<b>Drill/clearance profile:</b> 0.30 mm through-via drills; pads at least 0.45 mm (0.075 mm ring). No laser, blind or buried vias. Dense signal escapes use 0.125 mm tracks and 0.10 mm clearance; additional hole/pad rules are checked by native DRC.',
+        f'<b>Via processing:</b> epoxy-fill and copper-cap all {via_count} through-vias listed in via-processing.csv, including ADC and IMU bypass via-in-pad sites. JLCPCB lists POFV for six-layer boards. Do not fill component PTH holes or NPTH holes.',
         '<b>Coordinates:</b> absolute KiCad origin; X right, Y up. Board bounds X=50..135, Y=-106..-50 mm. Gerber, drill and CPL share this origin. Bottom CPL coordinates are NOT mirrored. Bottom illustration is mirrored for viewing only.',
-        '<b>Drills:</b> four Excellon files keep PTH, NPTH and both blind spans separate. Preserve Edge.Cuts, mounting holes and connector locating holes. Use the drill report for tool counts; never merge blind spans into through drills.',
+        '<b>Drills:</b> two Excellon files keep PTH and NPTH separate. Preserve Edge.Cuts, mounting holes and connector locating holes. Use the drill report for tool counts; no blind-drill files are expected.',
     ]: y = paragraph(text, y)
     c.showPage()
 
@@ -83,13 +86,13 @@ def make(out):
         c.drawImage(im,48,bottom,width,height,mask='auto')
         y=bottom-22
         rows = ([
-            '<b>J80 / J81 / J82:</b> three Samtec fine-pitch Trenz connectors on TOP. Match exact height, locating posts and pin 1. Confirm stock or consigned parts before accepting the assembly quote.',
-            '<b>U11-U14 / U20 / U22:</b> four IMUs, inclinometer and geophone ADC. Preserve existing sensor orientations; do not rotate an accelerometer to create another axis. The IMUs already measure all three axes.',
+            '<b>J80 / J81 / J82:</b> three Samtec fine-pitch Trenz connectors on TOP, with SMT signal contacts and plated mounting features. Match exact height, locating posts and pin 1. Confirm stock or consigned parts before accepting the assembly quote.',
+            '<b>U11-U13 / U22:</b> three IMUs and geophone ADC. Preserve existing sensor orientations; do not rotate an accelerometer to create another axis. The IMUs already measure all three axes.',
             '<b>J83 / J90:</b> module power terminal and geophone receptacle, respectively. Populate both through-hole connectors. JP1/JP80/JP81 headers have no installed shorting shunts.',
             '<b>J1 exception:</b> the long Pi connector land pattern appears on this side in CAD Fab output, but its socket body is installed BELOW the board. Follow the bottom assembly instruction, not the library layer.',
         ] if side == 'top' else [
             '<b>J1:</b> Samtec ESQ-120-23-G-D socket body underneath the HAT; mating face toward the Pi riser. Verify pin 1, tail length and seating against the stack drawing before soldering.',
-            '<b>U100-U106 and associated passives:</b> underside link-switch, expander, logic and supervisor circuitry. 35 SMT components occupy this side. Confirm their rotations in the JLC assembly preview.',
+            f"<b>U100-U106 and associated passives:</b> underside link-switch, expander, logic and supervisor circuitry. {manifest['counts']['assembly'].get('Bottom SMT',0)} SMT components occupy this side. Confirm their rotations in the JLC assembly preview.",
             '<b>Mechanical fit:</b> maintain Pi/riser and fastener clearance. No cable guide or external FPGA ribbon connectors are part of this revision. Actual connector mating and stack clearances need first-article verification.',
         ])
         for text in rows: y=paragraph(text,y)

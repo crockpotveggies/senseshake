@@ -1,4 +1,383 @@
 {
-  "status": "superseded by native drc.json and power-distribution.json",
-  "scope": "intermediate via-placement trials are not release evidence"
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-09-25T21:23:06-0700",
+    "included_severities": [
+        "error",
+        "warning"
+    ],
+    "kicad_version": "9.0.9",
+    "schematic_parity": [],
+    "source": "groundlark-daqhat-01.kicad_pcb",
+    "unconnected_items": [],
+    "violations": [
+        {
+            "description": "Clearance violation (rule 'Via copper clearance' clearance 0.1250 mm; actual 0.1123 mm)",
+            "items": [
+                {
+                    "description": "Pad 9 [FPGA_3V3] of J81 on F.Cu",
+                    "pos": {
+                        "x": 94.75,
+                        "y": 60.15
+                    },
+                    "uuid": "21e95aad-441e-4bfa-854c-fa0b8d84074e"
+                },
+                {
+                    "description": "Via [FPGA_VIN] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 95.0,
+                        "y": 59.0
+                    },
+                    "uuid": "8a9435c5-a49d-4359-9900-ee2b6adc7caf"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Items shorting two nets (nets PI_IMU1_CS and FPGA_VIN)",
+            "items": [
+                {
+                    "description": "Track [PI_IMU1_CS] on B.Cu, length 0.0500 mm",
+                    "pos": {
+                        "x": 95.25,
+                        "y": 58.7
+                    },
+                    "uuid": "1b564d33-bf36-46b3-b04b-a254ec0d13f6"
+                },
+                {
+                    "description": "Via [FPGA_VIN] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 95.0,
+                        "y": 59.0
+                    },
+                    "uuid": "8a9435c5-a49d-4359-9900-ee2b6adc7caf"
+                }
+            ],
+            "severity": "error",
+            "type": "shorting_items"
+        },
+        {
+            "description": "Items shorting two nets (nets ID_SDA and FPGA_VIN)",
+            "items": [
+                {
+                    "description": "Track [ID_SDA] on In3.Cu, length 0.4438 mm",
+                    "pos": {
+                        "x": 95.3173,
+                        "y": 59.021
+                    },
+                    "uuid": "8157f0e5-ad8c-42ec-9379-6359dfcbddde"
+                },
+                {
+                    "description": "Via [FPGA_VIN] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 95.0,
+                        "y": 59.0
+                    },
+                    "uuid": "8a9435c5-a49d-4359-9900-ee2b6adc7caf"
+                }
+            ],
+            "severity": "error",
+            "type": "shorting_items"
+        },
+        {
+            "description": "Clearance violation (rule 'Via copper clearance' clearance 0.1250 mm; actual 0.1200 mm)",
+            "items": [
+                {
+                    "description": "Track [PI_IMU1_CS] on B.Cu, length 3.7477 mm",
+                    "pos": {
+                        "x": 98.0,
+                        "y": 56.0
+                    },
+                    "uuid": "08a1c951-f49d-4036-ba3f-56814b5d6bfc"
+                },
+                {
+                    "description": "Via [FPGA_VIN] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 95.0,
+                        "y": 59.0
+                    },
+                    "uuid": "8a9435c5-a49d-4359-9900-ee2b6adc7caf"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation (rule 'Via copper clearance' clearance 0.1250 mm; actual 0.0860 mm)",
+            "items": [
+                {
+                    "description": "Track [PI_IMU1_CS] on B.Cu, length 0.0500 mm",
+                    "pos": {
+                        "x": 95.35,
+                        "y": 58.65
+                    },
+                    "uuid": "15a781f0-8a61-4e6a-b08c-64ea736d4727"
+                },
+                {
+                    "description": "Via [FPGA_VIN] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 95.0,
+                        "y": 59.0
+                    },
+                    "uuid": "8a9435c5-a49d-4359-9900-ee2b6adc7caf"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation (rule 'Via copper clearance' clearance 0.1250 mm; actual 0.0155 mm)",
+            "items": [
+                {
+                    "description": "Track [PI_IMU1_CS] on B.Cu, length 0.0707 mm",
+                    "pos": {
+                        "x": 95.3,
+                        "y": 58.65
+                    },
+                    "uuid": "52bcf3ad-28c1-48a0-b2e2-97907009a55c"
+                },
+                {
+                    "description": "Via [FPGA_VIN] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 95.0,
+                        "y": 59.0
+                    },
+                    "uuid": "8a9435c5-a49d-4359-9900-ee2b6adc7caf"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Items shorting two nets (nets PI_IMU1_CS and FPGA_VIN)",
+            "items": [
+                {
+                    "description": "Track [PI_IMU1_CS] on B.Cu, length 0.7000 mm",
+                    "pos": {
+                        "x": 95.15,
+                        "y": 58.75
+                    },
+                    "uuid": "5929eec8-a999-42e4-9069-3395193934c5"
+                },
+                {
+                    "description": "Via [FPGA_VIN] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 95.0,
+                        "y": 59.0
+                    },
+                    "uuid": "8a9435c5-a49d-4359-9900-ee2b6adc7caf"
+                }
+            ],
+            "severity": "error",
+            "type": "shorting_items"
+        },
+        {
+            "description": "Items shorting two nets (nets PI_IMU1_CS and FPGA_VIN)",
+            "items": [
+                {
+                    "description": "Track [PI_IMU1_CS] on B.Cu, length 0.0707 mm",
+                    "pos": {
+                        "x": 95.2,
+                        "y": 58.7
+                    },
+                    "uuid": "83a068ec-e4f2-4481-8f10-6cbe52d251b7"
+                },
+                {
+                    "description": "Via [FPGA_VIN] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 95.0,
+                        "y": 59.0
+                    },
+                    "uuid": "8a9435c5-a49d-4359-9900-ee2b6adc7caf"
+                }
+            ],
+            "severity": "error",
+            "type": "shorting_items"
+        },
+        {
+            "description": "Items shorting two nets (nets LINK_DQ2 and FPGA_VIN)",
+            "items": [
+                {
+                    "description": "Track [LINK_DQ2] on B.Cu, length 0.0500 mm",
+                    "pos": {
+                        "x": 95.4,
+                        "y": 58.975
+                    },
+                    "uuid": "0d3f5d62-f8bc-4dd8-a6e8-b9124735e8c9"
+                },
+                {
+                    "description": "Via [FPGA_VIN] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 95.0,
+                        "y": 59.0
+                    },
+                    "uuid": "8a9435c5-a49d-4359-9900-ee2b6adc7caf"
+                }
+            ],
+            "severity": "error",
+            "type": "shorting_items"
+        },
+        {
+            "description": "Items shorting two nets (nets ID_SDA and FPGA_VIN)",
+            "items": [
+                {
+                    "description": "Track [ID_SDA] on In3.Cu, length 1.0592 mm",
+                    "pos": {
+                        "x": 96.0663,
+                        "y": 59.77
+                    },
+                    "uuid": "2307e3a0-6f12-4e52-8f7d-3f8feea685ae"
+                },
+                {
+                    "description": "Via [FPGA_VIN] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 95.0,
+                        "y": 59.0
+                    },
+                    "uuid": "8a9435c5-a49d-4359-9900-ee2b6adc7caf"
+                }
+            ],
+            "severity": "error",
+            "type": "shorting_items"
+        },
+        {
+            "description": "Items shorting two nets (nets LINK_DQ2 and FPGA_VIN)",
+            "items": [
+                {
+                    "description": "Track [LINK_DQ2] on B.Cu, length 0.0707 mm",
+                    "pos": {
+                        "x": 95.35,
+                        "y": 58.975
+                    },
+                    "uuid": "2f591895-9fc7-40e5-bd94-6b8a0023ffe3"
+                },
+                {
+                    "description": "Via [FPGA_VIN] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 95.0,
+                        "y": 59.0
+                    },
+                    "uuid": "8a9435c5-a49d-4359-9900-ee2b6adc7caf"
+                }
+            ],
+            "severity": "error",
+            "type": "shorting_items"
+        },
+        {
+            "description": "Items shorting two nets (nets LINK_DQ2 and FPGA_VIN)",
+            "items": [
+                {
+                    "description": "Track [LINK_DQ2] on B.Cu, length 0.0354 mm",
+                    "pos": {
+                        "x": 95.25,
+                        "y": 59.025
+                    },
+                    "uuid": "5b6e43ee-94dc-43cb-8c4b-7cd50a7e1875"
+                },
+                {
+                    "description": "Via [FPGA_VIN] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 95.0,
+                        "y": 59.0
+                    },
+                    "uuid": "8a9435c5-a49d-4359-9900-ee2b6adc7caf"
+                }
+            ],
+            "severity": "error",
+            "type": "shorting_items"
+        },
+        {
+            "description": "Items shorting two nets (nets FPGA_VIN and LINK_DQ2)",
+            "items": [
+                {
+                    "description": "Via [FPGA_VIN] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 95.0,
+                        "y": 59.0
+                    },
+                    "uuid": "8a9435c5-a49d-4359-9900-ee2b6adc7caf"
+                },
+                {
+                    "description": "Track [LINK_DQ2] on B.Cu, length 0.0500 mm",
+                    "pos": {
+                        "x": 95.3,
+                        "y": 59.025
+                    },
+                    "uuid": "98ffd4f8-cca3-44ac-b7d0-074570ed983b"
+                }
+            ],
+            "severity": "error",
+            "type": "shorting_items"
+        },
+        {
+            "description": "Clearance violation (rule 'Via copper clearance' clearance 0.1250 mm; actual 0.0383 mm)",
+            "items": [
+                {
+                    "description": "Via [FPGA_VIN] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 95.0,
+                        "y": 59.0
+                    },
+                    "uuid": "8a9435c5-a49d-4359-9900-ee2b6adc7caf"
+                },
+                {
+                    "description": "Track [LINK_DQ2] on B.Cu, length 0.0707 mm",
+                    "pos": {
+                        "x": 95.45,
+                        "y": 58.925
+                    },
+                    "uuid": "9a705d3a-e409-4931-8631-f45817a779c5"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation (rule 'Via copper clearance' clearance 0.1250 mm; actual 0.0937 mm)",
+            "items": [
+                {
+                    "description": "Via [FPGA_VIN] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 95.0,
+                        "y": 59.0
+                    },
+                    "uuid": "8a9435c5-a49d-4359-9900-ee2b6adc7caf"
+                },
+                {
+                    "description": "Track [LINK_DQ2] on B.Cu, length 0.0500 mm",
+                    "pos": {
+                        "x": 95.5,
+                        "y": 58.925
+                    },
+                    "uuid": "aa6d1180-d84e-475c-9429-1765b7bb0608"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Items shorting two nets (nets FPGA_VIN and LINK_DQ2)",
+            "items": [
+                {
+                    "description": "Via [FPGA_VIN] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 95.0,
+                        "y": 59.0
+                    },
+                    "uuid": "8a9435c5-a49d-4359-9900-ee2b6adc7caf"
+                },
+                {
+                    "description": "Track [LINK_DQ2] on B.Cu, length 0.8750 mm",
+                    "pos": {
+                        "x": 95.225,
+                        "y": 59.05
+                    },
+                    "uuid": "e5440965-9287-42f3-87ec-e9bf0627f6e5"
+                }
+            ],
+            "severity": "error",
+            "type": "shorting_items"
+        }
+    ]
 }

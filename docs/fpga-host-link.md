@@ -41,7 +41,7 @@ Settled-state simulation does not characterize subthreshold power ramps.
 
 J83 still requires the [regulated external supply and operating envelope](trenz-hat.md#power-and-interfaces).
 The [assembly guide](stack-assembly.md) specifies the existing GPIO riser and
-four straight supports. Keep HDI processing and fill/cap all solder-pad vias,
+four straight supports. Use the recorded six-layer stock stack and fill/cap all through-vias,
 including the ADC supply vias and the through-via at U101.4.
 
 ## Initial transport and bitstream

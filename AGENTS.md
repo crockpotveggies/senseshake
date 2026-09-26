@@ -8,8 +8,10 @@ QSPI signals, retained UART and four shared pins for isolated Pi-driven JTAG.
 External J84-J89 and their ribbons/guide are removed. This supersedes the
 155-breakout requirement. Keep the circuit, routed CAD, model and validation evidence synchronized. Preserve vendor GPIO/ground
 fixtures and audit all module contacts, including deliberate no-connects, when
-implementing the revision. Keep sensors and the 85 x 56 mm outline.
-DAQHAT-01 uses a provisional eight-layer 1+6+1 HDI stack and a complete native SES
+implementing the revision. Keep three XYZ IMUs U11-U13, geophone input and 85 x 56 mm outline.
+U14/C18/C19/R14 are removed; sensor IDs 4/5 are legacy-only. U20/C20-C23/R20 are removed. Pi BCM6/13/24 are spare.
+Unused U41.8/U41.9 and U42.17 inputs must be grounded; U41.15/U41.16/U42.7 outputs are NC.
+DAQHAT-01 uses a conventional six-layer stock FR-4 stack with through-vias only and a complete native SES
 routing snapshot. Fabrication approval is owned by the user. DAQHAT-01 removes GNSS and adds one Racotech/ADS122C04 input. Preserve its
 independent pin/axis checks, GPIO riser assembly, and explicit
 power envelope in docs/daqhat-01-engineering-closure.md. Geophone noise/response measurements, actual stack
@@ -23,6 +25,13 @@ and interface documentation under `docs/`, and portable test tooling under
 Generated fabrication/assembly packages in `hw/releases/` stay local and ignored.
 Do not commit or push these packages unless the user explicitly requests their
 publication. Keep reusable export tooling and tests tracked separately.
+Assembly procurement overrides belong in `hw/assembly/`; preserve exact MPN,
+manufacturer, catalog identity, manufacturer evidence and dated stock observations.
+Rotation corrections must fit frozen numbered supplier pads, including an explicit
+bottom-side convention, rather than hardcoded reference offsets. Run the hardware
+regressions after assembly exporter/registry changes; the integration test rebuilds
+both full and overlay exports without depending on ignored release archives.
+See `docs/assembly-regressions.md`. Offline tests never establish current inventory.
 
 Electrical connectivity is authored in `hw/elec/*.ato`; placement metadata is
 in `hw/layout*.json`. The routed boards and review schematics are in `hw/boards/`.
@@ -83,3 +92,10 @@ The DAQHAT-01 analog path targets are enforced by prefab_review.py. Preserve loc
 filter/protection routing and ground stitches. Four straight Pi supports replace the previous flex-cable assembly;
 check the actual board in assembly_fit.py and prefab_review.py. ADC supply-pad through-vias need filled/capped
 processing in the fabrication notes.
+
+IMU bypass layout is checked read-only by `hw/tools/imu_layout.py` as part of
+`prefab_review.py`. Keep six fitted 100 nF bypass capacitors, connected local
+In1.Cu ground stitches, and the documented supply/return path limits. Update
+placement metadata, electrical review metadata, the native SES snapshot and
+UI/render provenance together after moving parts. Geometry checks are not
+physical noise qualification; see `docs/imu-placement-review.md`.

@@ -29,8 +29,8 @@ for n in [50,30]:
         for y in [-1.85,1.85]:s+=box((i-(n-1)/2)*.5,y,.3,.2,1.1,.6,'0.72 0.58 0.25')
     write(f'LSHM_{n}_4mm',s)
 b=p.LoadBoard(str(F/(NAME+'.kicad_pcb')))
-title=b.GetTitleBlock();title.SetRevision('DAQHAT-01 HDI');title.SetDate('2026-09-25');b.SetTitleBlock(title)
-custom={'U20':'SCL3300','J1':'Pi_ESQ_120_23','J80':'LSHM_50_4mm','J81':'LSHM_50_4mm','J82':'LSHM_30_4mm'}
+title=b.GetTitleBlock();title.SetRevision('DAQHAT-01 6L');title.SetDate('2026-09-25');b.SetTitleBlock(title)
+custom={'J1':'Pi_ESQ_120_23','J80':'LSHM_50_4mm','J81':'LSHM_50_4mm','J82':'LSHM_30_4mm'}
 for fp in b.GetFootprints():
     if fp.GetReference() in custom:model(fp,'${KIPRJMOD}/../../models/'+custom[fp.GetReference()]+'.wrl')
     else:

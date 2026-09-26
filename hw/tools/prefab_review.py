@@ -206,7 +206,8 @@ def main():
     report=dict(scope='pre-fab engineering review; no physical qualification',
         disposition='analog and internal-link stack reviewed; physical power/noise/fit and link throughput remain unqualified',
         board_sha256=before,physical_pin_checks=pin_checks,purchasing_package_checks=len(packages),
-        analog=analog_review(),layout_and_fit=geometry_review(board))
+        analog=analog_review(),layout_and_fit=geometry_review(board),
+        imu_bypass=__import__('imu_layout').review(board))
     assert hashlib.sha256(path.read_bytes()).hexdigest()==before
     (BOARD/'prefab-review.json').write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps(report,indent=2))

@@ -23,7 +23,7 @@ bring-up procedure; no workstation boot configuration is changed by the lab.
    sw/pi/profiles/daqhat-01.example.json --seconds 60 --output sw/build/bench-001.ssrec`.
    Use a new output filename each time. Start with the FPGA supply off.
 
-Chip-select order is BCM8,7,5,6,13. IRQ order is BCM27,22,23,24. Sensor OE is
+Chip-select order is BCM8,7,5. IRQ order is BCM27,22,23. Sensor OE is
 BCM26; geophone DRDY is BCM4 (currently polled over I2C). IRQs are rising-edge hints, backed by a 20 ms periodic drain
 so an event missed while servicing the FIFO does not strand data. The application
 requests GPIO inputs without a bias; the board drives them through U42.

@@ -1,5 +1,15 @@
 # Groundlark — sensors, Raspberry Pi HATs and Coldfoot integration
 
+Groundlark is an open hardware seismic acquisition platform combining a
+Raspberry Pi, a three-IMU DAQHAT-01 sensor HAT, a Trenz Artix-7 200T FPGA module,
+and a passive geophone.
+
+![Groundlark: Raspberry Pi, DAQHAT-01 and Trenz FPGA stack with Racotech geophone](docs/images/groundlark-stack-geophone.png)
+
+Current HAT CAD and vendor Trenz model; Pi, baseline socket and Racotech geophone
+are conceptual geometry. Lead dressing is illustrative; stack fit remains under
+review. [Render sources and reproduction](docs/readme-render.md).
+
 Formerly ShakeSense / SenseShake. See the [naming migration](docs/groundlark-rename.md)
 for updated commands and compatibility with existing recordings.
 
@@ -8,25 +18,42 @@ Coldfoot ASIC/runtime integration is deferred. Preserve the required FPGA
 connections while building sensor acquisition and tests; see the
 [four-step sensor plan](docs/sensor-development-plan.md).
 
+**DAQHAT-01 sensors:** three XYZ LSM6DSO IMUs and one ADS122C04 geophone input.
+The dedicated inclinometer is removed; sensor IDs 4/5 are reserved for older recordings.
+See [the circuit revision](docs/inclinometer-removal.md).
+
 **DAQHAT-01 hardware:** [internal FPGA link](docs/fpga-host-link.md)
 reserves six QSPI wires, keeps UART, adds switched Pi-driven JTAG, and removes
 the external GPIO ribbons/connectors and cable guide. Pi 4 initially uses SPI6;
 native quad transfers need a separate host solution. The circuit, routed PCB and renders use this internal connection.
+
+**IMU layout:** [bypass-loop improvements](docs/imu-placement-review.md) shorten local
+supply and ground paths while retaining sensor separation from the FPGA/regulator.
+These geometry checks do not replace measurements on the assembled HAT.
 
 **Latest validation:** the [DAQHAT-01 hardening review](docs/daqhat-01-link-hardening.md)
 records the expanded tests, fixes, prototype fabrication preparation steps and
 physical qualification still required on first articles.
 
 **Assembly preparation:** the [JLCPCB review package](docs/jlcpcb-assembly.md)
-targets one assembled DAQHAT-01 HAT. Quantity minimum, HDI stack, sourcing and
+targets one assembled DAQHAT-01 HAT with exact part identifiers and 38 catalog
+identities across 38 BOM lines. J1 now specifies Megastar ZX-PM2.54-2-20PY /
+JLCPCB C7499354; its shorter socket needs stack-height and bottom-side placement
+review. Quantity minimum, assembly framing, sourcing and
 placement review remain open; the package is not released for manufacture.
+The [latest BOM correction](docs/assembly-shortages.md) selects stocked alternatives
+for eight parts and corrects F80's fuse package mismatch without changing Gerbers.
+The [full BOM placement audit](docs/assembly-placement.md) checks all 117 placements,
+with catalog mappings for all 117. C91/C92 now select KEMET C140950, retaining
+1 nF / 50 V / C0G / ±5% / 0603. The audit includes the connector and IC rotation
+corrections; use its replacement CPL and BOM together.
 
 **Portable tests:** run `./lab.ps1 build` once, then `./lab.ps1 test` from
 PowerShell. See the [portable lab guide](docs/portable-lab.md) for profiles,
 bounded scratch storage, automatic five-run retention, and cleanup previews.
 The [initial sensor contract](docs/sensor-contract.md) is implemented; run
 `./lab.ps1 test -Profile software` for schemas, compatibility, acquisition,
-recording/replay and recovery tests. It saves an eight-sensor demo recording.
+recording/replay and recovery tests. It saves a six-sensor demo recording.
 See [running the sensor software](docs/sensor-software.md). Rebuild the image
 once if it predates the pinned Buf tool.
 
@@ -35,7 +62,7 @@ once if it predates the pinned Buf tool.
 
 **Sensor workbench:** run `./ui.ps1` (Windows) or `./ui.sh` (Linux/macOS), then
 open `http://127.0.0.1:8080`. The dark-mode, Python-authored UI offers a selectable
-3D HAT, eight virtual sensors, raw-data charts, stimulus/fault controls and
+3D HAT, six virtual sensors, raw-data charts, stimulus/fault controls and
 recording/replay. Requires `uv`; dependencies install into the project's ignored
 `.local/` folder. See the [workbench guide](docs/sensor-workbench.md).
 Press **Test HAT signals** for a measured eight-second capture through the actual
@@ -50,11 +77,8 @@ Pi drivers on modeled buses, with signal tolerances, replay and downloadable res
 
 See the [project map](docs/project-layout.md) for ownership and generated-file rules.
 
-**Non-FPGA boards** — KiCad renders of the A2 sensor HAT and remote USB-C sensor head.
-
-![A2 sensor HAT with run-1 Coldfoot module interface](hw/boards/groundlark-hat/3d.png)
-
-![USB-C magnetometer and optional infrasound sensor head](hw/boards/groundlark-field-head/3d.png)
+**Non-FPGA boards:** [A2 sensor HAT](hw/boards/groundlark-hat/3d.png) and
+[remote USB-C sensor head](hw/boards/groundlark-field-head/3d.png).
 
 The infrasound sensor is optional and is not fitted in the default render.
 [View the infrasound option fitted](hw/boards/groundlark-field-head/3d-infrasound-option.png).
@@ -62,7 +86,7 @@ The infrasound sensor is optional and is not fitted in the default render.
 **DAQHAT-01 FPGA variant:** [Pi-size 85 × 56 mm Trenz 200T carrier](docs/trenz-hat.md),
 with [carrier 3D](hw/boards/groundlark-daqhat-01/3d.png) and
 [three-board stack concept](hw/boards/groundlark-daqhat-01/pi-trenz-stack-concept.png).
-It is an alternative to the ASIC HAT below and requires external regulated 3.3 V
+It is an alternative to the historical ASIC HAT and requires external regulated 3.3 V
 FPGA power. Six internal data wires plus UART/reset connect the Pi to the
 module, with Pi-driven JTAG sharing the data-link pins. No external FPGA cables
 are needed; see the [pin contract](docs/trenz-gpio-breakout.csv).
@@ -75,9 +99,8 @@ the remaining physical qualification work. The geophone filter/protection layout
 meets its path-length targets. Four straight Pi supports replace the previous
 ribbon guide and offset spacer; see the [assembly notes](docs/stack-assembly.md).
 
-![DAQHAT-01 geophone HAT](hw/boards/groundlark-daqhat-01/3d.png)
-
-The internal-link HAT retains an eight-layer HDI stack. The geophone input,
+The internal-link HAT uses a conventional six-layer FR-4 stack with through-vias only;
+see the [fabrication cost audit](docs/cost-reduction.md). The geophone input,
 power envelope, GPIO riser and buffered acquisition are tracked in
 [engineering closure](docs/daqhat-01-engineering-closure.md); physical qualification
 remains open. Fabrication approval belongs to the project owner. Ethernet is not exposed.

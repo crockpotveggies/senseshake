@@ -42,7 +42,7 @@ class SensorTests(unittest.TestCase):
                 return result
         bus = Bus()
         driver = SCL3300(bus, sleep=lambda _: None)
-        driver.configure(defaults()[4])
+        driver.configure(next(c for c in defaults(legacy_gnss=True) if c['sensor_id']==5))
         self.assertEqual(bus.commands[:7], ["b400001f", "b4002098", "b400001f", "b0001f6f",
                                             "180000e5", "180000e5", "180000e5"])
         reading = driver.read()

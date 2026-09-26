@@ -4,48 +4,59 @@
     85,
     56
   ],
-  "copper_layers": 8,
+  "copper_layers": 6,
   "ground_layers": [
-    "In2.Cu",
-    "In5.Cu"
+    "In1.Cu",
+    "In4.Cu"
   ],
-  "hdi": {
-    "structure": "1+6+1",
-    "microvia_diameter_mm": 0.3,
-    "microvia_drill_mm": 0.1,
-    "microvia_pairs": [
-      [
-        "F.Cu",
-        "In1.Cu"
-      ],
-      [
-        "In6.Cu",
-        "B.Cu"
-      ]
-    ],
-    "via_in_pad": "filled and planarized; manufacturer DFM required",
-    "stackup_status": "provisional; HDI materials and process approval pending",
+  "stackup": {
+    "stock_id": "JLC06161H-3313",
+    "material": "FR4 TG135",
+    "nominal_thickness_mm": 1.6,
+    "stock_copper_dielectric_total_mm": 1.5384,
     "copper_thickness_mm": [
       0.035,
-      0.035,
-      0.035,
-      0.035,
-      0.035,
-      0.035,
-      0.035,
+      0.0152,
+      0.0152,
+      0.0152,
+      0.0152,
       0.035
     ],
     "dielectric_thickness_mm": [
-      0.08,
-      0.1,
-      0.18,
-      0.58,
-      0.18,
-      0.1,
-      0.08
+      0.0994,
+      0.55,
+      0.1088,
+      0.55,
+      0.0994
+    ],
+    "dielectric_types": [
+      "prepreg",
+      "core",
+      "prepreg",
+      "core",
+      "prepreg"
     ],
     "mask_thickness_mm": 0.01,
-    "nominal_thickness_mm": 1.6
+    "notes": "Supplier stock reference; order nominal 1.6 mm +/-10%. Mask and dielectric electrical constants are CAD assumptions. No custom lamination or controlled impedance requested."
+  },
+  "fabrication": {
+    "process": "standard-six-layer-through-via",
+    "min_track_mm": 0.125,
+    "min_clearance_mm": 0.1,
+    "via_processing": "Epoxy filled and copper capped (POFV)",
+    "rules": {
+      "min_clearance": 0.1,
+      "min_track_width": 0.125,
+      "min_via_diameter": 0.45,
+      "min_through_hole_diameter": 0.3,
+      "min_copper_edge_clearance": 0.3,
+      "min_microvia_diameter": 0.3,
+      "min_microvia_drill": 0.1,
+      "min_via_annular_width": 0.075,
+      "min_hole_clearance": 0.2,
+      "min_hole_to_hole": 0.2
+    },
+    "custom_rules": "(version 1)\n# JLCPCB standard multilayer/POFV capability; no HDI.\n(rule \"Via copper clearance\" (condition \"A.Type == 'Via' || B.Type == 'Via'\") (constraint clearance (min 0.125mm)))\n(rule \"SMD pad spacing\" (condition \"A.Pad_Type == 'SMD' && B.Pad_Type == 'SMD'\") (constraint clearance (min 0.15mm)))\n(rule \"PTH drill to copper\" (condition \"A.Pad_Type == 'Through-hole'\") (constraint hole_clearance (min 0.3mm)))\n(rule \"Component drill spacing\" (condition \"A.Type == 'Pad' || B.Type == 'Pad'\") (constraint hole_to_hole (min 0.45mm)))\n"
   },
   "parts": [
     {
@@ -81,7 +92,7 @@
         "15": "PI_IMU2_INT",
         "16": "PI_IMU3_INT",
         "17": "PI_3V3",
-        "18": "PI_IMU4_INT",
+        "18": null,
         "19": "PI_SPI_MOSI",
         "20": "GND",
         "21": "PI_SPI_MISO",
@@ -94,9 +105,9 @@
         "28": "ID_SCL",
         "29": "PI_IMU3_CS",
         "30": "GND",
-        "31": "PI_IMU4_CS",
+        "31": null,
         "32": "PI_LINK_DQ3",
-        "33": "PI_TILT_CS",
+        "33": null,
         "34": "GND",
         "35": "PI_LINK_DQ1",
         "36": "PI_LINK_DQ2",
@@ -334,11 +345,11 @@
       "footprint": "Capacitor_SMD:C_0402_1005Metric",
       "names": {},
       "xy": [
-        9.8,
-        24.1
+        11.5,
+        26.2
       ],
       "section": "02-motion-array-page-01",
-      "angle": 0,
+      "angle": 180,
       "mpn": "GRM155R71C104KA88D",
       "note": "",
       "dnp": false,
@@ -354,8 +365,8 @@
       "footprint": "Capacitor_SMD:C_0402_1005Metric",
       "names": {},
       "xy": [
-        14.6,
-        26.4
+        15.8,
+        25.1
       ],
       "section": "02-motion-array-page-01",
       "angle": 0,
@@ -548,8 +559,8 @@
       "footprint": "Capacitor_SMD:C_0402_1005Metric",
       "names": {},
       "xy": [
-        9.8,
-        36.1
+        13,
+        39.5
       ],
       "section": "02-motion-array-page-01",
       "angle": 0,
@@ -599,256 +610,6 @@
       "local_fp": "Resistor_SMD__R_0603_1608Metric",
       "pins": {
         "1": "IMU3_CS",
-        "2": "SENS_3V3"
-      }
-    },
-    {
-      "ref": "U14",
-      "value": "LSM6DSOTR",
-      "footprint": "Package_LGA:LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y",
-      "names": {
-        "1": "SDO",
-        "2": "SDx",
-        "3": "SCx",
-        "4": "INT1",
-        "5": "VDDIO",
-        "6": "GND",
-        "7": "GND",
-        "8": "VDD",
-        "9": "INT2",
-        "10": "OCS_AUX",
-        "11": "SDO_AUX",
-        "12": "CS",
-        "13": "SCLK",
-        "14": "SDI"
-      },
-      "xy": [
-        24,
-        36
-      ],
-      "section": "02-motion-array-page-02",
-      "angle": 0,
-      "mpn": "LSM6DSOTR",
-      "note": "",
-      "dnp": false,
-      "local_fp": "Package_LGA__LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y",
-      "pins": {
-        "1": "SPI_MISO",
-        "2": "GND",
-        "3": "GND",
-        "4": "IMU4_INT",
-        "5": "SENS_3V3",
-        "6": "GND",
-        "7": "GND",
-        "8": "SENS_3V3",
-        "9": null,
-        "10": null,
-        "11": null,
-        "12": "IMU4_CS",
-        "13": "SPI_SCLK",
-        "14": "SPI_MOSI"
-      }
-    },
-    {
-      "ref": "C18",
-      "value": "100n",
-      "footprint": "Capacitor_SMD:C_0402_1005Metric",
-      "names": {},
-      "xy": [
-        20.8,
-        36.1
-      ],
-      "section": "02-motion-array-page-02",
-      "angle": 0,
-      "mpn": "GRM155R71C104KA88D",
-      "note": "",
-      "dnp": false,
-      "local_fp": "Capacitor_SMD__C_0402_1005Metric",
-      "pins": {
-        "1": "SENS_3V3",
-        "2": "GND"
-      }
-    },
-    {
-      "ref": "C19",
-      "value": "100n",
-      "footprint": "Capacitor_SMD:C_0402_1005Metric",
-      "names": {},
-      "xy": [
-        25.6,
-        38.4
-      ],
-      "section": "02-motion-array-page-02",
-      "angle": 0,
-      "mpn": "GRM155R71C104KA88D",
-      "note": "",
-      "dnp": false,
-      "local_fp": "Capacitor_SMD__C_0402_1005Metric",
-      "pins": {
-        "1": "SENS_3V3",
-        "2": "GND"
-      }
-    },
-    {
-      "ref": "R14",
-      "value": "10k",
-      "footprint": "Resistor_SMD:R_0603_1608Metric",
-      "names": {},
-      "xy": [
-        27.7,
-        34.8
-      ],
-      "section": "02-motion-array-page-02",
-      "angle": 0,
-      "mpn": "RC0603FR-0710KL",
-      "note": "",
-      "dnp": false,
-      "local_fp": "Resistor_SMD__R_0603_1608Metric",
-      "pins": {
-        "1": "IMU4_CS",
-        "2": "SENS_3V3"
-      }
-    },
-    {
-      "ref": "U20",
-      "value": "SCL3300-D01",
-      "footprint": "Groundlark:SCL3300_D01",
-      "names": {
-        "1": "AVSS",
-        "2": "A_EXTC",
-        "3": "RESERVED_GND",
-        "4": "VDD",
-        "5": "CSB",
-        "6": "MISO",
-        "7": "MOSI",
-        "8": "SCK",
-        "9": "DVIO",
-        "10": "D_EXTC",
-        "11": "DVSS",
-        "12": "EMC_GND"
-      },
-      "xy": [
-        45,
-        28
-      ],
-      "section": "03-level-position-page-01",
-      "angle": 0,
-      "mpn": "SCL3300-D01-10",
-      "note": "",
-      "dnp": false,
-      "local_fp": "Groundlark__SCL3300_D01",
-      "pins": {
-        "1": "GND",
-        "2": "TILT_AEXT",
-        "3": "GND",
-        "4": "SENS_3V3",
-        "5": "TILT_CS",
-        "6": "SPI_MISO",
-        "7": "SPI_MOSI",
-        "8": "SPI_SCLK",
-        "9": "SENS_3V3",
-        "10": "TILT_DEXT",
-        "11": "GND",
-        "12": "GND"
-      }
-    },
-    {
-      "ref": "C20",
-      "value": "100n",
-      "footprint": "Capacitor_SMD:C_0402_1005Metric",
-      "names": {},
-      "xy": [
-        42.0,
-        22.0
-      ],
-      "section": "03-level-position-page-01",
-      "angle": 0,
-      "mpn": "GRM155R71C104KA88D",
-      "note": "",
-      "dnp": false,
-      "local_fp": "Capacitor_SMD__C_0402_1005Metric",
-      "pins": {
-        "1": "SENS_3V3",
-        "2": "GND"
-      }
-    },
-    {
-      "ref": "C21",
-      "value": "100n",
-      "footprint": "Capacitor_SMD:C_0402_1005Metric",
-      "names": {},
-      "xy": [
-        46.0,
-        22.0
-      ],
-      "section": "03-level-position-page-01",
-      "angle": 0,
-      "mpn": "GRM155R71C104KA88D",
-      "note": "",
-      "dnp": false,
-      "local_fp": "Capacitor_SMD__C_0402_1005Metric",
-      "pins": {
-        "1": "TILT_AEXT",
-        "2": "GND"
-      }
-    },
-    {
-      "ref": "C22",
-      "value": "100n",
-      "footprint": "Capacitor_SMD:C_0402_1005Metric",
-      "names": {},
-      "xy": [
-        42.0,
-        34.0
-      ],
-      "section": "03-level-position-page-01",
-      "angle": 0,
-      "mpn": "GRM155R71C104KA88D",
-      "note": "",
-      "dnp": false,
-      "local_fp": "Capacitor_SMD__C_0402_1005Metric",
-      "pins": {
-        "1": "SENS_3V3",
-        "2": "GND"
-      }
-    },
-    {
-      "ref": "C23",
-      "value": "100n",
-      "footprint": "Capacitor_SMD:C_0402_1005Metric",
-      "names": {},
-      "xy": [
-        46.0,
-        34.0
-      ],
-      "section": "03-level-position-page-01",
-      "angle": 0,
-      "mpn": "GRM155R71C104KA88D",
-      "note": "",
-      "dnp": false,
-      "local_fp": "Capacitor_SMD__C_0402_1005Metric",
-      "pins": {
-        "1": "TILT_DEXT",
-        "2": "GND"
-      }
-    },
-    {
-      "ref": "R20",
-      "value": "10k",
-      "footprint": "Resistor_SMD:R_0603_1608Metric",
-      "names": {},
-      "xy": [
-        44.0,
-        34.5
-      ],
-      "section": "03-level-position-page-01",
-      "angle": 90,
-      "mpn": "RC0603FR-0710KL",
-      "note": "",
-      "dnp": false,
-      "local_fp": "Resistor_SMD__R_0603_1608Metric",
-      "pins": {
-        "1": "TILT_CS",
         "2": "SENS_3V3"
       }
     },
@@ -1095,15 +856,15 @@
         "5": "PI_IMU1_CS",
         "6": "PI_IMU2_CS",
         "7": "PI_IMU3_CS",
-        "8": "PI_IMU4_CS",
-        "9": "PI_TILT_CS",
+        "8": "GND",
+        "9": "GND",
         "10": "GND",
         "11": "GND",
         "12": "GND",
         "13": "GND",
         "14": null,
-        "15": "TILT_CS",
-        "16": "IMU4_CS",
+        "15": null,
+        "16": null,
         "17": "IMU3_CS",
         "18": "IMU2_CS",
         "19": "IMU1_CS",
@@ -1161,7 +922,7 @@
         "4": "PI_IMU1_INT",
         "5": "PI_IMU2_INT",
         "6": "PI_IMU3_INT",
-        "7": "PI_IMU4_INT",
+        "7": null,
         "8": "PI_GEO_DRDY_N",
         "9": null,
         "10": null,
@@ -1171,7 +932,7 @@
         "14": "GND",
         "15": "GND",
         "16": "GEO_DRDY_N",
-        "17": "IMU4_INT",
+        "17": "GND",
         "18": "IMU3_INT",
         "19": "IMU2_INT",
         "20": "IMU1_INT",

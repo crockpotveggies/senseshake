@@ -77,19 +77,17 @@ def power_interfaces(pins):
 def main():
     import pcbnew as p
     spec = json.loads((ROOT / "hw/layout-trenz.json").read_text())[BOARD.name]
-    hdi = spec["hdi"]
-    h = sum(hdi["dielectric_thickness_mm"][:2]) + hdi["copper_thickness_mm"][1]
     board = p.LoadBoard(str(BOARD / (BOARD.name + ".kicad_pcb")))
     pins = {(f.GetReference(), pad.GetNumber()):pad.GetNetname() for f in board.GetFootprints() for pad in f.Pads()}
     power_checks = power_interfaces(pins)
-    for pin, net in {7:'PI_GEO_DRDY_N',13:'PI_IMU1_INT',15:'PI_IMU2_INT',16:'PI_IMU3_INT',18:'PI_IMU4_INT'}.items():
+    for pin, net in {7:'PI_GEO_DRDY_N',13:'PI_IMU1_INT',15:'PI_IMU2_INT',16:'PI_IMU3_INT'}.items():
         assert pins[('J1',str(pin))] == net, ('Pi acquisition IRQ mapping', pin)
     from geophone_checks import verify
     geo_checks = verify(pins, {f.GetReference():(f.GetOrientationDegrees(), f.IsFlipped()) for f in board.GetFootprints()})
     low, high = supply_range(3.35, .005, .030, 3)
     gap = 16.129 + 2.54 + 8.51
     report = dict(
-        geophone=dict(physical_pin_checks=geo_checks, sensor="Racotech RGI-4.5Hz vertical", adc="ADS122C04", axes="four aligned three-axis IMUs"),
+        geophone=dict(physical_pin_checks=geo_checks, sensor="Racotech RGI-4.5Hz vertical", adc="ADS122C04", axes="three aligned three-axis IMUs"),
         power=dict(interface_pin_checks=power_checks, input_setpoint_v=3.35, input_tolerance=.005,
                    total_hot_loop_resistance_limit_ohm=.030, current_limit_a=3,
                    dc_module_min_v=low, dc_module_max_v=high,

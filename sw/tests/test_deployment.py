@@ -19,16 +19,16 @@ class DeploymentTests(unittest.TestCase):
         module = importlib.util.module_from_spec(spec); spec.loader.exec_module(module)
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            for i in range(5):
+            for i in range(3):
                 folder = root/'devices'/f'spi0.{i}'/'of_node'
                 folder.mkdir(parents=True)
-                (folder/'compatible').write_bytes(b'groundlark,' + (b'lsm6dso-userspace' if i < 4 else b'scl3300-userspace') + b'\0')
-            self.assertEqual(len(module.inventory(root)), 5)
-            (root/'devices/spi0.3/of_node/compatible').write_bytes(b'unrelated\0')
+                (folder/'compatible').write_bytes(b'groundlark,lsm6dso-userspace\0')
+            self.assertEqual(len(module.inventory(root)), 3)
+            (root/'devices/spi0.2/of_node/compatible').write_bytes(b'unrelated\0')
             with self.assertRaises(ValueError): module.inventory(root)
 
     @unittest.skipUnless(shutil.which('dtc') and shutil.which('fdtoverlay'), 'device-tree compiler/merger in portable lab')
-    def test_compiled_overlay_merges_five_selects_without_duplicates(self):
+    def test_compiled_overlay_merges_three_selects_without_duplicates(self):
         with tempfile.TemporaryDirectory() as tmp:
             folder = Path(tmp)
             base = folder/'base.dts'
@@ -46,16 +46,16 @@ class DeploymentTests(unittest.TestCase):
             run('dtc', '-@', '-I', 'dts', '-O', 'dtb', '-o', str(folder/'overlay.dtbo'), str(ROOT/'sw/pi/deploy/groundlark-daqhat-01-overlay.dts'))
             run('fdtoverlay', '-i', str(folder/'base.dtb'), '-o', str(folder/'merged.dtb'), str(folder/'overlay.dtbo'))
             merged = str(folder/'merged.dtb')
-            self.assertEqual(set(run('fdtget','-l',merged,'/spi').split()), {f'spidev@{i}' for i in range(5)})
+            self.assertEqual(set(run('fdtget','-l',merged,'/spi').split()), {f'spidev@{i}' for i in range(3)})
             cs = [int(v) for v in run('fdtget','-t','u',merged,'/spi','cs-gpios').split()]
-            self.assertEqual(cs[1::3], [8, 7, 5, 6, 13])
-            self.assertEqual(cs[2::3], [1]*5)
+            self.assertEqual(cs[1::3], [8, 7, 5])
+            self.assertEqual(cs[2::3], [1]*3)
             self.assertEqual(run('fdtget',merged,'/i2c','status'), 'okay')
             self.assertEqual(run('fdtget','-t','u',merged,'/i2c','clock-frequency'), '100000')
-            for i in range(5):
+            for i in range(3):
                 self.assertEqual(run('fdtget','-t','u',merged,f'/spi/spidev@{i}','reg'), str(i))
                 self.assertEqual(run('fdtget',merged,f'/spi/spidev@{i}','compatible'),
-                                 'groundlark,' + ('lsm6dso-userspace' if i < 4 else 'scl3300-userspace'))
+                                 'groundlark,lsm6dso-userspace')
 
     @unittest.skipUnless(shutil.which('dtc') and shutil.which('fdtoverlay'), 'device-tree tools in portable lab')
     def test_fpga_overlay_preserves_interrupt_and_requests_cs_timing(self):

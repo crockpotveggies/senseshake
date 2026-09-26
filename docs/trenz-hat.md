@@ -1,5 +1,9 @@
 # Groundlark DAQHAT-01 — Pi-outline Trenz carrier
 
+The front silkscreen carries a 7 mm monochrome Groundlark lark/waveform above
+the model name. It is native KiCad polygon artwork, included in layout rebuilds
+without adding BOM parts. See the [current 3D view](../hw/boards/groundlark-daqhat-01/3d.png).
+
 **DAQHAT-01 revision:** six internal QSPI-reserved wires, retained UART and
 switched Pi-driven JTAG replace external expansion connectors and ribbons.
 See the [host-link circuit and bring-up guide](fpga-host-link.md). Pi 4 initially
@@ -11,7 +15,7 @@ GNSS/PPS/RF details below describe the preceding revision or legacy recordings.
 The current physical bench template is version 2, with geophone response/noise/timing
 checks replacing the GNSS UTC check.
 
-DAQHAT-01 is an **85 × 56 mm, eight-layer HDI** alternative to the A2 Coldfoot ASIC HAT.
+DAQHAT-01 is an **85 × 56 mm, six-layer FR-4** alternative to the A2 Coldfoot ASIC HAT.
 Electrical source: [`hw/elec/hat_trenz.ato`](../hw/elec/hat_trenz.ato).
 CAD: [`groundlark-daqhat-01.kicad_pcb`](../hw/boards/groundlark-daqhat-01/groundlark-daqhat-01.kicad_pcb).
 The original ASIC HAT and remote USB sensor head remain separate builds.
@@ -19,8 +23,8 @@ The original ASIC HAT and remote USB sensor head remain separate builds.
 ## Stack and sensor placement
 
 From bottom to top: Raspberry Pi, Groundlark DAQHAT-01, **TE0712-03-81I36-A**.
-The FPGA stays on top for heatsink access. The HAT keeps the four LSM6DSO IMUs,
-SCL3300 inclinometer and ADS122C04 geophone input. The magnetometer and optional infrasound
+The FPGA stays on top for heatsink access. The HAT keeps the three LSM6DSO IMUs
+and ADS122C04 geophone input; the dedicated inclinometer is removed. The magnetometer and optional infrasound
 sensor stay on the separate USB head; they consume no HAT area.
 
 The Trenz outline occupies HAT coordinates x=30–80, y=8–48 mm, measured from
@@ -96,17 +100,20 @@ Bank supplies remain at 3.3 V. There are no externally exposed raw FPGA GPIOs.
 
 ## Fabrication stack
 
-The internal-link revision retains a provisional **eight-layer 1+6+1 HDI** stack.
-Ground planes are on In2.Cu and In5.Cu. Track width/clearance remain 0.15 mm;
-small through vias use 0.45 mm pads / 0.20 mm drills. Outer-layer microvias use
-0.30 mm pads / 0.10 mm laser holes and connect only F.Cu–In1.Cu or In6.Cu–B.Cu.
-Via-in-pad microvias require filling and planarization. Nominal board thickness
-is 1.6 mm, with 0.08 mm outer dielectrics. These values are explicitly recorded
-in the native PCB and `hw/layout-trenz.json`.
+The cost-reduced revision uses conventional **six-layer FR-4**, nominal 1.6 mm,
+with through-vias only. Ground references are In1.Cu and In4.Cu. Signal layers
+are F.Cu, In2.Cu, In3.Cu and B.Cu. Minimum signal width/clearance is
+0.125/0.10 mm; vias have 0.30 mm drills and at least 0.45 mm pads.
+Native custom rules additionally enforce via copper, SMD pad and hole clearances.
+All through-vias are epoxy filled and copper capped, including solder-pad sites.
 
-This is a more expensive manufacturing process than the original carrier.
-The fabricator must approve the complete stack, drill separation, fill/cap process
-and materials; fabrication approval is the project owner's responsibility.
+The recorded stock reference is JLC06161H-3313: 1 oz outer / 0.5 oz inner copper.
+Its published copper/dielectric sum is 1.5384 mm; 1.6 mm is the nominal ordering
+and mechanical-model thickness (+/-10% supplier tolerance). CAD mask thickness
+and dielectric electrical constants are illustrative. Do not request custom
+lamination to force the stock values to sum to 1.600 mm. No controlled impedance
+is claimed. See the [cost audit](cost-reduction.md) for settings and limitations.
+
 ## Verification and release limits
 
 Current results are recorded in [validation.json](../hw/boards/groundlark-daqhat-01/validation.json),

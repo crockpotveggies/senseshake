@@ -1,4 +1,4 @@
-"""Free-running ADC, six-channel scheduler and bounded bus-latency stress.
+"""Free-running ADC, four-channel scheduler and bounded bus-latency stress.
 
 The conversion clock advances independently of reads. This is deterministic
 fault injection, not a Pi throughput benchmark or an emulation of its kernel.
@@ -104,12 +104,12 @@ def exercise(hz=100_000, oscillator=1, stalls=()):
 
 
 class GeophoneTimingTests(unittest.TestCase):
-    def test_six_channels_clock_tolerance_and_bus_speed(self):
+    def test_four_channels_clock_tolerance_and_bus_speed(self):
         rows=[]
         for hz in (100_000,400_000):
             for oscillator in (.98,1,1.02):
                 row=exercise(hz,oscillator);rows.append(row)
-                self.assertEqual(row['other_sensor_ids'],[1,2,3,4,5,9])
+                self.assertEqual(row['other_sensor_ids'],[1,2,3,9])
                 self.assertGreater(row['valid'],300)
                 self.assertEqual(row['ambiguous'],0)
                 self.assertEqual(row['recoveries'],0)
@@ -118,7 +118,7 @@ class GeophoneTimingTests(unittest.TestCase):
         out=Path(__file__).resolve().parents[1]/'build'
         out.mkdir(exist_ok=True)
         (out/'acquisition-stress.json').write_text(json.dumps(dict(
-            scope='deterministic six-channel model; no target Pi or real IPC benchmark',
+            scope='deterministic four-channel model; no target Pi or real IPC benchmark',
             cases=rows,throughput_qualified=False),indent=2)+'\n')
 
     def test_delayed_service_and_full_wrap_are_visible_then_recover(self):

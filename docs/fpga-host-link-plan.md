@@ -74,15 +74,16 @@ The other header GPIOs retain these assignments:
 | Sensor I2C | 2, 3 |
 | Geophone DRDY | 4 |
 | Sensor SPI0 MISO / MOSI / SCLK | 9, 10, 11 |
-| IMU1-4 chip selects | 8, 7, 5, 6 |
-| Tilt chip select | 13 |
-| IMU1-4 interrupts | 27, 22, 23, 24 |
+| IMU1-3 chip selects | 8, 7, 5 |
+| Spare, no HAT connection | 6, 13, 24 |
+| IMU1-3 interrupts | 27, 22, 23 |
 | FPGA reset | 17 |
 | Existing FPGA UART buffer enable | 25 |
 | Sensor isolation enable | 26 |
 
-Accounting: 2 EEPROM + 16 sensor/control + 4 existing FPGA/UART/control +
-6 new link = **28 GPIOs**. No spare dedicated Pi interrupt or JTAG pins remain.
+Accounting: 2 EEPROM + 13 sensor/control + 4 existing FPGA/UART/control +
+6 new link = **25 GPIOs**. The three-IMU/no-inclinometer revision leaves BCM6, BCM13 and BCM24 unused on the HAT
+(physical pins 31, 33 and 18); they are not connected to the FPGA.
 Read FPGA ready/FIFO status over SPI, or send bounded status over UART; do not
 silently allocate another header pin. An I2C control expander supplies the
 switch controls without consuming a new GPIO. Reserve a free address, nominally

@@ -51,7 +51,7 @@ class PhysicsTests(unittest.TestCase):
     def test_sensor_configuration_changes_raw_scale(self):
         cfg = dict(defaults()[0], acceleration_range_g=4)
         self.assertEqual(model(1, cfg=cfg).raw["acceleration"][2], 8197)
-        cfg = dict(defaults()[4], tilt_mode=2)
+        cfg = dict(next(c for c in defaults(legacy_gnss=True) if c["sensor_id"] == 5), tilt_mode=2)
         self.assertEqual(model(5, cfg=cfg).raw["acceleration"][2], 3000)
 
     def test_rail_saturation_and_freefall_are_explicit(self):
@@ -185,7 +185,7 @@ class ScenarioTests(unittest.TestCase):
             self.assertEqual(json.loads(exported.stdout)["seed"], 7)
             run(scenario_file, second)
             self.assertEqual(first.read_bytes(), second.read_bytes())
-            self.assertEqual(replay(first)["samples"], 1138)
+            self.assertEqual(replay(first)["samples"], 1036)  # Three IMUs, geophone and two remote sensors.
             self.assertEqual(replay(first)["saturated"], 50)
 
     def test_export_includes_interactive_events_absent_from_initial_metadata(self):

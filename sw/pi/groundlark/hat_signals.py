@@ -61,7 +61,7 @@ def check_recording(data):
         raise ValueError("HAT bench recording exceeds 2 MiB")
     reader = Reader(BytesIO(data))
     sessions = Sessions()
-    samples = {sid: [] for sid in (1, 2, 3, 4, 5, 9)}
+    samples = {sid: [] for sid in (1, 2, 3, 9)}
     checks, configs, completed = [], {}, False
     def check(name, passed, detail):
         checks.append(dict(name=name, passed=bool(passed), detail=detail))
@@ -75,31 +75,31 @@ def check_recording(data):
         elif kind == "batch":
             sid = message.batch.sensor_id
             if sid not in samples:
-                raise ValueError("HAT bench expects only sensors 1–6")
+                raise ValueError("HAT bench expects only sensors 1, 2, 3 and 9")
             samples[sid].extend(message.batch.samples)
             if len(samples[sid]) > 4000:
                 raise ValueError("HAT bench sample bound")
     inventory = all(samples.values()) and set(configs) == set(samples)
     check("Inventory & quality", inventory and completed and all(s.quality == 1 for rows in samples.values() for s in rows),
-          f"{sum(map(len, samples.values()))} samples; six HAT sensors; completion={completed}")
+          f"{sum(map(len, samples.values()))} samples; four HAT sensors; completion={completed}")
     settings_ok = inventory and all(configs[i].period_ns == next(c["period_ns"] for c in defaults() if c["sensor_id"] == i) for i in samples)
     if settings_ok:
-        settings_ok = all(configs[i].acceleration_range_g == 2 and configs[i].angular_rate_range_dps == 250 for i in range(1, 5)) and configs[5].tilt_mode == 1
-    check("Effective configuration", settings_ok, "26 Hz / ±2 g / ±250 °/s IMUs; 25 Hz inclinometer; 330 SPS vertical geophone")
+        settings_ok = all(configs[i].acceleration_range_g == 2 and configs[i].angular_rate_range_dps == 250 for i in range(1, 4))
+    check("Effective configuration", settings_ok, "26 Hz / ±2 g / ±250 °/s IMUs; 330 SPS vertical geophone")
     if not inventory or not settings_ok or any(s.quality != 1 for rows in samples.values() for s in rows):
         return dict(passed=False, checks=checks, samples=sum(map(len, samples.values())), recording_sha256=hashlib.sha256(data).hexdigest(), scope="modeled buses / actual Pi drivers")
     timing_errors = []
     continuity = True
     for sid, rows in samples.items():
         period = configs[sid].period_ns
-        continuity &= len(rows) == SECONDS * (26 if sid <= 4 else 25 if sid == 5 else 330)
+        continuity &= len(rows) == SECONDS * (26 if sid in (1, 2, 3) else 330)
         for index, sample in enumerate(rows):
             continuity &= sample.sequence == index and sample.time.domain == 1 and sample.time.HasField("acquisition_ns")
             timing_errors.append(abs(sample.time.acquisition_ns - index * period))
     worst_timing = max(timing_errors)
     check("Timing & continuity", continuity and worst_timing <= 1_000_000, f"Maximum polling offset {worst_timing / 1e6:.3f} ms; limit 1 ms; no missing sequences")
     tones, rocking, gravity_errors, gyro_errors = [], [], [], []
-    for sid in range(1, 5):
+    for sid in range(1, 4):
         rows = samples[sid]
         times = [s.time.acquisition_ns / 1e9 for s in rows]
         accel = [tuple(v * ACCEL_M_S2_PER_COUNT for v in xyz(s.imu.acceleration)) for s in rows]
@@ -116,7 +116,7 @@ def check_recording(data):
             gyro_errors.append(abs(integrated - roll[index]))
             gyro_errors.extend(abs(getattr(rows[index].imu.angular_rate, axis) * GYRO_DEG_S_PER_COUNT) for axis in "yz")
     check("IMU frequency, gain & phase", all(abs(f - 2) <= .01 and abs(a - .3) <= .003 and abs(p) <= 2 for f, a, p in tones),
-          f"IMU 1: {tones[0][0]:.4f} Hz, {tones[0][1]:.4f} m/s², {tones[0][2]:.3f}°; limits 2 ±0.01 Hz, 0.300 ±0.003 m/s², phase ±2° (all four checked)")
+          f"IMU 1: {tones[0][0]:.4f} Hz, {tones[0][1]:.4f} m/s², {tones[0][2]:.3f}°; limits 2 ±0.01 Hz, 0.300 ±0.003 m/s², phase ±2° (all three checked)")
     check("Gravity magnitude", max(gravity_errors) <= .001,
           f"Maximum YZ gravity error {max(gravity_errors):.6f} m/s²; limit 0.001")
     check("Known roll waveform", all(abs(f-.5) <= .005 and abs(a-5) <= .02 and abs(p) <= 2 for f, a, p in rocking),
@@ -124,21 +124,8 @@ def check_recording(data):
     check("Gyro / gravity consistency", max(gyro_errors) <= .02,
           f"Maximum integrated roll error {max(gyro_errors):.4f}°; limit 0.02°")
     coherent = all(len(samples[i]) == len(samples[1]) and all(
-        a.imu.SerializeToString() == b.imu.SerializeToString() for a, b in zip(samples[1], samples[i])) for i in (2, 3, 4))
-    check("Four-IMU coherence", coherent, "All four raw IMU streams agree for identical noiseless excitation")
-    tilt_errors, tilt_gravity, tilt_roll = [], [], []
-    for sample in samples[5]:
-        acc = xyz(sample.tilt.acceleration)
-        norm = math.sqrt(sum(v*v for v in acc))
-        tilt_gravity.append(abs(math.hypot(acc[1], acc[2]) / 6000 - 1))
-        t = sample.time.acquisition_ns / 1e9
-        tilt_roll.append(abs(math.degrees(math.atan2(acc[1], acc[2])) - 5 * math.sin(math.pi * t)))
-        for value, angle in zip(acc, xyz(sample.tilt.angle)):
-            # A stuck zero vector has no defined inclination. Fail explicitly,
-            # without dividing by zero or treating the angle as a level reading.
-            tilt_errors.append(abs(math.degrees(math.asin(value / norm)) - angle * 180 / 32768) if norm else 180.)
-    check("Inclinometer consistency", max(tilt_errors) <= .015 and max(tilt_gravity) <= .0002 and max(tilt_roll) <= .01,
-          f"Angle error {max(tilt_errors):.4f}° (≤0.015°); gravity error {max(tilt_gravity):.6f} g (≤0.0002 g); prescribed-roll error {max(tilt_roll):.4f}° (≤0.01°)")
+        a.imu.SerializeToString() == b.imu.SerializeToString() for a, b in zip(samples[1], samples[i])) for i in (2, 3))
+    check("Three-IMU coherence", coherent, "All three raw IMU streams agree for identical noiseless excitation")
     # Independent fixture: Racotech mechanical response + loaded input RC at 10 Hz.
     # 100 um/s produces 2.299408 mV peak and +37.44222 degrees (nominal).
     rows = samples[9]

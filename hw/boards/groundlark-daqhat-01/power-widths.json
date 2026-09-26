@@ -1,230 +1,200 @@
 {
-  "trial_counts": {
-    "1.2": {
-      "attempted": 766,
-      "retained": 58
-    },
-    "0.8": {
-      "attempted": 708,
-      "retained": 83
-    },
-    "0.6": {
-      "attempted": 625,
-      "retained": 50
-    },
-    "0.4": {
-      "attempted": 575,
-      "retained": 70
-    },
-    "0.3": {
-      "attempted": 505,
-      "retained": 326
-    },
-    "0.25": {
-      "attempted": 179,
-      "retained": 64
-    },
-    "0.2": {
-      "attempted": 115,
-      "retained": 29
-    }
-  },
   "track_length_mm": [
     {
       "net": "EXT_3V3",
-      "width_mm": 0.8,
-      "length_mm": 5.1
+      "width_mm": 1.2,
+      "length_mm": 11.874
     },
     {
-      "net": "EXT_3V3",
-      "width_mm": 1.2,
-      "length_mm": 4.95
+      "net": "FPGA_3V3",
+      "width_mm": 0.125,
+      "length_mm": 3.494
     },
     {
       "net": "FPGA_3V3",
       "width_mm": 0.15,
-      "length_mm": 83.46
+      "length_mm": 0.521
     },
     {
       "net": "FPGA_3V3",
       "width_mm": 0.2,
-      "length_mm": 24.997
+      "length_mm": 31.575
     },
     {
       "net": "FPGA_3V3",
       "width_mm": 0.25,
-      "length_mm": 8.193
+      "length_mm": 10.686
     },
     {
       "net": "FPGA_3V3",
       "width_mm": 0.3,
-      "length_mm": 32.101
+      "length_mm": 29.104
     },
     {
       "net": "FPGA_3V3",
       "width_mm": 0.4,
-      "length_mm": 22.993
+      "length_mm": 58.389
     },
     {
       "net": "FPGA_3V3",
       "width_mm": 0.6,
-      "length_mm": 13.707
+      "length_mm": 24.775
     },
     {
       "net": "FPGA_3V3",
       "width_mm": 0.8,
-      "length_mm": 30.337
+      "length_mm": 40.007
     },
     {
       "net": "FPGA_3V3",
       "width_mm": 1.2,
-      "length_mm": 11.873
+      "length_mm": 10.399
     },
     {
       "net": "FPGA_VIN",
+      "width_mm": 0.125,
+      "length_mm": 0.241
+    },
+    {
+      "net": "FPGA_VIN",
+      "width_mm": 0.2,
+      "length_mm": 1.779
+    },
+    {
+      "net": "FPGA_VIN",
+      "width_mm": 0.25,
+      "length_mm": 25.38
+    },
+    {
+      "net": "FPGA_VIN",
+      "width_mm": 0.3,
+      "length_mm": 19.341
+    },
+    {
+      "net": "FPGA_VIN",
+      "width_mm": 0.4,
+      "length_mm": 17.787
+    },
+    {
+      "net": "FPGA_VIN",
+      "width_mm": 0.6,
+      "length_mm": 1.908
+    },
+    {
+      "net": "FPGA_VIN",
+      "width_mm": 0.8,
+      "length_mm": 9.285
+    },
+    {
+      "net": "FPGA_VIN",
+      "width_mm": 1.2,
+      "length_mm": 44.127
+    },
+    {
+      "net": "PI_3V3",
+      "width_mm": 0.125,
+      "length_mm": 0.964
+    },
+    {
+      "net": "PI_3V3",
+      "width_mm": 0.2,
+      "length_mm": 32.364
+    },
+    {
+      "net": "PI_3V3",
+      "width_mm": 0.25,
+      "length_mm": 51.392
+    },
+    {
+      "net": "PI_3V3",
+      "width_mm": 0.3,
+      "length_mm": 29.634
+    },
+    {
+      "net": "PI_3V3",
+      "width_mm": 0.4,
+      "length_mm": 23.665
+    },
+    {
+      "net": "PI_3V3",
+      "width_mm": 0.6,
+      "length_mm": 30.134
+    },
+    {
+      "net": "PI_3V3",
+      "width_mm": 0.8,
+      "length_mm": 43.424
+    },
+    {
+      "net": "PI_3V3",
+      "width_mm": 1.2,
+      "length_mm": 25.9
+    },
+    {
+      "net": "PI_5V",
+      "width_mm": 0.3,
+      "length_mm": 5.215
+    },
+    {
+      "net": "PI_5V",
+      "width_mm": 0.4,
+      "length_mm": 69.05
+    },
+    {
+      "net": "PI_5V",
+      "width_mm": 0.8,
+      "length_mm": 11.333
+    },
+    {
+      "net": "PI_5V",
+      "width_mm": 1.2,
+      "length_mm": 22.787
+    },
+    {
+      "net": "SENS_3V3",
+      "width_mm": 0.125,
+      "length_mm": 2.786
+    },
+    {
+      "net": "SENS_3V3",
       "width_mm": 0.15,
-      "length_mm": 44.945
-    },
-    {
-      "net": "FPGA_VIN",
-      "width_mm": 0.2,
-      "length_mm": 25.63
-    },
-    {
-      "net": "FPGA_VIN",
-      "width_mm": 0.3,
-      "length_mm": 7.528
-    },
-    {
-      "net": "FPGA_VIN",
-      "width_mm": 0.4,
-      "length_mm": 3.539
-    },
-    {
-      "net": "FPGA_VIN",
-      "width_mm": 0.6,
-      "length_mm": 6.357
-    },
-    {
-      "net": "FPGA_VIN",
-      "width_mm": 0.8,
-      "length_mm": 9.65
-    },
-    {
-      "net": "FPGA_VIN",
-      "width_mm": 1.2,
-      "length_mm": 6.398
-    },
-    {
-      "net": "PI_3V3",
-      "width_mm": 0.15,
-      "length_mm": 81.129
-    },
-    {
-      "net": "PI_3V3",
-      "width_mm": 0.2,
-      "length_mm": 11.134
-    },
-    {
-      "net": "PI_3V3",
-      "width_mm": 0.25,
-      "length_mm": 29.645
-    },
-    {
-      "net": "PI_3V3",
-      "width_mm": 0.3,
-      "length_mm": 31.553
-    },
-    {
-      "net": "PI_3V3",
-      "width_mm": 0.4,
-      "length_mm": 4.886
-    },
-    {
-      "net": "PI_3V3",
-      "width_mm": 0.6,
-      "length_mm": 11.533
-    },
-    {
-      "net": "PI_3V3",
-      "width_mm": 0.8,
-      "length_mm": 31.357
-    },
-    {
-      "net": "PI_3V3",
-      "width_mm": 1.2,
-      "length_mm": 17.663
-    },
-    {
-      "net": "PI_5V",
-      "width_mm": 0.2,
-      "length_mm": 19.809
-    },
-    {
-      "net": "PI_5V",
-      "width_mm": 0.25,
-      "length_mm": 9.988
-    },
-    {
-      "net": "PI_5V",
-      "width_mm": 0.3,
-      "length_mm": 48.285
-    },
-    {
-      "net": "PI_5V",
-      "width_mm": 0.4,
-      "length_mm": 5.556
-    },
-    {
-      "net": "PI_5V",
-      "width_mm": 0.8,
-      "length_mm": 6.56
-    },
-    {
-      "net": "PI_5V",
-      "width_mm": 1.2,
-      "length_mm": 18.216
-    },
-    {
-      "net": "SENS_3V3",
-      "width_mm": 0.15,
-      "length_mm": 61.96
+      "length_mm": 0.559
     },
     {
       "net": "SENS_3V3",
       "width_mm": 0.2,
-      "length_mm": 18.743
+      "length_mm": 25.796
     },
     {
       "net": "SENS_3V3",
       "width_mm": 0.25,
-      "length_mm": 4.154
+      "length_mm": 31.423
     },
     {
       "net": "SENS_3V3",
       "width_mm": 0.3,
-      "length_mm": 44.01
+      "length_mm": 29.506
     },
     {
       "net": "SENS_3V3",
       "width_mm": 0.4,
-      "length_mm": 14.721
+      "length_mm": 37.292
     },
     {
       "net": "SENS_3V3",
       "width_mm": 0.6,
-      "length_mm": 47.323
+      "length_mm": 40.248
     },
     {
       "net": "SENS_3V3",
       "width_mm": 0.8,
-      "length_mm": 42.212
+      "length_mm": 43.94
     },
     {
       "net": "SENS_3V3",
       "width_mm": 1.2,
-      "length_mm": 29.577
+      "length_mm": 24.159
     }
   ],
-  "scope": "Width cleanup checked by DRC; not current/thermal signoff"
+  "scope": "Read-only copper inventory after IMU bypass corrections; not current/thermal signoff"
 }

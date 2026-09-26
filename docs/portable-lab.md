@@ -237,13 +237,15 @@ References: [official KiCad container images](https://www.kicad.org/download/doc
 
 ## Current DAQHAT-01 validation
 
-Run `20260925T214440Z-e4e115ce` passes all **22 portable stages**: three Atopile
-builds/solves, invalid-voltage rejection, **33 hardware regressions**, native
+Run `20260926T034710Z-7502c956` passes all **22 portable stages**: three Atopile
+builds/solves, invalid-voltage rejection, **54 hardware regressions**, native
 ERC/DRC/connectivity, clean routing replay, **102 SPICE cases**, RTL/host
-co-simulation, the implementation-evidence gate and **181 software tests without
-skips**. Replay reproduces all **7,522 copper objects**, including **11 microvias**,
-with zero DRC/unrouted findings. Sensor acquisition passes all 10 modeled signal
-checks over 3,672 samples. The UI HTTP/model check also passes.
+co-simulation, the implementation-evidence gate and **185 software tests without
+skips**. Replay reproduces all **11,546 copper objects** on the cost-reduced
+six-layer FR-4 board, with **zero microvias**, zero DRC findings and zero opens.
+Sensor acquisition passes all 10 modeled signal checks over 3,672 samples.
+The UI HTTP/model/favicon check passes after native model re-export. Native
+custom KiCad rules are explicitly included in the portable source snapshot.
 
 The Python client talks to real simulated RTL pins across all 193 payload sizes,
 sequence wrap, 20 clock phases and 491 fault/reset cases. Independent fixtures

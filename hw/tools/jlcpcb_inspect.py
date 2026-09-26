@@ -1,17 +1,18 @@
 """Independently parse exported Gerber/Excellon and compare drills to KiCad.
 
-Dependencies: pcbnew 9, gerbonara 1.5.0, cairosvg 2.8.2. Read-only on CAD.
+Dependencies: pcbnew 9, gerbonara 1.5.0, rsvg-convert. Read-only on CAD.
 """
 import argparse
 import json
+import subprocess
 import xml.etree.ElementTree as ET
 from collections import Counter
 from pathlib import Path
 import pcbnew as p
 from gerbonara import GerberFile, ExcellonFile, LayerStack
 from gerbonara.utils import MM
-import cairosvg
 from jlcpcb_package import BOARD, ROOT, EXTENSIONS, write_json, validate_plot_inventory, check_drills, sha
+from jlcpcb_quantity import check_single_outline
 
 
 def drill_key(x, y, diameter):
@@ -26,7 +27,7 @@ def inspect(out):
             raise ValueError(f'Source changed since export: {source}')
     validate_plot_inventory(plots)
     b = p.LoadBoard(str(BOARD))
-    expected = {'PTH': Counter(), 'NPTH': Counter(), 'front-in1': Counter(), 'in6-back': Counter()}
+    expected = {'PTH': Counter(), 'NPTH': Counter()}
     for f in b.GetFootprints():
         for pad in f.Pads():
             dx, dy = p.ToMM(pad.GetDrillSize())
@@ -38,8 +39,8 @@ def inspect(out):
     for via in b.GetTracks():
         if not isinstance(via, p.PCB_VIA): continue
         kind = 'PTH'
-        if via.GetViaType() == p.VIATYPE_MICROVIA:
-            kind = 'front-in1' if via.TopLayer() == p.F_Cu else 'in6-back'
+        if via.GetViaType() != p.VIATYPE_THROUGH:
+            raise ValueError('Non-through via in standard-process export')
         x, y = p.ToMM(via.GetPosition())
         expected[kind][drill_key(x, -y, p.ToMM(via.GetDrillValue()))] += 1
     result = {'parser': 'gerbonara 1.5.0', 'drill_coordinate_tolerance_mm': 0.001, 'drills': {}, 'layers': {}}
@@ -52,6 +53,12 @@ def inspect(out):
         if path.suffix[1:] not in EXTENSIONS: continue
         layer = GerberFile.open(path)
         if not layer.objects: raise ValueError(f'Empty plot: {path.name}')
+        if path.suffix == '.gm1':
+            from gerbonara.graphic_objects import Line
+            if any(not isinstance(o, Line) or not o.polarity_dark or o.unit != MM for o in layer.objects):
+                raise ValueError('Expected millimetre dark-line board outline only')
+            result['single_board_outline'] = check_single_outline([
+                ((o.x1, o.y1), (o.x2, o.y2)) for o in layer.objects])
         result['layers'][path.name] = {'objects': len(layer.objects), 'bounds_mm': layer.bounding_box(unit=MM)}
     stack = LayerStack.open(plots)
     for side in ('top', 'bottom'):
@@ -62,13 +69,36 @@ def inspect(out):
                                colors={f'{side} copper': '#417e87', f'{side} silk': '#111111',
                                        'mechanical outline': '#222222', 'drill pth': '#ffffff',
                                        'drill npth': '#ffffff', 'drill unknown': '#ffffff'}))
+        # Gerbonara emits silk before copper. Draw it above copper in this
+        # review composite so artwork over masked copper remains visible.
+        root = ET.fromstring(svg)
+        silk = next(g for g in root if g.get('id') == f'l-{side}-silk')
+        copper = next(g for g in root if g.get('id') == f'l-{side}-copper')
+        root.remove(silk)
+        # Clear-polarity silk apertures remove ink, not underlying copper.
+        # Represent the layer as a luminance mask rather than white overpaint.
+        ns = '{http://www.w3.org/2000/svg}'
+        mask = ET.Element(ns + 'mask', {'id': f'{side}-ink', 'maskUnits': 'userSpaceOnUse',
+                                        'x': '49', 'y': '-107', 'width': '87', 'height': '58'})
+        for node in silk.iter():
+            for attr in ('fill', 'stroke'):
+                value = node.get(attr)
+                if value and value != 'none':
+                    node.set(attr, '#000000' if value.lower() in ('white', '#fff', '#ffffff') else '#ffffff')
+        mask.append(silk)
+        definitions = ET.Element(ns + 'defs'); definitions.append(mask)
+        root.insert(0, definitions)
+        ink = ET.Element(ns + 'rect', {'x': '49', 'y': '-107', 'width': '87', 'height': '58',
+                                       'fill': '#111111', 'mask': f'url(#{side}-ink)'})
+        root.insert(list(root).index(copper) + 1, ink)
         if side == 'bottom':
-            root = ET.fromstring(svg)
             group = ET.Element('{http://www.w3.org/2000/svg}g', {'transform': 'translate(185 0) scale(-1 1)'})
             for child in list(root): root.remove(child); group.append(child)
-            root.append(group); svg = ET.tostring(root, encoding='unicode')
+            root.append(group)
+        svg = ET.tostring(root, encoding='unicode')
         (review / f'gerber-{side}.svg').write_text(svg, encoding='utf-8')
-        cairosvg.svg2png(bytestring=svg.encode(), write_to=str(review / f'gerber-{side}.png'), output_width=1600)
+        subprocess.run(['rsvg-convert', '-w', '1600', '-b', 'white', '-o',
+                        str(review / f'gerber-{side}.png'), str(review / f'gerber-{side}.svg')], check=True)
     write_json(review / 'independent-check.json', result)
     print(json.dumps({'drills': result['drills'], 'parsed_layers': len(result['layers'])}))
 

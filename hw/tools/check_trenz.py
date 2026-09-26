@@ -29,19 +29,15 @@ spec=json.loads((ROOT/'hw/layout-trenz.json').read_text())[N]
 from host_link_checks import verify_parts
 with (F/'bom.csv').open(newline='',encoding='utf8') as stream:
     gpio_report['host_link_component_checks']=verify_parts(spec,list(csv.DictReader(stream)),board)
-assert board.GetCopperLayerCount()==spec['copper_layers']==8
+assert board.GetCopperLayerCount()==spec['copper_layers']==6
 assert abs(p.ToMM(board.GetDesignSettings().GetBoardThickness())-1.6)<1e-6
 planes={board.GetLayerName(z.GetLayer()) for z in board.Zones() if not z.GetIsRuleArea() and z.GetNetname()=='GND'}
-assert planes==set(spec['ground_layers'])=={'In2.Cu','In5.Cu'}
+assert planes==set(spec['ground_layers'])=={'In1.Cu','In4.Cu'}
 microvias=[t for t in board.GetTracks() if isinstance(t,p.PCB_VIA) and t.GetViaType()==p.VIATYPE_MICROVIA]
-assert microvias,'HDI routing missing'
-for via in microvias:
-    pair=[board.GetLayerName(via.TopLayer()),board.GetLayerName(via.BottomLayer())]
-    assert pair in spec['hdi']['microvia_pairs'],pair
-    assert abs(p.ToMM(via.GetWidth(via.TopLayer()))-.3)<1e-6 and abs(p.ToMM(via.GetDrillValue())-.1)<1e-6
-from stackup import block_span
-text=(F/(N+'.kicad_pcb')).read_text();a,z=block_span(text,'(stackup');stack=text[a:z]
-assert stack.count('(type "copper")')==8 and stack.count('(thickness 0.08)')==2
+from fabrication_audit import inspect
+process=inspect(F/(N+'.kicad_pcb'))
+assert not process['standard_process_issues'],process['standard_process_issues']
+(F/'fabrication-audit.json').write_text(json.dumps(process,indent=2)+'\n')
 checks=0
 for ref,m in fixture.items():
     for modulepin,net in m.items():
@@ -54,11 +50,26 @@ assert bp[('J83','1')]=='EXT_3V3' and bp[('F80','2')]=='FPGA_VIN'
 assert len({'PI_5V','PI_3V3','EXT_3V3','FPGA_VIN','FPGA_3V3'} & set(bp.values()))==5
 # Shared sensor circuitry must preserve A2 pad connectivity exactly.
 base=pins(p.LoadBoard(str(ROOT/'hw/boards/groundlark-hat/groundlark-hat.kicad_pcb')))
-sensor_refs={'U11','U12','U13','U14','U20','U40','U41','U42','U43'}
+sensor_refs={'U11','U12','U13','U40','U41','U42','U43'}
 degrees=Counter(base.values())
 for k,n in base.items():
-    if k[0] in sensor_refs and degrees[n]>1 and 'GNSS' not in n:assert bp[k]==n,(k,n,bp[k])
+    if k[0] in sensor_refs and degrees[n]>1 and 'GNSS' not in n and 'IMU4' not in n and 'TILT' not in n:assert bp[k]==n,(k,n,bp[k])
 fps={f.GetReference():f for f in board.GetFootprints()}
+assert {ref for ref,fp in fps.items() if fp.GetValue()=='LSM6DSOTR'}=={'U11','U12','U13'}, 'Expected exactly three XYZ IMUs'
+assert not {'U14','C18','C19','R14'} & fps.keys(), 'Fourth IMU circuitry remains'
+assert bp[('U41','8')]==bp[('U41','9')]==bp[('U42','17')]=='GND', 'Unused buffer inputs must not float'
+for key in [('J1','18'),('J1','31'),('U41','16'),('U42','7'),('J1','33'),('U41','15')]:
+    net=bp[key]
+    assert sum(n==net for n in bp.values())==1, ('Removed sensor pin must be NC',key)
+assert not {'U20','C20','C21','C22','C23','R20'} & fps.keys(), 'Inclinometer circuitry remains'
+assert not any('TILT' in net for net in bp.values()), 'Inclinometer net remains'
+assert not any('IMU4' in net for net in bp.values()), 'Removed IMU4 GPIO net remains'
+# Bypass placement metadata must reproduce the reviewed native layout.
+for meta in spec['parts']:
+    if meta['ref'] not in {'C12','C13','C14','C15','C16','C17'}:continue
+    fp=fps[meta['ref']];q=fp.GetPosition()
+    assert abs(p.ToMM(q.x)-50-meta['xy'][0])<.001 and abs(p.ToMM(q.y)-50-meta['xy'][1])<.001,meta['ref']
+    assert abs((fp.GetOrientationDegrees()-meta['angle']+180)%360-180)<.001,meta['ref']
 pad_ids=[q.m_Uuid.AsString() for f in board.GetFootprints() for q in f.Pads()]
 assert len(pad_ids)==len(set(pad_ids)),'Duplicate pad UUIDs corrupt KiCad report item references'
 for ref,xy in {'J80':(55,44),'J81':(55,12),'J82':(34,28),'H80':(33,11),'H81':(77,11),'H82':(33,45),'H83':(77,45),'H1':(3.5,3.5),'H2':(61.5,3.5),'H3':(3.5,52.5),'H4':(61.5,52.5)}.items():
@@ -89,9 +100,9 @@ for kind,extension,check in [('pcb','kicad_pcb','drc'),('sch','kicad_sch','erc')
     subprocess.run(['kicad-cli',kind,check,'--format','json','-o',str(F/(check+'.json')),str(F/(N+'.'+extension))],check=True,stdout=subprocess.DEVNULL)
 drc=json.loads((F/'drc.json').read_text());erc=json.loads((F/'erc.json').read_text())
 er=[v for s in erc['sheets'] for v in s['violations']]
-report={'status':'DAQHAT-01 engineering prototype; not fabrication released','outline_mm':[85,56],**gpio_report,'compiled_pin_checks':len(cp),'critical_module_pin_checks':checks,'drc_violations':len(drc['violations']),'unconnected_items':len(drc['unconnected_items']),'erc_violations':len(er),'tracks_and_vias':len(board.GetTracks()),'copper_layers':8,'microvias':len(microvias),'hdi_structure':'1+6+1','limits':['HDI stack includes filled/planarized via-in-pad; include ADC supply pad through-vias in fabrication notes','No FPGA bitstream port or hardware test performed','External regulated 3.3 V supply required; confirm 3.201–3.399 V at module under startup/load','Copper resistance, heating, sensor thermal drift, EMI and physical mating remain unqualified','Internal-link timing and signal integrity remain unqualified; see fpga-host-link.md','Pi rendering is conceptual; Trenz rendering uses vendor generic revision-03 STEP']}
+report={'status':'DAQHAT-01 engineering prototype; not fabrication released','outline_mm':[85,56],**gpio_report,'compiled_pin_checks':len(cp),'critical_module_pin_checks':checks,'drc_violations':len(drc['violations']),'unconnected_items':len(drc['unconnected_items']),'erc_violations':len(er),'tracks_and_vias':len(board.GetTracks()),'copper_layers':6,'microvias':len(microvias),'fabrication_process':'standard-six-layer-through-via','limits':['Stock six-layer stack includes epoxy-filled/capped through-vias; include ADC supply pad through-vias in fabrication notes','No FPGA bitstream port or hardware test performed','External regulated 3.3 V supply required; confirm 3.201–3.399 V at module under startup/load','Copper resistance, heating, sensor thermal drift, EMI and physical mating remain unqualified','Internal-link timing and signal integrity remain unqualified; see fpga-host-link.md','Pi rendering is conceptual; Trenz rendering uses vendor generic revision-03 STEP']}
 report['limits'] = [
- 'Fabrication process approval is owned by the project owner; calculations use the recorded provisional stack',
+ 'Fabrication process approval is owned by the project owner; stock JLC06161H-3313 is recorded; no controlled impedance is claimed',
  'Single Racotech geophone input; analog noise, cable coupling and ADC timing require physical qualification',
  'J83 source: 3.35 V +/-0.5%, total hot loop resistance <=30 milliohms, <=3 A; verify startup and load waveform at module',
  'Pi4 conceptual stack uses SSQ-120-02-G-D riser; selected cooler, cables and mating need physical fit verification',

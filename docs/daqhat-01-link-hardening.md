@@ -58,8 +58,8 @@ checks a recorded Vivado build; it does not run synthesis inside Docker.
    four supports, standard-height TE0712-03-81I36-A, geophone connector and
    selected cooler. Keep the FPGA at the top. Native quad and FPGA acceleration
    are not implemented; the initial application link is ordinary SPI up to 1 MHz.
-2. Finalize the documented eight-layer 1+6+1 stack and fabrication drawing.
-   Include filled/planarized microvias and filled/capped solder-pad through-vias,
+2. Use the documented stock six-layer FR-4 stack and fabrication drawing.
+   Include epoxy-filled/copper-capped through-vias,
    including ADC supply pads and U101.4. Preserve the recorded drills, copper,
    1.6 mm thickness, connector positions and board outline.
 3. Review procurement BOM, exact package variants, population/DNPs and the

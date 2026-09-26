@@ -40,7 +40,7 @@ The lab manages its own copy and does not delete direct developer recordings.
 directory. Do not use the frozen compatibility baseline as the generated schema.
 
 The scenario is deterministic for a given seed, configuration and fault file,
-including recording bytes. It covers four IMUs, the inclinometer, GNSS,
+including recording bytes. It covers three IMUs, geophone,
 magnetometer and pressure. Remote streams in this command are modeled MCU
 producers, not firmware or USB emulation. Separate tests send framed messages
 in fragments through a Linux pseudo-terminal. `--queue 1 --drain-every 100`
@@ -61,7 +61,7 @@ and a nonblocking USB CDC TTY. The initial profile is:
 | Sensor | Configuration and reading |
 | --- | --- |
 | Four LSM6DSO | 26 Hz, ±2 g, ±250 dps; identity/reset/readback; BDU/address increment; signed temperature, gyro and acceleration. |
-| SCL3300 | Mode 1, angle outputs enabled; startup/identity/mode readback; off-frame response/CRC checks; 25 Hz polling. |
+| SCL3300 (legacy driver only) | Mode 1, angle outputs enabled; startup/identity/mode readback; off-frame response/CRC checks; 25 Hz polling. |
 | MAX-M10S | I²C 0x42; RAM-only UBX CFG-VALSET/ACK/VALGET; NAV-PVT every second; retain its complete 92-byte payload. |
 | USB head | Receive v1 identity/configuration/batches/status over framed CDC; real firmware is still required. |
 
@@ -74,12 +74,12 @@ normal/error cleanup.
 | Signal | BCM GPIO | Physical header pin |
 | --- | --- | --- |
 | SPI0 MOSI / MISO / SCLK | 10 / 9 / 11 | 19 / 21 / 23 |
-| IMU1 / IMU2 / IMU3 / IMU4 chip select | 8 / 7 / 5 / 6 | 24 / 26 / 29 / 31 |
-| SCL3300 chip select | 13 | 33 |
+| IMU1 / IMU2 / IMU3 chip select | 8 / 7 / 5 | 24 / 26 / 29 |
+| Spare, unconnected (former inclinometer CS) | 13 | 33 |
 | Sensor buffer OE, active low | 26 | 37 |
-| GNSS I²C SDA / SCL | 2 / 3 | 3 / 5 |
+| Geophone ADC I²C SDA / SCL | 2 / 3 | 3 / 5 |
 
-The [Pi 4 deployment package](../sw/pi/deploy/README.md) now supplies the five-CS
+The [Pi 4 deployment package](../sw/pi/deploy/README.md) now supplies the three-CS
 overlay, 100 kHz I²C configuration and an identity-checked `driver_override`
 binding tool. Its compiled overlay is merge-tested in the portable lab. The
 selected physical Pi/kernel must still be boot-tested. No overlay is installed
@@ -104,13 +104,13 @@ overdue slots are skipped and unavailable scheduled samples are MISSING.
 Do not infer lossless acquisition or synchronized devices from polling time.
 The optional FIFO path below replaces these polling semantics for the IMUs.
 Sensor self-test qualification, board-axis transforms and
-GNSS fix decoding in the live CLI remain follow-on work. SCL3300
+GNSS fix decoding in the live CLI remain follow-on work. Legacy SCL3300
 register reads are sequential, not an atomic six-axis snapshot.
 
 ## Buffered IMUs and PPS capture
 
-Add `--fifo` to the live command with the updated DAQHAT-01 profile. Four rising-edge
-GPIO requests use BCM27/22/23/24. FIFO watermark/overrun interrupts are hints;
+Add `--fifo` to the live command with the updated DAQHAT-01 profile. Three rising-edge
+GPIO requests use BCM27/22/23. FIFO watermark/overrun interrupts are hints;
 a 20 ms periodic service interval also checks each FIFO. SPI transfer work is
 limited to 96 seven-byte records (32 complete IMU slots) per call. A larger
 backlog, hardware overrun, bad tag parity, unexpected sensor/configuration tag,

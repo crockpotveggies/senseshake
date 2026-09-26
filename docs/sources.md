@@ -54,4 +54,4 @@ See [USB circuit and manufacturer references](usb-sensor-head.md). The former PC
   geometry is retained. The separate FFC 3D bodies are simplified envelopes,
   not manufacturer STEP models or cable-clearance certification.
 
-HDI fabrication reference: [JLCPCB HDI capabilities](https://jlcpcb.com/help/article/hdi-pcb-capabilities-faq). DAQHAT-01 uses a provisional 1+6+1 stack; manufacturer DFM, material selection and RF impedance approval remain open.
+Conventional fabrication references: [JLCPCB capabilities](https://jlcpcb.com/capabilities/Capab) and [six-layer POFV](https://jlcpcb.com/news/free-via-in-pad-6-20-layer-pcbs-pofv). DAQHAT-01 uses stock six-layer FR-4 with 0.3 mm through-drills; supplier DFM and physical signal-integrity qualification remain separate.

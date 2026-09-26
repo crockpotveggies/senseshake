@@ -118,8 +118,6 @@ module TrenzHat:
     signal IMU2_INT
     signal IMU3_CS
     signal IMU3_INT
-    signal IMU4_CS
-    signal IMU4_INT
     signal JTAG_TCK
     signal JTAG_TDI
     signal JTAG_TDO
@@ -135,12 +133,9 @@ module TrenzHat:
     signal PI_IMU2_INT
     signal PI_IMU3_CS
     signal PI_IMU3_INT
-    signal PI_IMU4_CS
-    signal PI_IMU4_INT
     signal PI_SPI_MISO
     signal PI_SPI_MOSI
     signal PI_SPI_SCLK
-    signal PI_TILT_CS
     signal PI_UART_RX
     signal PI_UART_TX
     signal SENSOR_OE_N
@@ -148,9 +143,6 @@ module TrenzHat:
     signal SPI_MISO
     signal SPI_MOSI
     signal SPI_SCLK
-    signal TILT_AEXT
-    signal TILT_CS
-    signal TILT_DEXT
 
     sensor_supply = new ElectricPower
     sensor_supply.hv ~ SENS_3V3
@@ -188,7 +180,7 @@ module TrenzHat:
     j1.p15 ~ PI_IMU2_INT
     j1.p16 ~ PI_IMU3_INT
     j1.p17 ~ PI_3V3
-    j1.p18 ~ PI_IMU4_INT
+    # J1.18: spare BCM24, intentionally unconnected
     j1.p19 ~ PI_SPI_MOSI
     j1.p20 ~ GND
     j1.p21 ~ PI_SPI_MISO
@@ -201,9 +193,9 @@ module TrenzHat:
     j1.p28 ~ ID_SCL
     j1.p29 ~ PI_IMU3_CS
     j1.p30 ~ GND
-    j1.p31 ~ PI_IMU4_CS
+    # J1.31: spare BCM6, intentionally unconnected
     j1.p32 ~ PI_LINK_DQ3
-    j1.p33 ~ PI_TILT_CS
+    # J1.33: spare BCM13, intentionally unconnected
     j1.p34 ~ GND
     j1.p35 ~ PI_LINK_DQ1
     j1.p36 ~ PI_LINK_DQ2
@@ -355,80 +347,6 @@ module TrenzHat:
     trait r13 has_designator<designator="R13">
     r13.p1 ~ IMU3_CS
     r13.p2 ~ SENS_3V3
-    # LSM6DSOTR: LSM6DSOTR
-    u14 = new P_8
-    trait u14 has_designator<designator="U14">
-    u14.p1 ~ SPI_MISO
-    u14.p2 ~ GND
-    u14.p3 ~ GND
-    u14.p4 ~ IMU4_INT
-    u14.p5 ~ SENS_3V3
-    u14.p6 ~ GND
-    u14.p7 ~ GND
-    u14.p8 ~ SENS_3V3
-    # U14.9: intentionally unconnected
-    # U14.10: intentionally unconnected
-    # U14.11: intentionally unconnected
-    u14.p12 ~ IMU4_CS
-    u14.p13 ~ SPI_SCLK
-    u14.p14 ~ SPI_MOSI
-    # 100n: GRM155R71C104KA88D
-    c18 = new P_9
-    trait c18 has_designator<designator="C18">
-    c18.p1 ~ SENS_3V3
-    c18.p2 ~ GND
-    # 100n: GRM155R71C104KA88D
-    c19 = new P_9
-    trait c19 has_designator<designator="C19">
-    c19.p1 ~ SENS_3V3
-    c19.p2 ~ GND
-    # 10k: RC0603FR-0710KL
-    r14 = new P_10
-    trait r14 has_designator<designator="R14">
-    r14.p1 ~ IMU4_CS
-    r14.p2 ~ SENS_3V3
-
-    # 03-level-position
-    # SCL3300-D01: SCL3300-D01-10
-    u20 = new P_11
-    trait u20 has_designator<designator="U20">
-    u20.p1 ~ GND
-    u20.p2 ~ TILT_AEXT
-    u20.p3 ~ GND
-    u20.p4 ~ SENS_3V3
-    u20.p5 ~ TILT_CS
-    u20.p6 ~ SPI_MISO
-    u20.p7 ~ SPI_MOSI
-    u20.p8 ~ SPI_SCLK
-    u20.p9 ~ SENS_3V3
-    u20.p10 ~ TILT_DEXT
-    u20.p11 ~ GND
-    u20.p12 ~ GND
-    # 100n: GRM155R71C104KA88D
-    c20 = new P_9
-    trait c20 has_designator<designator="C20">
-    c20.p1 ~ SENS_3V3
-    c20.p2 ~ GND
-    # 100n: GRM155R71C104KA88D
-    c21 = new P_9
-    trait c21 has_designator<designator="C21">
-    c21.p1 ~ TILT_AEXT
-    c21.p2 ~ GND
-    # 100n: GRM155R71C104KA88D
-    c22 = new P_9
-    trait c22 has_designator<designator="C22">
-    c22.p1 ~ SENS_3V3
-    c22.p2 ~ GND
-    # 100n: GRM155R71C104KA88D
-    c23 = new P_9
-    trait c23 has_designator<designator="C23">
-    c23.p1 ~ TILT_DEXT
-    c23.p2 ~ GND
-    # 10k: RC0603FR-0710KL
-    r20 = new P_10
-    trait r20 has_designator<designator="R20">
-    r20.p1 ~ TILT_CS
-    r20.p2 ~ SENS_3V3
     # 03-geophone: passive vertical Racotech RGI-4.5Hz, 395 ohm, 23.4 V/(m/s).
     # Internal PGA/reference; no borrowed Raspberry Shake low-frequency extension.
     u22 = new GEO_ADC
@@ -585,10 +503,10 @@ module TrenzHat:
     u41.p18 ~ IMU2_CS
     u41.p7 ~ PI_IMU3_CS
     u41.p17 ~ IMU3_CS
-    u41.p8 ~ PI_IMU4_CS
-    u41.p16 ~ IMU4_CS
-    u41.p9 ~ PI_TILT_CS
-    u41.p15 ~ TILT_CS
+    u41.p8 ~ GND
+    # U41.16: unused output, intentionally unconnected
+    u41.p9 ~ GND
+    # U41.15: unused output, intentionally unconnected
     u41.p10 ~ GND
     # U41.14: intentionally unconnected
     # SN74LVC8T245PWR: SN74LVC8T245PWR
@@ -610,8 +528,8 @@ module TrenzHat:
     u42.p19 ~ IMU2_INT
     u42.p6 ~ PI_IMU3_INT
     u42.p18 ~ IMU3_INT
-    u42.p7 ~ PI_IMU4_INT
-    u42.p17 ~ IMU4_INT
+    # U42.7: unused output, intentionally unconnected
+    u42.p17 ~ GND
     u42.p8 ~ PI_GEO_DRDY_N
     u42.p16 ~ GEO_DRDY_N
     # U42.9: intentionally unconnected
@@ -704,10 +622,6 @@ module TrenzHat:
     u12.io ~ sensor_supply
     u13.power ~ sensor_supply
     u13.io ~ sensor_supply
-    u14.power ~ sensor_supply
-    u14.io ~ sensor_supply
-    u20.power ~ sensor_supply
-    u20.io ~ sensor_supply
     u22.digital ~ sensor_supply
     u22.analog.voltage = 3.3V +/- 5%
     u40.input_power ~ input_supply
@@ -934,8 +848,6 @@ module TrenzHat:
     trait IMU2_INT has_net_name_suggestion<name="IMU2_INT", level="EXPECTED">
     trait IMU3_CS has_net_name_suggestion<name="IMU3_CS", level="EXPECTED">
     trait IMU3_INT has_net_name_suggestion<name="IMU3_INT", level="EXPECTED">
-    trait IMU4_CS has_net_name_suggestion<name="IMU4_CS", level="EXPECTED">
-    trait IMU4_INT has_net_name_suggestion<name="IMU4_INT", level="EXPECTED">
     trait JTAG_TCK has_net_name_suggestion<name="JTAG_TCK", level="EXPECTED">
     trait JTAG_TDI has_net_name_suggestion<name="JTAG_TDI", level="EXPECTED">
     trait JTAG_TDO has_net_name_suggestion<name="JTAG_TDO", level="EXPECTED">
@@ -951,12 +863,9 @@ module TrenzHat:
     trait PI_IMU2_INT has_net_name_suggestion<name="PI_IMU2_INT", level="EXPECTED">
     trait PI_IMU3_CS has_net_name_suggestion<name="PI_IMU3_CS", level="EXPECTED">
     trait PI_IMU3_INT has_net_name_suggestion<name="PI_IMU3_INT", level="EXPECTED">
-    trait PI_IMU4_CS has_net_name_suggestion<name="PI_IMU4_CS", level="EXPECTED">
-    trait PI_IMU4_INT has_net_name_suggestion<name="PI_IMU4_INT", level="EXPECTED">
     trait PI_SPI_MISO has_net_name_suggestion<name="PI_SPI_MISO", level="EXPECTED">
     trait PI_SPI_MOSI has_net_name_suggestion<name="PI_SPI_MOSI", level="EXPECTED">
     trait PI_SPI_SCLK has_net_name_suggestion<name="PI_SPI_SCLK", level="EXPECTED">
-    trait PI_TILT_CS has_net_name_suggestion<name="PI_TILT_CS", level="EXPECTED">
     trait PI_UART_RX has_net_name_suggestion<name="PI_UART_RX", level="EXPECTED">
     trait PI_UART_TX has_net_name_suggestion<name="PI_UART_TX", level="EXPECTED">
     trait SENSOR_OE_N has_net_name_suggestion<name="SENSOR_OE_N", level="EXPECTED">
@@ -964,9 +873,6 @@ module TrenzHat:
     trait SPI_MISO has_net_name_suggestion<name="SPI_MISO", level="EXPECTED">
     trait SPI_MOSI has_net_name_suggestion<name="SPI_MOSI", level="EXPECTED">
     trait SPI_SCLK has_net_name_suggestion<name="SPI_SCLK", level="EXPECTED">
-    trait TILT_AEXT has_net_name_suggestion<name="TILT_AEXT", level="EXPECTED">
-    trait TILT_CS has_net_name_suggestion<name="TILT_CS", level="EXPECTED">
-    trait TILT_DEXT has_net_name_suggestion<name="TILT_DEXT", level="EXPECTED">
     j80.p1 ~ GND
     j80.p7 ~ GND
     j80.p19 ~ GND

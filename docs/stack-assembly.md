@@ -37,8 +37,8 @@ a first-article check. The Pi and service envelopes are conceptual; the Trenz
 model is the vendor's generic revision-03 STEP.
 
 C95/C96 and D90 are underside geophone components; C90 is on the front.
-ADC supply-pad and U101.4 link through-vias require filled/capped processing, in addition to
-HDI via-in-pad filling/planarization. Tenting alone does not meet this requirement.
+ADC supply-pad and U101.4 link through-vias require epoxy-filled/copper-capped processing, as do the other
+through-vias in this six-layer revision. Tenting alone does not meet this requirement.
 
 See the [bench procedure](bench-procedure.md),
 [Pi Case Fan brief](https://datasheets.raspberrypi.com/case-fan/case-fan-product-brief.pdf),

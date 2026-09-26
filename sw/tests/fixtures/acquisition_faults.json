@@ -2,8 +2,8 @@
   {"sensor": 1, "sample": 2, "action": "timeout"},
   {"sensor": 2, "sample": 3, "action": "nack"},
   {"sensor": 3, "sample": 4, "action": "short_read"},
-  {"sensor": 4, "sample": 5, "action": "not_ready"},
-  {"sensor": 5, "sample": 6, "action": "saturation"},
+  {"sensor": 3, "sample": 5, "action": "not_ready"},
+  {"sensor": 1, "sample": 6, "action": "saturation"},
   {"sensor": 7, "sample": 7, "action": "disconnect"},
   {"sensor": 8, "sample": 8, "action": "saturation"}
 ]

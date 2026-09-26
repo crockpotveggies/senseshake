@@ -30,10 +30,11 @@ class WorkbenchTests(unittest.TestCase):
         engine.advance(100)
         self.assertEqual(engine.now, 50_000_000)
 
-    def test_zero_gravity_pose_and_all_eight_sensors(self):
+    def test_zero_gravity_pose_and_all_six_sensors(self):
         engine = Workbench()
         advance(engine, 200)
         snap = engine.snapshot(1)
+        self.assertEqual(set(snap["latest"]), {1, 2, 3, 9, 7, 8})
         self.assertTrue(all(snap["latest"].values()))
         self.assertEqual(snap["latest"][1]["primary"], [0, 0, 16393])
         engine.controls({"orientation_deg": [90, 0, 0]})

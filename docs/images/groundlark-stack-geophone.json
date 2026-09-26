@@ -1,0 +1,22 @@
+{
+  "source_sha256": {
+    "hw/boards/groundlark-daqhat-01/pi-trenz-stack-concept.kicad_pcb": "ad4eabdc1e2e99c5afb4513cdf7ee3aa4340cdba153210616664d6abfeb2d600",
+    "hw/boards/groundlark-daqhat-01/groundlark-daqhat-01.kicad_pcb": "3952c7d0cf4d95ebcdd851cdab9f00aabde3fcb983c0ea10d56c12514a60ed54",
+    "hw/layout-trenz.json": "7be790e7ca0322325bc99663af03292d861b324382fa00be39e86332fbb9aa57",
+    "hw/tools/render_readme_stack.py": "d147d6a5bbdc399f0024ceda0577b765928c9e6954f48d3a547fdb98e474af02",
+    "hw/models/trenz/STP-TE0712-03-No Variations.step": "23b1905a356912d70b7223cae260809c84728a5ad717ad9dc25c828ff8283697",
+    "hw/models/Pi4_stack_concept.wrl": "4da89910eccdc68ef531fa1051cf44cef5159b11345e2ff7b684a813950893cd",
+    "hw/models/Pi_ESQ_120_23.wrl": "d656614736c9d58bdadc3acb4905a6980155654209236a14466646eba8d680e6",
+    "hw/models/Trenz_spacers.wrl": "f3d018dbd6c12495cba0ea888e942f50e4b9d52059f307a76d75b3d3db089134",
+    "hw/models/LSHM_50_4mm.wrl": "b3965dc267e26e2324ca0716a948c96b2b3e7a6a9096bc173d20a395e6b57af5",
+    "hw/models/LSHM_30_4mm.wrl": "c51a5090c70f57cdfe016c581587e02d72a97b2286efacf4a1c836d6339e887e"
+  },
+  "image_sha256": "dba507dae919e27b46ba04eee489e33501f1f53525517aeb113555fa714b5b08",
+  "renderer": "9.0.9",
+  "scope": "Current routed HAT and vendor Trenz STEP; conceptual Pi, socket, spacers, Racotech can and leads.",
+  "geophone_nominal_mm": {
+    "diameter": 25.4,
+    "height": 33
+  },
+  "limitations": "Baseline Samtec stack shown. Shorter J1 procurement substitute requires riser/height review. Geophone terminal positions, lead dressing and mating plug are illustrative; no physical fit approval."
+}

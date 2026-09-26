@@ -14,7 +14,7 @@ The application must also work with simulated sensors and with the FPGA absent
 or unconfigured. No Coldfoot chip, runtime integration, or Coldfoot RTL port is
 required for these milestones. Preserve the A2 ASIC design as deferred work.
 
-On-HAT sensors are the four LSM6DSO IMUs, SCL3300 inclinometer, and ADS122C04
+On-HAT sensors are the three LSM6DSO IMUs and ADS122C04
 input for the external Racotech geophone. GNSS has been removed.
 The RM3100 magnetometer and optional DLVR infrasound input remain on the separate
 USB-C sensor head. Its MCU needs firmware; the accelerometer HAT does not.

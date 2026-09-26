@@ -1,4 +1,10 @@
 > Historical DAQHAT-01 review. Analog/software findings below remain useful, but
+
+**Current population:** three XYZ IMUs and geophone ADC; the inclinometer is removed. The
+four-IMU and six-channel figures below are historical review results; the
+[inclinometer-removal revision](inclinometer-removal.md) records current validation.
+The [IMU noise review](imu-placement-review.md) records completed bypass-loop cleanup
+and the physical noise/thermal/mechanical checks that still need measurements.
 > external GPIO/ribbon and JTAG-cable details were superseded by DAQHAT-01.
 > Use [current circuit](fpga-host-link.md), [assembly](stack-assembly.md) and
 > current generated validation reports. Earlier pass counts do not certify DAQHAT-01.
@@ -181,13 +187,14 @@ routing replay. The [retained acquisition stress results](pre-fab-acquisition-st
 remain applicable to unchanged acquisition software. Layout changes do not
 constitute new physical signal measurements.
 
-Current run `20260925T161718Z-0cb993da`: 18 stages, 26 hardware regressions,
-152 software tests, 64 SPICE cases; ERC/DRC/opens all zero. Clean replay matches
-7,485 copper items including 46 microvias, with matching schematic links.
-All geophone signal copper and the physical pad/net map are preserved.
-Browser signal check: 10/10 passed across 3,672 samples.
+Current run `20260926T034710Z-7502c956`: 22 stages, 54 hardware regressions,
+185 software tests, 102 SPICE cases; ERC/DRC/opens all zero. Clean replay matches
+11,546 copper objects with zero microvias on a standard six-layer FR-4 stack.
+All component pad nets, placements and orientations are unchanged. Geophone
+local-path and ground-stitch checks pass; return geometry changed and remains
+subject to physical noise/signal-integrity qualification. Modeled sensor checks
+pass 10/10 across 3,672 samples; the refreshed UI model passes its HTTP smoke test.
 
-The four flex paths pass all 36 slot-height cases. Minimum residual obstacle
-margin is 0.234 mm after cable allowance; ribbon separation is 1.668 mm.
-The guide clears the Pi port envelope by 0.379 mm after the 1 mm stack allowance.
-These are CAD margins for the prescribed assembly, not physical measurements.
+Four straight supports and the Pi/riser/Trenz envelopes pass the current CAD fit
+checks. No FPGA ribbons or cable guide remain. The native 3D views are refreshed.
+These are CAD/model results, not physical measurements.

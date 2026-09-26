@@ -34,7 +34,11 @@ def verify(pins, orientations):
         if pins.get(key) != net: raise ValueError(f'geophone physical pin mismatch: {key}')
     if any('GNSS' in net for net in pins.values()) or any(ref in ('U21','J2') for ref,_ in pins):
         raise ValueError('GNSS remains on current DAQHAT-01')
-    for ref in ('U11','U12','U13','U14'):
+    for ref in ('U11','U12','U13'):
         if orientations.get(ref) != (0,False):
             raise ValueError(f'{ref}: package axes changed; explicit software remapping required')
+    if any(ref in orientations for ref in ('U14','C18','C19','R14')):
+        raise ValueError('removed fourth IMU circuitry remains')
+    if any(ref in orientations for ref in ('U20','C20','C21','C22','C23','R20')) or any('TILT' in net for net in pins.values()):
+        raise ValueError('removed inclinometer circuitry remains')
     return len(PINS)

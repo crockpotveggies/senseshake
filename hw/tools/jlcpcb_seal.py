@@ -5,9 +5,11 @@ import json
 from pathlib import Path
 import zipfile
 from jlcpcb_package import ROOT, sha, write_json
+from jlcpcb_quantity import audit_quantity
 
 
 def seal(out):
+    write_json(out/'review/one-hat-quantity-check.json', audit_quantity(out))
     manifest = json.loads((out / 'manifest.json').read_text())
     for source, expected in manifest['source_sha256'].items():
         if sha(ROOT / source) != expected: raise ValueError(f'Stale source: {source}')

@@ -70,7 +70,7 @@ application time are both retained. A sample sees the state at its own time.
 | `geophone_velocity_m_s` | External vertical velocity; constant or steady sinusoid, native 4.5 Hz mechanical response plus passive RC | `0` |
 | `magnetic_ut` | World east/north/up field, microtesla; three signals | `[0,20,-45]` |
 | `pressure_pa` | Differential pressure; scalar signal | `0` |
-| `temperature_c` | IMU/inclinometer temperature; scalar signal | `25` |
+| `temperature_c` | IMU/legacy-inclinometer temperature; scalar signal | `25` |
 | `pressure_temperature_count` | Explicit unsigned 11-bit DLVR temperature fixture | `768` |
 | `gnss_position` | Origin latitude degrees, longitude degrees, height metres; numbers only | `[49,-123,0]` |
 | `gnss_velocity_ned_m_s` | Constant north/east/down velocity until changed | `[0,0,0]` |
@@ -107,11 +107,11 @@ GNSS fix loss is controlled by `gnss_fix`, not `saturation`.
 World axes are east/north/up, with package axes aligned at zero orientation.
 Orientation uses `Rz(yaw) Ry(pitch) Rx(roll)`. Acceleration is linear acceleration
 plus an upward 9.80665 m/s² gravity contribution, rotated into package axes.
-The four IMUs share motion, with independent noise when requested. Gyro rates
+The three IMUs share motion, with independent noise when requested. Gyro rates
 come from the analytic Euler-angle derivatives, including tilted-axis coupling.
 
 LSM6DSO encoding uses nominal selected-range sensitivities and signed 16-bit
-counts. SCL3300 encodes acceleration using the selected mode and tilt angles
+counts. The legacy SCL3300 model encodes acceleration using the selected mode and tilt angles
 from the acceleration direction, with 16384 counts per 90 degrees. Zero
 acceleration/freefall makes tilt undefined and yields FAULT. Temperature follows
 the respective nominal register transfer functions. Sensor full-scale excess

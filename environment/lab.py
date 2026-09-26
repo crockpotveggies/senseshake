@@ -130,6 +130,7 @@ def source_files(source):
     for folder, patterns in {
         "hw/elec": ("*.ato", "*.kicad_mod", "*.kicad_sym"),
         "hw/tools": ("*.py",), "hw/tests": ("*.py",), "docs": ("*.csv",),
+        "hw/assembly": ("*.json",),
         "hw/libraries": ("*.kicad_mod", "*.kicad_sym"),
         "sw/interfaces": ("*.proto", "*.yaml", "*.binpb", "*.py", "*.options"),
         "sw/tools": ("*.py",), "sw/tests": ("*.py", "*.json"),
@@ -140,6 +141,7 @@ def source_files(source):
             files.extend((source / folder).rglob(pattern))
     files.append(source / "hw/tests/overvoltage.ato")
     files.append(source / "hw/boards/groundlark-daqhat-01/groundlark-daqhat-01.ses")
+    files.append(source / "hw/boards/groundlark-daqhat-01/verification.json")
     for target in TARGETS:
         folder = source / "hw/layout" / target
         files.append(folder / f"{target}.kicad_pcb")
@@ -148,6 +150,7 @@ def source_files(source):
         folder = source / "hw/boards" / board
         files.extend(folder.glob("*.kicad_sch"))
         files.extend(folder.glob("*.kicad_sym"))
+        files.extend(folder.glob("*.kicad_dru"))
         files.extend(folder.glob("*-lib-table"))
         files.extend(folder / name for name in (
             f"{board}.kicad_pcb", f"{board}.kicad_pro", "electrical.json", "bom.csv"))
@@ -219,7 +222,7 @@ def collect(workspace, report, profile):
         files.extend((workspace / "hw/simulation").rglob(pattern))
     for board in BOARDS:
         folder = workspace / "hw/boards" / board
-        files.extend(folder / name for name in ("drc.json", "erc.json", "validation.json", "schematic-netlist.xml", "engineering.json", "prefab-review.json", "replay.json"))
+        files.extend(folder / name for name in ("drc.json", "erc.json", "validation.json", "schematic-netlist.xml", "engineering.json", "prefab-review.json", "replay.json", "fabrication-audit.json"))
     if profile == "full":
         for target in TARGETS:
             files.append(workspace / "hw/layout" / target / f"{target}.kicad_pcb")

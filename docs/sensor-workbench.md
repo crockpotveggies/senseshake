@@ -82,22 +82,22 @@ recording and its JSON report using the panel buttons; the report includes the
 recording's SHA-256. Seek backward and press Play to inspect the checked signals.
 
 Unlike ordinary simulation, this test feeds the models through register/packet
-buses into the production `LSM6DSO`, `SCL3300` and `ADS122C04` driver classes,
+buses into the production `LSM6DSO` and `ADS122C04` driver classes,
 then through the acquisition, session validation and recording code. It checks
-3,672 samples from the six HAT sensors. Remote-head sensors are outside this test.
+3,264 samples from the four HAT sensors. Remote-head sensors are outside this test.
 
 The fixed excitation is a 2 Hz, 0.300 m/s² X-axis acceleration sine wave, 0.5 Hz,
 5° roll, and a geophone input of 100 µm/s at 10 Hz. The independent recording
 analyzer checks inventory/quality, effective configuration, sample timing and
 continuity, tone frequency/gain/phase, gravity magnitude, prescribed roll,
-integrated gyro versus gravity-derived roll, agreement across four IMUs,
-inclinometer angle/acceleration consistency, and geophone gain/phase and conversion-counter rollover.
+integrated gyro versus gravity-derived roll, agreement across three IMUs,
+and geophone gain/phase and conversion-counter rollover.
 Measurements and explicit tolerances are expandable in the UI. These are
 **ideal-model regression limits**, not manufacturing acceptance specifications.
 Geophone excitation is commanded independently of HAT motion; the test does
 not establish a shared mechanical mounting model.
 
-![HAT driver signal test passing in the workbench](images/hat-signal-test.png)
+![Current HAT driver signal test: nine passing checks without the inclinometer](images/hat-signal-test.png)
 
 The portable software profile also saves `results/sw/build/hat-signals.ssrec`
 and `hat-signals.json` in its retained run. After starting the UI once, the
@@ -109,16 +109,16 @@ $env:GROUNDLARK_DESCRIPTOR = "$PWD/sw/build/ui-schema.binpb"
 ```
 
 Choose a new output filename for each manual run; existing recordings are never
-overwritten. The thirteen regression tests include negative controls which alter
+overwritten. The signal regression tests include negative controls which alter
 otherwise valid, CRC-correct records or excitation. Wrong frequency, gain,
-polarity, motion, stuck channels, gyro scale, tilt sign, geophone polarity, timestamps
+polarity, motion, stuck channels, gyro scale, geophone polarity, timestamps
 and missing measurements must fail. Existing independent bus-vector tests remain
 the guard for wire constants/CRC logic shared by a driver and a modeled bus.
 This does not exercise Linux ioctls, physical SPI/I²C timing, or real HAT noise.
 
 ### Display semantics
 
-All eight sensors use the existing `Acquisition`, `Simulated`, `Scenario`,
+All six sensors use the existing `Acquisition`, `Simulated`, `Scenario`,
 `Sessions` and CRC-protected recording code. The display does not generate a
 second stream of decorative data. Stimulus changes are recorded before the
 corresponding samples, and simulation steps are fixed at 1 ms. UI/wall-clock

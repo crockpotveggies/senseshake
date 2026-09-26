@@ -8,6 +8,13 @@ from lab import MARKER, clean, lab_lock, managed_runs, source_files, write_json,
 
 
 class LabSafetyTests(unittest.TestCase):
+    def test_native_custom_rules_are_in_validation_snapshot(self):
+        board=self.root/'hw/boards/groundlark-daqhat-01'
+        board.mkdir(parents=True)
+        rule=board/'groundlark-daqhat-01.kicad_dru'
+        rule.write_text('(version 1)')
+        self.assertIn(rule,source_files(self.root))
+
     def test_legacy_lab_and_runs_keep_their_ownership(self):
         marker = self.root / '.senseshake-lab'
         marker.write_text('senseshake-lab-v1')
@@ -139,6 +146,19 @@ class LabSafetyTests(unittest.TestCase):
             self.assertIn('routing-replay',dict(commands(profile)))
         root=Path(self.temp.name)
         self.assertIn(root/'hw/boards/groundlark-daqhat-01/groundlark-daqhat-01.ses',source_files(root))
+
+    def test_assembly_regression_inputs_are_staged_without_release_archives(self):
+        source=Path(self.temp.name)/'assembly-source'
+        expected=['hw/assembly/daqhat-01-jlcpcb-parts.json',
+                  'hw/assembly/daqhat-01-jlcpcb-placement.json',
+                  'hw/boards/groundlark-daqhat-01/verification.json',
+                  'hw/tests/test_jlcpcb_export_integration.py']
+        excluded=['hw/releases/old/BOM-review.csv','.local/placement-review/old.json']
+        for rel in expected+excluded:
+            path=source/rel;path.parent.mkdir(parents=True,exist_ok=True);path.write_text('fixture')
+        staged=set(source_files(source))
+        self.assertTrue({source/rel for rel in expected}<=staged)
+        self.assertFalse({source/rel for rel in excluded}&staged)
 
 
 if __name__ == "__main__":

@@ -4,10 +4,21 @@ import sys
 import tempfile
 import unittest
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tools'))
-from jlcpcb_package import check_reference_sets, physical, validate_plot_inventory, EXTENSIONS, check_drills
+from jlcpcb_package import check_reference_sets, physical, validate_plot_inventory, EXTENSIONS, check_drills, assembly_process, source_commit
 
 
 class AssemblyPackageTests(unittest.TestCase):
+    def test_source_archive_records_unknown_commit_without_inventing_provenance(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            self.assertIsNone(source_commit(Path(tmp)))
+
+    def test_smt_contacts_with_plated_mounts_are_not_tht_only(self):
+        self.assertEqual(assembly_process(True, True), 'Mixed SMT/THT')
+        self.assertEqual(assembly_process(True, False), 'SMT')
+        self.assertEqual(assembly_process(False, True), 'THT')
+        with self.assertRaises(ValueError):
+            assembly_process(False, False)
+
     def test_drill_quantization(self):
         check_drills([(12.0009, -20, 0.1)], [(12, -20, 0.1)])
 
@@ -36,7 +47,7 @@ class AssemblyPackageTests(unittest.TestCase):
 
     def plots(self, root):
         for extension in EXTENSIONS: (root / ('test.' + extension)).write_text('placeholder')
-        for i, span in enumerate(['NonPlated,1,8,NPTH', 'Plated,1,8,PTH', 'Plated,1,2,Blind', 'Plated,7,8,Blind']):
+        for i, span in enumerate(['NonPlated,1,6,NPTH', 'Plated,1,6,PTH']):
             (root / f'{i}.drl').write_text(f'METRIC\n; #@! TF.FileFunction,{span}\n')
 
     def test_complete_inventory(self):
@@ -45,19 +56,31 @@ class AssemblyPackageTests(unittest.TestCase):
 
     def test_missing_inner_layer(self):
         with tempfile.TemporaryDirectory() as tmp:
-            root = Path(tmp); self.plots(root); (root / 'test.g6').unlink()
+            root = Path(tmp); self.plots(root); (root / 'test.g4').unlink()
             with self.assertRaisesRegex(ValueError, 'Missing manufacturing'): validate_plot_inventory(root)
 
     def test_merged_drills_rejected(self):
         with tempfile.TemporaryDirectory() as tmp:
-            root = Path(tmp); self.plots(root); (root / '3.drl').unlink()
+            root = Path(tmp); self.plots(root); (root / '1.drl').unlink()
             with self.assertRaisesRegex(ValueError, 'separate'): validate_plot_inventory(root)
 
-    def test_wrong_blind_span_or_units(self):
+    def test_wrong_span_or_units(self):
         for wrong in ['METRIC\n; #@! TF.FileFunction,Plated,2,7,Blind', 'INCH\n; #@! TF.FileFunction,Plated,7,8,Blind']:
             with tempfile.TemporaryDirectory() as tmp:
-                root = Path(tmp); self.plots(root); (root / '3.drl').write_text(wrong)
+                root = Path(tmp); self.plots(root); (root / '1.drl').write_text(wrong)
                 with self.assertRaises(ValueError): validate_plot_inventory(root)
+
+
+    def test_stale_hdi_inner_layer_rejected(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp); self.plots(root); (root / 'old.g6').write_text('stale')
+            with self.assertRaisesRegex(ValueError, 'Unexpected'): validate_plot_inventory(root)
+
+    def test_extra_blind_drill_rejected(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp); self.plots(root)
+            (root / 'blind.drl').write_text('METRIC\n; #@! TF.FileFunction,Plated,1,2,Blind')
+            with self.assertRaisesRegex(ValueError, 'separate'): validate_plot_inventory(root)
 
 
 if __name__ == '__main__': unittest.main()

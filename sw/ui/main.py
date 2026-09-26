@@ -70,15 +70,14 @@ def board_scene(scene, select):
             scene.box(5.08, .51, 1.61).move(-.999, 2.45, -.967).material("#252b34")
             # KiCad's GLB exporter omits these local VRML bodies. These are
             # intentionally simple visualization envelopes, not STEP substitutes.
-            custom = {"U20": (1.21, .76, .3),
-                      "J80": (3.9, .65, .4), "J81": (3.9, .65, .4), "J82": (.65, 2.6, .4)}
+            custom = {"J80": (3.9, .65, .4), "J81": (3.9, .65, .4), "J82": (.65, 2.6, .4)}
             for part in layout["parts"]:
                 ref, (x, y) = part["ref"], part["xy"]
                 x, y = (x - 42.5) / 10, (28 - y) / 10
                 if ref in custom:
                     w, h, z = custom[ref]
                     scene.box(w, h, z).move(x, y, .16 + z / 2).material("#252b34")
-                sid = {"U11": 1, "U12": 2, "U13": 3, "U14": 4, "U20": 5, "U22": 9}.get(ref)
+                sid = {"U11": 1, "U12": 2, "U13": 3, "U22": 9}.get(ref)
                 if sid:
                     radius = .29 if sid <= 4 else .72
                     target = scene.cylinder(radius, radius, .07).rotate(math.pi / 2, 0, 0).move(x, y, .63).material(TEAL, .28).with_name(f"sensor-{sid}")
@@ -261,7 +260,7 @@ def page():
             ui.label("DEVICES").classes("eyebrow")
             ui.label("Select a sensor").classes("section-title")
             sensor_buttons, statuses = {}, {}
-            for sid in (1, 2, 3, 4, 5, 9, 7, 8):
+            for sid in (1, 2, 3, 9, 7, 8):
                 name = NAMES[sid]
                 if sid in (1, 7):
                     ui.label("DAQHAT-01 HAT · PI / FPGA STACK" if sid == 1 else "REMOTE · USB-C HEAD").classes("group-label")
@@ -337,7 +336,7 @@ def page():
                     ui.button("Apply geophone tone", on_click=lambda: attempt(lambda: engine.controls({"geophone_velocity_m_s": {"amplitude": geo_amp.value/1e6, "frequency_hz": geo_freq.value}}))).props("flat no-caps")
                     ui.label("Steady-state response model; changes do not simulate settling.").classes("muted")
                 with ui.expansion("Fault injection", icon="bug_report").classes("w-full"):
-                    fault_sensor = ui.select(NAMES, value=1, label="Sensor").props("dense outlined").classes("w-full")
+                    fault_sensor = ui.select({sid: name for sid, name in NAMES.items() if sid not in (4, 5)}, value=1, label="Sensor").props("dense outlined").classes("w-full")
                     fault = ui.select(["none", "timeout", "nack", "disconnect", "not_ready", "saturation", "short_read"], value="none", label="Fault").props("dense outlined").classes("w-full")
                     ui.label("Applies to one sensor; other active faults are preserved. Recovery follows the runtime retry budget.").classes("fine-print")
                     def apply_fault():
@@ -428,4 +427,4 @@ if __name__ in {"__main__", "__mp_main__"}:
     parser.add_argument("--port", type=int, default=8080)
     args = parser.parse_args()
     ui.run(host="127.0.0.1", port=args.port, title="Groundlark · Sensor Workbench",
-           dark=True, reload=False, show=False, favicon="〰", reconnect_timeout=30)
+           dark=True, reload=False, show=False, favicon=ASSETS / "groundlark-favicon.ico", reconnect_timeout=30)

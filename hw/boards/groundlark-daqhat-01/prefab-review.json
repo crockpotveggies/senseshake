@@ -1,7 +1,7 @@
 {
   "scope": "pre-fab engineering review; no physical qualification",
   "disposition": "analog and internal-link stack reviewed; physical power/noise/fit and link throughput remain unqualified",
-  "board_sha256": "4bcffcda451d27b287392f85c253aa793cc391018e583ba701add15131d20f6f",
+  "board_sha256": "3952c7d0cf4d95ebcdd851cdab9f00aabde3fcb983c0ea10d56c12514a60ed54",
   "physical_pin_checks": 51,
   "purchasing_package_checks": 18,
   "analog": {
@@ -185,8 +185,8 @@
       "GEO_P": {
         "samples": 104,
         "over_ground_by_plane": {
-          "In2.Cu": 56,
-          "In5.Cu": 56
+          "In1.Cu": 57,
+          "In4.Cu": 57
         },
         "signal_layers": [
           "B.Cu",
@@ -196,8 +196,8 @@
       "GEO_N": {
         "samples": 179,
         "over_ground_by_plane": {
-          "In2.Cu": 129,
-          "In5.Cu": 129
+          "In1.Cu": 131,
+          "In4.Cu": 131
         },
         "signal_layers": [
           "B.Cu",
@@ -205,25 +205,25 @@
         ]
       },
       "GEO_AIN_P": {
-        "samples": 281,
+        "samples": 285,
         "over_ground_by_plane": {
-          "In2.Cu": 264,
-          "In5.Cu": 264
+          "In1.Cu": 269,
+          "In4.Cu": 269
         },
         "signal_layers": [
           "F.Cu",
-          "In1.Cu"
+          "In2.Cu"
         ]
       },
       "GEO_AIN_N": {
         "samples": 219,
         "over_ground_by_plane": {
-          "In2.Cu": 189,
-          "In5.Cu": 189
+          "In1.Cu": 194,
+          "In4.Cu": 194
         },
         "signal_layers": [
           "F.Cu",
-          "In4.Cu"
+          "In3.Cu"
         ]
       }
     },
@@ -393,6 +393,71 @@
       "Ground centerline samples are a screen for voids, not field-solver signoff",
       "Plug dimensions are manufacturer data; connectors are bounded envelopes, not supplier mated solids",
       "Selected Pi/heatsink/plug and four straight supports checked; first-article fit remains unmeasured"
+    ]
+  },
+  "imu_bypass": {
+    "bypass_paths": [
+      {
+        "imu": "U11",
+        "pin": "5",
+        "capacitor": "C12",
+        "supply_xy_mm": 1.3885,
+        "supply_limit_mm": 4.0,
+        "ground_track_to_plane_via_mm": 0
+      },
+      {
+        "imu": "U11",
+        "pin": "8",
+        "capacitor": "C13",
+        "supply_xy_mm": 1.2093,
+        "supply_limit_mm": 2.0,
+        "ground_track_to_plane_via_mm": 0.5571
+      },
+      {
+        "imu": "U12",
+        "pin": "5",
+        "capacitor": "C14",
+        "supply_xy_mm": 3.6024,
+        "supply_limit_mm": 4.0,
+        "ground_track_to_plane_via_mm": 1.9242
+      },
+      {
+        "imu": "U12",
+        "pin": "8",
+        "capacitor": "C15",
+        "supply_xy_mm": 1.6505,
+        "supply_limit_mm": 2.0,
+        "ground_track_to_plane_via_mm": 0
+      },
+      {
+        "imu": "U13",
+        "pin": "5",
+        "capacitor": "C16",
+        "supply_xy_mm": 2.5876,
+        "supply_limit_mm": 4.0,
+        "ground_track_to_plane_via_mm": 0
+      },
+      {
+        "imu": "U13",
+        "pin": "8",
+        "capacitor": "C17",
+        "supply_xy_mm": 1.6075,
+        "supply_limit_mm": 2.0,
+        "ground_track_to_plane_via_mm": 0
+      }
+    ],
+    "imu_ground_pins_to_plane_via_mm": {
+      "U11.6": 1.3029,
+      "U11.7": 1.8029,
+      "U12.6": 1.6376,
+      "U12.7": 2.1376,
+      "U13.6": 0.4,
+      "U13.7": 0
+    },
+    "method": "Native track endpoint graph, pad-interior bridges, ground via intersects filled In1.Cu GND",
+    "limits": [
+      "XY centerline lengths exclude via barrels, pad spreading and plane impedance",
+      "No field solver, thermal/stress model, or measured noise qualification"
     ]
   }
 }
