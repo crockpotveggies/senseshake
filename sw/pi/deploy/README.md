@@ -32,8 +32,8 @@ DAQHAT-01 uses the ADS122C04 at I2C address 0x40. Remove `pps` from old profiles
 The active profile has no GNSS and rejects `--utc`. Geophone conversion counters
 report gaps, but polling timestamps do not establish exact sample times.
 Conversion gaps do not reset a healthy ADC; real bus faults still trigger bounded
-recovery. The [pre-fab stress review](../../../docs/pre-fab-review.md) demonstrates
-that current polling does not preserve every conversion under the modeled load.
+recovery. Modeled independent-clock tests show that current polling does not
+preserve every conversion under load.
 Dedicated falling-edge DRDY acquisition is the next software step; do not enable
 400 kHz merely to claim lossless capture. That speed also needs electrical testing.
 Physical qualification follows the [bench procedure](../../../docs/bench-procedure.md).

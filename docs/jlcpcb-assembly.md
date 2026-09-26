@@ -1,147 +1,109 @@
 # JLCPCB assembled DAQHAT-01 HAT
 
-**Current package:** `groundlark-daqhat-01-jlcpcb-review-20260926-one-hat` uses three
-IMUs, no dedicated inclinometer, and the corrected local bypass loops. Its BOM
-uses exact ordering codes and verified catalog identities instead of value-only
-matching. It supersedes the `imu-bypass` upload package, the older `standard6`
-four-IMU/inclinometer package and all HDI exports.
-Do not submit an older ZIP.
+The package targets **one fabricated PCB and one assembled HAT**, the same
+physical board. The HAT is 85 × 56 mm with 117 placements and 38 BOM lines.
+The Pi, Trenz module, geophone, riser, supply and mounting hardware are separate
+purchases. The remote sensor head and A2 ASIC HAT are not included.
 
-**Current assembly correction (2026-09-26):** use both `BOM-review.csv` and
-`CPL-review.csv` from the local
-`hw/releases/groundlark-daqhat-01-jlcpcb-placement-20260926-c91-c92/` overlay instead of
-earlier BOM/CPL files. [Programmatic placement correction](assembly-placement.md)
-audits all 117 placements against catalog pads and corrects 21 rotations in total.
-C91/C92 now select KEMET C0603C102J5GAC7867 / C140950, an available catalog alias
-with matching 1 nF / 50 V / C0G / ±5% / 0603 specification and a mapped footprint.
-Gerbers are unchanged. Prior ZIPs are retained intact.
-The corrected BOM has 38 catalog identities and 117 placements.
-This is a BOM correction, not confirmation that JLCPCB can assemble every part.
-It includes the J1 fix and [reviewed shortage replacements](assembly-shortages.md)
-for C42/C80-C82, C84/C85, C90 and F80. F80 also corrects an old 0603 fuse MPN on
-1206 PCB lands. The selected assembly MPN is now 0466005.NRHF / C57525.
+## Files to upload
 
-The requested quantity is **ONE fabricated PCB and ONE assembled HAT**, the same
-physical board. No increase to two or five is authorized. No order has been placed.
-Export rejects every quantity except integer 1. The Gerbers contain one closed
-85 x 56 mm outline, with no panel repeats. BOM/CPL and procurement totals describe
-117 installed components on that one HAT. Package sealing checks these counts
-again and writes `review/one-hat-quantity-check.json`.
-The package is for quotation and engineering review, **not manufacturing release**.
-The replacement export uses conventional six-layer FR-4 and retains the
-Groundlark lark/waveform silkscreen. Exact working-tree hashes, rather than a
-Git commit alone, identify the tested source. See [cost reduction](cost-reduction.md)
-for supplier settings and the quote comparison. Full run
-`20260926T052916Z-5c4e5ac3` passes all 22 stages (65 hardware and 187 software
-regressions); native DRC/ERC/opens are zero. Earlier eight-layer HDI packages
-are superseded and must not be uploaded as standard-process artwork.
-
-## Files and scope
-
-The current local review package at
-`hw/releases/groundlark-daqhat-01-jlcpcb-review-20260926-one-hat/`
-contains Gerbers, separate PTH/NPTH through-drill files, an assembly BOM, candidate
-CPL, procurement quantities, via-processing coordinates, a four-page review PDF,
-native Fab SVGs, independent Gerber views and validation evidence. Release directories are retained locally and ignored by Git; tools and intermediate
-runs stay in `.local/`. Fabrication packages must not be committed or pushed
-without an explicit request to publish them. Export tooling and tests remain tracked.
-
-The assembled carrier has 117 placements and 38 BOM lines: 107 SMT-only, seven
-THT-only and three mixed SMT/THT connectors. J80/J81/J82 have SMT signal contacts
-and plated mounting features; they are no longer classified as THT-only. J1 is the bottom
-Pi socket. The Raspberry Pi, Trenz TE0712 module, riser, geophone, supply, cooling
-and mounting hardware are separate purchases; see the existing
-[stack assembly](stack-assembly.md). The remote USB sensor head and deferred A2
-Coldfoot board are not part of this package.
-
-## What still prevents an order-ready package
-
-1. **Quantity:** JLCPCB publishes a minimum of two Standard assembled boards.
-   Supplier must accept a one-piece quote; increasing the order is prohibited.
-   Bare PCB lot sizes, component purchase minimums and assembly losses are separate.
-2. **Standard fabrication:** six-layer FR-4, nominal 1.6 mm, TG135, 1 oz outer /
-   0.5 oz inner copper, ENIG, 0.30 mm through-drills, epoxy fill/capping (POFV).
-   Use the stock JLC06161H-3313 reference; no HDI, custom lamination, controlled
-   impedance, optional Kelvin testing or expedited lead time. The published
-   stock copper/dielectric sum is 1.5384 mm; nominal 1.6 mm has +/-10% tolerance.
-   CAD mask thickness is illustrative. Do not fill component PTH or NPTH holes.
-3. **Assembly frame:** Standard PCBA requires edge rails and fiducials and has
-   a 70 mm minimum dimension. The 85 x 56 mm HAT needs a manufacturer-proposed
-   frame/panel. Approve the returned panel and retain the HAT outline and holes.
-4. **Sourcing:** all 38 upload lines now have exact catalog identities. J1 selects
-   [Megastar ZX-PM2.54-2-20PY / C7499354](https://jlcpcb.com/partdetail/ZX-PM2.54-2-20PY/C7499354),
-   which is listed in JLCPCB's assembly catalog. Its 8.5 mm body is shorter than
-   the original Samtec socket; stack/riser height and bottom-side orientation
-   remain unresolved. The old Samtec 3D/fit evidence does not qualify this substitute.
-   JP1/J4 are resolved to Samtec TSW-102-07-G-S /
-   TSW-104-07-G-S; Q1 is Nexperia 2N7002,215. These procurement clarifications
-   are recorded separately from the unchanged validated CAD. All stock
-   allocations and assembly eligibility remain unconfirmed. Shortages for C90,
-   F80 and six supply capacitors are addressed by the explicit selections in
-   [assembly-shortages.md](assembly-shortages.md). JLCPCB showed available stock
-   for these replacements; it has not been reserved. Do not omit them or accept further automatic substitutions.
-   Signal capacitors must retain C0G dielectric, tolerance and voltage rating.
-5. **Placement and process:** verify each JLC library rotation and centroid.
-   Nine top connectors use catalog numbered-pad fits. Bottom J1 now uses an
-   explicit C7499354 board-projection mapping at 0 degrees instead of 90.
-   Thirteen additional IC/transistor/protection rotations are corrected, including
-   U100/U101/U102/U103 on Bottom. C91/C92 now have exact C140950 catalog mappings
-   and retain 0 degrees on Top. See [placement evidence and tests](assembly-placement.md).
-   The front-layer J1 land pattern requires a **bottom-mounted socket**. Confirm
-   mixed SMT/THT assembly, reflow/cleaning limits and sensor handling. JLC should
-   populate required connectors too; this is not an SMT-only quote.
-
-These are documented open issues, not waived checks. Passing simulation or DRC
-does not close supplier-specific production details or physical qualification.
-
-## Corrected BOM upload and matching
-
-The previous returned supplier review matched R61 to a Zener diode, R96/R100-R105
-to inductors, C12-C17 to 01005 capacitors, C90-C92 to X7R capacitors, and U40/D90
-to unreviewed manufacturers. It also used five boards and omitted many parts
-from its subtotal. Do not reuse that matching result or its price.
-
-The exporter now reads [the exact-part registry](../hw/assembly/daqhat-01-jlcpcb-parts.json).
-Each record binds the source MPN, value, footprint and references to the reviewed
-manufacturer, ordering code, package and evidence URL. Changed source inputs,
-missing selections, duplicate references, conflicting catalog identities and
-undocumented resolutions fail export. The registry and exporter are hashed in
-the release. A catalog identity is not stock reservation or assembly approval.
-
-Upload `BOM-review.csv` as BOM and `CPL-review.csv` as placement data. Map:
-
-| Upload field | Column in CSV |
+| File | Local package |
 | --- | --- |
-| Comment / manufacturer part number | `Comment` (exact orderable MPN) |
+| `DAQHAT-01-Gerbers-REVIEW.zip` | `hw/releases/groundlark-daqhat-01-jlcpcb-review-20260926-one-hat/` |
+| `BOM-review.csv` and `CPL-review.csv` together | `hw/releases/groundlark-daqhat-01-jlcpcb-placement-20260926-c91-c92/` |
+
+Use the BOM and CPL from the same overlay. Do not reuse the base package's BOM/CPL
+or previous manual rotation overrides. Gerbers contain one closed outline;
+BOM quantities are per HAT. Set the supplier's PCB and assembly quantities
+separately: the CSV cannot control the website's quantity selector.
+
+Packages remain local and Git-ignored. They include checksums and validation
+records; source CAD, part, side or process changes require a fresh export.
+The package retains manufacturing holds and is not a fabrication approval.
+
+## Fabrication and assembly requirements
+
+- Six-layer FR-4, nominal 1.6 mm, TG135, ENIG, 1 oz outer / 0.5 oz inner copper.
+  Use the stock JLC06161H-3313 stack, with no HDI or custom lamination.
+  Its 1.5384 mm copper/dielectric sum is ordered as nominal 1.6 mm, ±10%.
+- Through-vias only, 0.30 mm drill, epoxy-filled and copper-capped (POFV),
+  including vias in solder pads. Tenting alone is insufficient.
+  Do not fill component plated holes or non-plated mounting holes.
+- Double-sided assembly: 107 SMT-only placements, seven THT-only placements and
+  three mixed SMT/THT connectors. J80/J81/J82 have SMT contacts and plated mounts.
+  J1 is the bottom Pi socket.
+- Confirm the supplier's one-piece assembly acceptance, handling frame,
+  fiducials, part allocation and process requirements. Recorded Standard PCBA
+  rules require a two-piece minimum and a 70 mm minimum dimension; the 85 × 56 mm
+  HAT therefore needs a supplier-agreed quantity exception and handling frame.
+  Do not change the requested quantity without the owner's agreement.
+- Verify the supplier placement preview and final proposed production data.
+  CAD, modeled tests and catalog pad fits do not establish physical fit or DFM approval.
+
+## BOM mapping and selected parts
+
+The [exact-part registry](../hw/assembly/daqhat-01-jlcpcb-parts.json) binds each
+reference to its source value/footprint and approved manufacturer, MPN and C-code.
+Catalog listing does not reserve stock or guarantee assembly eligibility.
+Recheck allocation at ordering; do not accept automatic substitutes.
+
+| Upload field | CSV column |
+| --- | --- |
+| Comment / manufacturer part number | `Comment` (full orderable MPN) |
 | Designator | `Designator` |
-| Footprint / package | `Footprint` (plain package name) |
-| JLCPCB / LCSC part number | `JLCPCB Part #` (C-code) |
+| Footprint / package | `Footprint` |
+| JLCPCB / LCSC part number | `JLCPCB Part #` |
 
-Manufacturer, MPN and description are also retained as supplementary columns.
-The primary four columns are sufficient if the importer ignores extra fields.
-Do not map `Description` as the ordering code. Confirm **38 nonblank catalog
-codes, including C7499354 for J1,** survive the import. The three
-identical jumper headers share one line. All 117 placements remain required.
+Do not use `Description` as the ordering code. Confirm all 38 nonblank catalog
+identities and all 117 placements survive import.
 
-For J1, match `C7499354` / `ZX-PM2.54-2-20PY` / `Megastar` in the order's
-component-selection screen. This exact replacement is in the assembly registry;
-do not reuse the older C21390538 BOM or mark J1 unplaced. It is a bottom-mounted
-female socket with an 8.5 mm body. Its revised riser/spacer height and underside
-orientation must be reviewed before assembly; the prior tall Samtec fit does not apply.
+| References | Assembly selection | Required specification |
+| --- | --- | --- |
+| J1 | Megastar ZX-PM2.54-2-20PY / C7499354 | Bottom-mounted 2×20 female socket, 8.5 mm body; stack fit remains open. |
+| C42, C80–C82 | Samsung CL31A226KAHNNNE / C12891 | 22 µF, ±10%, X5R, 25 V, 1206. |
+| C84, C85 | Murata GRM21BR71C475KE51L / C408144 | 4.7 µF, ±10%, X7R, 16 V, 0805. |
+| C90 | Murata GRM31C5C1H104JA01L / C97946 | 100 nF, ±5%, C0G, 50 V, 1206. |
+| C91, C92 | KEMET C0603C102J5GAC7867 / C140950 | 1 nF, ±5%, C0G, 50 V, 0603. |
+| F80 | Littelfuse 0466005.NRHF / C57525 | 5 A fast fuse, 32 V, 1206. |
 
-Set the supplier's **PCB quantity and assembled quantity to ONE** separately; BOM reference
-counts describe one PCB and cannot control the website's quantity selector.
-Procurement totals also target one HAT and exclude unknown MOQ/attrition.
-Review manufacturer, full MPN, package, all allocations and the placement
-preview before accepting. The CSV does not override supplier substitutions.
+F80 must use the 1206 assembly selection; the 0603 source-schematic MPN is not
+an approved assembly part. Its nominal cold resistance is 11 mΩ, which is
+included in the **30 mΩ total hot power-loop budget**, not an allowance in
+addition to it. Check hot voltage drop, startup and fuse behavior on hardware.
+Signal capacitors C90–C92 must retain C0G dielectric, tolerance and voltage rating.
 
-The correction adds 13 regression tests covering the real bad matches,
-one-board quantities, missing/duplicate references, stale selections, manual
-sourcing, primary upload fields and CSV quoting of `2N7002,215`. Four additional
-tests reject batch export, repeated/open/multiple outlines and multiplied
-procurement totals. All 82 hardware
-tests pass. Fresh export DRC is clean; all 13 layers and 608 drill hits pass
-independent parsing. Circuit, layout and CPL are unchanged from `imu-bypass`.
+**J1 fit remains unresolved:** its 8.5 mm body is shorter than the Samtec socket
+in the baseline CAD and stack render. Riser/spacer height, pin engagement and
+bottom-side orientation need confirmation. The previous tall-socket geometry
+does not qualify this part. See [stack assembly](stack-assembly.md).
+
+## Placement conventions
+
+The exporter fits supplier numbered pads to native footprints using the frozen
+[catalog geometry](../hw/assembly/daqhat-01-jlcpcb-placement.json). It accounts
+for bottom-side projection and preserves absolute component positions.
+Use its CPL rather than raw KiCad angles or manual per-reference offsets.
+
+| References | Supplier CPL rotation |
+| --- | --- |
+| J1 (Bottom) | 0° |
+| J4 | 270° |
+| JP1, JP80, JP81 | 0° |
+| J80, J81 | 180° |
+| J82, J83 | 270° |
+| J90 | 180° |
+| U1, U22, U41, U42 | 270° |
+| U100–U103 (Bottom) | 270° |
+| Q1, U40, U51, U52 | 180° |
+| D90 (Bottom), C91, C92 (Top) | 0° |
+
+Check J1's underside model and pin-1 direction in the supplier preview. Its
+front-layer land pattern requires a bottom-mounted socket. Confirm mixed
+SMT/THT assembly, reflow/cleaning limits and sensor handling with the supplier.
+Each placement must have a part-bound catalog mapping
+or explicit exception. Changed MPNs or footprints invalidate those mappings.
+The full exporter and overlay use the same solver; repeated export does not
+apply an extra rotation. This checks registration, not solder-joint reliability.
 
 ## Reproduce exports without changing CAD
 
@@ -181,28 +143,6 @@ After adding the package README and reviewing the PDF, run
 `python3 hw/tools/jlcpcb_seal.py .local/jlcpcb/new-review` to write checksums
 and the complete review ZIP. This retains all manufacturing holds; it does not
 promote the package to an approved release.
-
-Electrical connectivity, sensor positions and axes are preserved. C12/C13/C16
-placements and local SENS_3V3/GND copper changed for the bypass correction;
-see [the IMU review](imu-placement-review.md). The full validation run is the
-circuit/layout evidence. Independent export inspection parsed 13 layers and
-matched 594 PTH plus 14 NPTH hits to CAD; all 533 vias are through-vias.
-The four-page PDF was rendered and visually checked before sealing. Export integrity tests supplement that evidence.
-Source hashes and output hashes must be regenerated if any file changes. Do not
-reuse old upload files after a CAD, BOM, assembly-side or process change.
-
-## Suggested quote request (draft only; not sent)
-
-Please quote one assembled Groundlark DAQHAT-01 HAT, or confirm whether an exception
-to the two-piece Standard PCBA minimum is available. The board is 85 x 56 mm,
-standard six-layer FR-4, nominal 1.6 mm, ENIG, 1 oz outer / 0.5 oz inner copper,
-0.30 mm through-drills with epoxy filling/capping, double-sided SMT plus THT.
-Use stock JLC06161H-3313; no HDI or custom lamination. Please provide an
-assembly handling-frame/fiducial proposal. All required connectors are to be
-assembled, including bottom-mounted J1. Please identify sourcing/consignment,
-MOQ/attrition and assembly-process constraints before quoting an order-ready BOM.
-No substitutions, stack changes or manufacturing release are authorized by this
-review package. Owner approval follows review of your proposed production data.
 
 ## Sources reviewed 2026-09-25
 

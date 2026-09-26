@@ -9,8 +9,7 @@ The runnable Pi application is in `sw/pi/groundlark/`; use
 `sw/tools/sensor.py` as its repository entry point. It has no FPGA, Coldfoot,
 network service or database dependency. Simulation and Linux device adapters
 use the same scheduler, calibration, session validation and recording path.
-This implements the development milestone in steps 1–3 of the
-[sensor plan](sensor-development-plan.md). Physical acceptance remains step 4.
+Physical acceptance follows the [bench procedure](bench-procedure.md).
 
 ## Run without hardware
 
@@ -178,8 +177,9 @@ Geophone conversion discontinuities are separate from I/O failures: the bus can
 be healthy while the host misses ADC conversions. `DataGap` survives worker IPC,
 emits a discontinuity status and MISSING record with unknown loss, and clears the
 consecutive I/O-failure count. It does not reset the ADC. Duplicate reads do not
-extend the counter-wrap ambiguity timer. See the [pre-fab stress review](pre-fab-review.md)
-for the measured model limits of polling and the planned DRDY acquisition path.
+extend the counter-wrap ambiguity timer. Current polling does not preserve every
+conversion under modeled load; exact sample timing and lossless capture are not
+qualified. Follow the [bench procedure](bench-procedure.md) for physical measurements.
 
 The queue defaults to 64 batches (configurable 1–4096). It drops newest data on
 overflow, carries known/unknown loss into the next accepted batch and retains
@@ -232,27 +232,3 @@ references and computes a digest of message bytes. A final `acquisition_summary`
 event marks normal completion. A complete prefix without that event is readable
 but incomplete; partial/corrupt records fail. USB arrival time never replaces
 remote acquisition time.
-
-## Evidence and next gate
-
-Tests include independent wire vectors, modeled SPI/I²C responses, ioctl buffer
-and short-transfer checks, pseudo-terminal input, subprocess termination,
-byte-identical CLI runs, replay, overflow and epoch recovery. They exercise
-application software, not Raspberry Pi or STM32 instructions.
-
-Next: generate/compile Nanopb C, establish C/Python interoperability, link USB-head
-firmware within measured RAM/flash/stack budgets, then test enumeration and
-sensors on assembled boards. Physical FPGA pin, power, clearance, thermal and
-noise qualification remains in step 4.
-
-The DAQHAT-01 correction adds FIFO/IRQ acquisition, deployment and stationary measurement
-tools. See [engineering closure](daqhat-01-engineering-closure.md) for measured versus
-modeled evidence. [UTC association](utc-timing.md) is implemented; the
-[physical bench procedure](bench-procedure.md) covers its remaining qualification.
-
-References: [ST LSM6DSO](https://github.com/STMicroelectronics/stm32-lsm6dso),
-[Murata SCL3300 rev. 4](https://www.murata.com/-/media/webrenewal/products/sensor/pdf/datasheet/datasheet_scl3300-d01.ashx),
-[u-blox keys](https://github.com/u-blox/ubxlib/blob/master/gnss/api/u_gnss_cfg_val_key.h),
-[MAX-M10S manual](https://content.u-blox.com/sites/default/files/MAX-M10S_IntegrationManual_UBX-20053088.pdf),
-[Linux spidev](https://docs.kernel.org/spi/spidev.html),
-[Linux I²C](https://docs.kernel.org/i2c/dev-interface.html).

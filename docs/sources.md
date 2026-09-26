@@ -4,7 +4,7 @@ Reviewed 2026-09-23. These references support component selection and pin assign
 
 | Reference | Use |
 |---|---|
-| [AnyShake/GeoShake sensor inventory](sensor-inventory.md) | Upstream repository commits, actual sensor support, distinction between hardware and firmware |
+| [AnyShake](https://github.com/anyshake) and [GeoShake](https://github.com/GeoShake) | Related open-source seismic acquisition projects |
 | [wafer.space pinned run-1 module](https://github.com/wafer-space/chip-on-board-wire-bonded-pcbs/tree/90fc89d65ef5ee5d9beb64b12b9cc8fa4ced7f08/run-1) | Selected 1×1 module connector nets and mating footprint |
 | [ST LSM6DSO datasheet](https://www.st.com/resource/en/datasheet/lsm6dso.pdf) | 14-pad package, primary SPI mode connections and supply bypassing |
 | [Murata SCL3300-D01 datasheet](https://www.murata.com/-/media/webrenewal/products/sensor/pdf/datasheet/datasheet_scl3300-d01.ashx?la=en) | 12-pin assignment, external regulator capacitors, land pattern and SPI requirements |

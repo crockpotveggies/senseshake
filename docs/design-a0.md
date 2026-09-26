@@ -37,7 +37,7 @@ flowchart LR
 
 No geophone or geophone analog front end is present. The magnetometer and
 pressure additions are new integrations, not claims of upstream driver support.
-[The inventory](sensor-inventory.md) distinguishes actual AnyShake/GeoShake support.
+See [component references](sources.md) for the selected parts and vendor documentation.
 
 ## Power and support components
 

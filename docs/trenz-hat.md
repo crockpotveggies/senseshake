@@ -9,11 +9,8 @@ switched Pi-driven JTAG replace external expansion connectors and ribbons.
 See the [host-link circuit and bring-up guide](fpga-host-link.md). Pi 4 initially
 uses SPI6; native quad transfers are not supported by its controller.
 
-**DAQHAT-01 revision:** GNSS is removed; one external Racotech vertical geophone
-uses an ADS122C04 input. See [current circuit, acquisition and validation](geophone-input.md).
-GNSS/PPS/RF details below describe the preceding revision or legacy recordings.
-The current physical bench template is version 2, with geophone response/noise/timing
-checks replacing the GNSS UTC check.
+An external Racotech vertical geophone uses an ADS122C04 input; GNSS is not fitted.
+See the [geophone circuit and acquisition](geophone-input.md).
 
 DAQHAT-01 is an **85 × 56 mm, six-layer FR-4** alternative to the A2 Coldfoot ASIC HAT.
 Electrical source: [`hw/elec/hat_trenz.ato`](../hw/elec/hat_trenz.ato).
@@ -34,12 +31,26 @@ The selected 4 mm carrier and module connectors give an **8 mm surface gap**.
 Use four matching M3 spacers. Components under the module are low-profile;
 the tall service connectors are outside its outline.
 
-J1 retains the Samtec ESQ-120-23-G-D bottom socket. Its specified body height is
+The baseline CAD shows the Samtec ESQ-120-23-G-D bottom socket. Its body height is
 16.129 mm. A **Samtec SSQ-120-02-G-D** 1:1 GPIO riser now adds 8.51 mm between
 the Pi and J1, giving **27.18 mm nominal Pi-top to HAT-underside clearance** with
 a 2.54 mm Pi header base. Its 4.93 mm square tails point into J1; the socket face
 mates to the Pi. Use measured spacers/shims for actual seating, without forcing
 the connector stack. The conceptual model and assembly BOM include this riser.
+
+**The JLCPCB assembly selection for J1 is Megastar ZX-PM2.54-2-20PY / C7499354,
+with an 8.5 mm body.** The baseline clearance above does not qualify that shorter
+part. Confirm riser, pin engagement and spacer heights before assembly; see
+[JLCPCB assembly](jlcpcb-assembly.md).
+
+The three IMUs have matching XYZ axes and lie outside the FPGA outline:
+U11 at (13,24), U12 at (24,24), and U13 at (13,36) mm. Their distance from the
+FPGA outline is 17, 6 and 17 mm respectively. These planar distances do not
+establish thermal or mechanical isolation. Local 100 nF bypass capacitors and
+In1.Cu ground stitches are required. Connected-path limits checked by
+`hw/tools/imu_layout.py` are 4 mm for VDDIO bypass, 2 mm for VDD bypass,
+2 mm for capacitor ground and 2.5 mm for IMU ground-pin paths. These geometry
+limits do not establish minimum noise; measure FPGA-off/idle/active coupling.
 
 This compact stack increases thermal and electrical coupling compared with
 placing the FPGA beside the Pi. Accelerometer/tilt drift and noise must be
@@ -112,7 +123,7 @@ Its published copper/dielectric sum is 1.5384 mm; 1.6 mm is the nominal ordering
 and mechanical-model thickness (+/-10% supplier tolerance). CAD mask thickness
 and dielectric electrical constants are illustrative. Do not request custom
 lamination to force the stock values to sum to 1.600 mm. No controlled impedance
-is claimed. See the [cost audit](cost-reduction.md) for settings and limitations.
+is claimed. See [JLCPCB assembly](jlcpcb-assembly.md) for upload and process requirements.
 
 ## Verification and release limits
 
@@ -122,5 +133,4 @@ Current results are recorded in [validation.json](../hw/boards/groundlark-daqhat
 The portable lab checks circuit compilation, independent pin fixtures, ERC/DRC,
 route connectivity, sensor regressions, power/geophone models and stack envelopes.
 These checks do not establish physical power, timing, noise or thermal performance.
-See [engineering limits](daqhat-01-engineering-closure.md) and the
-[bench procedure](bench-procedure.md) before first-article qualification.
+Follow the [bench procedure](bench-procedure.md) for first-article qualification.

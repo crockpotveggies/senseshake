@@ -922,7 +922,7 @@
   },
   "imu_noise_review": {
     "scope": "Completed bypass geometry corrections; physical noise qualification pending",
-    "report": "docs/imu-placement-review.md",
+    "report": "docs/trenz-hat.md",
     "finding": "C12 detour resolved; six bypass paths and local ground returns pass geometric limits",
     "physical_qualification": false,
     "moved_capacitors": {

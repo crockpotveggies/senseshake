@@ -1,9 +1,9 @@
 # Groundlark repository guidance
 
-Current priority is the [sensor development plan](docs/sensor-development-plan.md)
+Current priority is [sensor acquisition](docs/sensor-software.md)
 on the Pi/DAQHAT-01/Trenz stack. Defer Coldfoot ASIC/runtime/RTL integration. Keep sensor
 software independent of a configured FPGA; preserve the existing FPGA interfaces.
-The DAQHAT-01 revision follows docs/fpga-host-link-plan.md: six internal
+The DAQHAT-01 revision follows docs/fpga-host-link.md: six internal
 QSPI signals, retained UART and four shared pins for isolated Pi-driven JTAG.
 External J84-J89 and their ribbons/guide are removed. This supersedes the
 155-breakout requirement. Keep the circuit, routed CAD, model and validation evidence synchronized. Preserve vendor GPIO/ground
@@ -14,7 +14,7 @@ Unused U41.8/U41.9 and U42.17 inputs must be grounded; U41.15/U41.16/U42.7 outpu
 DAQHAT-01 uses a conventional six-layer stock FR-4 stack with through-vias only and a complete native SES
 routing snapshot. Fabrication approval is owned by the user. DAQHAT-01 removes GNSS and adds one Racotech/ADS122C04 input. Preserve its
 independent pin/axis checks, GPIO riser assembly, and explicit
-power envelope in docs/daqhat-01-engineering-closure.md. Geophone noise/response measurements, actual stack
+power envelope in docs/trenz-hat.md. Geophone noise/response measurements, actual stack
 fit and GPIO signal integrity still need qualification. Ethernet is not exposed.
 Keep the A2 ASIC design deferred for this phase.
 
@@ -22,6 +22,10 @@ Keep authored inputs separate from disposable build output. Preserve unrelated
 work. Hardware changes belong under `hw/`, software under `sw/`, shared design
 and interface documentation under `docs/`, and portable test tooling under
 `environment/`. See [the project map](docs/project-layout.md).
+Keep public docs focused on setup, current specifications, assembly and operating
+instructions. Do not add internal plans, component shortlists or work-session
+review narratives to `docs/`; keep disposable investigation output in `.local/`
+and test-run evidence in the existing bounded lab storage.
 Generated fabrication/assembly packages in `hw/releases/` stay local and ignored.
 Do not commit or push these packages unless the user explicitly requests their
 publication. Keep reusable export tooling and tests tracked separately.
@@ -31,7 +35,7 @@ Rotation corrections must fit frozen numbered supplier pads, including an explic
 bottom-side convention, rather than hardcoded reference offsets. Run the hardware
 regressions after assembly exporter/registry changes; the integration test rebuilds
 both full and overlay exports without depending on ignored release archives.
-See `docs/assembly-regressions.md`. Offline tests never establish current inventory.
+See `docs/jlcpcb-assembly.md`. Offline tests never establish current inventory.
 
 Electrical connectivity is authored in `hw/elec/*.ato`; placement metadata is
 in `hw/layout*.json`. The routed boards and review schematics are in `hw/boards/`.
@@ -64,7 +68,7 @@ Preserve explicit zero/missing/unknown distinctions and raw sensor precision.
 Conversion discontinuities use `DataGap`: preserve it across worker IPC and emit
 unknown-loss/missing records without treating host service jitter as broken hardware.
 Do not reset the ADC just because conversions were overwritten. Preserve the
-independent-clock stress tests and open findings in docs/pre-fab-review.md.
+independent-clock stress tests and open findings in docs/bench-procedure.md.
 The Buf baseline is a compatibility fixture, not routine generated output.
 Do not refresh it just to bypass a breaking change. Generated descriptors belong
 in ignored `sw/build/` inside the lab. Follow `docs/sensor-software.md` for runtime,
@@ -98,4 +102,4 @@ IMU bypass layout is checked read-only by `hw/tools/imu_layout.py` as part of
 In1.Cu ground stitches, and the documented supply/return path limits. Update
 placement metadata, electrical review metadata, the native SES snapshot and
 UI/render provenance together after moving parts. Geometry checks are not
-physical noise qualification; see `docs/imu-placement-review.md`.
+physical noise qualification; see `docs/trenz-hat.md`.

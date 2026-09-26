@@ -152,8 +152,8 @@ After updating the repository, rerun setup with its check option.
 
 ## For contributors
 
-See [implementation and validation](workbench-development.md) for raw-data and
-timing semantics, limits, test commands, model provenance and browser checks.
+See [sensor software](sensor-software.md) for data and timing semantics and
+[UI source notes](../sw/ui/README.md) for checks and asset provenance.
 The [portable lab](portable-lab.md) is the separate Docker-based full regression
 environment; it is optional for using this UI.
 Setup uses the official [uv installer options](https://docs.astral.sh/uv/reference/installer/)

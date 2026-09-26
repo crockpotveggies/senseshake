@@ -151,8 +151,8 @@ Still measure first-article rail ramps/current, actual stack seating, SPI/JTAG
 edges and switching, and sensor noise with the FPGA idle and active. Linux driver
 handoff and JTAG programming have not been exercised on a physical Pi/Trenz stack.
 Quad throughput and accelerated processing remain future work.
-See the [hardening and prototype preparation review](daqhat-01-link-hardening.md) for
-test coverage, fixes and the remaining release/first-article steps.
+See [assembly requirements](jlcpcb-assembly.md) and the
+[bench procedure](bench-procedure.md) for production preparation and physical qualification.
 
 Sources: [exact module schematic](vendor/trenz/SCH-TE0712-03-81I36-A.PDF),
 [TMUX1574](https://www.ti.com/lit/ds/symlink/tmux1574.pdf),

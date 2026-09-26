@@ -31,7 +31,7 @@ The render shows the PCB header, not the cable plug or external geophone.
   sustained applied voltage. Qualification of the protection remains physical.
 - C90: 100 nF C0G across the differential input. Baseline CAD names TDK
   C3216C0G1H104J160AA; the reviewed assembly selection is Murata GRM31C5C1H104JA01L
-  (C97946), retaining 50 V, +/-5% and 1206; see [shortage review](assembly-shortages.md);
+  (C97946), retaining 50 V, +/-5% and 1206; see [assembly selections](jlcpcb-assembly.md);
   C91/C92: 1 nF C0G to ground.
   C0G avoids using piezoelectric high-k ceramics on the measurement input.
 - R92/R93: 1 MΩ bias returns to filtered mid-supply. R94/R95: 10 kΩ divider;
@@ -86,9 +86,8 @@ missing records with unknown loss, without resetting an otherwise healthy ADC.
 Actual communication faults retain bounded hardware recovery. The nominal
 330-SPS setting has a 3.04296875 ms conversion period at nominal clock; do not
 interpret the configured nominal period as a calibrated device timestamp.
-See the [pre-fab review](pre-fab-review.md) for measured geometry, noise estimates,
-2,816 analytical corner evaluations, eight added passive SPICE transients and
-four-channel timing stress. The six analog path targets are now closed; optional flex-harness fit remains open.
+The [bench procedure](bench-procedure.md) covers physical response, noise,
+timing and fit. Modeled layout and transient checks do not replace these measurements.
 
 Tests include independent pin maps, three-IMU orientation, ADC wire faults,
 counter rollover, signed precision, saturation, contract clock/ID validation,
@@ -107,13 +106,3 @@ sequence and physical cable/stack fit. Blank physical evidence never passes.
 - [TI ADS122C04 datasheet, SBAS751B](https://www.ti.com/lit/ds/symlink/ads122c04.pdf): PW pin map, PGA common-mode, noise table 1, registers and input filtering.
 - [TI TPD2E2U06 datasheet](https://www.ti.com/lit/ds/symlink/tpd2e2u06.pdf): DCK pin map and ESD characteristics.
 - [Phoenix Contact 1803439](https://www.phoenixcontact.com/en-us/products/pcb-header-mcv-15-3-g-381-1803439).
-
-## Recorded validation
-
-The [DAQHAT-01 verification record](../hw/boards/groundlark-daqhat-01/verification.json)
-records all 18 portable stages passing, 152 software tests without skips, 20
-hardware regressions and 64 total SPICE cases. Native KiCad ERC/DRC and
-connectivity report zero findings. Clean SES replay reproduces all 6,444 copper
-items exactly. The refreshed UI passes all 10 modeled-driver checks.
-See [the layout review](pre-fab-review.md) for the shortened filter/protection
-paths and [assembly notes](stack-assembly.md) for component sides and via-in-pad.

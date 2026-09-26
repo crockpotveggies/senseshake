@@ -3,8 +3,7 @@
 From the repository root, run `./setup-ui.ps1 -Check`, then `./ui.ps1`.
 On Linux/macOS, use `sh ./setup-ui.sh --check`, then `sh ./ui.sh`.
 Open `http://127.0.0.1:8080`; Ctrl+C in the terminal stops the server.
-See the [beginner walkthrough](../../docs/sensor-workbench.md) and
-[developer notes](../../docs/workbench-development.md).
+See the [beginner walkthrough](../../docs/sensor-workbench.md).
 
 Rerun `./ui.ps1 -Check` / `sh ./ui.sh --check` for the HTTP and scene tests.
 The full acquisition/controller tests use the portable software profile.

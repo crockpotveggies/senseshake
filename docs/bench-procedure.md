@@ -177,13 +177,12 @@ measurements, targets, context or evidence never become a pass. Correct failed
 items and repeat the affected tests with traceable revisions.
 
 For the next **prototype fab submission**, freeze the intended DAQHAT-01 revision and
-actual stack/copper/dielectric values; use the current
-[hardening review](daqhat-01-link-hardening.md) and internal-link assembly;
+actual stack/copper/dielectric values; follow the current
+[assembly requirements](jlcpcb-assembly.md) and [stack instructions](stack-assembly.md);
 run the full CAD/build checks; review footprint pin numbering, BOM availability,
 DNPs, drill/microvia instructions and mechanical fit; then export and independently
 inspect Gerbers/drills, assembly drawings and placements from that same revision.
-Retain hashes and a release manifest. Fabrication data has not been exported or
-submitted by this software task. Keep the physical bench report pending until
+Retain hashes and a release manifest. Keep the physical bench report pending until
 boards arrive, rather than requiring completed-board measurements before making
 the first prototype.
 

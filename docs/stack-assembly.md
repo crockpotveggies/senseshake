@@ -22,6 +22,11 @@ The geophone plug has 9.20 mm calculated lateral clearance to the module after
 twisted pair toward the lower-left edge, and clamp the cable outside the PCB.
 The geophone remains external, vertical and mechanically coupled to the ground.
 
+**J1 procurement caveat:** the JLCPCB BOM selects the shorter 8.5 mm-body
+Megastar ZX-PM2.54-2-20PY / C7499354. The 27.179 mm gap in the baseline table
+does not apply automatically. Confirm mating depth, riser/spacer height and
+cooler clearance for the ordered socket before assembly.
+
 ## Checks and limits
 
 `assembly_fit.py` checks four support envelopes against the actual underside
