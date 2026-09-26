@@ -14,6 +14,10 @@ native quad transfers need a separate host solution. The circuit, routed PCB and
 records the expanded tests, fixes, prototype fabrication preparation steps and
 physical qualification still required on first articles.
 
+**Assembly preparation:** the [JLCPCB review package](docs/jlcpcb-assembly.md)
+targets one assembled T1-LINK HAT. Quantity minimum, HDI stack, sourcing and
+placement review remain open; the package is not released for manufacture.
+
 **Portable tests:** run `./lab.ps1 build` once, then `./lab.ps1 test` from
 PowerShell. See the [portable lab guide](docs/portable-lab.md) for profiles,
 bounded scratch storage, automatic five-run retention, and cleanup previews.

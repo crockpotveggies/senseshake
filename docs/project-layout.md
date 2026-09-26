@@ -6,6 +6,7 @@
 | `hw/elec/` | Electrical source and atomic part definitions. |
 | `hw/layout/`, `hw/layout*.json` | Compiled connectivity and mechanical placement inputs. |
 | `hw/boards/` | Routed KiCad projects, review schematics, BOMs, 3D previews and recorded validation. |
+| `hw/releases/` | Ignored local manufacturer review packages with explicit release status and hashes; not published without an explicit request. |
 | `hw/libraries/`, `hw/models/` | Shared KiCad symbols/footprints and local 3D models. |
 | `hw/tools/`, `hw/tests/`, `hw/simulation/` | CAD tooling, electrical fault fixture, bounded SPICE models and recorded results. |
 | `hw/reference/`, `hw/vendor/` | Component references and upstream board material. |

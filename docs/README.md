@@ -9,6 +9,7 @@
 - [T1 Pi-size Trenz carrier](trenz-hat.md) and [FPGA selection](fpga-options.md).
 - [T1-LINK: internal SPI/QSPI reservation, UART, Pi JTAG and bring-up](fpga-host-link.md).
 - [T1-LINK hardening, expanded tests and prototype preparation](t1-link-hardening.md).
+- [JLCPCB assembly package, sourcing and release holds](jlcpcb-assembly.md).
 - [Current T1-GEO circuit, Racotech input and accelerometer axes](geophone-input.md).
 - [Pi/Trenz stack, cooling, geophone plug and four straight supports](stack-assembly.md).
 - [Pre-fab review: analog, timing, components/layout and stack fit](pre-fab-review.md).

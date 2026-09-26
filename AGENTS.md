@@ -20,6 +20,9 @@ Keep authored inputs separate from disposable build output. Preserve unrelated
 work. Hardware changes belong under `hw/`, software under `sw/`, shared design
 and interface documentation under `docs/`, and portable test tooling under
 `environment/`. See [the project map](docs/project-layout.md).
+Generated fabrication/assembly packages in `hw/releases/` stay local and ignored.
+Do not commit or push these packages unless the user explicitly requests their
+publication. Keep reusable export tooling and tests tracked separately.
 
 Electrical connectivity is authored in `hw/elec/*.ato`; placement metadata is
 in `hw/layout*.json`. The routed boards and review schematics are in `hw/boards/`.

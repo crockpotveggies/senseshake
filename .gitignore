@@ -1,6 +1,7 @@
 __pycache__/
 .lab/
 .local/
+/hw/releases/
 senseshake-lab-image.tar
 *.pyc
 *.log
